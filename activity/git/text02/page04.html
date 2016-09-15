@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>既存ファイルの更新</title>
+</head>
+<body>
+
+<h2>既存ファイルの更新</h2>
+
+<br>
+次に既存のファイルを更新してコミットしてみますが、基本的には新規作成と同じ様に add して commit という流れになります。
+<br>
+では実際にやってみましょう。
+<br>
+<pre class="prog">
+<input type="checkbox"> (1) hoge.txtに b という文字を追加して保存する
+</pre>
+この時点での「ワーキングツリー」「インデックス」「HEAD」は次のような状態になります。
+<br>
+ここではまだ「ワーキングツリー」しか更新されていません。
+
+<br>
+<br>
+<h2>状態 6</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+
+</tr></table>
+
+</tr></table>
+
+<br>
+次に前のページで学んだ git add コマンドを使って hoge.txt をインデックスに登録します。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"> (2) hoge.txt が更新されていることを確認: git status
+<br>
+<input type="checkbox"> (3) git add hoge.txt
+<br>
+<input type="checkbox"> (4) hoge.txt がインデックスに登録されているか確認: git status
+</pre>
+この時点でワーキングツリーとインデックスは同じ状態になりますが、まだコミットしていませんのでHEADはそのままです。
+
+<br>
+<br>
+<h2>状態 7</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+
+<br>
+最後に git commit コマンドを使ってコミットします。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"> (5) git commit -m "hoge.txtを更新"
+<br>
+<input type="checkbox"> (6) コミットするファイルが無いか確認: git status
+<br>
+<input type="checkbox"> (7) コミットログを確認: git log
+</pre>
+するとインデックスの内容でスナップショットが作られてローカルリポジトリに登録され、そのスナップショットにHEADが移動します。
+<br>
+<br>
+<h2>状態 8</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+ではまた演習として、今度は piyo.txt に B を追加して次の状態にして下さい。
+<br>
+コミット時のコメントは"piyo.txtを更新"とします。
+
+<br>
+<br>
+<h2>状態 9</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

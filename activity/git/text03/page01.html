@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>リモートリポジトリのクローン</title>
+</head>
+<body>
+
+<h2>リモートリポジトリのクローン</h2>
+
+<br>
+ここではリモートリポジトリを使って多人数(今回はAさん、Bさん、Cさん、Dさんの4名)で共同開発をする演習を行います。 
+<br>
+<br>
+まずリモートリポジトリを新規作成する必要があるのですが、手作業だと結構面倒な作業になるので(※)今回は省略し、既に存在するリモートリポジトリをクローン(リモートリポジトリをローカルリポジトリとしてコピーすること)して使うことにします。 
+<br>
+<br>
+※ GitHub などの外部ウェブサービスを利用すればブラウザ上で簡単に作れます。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"> (1) 端末(※)を開いてホームディレクトリに移動する
+<br>
+※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
+<br>
+<input type="checkbox"> (2)リモートリポジトリをクローンする
+<br>
+git clone &lt;リモートリポジトリのアドレス&gt;
+<br>
+<input type="checkbox"> (3) ls か dir でローカルリポジトリが出来ているか確認する
+<br>
+<input type="checkbox"> (4) ローカルリポジトリに cd する
+</pre>
+
+<br>
+<br>
+さて今回の演習で使用するリモートリポジトリ「gitremote」をクローンすると以下の状態1になります。
+<br>
+リモートリポジトリの内容がA〜Dさんのローカル環境にそのままコビーされていることに注目して下さい。
+<br>
+<br>
+なおリモートリポジトリのところにある「origin」とはリモートリポジトリの別名です。
+<br>
+<br>
+<h2>状態 1</h2>
+<br>
+
+<table><tr>
+
+<td>
+<b>Aさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+"init"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Bさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+"init"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Cさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+"init"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Dさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+"init"
+</td>
+
+</tr></table>
+</td>
+
+</tr><tr><td colspan="4">
+
+<b>リモートリポジトリ(origin)</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+</td></tr></table>
+</td></tr></table>
+"init"
+</td>
+
+</tr></table>
+
+</td></tr></table>
+
+<br>
+<br>
+<br>
+</body>
+</html>

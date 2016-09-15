@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>ファイルの削除</title>
+</head>
+<body>
+
+<h2>ファイルの削除</h2>
+
+<br>
+次はファイルの削除方法を学びます。
+<br>
+<br>
+単にワーキングツリーからファイルを削除しても、そのファイルはインデックスには残り続けるので、何かのタイミングで消したはずのファイルが復活して大問題を起こしたりします。
+<br>
+そこで git で管理しているファイルは次のコマンドを使ってワーキングツリーとインデックスから同時に消す必要があります。
+<br>
+<pre class="prog">
+ワーキングツリーとインデックスからファイルを同時に消す
+<br>
+<input type="checkbox"> git rm &lt;ファイル&gt;
+</pre>
+
+ちなみにインデックスからは消したいけど、ワーキングツリーにはファイルを残したい場合(※)は --cached オプションを付けます。
+<br>
+<br>
+※ 要するに git による管理を取りやめたい場合です。
+<br>
+<br>
+<pre class="prog">
+インデックスからファイルを消す(＝ git による管理を止める)
+<br>
+<input type="checkbox"> git rm --cached &lt;ファイル&gt;
+</pre>
+
+
+<br>
+では演習として前のページの状態13の状態において piyo.txt を削除してみましょう。
+<br>
+するとワーキングツリーとインデックスの piyo.txt は消えます。ただしまだコミットしていないので HEAD には piyo.txt は残っています。
+
+<br>
+<br>
+<h2>状態 14</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+間違ってファイルを消してしまったとか言う場合は前のページで学んだ git checkout を使って復元できます。
+<br>
+ただしインデックスからも対象のファイルは消えてますので
+<br>
+<br>
+git checkout HEAD -- &lt;ファイル名&gt;
+<br>
+<br>
+を使って HEAD から復元する必要があります。
+<br>
+<br>
+では早速消した piyo.txt を HEAD から復元してみましょう。
+<br>
+すると元の状態に戻ります。
+<br>
+<br>
+<h2>状態 15 ( = 状態13 )</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+では演習として再び piyo.txt を消して、 "piyo.txt を削除" というコメントでコミットして下さい。
+<br>
+するといつものようにインデックスからスナップショットが作られ、HEADの位置が移動して次の状態に変わります。
+<br>
+<br>
+<h2>状態 16</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを削除"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~4
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>一時的に過去のコミットに戻る</title>
+</head>
+<body>
+
+<h2>一時的に過去のコミットに戻る</h2>
+
+<br>
+バグがどこで混入したのか調べたい時など、一時的に過去のコミットに戻って作業したい場合があります。
+<br>
+その場合は次のコマンドを使います。
+<br>
+<br>
+<pre class="prog">
+一時的に過去のコミットに戻る
+<br>
+<input type="checkbox"> git checkout &lt;コミット&gt;
+<br>
+</pre>
+
+<br>
+ファイル復元のテキストで出てきたのと同じ checkout コマンドを使っていますが、今回はワーキングツリーとインデックス全体が指定したコミットの内容に変わり、HEADもそのコミットに移動します。
+<br>
+ただしその HEAD は本当の HEAD ではなくて「detached HEAD」という特殊な使い捨ての HEAD となります。
+<br>
+それにより本来の HEAD (これを master と言います) に影響を与えずにいろいろ実験することが可能になっています。
+<br>
+<br>
+しかし、checkout コマンドはワーキングツリーとインデックスと HEAD の内容が一致していないと実行することが出来ません。
+<br>
+例えば前のページの状態16ではワーキングツリーと HEAD の hoge.txt の内容が異なっているのでコマンドを実行できません。
+<br>
+<br>
+そういう場合は stash 機能を使ってワーキングツリーとインデックスの内容を一時的に保存してから checkout します。
+<br>
+<br>
+まとめると次のような流れで一時的に過去のコミットに戻ることが出来ます。
+
+<br>
+<br>
+<pre class="prog">
+一時的に過去のコミットに戻る方法の流れ
+<br>
+<input type="checkbox"> (1) 対象コミットのハッシュを調べる
+<br>
+git log
+<br>
+<input type="checkbox"> (2) ワーキングツリーとインデックスの内容を一時保存
+<br>
+git stash
+<br>
+<input type="checkbox"> (3) 過去のコミットに戻る
+<br>
+git checkout &lt;コミット&gt;
+<br>
+<input type="checkbox"> (4) ちゃんと過去に戻れたか確認
+<br>
+git show
+<br>
+</pre>
+
+<br>
+例えば状態16から HEAD~2 に戻った状態が以下の状態17となります。
+<br>
+元のワーキングツリーとインデックスの内容は stash に一時保存され、HEAD は detached HEAD になっています。
+<br>
+<br>
+<h2>状態 17</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+stash に一時保存されたワーキングツリー
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+</td>
+
+<td class="noborder">　</td>
+
+<td class="noborder" style="width: 10em;">
+　
+</td>
+
+<td class="noborder">　</td>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+stash に一時保存されたインデックス
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+<td class="noborder">　</td>
+
+<td class="noborder" style="width: 10em;">
+　
+</td>
+
+<td class="noborder">　</td>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+本来のHEAD
+<br>
+( master )
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを削除"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+(detached) HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+では作業が終わったので元の状態に戻したいと思います。
+
+<br>
+<br>
+<pre class="prog">
+元の状態に戻る方法の流れ
+<br>
+<input type="checkbox"> (1) 本来の HEAD (master) に戻る
+<br>
+git checkout -f master
+<br>
+※ -f はワーキングツリーとインデックスの更新内容を全部捨てて
+　強制的に master に戻ることを指示するオプションです
+<br>
+<input type="checkbox"> (2) ちゃんと元に戻れたか確認
+<br>
+git show
+<br>
+<input type="checkbox"> (3) ワーキングツリーとインデックスの内容を復元
+<br>
+git stash pop --index
+<br>
+※ --index はインデックスも復元するという意味のオプションです
+<br>
+</pre>
+
+<br>
+すると次の状態18になります。これは元の状態16と同じ状態です。
+
+<br>
+<br>
+<h2>状態 18 ( = 状態16 )</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを削除"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~4
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

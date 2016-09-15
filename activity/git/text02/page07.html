@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>ファイル内容の復元</title>
+</head>
+<body>
+
+<h2>ファイル内容の復元</h2>
+
+<br>
+次は作業中に何かやらかしてしまった時に、インデックスや指定したコミット内容にファイルを復元する方法について学びます。
+<br>
+なお現在の状態は前のページ同じく状態10のままと仮定します。
+<br>
+<br>
+<h2>状態 10</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abcd
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abc
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+まずはワーキングツリーにあるファイルをインデックスの内容で復元する方法です。
+<br>
+実際の開発中はよく使います。
+<br>
+<pre class="prog">
+ワーキングツリーにあるファイルをインデックスの内容で復元
+<br>
+<input type="checkbox"> git checkout -- &lt;ファイル名&gt;
+<br>
+※ ファイル名を「.」(ドット)にすると更新した全てのファイルを復元します
+※ -- は git にブランチ切り替えするなと指示するためのオプションで省略可能です。
+　ブランチ機能を使わないなら省略しても良いのですが付けておいた方が無難です。
+</pre>
+
+<br>
+では演習として hoge.txt をインデックスの内容で復元してみましょう。
+<br>
+すると次の状態になります。
+<br>
+ワーキングツリーの hoge.txt の内容がインデックスの内容に戻っていることに注目して下さい。
+<br>
+<br>
+<h2>状態 11</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abc
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abc
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+次はワーキングツリーにあるファイルを指定したコミットの内容で復元する方法です。
+<br>
+なお<font color="red">インデックスの内容も同時に更新されるので注意</font>して下さい。
+<br>
+<pre class="prog">
+ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元
+<br>
+<input type="checkbox"> git checkout &lt;コミット&gt; -- &lt;ファイル名&gt;
+<br>
+※ ファイル名を「.」(ドット)にすると更新した全てのファイルを復元します
+※ コミットの所を HEAD にすると HEAD の内容で復元します。
+</pre>
+
+<br>
+では演習としてワーキングツリーとインデックスの hoge.txt を HEAD~2 の内容で復元してみましょう。
+<br>
+すると次の状態になります。
+<br>
+ワーキングツリーとインデックスの hoge.txt の内容は HEAD~2の内容に戻っていますが、HEAD の hoge.txt の内容はそのままであることに注目して下さい。
+<br>
+<br>
+<h2>状態 12</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+次はインデックスにあるファイルを HEAD の内容に復元する方法です。
+<br>
+この行為は「アンステージ」と呼ばれ、ステージング(git add)をキャンセルしたい時に良く利用されています。
+<br>
+<pre class="prog">
+アンステージ( git add のキャンセル)
+<br>
+<input type="checkbox"> git reset HEAD &lt;ファイル&gt;
+<br>
+※ ファイル名を省略すると全てのファイルの git add をキャンセルします。
+※ HEAD は省略可能です。
+</pre>
+
+<br>
+では演習として hoge.txt をアンステージしてみましょう。
+<br>
+すると次の状態になります。
+<br>
+インデックスの hoge.txt の内容は HEAD の内容に戻っていますが、ワーキングツリーの hoge.txt の内容はそのままであることに注目して下さい。
+<br>
+<br>
+<h2>状態 13</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

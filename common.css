@@ -1,0 +1,84 @@
+body{
+margin-left: 32px; 
+margin-right: 32px; 
+}
+
+table{
+color: #000000;
+background: #ffffff;
+border: 1px solid #000000;
+border-collapse: collapse;
+}
+
+th{
+padding: 10px;
+vertical-align:middle;
+border: 1px solid #000000;
+}
+
+td{
+padding: 10px;
+vertical-align:middle;
+border: 1px solid #000000;
+}
+
+td.center{
+padding: 10px;
+vertical-align:middle;
+text-align:center;
+border: 1px solid #000000;
+}
+
+table.info{
+border: 2px solid #000000;
+}
+
+td.info{
+padding: 10px;
+line-height: 130%;
+}
+
+table.noborder{
+margin-top: 5px;
+margin-bottom: 5px;
+color: #000000;
+background: #ffffff;
+border: 0px solid #000000;
+border-collapse: collapse;
+}
+
+td.centerbold{
+padding: 10px;
+vertical-align:middle;
+text-align:center;
+border: 2px solid #000000;
+}
+
+td.noborder{
+padding: 10px;
+vertical-align:middle;
+border: 0px solid #000000;
+}
+
+table.innerbox{
+margin-top: 5px;
+margin-bottom: 5px;
+width: 80%;
+margin: 5px;
+color: #000000;
+background: #ffffff;
+border: 1px solid #000000;
+}
+
+pre.prog { 
+border: 2px solid black;
+padding-top:10px;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:10px;
+}
+
+div.process{
+padding-left:32px;
+line-height:18pt;
+}

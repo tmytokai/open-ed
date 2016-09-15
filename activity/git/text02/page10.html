@@ -1,0 +1,482 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>コミットの巻き戻し</title>
+</head>
+<body>
+
+<h2>コミットの巻き戻し</h2>
+
+<br>
+あるコミットで致命的なバグが混入した時に、そのコミットの前まで状態を巻き戻したい場合があります。
+<br>
+ここではその方法について学びます。
+<br>
+<br>
+その前にまず、現在作業中に致命的なミスをやらかしてしまったので、HEADの状態までワーキングツリーとインデックスを強制リセットする方法について学びます。
+<br>
+出来れば使いたくないコマンドですが、実際の開発中は意外に良くお世話になります。
+<br>
+<br>
+<pre class="prog">
+HEADの状態までワーキングツリーとインデックスを強制リセット( やや危険 )
+<br>
+<input type="checkbox"> git reset --hard HEAD
+<br>
+※ <font color="red">HEAD 後に更新した内容が完全に全て消えるので実行する時は要注意</font>
+　ファイル内容の復元のテキストで学んだ
+  git checkout HEAD -- .
+  を使う方法と異なって add した新規ファイルも全て消えます
+<br>
+</pre>
+
+<br>
+試しに状態 18に対して上のコマンドを実行すると次の状態19になります。
+<br>
+ワーキングツリーとインデックスがHEADの状態まで戻っていることに注意して下さい。
+
+<br>
+<br>
+<h2>状態 19</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを削除"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~4
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+次にこのページの本題であるコミットの巻き戻しについて学びます。
+<br>
+まずは安全(だけど面倒)な方法からです。
+<br>
+<br>
+<pre class="prog">
+N 回コミットを巻き戻す(安全な方法)
+<br>
+<input type="checkbox"> (1) 以下のように revert コマンドを N 回繰り返す
+<br>
+git revert -n HEAD
+git revert -n HEAD~1
+git revert -n HEAD~2
+：
+：
+git revert -n HEAD~(N-1)
+<br>
+※ 1 回だけ巻き戻したい時は git revert -n HEAD だけで結構です。
+※ -n オプションを付けないと(有難迷惑なことに)コミットが実行されます。
+<br>
+<input type="checkbox"> (2) diff コマンドで差分が無いか調べる
+<br>
+git diff HEAD~N
+<br>
+<input type="checkbox"> (3) コミットする
+<br>
+git commit -m "N回巻き戻し"
+<br>
+</pre>
+
+<br>
+例えば状態19から N = 3 回巻き戻した状態が以下の状態20となります。
+<br>
+状態20のワーキングツリー、インデックス、HEADが状態19のHEAD~3( = 状態20のHEAD~4)と同じ内容になっていることに注目して下さい。
+
+<br>
+<br>
+<h2>状態 20</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"3回巻き戻し"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを削除"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~4
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~5
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+最後に、危険(だけど簡単)な方法について学びます。
+<br>
+<br>
+<pre class="prog">
+N 回コミットを巻き戻す(危険な方法)
+<br>
+<input type="checkbox"> git reset --hard HEAD~N
+<br>
+※ <font color="red">更新した内容が完全に全て消えるので実行する時は要注意</font>
+<br>
+</pre>
+
+<br>
+教えておいて何ですが普通は使わない方が無難です。
+<br>
+特にこの後学ぶリモートリポジトリを使って多人数でチーム開発する時は、他のメンバーに大迷惑がかかるのでこの方法は厳禁です。
+<br>
+ちなみに HEAD~N を HEAD にした場合がこのページの最初に学んだ「HEADの状態までワーキングツリーとインデックスを強制リセット(やや危険)」です。
+<br>
+<br>
+では試しに状態20から N = 3 回この危険な方法で巻き戻してみましょう。
+<br>
+すると状態が以下の状態21となります。
+<br>
+状態が状態 8 まで戻り、その後の更新は無かったことになります。
+
+<br>
+<br>
+<h2>状態21( = 状態 8 )</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~　
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

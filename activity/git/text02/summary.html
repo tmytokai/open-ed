@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>まとめ</title>
+</head>
+<body>
+
+<h2>まとめ</h2>
+
+<table class="info"><tr><td class="info">
+<b>初期設定</b>
+<br>
+<br>
+・ git を初めて使う場合、git config コマンドを使って自分のユーザーIDやメールアドレスを登録する
+<br>
+<br>
+・ ホームディレクトリ直下に設定ファイル(.gitconfig)が出来る
+<br>
+<br>
+・ 設定を全てリセットしたい場合はその設定ファイルを消す
+<br>
+<br>
+</td><tr></table>
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>ローカルリポジトリの新規作成</b>
+<br>
+<br>
+・ ローカルリポジトリの新規作成
+<br>
+　git init
+<br>
+<br>
+</td><tr></table>
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>新規ファイルの追加</b>
+<br>
+<br>
+・ 新規ファイルのインデックス登録
+<br>
+　git add &lt;ファイル名&gt;
+<br>
+<br>
+・ コミット実行
+<br>
+　git commit -m "コメント"
+<br>
+<br>
+・ 現在のローカルリポジトリの状態を確認
+<br>
+　git status
+<br>
+<br>
+・ コミットログを確認
+<br>
+　git log
+<br>
+<br>
+</td><tr></table>
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>既存ファイルの更新</b>
+<br>
+<br>
+・ 更新したファイルをインデックスに登録
+<br>
+　git add &lt;ファイル名&gt;
+<br>
+<br>
+・ コミット実行
+<br>
+　git commit -m "コメント"
+<br>
+<br>
+</td><tr></table>
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>コミットの指定方法</b>
+<br>
+<br>
+・ HEAD ・・・ 最新のコミット
+<br>
+<br>
+・ HEAD~ または HEAD^ ・・・1つ前のコミット
+<br>
+<br>
+・ HEAD~~ または HEAD^^ または HEAD~2 または HEAD^2 ・・・2つ前のコミット
+<br>
+<br>
+・ HEAD~n または HEAD^n ・・・nつ前のコミット
+<br>
+<br>
+・Windowsのコマンドプロンプトではハットはエスケープ文字になるので「^」は「^^」と2回入力する必要あり
+<br>
+<br>
+・ リビジョン番号(ハッシュ値)の調べ方
+<br>
+　(1) git log
+<br>
+　(2) 日付やコメントで対象となるコミットを見つける
+<br>
+　(3) commit の後にある英数字の羅列がリビジョン番号(ハッシュ値)
+<br>
+<br>
+・指定したコミットの情報取得
+<br>
+　git show &lt;コミット&gt;　
+
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>ファイルの更新差分表示</b>
+<br>
+<br>
+・ワーキングツリーとインデックス(インデックス → ワーキングツリー)間の差分
+<br>
+　git diff &lt;ファイル名&gt;
+<br>
+<br>
+・ワーキングツリーと指定したコミット間(コミット → ワーキングツリー)の差分
+<br>
+　git diff &lt;コミット&gt; &lt;ファイル名&gt;
+<br>
+<br>
+・インデックスと指定したコミット間(コミット → インデックス)の差分
+<br>
+　git diff --cached &lt;コミット&gt; &lt;ファイル名&gt;
+<br>
+<br>
+・指定したコミット間(コミットA → コミットB)の差分
+<br>
+　git diff &lt;コミットA&gt; &lt;コミットB&gt; &lt;ファイル名&gt;
+<br>
+<br>
+※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+<br>
+※ コミットの所を HEAD にすると HEAD との差分になります。
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>ファイル内容の復元</b>
+<br>
+<br>
+・ワーキングツリーにあるファイルをインデックスの内容で復元
+<br>
+　git checkout -- &lt;ファイル名&gt;
+<br>
+<br>
+※ ファイル名を「.」(ドット)にすると更新した全てのファイルを復元します
+<br>
+※ -- は git にブランチ切り替えするなと指示するためのオプションで省略可能です。
+<br>
+　ブランチ機能を使わないなら省略しても良いのですが付けておいた方が無難です。
+<br>
+<br>
+・ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元
+<br>
+　git checkout &lt;コミット&gt; -- &lt;ファイル名&gt;
+<br>
+<br>
+※ ファイル名を「.」(ドット)にすると更新した全てのファイルを復元します
+<br>
+※ コミットの所を HEAD にすると HEAD の内容で復元します。
+<br>
+<br>
+<br>
+・アンステージ( git add のキャンセル)
+<br>
+　git reset HEAD &lt;ファイル&gt;
+<br>
+<br>
+※ ファイル名を省略すると全てのファイルの git add をキャンセルします。
+<br>
+※ HEAD は省略可能です。
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>ファイルの削除</b>
+<br>
+<br>
+・ワーキングツリーとインデックスからファイルを同時に消す
+<br>
+　git rm &lt;ファイル&gt;
+<br>
+<br>
+・インデックスからファイルを消す(＝ git による管理を止める)
+<br>
+　git rm --cached &lt;ファイル&gt;
+<br>
+<br>
+</td><tr></table>
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>一時的に過去のコミットに戻る</b>
+<br>
+<br>
+一時的に過去のコミットに戻る方法の流れ
+<br>
+<br>
+(1) 対象コミットのハッシュを調べる
+<br>
+　git log
+<br>
+<br>
+(2) ワーキングツリーとインデックスの内容を一時保存
+<br>
+　git stash
+<br>
+<br>
+(3) 過去のコミットに戻る
+<br>
+　git checkout &lt;コミット&gt;
+<br>
+<br>
+(4) ちゃんと過去に戻れたか確認
+<br>
+　git show
+<br>
+<br>
+<br>
+元の状態に戻る方法の流れ
+<br>
+<br>
+(1) 本来の HEAD (master) に戻る
+<br>
+　git checkout -f master
+<br>
+<br>
+※ -f はワーキングツリーとインデックスの更新内容を全部捨てて
+<br>
+　強制的に master に戻ることを指示するオプションです
+<br>
+<br>
+(2) ちゃんと元に戻れたか確認
+<br>
+git show
+<br>
+<br>
+(3) ワーキングツリーとインデックスの内容を復元
+<br>
+git stash pop --index
+<br>
+<br>
+※ --index はインデックスも復元するという意味のオプションです
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>コミットの巻き戻し</b>
+<br>
+<br>
+・HEADの状態までワーキングツリーとインデックスを強制リセット( やや危険 )
+<br>
+　git reset --hard HEAD
+<br>
+<br>
+※ <font color="red">HEAD 後に更新した内容が完全に全て消えるので実行する時は要注意</font>
+<br>
+　ファイル内容の復元のテキストで学んだ
+<br>
+　git checkout HEAD -- .
+<br>
+　を使う方法と異なって add した新規ファイルも全て消えます
+<br>
+<br>
+<br>
+・N 回コミットを巻き戻す(安全な方法)
+<br>
+<br>
+　(1) 以下のように revert コマンドを N 回繰り返す
+<br>
+　git revert -n HEAD
+<br>
+　git revert -n HEAD~1
+<br>
+　git revert -n HEAD~2
+<br>
+　：
+<br>
+　：
+<br>
+　git revert -n HEAD~(N-1)
+<br>
+<br>
+　※ 1 回だけ巻き戻したい時は git revert -n HEAD だけで結構です。
+<br>
+　※ -n オプションを付けないと(有難迷惑なことに)コミットが実行されます。
+<br>
+<br>
+　(2) diff コマンドで差分が無いか調べる
+<br>
+　git diff HEAD~N
+<br>
+　(3) コミットする
+<br>
+　git commit -m "N回巻き戻し"
+<br>
+<br>
+<br>
+・N 回コミットを巻き戻す(危険な方法)
+<br>
+　git reset --hard HEAD~N
+<br>
+<br>
+　※ <font color="red">更新した内容が完全に全て消えるので実行する時は要注意</font>
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<table class="info"><tr><td class="info">
+<b>その他</b>
+<br>
+<br>
+・ ブランチ機能やその他の便利な機能については自分で勉強しよう。
+<br>
+<br>
+・ コミットを行うタイミングは原則自由
+<br>
+<br>
+</td><tr></table>
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

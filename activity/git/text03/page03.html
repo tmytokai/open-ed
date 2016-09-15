@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>更新内容のプッシュ (衝突が無い場合)</title>
+</head>
+<body>
+
+<h2>更新内容のプッシュ (衝突が無い場合)</h2>
+
+<br>
+次にプッシュしてローカルリポジトリの更新内容をリモートリポジトリにアップロードして反映します。 
+<br>
+<br>
+ここではリモートリポジトリが更新されていない場合を試します。
+<br>
+この場合は<a href="../text01/page03.html">git によるチーム開発の流れ</a>で学んだ「衝突(conflict)」は生じませんので非常にシンプルです。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"> (1) Aさんだけ作業するので、他のメンバーはAさんの作業を後から見る。
+<br>
+<input type="checkbox"> (2) Aさんはプルを実行し、リモートリポジトリの更新内容を
+ダウンロードしてローカルリポジトリに取り込む
+(ただしこの時点ではリモートリポジトリは更新されていないので 何も起きない)。
+<br>
+git pull
+<br>
+すると「Already up-to-date」と表示される。
+<br>
+<input type="checkbox"> (3) Aさんはプッシュを実行してローカルリポジトリの更新内容をリモートリポジトリにアップロードする
+<br>
+git push
+<br>
+※ IDとパスワードを聞かれますが演習時に知らせます
+<br>
+<input type="checkbox"> (4) Aさんは現在のローカルリポジトリの状態を確認する
+<br>
+git show
+<br>
+<input type="checkbox"> (4) Aさんは現在のリモートリポジトリの状態を確認する
+<br>
+git show origin
+<br>
+※ 前のテキストで説明したように、origin はリモートリポジトリの別名です
+</pre>
+<br>
+すると以下の状態3になります。
+<br>
+<br>
+AさんのローカルリポジトリのHEADの内容がそのままリモートリポジトリにアップロードされている事が分かります。
+<br>
+<br>
+<h2>状態 3</h2>
+<br>
+
+<table><tr>
+
+<td>
+<b>Aさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>A
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>A
+</td></tr></table>
+</td></tr></table>
+"my name is A"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Bさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>B
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>B
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>B
+</td></tr></table>
+</td></tr></table>
+"my name is B"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Cさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>C
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>C
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>C
+</td></tr></table>
+</td></tr></table>
+"my name is C"
+</td>
+
+</tr></table>
+</td>
+
+<td>
+<b>Dさん</b>
+<br>
+<br>
+<br>
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>D
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>D
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>ローカルリポジトリ</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>D
+</td></tr></table>
+</td></tr></table>
+"my name is D"
+</td>
+
+</tr></table>
+</td>
+
+</tr><tr><td colspan="4">
+
+<b>リモートリポジトリ(origin)</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+name?
+<br>
+A
+</td></tr></table>
+</td></tr></table>
+"my name is A"
+</td>
+
+</tr></table>
+
+</td></tr></table>
+
+<br>
+<br>
+<br>
+</body>
+</html>

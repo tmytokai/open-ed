@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>ファイルの更新差分表示</title>
+</head>
+<body>
+
+<h2>ファイルの更新差分表示</h2>
+
+<br>
+コミットの指定方法が分かったので、あるファイルが過去の状態からどの様に更新されたか差分を調べてみましょう。
+<br>
+<br>
+状態 9 のままだとワーキングツリーとインデックスとHEADが同じ状態で面白くないので、次の手順でファイルを更新します。
+
+<br>
+<pre class="prog">
+<input type="checkbox"> (1) hoge.txt に c を追加して保存
+<br>
+<input type="checkbox"> (2) git add hoge.txt でインデックスに hoge.txt を登録
+<br>
+<input type="checkbox"> (3) hoge.txt に d を追加して保存
+</pre>
+
+<br>
+すると次の状態に変わります。ワーキングツリー、インデックス、HEADの hoge.txt の違いに注目して下さい。
+
+<br>
+<br>
+<h2>状態 10</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abcd
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+abc
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加"
+</td>
+
+</tr></table>
+
+</tr></table>
+
+<br>
+<br>
+まずはワーキングツリーとインデックス間の差分を見る方法です。
+<br>
+実際の開発中は一番良く使うコマンドです。
+<br>
+<pre class="prog">
+ワーキングツリーとインデックス間(インデックス → ワーキングツリー)の差分
+<br>
+<input type="checkbox"> git diff &lt;ファイル名&gt;
+<br>
+※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+</pre>
+
+<br>
+<br>
+例えば git diff hoge.txt を実行すると
+<br>
+<br>
+-abc
+<br>
++abcd
+<br>
+<br>
+と表示されますが、-が付いている行が削除された行、+が付いている行が追加された行になります。
+<br>
+<br>
+次はワーキングツリーと指定したコミット間の差分を見る方法です。
+<br>
+<pre class="prog">
+ワーキングツリーと指定したコミット間(コミット → ワーキングツリー)の差分
+<br>
+<input type="checkbox"> git diff &lt;コミット&gt; &lt;ファイル名&gt;
+<br>
+※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ コミットの所を HEAD にすると HEAD との差分になります。
+</pre>
+
+<br>
+<br>
+次はインデックスと指定したコミット間の差分を見る方法です。
+<br>
+<pre class="prog">
+インデックスと指定したコミット間(コミット → インデックス)の差分
+<br>
+<input type="checkbox"> git diff --cached &lt;コミット&gt; &lt;ファイル名&gt;
+<br>
+※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ コミットの所を HEAD にすると HEAD との差分になります。
+</pre>
+
+<br>
+<br>
+最後は指定したコミット間の差分を見る方法です。
+<br>
+<pre class="prog">
+指定したコミット間(コミットA → コミットB)の差分
+<br>
+<input type="checkbox"> git diff &lt;コミットA&gt; &lt;コミットB&gt; &lt;ファイル名&gt;
+<br>
+※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ コミットの所を HEAD にすると HEAD との差分になります。
+</pre>
+
+<br>
+具体的な演習内容は演習のページを見て下さい。
+
+<br>
+<br>
+<br>
+</body>
+</html>
