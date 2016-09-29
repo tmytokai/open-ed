@@ -2,6 +2,13 @@ body{
 margin-left: 32px; 
 margin-right: 32px; 
 margin-bottom: 32px; 
+/* モバイル機器のフォントサイズ対策 */
+-webkit-text-size-adjust: 100%;
+}
+
+p{
+/* モバイル機器のフォントサイズ対策 */
+max-height: 999999px;
 }
 
 ol{
