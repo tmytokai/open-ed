@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>2進数と10進数と16進数</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C言語のポインター</a>
+<br>
+学習項目: [1] メモリ空間の基礎
+</p>
+
+<h2>2進数と10進数と16進数</h2>
+
+<p>
+ポインターの話をするためにはメモリ空間、メモリ空間の話をするためには2進数、16進数の話が必須になりますので、まずは具体例を挙げながら 2進数と10進数と16進数の相互変換の復習を行います。
+</p>
+
+<br>
+<h3>
+1. 2進数 → 10 進数
+</h3>
+
+<p>
+ここでは例として「0b101011」を 2進数 → 10 進数変換してみましょう。
+<br>
+これは次の表1を作って変換できます。ここで「2^x」は「2のx乗」の意味です。
+</p>
+
+<p>
+<input type="checkbox"><b>表1: 2進数 → 10 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">元の2進数</td>
+<td class="center" colspan="6">0b101011</td>
+</tr>
+<tr>
+<td class="center">1桁ごとに分ける</td>
+<td class="center">1</td>
+<td class="center">0</td>
+<td class="center">1</td>
+<td class="center">0</td>
+<td class="center">1</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">2^x</td>
+<td class="center">2^5 = 32</td>
+<td class="center">2^4 = 16</td>
+<td class="center">2^3 = 8</td>
+<td class="center">2^2 = 4</td>
+<td class="center">2^1 = 2</td>
+<td class="center">2^0 = 1</td>
+</tr>
+<tr>
+<td class="center">2行目 x 3 行目</td>
+<td class="center">32</td>
+<td class="center">0</td>
+<td class="center">8</td>
+<td class="center">0</td>
+<td class="center">2</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">変換後の10進数</td>
+<td class="center" colspan="6">32+0+8+0+2+1 = 43</td>
+</tr>
+</table>
+
+<p>
+慣れれば暗算で変換出来るようになりますが、初学者のうちはちゃんと表を作って勉強すると良いと思います。
+</p>
+
+<br>
+<h3>
+2. 2進数 → 16 進数
+</h3>
+
+<p>
+ここでは例として「0b101011」を 2進数 → 16 進数変換してみましょう。
+<br>
+この変換は次の 2 進数 ←→ 10 進数 ←→ 16 進数相互変換表を使うと簡単にできます。
+</p>
+
+<p>
+<input type="checkbox"><b>表2: 2 進数 ←→ 10 進数 ←→ 16 進数相互変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">2進数</td>
+<td class="center">10進数 </td>
+<td class="center">16進数 </td>
+</tr>
+<tr>
+<td class="center">0b0000</td>
+<td class="center">0 </td>
+<td class="center">0x0</td>
+</tr>
+<tr>
+<td class="center">0b0001</td>
+<td class="center">1</td>
+<td class="center">0x1</td>
+</tr>
+<tr>
+<td class="center">0b0010</td>
+<td class="center">2</td>
+<td class="center">0x2</td>
+</tr>
+<tr>
+<td class="center">0b0011</td>
+<td class="center">3</td>
+<td class="center">0x3</td>
+</tr>
+<tr>
+<td class="center">0b0100</td>
+<td class="center">4</td>
+<td class="center">0x4</td>
+</tr>
+<tr>
+<td class="center">0b0101</td>
+<td class="center">5</td>
+<td class="center">0x5</td>
+</tr>
+<tr>
+<td class="center">0b0110</td>
+<td class="center">6</td>
+<td class="center">0x6</td>
+</tr>
+<tr>
+<td class="center">0b0111</td>
+<td class="center">7</td>
+<td class="center">0x7</td>
+</tr>
+<tr>
+<td class="center">0b1000</td>
+<td class="center">8</td>
+<td class="center">0x8</td>
+</tr>
+<tr>
+<td class="center">0b1001</td>
+<td class="center">9</td>
+<td class="center">0x9</td>
+</tr>
+<tr>
+<td class="center">0b1010</td>
+<td class="center">10</td>
+<td class="center">0xA</td>
+</tr>
+<tr>
+<td class="center">0b1011</td>
+<td class="center">11</td>
+<td class="center">0xB</td>
+</tr>
+<tr>
+<td class="center">0b1100</td>
+<td class="center">12</td>
+<td class="center">0xC</td>
+</tr>
+<tr>
+<td class="center">0b1101</td>
+<td class="center">13</td>
+<td class="center">0xD</td>
+</tr>
+<tr>
+<td class="center">0b1110</td>
+<td class="center">14</td>
+<td class="center">0xE</td>
+</tr>
+<tr>
+<td class="center">0b1111</td>
+<td class="center">15</td>
+<td class="center">0xF</td>
+</tr>
+</table>
+
+<p>
+この変換表はこの業界にいる限り延々と使いますので、さっさと暗記しておいた方が良いです。
+</P>
+
+<p>
+では実際に「0b101011」を 2進数 → 16 進数変換してみましょう。
+<br>
+そのためには、変換元の 2 進数を下の桁から 4 桁ずつ分けて、次の表3を作って変換します(桁数を合わせるため0b10に2つ0を追加して0b0010としています)。
+</p>
+
+<p>
+<input type="checkbox"><b>表3: 2進数 → 16 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">元の2進数</td>
+<td class="center" colspan="2">0b101011</td>
+</tr>
+<tr>
+<td class="center">4桁毎に分ける</td>
+<td class="center">0b0010</td>
+<td class="center">0b1011</td>
+</tr>
+<tr>
+<td class="center">表2を見て16進数化</td>
+<td class="center">0x2</td>
+<td class="center">0xB</td>
+</tr>
+<tr>
+<td class="center">変換後の16進数</td>
+<td class="center" colspan="2">0x2B</td>
+</tr>
+</table>
+
+<br>
+<h3>
+3. 16進数 → 2 進数
+</h3>
+
+<p>
+次は例として「0x2B」を 16進数 → 2 進数変換してみましょう。
+<br>
+これも表2を使って次のようにして変換できます。
+</p>
+
+<p>
+<input type="checkbox"><b>表4: 16進数 → 2 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">元の16進数</td>
+<td class="center" colspan="2">0x2B</td>
+</tr>
+<tr>
+<td class="center">1桁毎に分ける</td>
+<td class="center">0x2</td>
+<td class="center">0xB</td>
+</tr>
+<tr>
+<td class="center">表2を見て2進数化</td>
+<td class="center">0b0010</td>
+<td class="center">0b1011</td>
+</tr>
+<tr>
+<td class="center">変換後の2進数</td>
+<td class="center" colspan="2">0b101011</td>
+</tr>
+</table>
+
+<br>
+<h3>
+4. 16進数 → 10 進数
+</h3>
+
+<p>
+次は「0x2B」を 16進数 → 10 進数変換してみましょう。 
+<br>
+これも表2を使って次のように変換できます。
+</p>
+
+<p>
+<input type="checkbox"><b>表5: 16進数 → 10 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">元の16進数</td>
+<td class="center" colspan="2">0x2B</td>
+</tr>
+<tr>
+<td class="center">1桁ごとに分ける</td>
+<td class="center">0x2</td>
+<td class="center">0xB</td>
+</tr>
+<tr>
+<td class="center">表2を見て10進数化</td>
+<td class="center">2</td>
+<td class="center">11</td>
+</tr>
+<tr>
+<td class="center">16^x</td>
+<td class="center">16^1 = 16</td>
+<td class="center">16^0 = 1</td>
+</tr>
+<tr>
+<td class="center">3行目 x 4 行目</td>
+<td class="center">32</td>
+<td class="center">11</td>
+</tr>
+<tr>
+<td class="center">変換後の10進数</td>
+<td class="center" colspan="2">32+11 = 43</td>
+</tr>
+</table>
+
+<br>
+<h3>
+5. 10進数 → 2 進数
+</h3>
+
+<p>
+次は「43」を 10進数 → 2 進数変換してみましょう。 
+<br>
+今回は次のように商が 0 になるまで割り算と余りを求める事を繰り返しながら変換表を作ります。
+</p>
+
+<p>
+<input type="checkbox"><b>表6: 10進数 → 2 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">被除数</td>
+<td class="center">序数</td>
+<td class="center">商</td>
+<td class="center">余り</td>
+</tr>
+<tr>
+<td class="center">43(元の10進数)</td>
+<td class="center">2</td>
+<td class="center">21</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">21(前行の商)</td>
+<td class="center">2</td>
+<td class="center">10</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">10(前行の商)</td>
+<td class="center">2</td>
+<td class="center">5</td>
+<td class="center">0</td>
+</tr>
+<tr>
+<td class="center">5(前行の商)</td>
+<td class="center">2</td>
+<td class="center">2</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">2(前行の商)</td>
+<td class="center">2</td>
+<td class="center">1</td>
+<td class="center">0</td>
+</tr>
+<tr>
+<td class="center">1(前行の商)</td>
+<td class="center">2</td>
+<td class="center">0</td>
+<td class="center">1</td>
+</tr>
+<tr>
+<td class="center">変換後の2進数</td>
+<td class="center" colspan="3">(余りを下から並べる)<br>0b101011</td>
+</tr>
+</table>
+
+<br>
+<h3>
+6. 10進数 → 16 進数
+</h3>
+
+<p>
+最後に「43」を 10進数 → 16 進数変換してみましょう。 
+<br>
+今回も次のように商が 0 になるまで割り算と余りを求める事を繰り返しながら変換表を作りますが、余りは表2を見て16進数化しておきます。
+</p>
+
+<p>
+<input type="checkbox"><b>表7: 10進数 → 16 進数変換表</b>
+</p>
+<table>
+<tr>
+<td class="center">被除数</td>
+<td class="center">序数</td>
+<td class="center">商</td>
+<td class="center">余り(表2より16進数化)</td>
+</tr>
+<tr>
+<td class="center">43(元の10進数)</td>
+<td class="center">16</td>
+<td class="center">2</td>
+<td class="center">11 → 0xB</td>
+</tr>
+<tr>
+<td class="center">2(前行の商)</td>
+<td class="center">16</td>
+<td class="center">0</td>
+<td class="center">2 → 0x2</td>
+</tr>
+<tr>
+<td class="center">変換後の16進数</td>
+<td class="center" colspan="3">(余りを下から並べる)<br>0x2B</td>
+</tr>
+</table>
+
+
+</body>
+</html>
+
+

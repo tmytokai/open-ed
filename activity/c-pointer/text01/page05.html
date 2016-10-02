@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>バージョン管理システムと git</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C言語のポインター</a>
+<br>
+学習項目: [1] メモリ空間の基礎
+</p>
+
+<h2>メモリ空間</h2>
+
+<p>
+前のテキストに書いたように、コンピュータで扱うデータのサイズは 1 byte が最小単位となっています。
+</p>
+
+<p>
+それらのデータはメモりに記録されて CPU/GPU などから利用されますので、CPU/GPU のメモりへのアクセス効率を上げるためにメモリの中も 1 byte 毎にブロック分割されています。
+<br>
+例えばあるコンピュータが 8 byte のメモリを持っているとします。
+<br>
+するとそのメモりは 8 個のブロックに分けられ、1 byte のデータを 8 個保存することが出来るようになります(図1)。
+</p>
+
+<p>
+<input type="checkbox"><b>図1: 8 byte メモりの構造</b>
+</p>
+<table>
+<tr>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+<td class="centw50">1 byte</td>
+</tr>
+</table>
+
+<p>
+ここでサイズが 1 byte のデータ A、B、C をこのメモリに記録してみることにします。
+<br>
+それぞれのデータはこのメモり内のどこかのブロックに記録される訳ですが、原則的にはどのブロックにデータを置いても良いので(※)、今回は図2のように A、B、Cを配置することにします。
+</p>
+
+<p>
+※ 実際には色々ルールがあるので適当に配置出来る訳ではありません。
+</p>
+
+<p>
+<input type="checkbox"><b>図2: 1 byte データを 3 つ記録する例</b>
+</p>
+<table>
+<tr>
+<td class="centw50">A</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">C</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">B</td>
+</tr>
+</table>
+
+<p>
+この場合データ A、B、C の間に空のブロックが入っている上に(※)、A→B→Cと連続的に配置されている訳でないので、CPU/GPUが各データにアクセスしたくてもどうやってアクセスすれば良いのか困ってしまいます。
+</p>
+
+<p>
+※ この様にデータとデータの間に複数の空ブロックが入っているとメモリの使用効率が落ちます。
+これを「メモり・フラグメンテーション」とか「メモリの断片化」と呼びます。
+</p>
+
+<p>
+そこで各ブロックに「アドレス」と呼ばれる16進数の住所をつけて、アドレスを指定することで CPU/GPU が各データにアクセス出来るようにします(図3)。
+<br>
+図3の様に、「アドレス」＋「ブロック」でメモリを表しているイメージを「メモり空間」とか「アドレス空間」と呼びます。
+</p>
+
+<p>
+<input type="checkbox"><b>図3: アドレス + ブロック = メモり空間 (アドレス空間)</b>
+</p>
+<table>
+<tr><td class="centw50">0x00</td><td class="centw50">0x01</td><td class="centw50">0x02</td><td class="centw50">0x03</td><td class="centw50">0x04</td><td class="centw50">0x05</td><td class="centw50">0x06</td><td class="centw50">0x07</td></tr>
+<tr>
+<td class="centw50">A</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">C</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">　</td>
+<td class="centw50">B</td>
+</tr>
+</table>
+
+<p>
+なおアドレスの単位は実社会でも使われている「番地」で、通常は「0x00 番地」からアドレスがブロックに割り振られます。
+<br>
+例えば図3の場合、CPU/GPU がデータ C にアクセスしたいなと思ったら、「0x03 番地」にアクセスすれば良いわけです。
+</p>
+
+<p>
+また、データサイズが 1 byte ではなくて多 byte である場合は、データが 1 byte 毎に分割されてブロックに記録されます。
+<br>
+例えば図3 からデータ B と C を消して、代わりに図4 の様に 2 byte のデータ D と 3 byte のデータ E を記録出来ます(※)。
+<br>
+するとデータDのアドレスは「0x02 番地」、データEのアドレスは「0x05 番地」となります。
+</p>
+
+<p>
+※ 図 4 の状況では空ブロックが不連続で 2 つ残っているので 1 byte のデータはあと 2 個保存出来ますが、2 byte のデータは記録出来ないことに注意して下さい。これが上の※で書いたメモり・フラグメンテーションの例です。
+</p>
+
+<p>
+<input type="checkbox"><b>図4: 多 byte のデータは 1 byte 毎に分割されて記録される</b>
+</p>
+<table>
+<tr><td class="centw50">0x00</td><td class="centw50">0x01</td><td class="centw50">0x02</td><td class="centw50">0x03</td><td class="centw50">0x04</td><td class="centw50">0x05</td><td class="centw50">0x06</td><td class="centw50">0x07</td></tr>
+<tr>
+<td class="centw50">A</td>
+<td class="centw50"> </td>
+<td class="centw50" colspan="2">D</td>
+<td class="centw50"> </td>
+<td class="centw50" colspan="3">E</td>
+</tr>
+</table>
+
+</body>
+</html>
