@@ -1,2 +1,6 @@
 *~
+*.aux
+*.dvi
+*.log
+*.pdf
 tmp

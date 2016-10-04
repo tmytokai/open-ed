@@ -1,0 +1,81 @@
+\makeatletter 
+
+\pagestyle{plain}
+
+\parindent = 1zw
+\hoffset = -1in
+\voffset = -1in
+\topmargin = 15mm
+\headheight = 0mm
+\headsep = 0mm
+\oddsidemargin = 15mm
+\evensidemargin = 15mm
+\textwidth = 210mm  
+\textheight = 287mm
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\textwidth}{-\evensidemargin}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+
+%%%% 演習ページ用マクロ %%%%
+
+% ページ番号
+\newcounter{c-page}
+\setcounter{c-page}{0}
+
+% 課題番号
+\newcounter{c-prac}
+\setcounter{c-prac}{0}
+
+% 合計時間
+\newcounter{practime}
+\setcounter{practime}{0}
+
+\newcommand{\prachead}[2]{%
+\noindent アクティビティ: #1\par%
+\noindent 学習項目: #2\par%
+\noindent 演習時間: \ref{label:practime} 分\par%
+\vspace{2zh}%
+\noindent \textbf{\Large 演習}%
+}
+
+\newcommand{\pracpage}[1]{%
+\stepcounter{c-page}%
+\vspace{4zh}%
+\noindent%
+\textbf{\noindent \textbf{\Large \arabic{c-page}. #1}}%
+}
+
+\newcommand{\practeam}[1]{%
+\stepcounter{c-prac}%
+\vspace{2zh}%
+\noindent%
+\textbf{演習 \arabic{c-prac} (チーム, #1 分)：}%
+\advance \c@practime by #1%
+}
+
+\newcommand{\pracnote}[1]{%
+\stepcounter{c-prac}%
+\vspace{2zh}%
+\noindent%
+\textbf{演習 \arabic{c-prac} (個人ノート, #1 分)：}%
+\advance \c@practime by #1%
+}
+
+\newcommand{\pracpc}[1]{%
+\stepcounter{c-prac}%
+\vspace{2zh}%
+\noindent%
+\textbf{演習 \arabic{c-prac} (個人PC, #1 分)：}%
+\advance \c@practime by #1%
+}
+
+\newcommand{\savepractime}{%
+\addtocounter{practime}{-1}%
+\refstepcounter{practime}%
+\label{label:practime}%
+}
+
+\makeatother 
