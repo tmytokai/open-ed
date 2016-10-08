@@ -1,35 +1,46 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
 <title>新規ファイルの追加</title>
 </head>
 <body>
 
+<p>
+<a href="../">アクティビティ: git によるバージョン管理</a>
+<br>
+学習項目: [2] ローカルリポジトリ
+</p>
+
 <h2>新規ファイルの追加</h2>
 
-<br>
+<p>
 ローカルリポジトリ「gitlocal」を作成したので、次はこのリポジトリに何か適当なファイルをコミットしてみましょう。
-<br>
-<br>
+</p>
+
+<p>
 まずは登録するファイル(今回はテキストファイル形式)を作成します。
-<br>
+</p>
+
 <pre class="prog">
 <input type="checkbox"> (1) ワーキングツリー内に「hoge.txt」というテキストファイルを新規作成する
-<br>
-<input type="checkbox"> (2) hoge.txt に a という文字を入力して保存する
+
+<input type="checkbox"> (2) hoge.txt に a という文字を入力して保存する(改行は入れない)
 </pre>
-この時点での「ワーキングツリー」「インデックス」「HEAD」は次のような状態になります。
+
+<p>
+この時点での「ワーキングツリー」「インデックス」「HEAD」は次の状態 2 になります。
 <br>
 まだ「ワーキングツリー」しか更新していませんので、「インデックス」は空のままで「HEAD」は存在しません。
 
-<br>
+</p>
+
 <br>
 <h2>状態 2</h2>
 <br>
-
 <b>ワーキングツリー</b>
+
 <br>
 <table class="noborder"><tr>
 
@@ -71,37 +82,42 @@ HEAD 無し
 
 </tr></table>
 
-<br>
+<p>
 次は git add コマンドを使って hoge.txt をインデックスに登録します(※)。
-<br>
-<br>
+</p>
+
+<p>
 ※ 以前のテキストに書いたように、あるファイルをインデックスに一時保存することを「インデックスに登録する」とか「add する」とか「ステージングする」などと言います。add は git add コマンドの add です。
-<br>
-<br>
+</p>
+
+<p>
 git add コマンドの構文は次の通りです。
+</p>
 
 <pre class="prog">
-新規ファイルのインデックス登録
-<br>
-<input type="checkbox"> git add &lt;ファイル名&gt;
+<input type="checkbox"><b>新規ファイルのインデックス登録:</b>
+
+git add &lt;ファイル名&gt;
 </pre>
-<br>
-<br>
+
+<p>
 では早速やってみましょう。
-<br>
-<br>
+</p>
+
 <pre class="prog">
 <input type="checkbox"> (3) git add hoge.txt
-<br>
+
 <input type="checkbox"> (4) hoge.txt がインデックスに登録されているか確認: git status
 </pre>
-この時点での「ワーキングツリー」「インデックス」「HEAD」は次のような状態になります。
+
+<p>
+この時点での「ワーキングツリー」「インデックス」「HEAD」は次の状態 3 になります。
 <br>
 hoge.txt がインデックスに登録されたので、ワーキングツリーとインデックスが同じ状態になりました。
 <br>
 ただしまだコミットしていませんので「HEAD」はまだ存在しません。
+</p>
 
-<br>
 <br>
 <h2>状態 3</h2>
 <br>
@@ -151,32 +167,36 @@ HEAD 無し
 
 </tr></table>
 
-
-<br>
+<p>
 最後に git commit コマンドを使って hoge.txt をコミットします。
 <br>
 git commit コマンドの構文は次の通りです。
+</p>
 
 <pre class="prog">
-コミット実行
-<br>
-<input type="checkbox"> git commit -m "コメント"
+<input type="checkbox"><b>コミット実行:</b>
+
+git commit -m "コメント"
 </pre>
 
+<p>
 ではやってみましょう。
-<br>
-<br>
+</p>
+
 <pre class="prog">
 <input type="checkbox"> (5) git commit -m "hoge.txtを追加"
-<br>
+
 <input type="checkbox"> (6) コミットするファイルが無いか確認: git status
-<br>
+
 <input type="checkbox"> (7) コミットログを確認: git log
 </pre>
+
+<p>
 するとインデックスの内容でスナップショットが作られてローカルリポジトリに登録され、そのスナップショットにHEADという識別子が割り当てられます。
 <br>
-よってこの時点でようやく「ワーキングツリー」「インデックス」「HEAD」は全て同じ状態になります。
-<br>
+よってこの時点でようやく「ワーキングツリー」「インデックス」「HEAD」が全て同じである状態 4 になります。
+</p>
+
 <br>
 <h2>状態 4</h2>
 <br>
@@ -233,17 +253,18 @@ a
 
 </tr></table>
 
-<br>
-<br>
+<p>
 さてファイルがひとつだけだと寂しいので、piyo.txt というテキストファイルも追加登録してみたいと思います。
 <br>
-上と同じような操作を繰り返して「ワーキングツリー」「インデックス」「HEAD」を次の状態にして下さい。
-<br>
-<br>
+上と同じような操作を繰り返して「ワーキングツリー」「インデックス」「HEAD」を次の状態 5 にして下さい。
+</p>
+
+<p>
 なおコミット時のコメントは"piyo.txtを追加"とします。
 <br>
 またコミットが一つ増えて HEAD の位置が移動している事に注目して下さい。
-<br>
+</p>
+
 <br>
 <h2>状態 5</h2>
 <br>
@@ -326,9 +347,5 @@ a
 
 </tr></table>
 
-
-<br>
-<br>
-<br>
 </body>
 </html>

@@ -1,47 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
 <title>ファイルの削除</title>
 </head>
 <body>
 
+<p>
+<a href="../">アクティビティ: git によるバージョン管理</a>
+<br>
+学習項目: [2] ローカルリポジトリ
+</p>
+
 <h2>ファイルの削除</h2>
 
-<br>
-次はファイルの削除方法を学びます。
-<br>
-<br>
+<p>
+こごてはファイルの削除方法を学びます。
+</p>
+
+<p>
 単にワーキングツリーからファイルを削除しても、そのファイルはインデックスには残り続けるので、何かのタイミングで消したはずのファイルが復活して大問題を起こしたりします。
 <br>
-そこで git で管理しているファイルは次のコマンドを使ってワーキングツリーとインデックスから同時に消す必要があります。
-<br>
+そこで git で管理しているファイルは次の git rm コマンドを使ってワーキングツリーとインデックスから同時に消す必要があります。
+</p>
+
 <pre class="prog">
-ワーキングツリーとインデックスからファイルを同時に消す
-<br>
-<input type="checkbox"> git rm &lt;ファイル&gt;
+<input type="checkbox"><b>ワーキングツリーとインデックスからファイルを同時に消す:</b>
+
+git rm &lt;ファイル&gt;
 </pre>
 
+<p>
 ちなみにインデックスからは消したいけど、ワーキングツリーにはファイルを残したい場合(※)は --cached オプションを付けます。
-<br>
-<br>
-※ 要するに git による管理を取りやめたい場合です。
-<br>
-<br>
+</p>
+
+<p>
+※ 要するにあるファイルの git による管理を取りやめたい場合です。
+</p>
+
 <pre class="prog">
-インデックスからファイルを消す(＝ git による管理を止める)
-<br>
-<input type="checkbox"> git rm --cached &lt;ファイル&gt;
+<input type="checkbox"><b>インデックスからファイルを消す(＝ git による管理を止める):</b>
+
+git rm --cached &lt;ファイル&gt;
 </pre>
 
+<p>
+では演習として前のページの状態 13 の状態において piyo.txt を削除してみましょう。
+<br>
+すると状態 14 の様にワーキングツリーとインデックスの piyo.txt は消えます。ただしまだコミットしていないので HEAD には piyo.txt は残っています。
+</p>
 
-<br>
-では演習として前のページの状態13の状態において piyo.txt を削除してみましょう。
-<br>
-するとワーキングツリーとインデックスの piyo.txt は消えます。ただしまだコミットしていないので HEAD には piyo.txt は残っています。
-
-<br>
 <br>
 <h2>状態 14</h2>
 <br>
@@ -149,26 +158,27 @@ a
 
 </tr></table>
 
-</tr></table>
 
-
-<br>
-<br>
-間違ってファイルを消してしまったとか言う場合は前のページで学んだ git checkout を使って復元できます。
+<p>
+さて、間違ってファイルを消してしまったとか言う場合は<a href="./page07.html">ファイル内容の復元</a>で学んだ checkout コマンドを使って復元できます。
 <br>
 ただしインデックスからも対象のファイルは消えてますので
-<br>
-<br>
+</p>
+
+<pre class="prog">
 git checkout HEAD -- &lt;ファイル名&gt;
-<br>
-<br>
+</pre>
+
+<p>
 を使って HEAD から復元する必要があります。
+</p>
+
+<p>
+では早速消した piyo.txt を HEAD から復元して状態 15 にしてみましょう。
 <br>
-<br>
-では早速消した piyo.txt を HEAD から復元してみましょう。
-<br>
-すると元の状態に戻ります。
-<br>
+当然ですがこれは元の状態 13 と同じ状態です。
+</p>
+
 <br>
 <h2>状態 15 ( = 状態13 )</h2>
 <br>
@@ -284,14 +294,12 @@ a
 
 </tr></table>
 
-</tr></table>
-
-<br>
-<br>
+<p>
 では演習として再び piyo.txt を消して、 "piyo.txt を削除" というコメントでコミットして下さい。
 <br>
-するといつものようにインデックスからスナップショットが作られ、HEADの位置が移動して次の状態に変わります。
-<br>
+するといつものようにインデックスからスナップショットが作られ、HEADの位置が移動して次の状態 16 に変わります。
+</p>
+
 <br>
 <h2>状態 16</h2>
 <br>
@@ -412,11 +420,5 @@ a
 
 </tr></table>
 
-</tr></table>
-
-
-<br>
-<br>
-<br>
 </body>
 </html>

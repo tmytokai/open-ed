@@ -1,46 +1,52 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
 <title>初期設定</title>
 </head>
 <body>
 
+<p>
+<a href="../">アクティビティ: git によるバージョン管理</a>
+<br>
+学習項目: [2] ローカルリポジトリ
+</p>
+
 <h2>初期設定</h2>
 
-<br>
+<p>
 最初に開発者がプライベートで自由に使えるローカルリポジトリの操作方法について説明します。
-<br>
-<br>
+</p>
+
+<p>
 git を初めて使う場合、以下のように git config コマンドを使って自分のユーザーIDやメールアドレスを登録します(※)。
-<br>
-<br>
+</p>
+
+<p>
 ※ 2回目以降は必要ありません。
-<br>
-<br>
+</p>
+
+<p>
 ここでユーザーIDやメールアドレスはローカルリポジトリしか使わない場合は適当で良いのですが、もしリモートリポジトリを使う場合は管理者に訪ねて下さい。
-<br>
-<br>
+</p>
+
 <pre class="prog">
 <input type="checkbox"> (1) 端末(※)を開いてホームディレクトリに移動する
-<br>
+
 ※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
-<br>
+
 <input type="checkbox"> (2) git config --global user.name "自分のID"
-<br>
+
 <input type="checkbox"> (3) git config --global user.email "メールアドレス"
-<br>
+
 <input type="checkbox"> (4) 登録内容の確認: git config --global --list 
 </pre>
 
-<br>
+<p>
 以上のコマンドを実行するとホームディレクトリ直下に設定ファイル(.gitconfig)が出来ます。
-<br>
+</p>
 設定を全てリセットしたい場合はその設定ファイルを消して下さい。
 
-<br>
-<br>
-<br>
 </body>
 </html>
