@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>1次元配列とメモリ空間</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C言語のポインタ</a>
+<br>
+学習項目: [3] 実際の1次元配列とメモリ空間
+</p>
+
+<h2>1次元配列とメモリ空間</h2>
+
+<br>
+<h3>
+1. 1次元配列のメモリ空間内での配置のされ方
+</h3>
+
+<p>
+ご存知の通り1次元配列(以下配列とだけ書きます)は
+</p>
+
+<pre class="prog">
+<input type="checkbox"><b>配列の定義方法:</b>
+
+データ型 配列名[配列の長さ];
+
+(例) char a[5]; とか int b[100];
+</pre>
+
+<p>
+で定義しますが、配列はメモリ空間内で「配列の各要素が長さ分だけ連続的につながっている領域」として配置されます。
+<br>
+また要素ひとつ分が使うデータサイズは sizeof(型の名前) で得られます。
+</p>
+
+<p>
+例えば長さ 4 の short 型の配列 a は、sizeof(short) = 2 、つまり short 型の要素ひとつ分のデータサイズは 2 byte ですので、次の図1の様に a[0] から a[3] までがメモリ空間内に連続的に配置されて全体では 2 * 4 = 8 byte のデータとなります(なおアドレスは省略しています)。
+
+<p>
+<input type="checkbox"><b>図1: short a[4] のメモリ配置(アドレス略)</b>
+</p>
+<table>
+<tr>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+<td class="centw50">略</td>
+</tr>
+
+<tr>
+<td class="centw50" colspan="2">a[0]</td>
+<td class="centw50" colspan="2">a[1]</td>
+<td class="centw50" colspan="2">a[2]</td>
+<td class="centw50" colspan="2">a[3]</td>
+</tr>
+</table>
+
+
+<br>
+<h3>
+2. 1次元配列の全体の使用データサイズと先頭アドレスを調べる
+</h3>
+
+<p>
+ある配列がメモリ空間内で使用する全体のデータサイズは、変数の時と同様に sizeof 演算子を使って次のようにして得られます。
+</p>
+
+<pre class="prog">
+<input type="checkbox"><b>配列の全体データサイズ(※):</b>
+
+sizeof(配列の名前)
+
+※ 図1の様に、一般的には
+「 sizeof(配列の名前) = sizeof(型の名前) * 配列の長さ」
+の関係があります。
+ただし構造体の配列では両辺の値が＝にならない時があります。
+</pre>
+
+<p>
+次に配列のアドレスに関してですが、図1の様に配列の各要素は先頭要素(図1で言えばa[0])から連続的に繋がっていますので、とりあえず先頭要素のアドレスさえ分かれば残りの要素のアドレスも分かります。
+</p>
+
+</p>
+よって C 言語では配列の先頭要素のアドレスだけ別格の扱いとされています。
+<br>
+ただ「配列の先頭要素のアドレス」と書くと若干長いので、普通は「要素の」を除いて「配列の先頭アドレス」と略して呼んでいます。
+</p>
+
+<p>
+それで先頭アドレスの調べ方ですが、配列の場合は変数の時と違ってアドレス演算子 &amp; を使わず
+</p>
+
+<pre class="prog">
+<input type="checkbox"><b>配列の先頭(要素の)アドレス:</b>
+
+配列名
+</pre>
+
+<p>
+だけで得られます。
+<br>
+例えば図1の配列 a の場合は sizeof(a) の値はもちろん 8 となりますが、もし a の値が 0x1F だとしたら、配列 a は 0x1F 番地から始まる全体で 8 byte のデータであることが分かります(図2)。
+</p>
+
+<p>
+<input type="checkbox"><b>図2: short a[4] のメモリ配置(アドレス付き)</b>
+</p>
+<table>
+<tr>
+<td class="centw50">0x1F</td>
+<td class="centw50">0x20</td>
+<td class="centw50">0x21</td>
+<td class="centw50">0x22</td>
+<td class="centw50">0x23</td>
+<td class="centw50">0x24</td>
+<td class="centw50">0x25</td>
+<td class="centw50">0x26</td>
+<td class="centw50">0x27</td>
+</tr>
+
+<tr>
+<td class="centw50" colspan="2">a[0]</td>
+<td class="centw50" colspan="2">a[1]</td>
+<td class="centw50" colspan="2">a[2]</td>
+<td class="centw50" colspan="2">a[3]</td>
+</tr>
+</table>
+
+<br>
+<h3>
+3. 1次元配列の各要素のデータサイズとアドレスを調べる
+</h3>
+
+<p>
+ある配列 a があったとき、その i 番目の要素 a[i] のデータサイズは
+
+<pre class="prog">
+<input type="checkbox"><b>配列 a の i 番目の要素 a[i] のデータサイズ:</b>
+
+(1) sizeof(a[i])
+
+又は
+
+(2) sizeof(型の名前)
+</pre>
+
+<p>
+で得られますが、普通は後者(2)の方を使うことが多いです。
+</p>
+
+<p>
+次は各要素のアドレスですが、こちらの方は
+
+<pre class="prog">
+<input type="checkbox"><b>配列 a の i 番目の要素 a[i] のアドレス:</b>
+
+(1) a + i
+
+又は
+
+(2) &amp;a[i]
+</pre>
+
+<p>
+で調べられます。
+<br>
+例えば図2の場合、a + 1 = &a[1] = 0x21 となります。
+</p>
+
+<p>
+どちらの記法を使っても同じアドレス値が出ますので基本的に好みの方を使って結構です。
+<br>
+ただしチームで開発する時はみんながバラバラの記法をすると混乱しますのでどちらかに統一した方が良いと思います。
+</p>
+
+
+</body>
+</html>
