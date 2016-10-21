@@ -67,14 +67,6 @@ text-align:center;
 border: 1px solid #000000;
 }
 
-table.info{
-border: 2px solid #000000;
-}
-
-td.info{
-padding: 10px;
-line-height: 130%;
-}
 
 table.noborder{
 margin-top: 5px;
@@ -108,15 +100,45 @@ background: #ffffff;
 border: 1px solid #000000;
 }
 
+pre.wrap{
+white-space: pre-wrap;
+word-break: break-all;
+}
+
+div.process{
+padding-left:32px;
+line-height:18pt;
+}
+
+div.info{
+border-width: 2px; 
+border-style: solid;
+border-color: black;
+padding: 10px;
+overflow: auto;
+}
+
+/* モバイル機器対策 */
+img{
+max-width: 100%;
+height: auto;
+}
+
+/* 廃止予定 */
+
+table.info{
+border: 2px solid black;
+}
+
+td.info{
+padding: 10px;
+line-height: 130%;
+}
+
 pre.prog { 
 border: 2px solid black;
 padding-top:10px;
 padding-left:10px;
 padding-right:10px;
 padding-bottom:10px;
-}
-
-div.process{
-padding-left:32px;
-line-height:18pt;
 }
