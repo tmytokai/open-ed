@@ -2,5 +2,7 @@
 *.aux
 *.dvi
 *.log
+*.xbb
 tmp
 practice.pdf
+exam*.pdf
