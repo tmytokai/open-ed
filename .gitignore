@@ -4,5 +4,6 @@
 *.log
 *.xbb
 tmp
+page*.pdf
 practice.pdf
 exam*.pdf
