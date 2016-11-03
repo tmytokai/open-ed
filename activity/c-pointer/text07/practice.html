@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>演習</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C言語のポインタ</a>
+<br>
+学習項目: [6] 活用例(2) 文字列配列
+<br>
+演習時間: 40 分
+</p>
+
+<h2>演習</h2>
+
+
+<br>
+<h2>1.アスキーコードとマルチバイト文字</h2>
+
+<p>
+今年度は省略
+</p>
+
+<br>
+<h2>2.<a href="./page02.html">文字列配列</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1 (個人PC、5分):</b> 文字列配列の途中の文字から文字列を表示してみましょう。
+</p>
+
+<p>
+<input type="radio" name="e3"> main 関数の中で長さ 256 の文字列配列 a を定義します。定義と同時に何か好きな半角英数字の文字列で初期化しておきます。文字列の長さは 10 文字程度にして下さい。
+<br>
+<input type="radio" name="e3"> a の内容を「2 文字目から」 printf で表示して下さい(文字列なので %s を使う)。
+<br>
+<input type="radio" name="e3"> ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+</p>
+
+<br>
+
+<p>
+<input type="checkbox"><b>演習 2 (個人PC、25分):</b> 文字列配列を引数とする関数を作り、文字列配列の中の文字にアクセスしてみましょう。
+</p>
+
+<p>
+<input type="radio" name="e2"> main 関数を作る前に以下の仕様で関数を作って下さい。
+</p>
+<div class="info">
+<p>
+<input type="radio" name="e2"> (1) 関数の戻り値の型は void 型とする。
+</p>
+<p>
+<input type="radio" name="e2"> (2) 関数名は hoge とする。
+</p>
+<p>
+<input type="radio" name="e2"> (3) 文字列配列 a (※)と int 型変数 n を引数とする。 n は a に含まれる文字数とする。
+</p>
+<p>
+※ 引数 a の定義方法は「配列の要素数を指定する記法」又は「配列の要素数を省略する記法」又は「* を用いる記法」のどれを使っても構いません。
+</p>
+<p>
+(4) 関数の中で文字列配列 a を逆順に表示する。
+<br>
+<input type="radio" name="e2"> for ループで使うint 型変数 i を定義する。
+<br>
+<input type="radio" name="e2"> i を n-1、n-2、・・・、0 と変化させる for ループを作る
+<br>
+<input type="radio" name="e2"> ループの中で文字列配列 a の i 番目の文字を一文字だけ表示させる(改行は無し、一文字だけなので %c を使う)
+<br>
+<input type="radio" name="e2"> ループから抜けたら改行文字 \n を printf する
+</p>
+</div>
+
+<p>
+<input type="radio" name="e2"> hoge 関数の下に main 関数を定義して下さい。
+<br>
+<input type="radio" name="e2"> main 関数の中で長さ 256 の文字列配列 a を定義します。定義と同時に何か好きな半角英数字の文字列で初期化しておきます。文字列の長さは 10 文字程度にして下さい。
+<br>
+<input type="radio" name="e2"> char 型のポインタ変数 pb を定義します。定義と同時に何か好きな半角英数字の文字列で初期化しておきます(※)。文字列の長さは 10 文字程度にして下さい。
+<br>
+<input type="radio" name="e2"> hoge 関数を呼び出して a の内容を逆順に表示して下さい。
+<br>
+<input type="radio" name="e2"> main 関数に戻ったらもう一回 hoge 関数を呼び出して、今度は pb の内容を逆順に表示して下さい。
+<br>
+<input type="radio" name="e2"> ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+</p>
+<p>
+※ 今回は const を付けなくても構いませんが、テキストでも書いている通り const を付けないで初期化することはかなり危険な行為なので注意しましょう。
+</p>
+
+
+<br>
+<h2>3.<a href="./page03.html">標準関数による文字列操作</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 3 (個人PC、10分):</b> str 系標準関数を使って文字列を操作しましょう(※)。
+</p>
+
+<p>
+※ テキストにも書きましたが str 系標準関数はもの凄く危険な関数なので出来るだけ使わない方が良いです。
+</p>
+
+<p>
+<input type="radio" name="e3"> main 関数に入る前に string.h をインクルードします。
+<br>
+<input type="radio" name="e3"> main 関数の中で長さ 256 の文字列配列 a を定義します。定義と同時に何か好きな半角英数字の文字列で初期化しておきます。文字列の長さは 10 文字程度にして下さい。
+<br>
+<input type="radio" name="e3"> char 型のポインタ変数 pb を定義します。定義と同時に何か好きな半角英数字の文字列で初期化しておきます(※)。文字列の長さは 10 文字程度にして下さい。
+<br>
+<input type="radio" name="e3"> strlen 関数を使って a の長さを 10 進数で表示して下さい。
+<br>
+<input type="radio" name="e3"> strcat 関数を使って a の内容の後に pb の内容を追加して下さい。
+<br>
+<input type="radio" name="e3"> a の内容を printf で表示して下さい(文字列なので %s を使う)。
+<br>
+<input type="radio" name="e3"> strcpy 関数を使って pb の内容を a にコピーして下さい。
+<br>
+<input type="radio" name="e3"> a の内容を printf で表示して下さい(文字列なので %s を使う)。
+<br>
+<input type="radio" name="e3"> ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+</p>
+<p>
+※ 今回は const を付けなくても構いませんが、テキストでも書いている通り const を付けないで初期化するとかなり危険なので注意しましょう。
+</p>
+
+
+</body>
+</html>
