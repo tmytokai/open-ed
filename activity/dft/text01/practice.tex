@@ -19,9 +19,9 @@
 \[
 f[i] = 
 -1
-+ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{\textrm{15}}{1} \right ) } \cdot i + 1 \right )
-+ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{\textrm{15}}{3} \right ) } \cdot i +0.5 \right )
-+ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{\textrm{15}}{7} \right ) } \cdot i -2 \right )
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
 \]
 
 とします。
@@ -46,11 +46,13 @@ f[i] =
 \item 自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
 \item 時間領域ディジタル信号の式は演習 1 と同様とします。
 \item const int 型変数 N を定義して演習 1 で求めた周期を代入します。
-\item double 型配列 f[N] を定義し、時間領域ディジタル信号の値を計算して代入します。
-\item 求めた f[i] ,(i = 0, 1,  …, N-1) の値を何らかの方法で表計算ソフトに取り込みグラフを作成します。
+\item double 型配列 f[N] を定義し、時間領域ディジタル信号の値を for ループを使って計算して代入します。\par
+ ※ 15/7 の所は 15.0/7.0 として下さい(そうしないと整数で演算されて 15/7 = 2 となります)。
+\item 求めた f[0] 〜 f[N-1] の値を何らかの方法で表計算ソフトに取り込んでください。
+\item グラフを作成して下さい。時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。周期的な信号なので足りない分は f[0] 〜 f[N-1] の値をコピペして下さい。
 \item グラフは点あり、線あり、平滑化「無し」とします。
 \item 完成したグラフの形と演習 1で作成したグラフの形が一致していることを確認します。
-\item ソースコードとグラフを同じドキュメントファイルに保存してアップロードします。
+\item ソースコードとグラフを同じドキュメントファイル(docx形式)に保存してアップロードします。
 \end{itemize}
 
 \pracpc{30} 周期性時間領域ディジタル信号の DFT 係数をプログラムで計算し、DFT係数の絶対値と偏角を表計算ソフトを使ってグラフ化してみましょう  \par
@@ -58,14 +60,14 @@ f[i] =
 \begin{itemize}
 \item 自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
 \item 前の演習の続きから行います。
-\item double 型配列 A[N] を定義し、DFT 係数の実数成分 $\textrm{A}[k]$ を計算して代入します。
-\item double 型配列 B[N] を定義し、DFT 係数の虚数成分 $\textrm{B}[k]$ を計算して代入します。
-\item double 型配列 abs\_C[N] を定義し、DFT 係数の絶対値 $|\textrm{C}[k]|$ を計算して代入します。
-\item double 型配列 arg\_C[N] を定義し、DFT 係数の偏角 $\angle\textrm{C}[k]$ を計算して代入します。\par
+\item double 型配列 A[N] を定義し、DFT 係数の実数成分 $\textrm{A}[k]$ を 2 重 for ループを使って計算して代入します。
+\item double 型配列 B[N] を定義し、DFT 係数の虚数成分 $\textrm{B}[k]$ を 2 重 for ループを使って計算して代入します。
+\item double 型配列 abs\_C[N] を定義し、DFT 係数の絶対値 $|\textrm{C}[k]|$ を for ループを使って計算して代入します。
+\item double 型配列 arg\_C[N] を定義し、DFT 係数の偏角 $\angle\textrm{C}[k]$ を for ループを使って計算して代入します。\par
  ※  絶対値の値が小さいと偏角の値が正しく出ないので、$|\textrm{C}[k]| < 0.01$ の時は $\angle\textrm{C}[k] = 0$ として下さい(この $0.01$ という値は適当に決めたもので特に深い意味はありません)。\par
-\item 求めた abs\_C[k] と arg\_C[k] ,(k = 0, 1,  …, N-1) の値を何らかの方法で表計算ソフトに取り込み、それぞれ別々にグラフを作成します。
+\item 求めた abs\_C[0] 〜  abs\_C[N-1] と arg\_C[0] 〜 arg\_C[N-1] の値を何らかの方法で表計算ソフトに取り込み、それぞれ別々にグラフを作成します。
 \item グラフは点あり、線「無し」、平滑化「無し」とします。
-\item ソースコードと2つのグラフを同じドキュメントファイルに保存してアップロードします。
+\item ソースコードと2つのグラフを同じドキュメントファイル(docx形式)に保存してアップロードします。
 \end{itemize}
 
 \savepractime
