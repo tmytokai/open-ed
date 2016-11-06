@@ -22,20 +22,18 @@
 <br>
 <h2>1.<a href="./page01.html">値渡しとポインタ渡し</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習 1 (個人PC、20分):</b> この演習では「ポインタ渡し」の活用例として「スワップ(swap)関数」を作ってみましょう。
 </p>
-
 <p>
 スワップ関数は二つ以上の変数の値を入れ替えるための関数で、「ポインタ渡し」の活用例として良く挙げられます。
 <br>
 例えば int a と int b という int 型の変数にそれぞれ 1 と 2 が入っている時、このスワップ関数を呼び出すと中身が入れ替わって a が 2、b が 1 となります。
 </p>
-
 <p>
 さて「ポインタ渡し」を学んでいない C 言語初学者にスワップ関数を作ってもらうと「値渡し」を使って必ず次のようなコードを書きますが、テキストに書いてあるように「値渡し」では main 関数の変数 a、b の値を変えることが出来ません。
 </p>
-
 <div class="info">
 <input type="checkbox"><b>「値渡し」を使ったスワップ(swap)関数の失敗例</b>
 <pre class="wrap">
@@ -62,33 +60,37 @@ int main()
 }
 </pre>
 </div>
-
 <p>
 ではこの失敗例を修正しながら「ポインタ渡し」の演習を行なって行きましょう。
 </p>
+<div class="olradio">
 <p>
-<input type="radio" name="e1"> 上の「値渡し」を使ったコードを実行し、「値渡し」の方法では main 関数の a と b の値が入れ替わらないことを確認して下さい。
+<span class="olradio"><input type="radio" name="e1"></span>上の「値渡し」を使ったコードを実行し、「値渡し」の方法では main 関数の a と b の値が入れ替わらないことを確認して下さい。
 <br>
-<input type="radio" name="e1"> スワップ関数の 2 つの引数定義を「ポインタ渡し」の方法に変更して下さい(引数名も a を pa、b を pb に変えて下さい)。
+<span class="olradio"><input type="radio" name="e1"></span>スワップ関数の 2 つの引数定義を「ポインタ渡し」の方法に変更して下さい。引数名も a を pa、b を pb に変えて下さい。
 <br>
-<input type="radio" name="e1"> スワップ関数の中を間接演算子 * を使う様に書き換えて下さい(※ c は int 型変数のままにして下さい。)。
-<br>
-<input type="radio" name="e1"> main 関数のスワップ関数の呼び出し部分で、アドレス演算子 &amp; を使って a と b のアドレスを関数に渡すように書き換えて下さい。
-<br>
-<input type="radio" name="e1"> スワップ関数が正常に動作することを確認して下さい。
-<br>
-<input type="radio" name="e1"> ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+<span class="olradio"><input type="radio" name="e1"></span>スワップ関数の中身を間接演算子 * を使う様に書き換えて下さい。
 </p>
+<p>
+　※ 変数 c は int 型変数のままにしておいて下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="e1"></span>main 関数のスワップ関数の呼び出し部分で、アドレス演算子 &amp; を使って a と b のアドレスを関数に渡すように書き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>スワップ関数が正常に動作することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+</p>
+</div>
 
 <br>
 <h2>2.<a href="./page02.html">配列渡し</a></h2>
-
 <p>
 <input type="checkbox"><b>演習 2 (個人PC、20分):</b> 「配列渡し」を使って関数の中で配列の各要素の中身を操作してみましょう。
 </p>
-
+<div class="olradio">
 <p>
-<input type="radio" name="e2"> main 関数を作る前に以下の仕様で関数を作って下さい。
+<span class="olradio"><input type="radio" name="e2"></span>main 関数を作る前に以下の仕様で関数を作って下さい。
 </p>
 <div class="info">
 <p>
@@ -98,35 +100,36 @@ int main()
 <input type="radio" name="e2"> (2) 関数名は hoge とする。
 </p>
 <p>
-<input type="radio" name="e2"> (3) int型の配列 a を引数とする(※)。
+<input type="radio" name="e2"> (3) int型の配列 a を引数とする。
 </p>
 <p>
-※ 引数 a の定義方法は「配列の要素数を指定する記法」又は「配列の要素数を省略する記法」又は「* を用いる記法」のどれを使っても構いません。
+　※ 引数 a の定義方法は「配列の要素数を指定する記法」又は「配列の要素数を省略する記法」又は「* を用いる記法」のどれを使っても構いません。
 </p>
 <p>
-(4) 関数の中で a の各要素を操作する。
+<input type="radio" name="e2"> (4) 関数の中で以下のように a の各要素を操作する。
+</p>
+<p>
+<input type="radio" name="e2"> 4-1. a[0] に 12 をセットする
 <br>
-<input type="radio" name="e2">  a[0] に 12 をセットする
+<input type="radio" name="e2"> 4-2. a[1] に34をセットする。
 <br>
-<input type="radio" name="e2">  a[1] に34をセットする。
-<br>
-<input type="radio" name="e2">  a[2] の中身を 2 倍する
+<input type="radio" name="e2"> 4-3. a[2] の中身を 2 倍する
 </p>
 </div>
-
 <p>
-<input type="radio" name="e2"> hoge 関数の下に main 関数を定義して下さい。
+<span class="olradio"><input type="radio" name="e2"></span>hoge 関数の下から main 関数を始めて下さい。
 <br>
-<input type="radio" name="e2"> main 関数の中で int 型の長さ 3 の配列 a を定義して下さい。
+<span class="olradio"><input type="radio" name="e2"></span>main 関数の中で int 型の長さ 3 の配列 a を定義して下さい。
 <br>
-<input type="radio" name="e2">  a[0] と a[1] に 0 を、a[2] に 2 を代入して下さい。
+<span class="olradio"><input type="radio" name="e2"></span>a[0] と a[1] に 0 を、a[2] に 2 を代入して下さい。
 <br>
-<input type="radio" name="e2"> hoge 関数を呼び出して main 関数の a の中身を書き換えて下さい。
+<span class="olradio"><input type="radio" name="e2"></span>hoge 関数を「配列渡し」の方法で呼び出し、 main 関数の配列 a の中身を書き換えて下さい。
 <br>
-<input type="radio" name="e2"> hoge 関数から main 関数に戻ったら for ループと printf を使って a[0] 〜 a[2] の値を表示して下さい。
+<span class="olradio"><input type="radio" name="e2"></span>hoge 関数から main 関数に戻ったら for ループと printf を使って a[0] 〜 a[2] の内容(10進数)を表示して下さい。
 <br>
-<input type="radio" name="e2"> ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
+<span class="olradio"><input type="radio" name="e2"></span>ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。
 </p>
+</div>
 
 <br>
 <h2>3.ヌルポインタとオーバーランに注意</h2>
