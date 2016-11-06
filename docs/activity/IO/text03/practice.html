@@ -21,62 +21,79 @@
 <h2>1. <a href="./page01.html">DAC と ADC とは</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1 (個人PC、10分):</b> 「自分が常日頃からお世話になっているDACとADCの例」を最低ひとつずつ考えてドキュメントファイルに記述してください。
+<input type="checkbox"><b>演習 1 (個人PC、10分):</b> DAC と ADC について調べてみましょう。
 </p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「自分が常日頃からお世話になっているDACとADC」を最低ひとつずつ Web 等で調べて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果」をドキュメントファイルに記述して保存してください。
+</p>
+</div>
 
 <br>
 <h2>2.<a href="./page02.html">出力</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習 2 (個人PC、20分):</b> Arduino UNO の アナログ出力ピン(PWM出力)から出力される電圧を測定してみましょう。
 </p>
-
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
+</p>
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) 任意のアナログ出力ピン → 適当な抵抗 → GND とつなぐ
+(1) 任意のアナログ出力ピン → 適当な抵抗 → GND とつなぐ。
 </p>
 <p>
-(2) 2000ミリ秒毎に 0V → 2.5V → 5V → 0V → 2.5V → … と出力値を変える
+(2) 2000ミリ秒毎に 0V → 2.5V → 5V → 0V → 2.5V → … と出力値を変える。
 </p>
 </div>
-
 <p>
-まずホワイトボードに回路の設計図を描いて下さい。
+<span class="olradio"><input type="radio" name="p2"></span>ホワイトボードに回路図を描いて下さい。
 <br>
-チームメンバー全員が描いたらファシリテーターの確認を受け、自分が描いた設計図の写真を撮って保存して下さい。
-</p>
-
-<p>
-次に設計図を見ながら回路を回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路図を描いたらファシリテータの確認を受けて下さい。
 <br>
-チームメンバー全員が組んだらファシリテーターの確認を受け、自分が組んだ回路の全体写真を撮って保存して下さい。
-</p>
-
-<p>
-次にプログラムを書いて転送し、抵抗の両端にかかっている電圧を測定して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
 <br>
-チームメンバー全員が動作したら各自ファシリテーターの動作確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span>設計図を見ながら回路を組んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>抵抗の両端にかかっている電圧を測定して正しく動作しているか確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
-
-<p>
-最後にドキュメントファイルに「設計図の写真」と「回路の写真」と「ソースコード」をコピーして保存してください。
-</p>
+</div>
 
 <br>
 <h2>3.<a href="./page03.html">入力</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 3 (個人PC、30分):</b> Arduino UNO のデジタル入力ピンに温度センサをつないで温度を測定してみましょう。
+<input type="checkbox"><b>演習 3 (個人PC、30分):</b> Arduino UNO のアナログ入力ピンに温度センサをつないで温度を測定してみましょう。
 </p>
-
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>仕様は以下の通りです。
+</p>
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) 任意のアナログ入力ピンに温度センサ(lm61ciz)を接続する
+(1) 任意のアナログ入力ピンに温度センサ(lm61ciz)を接続する。
 </p>
 <p>
-(2) 現在の温度をシリアルモニタに出力する(※)
+(2) 現在の温度をシリアルモニタ(虫めがねボタン)に出力する。
 </p>
 <p>
 ※ VsとGNDの間が正確に5Vとは限らないのでVsとGNDの間をテスターで測ってから map 関数で理論的な入力電圧値を求めて下さい。
@@ -84,22 +101,32 @@
    また理論的な入力電圧値が実際の入力電圧値に近いことも確認して下さい。
 </p>
 </div>
-
 <p>
-まず仕様に従って回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p3"></span>ホワイトボードに回路図を描いて下さい。
 <br>
-チームメンバー全員が組んだらファシリテーターの確認を受け、自分が組んだ回路の全体写真を撮って保存して下さい。
-</p>
-
-<p>
-次にプログラムを書いて転送して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>回路図を描いたらファシリテータの確認を受けて下さい。
 <br>
-チームメンバー全員が動作したら各自ファシリテーターの動作確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p3"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>設計図を見ながら回路を組んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>プログラムを書いて Arduino UNO に転送して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>シリアルモニタに表示される温度が現在の室温と大体合っていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>指で温度センサをつまんでシリアルモニタに表示される温度が変化することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
-
-<p>
-最後にドキュメントファイルに「設計図の写真」と「回路の写真」と「ソースコード」をコピーして保存してください。
-</p>
+</div>
 
 </body>
 </html>
