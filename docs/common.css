@@ -32,6 +32,9 @@ list-style-position: outside;
 margin-top: 10px;
 }
 
+input[type="radio"]{
+margin-top: 10px;
+}
 
 table{
 color: #000000;
@@ -105,17 +108,23 @@ white-space: pre-wrap;
 word-break: break-all;
 }
 
-div.process{
-padding-left:32px;
-line-height:18pt;
-}
-
 div.info{
 border-width: 2px; 
 border-style: solid;
 border-color: black;
 padding: 10px;
 overflow: auto;
+}
+
+/* カウンタ付きラジオボックス */
+
+div.olradio{
+counter-reset: cnt0;
+}
+
+span.olradio:after{
+counter-increment: cnt0;
+content: "(" counter(cnt0) ") ";
 }
 
 /* モバイル機器対策 */
@@ -126,8 +135,14 @@ height: auto;
 
 /* 廃止予定 */
 
+div.process{
+border: 2px solid red;
+padding-left:32px;
+line-height:18pt;
+}
+
 table.info{
-border: 2px solid black;
+border: 2px solid red;
 }
 
 td.info{
@@ -136,7 +151,7 @@ line-height: 130%;
 }
 
 pre.prog { 
-border: 2px solid black;
+border: 2px solid red;
 padding-top:10px;
 padding-left:10px;
 padding-right:10px;
