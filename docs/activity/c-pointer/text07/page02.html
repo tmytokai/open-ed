@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>文字列配列</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C言語のポインタ</a>
+<br>
+学習項目: [7] 活用例(2) 文字列配列
+</p>
+
+<h2>文字列配列</h2>
+
+<p>
+マルチバイト文字(漢字とか平仮名)をC言語で扱うのは結構面倒なので、これ以降はアスキー文字(半角英数字文字)だけ取り扱います。従って今後は「文字」＝「アスキー文字」と読み替えて下さい。
+</p>
+
+<br>
+<h3>
+1.文字と char 型変数
+</h3>
+<p>
+(半角英数字)文字は 0〜127 までの整数と一対一で対応していますので、C 言語では -128 から 127 までの整数を扱える char 型変数(※)に代入してメモリ空間に格納することが出来ます。
+</p>
+
+<p>
+※ char 型変数の事を「文字型変数」と書いてある文献が多いのですが、正確には 1 byte 整数型変数と言って整数を格納する変数です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>(半角英数字)文字を char 型変数に代入する例:</b>
+
+<pre class="wrap">
+char a;
+a = 'A';  // 文字はシングルクォーテーションで囲む
+printf("%c\n", a ); // 文字の printf 表示は %c
+</pre>
+
+</div>
+
+<br>
+<h3>
+2.文字列と文字列配列
+</h3>
+<p>
+文字は char 型変数を使って格納出来るということは、文字「列」は char 型の配列に格納することが出来ます。
+</p>
+
+<p>
+文字列を格納するために使われている char 型配列の事を「文字列配列」とか「文字列の配列」とか、あるいは単純に「文字列」とだけ呼んでいます。なお配列の長さは最大文字数を表します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列配列の定義例:</b>
+
+<pre class="wrap">
+char a[256]; // 最大256文字を格納できる文字列配列
+</pre>
+
+</div>
+
+<p>
+いったん文字列配列を定義すれば後はただの char 型配列ですので、普通に文字を代入することが出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列配列への文字の代入例:</b>
+
+<pre class="wrap">
+char a[256];
+
+a[0] = 'h';
+a[1] = 'o';
+a[2] = 'g';
+a[3] = 'e';
+</pre>
+
+</div>
+
+<p>
+なお上の例を実行した後のメモリ空間の状態は図1の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 上の例を実行した後のメモリ空間</b>
+
+<p>
+※ 例なのでアドレスは適当です。
+</p>
+
+<table>
+<tr>
+<td class="center">a = 0x01</td>
+<td class="center">0x02</td>
+<td class="center">0x03</td>
+<td class="center">0x04</td>
+<td class="center">0x05</td>
+<td class="center">0x06</td>
+<td class="center">・・・</td>
+</tr>
+
+<tr>
+<td class="center">a[0] = 'h'</td>
+<td class="center">a[1] = 'o'</td>
+<td class="center">a[2] = 'g'</td>
+<td class="center">a[3] = 'e'</td>
+<td class="center">a[4] = ？</td>
+<td class="center">a[5] = ？</td>
+<td class="center">・・・</td>
+</tr>
+</table>
+
+<p>
+※ a[4] 以降は何が入っているか分からないので？にしています。
+</p>
+</div>
+
+<br>
+<h3>
+3. ヌル終端文字
+</h3>
+<p>
+日本語の文字列は「。」が来ると終わりですが、C 言語でも「ヌル終端文字」という特殊な文字を使って文字列の終了を表します。「ヌル文字」とか単に「終端文字」とだけ呼ばれる事もあります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ヌル終端文字:</b>
+
+<pre class="wrap">
+'\0'
+
+※ C言語では '\0' は整数 0 と同一
+</pre>
+
+</div>
+
+<p>
+具体的には、次のように文字列配列の最後の要素にヌル終端文字を代入することで「以上で文字列は終わり」という事を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ヌル終端文字の使用例:</b>
+
+<pre class="wrap">
+char a[256];
+
+a[0] = 'h';
+a[1] = 'o';
+a[2] = 'g';
+a[3] = 'e';
+a[4] = '\0';
+</pre>
+
+</div>
+
+<p>
+上の例を実行した後のメモリ空間の状態は次の図 2 の様になります。最後の要素に'\0'が入っていることに注目して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 上の例を実行した後のメモリ空間</b>
+
+<p>
+※ 例なのでアドレスは適当です。
+</p>
+
+<table>
+<tr>
+<td class="center">a = 0x01</td>
+<td class="center">0x02</td>
+<td class="center">0x03</td>
+<td class="center">0x04</td>
+<td class="center">0x05</td>
+<td class="center">0x06</td>
+<td class="center">・・・</td>
+</tr>
+
+<tr>
+<td class="center">a[0] = 'h'</td>
+<td class="center">a[1] = 'o'</td>
+<td class="center">a[2] = 'g'</td>
+<td class="center">a[3] = 'e'</td>
+<td class="center">a[4] = '\0'</td>
+<td class="center">a[5] = ？</td>
+<td class="center">・・・</td>
+</tr>
+</table>
+
+<p>
+※ a[5] 以降は何が入っているか分からないので？にしています。
+</p>
+</div>
+
+<p>
+このヌル終端文字は文字列の最後に必ず入れなければいけないものでは無いのですが、もしヌル終端文字が無いとどこで文字列が終わりなのか分からないのでプログラムの誤動作の原因になる時があります。
+</p>
+
+<br>
+<h3>
+4. 文字列配列の printf 
+</h3>
+<p>
+文字列配列を printf で表示する場合は %s を使います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列の printf 例:</b>
+
+<pre class="wrap">
+char a[256];
+
+a[0] = 'h';
+a[1] = 'o';
+a[2] = 'g';
+a[3] = 'e';
+a[4] = '\0';  // ヌル終端文字が無いと pritnf が誤動作するので注意 !
+
+printf("%s\n", a ); // hoge と表示される
+
+</pre>
+</div>
+
+<p>
+参考までに、i 番目の文字を一文字だけ表示したい時は %c を使います。
+
+<div class="info">
+<input type="checkbox"><b>i 番目の文字の printf 例:</b>
+
+<pre class="wrap">
+char a[256];
+
+a[0] = 'h';
+a[1] = 'o';
+a[2] = 'g';
+a[3] = 'e';
+a[4] = '\0';
+
+printf("%c\n", a[2] ); // g と表示される
+
+</pre>
+</div>
+
+
+<br>
+<h3>
+5. 文字列配列の i 番目の文字から文字列を開始する
+</h3>
+<p>
+文字列配列は結局ただの char 型配列ですので、<a href="../text03/page01.html">1次元配列とメモリ空間</a>の「配列 a の i 番目の要素 a[i] のアドレス」の所で習った方法を使って i 番目の文字から文字列を開始することができます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字配列の i 番目の文字から文字列を開始する方法:</b>
+<p>
+(1) a + i
+</p>
+<p>
+又は
+</p>
+<p>
+(2) &amp;a[i]
+</p>
+
+<p>
+※どちらを使っても構いませんが、文字列配列の場合は(1)の方を使う人が多いみたいです。
+</p>
+
+</div>
+
+<p>
+と言われても何の事かピンと来ないと思いますので、printf を使った具体例を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>i 番目の文字から文字列を表示する例:</b>
+
+<pre class="wrap">
+char a[256];
+
+a[0] = 'h';
+a[1] = 'o';
+a[2] = 'g';
+a[3] = 'e';
+a[4] = '\0';  // ヌル終端文字が無いと pritnf が誤動作するので注意 !
+
+printf("%s\n", a );  // hoge と表示される
+printf("%s\n", a+1 );  // oge と表示される
+printf("%s\n", a+2 );  // ge と表示される
+printf("%s\n", a+3 );  // e と表示される
+
+</pre>
+</div>
+
+<br>
+<h3>
+6. 文字列配列の初期化
+</h3>
+<p>
+普通の変数は int a = 123; の様に定義と同時に初期化可能ですが、文字列配列の場合も次の様にして初期化します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列配列の初期化方法:</b>
+
+<pre class="wrap">
+
+char a[256] = "hoge";
+
+※ 文字数が最大文字数を超えているとコンパイル出来ません。
+※ 配列の最後の要素に自動的にヌル終端文字が入ります。
+</pre>
+</div>
+
+<p>
+この時のメモリ空間の状態は上の図 2 と同じとなります。
+</p>
+
+<p>
+なお次のやり方で文字列を初期化して作っている文献が結構ありますが、極めて危険な初期化方法なので使わない方が無難です。何故危険なのかは自分で調べてみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>危険な文字列の初期化方法:</b>
+
+<pre class="wrap">
+char *a = "hoge";
+
+又は
+
+char a[] = "hoge";
+</pre>
+
+<p>
+※ const を付けている場合は比較的安全なので良く使われている
+</p>
+
+<pre class="wrap">
+const char *a = "hoge";
+
+又は
+
+const char a[] = "hoge";
+</pre>
+
+
+</div>
+
+
+<br>
+<h3>
+7. 文字列配列の配列渡し(文字列渡し)
+</h3>
+<p>
+しつこいようですが、文字列配列はただの char 型配列ですので、<a href="../text06/page02.html">「配列渡し」</a>で学んだ方法を使って関数呼び出し可能です。なお「文字列配列の配列渡し」と書くと長いので単に「文字列渡し」とだけ呼んでいる人も多いです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列渡しの例:</b>
+
+<pre class="wrap">
+void HOGE( char *pa )
+{
+  ※ 関数の中で引数を使いたい時は *(pa+i)記法 や pa[i] 記法の好きな方を使う
+
+   printf( "%c\n", *(pa+1) );   // 1 番目の文字を表示する
+   pa[2] = 'A';  // 2番目の文字を 'A' に置き換える
+}
+
+
+(関数の呼び出し方の例)
+
+char a[10] = "hoge";
+
+※ 文字列配列の先頭アドレスを渡す(アドレス演算子 &amp; を配列名の前に付けない)
+HOGE( a );
+</pre>
+
+</div>
+
+
+</body>
+</html>
