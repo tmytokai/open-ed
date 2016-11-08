@@ -4,7 +4,4 @@
 *.log
 *.xbb
 tmp
-page*.pdf
-summary.pdf
-practice.pdf
-exam*.pdf
+exam*-all.pdf
