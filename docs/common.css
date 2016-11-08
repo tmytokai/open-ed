@@ -14,22 +14,23 @@ max-height: 999999px;
 ul{
 margin: 0px;
 margin-left: 2em;
-margin-top: 15px;
-margin-bottom: 15px;
 padding: 0px;
 }
 
 ol{
 margin: 0px;
 margin-left: 2em;
-margin-top: 15px;
-margin-bottom: 15px;
 padding: 0px;
 }
 
 li{
 list-style-position: outside;
-margin-top: 10px;
+margin-bottom: 10px;
+}
+
+span.prac
+{
+margin-left: 2em;
 }
 
 input[type="radio"]{

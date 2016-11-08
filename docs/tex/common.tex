@@ -1,5 +1,8 @@
 \makeatletter 
 
+\usepackage{amsmath}
+\usepackage{framed}
+
 \pagestyle{plain}
 
 \parindent = 1zw
@@ -35,6 +38,13 @@
 % 合計時間
 \newcounter{practime}
 \setcounter{practime}{0}
+
+\newcommand{\pagehead}[4]{%
+\noindent アクティビティ: #1\par%
+\noindent 学習項目: #2\par%
+\vspace{2zh}%
+\noindent\textbf{\LARGE #3. #4}\par%
+}
 
 \newcommand{\prachead}[2]{%
 \noindent アクティビティ: #1\par%
