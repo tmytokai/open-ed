@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>演習</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C 言語によるファイル入出力</a>
+<br>
+学習項目: [1] ファイル入出力
+<br>
+演習時間: 80  分
+</p>
+
+<h2>演習</h2>
+
+<br>
+<h2>1. <a href="./page01.html">ファイルのオープン</a></h2>
+
+<br>
+<p>
+演習無し
+</p>
+
+<br>
+<h2>2. <a href="./page02.html">ファイルのクローズ</a></h2>
+
+<br>
+<p>
+演習無し
+</p>
+
+<br>
+<h2>3. <a href="./page03.html">エラー処理</a></h2>
+
+<br>
+<p>
+演習無し
+</p>
+
+<br>
+<h2>4. <a href="./page04.html">変数をテキストファイルとして読み書き</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1 (個人PC、20分):</b> 複数の変数の値をテキストファイルに書き出してみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="e1"></span> main 関数の前で stdlib.h をインクルードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span> int 型の変数 a を定義します。同時に 123 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span> double 型の変数 b を定義します。同時に 0.456 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span> short 型の変数 c を定義します。同時に 789 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span> char 型の変数 d を定義します。同時に 'A' で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>ファイルポインタ fp を定義して下さい。同時に NULL で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>fopen 関数を使って書き込み(writing)モードでテキストファイル "1-1.txt" をオープンして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>エラー処理を書いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>fprintf 関数を使って変数 a、b の値をファイルに書き出して下さい。書式は "%d,%lf\n" とします。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>fprintf 関数を使って変数 c, d の値をファイルに書き出して下さい。書式は "%hd,%c\n" とします。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>fclose 関数を使ってファイルをクローズして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>プログラムを実行し、ファイルが出来ている事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>ファイルを開いて、fprintf の書式通りにテキストが出力されていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e1"></span>ドキュメントファイルに「ソースコード」と「1-1.txt の中身」をコピーして保存してください。 
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2 (個人PC、20分):</b> 複数の変数の値をテキストファイルから読み込んでみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="e1"></span> main 関数の前で stdlib.h をインクルードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span> int 型の変数 a を定義します。同時に 0 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span> double 型の変数 b を定義します。同時に 0 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span> short 型の変数 c を定義します。同時に 0 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span> char 型の変数 d を定義します。同時に 0 で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>ファイルポインタ fp を定義して下さい。同時に NULL で初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>fopen 関数を使って読み込み(reading)モードでテキストファイル "hoge.txt" をオープンして下さい。
+</p>
+<p>
+　※ エラー処理を試すためにあえて "1-1.txt" にしていません。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="e2"></span>エラー処理を書いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>fscanf 関数を使って変数 a、b の値をファイルから読み込んで下さい。書式は演習 1 と合わせて下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>fprintf 関数を使って変数 c, d の値をファイルから読み込んで下さい。書式は演習 1 と合わせて下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>fclose 関数を使ってファイルをクローズして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>変数 a、b、c、d の値を printf で表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>実行して fopen に失敗したことを確認したら、開くファイル名を "1-1.txt" にして下さい。
+<br>
+<span class="olradio"><input type="radio" name="e2"></span>ドキュメントファイルに「ソースコード」と「実行結果」をコピーして保存してください。 
+</p>
+</div>
+
+
+<br>
+<h2>5. <a href="./page05.html">文字列配列をテキストファイルとして読み書き</a></h2>
+
+<br>
+<p>
+更新中
+</p>
+
+<br>
+<h2>6. 配列をバイナリファイルとして読み書き</h2>
+
+<br>
+<p>
+今年度は演習無し
+</p>
+
+<br>
+<h2>7. 構造体をバイナリファイルとして読み書き</h2>
+
+<br>
+<p>
+今年度は演習無し
+</p>
+
+
+
+</body>
+</html>
