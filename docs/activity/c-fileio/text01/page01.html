@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>ファイルのオープンとエラー処理とクローズ</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C 言語によるファイル入出力</a>
+<br>
+学習項目: [7] 活用例(2) 文字列配列
+</p>
+
+<h2>1. ファイルのオープンとエラー処理とクローズ</h2>
+
+<p>
+プログラムの外にあるデータを読み込んだり逆に外にデータを書き出す方法は色々ありますが、一番基本的な方法はストレージに置いてあるファイルを読み書きすることだと思います。実際に読み書きする前に、まずここではファイルをオープンしてクローズする方法について学びます。
+</p>
+
+<br>
+<h3>
+1.fopen 標準関数でファイルをオープンする
+</h3>
+
+<p>
+さて皆さんがノートの内容を読みたい時とか文字を書きたい時とかにノートを開く様に、プログラムがファイルを読み書き可能にする処理の事を「ファイルをオープンする」とか「ファイルを開く」とか言います。
+</p>
+
+<p>
+ファイルをオープンするために C 言語では「fopen 標準関数」を使います。fopen 標準関数の使い方と使用例は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fopen 標準関数の書式:</b>
+
+<p>
+※ この関数は古い関数でセキュリティ的に危険なので使わない方が良いです。 何故危険なのかは自分で調べてみましょう。 C11以降は「fopen_s」を代わりに使うことが推奨されています。
+</p>
+
+<p>
+fopen( ファイル名, モード )
+</p>
+
+<p>
+戻り値: オープンに成功したらファイルポインタ(※)、エラーなら NULL が返る。
+</p>
+
+<p>
+※ 正確には FILE 構造体型変数のポインタ
+</p>
+
+<p>
+モード: どの様にファイルをオープンするか指定する。
+</p>
+
+<table>
+<tr><th>モード</th><th>説明</th><th>ファイルがある時</th><th>ファイルが無い時</th></tr>
+<tr><td class="center">"w"</td><td>ファイルにデータを新規で書き込む (writing)</td><td>古い内容を消してから上書き</td><td>書き込み可なら新規作成、不可ならエラー</td></tr>
+<tr><td class="center">"r"</td><td>ファイルからデータを読み込む (reading)</td><td>先頭から読み出し</td><td>エラーを返す</td></tr>
+<tr><td class="center">"a"</td><td>ファイルにデータを追加する (appending)</td><td>古い内容の後に追加書き込み</td><td>書き込み可なら新規作成、不可ならエラー</td></tr>
+</table>
+
+<p>
+※ 各モードの後に + を追加した "w+" / "r+" / "a+" も指定できますが、今回は fseek 標準関数を扱わないので説明は省きます。詳しくは自分で調べて下さい。
+</p>
+
+<br>
+<pre class="wrap">
+(使用例1: ファイル名を直接指定)
+
+FILE *fp1 = NULL;  // fp1 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+FILE *fp2 = NULL;  // fp2 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+
+fp1 = fopen( "hoge.txt", "w" );  // hoge.txt を書き込み(writing)モードでオープン。fp1 使用
+fp2 = fopen( "fuga.txt", "r" );  // fuga.txt を読み込み(reading)モードでオープン。fp2 使用
+</pre>
+
+<br>
+<pre class="wrap">
+(使用例2: ファイル名を文字列配列で指定)
+
+FILE *fp1 = NULL;  // fp1 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+FILE *fp2 = NULL;  // fp2 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+
+char f1[256] = "hoge.txt";  // const char *f1 = "hoge.txt"; と書くのが一般的
+char f2[256] = "fuga.txt";  // const char *f2 = "fuga.txt"; と書くのが一般的
+
+fp1 = fopen( f1, "w" );  // hoge.txt を書き込み(writing)モードでオープン。fp1 使用
+fp2 = fopen( f2, "r" );  // fuga.txt を読み込み(reading)モードでオープン。fp2 使用
+</pre>
+</div>
+
+<br>
+<h3>
+2.exit 標準関数でプログラムの強制終了
+</h3>
+
+<p>
+上のモードの表で示した様に、書き込み出来ないデバイスにファイルを書き込もうとしたり、存在しないファイルを読もうとしたりすると fopen 標準関数はエラーとなり、ファイルポインタに NULL が入ります。
+</p>
+
+<p>
+この時そのままプログラムを続けると、ファイルを読み書きしようとした瞬間にいきなりプログラムがクラッシュしますので、「ファイルのオープンに失敗しました」の様なエラーメッセージを出してプログラムを強制終了してあげるとユーザーフレンドリーになって好ましいです。
+</p>
+
+<p>
+さてエラーメッセージを出してプログラムを強制終了させたい時に便利な標準関数として exit 標準関数が用意されています。使い方は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>exit 標準関数の書式:</b>
+
+<p>
+※ stdlib.h をインクルードする必要があります。
+<br>
+※ C11以降ならより高速化された「quick_exit」も使えます。
+</p>
+
+<p>
+exit(終了コード)
+</p>
+
+<p>
+戻り値: 無し
+</p>
+
+<p>
+終了コード: OS にプログラムがどう終了したかを知らせるための数字
+</p>
+
+<table>
+<tr><th>終了コード</th><th>説明</th><th>備考</th></tr>
+<tr><td class="center">EXIT_FAILURE</td><td>異常終了</td><td>数字の 1でも代替可</td></tr>
+<tr><td class="center">EXIT_SUCCESS</td><td>正常終了</td><td>数字の 0でも代替可</td></tr>
+</table>
+
+<br>
+<pre class="wrap">
+(使用例: 強制的に異常終了)
+
+exit(EXIT_FAILURE);
+
+又は
+
+exit(1);
+</pre>
+
+<br>
+<pre class="wrap">
+(使用例: 強制的に正常終了)
+
+exit(EXIT_SUCCESS);
+
+又は
+
+exit(0);
+</pre>
+</div>
+
+<br>
+<h3>
+3. fopen 時のエラー処理
+</h3>
+
+<p>
+では exit 標準関数を使って fopen 時のエラー処理をする例を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> fopen 時のエラー処理の例:</b>
+
+<br>
+<pre class="wrap">
+※ stdlib.h のインクルードを忘れずに
+
+FILE *fp1 = NULL;  // fp1 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+FILE *fp2 = NULL;  // fp2 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+
+char f1[256] = "hoge.txt";  // const char *f1 = "hoge.txt"; と書くのが一般的
+char f2[256] = "fuga.txt";  // const char *f2 = "fuga.txt"; と書くのが一般的
+
+fp1 = fopen( f1, "w" );  // hoge.txt を書き込み(writing)モードでオープン。fp1 使用
+if( fp1 == NULL ){ // hoge.txt を書き込みオープン出来なかったら fp1 に NULL が入る
+    printf("%s のオープン失敗\n", f1);
+    exit(EXIT_FAILURE); // 強制的に異常終了。exit(1)でも可
+}
+
+fp2 = fopen( f2, "r" );  // fuga.txt を読み込み(reading)モードでオープン。fp2 使用
+if( fp2 == NULL ){ // fuga.txt を読み込みオープン出来なかったら fp2 に NULL が入る
+    printf("%s のオープン失敗\n", f2);
+    exit(EXIT_FAILURE); // 強制的に異常終了。exit(1)でも可
+}
+
+// ここまで処理が進んだら hoge.txt と fuga.txt のオープンに成功しているので
+// fp1, fp2 を使ってファイルの読み書きが出来る
+</pre>
+</div>
+
+<br>
+<h3>
+4. fclose 標準関数でファイルをクローズする
+</h3>
+
+<p>
+プログラムがあるファイルを読み書きしている間はそのファイルにロックがかかって他のプログラムはアクセス出来ません。そこでファイルを使い終わったら終了処理をする必要があります。ファイルを使い終わった時の終了処理の事を「ファイルをクローズする」とか「ファイルを閉じる」とか言います。 
+</p>
+
+<p>
+ファイルをクローズするために C 言語では「fclose 標準関数」を使います。fclose 標準関数の使い方と使用例は以下の通りです。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fclose 標準関数の書式:</b>
+
+<p>
+fclose(ファイルポインタ)
+</p>
+
+<p>
+戻り値: 終了コード(普通は使わない)
+</p>
+
+<br>
+<pre class="wrap">
+(使用例)
+
+fclose(fp);
+</pre>
+</div>
+
+<p>
+では fopen → エラー処理 → fclose までの流れの例を示したいと思います。
+</p>
+
+<p>
+なお、下のコードを実行してもまだ読み書きの部分を作っていませんので何もおきません(空っぽの hoge.txt は出来ますが)。読み書きの方法についてはデータの種類別に次のページ以降で学んで行きます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> fopen → エラー処理 → fclose の例:</b>
+
+<br>
+<pre class="wrap">
+※ stdlib.h のインクルードを忘れずに
+
+FILE *fp1 = NULL;  // fp1 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+FILE *fp2 = NULL;  // fp2 を「ファイルポインタ」と呼び、ファイルの読み書き時に使う
+
+char f1[256] = "hoge.txt";  // const char *f1 = "hoge.txt"; と書くのが一般的
+char f2[256] = "fuga.txt";  // const char *f2 = "fuga.txt"; と書くのが一般的
+
+fp1 = fopen( f1, "w" );  // hoge.txt を書き込み(writing)モードでオープン。fp1 使用
+if( fp1 == NULL ){ // hoge.txt を書き込みオープン出来なかったら fp1 に NULL が入る
+    printf("%s のオープン失敗\n", f1);
+    exit(EXIT_FAILURE); // 強制的に異常終了。exit(1)でも可
+}
+
+fp2 = fopen( f2, "r" );  // fuga.txt を読み込み(reading)モードでオープン。fp2 使用
+if( fp2 == NULL ){ // fuga.txt を読み込みオープン出来なかったら fp2 に NULL が入る
+    printf("%s のオープン失敗\n", f2);
+    exit(EXIT_FAILURE); // 強制的に異常終了。exit(1)でも可
+}
+
+// ここまで処理が進んだら hoge.txt と fuga.txt のオープンに成功しているので
+// fp1, fp2 を使ってファイルの読み書きが出来る
+
+fclose(fp1); // hoge.txt のクローズ
+fclose(fp2); // fuga.txt のクローズ
+</pre>
+</div>
+
+
+</body>
+</html>
