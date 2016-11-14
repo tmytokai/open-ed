@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>変数をテキストファイルとして読み書き</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C 言語によるファイル入出力</a>
+<br>
+学習項目: [7] 活用例(2) 文字列配列
+</p>
+
+<h2>2. 変数をテキストファイルとして読み書き</h2>
+
+<p>
+ここでは変数をテキスト形式でファイルに読み書きする方法について学びます。
+</p>
+
+<br>
+<h3>
+1.fprintf 標準関数でテキストファイルに書き込む
+</h3>
+
+<p>
+変数の値をテキストとして画面に表示する時は printf を使いましたが、画面の代わりにファイルにテキストを出力したい時は printf の親戚である「fprintf 標準関数」を使います。
+</p>
+
+<p>
+使い方は printf とほとんど同じで、違いは次のように書式の前にファイルポインタがあるだけです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fprintf 標準関数の書式:</b>
+
+<p>
+fprintf( ファイルポインタ、書式、変数1, 変数2,…)
+</p>
+
+<p>
+書式: printf と同じ
+</p>
+
+<p>
+戻り値: printf と同じ
+</p>
+
+<br>
+<pre class="wrap">
+(使用例)
+
+FILE *fp = NULL;
+char f[256] = "hoge.txt";
+fp = fopen( f, "w" ); // もちろん書き込み(writing)モードでファイルをオープンする
+
+int a = 123;
+fprintf( fp, "hoge %d\n", a ); // hoge.txt に「hoge 123」を出力する
+
+fclose(fp);
+
+</pre>
+</div>
+
+<br>
+<h3>
+2.fscanf 標準関数でテキストファイルから読み込む
+</h3>
+
+<p>
+変数の値をキーボードからテキスト入力する時は scanf を使いましたが、キーボードの代わりにファイルからテキストを入力したい時は scanf の親戚である「fscanf 標準関数」を使います。
+</p>
+
+<p>
+使い方は scanf とほとんど同じで、違いは次のように書式の前にファイルポインタがあるだけです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fscanf 標準関数の書式:</b>
+
+<p>
+※ fscanf 標準関数は scanf 標準関数と同じく使い方によっては危険な関数なので基本的に使わない方が良いです。代わりに C11 以降の「fscanf_s」を使うか「fgets」+「sscanf_s」を使った方が安全です。
+</p>
+
+<p>
+fscanf( ファイルポインタ、書式、変数1のアドレス, 変数2のアドレス,…)
+</p>
+
+<p>
+書式: scanf と同じ
+</p>
+
+<p>
+戻り値: scanf と同じ (読み込みに失敗すると EOF 返る)
+</p>
+
+<br>
+<pre class="wrap">
+(使用例)
+
+※ hoge.txt の中身は「hoge 123」とする。
+
+FILE *fp = NULL;
+char f[256] = "hoge.txt";
+fp = fopen( f, "r" ); // もちろん読み込み(reading)モードでファイルをオープンする
+
+int a;
+fscanf( fp, "hoge %d", &a );
+
+fclose(fp);
+
+printf( "%d\n", a );  // 123 と表示される。
+
+</pre>
+</div>
+
+<p>
+なお文字列も %s を使って読み込めますがセキュリティ的に「最高レベルで」危険なので、文字列を読み込むためには次のページで説明する fgets 標準関数を使います。
+</p>
+
+</body>
+</html>
