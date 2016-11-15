@@ -1,0 +1,93 @@
+\documentclass[a4paper]{jarticle}
+
+\def\texdir{../../../tex}
+\input{\texdir/common}
+
+\begin{document}
+
+\pagehead{離散フーリエ変換 (DFT)}{[1] DFT と IDFT}{3}{プログラミング}
+
+\bigskip
+DFTの演算中には複素数が含まれていますので、C言語などでプログラミングしてDFT係数を求めるためには
+
+\[
+\textrm{C}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
+\]
+
+\medskip
+\noindent の様にDFT係数 $\textrm{C}[k]$ を実数成分 $\textrm{A}[k]$ と虚数成分 $\textrm{B}[k]$ に分けて求めると楽です。
+
+\medskip
+そこでオイラー公式を使ってDFTの演算中に含まれる複素数を $\sin$ と $\cos$ の和に分解してみると、 
+$\textrm{A}[k]$ と $\textrm{B}[k]$ は次の様にして求められます。
+
+\begin{framed}
+\noindent\quad \textbf{DFTをプログラミングで求める}
+
+\begin{align*}
+\textrm{A}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i ) 
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
+\textrm{B}[k] &= -\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+\end{align*}
+
+\bigskip
+\noindent\quad $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性ディジタル信号
+
+\bigskip
+\noindent\quad $\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の\underline{定数}、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+
+\bigskip
+\noindent\quad $\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の\underline{定数}、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+\end{framed}
+
+\medskip
+このようにすると DFT の演算中に複素数が含まれなくなるので、普通に外側が $k$、内側が $i$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ を求められます。なお \textrm{B}[k] は $\textrm{N}$ ではなく $-\textrm{N}$ で割る事に注意して下さい。
+
+\medskip
+また C 言語なら sqrt 関数と atan2 関数を使って
+
+\begin{align*}
+|\textrm{C}[k]| & = \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k]) \\
+\angle \ \textrm{C}[k] & = \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
+\end{align*}
+
+\medskip
+\noindent より DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \ \textrm{C}[k]$ も求まります。
+
+\bigskip
+同様に IDFT を $\textrm{A}[k]$ と $\textrm{B}[k]$ を使って書き直すと次のようになります。
+
+\begin{framed}
+\noindent\quad \textbf{IDFTをプログラミングで求める}
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+- 
+\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1)
+\]
+
+\bigskip
+\noindent\quad $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性ディジタル信号
+
+\bigskip
+\noindent\quad $\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の\underline{定数}、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+
+\bigskip
+\noindent\quad $\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の\underline{定数}、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+\end{framed}
+
+\medskip
+この場合は外側が $i$、内側が $k$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ から $f[i]$ を復元できます。
+
+\end{document}
