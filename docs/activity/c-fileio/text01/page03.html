@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>文字列配列をテキストファイルとして読み書き</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: C 言語によるファイル入出力</a>
+<br>
+学習項目: [7] 活用例(2) 文字列配列
+</p>
+
+<h2>3. 文字列配列をテキストファイルとして読み書き</h2>
+
+<p>
+ここでは文字列配列をテキスト形式でファイルに読み書きする方法について学びます。
+</p>
+
+<br>
+<h3>
+1.fputs 標準関数でテキストファイルに書き込む
+</h3>
+
+<p>
+文字列配列をテキストファイルに出力したい時は fprintf を使って
+</p>
+
+<p>
+fprintf( fp, "%s", a );
+</p>
+
+<p>
+としても良いのですが、もっと楽な方法として fputs 標準関数を使う方法もあります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fputs 標準関数の書式:</b>
+
+<p>
+fputs( 文字列配列の先頭アドレス, ファイルポインタ )
+</p>
+
+<p>
+戻り値: 成功したら 0 よりも大きい数、失敗したら EOF を返す。
+</p>
+
+<br>
+<pre class="wrap">
+(使用例)
+
+char a[256] = "hoge\n";
+char b[256] = "fuga\n";
+
+FILE *fp = NULL;
+char f[256] = "hoge.txt";
+fp = fopen( f, "w" ); // もちろん書き込み(writing)モードでファイルをオープンする
+
+fputs( a, fp ); // hoge.txt に「hoge(改行)」を出力する。ヌル終端文字は出力されない。
+fputs( b, fp );// hoge.txt に続けて「fuga(改行)」を出力する。ヌル終端文字は出力されない。
+
+fclose(fp);
+
+</pre>
+</div>
+
+<br>
+<h3>
+2.fgets 標準関数でテキストファイルから読み込む
+</h3>
+
+
+<p>
+文字列配列にテキストファイルから文字列を読み込みたい時は fscanf を使って
+</p>
+
+<p>
+fscanf( fp, "%s", a );
+</p>
+
+<p>
+とする方法もありますが危険な方法なので止めましょう。普通は fscanf ではなくて fgets 標準関数を使います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>fgets 標準関数の書式:</b>
+
+<p>
+fgets( 文字列配列の先頭アドレス, 最大文字数, ファイルポインタ )
+</p>
+
+<p>
+※ 1回この関数を呼び出すと改行文字が現れるまで、又はファイルの最後までテキストを最大文字数を限度に読み込みます。
+<br>
+　改行文字も読み込まれます、ヌル終端文字が文字列の最後に自動で付きます。
+</p>
+
+<p>
+戻り値: 成功したら文字列配列の先頭アドレス、失敗したら NULL
+</p>
+
+<br>
+<pre class="wrap">
+(使用例)
+
+※ hoge.txt の中身は
+　hoge
+　fuga
+　とする。
+
+char a[256];
+char b[256];
+
+FILE *fp = NULL;
+char f[256] = "hoge.txt";
+fp = fopen( f, "r" ); // もちろん読み込み(reading)モードでファイルをオープンする
+
+fgets( a, 256, fp ); // hoge.txtの1行目を読み込む(改行文字含む)。ヌル終端文字が最後に付く。
+fgets( b, 256, fp ); // hoge.txtの2行目を読み込む(改行文字含む)。ヌル終端文字が最後に付く。
+
+fclose(fp);
+
+printf( "%s", a );  // hoge と表示される。
+printf( "%s", b );  // fuga と表示される。
+
+</pre>
+</div>
+
+
+</body>
+</html>
