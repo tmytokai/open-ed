@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../../common.css">
+<title>TensorFlow とは</title>
+</head>
+<body>
+
+<p>
+<a href="../">アクティビティ: TensorFlow によるディープラーニング</a>
+<br>
+学習項目: [1] TensorFlow の基本
+</p>
+
+<h2>1. TensorFlow とは</h2>
+
+<p>
+TensorFlow(テンソルフロー)は Google が開発し 2015/11/9 にオープンソースで公開したディープラーニング用ライブラリであり、 Google の自社サービスでも実際に使われています。
+</p>
+
+<p>
+TensorFlow は具体的には高速で数値演算や行列演算を行うための演算ライブラリであり Python や C++ から利用することが出来ます。その高速演算能力をディープラーニングに生かして画像・音声の認識や検索、翻訳などで利用されています。
+</p>
+
+<p>
+TensorFlow に関して詳しい事は自分で調べてもらうことにして、早速 TensorFlow でハローワールドを動かしてみましょう。なお今回のアクティビティでは python を使います。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>TensorFlow のハローワールド:</b>
+
+<p>
+python を起動して以下のコードを実行すると 123 と表示される。
+</p>
+
+<pre class="wrap">
+import tensorflow as tf
+sess = tf.Session()
+
+op_const = tf.constant( 123 )
+
+result = sess.run( op_const )
+print( result )
+# 表示結果
+# 123
+</pre>
+</div>
+
+<p>
+各行の意味についてはこれから順を追って説明していきたいと思います。
+</p>
+
+
+</body>
+</html>
