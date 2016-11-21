@@ -105,7 +105,7 @@ print( result )
 </p>
 
 <p>
-ただし、定数 OP ノードはセッションの途中で最初にセットした値を変更できませんが、変数 OP ノードは途中で変更する事ができます。ただし run する前に初期値で値をリセットしておかないとエラーが出ます。
+定数 OP ノードの場合はセッションの途中で最初にセットした値を変更できませんが、変数 OP ノードは途中で変更する事ができます。ただし run する前に初期値で値をリセットしておかないとエラーが出ます。
 </p>
 
 <p>
@@ -120,7 +120,7 @@ print( result )
 </p>
 
 <p>
-入力テンソル: x ・・・ 初期値(定数値、又はテンソル)
+入力テンソル: x ・・・ 初期値
 <br>
 出力テンソル: 現在値
 </p>
@@ -170,9 +170,9 @@ sess.run( tf.initialize_all_variables() )
 result = sess.run( op_var )
 print( result )
 # 表示結果(乱数なので毎回変わる)
-# [[ 0.  0.]
-#  [ 0.  0.]
-#  [ 0.  0.]]
+#[[ 0.08048159  0.03259621]
+# [ 0.09933039  0.17510985]
+# [-0.0177522  -0.01852487]]
 </pre>
 </div>
 
@@ -450,14 +450,15 @@ f(x) = log(x)、exp(x)、sin(x)、cos(x)、その他色々
 import tensorflow as tf
 sess = tf.Session()
 
-op_const_x = tf.constant( [ 1, 2, 3] )
+op_const_x = tf.constant( [ 1, 2, 3], tf.float32 )
+# tf.float32 は各要素を 32 bit浮動小数として扱うという意味
 
 op_log = tf.log( op_const_x )
 
 result = sess.run( op_log )
 print( result )
 # 表示結果
-# [ ]
+# [ 0.          0.69314718  1.09861231]
 </pre>
 
 <br>
@@ -509,14 +510,16 @@ SoftMax OP ノードはニューラルネットワークの出力層で良く使
 import tensorflow as tf
 sess = tf.Session()
 
-op_const_x = tf.constant( [ 1, 2, 3] )
+op_const_x = tf.constant( [ 1, 2, 3], tf.float32 )
+# tf.float32 は各要素を 32 bit浮動小数として扱うという意味
 
 op_smax = tf.nn.softmax( op_const_x )
 
 result = sess.run( op_smax )
 print( result )
 # 表示結果
-# [ ]  全て足すと 1 になるので、各要素は確率の数字を表している
+# [ 0.09003057  0.24472848  0.66524094]
+# 結果を全て足すと 1 になる → 各要素は確率の数字を表している
 </pre>
 
 <br>
@@ -602,7 +605,7 @@ print( result )
 </p>
 
 <p>
-入力テンソル: x ・・・ 新しい値(定数値、又はテンソル)
+入力テンソル: x ・・・ 新しい値
 <br>
 出力テンソル: x がそのまま出力される
 </p>
