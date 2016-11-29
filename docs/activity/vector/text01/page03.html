@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<title>3. デカルト座標系</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ベクトルと多様体</a></li>
+<li>学習項目: [1] 座標系</li>
+<li>ここ</li>
+</ol>
+</nav>
+
+<p>
+このページでは数式の表示に<a href="https://www.mathjax.org/">MathJax</a>を利用させて頂いております。
+</p>
+
+<h2>3. デカルト座標系</h2>
+
+<p>
+前のページで座標系、つまりベクトル空間に座標と位置ベクトルの組が与えられている世界を考えましたが、あまりにも漠然とし過ぎているので、何か基準となる座標系をひとつ作ってそれを元にして議論を進めたいと思います。
+</p>
+
+<p>
+この基準となる座標系は別に自分で好きに作って良いのですが(※)、今回は一番分かりやすくて馴染みがある「デカルト座標系」を基準の座標系にしたいと思います。なお分野によっては「カーテシアン座標系」とも呼ばれています。
+</p>
+
+<p>
+※ というか前のページに書いたように基底ベクトルや成分が数ベクトルですら無くても良いです。
+</p>
+
+<p>
+さてデカルト座標系とは各点に座標というラベルを割り振ったあと、基底ベクトルを正規直交数ベクトル、つまり
+</p>
+
+\begin{align}
+e_1 = \left [
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right ] \\
+e_2 = \left [
+\begin{array}{c}
+0 \\
+1
+\end{array}
+\right ]
+\end{align}
+
+<p>
+とし、更に位置ベクトルの成分$\{a^1,a^2\}$を座標、つまり
+</p>
+
+\begin{align}
+a^1 = x^1 \\
+a^2 = x^2 \\
+\end{align}
+
+<p>
+とする事が出来る座標系です。逆に基底ベクトルと成分を先に決めてから座標を成分に一致させるという考え方でもOKです。いずれにしろ位置ベクトルは
+</p>
+
+\begin{align}
+x^1e_1 + x^2e_2
+\label{eq:vec}
+\end{align}
+
+<p>
+となりますが、式 \eqref{eq:vec} を展開すると
+</p>
+
+\begin{align}
+x^1e_1 + x^2e_2 =
+x^1
+\left [
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right ]
++x^2
+\left [
+\begin{array}{c}
+0 \\
+1
+\end{array}
+\right ]
+=\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+\end{align}
+
+<p>
+ですので、デカルト座標系の位置ベクトルは座標を単に数ベクトル化しただけの形となっています(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: デカルト座標系の例: </b>
+
+<p>
+デカルト座標 {2,3} の点と {2,1} の点とそれらの点に対応した位置ベクトル
+</p>
+
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+
+<p>
+こんなの当たり前の話じゃないの？と思う人が大半だと思いますが、実はデカルト座標系の様に<b>位置ベクトルの成分と座標をたまたま同じ値に出来る座標系はむしろ例外的</b>なことに注意が必要です。
+
+
+<p>
+座標は説明した通り各点に好きに割り当てることが出来るただのラベルなので、より一般的な座標系では位置ベクトルを 式 \eqref{eq:vec} の形で表す事が出来ません。その様な座標系の典型例は皆さんもよく知っている極座標系です。
+</p>
+
+<p>
+ごちゃごちゃと見辛くて済みませんが、図 2 が極座標系における点の座標を基準であるデカルト座標系における座標に変換して図示した例です。極座標系では座標が変わると基底ベクトル(※)も変わるので、位置ベクトルの成分を 式 \eqref{eq:vec} の様に座標と一致させることは出来ません。
+</p>
+
+<p>
+※ 正確には接ベクトル、あるいは共変基底ベクトルと言います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 極座標系の例: </b>
+
+<p>
+極座標 $\{r, \theta\}$ = {2,3} の点と $\{r, \theta\}$ = {2,1} の点、及びそれらの点における基底ベクトル(接ベクトル、共変基底ベクトル)を基準のデカルト座標系における座標、基底ベクトルに変換して示した図
+</p>
+
+<img src="./img/page03-fig2.png" alt="">
+</div>
+
+<p>
+この極座標系の様に「座標がねじ曲がっている座標系を持つ空間」を「多様体」と言います(※)。
+</p>
+
+<p>
+※ 正確にいうと「局所的にユークリッド空間とみなせる位相空間」を多様体と言います。
+<br>
+普段ユークリッド空間の中で生活しているせいか、「多様体では位置ベクトル成分が必ずしも座標と一致しない」ことに気が付いていない学生が意外に多いです。その結果「公式を丸暗記してテストでは100点取れたけど多様体って何なのか結局分からなかった」という悲劇が生まれ続けている訳です。
+</p>
+
+<nav class="prnx">
+<ol>
+<li><a href="./page02.html">前のページ</a></li>
+<li><a href="./page04.html">次のページ</a></li>
+<li><a href="../">アクティビティに戻る</a></li>
+</ol>
+</nav>
+
+</body>
+</html>

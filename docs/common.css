@@ -128,6 +128,36 @@ counter-increment: cnt0;
 content: "(" counter(cnt0) ") ";
 }
 
+/* パンくず */
+nav.brcr ol{
+margin: 0px;
+}
+
+nav.brcr ol li{
+display: inline-block;
+list-style-type: none;
+}
+
+nav.brcr ol li:first-child:before{
+content:"";
+}
+
+nav.brcr ol li:before{
+content: " ≫ ";
+}
+
+/* 前、次のページ */
+
+nav.prnx ol{
+text-align: right;
+}
+
+nav.prnx ol li{
+display: inline-block;
+list-style-type: none;
+}
+
+
 /* モバイル機器対策 */
 img{
 max-width: 100%;
