@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 200  分
+</p>
+
+<br>
+<h2><a href="./page01.pdf">1. 周期性時間領域ディジタル信号</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1 (個人PC、15分):</b> 表計算ソフトを使って周期性時間領域ディジタル信号のグラフを描いてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span>  周期性時間領域ディジタル信号の式は以下の通りとします。
+<br>
+\[
+f[i] = 
+-1
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
+\]
+
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  グラフは点あり、線あり、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  グラフを描いたら周期 $\textrm{N}$ [点]を求めてタイトルに追加記述して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  グラフを画像ファイルに変換してアップロードして下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.pdf">2. DFT と IDFTの定義</a></h2>
+
+<p>
+演習無し
+</p>
+
+<br>
+<h2><a href="./page03.pdf">3. プログラミング</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2 (個人PC、15分):</b> 周期性時間領域ディジタル信号の信号値をプログラム上で求め、表計算ソフトを使ってグラフ化してみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>  自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  時間領域ディジタル信号の式は演習 1 と同様とします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  const int 型変数 N を定義して演習 1 で求めた周期を代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  double 型配列 f[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  時間領域ディジタル信号の値を for ループを使って計算して代入して下さい。
+</p>
+<p>
+　※ 15/7 の所は 15.0/7.0 として下さい(そうしないと整数で演算されて 15/7 = 2 となります)。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>  求めた f[0] 〜 f[N-1] の値を何らかの方法で表計算ソフトに取り込んでください。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  グラフを描いて下さい。時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。
+</p>
+<p>
+　※ 周期的な信号なので足りない分は f[0] 〜 f[N-1] の値をコピペして下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>  グラフは点あり、線あり、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  完成したグラフの形と演習 1で作成したグラフの形が一致していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  ソースコードとグラフを同じドキュメントファイル(docx形式)に保存してアップロードして下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3 (個人PC、90分):</b> 周期性時間領域ディジタル信号の DFT 係数 $\textrm{C}[k]$ をプログラムで計算し、DFT係数の絶対値と偏角を表計算ソフトを使ってグラフ化してみましょう
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  時間領域ディジタル信号の式は演習 1 と同様とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  演習 2 のソースコードをコピーし、続きから作成します。
+</p>
+<p>
+　※ 演習 2 で書いた部分のコードは書き換えないで return 0 の真上から書いて行って下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型配列 A[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の実数成分 $\textrm{A}[0]$ 〜 $\textrm{A}[\textrm{N}-1]$ を k,i の 2 重 for ループを使って計算して 配列 A[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型配列 B[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の虚数成分 $\textrm{B}[0]$ 〜 $\textrm{B}[\textrm{N}-1]$ を k,i の 2 重 for ループを使って計算して 配列 B[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型配列 abs_C[N] を定義して下さい。
+</p>
+<p>
+ ※ abs は absolute value: 絶対値の略です。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の絶対値 $|\textrm{C}[0]|$ 〜 $|\textrm{C}[\textrm{N}-1]|$ を k の for ループを使って計算して配列 abs_C[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型配列 arg_C[N] を定義して下さい。
+</p>
+<p>
+ ※ arg は argument: 偏角の略です。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 arg_C[]  に代入して下さい。
+</p>
+<p>
+ ※  絶対値の値が小さいと偏角の値が正しく出ないので、$|\textrm{C}[k]| < 0.01$ の時は $\angle\textrm{C}[k] = 0$ として下さい(この $0.01$ という値は適当に決めたもので特に深い意味はありません)。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  求めた abs_C[0] 〜  abs_C[N-1] と arg_C[0] 〜 arg_C[N-1] の値を何らかの方法で表計算ソフトに取り込み、それぞれ別々にグラフを描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  グラフは点あり、線「無し」、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  ソースコードと2つのグラフを同じドキュメントファイル(docx形式)に保存してアップロードして下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 4 (個人PC、30分):</b> DFT 係数 $\textrm{C}[k]$ から元の周期性時間領域ディジタル信号をプログラムで復元してみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 演習 3 のソースコードをコピーし、続きから作成します。
+</p>
+<p>
+　※ 演習 3 で書いた部分のコードは書き換えないで return 0 の真上から書いて行って下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> double 型配列 f2[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 配列 A[] と B[] から元の信号値を i,k の 2 重 for ループを使って復元して 配列 f2[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 求めた f2[0] 〜 f2[N-1] の値を何らかの方法で表計算ソフトに取り込んでください。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを描いて下さい。時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。
+</p>
+<p>
+　※ 周期的な信号なので足りない分は f2[0] 〜 f2[N-1] の値をコピペして下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> グラフは点あり、線あり、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 完成したグラフの形と演習 1 及び演習 2 で作成したグラフの形が一致していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> ソースコードとグラフを同じドキュメントファイル(docx形式)に保存してアップロードして下さい。
+</p>
+</div>
+
+
+<br>
+<h2><a href="./page04.pdf">4. DFT と IDFTの意味</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 5 (個人PC、20分):</b> 任意の周期性時間領域ディジタル信号の高調波成分をプログラムで求めてみましょう。 
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 自分の好きなプログラミング言語を使って結構ですが、C 言語の使用を前提として説明します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 演習 4 のソースコードをコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 周期 N の値を 9 に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 演習 2 で作った部分(f[]にforループで値をセット)を削除し、代わりに double f[N] = {8, 7, 6, 5, 4, 3, 2, 1, 0 }; と配列 f[] を初期化します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> これ以降は 演習 4 の続きから作成します。
+</p>
+<p>
+　※ 上の変更部と演習 4 で書いた部分のコードは書き換えないで return 0 の真上から書いて行って下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> double 型配列 T[N] を定義して下さい。
+</p>
+<p>
+　※ 実際には T[1] 〜 T[(N-1)/2] しか使わないのですが多めにメモリを確保しています。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 第 $k$ 高調波の周期 $\textrm{T}_k$ を求めて T[1] 〜 T[(N-1)/2] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> double 型配列 a[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 直流成分を abs_C[0] と arg_C[0] の値から求めて a[0] に代入して下さい。
+</p>
+<p>
+　※ arg_C[0] が 0 なら a[0] = $\textrm{C}[0]$ = abs_C[0] * $\textrm{e}^{0\cdot j}$ = abs_C[0]
+<br>
+　 　arg_C[0] が $\pm\pi$ なら a[0] = abs_C[0] * $\textrm{e}^{\pm\pi \cdot j}$ = -abs_C[0] です。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 第 $k$ 高調波( $k = 1$ の時は基本波)の振幅を abs_C[1] 〜  abs_C[(N-1)/2] の値から求めて a[1] 〜 a[(N-1)/2] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> double 型配列 phi[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 第 $k$ 高調波( $k = 1$ の時は基本波)の位相を arg_C[1] 〜 arg_C[(N-1)/2] の値から求めて phi[1] 〜 phi[(N-1)/2] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> T[1] 〜 T[(N-1)/2] の値を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> a[0] の値を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> a[1] 〜 a[(N-1)/2] の値を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> phi[1] 〜 phi[(N-1)/2] の値を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> ソースコードと表示結果を同じドキュメントファイル(docx形式)に保存してアップロードして下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6 (個人PC、30分):</b> 任意の周期性時間領域ディジタル信号をサイン波を合成して作ってみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 演習 5 で求めた T[1] 〜 T[(N-1)/2] の値を何らかの方法で表計算ソフトに取り込んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 同様に a[0] の値を表計算ソフトに取り込んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 同様に a[1] 〜 a[(N-1)/2] の値を表計算ソフトに取り込んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 同様に phi[1] 〜 phi[(N-1)/2] の値を表計算ソフトに取り込んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 直流成分のグラフを a[0] を使って描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 時刻の範囲は $i = 0, 1,  \cdots, 27$ とします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> グラフは点あり、線あり、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 同様に基本波のグラフを T[1] 、 a[1] 、 phi[1] を使って描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 同様に第 2 〜 (N-1)/2 高調波のグラフを T[k] 、 a[k] 、 phi[k] を使って描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 各時刻 i 毎に直流成分、基本波、第 2 〜 (N-1)/2 高調波の値を足し合わせた信号のグラフを描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 描いたグラフが {8, 7, 6, 5, 4, 3, 2, 1, 0 } を繰り返した様な形となっていることを確認して下さい。
+</p>
+<p>
+　※ 計算誤差があるので足しあわせた結果がきれいな整数値になるとは限りません。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 各グラフを同じドキュメントファイル(docx形式)に保存してアップロードして下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page05.pdf">5. 高速フーリエ変換 (FFT)</a></h2>
+
+<p>
+演習無し
+</p>
+
+<script>PreNext(6,5)</script>
+</body>
+</html>
