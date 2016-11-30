@@ -115,6 +115,7 @@ border-style: solid;
 border-color: black;
 padding: 10px;
 overflow: auto;
+line-height: 120%;
 }
 
 /* カウンタ付きラジオボックス */
@@ -157,6 +158,13 @@ display: inline-block;
 list-style-type: none;
 }
 
+nav.prnx ol li:first-child:before{
+content:"";
+}
+
+nav.prnx ol li:before{
+content: " / ";
+}
 
 /* モバイル機器対策 */
 img{

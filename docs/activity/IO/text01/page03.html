@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>入力</title>
+<script src="../../../common.js"></script>
+<title>3. 入力</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: 入出力インターフェース</a>
-<br>
-学習項目: [1] GPIO
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: [1] GPIO</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>3. 入力</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 入力モードに設定した GPIO ピンも、メーカーが用意しているライブラリの関数を使ってプログラム内から簡単にピンに入力されたディジタル入力を取得することが出来ます。
@@ -59,5 +63,6 @@ GPIO ピンに 5V か 3.3V の電圧をかけると上の関数の戻り値は H
 どちらの回路を使うかは好みの問題だと思いますが、Arduino の様にマイコンボードによってはプルアップ回路が内蔵されている場合もあります。
 </p>
 
+<script>PreNext(3,3)</script>
 </body>
 </html>

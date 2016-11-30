@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>GPIOとは</title>
+<script src="../../../common.js"></script>
+<title>1. GPIOとは</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: 入出力インターフェース</a>
-<br>
-学習項目: [1] GPIO
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: [1] GPIO</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>1. GPIOとは</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 GPIO は General Purpose Input Output(汎用入出力) の略で、HIGHT/LOW とか ON/OFF とか 1/0 とか TRUE/FALSE とかのディジタル入出力を行うインターフェースで、一般的にはポート形式かピン形式で提供されています(※)。
@@ -30,5 +34,6 @@ GPIO は General Purpose Input Output(汎用入出力) の略で、HIGHT/LOW と
 PCなどに GPIO のピンが付いている事はあまりありませんが、大抵のマイコンボードやPICなどには GPIO ピンが付いていて、ライブラリを通じてソフトウェア上から GPIO ピンを簡単に制御することが出来ます。
 </p>
 
+<script>PreNext(1,3)</script>
 </body>
 </html>

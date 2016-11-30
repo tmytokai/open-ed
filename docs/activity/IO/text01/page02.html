@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>出力</title>
+<script src="../../../common.js"></script>
+<title>2. 出力</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: 入出力インターフェース</a>
-<br>
-学習項目: [1] GPIO
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: [1] GPIO</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>2. 出力</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 GPIO ピンは一般的にソフトウェアの実行開始直後に出力モードか入力モードかどちらかに設定で切り替えて使います。
@@ -53,5 +57,6 @@ GPIO 出力の HIGH/LOW を切り替える関数の書式はプログラミン�
 従って回路を設計する場合は電圧レベルに注意し、必要な場合はレベルを揃える必要があります。
 </p>
 
+<script>PreNext(2,3)</script>
 </body>
 </html>

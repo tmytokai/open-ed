@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>入力</title>
+<script src="../../../common.js"></script>
+<title>3. 入力</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: 入出力インターフェース</a>
-<br>
-学習項目: [2] RS-232C
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: [2] RS-232C</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>3. 入力</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 入力の場合も送信側の Tx ピンと受信側の Rx ピンを線1本で繋ぎ、メーカーが用意したライブラリの関数を使って情報を読み込むだけです。
@@ -40,6 +44,6 @@
 出力の時と同様に電圧レベルには十分注意して下さい。
 </p>
 
-
+<script>PreNext(3,3)</script>
 </body>
 </html>
