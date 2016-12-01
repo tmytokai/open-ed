@@ -4,15 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>2. 座標系の作り方</title>
 </head>
 <body>
@@ -21,15 +14,11 @@ MathJax.Hub.Config({
 <ol>
 <li><a href="../">アクティビティ: ベクトルと多様体</a></li>
 <li>学習項目: [1] 座標系</li>
-<li>ここ</li>
+<li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
-<p>
-このページでは数式の表示に<a href="https://www.mathjax.org/">MathJax</a>を利用させて頂いております。
-</p>
-
-<h2>2. 座標系の作り方</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 前のページに書いたようにこのアクティビティでは 2 次元(部分)ベクトル空間だけを考えます。またベクトル空間について基本的な知識は知っている事を前提に話を進めますので、途中で何か分からない用語が出てきたら自分で調べて下さい。
@@ -69,13 +58,6 @@ a^1e_1 + a^2e_2
 なお座標  $\{x^1,x^2\}$ は実数値の組ですが、位置ベクトルは座標と 1 対 1 で対応さえしていれば良いので別に数ベクトル(成分が実数のベクトル)である必要はありません。つまり基底ベクトル $e_1$ と $e_2$ は数ベクトルではなくて複素数とか関数とか演算子とかその他好きな何かで出来たベクトルで OK です。同様に、成分 $\{a^1,a^2\}$ も実数値の組ではなくて複素数とか関数とか演算子とかその他好きな何かで OK です。
 </p>
 
-<nav class="prnx">
-<ol>
-<li><a href="./page01.html">前のページ</a></li>
-<li><a href="./page03.html">次のページ</a></li>
-<li><a href="../">アクティビティに戻る</a></li>
-</ol>
-</nav>
-
+<script>PreNext(2,8)</script>
 </body>
 </html>
