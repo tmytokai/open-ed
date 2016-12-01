@@ -5,15 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
+<script src="../../../mathjax.js"></script>
 <title>演習</title>
 </head>
 <body>
@@ -149,7 +141,7 @@ f[i] =
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 arg_C[]  に代入して下さい。
 </p>
 <p>
- ※  絶対値の値が小さいと偏角の値が正しく出ないので、$|\textrm{C}[k]| < 0.01$ の時は $\angle\textrm{C}[k] = 0$ として下さい(この $0.01$ という値は適当に決めたもので特に深い意味はありません)。
+ ※  絶対値の値が小さいと偏角の値が正しく出ないので、$|\textrm{C}[k]| &lt; 0.01$ の時は $\angle\textrm{C}[k] = 0$ として下さい(この $0.01$ という値は適当に決めたもので特に深い意味はありません)。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span>  求めた abs_C[0] 〜  abs_C[N-1] と arg_C[0] 〜 arg_C[N-1] の値を何らかの方法で表計算ソフトに取り込み、それぞれ別々にグラフを描いて下さい。
