@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. 入力</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: 学習項目: [5] I2C</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+I2C 通信を使ってデータを受信したい場合も、マスター側とスレーブ側の SDA ピンと SCL ピンを線で繋ぎ、メーカーが用意したライブラリの関数を使うだけです。
+</p>
+
+<p>
+受信の場合も自分がプログラムしている機器がマスター側なのかスレーブ側なのか考慮しないといけないのですが、今回は簡単のためにマスター側だけを取り扱うことにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>I2C 通信で情報を受信する流れ(マスター側):</b>
+<p>
+(1) 関数を使って受信対象であるスレーブ側機器のアドレスを指定する。
+</p>
+<p>
+(2) 関数を使ってスレーブ側に受信サイズ(バイト)を知らせる。
+</p>
+<p>
+(3) 関数を使ってスレーブ側から送られてきたデータを受信する。
+</p>
+<p>
+(4) データを全て受信したら、関数を使ってデータ受信の終了を宣言する。
+</p>
+</div>
+
+<script>PreNext(3,3)</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. I2C とは</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 入出力インターフェース</a></li>
+<li>学習項目: 学習項目: [5] I2C</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+I2C(Inter Integrated Circuit)はシリアル通信を行うためのインターフェースで、「アイ・ツー・シー」「アイ・アイ・シー」「アイ・スクエア・シー」等と呼ばれています。「IIC」と表記されることもあります。
+</p>
+
+<p>
+I2C は RS-232C と同様にSDA ピン、SCL ピンという 2 ピンがあればデータを送受信出来ます(実際には GND も繋ぎます)。ただし、1対1でしか通信出来なかった RS-232C と違い、マスタ・スレーブ方式で複数の機器と接続してデータをやりとり出来るという利点があります。また送信速度も RS-232C より高速です。
+</p>
+
+<p>
+ただし遠距離でもデータを送れる大雑把な仕様の RS-232C と違ってノイズに弱いので、マスタ側とスレーブ側が同じ基板の中にあるとか、せいぜい数センチ位の距離の所に無いとうまくデータを送れません。
+</p>
+
+<script>PreNext(1,3)</script>
+</body>
+</html>
