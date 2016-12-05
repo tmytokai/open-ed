@@ -117,11 +117,17 @@
 % 機能：問題・フィードバック作成 (命令)
 % 書式：\makeq[オプション]
 % オプション：
-% [q] 問題だけ表示(デフォルト), [f] 問題とフィードバックを交互に表示
+% [q] 問題だけ表示(デフォルト), [f] 問題とフィードバックを交互に表示, [p] ペーパー試験用問題
 \newcommand{\makeq}[1][q]{%
 \setcounter{BB@i}{0}% ループ用
 \setcounter{BB@k}{0}% 問題番号
 \setcounter{BB@n}{\@nameuse{sizeBB@qpath}}% 問題数
+%
+\if#1p%
+\begin{center}%
+\parbox{\qwidth}{\examname\hfill{\normalsize  \examdate}}%
+\end{center}%
+\fi%
 %
 \@whilenum\c@BB@i<\c@BB@n\do{%
 %
@@ -134,8 +140,17 @@
 \edef\dfile{\@nameuse{BB@dfile[\the\c@BB@i]}}%
 \edef\qnumber{\the\c@BB@k}%
 \edef\filedir{\rootdir\qpath}%
+%
+\if#1q%
 \input{\cbtdir/template-q}%
+\fi%
+%
+\if#1p%
+\input{\cbtdir/template-p}%
+\fi%
+%
 \if#1f%
+\input{\cbtdir/template-q}%
 \edef\qcorrect{\@nameuse{BB@qcorrect[\the\c@BB@i]}}%
 \input{\cbtdir/template-fb}%
 \fi%
