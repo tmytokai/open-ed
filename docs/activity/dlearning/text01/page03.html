@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
 <title>TensorFlow の仕組み</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: TensorFlow によるディープラーニング</a>
-<br>
-学習項目: [1] TensorFlow の基本
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [1] TensorFlow の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>3. TensorFlow の仕組み</h2>
+<h2><script>GetTitle()</script></h2>
 
 <br>
 <h3>
@@ -121,5 +125,6 @@ print( result )
 さてグラフを作ったので sess.run() 関数でセッションを開始します。すると先頭の OP ノードから run のカッコ内で指定した OP ノードまでテンソルが流れて(今回は op_const しか無いので op_const から始まって op_const で終わりです)、その演算結果が result オブジェクトに入ります。
 </p>
 
+<script>PreNext(3,5)</script>
 </body>
 </html>

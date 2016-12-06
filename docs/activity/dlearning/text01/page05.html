@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>OP ノードの自作</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [1] TensorFlow の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Python の関数オブジェクトを利用して OP ノードを自作することができます。
+</p>
+
+<p>
+以下は (x+y)*z の演算を行う OP ノード hoge を作成する例です。内部で足し算 OP ノードと掛け算 OP ノードを使用しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>OP ノードの自作例:</b>
+
+<p>
+
+</p>
+
+<pre class="wrap">
+
+import tensorflow as tf
+sess = tf.Session()
+
+#自作 OP ノード  (x+y)*z
+def hoge(x, y, z):
+  op_add = tf.add( x, y )
+  op_mul = tf.mul( op_add, z )
+  return op_mul
+
+op_hoge = hoge( 1, 2, 3 )
+result = sess.run( op_hoge )
+print( result )
+
+# 表示結果
+# 9
+</pre>
+
+<br>
+<p>
+データフローグラフ
+</p>
+
+<img src="./img/page05-fig1.png" alt="">
+</div>
+
+<script>PreNext(5,5)</script>
+</body>
+</html>

@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
 <title>TensorFlow とは</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: TensorFlow によるディープラーニング</a>
-<br>
-学習項目: [1] TensorFlow の基本
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [1] TensorFlow の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>1. TensorFlow とは</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 TensorFlow(テンソルフロー)は Google が開発し 2015/11/9 にオープンソースで公開したディープラーニング用ライブラリであり、 Google の自社サービスでも実際に使われています。
@@ -43,6 +47,7 @@ op_const = tf.constant( 123 )
 
 result = sess.run( op_const )
 print( result )
+
 # 表示結果
 # 123
 </pre>
@@ -52,6 +57,6 @@ print( result )
 各行の意味についてはこれから順を追って説明していきたいと思います。
 </p>
 
-
+<script>PreNext(1,5)</script>
 </body>
 </html>
