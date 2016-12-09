@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>基本的な OP ノード</title>
+<title>4. 基本的な OP ノード</title>
 </head>
 <body>
 
@@ -64,7 +64,7 @@ op_const = tf.constant( 1, tf.float32 )
 result = sess.run( op_const )
 print( result )
 # 表示結果
-# 1
+# 1.0
 
 # 3 次元ベクトル
 op_const = tf.constant( [1, 2, 3], tf.float32 )
@@ -73,7 +73,7 @@ op_const = tf.constant( [1, 2, 3], tf.float32 )
 result = sess.run( op_const )
 print( result )
 # 表示結果
-# [1 2 3]
+# [1. 2. 3.]
 
 # 3 x 1 行列
 op_const = tf.constant( [[1], [2], [3]], tf.float32 )
@@ -82,9 +82,9 @@ op_const = tf.constant( [[1], [2], [3]], tf.float32 )
 result = sess.run( op_const )
 print( result )
 # 表示結果
-#[[1]
-# [2]
-# [3]]
+#[[1.]
+# [2.]
+# [3.]]
 
 # 3 x 2 行列
 op_const = tf.constant([[1, 2], [3, 4], [5, 6]], tf.float32 )
@@ -93,9 +93,9 @@ op_const = tf.constant([[1, 2], [3, 4], [5, 6]], tf.float32 )
 result = sess.run( op_const )
 print( result )
 # 表示結果
-# [[1 2]
-#  [3 4]
-#  [5 6]]
+# [[1. 2.]
+#  [3. 4.]
+#  [5. 6.]]
 </pre>
 </div>
 
