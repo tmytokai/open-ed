@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 未知入力データの分類</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [2] ディープラーニングの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+前のページで 3 層ニューラルネットワークのディープラーニングを行なったので、ここでは未知の入力データのクラス分類をしてみます。と言っても基本的な事は既に説明済みです。
+</p>
+
+<p>
+まず分類をしたい未知の入力データをページ3の図2の様に 「1 x N 行列の定数」として入力データをデータフロー化します。図1にページ3の図2を再掲します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 未知入力データのデータフローグラフ:</b>
+
+<p>
+1 x N 行列の未知入力データを定数 OP ノード として表現する
+</p>
+
+<img src="./img/page03-fig2.png" alt="">
+</div>
+
+<p>
+この未知入力データを重みとバイアスが学習済みのニューラルネットワークの入力データとし、出力 OP ノードを run すると出てくる値は以下の図2の様に 1 X M 行列となります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: op_output_latyerから出力される 1 X M 行列(テンソル):</b>
+
+<p>
+</p>
+
+<img src="./img/page05-fig2.png" alt="">
+</div>
+
+<p>
+ここで「$y'_{j}$ は入力データがクラス $j$ に属する確率」でしたので、未知入力データがどのクラスに分類出来るのか判定出来ます。もし明らかに外れていたらこの未知データを教師データに含めて再びディープラーニングを実行します。
+</p>
+
+<br>
+
+<script>PreNext(5,5)</script>
+</body>
+</html>
