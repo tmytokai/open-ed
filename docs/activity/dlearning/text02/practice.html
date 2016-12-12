@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [1] TensorFlow の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 70  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. ディープラーニングとは</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1 (個人PC、10分):</b> ディープラーニングについて調べてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「現在ディープラーニングが使われている具体的的な例」を Web 等で調べて下さい(最低 1 件)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果」をドキュメントファイルに記述して保存してください。
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.html">2. 多層ニューラルネットワーク</a></h2>
+
+<p>
+このページの演習は演習 2 で行います。
+</p>
+
+<br>
+<h2><a href="./page03.html">3. 3層ニューラルネットワークのデータフローグラフ化</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2 (個人PC、30分):</b> TensorFlow を使って 3 層ニューラルネットワークを構成しましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./template02-2.py">テンプレートスクリプト</a>をダウンロードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> テキストを参考にしながらスクリプト内の ? の部分を上から穴埋めして行って下さい。ネットワークの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) N = 2、K = 3, M = 2 とする。
+</p>
+<p>
+(2) 入力データは適当な値とする。
+</p>
+<p>
+(3) 重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する。
+</p>
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 穴埋めが終わったら実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「スクリプトファイルの内容」と「表示結果」をドキュメントファイルに記述して保存してください。
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.html">4. ディープラーニングの実行</a></h2>
+
+<p>
+このページの演習は演習 3 で行います。
+</p>
+
+<br>
+<h2><a href="./page05.html">5. 未知入力データの分類</a></h2>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3 (個人PC、30分):</b> ディープラーニングを使って簡単な画像の判別をしてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./template02-3.py">テンプレートスクリプト</a>をダウンロードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> テキストを参考にしながらスクリプト内の ? の部分を上から穴埋めして行って下さい。ネットワークの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) N = 9、K = 5, M = 4 とする。
+</p>
+<p>
+(2) 学習データは以下の 3x3 サイズ(つまり K = 9 )の 4 画像とする。
+</p>
+
+<pre class="wrap">
+    [
+        # 画像1
+        [
+            1, 0, 1,
+            1, 1, 1,
+            1, 0, 1
+        ],
+        # 画像2
+        [
+            0, 1, 0,
+            1, 0, 1,
+            0, 1, 0
+        ],
+        # 画像3
+        [
+            0, 1, 0,
+            1, 1, 1,
+            0, 1, 0
+        ],
+        # 画像4
+        [
+            1, 0, 1,
+            0, 1, 0,
+            1, 0, 1
+        ]
+    ]
+</pre>
+
+<p>
+(3) 各画像はそれぞれ別々のクラスに属するものとしてラベルを作成する(つまり M = 4 クラス)。
+</p>
+
+<p>
+(4) 重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する。
+</p>
+
+<p>
+(4) 学習率は 0.01 とする。
+</p>
+
+<p>
+(5) 未知入力データは以下とする。
+</p>
+
+<pre class="wrap">
+   [
+       # 入力画像
+       [
+           1, 1, 0,
+           1, 1, 1,
+           1, 0, 1
+       ]
+    ]
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 穴埋めが終わったら実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「スクリプトファイルの内容」と「表示結果」をドキュメントファイルに記述して保存してください。
+</p>
+</div>
+
+<script>PreNext(6,5)</script>
+</body>
+</html>
