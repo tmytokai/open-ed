@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号のスペクトル解析</a></li>
+<li>学習項目: [1] ディジタル信号のスペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 45  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. 振幅・位相・パワースペクトル</a></h2>
+
+<p>
+このページの演習は演習 1 で行います。
+</p>
+
+<br>
+<h2><a href="./page02.html">2. スペクトル解析の手順</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1 (個人PC、45分):</b> 自分の声をスペクトル解析してみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> マイクを PC の端子に繋ぎます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 2 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 8000 [Hz] で 2 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」いう Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./template01-1.cpp">テンプレートファイル</a>(template01-1.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めして行って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「g++ template01-1.cpp」でコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.csv 」いう CSV ファイルが出来ます。内容は 1 列目がディジタルサイン波の周波数、2列目が振幅スペクトル、3列目が位相スペクトルです。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  csv ファイルを表計算ソフトに取り込み、振幅スペクトルと位相スペクトルのグラフを描いて下さい。Hz もちゃんと分かるようにして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  グラフは点「無し」、線あり、平滑化ありとします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  ソースコードと2つのグラフを同じドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  振幅スペクトルを解析して自分の声を特徴付けている周波数帯を見つけ、ドキュメントに「自分の声を特徴付けている周波数帯は○Hz から ○ Hz までの辺り」と記述してからアップロードして下さい。
+</p>
+</div>
+
+
+<script>PreNext(3,2)</script>
+</body>
+</html>

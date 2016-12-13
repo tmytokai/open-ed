@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 振幅・位相・パワースペクトル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号のスペクトル解析</a></li>
+<li>学習項目: [1] ディジタル信号のスペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+「スペクトル解析とは何か？」については<a href="../../a-spectrum/">アクティビティ:アナログ信号のスペクトル解析</a>を参照して欲しいのですが、結局の所、ディジタル信号のスペクトル解析も「ディジタル信号に含まれている<a href="../../d-sin">ディジタルサイン波</a>の(角)周波数、振幅、初期位相を調べる技術」です。
+
+</p>
+
+<p>
+なおディジタル信号のスペクトルの求め方は信号の種類や計算手法によって異なるのですが、今回は周期性時間領域ディジタル信号のスペクトルを<a href="../../dft/">DFT/FFT</a>を用いて求める方法に限定して話をします。
+</p>
+
+<p>
+それで結論から言うと、DFT 係数 $\textrm{C}[k]$ が周期性時間領域ディジタル信号の「スペクトル」になります。よって
+</p>
+
+<ul>
+<li>絶対値 $|\textrm{C}[k]|$ のことを「振幅スペクトル」または「振幅成分」</li>
+<li>偏角 $\angle\textrm{C}[k]$ のことを「位相スペクトル」または「位相成分」</li>
+<li>$|\textrm{C}[k]|^2$ のことを「パワースペクトル」または「(電力)スペクトル密度」</li>
+</ul>
+
+<p>
+と呼ぶのはアナログ信号の時と同じです。そして、これらのスペクトルから求めたディジタルサイン波(高調波)を合成して元のディジタル信号を復元出来ることも<a href="../../dft/">アクティビティ: 離散フーリエ変換 (DFT)</a>の演習で確認しました。
+</p>
+
+<p>
+ただアナログ信号のスペクトル $\textrm{F}(w)$ は角周波数 $w$ [rad/秒] の関数だったので信号に含まれる $w$ [rad/秒]の角周波数のアナログサイン波の振幅と初期位相はそれらのスペクトルから即座に求められたのですが、$\textrm{C}[k]$ は整数 $k$ の関数なのでそのままだと周波数との対応が分かりにくいという問題があります。
+</p>
+
+<p>
+そこで以下のステップで整数 $k$ からディジタルサイン波(第 $k$ 高調波)の周波数 $f_k$ [hz] および角周波数 $w_k$ [rad/秒] を求めます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> $k$ → $f_k$ [Hz]、$w_k$ [rad/秒] の変換方法</b>
+
+<p>
+$f_s$ [Hz]をサンプリング周波数、$\textrm{N}$ [点]を周期性時間領域ディジタル信号の周期とする。
+</p>
+
+<p>
+<b>ステップ1:</b> $k$ からディジタルサイン波(第 $k$ 高調波)の周期を求める。
+</p>
+
+\[
+\textrm{T}_k = \frac{\textrm{N}}{k} \ \mbox{[点]}
+\]
+
+<p>
+<b>ステップ2:</b> $\textrm{T}_k$ とサンプリング周波数からディジタルサイン波(第 $k$ 高調波)の(角)周波数を求める。
+</p>
+
+\[
+f_k = \frac{f_s}{\textrm{T}_k} = \frac{f_s}{\textrm{N}}\cdot k \ \mbox{[Hz]}
+\]
+
+\[
+w_k = 2 \pi \cdot f_k \ \mbox{[rad/秒]}
+\]
+
+</div>
+
+
+
+<script>PreNext(1,2)</script>
+</body>
+</html>
