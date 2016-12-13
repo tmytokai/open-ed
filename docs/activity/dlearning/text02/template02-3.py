@@ -35,14 +35,14 @@ op_var_b_output = ?
 def output_layer( x, w, b ):
    ?
 
-# クロスエントロピー  OP ノードの定義
-def cross_entropy( r, l ):
-   ?
-
 # 3 層ニューラルネットワーク作成
 op_input_layer = ?
 op_hidden_layer = ?
 op_output_layter = ?
+
+# クロスエントロピー  OP ノードの定義
+def cross_entropy( r, l ):
+   ?
 
 # クロスエントロピーと勾配降下法 OP ノードの作成
 op_cross_entropy = ?
@@ -55,7 +55,7 @@ print('学習前エントロピー')
 print( sess.run( op_cross_entropy ) )
 
 print('学習中・・・')
-for i in range( 20000 ):
+for i in range( ? ):
    sess.run( op_grad_optimizer )
 
 print('学習後エントロピー')
@@ -72,8 +72,11 @@ op_output_layter = ?
 print('教師画像')
 print( sess.run( op_const_teacher ) )
 
+print('ラベル')
+print( sess.run( op_const_label ) )
+
 print('入力画像')
-print( sess.run( op_const_data ) )
+print( sess.run( op_input_layer ) )
 
 print('判別結果')
 print( sess.run( op_output_layer ) )
