@@ -38,7 +38,7 @@ def output_layer( x, w, b ):
 # 3 層ニューラルネットワーク作成
 op_input_layer = ?
 op_hidden_layer = ?
-op_output_layter = ?
+op_output_layer = ?
 
 # クロスエントロピー  OP ノードの定義
 def cross_entropy( r, l ):
@@ -67,7 +67,7 @@ op_const_data = ?
 # 学習した重みとバイアスを利用して入力画像を判別
 op_input_layer = ?
 op_hidden_layer = ?
-op_output_layter = ?
+op_output_layer = ?
 
 print('教師画像')
 print( sess.run( op_const_teacher ) )

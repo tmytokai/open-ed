@@ -35,7 +35,7 @@ def output_layer( x, w, b ):
 # 3 層ニューラルネットワーク作成
 op_input_layer = ?
 op_hidden_layer = ?
-op_output_layter = ?
+op_output_layer = ?
 
 # セッション開始
 sess.run( tf.initialize_all_variables() )
