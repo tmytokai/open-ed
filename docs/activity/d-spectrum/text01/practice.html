@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>演習</title>
 </head>
 <body>
@@ -56,7 +57,11 @@
 <span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.csv 」いう CSV ファイルが出来ます。内容は 1 列目がディジタルサイン波の周波数、2列目が振幅スペクトル、3列目が位相スペクトルです。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  csv ファイルを表計算ソフトに取り込み、振幅スペクトルと位相スペクトルのグラフを描いて下さい。Hz もちゃんと分かるようにして下さい。
-<br>
+</p>
+<p>
+※ DFT の演習で描いた絶対値・偏角のグラフと今回の振幅・位相スペクトルのグラフとの違いは横軸が単なる整数 k ではなくて $f_k$ [Hz] (又は $w_k$ [rad/秒])であることです。スペクトルグラフを描く目的はスペクトル解析のためですので、サイン波の周波数という概念が強く意識されます。
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span>  グラフは点「無し」、線あり、平滑化ありとします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  ソースコードと2つのグラフを同じドキュメントファイルに貼りつけて下さい。
