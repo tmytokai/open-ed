@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 線形座標変換</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ベクトルと多様体</a></li>
+<li>学習項目: [1] 座標系</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+線形座標変換とは座標変換式が線形である変換のことで、アフィン変換とも呼びます。
+つまり要素が実数である「線形変換行列(またはアフィン変換行列)」
+</p>
+
+\begin{align}
+{\textrm A}
+=
+\left [
+\begin{array}{cc}
+a_{11} \ a_{12} \\
+a_{21} \ a_{22}
+\end{array}
+\right ]
+\end{align}
+
+<p>
+が与えられると
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ] = 
+{\textrm A}
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{c}
+a_{11}x^1 + a_{12}x^2 \\
+a_{21}x^1 + a_{22}x^2
+\end{array}
+\right ] \\
+\end{align}
+
+<p>
+により新しい座標系 $u$ の座標が得られます。
+</p>
+
+<p>
+ところで
+</p>
+
+\begin{align}
+u^1 = a_{11}x^1 + a_{12}x^2
+\end{align}
+
+<p>
+の両辺を $x^1$ で偏微分すると
+</p>
+
+\begin{align}
+\frac{\partial u^1}{\partial x^1} = a_{11}
+\end{align}
+
+<p>
+ですので、同様に考えることで線形変換行列は
+</p>
+
+\begin{align}
+{\textrm A}
+=
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \ \frac{\partial u^1}{\partial x^2} \\
+\frac{\partial u^2}{\partial x^1} \ \frac{\partial u^2}{\partial x^2} \\
+\end{array}
+\right ]
+\end{align}
+
+<p>
+で表されることが分かりますので次の式が成り立ちます。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{c}
+\frac{\partial u^1}{\partial x^1}x^1 + \frac{\partial u^1}{\partial x^2}x^2 \\
+\frac{\partial u^2}{\partial x^1}x^1 + \frac{\partial u^2}{\partial x^2}x^2 \\
+\end{array}
+\right ]
+\end{align}
+
+<p>
+次に逆変換を考えます。逆変換行列を ${\textrm A}^{-1}$ で表すと
+
+\begin{align}
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ] = 
+{\textrm A}^{-1}
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+\end{align}
+
+<p>
+となりますが、上と同様に考えると
+</p>
+
+\begin{align}
+{\textrm A}^{-1}
+=
+\left [
+\begin{array}{cc}
+\frac{\partial x^1}{\partial u^1} \ \frac{\partial x^1}{\partial u^2} \\
+\frac{\partial x^2}{\partial u^1} \ \frac{\partial x^2}{\partial u^2} \\
+\end{array}
+\right ]
+\end{align}
+
+\begin{align}
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^1}u^1 + \frac{\partial x^1}{\partial u^2}u^2 \\
+\frac{\partial x^2}{\partial u^1}u^1 + \frac{\partial x^2}{\partial u^2}u^2 \\
+\end{array}
+\right ]
+\end{align}
+
+<p>
+となります。なお $\{u^1,u^2\}$ から $\{x^1,x^2\}$ に値を戻せるためには
+</p>
+
+\begin{align}
+{\textrm A}^{-1}
+{\textrm A}
+=
+{\textrm A}
+{\textrm A}^{-1}
+=
+\left [
+\begin{array}{cc}
+1 \ 0 \\
+0 \ 1
+\end{array}
+\right ]
+\end{align}
+
+<p>
+という関係を満たす必要があることに注意して下さい。
+</p>
+
+<script>PreNext(5,8)</script>
+</body>
+</html>

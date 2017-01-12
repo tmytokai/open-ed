@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 半変ベクトル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ベクトルと多様体</a></li>
+<li>学習項目: [2] 線形座標変換における半変ベクトル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+「半変ベクトル」とは、座標変換に強くて微分演算も楽であるように基底ベクトルを選んでベクトル成分を求めたベクトルの総称です。
+</p>
+
+<p>
+何度も言っているようにある座標系の基底ベクトル(とベクトル成分)は自分で適当に決めても良いのですが、あまり適当に基底ベクトルを決めてしまうと、座標系を変更した時に利用中のベクトルの成分を最初から計算し直す必要が出てきて大変面倒です。また(今回は詳しく説明しませんが)ベクトルの回転などの微分演算も適当に基底ベクトルを決めるととてもやっかいになります。特に物理学や工学での演算処理では頻繁に座標系の変更が出てきますので、学者や技術者達はどう基底ベクトルを決めるかについて頭を悩ませていました。
+</p>
+
+<p>
+そこで適当に基底ベクトルを決めるのは止めて、その代わり
+</p>
+
+<ol>
+<li>座標系を変更したとき、基底ベクトルやベクトル成分を簡単に変換できる</li>
+<li>微分演算が楽にできる</li>
+</ol>
+
+<p>
+という条件を満たすように基底ベクトルを決めることにしました。こんな都合の良い条件を満たす基底ベクトルなんか有るんだろうか？と思うかもしれませんがちゃんと有りました。
+</p>
+
+<p>
+で、この条件を満たす基底ベクトルを使って作ったベクトルには「半変ベクトル」と「共変ベクトル」の 2 種類があります(※)。この学習項目では理解しやすい「半変ベクトル」の方を具体例を挙げながら順を追って説明していきたいと思います。
+</p>
+
+<p>
+※ 他にも有るかもしれませんが、私は本職の数学者では無いので知りません。もし有るならこっそりお知らせ下さい。
+</p>
+
+<p>
+まず半変ベクトルの定義ですが、実は分野や文献によって記述が異なるので自分が理解しやすい定義を使って考えて結構です。今回は半変ベクトルの定義を次のようにしたいと思います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 半変ベクトル: </b>
+
+<p>
+</p>
+
+<ul>
+<li> (2次元の) 座標系 $u$ の基底ベクトルを $e_1^u$、$e_2^u$ とする。</li>
+<li> 座標系 $u$ 上のあるベクトルの成分を $\{a_u^1,a_u^2\}$ とする。</li>
+<li> 座標系 $x$ の基底ベクトルを $e_1^x$、$e_2^x$ とする。</li>
+<li> 座標系$u$ とは別の座標系 $x$ におけるベクトル成分 を $\{a_x^1,a_x^2\}$ とする。</li>
+<li> 考えている座標系を $u$ から $x$ に変更することを考える。つまり座標を $\{u^1,u^2\}$ から $\{x^1,x^2\}$ に変換する。</li>
+</ul>
+
+<p>
+この時、もし座標系 $u$ の基底ベクトルを次のように選ぶなら、その基底ベクトルをもとにして作ったベクトルは「半変ベクトル」になる。
+</p>
+
+
+\begin{align}
+e_1^u
+=
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^1}\\
+\frac{\partial x^2}{\partial u^1}
+\end{array}
+\right ] \label{eq:cont1-2}\\
+e_2^u
+=
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^2}\\
+\frac{\partial x^2}{\partial u^2}
+\end{array}
+\right ] \label{eq:cont1-3}
+\end{align}
+
+
+<p>
+こうして決めた半変ベクトルの基底ベクトルのことを「共変基底ベクトル」と呼ぶ(半変ベクトルの基底なのに共変と呼ぶ理由はこのページの下の方を参考)。
+</p>
+
+<p>
+また半変ベクトルのベクトル成分のことを「半変成分」と呼ぶ。
+</p>
+
+<p>
+もしあるベクトルが半変ベクトルなら、座標系を $u$ から $x$ に変更した時にベクトル成分は次の線形変換によって簡単に変換できる(※)。
+</p>
+
+<p>
+※ この変換式を半変ベクトルの定義とする文献も多いです。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+a_x^1 \\
+a_x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial x^1}{\partial u^1} \ \frac{\partial x^1}{\partial u^2} \\
+\frac{\partial x^2}{\partial u^1} \ \frac{\partial x^2}{\partial u^2} \\
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+a_u^1 \\
+a_u^2
+\end{array}
+\right ]
+\label{eq:cont1}
+\end{align}
+
+<p>
+同様に、基底ベクトルも次の線形変換によって簡単に基底変換できる。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+e_1^x \\
+e_2^x
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \  \frac{\partial u^2}{\partial x^1}\\
+\frac{\partial u^1}{\partial x^2} \ \frac{\partial u^2}{\partial x^2}
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+e^u_1 \\
+e^u_2
+\end{array}
+\right ]
+\label{eq:cont1-4}
+\end{align}
+
+
+</div>
+
+<p>
+定義に座標変換関数の偏微分が含まれていることから分かるように、<b>半変ベクトルは座標変換を行うことを大前提として作られます</b>ので、そもそも座標変換を一切考える必要が無いなら適当に基底ベクトルを決めて結構です。
+</p>
+
+<p>
+さてこの定義だけだとあまりにも漠然過ぎて良く分かりませんので、ここからは座標系 $x$ を<a href="../text01/page03.html">デカルト座標系</a>、座標系 $u$ をデカルト座標系から<a href="../text01/page05.html">線形座標変換</a>を使って作った座標系として半変ベクトルの作り方を具体的に説明していきます。
+</p>
+
+<p>
+まず、デカルト座標系の任意の点の座標を$\{x^1,x^2\}$、同じ点の座標系 $u$ における座標を $\{u^1,u^2\}$ とすると次の座標変換式が成り立ちます。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial x^1}{\partial u^1} \ \frac{\partial x^1}{\partial u^2} \\
+\frac{\partial x^2}{\partial u^1} \ \frac{\partial x^2}{\partial u^2}
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+\label{eq:cont2}
+\end{align}
+
+<p>
+さて座標系 $u$ の位置ベクトルは自分で適当に定義して良かったので、(基底ベクトルについては後で考えることにして)今回はデカルト座標系と同様に位置ベクトルの成分を座標 $\{u^1,u^2\}$ とします(※)。
+</p>
+
+<p>
+※ 一般的な座標系では必ずしも出来ませんが、デカルト座標系→線形座標変換で作った座標系なら基底ベクトルの向きを点の位置によらず固定出来るので可能です。
+</p>
+
+<p>
+一方デカルト座標系の位置ベクトルの成分は $\{x^1,x^2\}$ でしたので、座標系 $u$ 上の任意の位置ベクトルの成分と、この位置ベクトルをデカルト座標系で表した時のベクトル成分の間には次の変換式が成り立っています。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial x^1}{\partial u^1} \ \frac{\partial x^1}{\partial u^2} \\
+\frac{\partial x^2}{\partial u^1} \ \frac{\partial x^2}{\partial u^2}
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+\label{eq:cont3}
+\end{align}
+
+<p>
+なお式 \eqref{eq:cont2} と \eqref{eq:cont3} は全く同じ式ですが、式 \eqref{eq:cont2} は座標の変換式、式 \eqref{eq:cont3} は位置ベクトルの成分の変換式であることに注意して下さい。
+</p>
+
+<p>
+さて、もうここまで来ればお分かりだと思いますが、式 \eqref{eq:cont3} は \eqref{eq:cont1} と同じ形になっていますので、<b>デカルト座標系→線形座標変換で作った座標系 $u$ の位置ベクトルの成分を座標 $\{u^1,u^2\}$ とすれば位置ベクトルは反変ベクトルになります</b>。なお $u$ をデカルト座標系と考えることで、実はお馴染みのデカルト座標の位置ベクトルも半変ベクトルであることが分かります。
+</p>
+
+
+<p>
+次の問題は基底ベクトルが式 \eqref{eq:cont1-2}、\eqref{eq:cont1-3} と同じ形になるかです。実は式 \eqref{eq:cont3} の右辺を次のような一次結合の形に変形すれば簡単に証明できます。
+</p>
+
+\begin{align}
+u^1
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^1}\\
+\frac{\partial x^2}{\partial u^1}
+\end{array}
+\right ]
++
+u^2
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^2}\\
+\frac{\partial x^2}{\partial u^2}
+\end{array}
+\right ]
+\end{align}
+
+<p>
+つまり座標系 $u$ の基底ベクトル $e_1^u$、$e_2^u$ は
+</p>
+
+\begin{align}
+e_1^u
+=
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^1}\\
+\frac{\partial x^2}{\partial u^1}
+\end{array}
+\right ] \\
+e_2^u
+=
+\left [
+\begin{array}{c}
+\frac{\partial x^1}{\partial u^2}\\
+\frac{\partial x^2}{\partial u^2}
+\end{array}
+\right ]
+\end{align}
+
+<p>
+なので、式 \eqref{eq:cont1-2}、\eqref{eq:cont1-3} と同じ形になります。
+</p>
+
+<p>
+このページの最後の話題としてなぜ半変ベクトルに「半変」という不思議な名前が付けられたのか説明したいと思います。
+</P>
+
+</p>
+まず式 \eqref{eq:cont3}をデカルト座標系の基底ベクトル $e_1$ と $e_2$ も使って一次結合の形に変形すると次のようになります。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{cc}
+e_1 \ e_2
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+e^u_1 \ e^u_2
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+\end{align}
+
+<p>
+この式に
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+u^1 \\
+u^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \ \frac{\partial u^1}{\partial x^2} \\
+\frac{\partial u^2}{\partial x^1} \ \frac{\partial u^2}{\partial x^2} \\
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+\end{align}
+
+<p>
+を代入すると
+</p>
+
+\begin{align}
+\left [
+\begin{array}{cc}
+e_1 \ e_2
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+e^u_1 \ e^u_2
+\end{array}
+\right ]
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \ \frac{\partial u^1}{\partial x^2} \\
+\frac{\partial u^2}{\partial x^1} \ \frac{\partial u^2}{\partial x^2} \\
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+x^1 \\
+x^2
+\end{array}
+\right ]
+\end{align}
+
+<p>
+ですので、座標系 $u$ とデカルト座標系の基底ベクトルの間には次の様な関係があります(式 \eqref{eq:cont1-4} と同じ式なのに注目) 。
+</p>
+
+\begin{align}
+\left [
+\begin{array}{c}
+e_1 \\
+e_2
+\end{array}
+\right ]
+=
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \  \frac{\partial u^2}{\partial x^1}\\
+\frac{\partial u^1}{\partial x^2} \ \frac{\partial u^2}{\partial x^2}
+\end{array}
+\right ]
+\left [
+\begin{array}{c}
+e^u_1 \\
+e^u_2
+\end{array}
+\right ]
+\label{eq:cont4}
+\end{align}
+
+<p>
+ここで
+</p>
+
+\begin{align}
+\left [
+\begin{array}{cc}
+\frac{\partial u^1}{\partial x^1} \ \frac{\partial u^1}{\partial x^2} \\
+\frac{\partial u^2}{\partial x^1} \ \frac{\partial u^2}{\partial x^2} \\
+\end{array}
+\right ]
+\end{align}
+
+<p>
+は
+</p>
+
+\begin{align}
+\left [
+\begin{array}{cc}
+\frac{\partial x^1}{\partial u^1} \ \frac{\partial x^1}{\partial u^2} \\
+\frac{\partial x^2}{\partial u^1} \ \frac{\partial x^2}{\partial u^2} \\
+\end{array}
+\right ]
+\end{align}
+
+<p>
+の逆行列でしたので、式 \eqref{eq:cont3} と \eqref{eq:cont4} を見比べると<b>半変ベクトルの基底ベクトルとベクトル成分は座標変換した時に互いから見て「反対」の「変化」を受けていることが分かります</b>。
+ここから「反変」という名前が付けられたらしいです(※)。
+</p>
+
+<p>
+※ 裏は取ってません。
+</p>
+
+<p>
+なお式 \eqref{eq:cont4}の様な変換を「共変的な変換」というので、ややこしいですが半変ベクトルの基底ベクトルは「共変基底ベクトル」と呼ばれます。
+</p>
+
+<script>PreNext(1,5)</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 座標変換式</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ベクトルと多様体</a></li>
+<li>学習項目: [1] 座標系</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ある点のある座標系での座標を別の座標系での座標に変換する事を「座標変換」、その変換式を「座標変換式」と呼びます。
+</p>
+
+<p>
+さて、基準となるデカルト座標系の座標 $\{x^1,x^2\}$ をもとにして別の座標系における座標 $\{u^1,u^2\}$ を作り出す時、その座標変換式は一般的に次の関数の組 $g^1$、$g^2$ で表されます。
+</p>
+
+\begin{align}
+u^1 = g^1(x^1,x^2) \label{eq:f1} \\
+u^2 = g^2(x^1,x^2) \label{eq:f2}
+\end{align}
+
+<p>
+こうやってデカルト座標系から新たに作った座標系を「座標系 $u$」と呼ぶことにします。
+</p>
+
+<p>
+さて座標変換を行う関数 $g^1$、$g^2$ は線形関数でも非線形関数でもどちらでも構いませんが、(少なくとも局所的には)逆関数の組 $f^1$、$f^2$を持っていて、$\{u^1,u^2\}$ から元のデカルト座標 $\{x^1,x^2\}$ に値を戻せないといけません。
+この逆変換式は次のように表されます。
+</p>
+
+\begin{align}
+x^1 = f^1(u^1,u^2) \\
+x^2 = f^2(u^1,u^2) \\
+\end{align}
+
+<p>
+なお、デカルト座標をもとにして新しく作った座標系 $u$ の座標は式 \eqref{eq:f1}、\eqref{eq:f2} から求められますが、座標系 $u$ の位置ベクトル及び基底ベクトルに関しては何も考えてないことに注意して下さい。
+つまり座標系 $u$ の位置、基底ベクトルは自分で好きに決めて良いです。
+</p>
+
+<script>PreNext(4,8)</script>
+</body>
+</html>
