@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 例2: ディジタルインパルス信号(nが0の場合)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Z変換</a></li>
+<li>学習項目: [1] Z変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ある $0$ 以上の正整数 $n$ に対し、
+</p>
+
+\begin{align}
+f[i] =
+\begin{cases}
+1 & (i=n) \\ 
+0 & (i \neq n)
+\end{cases}
+\end{align}
+
+<p>
+である信号のことを「ディジタルインパルス信号」といって記号 $\delta[i-n]$ で表します。この $\delta[i-n]$ の Z 変換を求めてみましょう。
+</p>
+
+<p>
+なお $n$ が $0$ かどうかで結果が代わりますので、最初にまず $n=0$ の場合を考えます。
+$n=0$ の場合は $\delta[i] = \{1,0,0,\cdots\}$ になります。
+</p>
+
+<p>
+(手順 1) 変換対象となる時間領域ディジタル信号 $f[i]$ が周期的だったら Z 変換ではなく DFT を行って計算を終了する。
+<br>
+もし非周期的かつ無限の長さの信号だった場合は(手順 2) に進む。
+</p>
+
+<p>
+→ 非周期的でかつ無限の長さなので(手順 2)に進みます。
+</p>
+
+<p>
+(手順 2) とりあえず $f[i]$ を Z 変換の定義にそのまま代入して $\textrm{F}(z)$ を求める。
+</p>
+
+<p>
+→ $\delta[i] = \{1,0,0,\cdots\}$ を Z 変換の定義に代入すると以下の式になります。
+</p>
+
+\begin{align}
+\textrm{F}(z) = \sum_{i=0}^{\infty} \{ f[i] \cdot z^{-i} \} 
+& = 1 + \frac{0}{z} + \frac{0}{z^2} + \cdots
+
+= 1
+\end{align}
+
+<p>
+(手順 3) 無限級数のままだと何かと都合が悪いので場合分けをして収束後の式を求める。
+</p>
+
+<p>
+→ 明らかに
+</p>
+
+<p>
+(場合 3-1) (手順 2)の段階で既に無限級数で無くなっている場合
+</p>
+
+<p>
+が適用されるので、上で求めた $\textrm{F}(z) = 1$ がそのまま収束後の式になります。
+</p>
+
+<p>
+そこで引き続き $\textrm{F}(z)$ が発散する $z$ の値を求めますが、どの $z$ の値を代入しても今回は必ず $\textrm{F}(z) = 1$ となりますので収束領域は Z 平面全域になります。
+
+<p>
+(手順 4) 具体的な $z$ の値を代入する。$z$ が収束領域に含まれるかどうかで場合分けする。
+</p>
+
+<p>
+→ 手順 3 に書いたように、どの $z$ も必ず収束領域に含まれます。従って
+
+<p>
+(場合 4-1) $z$ が収束領域に含まれる場合
+</p>
+
+<p>
+が必ず適用されて $\textrm{F}(z) = 1$ となります。
+</p>
+
+<p>
+例えば $z=1+2j$ の時は $\textrm{F}(1+2j) = 1$ ですし、$z=-2$ の時も $\textrm{F}(-2) = 1$ となります。
+</p>
+
+<script>PreNext(5,9)</script>
+</body>
+</html>

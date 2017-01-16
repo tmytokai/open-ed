@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. Z変換とは</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Z変換</a></li>
+<li>学習項目: [1] Z変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Z変換は、非周期的かつ無限の長さの<a href="../../d-signal/">時間領域ディジタル信号</a> $f[i]$ に対する<a href="../../dft/">DFT</a>です(※)。
+</p>
+
+<p>
+※ 周期 $\textrm{N}$ [点] が無限である周期性ディジタル信号に対する DFT とも言えます。または非周期的かつ無限の長さの時間領域ディジタル信号に対するラプラス変換とも言えます。
+</p>
+
+<p>
+Z 変換には両側 Z 変換と片側 Z 変換があるのですが今回は片側 Z 変換のみを取り扱います。
+(片側) Z 変換の定義は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: (片側) Z 変換: </b>
+
+\begin{align}
+\textrm{F}(z) = \sum_{i=0}^\infty \{ f[i] \cdot z^{-i} \}
+\end{align}
+
+<p>
+により定義される複素関数 $\textrm{F}(z)$ を(片側)Z変換という。ここで
+</p>
+
+<p>
+ $f[i]$・・・非周期的かつ無限の長さの時間領域ディジタル信号
+</p>
+<p>
+　時刻 $i$ が負の時は $f[i] = 0$とする
+<br>
+　各 $f[i]$ は有限な実数(つまり $|f[i]| \lt \infty$ )とする
+</p>
+
+<p>
+ $z$・・・複素数の独立変数、「Z平面」と呼ばれる複素平面上の点
+</p>
+
+</div>
+
+<p>
+この Z 変換はもともと非周期的かつ無限の長さを持つ<a href="../../d-spectrum/">ディジタル信号のスペクトル</a>を求めるために考えられたものですので、$\textrm{F}(z)$ の事を「$f[i]$のスペクトル」、独立変数 $z$ の事を「複素角周波数」と呼ぶこともあります。
+</p>
+
+<p>
+また独立変数 $z$ は Z 平面上で連続的に変化するアナログ量ですので、$\textrm{F}(z)$ も Z 平面上で定義されるアナログ信号になります。
+</p>
+
+<p>
+なお $\textrm{F}(z)$ から元の $f[i]$ を復元する「逆Z変換」もありますが今回のアクティビティでは省略します。
+</p>
+
+<script>PreNext(1,9)</script>
+</body>
+</html>

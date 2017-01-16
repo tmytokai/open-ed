@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 収束領域</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Z変換</a></li>
+<li>学習項目: [1] Z変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Z変換は $f[i] \cdot z^{-i}$ を $i=0$ から順に無限に足しあわせて作られています(これを無限級数といいます)ので、独立変数 $z$ の値によっては絶対値 $|\textrm{F}(z)|$ が無限大になる時があります。
+</p>
+
+<p>
+この状況のことを「 $\textrm{F}(z)$ が発散する」といいます。逆に絶対値が有限になる場合は「$\textrm{F}(z)$ が収束する」といいます。
+</p>
+
+<p>
+さて $\textrm{F}(z)$ が発散すると計算上色々やっかいな事が生じますので、通常は独立変数 $z$ の値域に制約を課して、Z 変換が必ず収束することが保証されているZ平面上の領域を値域として選びます。
+その領域のことを「収束領域」と呼びます。収束領域は元の $f[i]$ から求めることが出来ます。
+</p>
+
+<p>
+以上の話をまとめると次のことが言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>Z 変換の収束領域</b>
+
+<p>
+ある時間領域ディジタル信号 $f[i]$ から $\textrm{F}(z)$ とその「収束領域」を求めたとき、
+<p>
+
+<ul>
+<li>収束領域内から $z$ を選んで $\textrm{F}(z)$ に代入すると $\textrm{F}(z)$ は収束する。つまり $|\textrm{F}(z)| \lt \infty$  </li>
+<li>収束領域外から $z$ を選んで $\textrm{F}(z)$ に代入すると $\textrm{F}(z)$ は発散する。つまり $|\textrm{F}(z)| \rightarrow \infty$ </li>
+</ul>
+
+</div>
+
+<script>PreNext(2,9)</script>
+</body>
+</html>

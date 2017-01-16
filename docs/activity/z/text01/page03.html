@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 計算手順</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Z変換</a></li>
+<li>学習項目: [1] Z変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+実際の Z 変換の計算手順は以下の通りになります。
+</p>
+
+<p>
+(手順 1) 変換対象となる時間領域ディジタル信号 $f[i]$ が周期的だったら Z 変換ではなく DFT を行って計算を終了する。
+<br>
+もし非周期的かつ無限の長さの信号だった場合は(手順 2) に進む。
+</p>
+
+<p>
+(手順 2) とりあえず $f[i]$ を Z 変換の定義にそのまま代入して $\textrm{F}(z)$ を求める。
+</p>
+
+<p>
+(手順 3) 無限級数のままだと何かと都合が悪いので場合分けをして収束後の式を求める(※)。
+</p>
+
+<p>
+※ 収束後の式と同時に収束領域も決まる事が多いです。
+</p>
+
+<div class="info">
+<p>
+(場合 3-1) (手順 2)の段階で既に無限級数で無くなっている場合
+</p>
+
+<p>
+例えば $f[i] = \{1,2,0,0,\cdots\}$ の Z 変換
+</p>
+
+\begin{align}
+\textrm{F}(z) = \sum_{i=0}^1 \{ f[i] \cdot z^{-i} \} = 1 + 2 \cdot z^{-1}
+\end{align}
+
+<p>
+みたいに最初から無限級数の形となっていない場合は $\textrm{F}(z)$ は既に収束した式になっている。
+その後 $\textrm{F}(z)$ が発散する $z$ の値を全て求め(上の例の場合は $z=0$)、それらを除いた Z 平面の領域を収束領域とする。
+</p>
+
+<p>
+(場合 3-2) (手順 2)の段階で無限級数になっている場合
+</p>
+
+<p>
+公式等を利用して $\textrm{F}(z)$ を何とか無限級数で無くなるように変形する。
+大抵はその公式が適用できる条件として収束領域も同時に決まる。
+</p>
+</div>
+
+<p>
+(手順 4) 具体的な $z$ の値を代入する。$z$ が収束領域に含まれるかどうかで場合分けする。
+</p>
+
+<div class="info">
+<p>
+(場合 4-1) $z$ が収束領域に含まれる場合
+</p>
+
+<p>
+収束後の $\textrm{F}(z)$ の式にその $z$ の値を直接代入して値を求める。
+</p>
+
+<p>
+(場合 4-2) $z$ が収束領域に含まれない場合
+</p>
+
+<p>
+$\textrm{F}(z)$ は発散するので計算出来ない。従って「この $z$ を代入すると $\textrm{F}(z)$ は発散する」が求める答となる。
+</p>
+</div>
+
+<script>PreNext(3,9)</script>
+</body>
+</html>
