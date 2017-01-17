@@ -36,6 +36,8 @@ op_const_label = tf.constant(
     , tf.float32
 )
 
+# ↓ ここから template02-3.py の内容をコピペ
+
 # 入力層 OP ノードの定義
 def input_layer( x ):
    ?
@@ -68,6 +70,8 @@ def cross_entropy( r, l ):
 # クロスエントロピーと勾配降下法 OP ノードの作成
 op_cross_entropy = ?
 op_grad_optimizer = ?
+
+# ↑ template02-3.py のコピペここまで
 
 # セッション開始
 sess.run( tf.initialize_all_variables() )
@@ -104,7 +108,7 @@ while 1:
            , tf.float32
        )
 
-       # 学習した重みとバイアスを利用して入力データを判別
+       # 学習した重みとバイアスを利用して入力データを判別 (template02-3.py の内容をコピペ)
        op_input_layer = ?
        op_hidden_layer = ?
        op_output_layer = ?

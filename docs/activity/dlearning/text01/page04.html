@@ -54,6 +54,7 @@
 <input type="checkbox"><b>コード1: 定数 OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -113,7 +114,13 @@ print( result )
 </p>
 
 <p>
-定数 OP ノードの場合はセッションの途中で最初にセットした値を変更できませんが、変数 OP ノードは途中で変更する事ができます。ただし run する前に初期値で値をリセットしておかないとエラーが出ます。
+定数 OP ノードの場合はセッションの途中で最初にセットした値を変更できませんが、変数 OP ノードは最初にセットした値(つまり初期値)を途中で変更する事ができます。ただし
+</p>
+
+<p>
+<b>
+「変数 OP ノードは最初の run を実行する前に初期化しておかないとエラーが出ます」。
+</b>
 </p>
 
 <p>
@@ -142,6 +149,7 @@ print( result )
 <input type="checkbox"><b>コード2: 変数 OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -224,6 +232,7 @@ print( result )
 <input type="checkbox"><b>コード3-1: 足し算 OP ノードのコード例 (スカラーの場合):</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -255,6 +264,7 @@ print( result )
 <input type="checkbox"><b>コード3-2: 足し算 OP ノードのコード例 (ベクトルの場合):</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -314,6 +324,7 @@ print( result )
 <input type="checkbox"><b>コード4-1: 掛け算 OP ノードのコード例(スカラーの場合):</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -345,6 +356,7 @@ print( result )
 <input type="checkbox"><b>コード4-2: 掛け算 OP ノードのコード例 (ベクトルの場合):</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -396,6 +408,7 @@ print( result )
 <input type="checkbox"><b>コード5: 行列積 OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -455,6 +468,7 @@ f(x) = log(x)、exp(x)、sin(x)、cos(x)、その他色々
 <input type="checkbox"><b>コード6: log、 exp、sin、cos、その他の OP ノードのコード例( log の場合 ):</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -515,6 +529,7 @@ SoftMax OP ノードはニューラルネットワークの出力層で良く使
 <input type="checkbox"><b>コード7: SoftMax OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -570,6 +585,7 @@ print( result )
 <input type="checkbox"><b>コード8: 総和 OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
@@ -628,6 +644,7 @@ print( result )
 <input type="checkbox"><b>コード9: 代入 OP ノードのコード例:</b>
 
 <pre class="wrap">
+#coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 

@@ -61,12 +61,18 @@
 </div>
 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./myserial.py">教師データ取得用スクリプト</a>(myserial.py)をダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/myserial.py">教師データ取得用スクリプト</a>(myserial.py)をダウンロードして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./template03-1.py">テンプレートスクリプトファイル</a>(template03-1.py)をダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/template03-1.py">テンプレートスクリプトファイル</a>(template03-1.py)をダウンロードして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 装置を接続して下さい(今回は arduino UNO + ADXL345 + USB接続)。
+<span class="olradio"><input type="radio" name="p1"></span> 装置を接続して下さい(※)
+</p>
+<p>
+※ 今回は arduino UNO + ADXL345(I2Cインターフェース) + USB 接続 の環境を使います。
 <br>
+※ VDD - <b>3.3V</b>、GND - GND、SDA - A4、SCL - A5 と接続して下さい(左側 ADXL345 - 右側 arduino ) 。
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> myserial.py を実行して正常状態を 5 組サンプリングして下さい(※)。スペースで取得、q で終了します。
 </p>
 <p>
