@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. ブロック図</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [1] ディジタル線形フィルタの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ブロック図とはディジタル線形フィルタそのもの、もしくはフィルタの構成パーツを四角や丸や三角などで表し、かつ、それらパーツ間を矢印で繋いで信号の流れを表した図の事です。
+</p>
+
+<p>
+もっとも基本的なブロック図はディジタル線形フィルタそのものの入出力を表した図で。例えば図1は
+</p>
+
+<p>
+<b>
+伝達関数 $\textrm{H}(z)$ を持つフィルタに $x[i]$ を入力したら $y[i]$ が出てきた
+</b>
+</p>
+
+<p>
+という意味のブロック図になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 基本的なブロック図: </b>
+
+<p>
+伝達関数 $\textrm{H}(z)$ を四角で囲むと「伝達関数 $\textrm{H}(z)$ を持つディジタル線形フィルタ」の意味になる。
+</p>
+
+<img src="./img/page04-fig1.png" alt="">
+
+</div>
+
+<p>
+またインパルス信号 $\delta[i]$ とインパルス応答 $h[i]$ の関係をブロック図で書けば次のように表されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: インパルス信号とインパルス応答の関係: </b>
+
+<p>
+</p>
+
+<img src="./img/page04-fig2.png" alt="">
+
+</div>
+
+
+<script>PreNext(4,11)</script>
+</body>
+</html>
