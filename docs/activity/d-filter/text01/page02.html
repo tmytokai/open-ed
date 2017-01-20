@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 重ね合わせの原理</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [1] ディジタル線形フィルタの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+これから「ディジタル線形フィルタ」について学んでいきますが、「ディジタル線形フィルタ」のそもそもの定義は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： ディジタル線形フィルタ: </b>
+
+
+<p>
+あるディジタルフィルタに時間領域ディジタル信号 $x_j[i]$ を入力した時の出力を $y_j[i]$ とする($j$ は信号の番号を表す整数)。
+</p>
+
+<p>
+$x_0[i]$ から $x_{\textrm{L}-1}[i]$ まで計 $\textrm{L}$ 個の入力信号があるとき、任意の実数の定数 $a_j$ をそれらに掛けて足しあわせた信号
+</p>
+
+\begin{align*}
+x[i] = \sum_{j=0}^{\textrm{L}-1}\{ a_j \cdot x_j[i] \}
+\end{align*}
+
+<p>
+を入力した時のフィルタ出力が
+</p>
+
+\begin{align*}
+y[i] = \sum_{j=0}^{\textrm{L-1}} \{ a_j \cdot y_j[i] \}
+\end{align*}
+
+<p>
+となるディジタルフィルタの事を「ディジタル線形フィルタ」という。
+<br>
+また上の関係の事を<b>「重ね合わせの原理」</b>と言う。
+</p>
+
+</div>
+
+<p>
+なお、この「重ね合わせの原理」が成り立たないディジタルフィルタは全て「ディジタル非線形フィルタ」になります。
+</p>
+
+<script>PreNext(2,13)</script>
+</body>
+</html>
