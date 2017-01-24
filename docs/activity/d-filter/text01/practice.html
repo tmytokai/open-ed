@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [1] ディジタル線形フィルタの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 45  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. ディジタルフィルタとは</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page02.html">2. ディジタル線形フィルタとは</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page03.html">3. インパルス応答</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page04.html">4. 伝達関数</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page05.html">5. ブロック図</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page06.html">6. 基本パーツ</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page07.html">7. フィルタの合成</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page08.html">8. フィードバック機構</a></h2>
+
+<p>
+無し
+</p>
+
+<br>
+<h2><a href="./page09.html">9. 伝達関数からブロック図を描く</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1 (個人PC、45分):</b> 例 4 と 5 を参考にし、伝達関数 $\textrm{H}(z) = a + b \cdot z^{-k}$ を持つフィルタ(ディレイ・フィルタと言います)を使って自分の声にディレイ効果をかけてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 適当なフォルダに移動します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> マイクを PC の端子に繋ぎます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 8000 [Hz] で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/d-filter-t01-1.cpp">テンプレートファイル</a>(d-filter-t01-1.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「g++ d-filter-t01-1.cpp」でコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 aplay out.wav 」を実行してディレイ効果がかかっている事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  ソースコードをアップロードして下さい。
+</p>
+</div>
+
+<script>PreNext(15,14)</script>
+</body>
+</html>
