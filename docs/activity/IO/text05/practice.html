@@ -72,7 +72,7 @@
 (5) SPI の設定はクロック「1000000」Hz、ビットオーダー「MSBFIRST」、モード「SPI_MODE0」とする。
 </p>
 <p>
-(6) Arduino 側の SS ピンはデフォルトの 10 ピンとする( digitalWrite 関数で SS と指定出来る)。
+(6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
 </p>
 <p>
 (6) 適当な間隔(2秒程度)で好きな音声を出力する。
@@ -101,7 +101,7 @@
 ※1 setup の中で SPI の初期設定を行うが、 setBitOrder、setClockDivider、setDataMode 関数を使う方法は古いやり方なので、beginTransaction + SPISettings の方を使用すること。
 </p>
 <p>
-※2 setup の中で SSピンを LOW にしたら 1 秒程度 delay を入れること。
+※2 setup の中で <span class="overline">SS</span>ピンを LOW にしたら 1 秒程度 delay を入れること。
 </p>
 <p>
 ※3 文字は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。

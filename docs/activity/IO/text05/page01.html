@@ -24,7 +24,7 @@ SPI(Serial Peripheral Interface)はシリアル通信を行うためのインタ
 </p>
 
 <p>
-SPI は SS、MOSI、MISO、SCK ピンという 4 ピンを使ってデータを送受信します(実際には GND も繋ぎます)。ただし、1対1でしか通信出来なかった RS-232C と違い、マスタ・スレーブ方式で複数の機器と接続してデータをやりとり出来るという利点があります。また通信速度も RS-232C よりかなり高速です。
+SPI は <span class="overline">SS</span>、MOSI、MISO、SCK ピンという 4 ピンを使ってデータを送受信します(実際には GND も繋ぎます)。ただし、1対1でしか通信出来なかった RS-232C と違い、マスタ・スレーブ方式で複数の機器と接続してデータをやりとり出来るという利点があります。また通信速度も RS-232C よりかなり高速です。
 </p>
 
 <p>
@@ -37,9 +37,9 @@ SPI は SS、MOSI、MISO、SCK ピンという 4 ピンを使ってデータを�
 </p>
 
 <div class="info">
-<input type="checkbox"><b> SS、MOSI、MISO、SCK ピンの正式名称と用途:</b>
+<input type="checkbox"><b> <span class="overline">SS</span>、MOSI、MISO、SCK ピンの正式名称と用途:</b>
 <p>
-SS : スレーブ・セレクト・・・・データ送受信対象のスレーブ機器を選ぶ
+<span class="overline">SS</span> : スレーブ・セレクト(ロー・アクティブ)・・・・データ送受信対象のスレーブ機器を選ぶ
 </p>
 <p>
 MOSI : マスタアウト・スレーブイン・・・・マスタ機器 → スレーブ機器の方向でデータを送る
@@ -62,7 +62,7 @@ SCK : シリアル・クロック・・・・マスタ・スレーブ機器間�
 </p>
 
 <p>
-マスタ機器の SS ピンとスレーブ機器の SS ピンは 1 対 1 で直結されていて通常は HIGH 状態になっています。つまりマスタ機器にはスレーブ機器の台数分だけ の SS ピンが必要になります。マスタ機器が通信を開始したい時は対象のスレーブ機器と繋がっている SS ピンを LOW にします。なお SS ピンとして GPIO が利用されることが多いです。
+マスタ機器の <span class="overline">SS</span> ピンとスレーブ機器の <span class="overline">SS</span> ピンは 1 対 1 で直結されており、ロー・アクティブなので通常は HIGH 状態になっています。つまりマスタ機器にはスレーブ機器の台数分だけ の <span class="overline">SS</span> ピンが必要になります。マスタ機器が通信を開始したい時は対象のスレーブ機器と繋がっている <span class="overline">SS</span> ピンを LOW にします。なお <span class="overline">SS</span> ピンとして GPIO が利用されることが多いです。
 </p>
 
 <p>
