@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>10. FIRフィルタ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [1] ディジタル線形フィルタの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+前のページではいくつか簡単な例を挙げて伝達関数とブロック図の関係を示しましたが、ここから実際に世の中でよく使われている FIR フィルタ、IIR フィルタ、バイクワッドフィルタについてその定義を示したいと思います。
+</p>
+
+
+<p>
+まず FIR (finite impulse response) フィルタですが、このフィルタ日本語では「有限インパルス応答フィルタ」と呼ばれます。つまり、正整数 $\textrm{L}$ を有限の数とした時、インパルス応答が $h[0]$ から $h[\textrm{L}-1]$ まで値が入っていて、残りは全て $h[i]=0, (i=\textrm{L},\textrm{L}+1,\cdots)$ となるフィルタです。
+</p>
+
+<p>
+従ってこのインパルスフィルタを Z 変換すると、伝達関数は<a href="../../z/text01/page04.html">有限長の時間領域ディジタル信号のZ変換</a>の所で勉強した式と同じ形で表されます。
+</p>
+
+<p>
+以上をまとめると FIR フィルタの定義は以下の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： FIR (finite impulse response: 有限インパルス応答)フィルタ: </b>
+
+
+<p>
+正整数 $\textrm{L}$ を有限の数とした時、インパルス応答が $h[0]$ から $h[\textrm{L}-1]$ まで値が入っていて、残りは全て $h[i]=0, (i=\textrm{L},\textrm{L}+1,\cdots)$ となるフィルタのことを FIR フィルタと呼び、その伝達関数は以下で表される。
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+& = \sum_{i=0}^{\textrm{L}-1} \{ h[i] \cdot z^{-i} \} \\
+& = h[0] + h[1] \cdot z^{-1} + h[2] \cdot z^{-2} + \cdots + h[\textrm{L}-1] \cdot z^{-(\textrm{L}-1)}
+\end{align*}
+
+</div>
+
+<p>
+FIR フィルタのブロック図は前のページの例 5 と 例 6 を組み合わせて次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： FIR フィルタのブロック図: </b>
+
+<img src="./img/page10-fig1.png" alt="">
+
+</div>
+
+<p>
+FIRフィルタのプログラム表現は次の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR フィルタのプログラム表現: </b>
+
+<p>
+x[i] は時刻 i が負の時は 0 とする
+</p>
+
+<pre class="wrap">
+y[i] = 0;
+for( j = 0; j &lt L; ++j ) y[i] += h[j] * x[i-j]
+</pre>
+
+</div>
+
+<p>
+ここでは FIR フィルタの定義についてだけ説明しましたが、具体的な設計方法については別の学習項目で取り扱いたいと思います。
+</p>
+
+
+<script>PreNext(10,14)</script>
+</body>
+</html>
