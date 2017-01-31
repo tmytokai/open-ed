@@ -60,7 +60,7 @@ int main()
         fprintf( stderr, "8bit音声は使用できません\n" );
         exit(EXIT_FAILURE);
     }
-    if( wavefmt.rate != 8000 ){
+    if( wavefmt.rate != 22050 ){
         fprintf( stderr, "サンプリング周波数が 8000 Hzでありません\n" );
         exit(EXIT_FAILURE);
     }
@@ -96,20 +96,27 @@ int main()
     const int fs = 8000;  // サンプリング周波数 [Hz]
     const int N = 10 * fs; // 10 [秒] * fs [Hz]
 
-    // 乗算器の乗数 a と b をセット
-    // a と b は負数でも可だが、|a| + |b| が 1.0 を超えないようにする
-    const double a = ?;
-    const double b = ?;
+    // フィルタ次数(タップ数)
+    const int L = ? ;
 
-    // 遅延素子の遅延時刻 k の計算
-    const double delay = ?; // 遅れ秒数
-    const int k = (int)( delay * fs ); // k = 遅れ秒数 * fs
+    // カットオフ周波数 [Hz]
+    const double fc = ? ;
 
-    // ディジタル線形フィルタ H(z) = a + b・z^{-k}
+    // FIR ローパスフィルタ係数を計算
+    // 円周率は M_PI を使用する
+    double h[L];
+    const int C = (L-1)/2;
+    h[C] = ? ;
+    for( int j = 1; j < ? ; ++j ){
+        h[C-j] = h[C+j] = ? ;
+    }
+
+    // FIR フィルタ
     // 出力信号は y[i]
-    // i-k が負の場合は x[i-k] = 0 と既になっているので、場合分けせずにそのまま使って OK
+    // i-j が負の場合は x[i-j] = 0 と既になっているので、場合分けせずにそのまま使って OK
     for( int i = 0; i < N; ++i ){
-        y[i] = ?
+        y[i] = ?;
+        for( int j = 0; j < ? ; ++j ) y[i] += ? ;
     }
 
     // ここまで
@@ -120,7 +127,7 @@ int main()
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
     }
-    for( int i = 0; i < lng; ++i ) buf[i] = (short)y[i];
+    for( int i = 0; i < lng; ++i ) buf[i] = (short)(y[i]*0.8);
 
     fwrite( &wavefmt, 1, sizeof( WAVEFORMAT ), fout );
     fwrite( buf, 1, wavefmt.data_size , fout );

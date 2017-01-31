@@ -95,7 +95,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 8000 [Hz] で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 $f_s = 8000$ [Hz] で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
 </p>
@@ -115,9 +115,58 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  ソースコードをアップロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span>  「ソースコード」をアップロードして下さい。
 </p>
 </div>
+
+<br>
+<h2><a href="./page10.html">10. FIRフィルタ</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習2 (個人PC、45分):</b> FIR ローパスフィルタを使って自分の声から高周波成分を取り除いてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 音声は演習 1 でサンプリングした「 test.wav 」を使用します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/d-filter-t01-2.cpp">テンプレートファイル</a>(d-filter-t01-2.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述と下のFIRローパスフィルタ係数の求め方に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおデフォルト値はフィルタ次数(タップ数) $\textrm{L} = 63$、カットオフ周波数 $f_c = 1000$ [Hz] とします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> FIR ローパスフィルタ係数の求め方: </b>
+
+<p>
+フィルタ次数(タップ数) $\textrm{L}$、カットオフ周波数 $f_c$ [Hz]、サンプリング周波数 $f_s$ [Hz] における FIR ローパスフィルタ係数(=インパルス応答) $h[i]$ は以下の式で得られる。なお $\textrm{C} = (\textrm{L}-1)/2$ である。
+</p>
+
+\begin{align*}
+h[\textrm{C}] &= \frac{f_c}{(f_s/2)} \\
+h[\textrm{C}-j] &= h[\textrm{C}+j] = \frac{ \sin \left ( \pi \cdot j \cdot h[\textrm{C}] \right ) }{ ( \pi \cdot j ) } \quad  , \quad  ( j = 1, 2,・・・, \textrm{C} ) 
+\end{align*}
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「g++ d-filter-t01-2.cpp」でコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「./a.out」を実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「 aplay out.wav 」を実行してローパス効果がかかっている事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「 audacity test.wav 」を実行し、自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「 audacity out.wav 」を実行し、フィルタリング後の自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> フィルタリング前、フィルタリング後のスペクトログラム表示を見比べて、$f_c$ [Hz] 以上の成分が減衰していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> カットオフ周波数 $f_c$ [Hz] を色々変えると効果が色々変化することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  ドキュメントに「ソースコード」「元の声のスペクトログラム表示」「フィルタリング後のスペクトログラム表示」を貼りつけてからアップロードして下さい。 
+</p>
+</div>
+
 
 <script>PreNext(15,14)</script>
 </body>
