@@ -60,7 +60,7 @@ int main()
         fprintf( stderr, "8bit音声は使用できません\n" );
         exit(EXIT_FAILURE);
     }
-    if( wavefmt.rate != 22050 ){
+    if( wavefmt.rate != 8000 ){
         fprintf( stderr, "サンプリング周波数が 8000 Hzでありません\n" );
         exit(EXIT_FAILURE);
     }
