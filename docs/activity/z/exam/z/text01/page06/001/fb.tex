@@ -1,0 +1,39 @@
+\noindent \textbf{【出題意図】}
+
+\bigskip
+\noindent $n \ne 0 $ のときのディジタルインパルス信号の Z 変換を求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\medskip
+$n \ne 0 $ のとき、ディジタルインパルス信号 
+
+\begin{align}
+f[i] =
+\begin{cases}
+1 & (i=n) \\ 
+0 & (i \neq n)
+\end{cases}
+\end{align}
+
+の Z 変換は以下の式で表される。
+
+\begin{align*}
+\textrm{F}(z) = \sum_{i=0}^{n} \{ f[i] \cdot z^{-i} \} \\
+& = 0 + \frac{0}{z} + \frac{0}{z^2} + \cdots + \frac{1}{z^{n}} \\
+& = \frac{1}{z^{n}} (= z^{-n})
+\end{align*}
+
+\medskip
+\noindent 収束領域は「$z=0$ を除くZ平面全域」となる。
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\bigskip
+\noindent $n = 1$ なので重要事項より $\textrm{F}(z) = z^{-1} $ が求まる。
