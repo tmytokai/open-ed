@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+pre.prog { 
+border: 2px solid black;
+padding-top:10px;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:10px;
+}
+
+table.info{
+border: 2px solid #000000;
+font-weight: bold;
+}
+
+td.info{
+padding: 10px;
+line-height: 130%;
+}
+
+
+-->
+</style>
+<title>クラスの追加</title>
+</head>
+
+<body bgcolor="#ffffff" link="#ff0000" text="#000000" vlink="#0000ff">
+
+<h2>クラスの追加 </h2>
+
+プロジェクトに「クラス」を新規に作成追加してそれを利用する方法を学びます。
+<br>
+<br>
+<h2>(1) クラスの新規作成</h2>
+「クラス」が一体何かはおいおい説明しますので、とりあえず下の手順で新しいクラスを作ってみてください。
+<br>
+<br>
+<br>
+<input type="checkbox"> (1)  画面左側にある「パッケージ・エクスプローラ」の「デフォルトパッケージ」を右クリックして「新規」→「クラス」を選ぶ。
+<br>
+<br>
+<br>
+<input type="checkbox"> (2) 「新規Javaクラス」ダイアログが出たら「名前」に「Test」と入れて「完了」を押す。
+<br>
+<br>
+<br>
+<input type="checkbox"> (3)もしソースコード(Test.java)が表示されなかったり、間違ってタブを閉じてしまった場合は、パッケージ・エクスプローラの三角をクリックして行ってTest.javaを見つけてダブルクリックする。
+<br>
+<br>
+<br>
+<h2>(2) クラスの利用</h2>
+以上で「Test」という新しいクラスができますが、このままだと何も起きませんので、Testクラスに何かメソッド(関数)を追加して main メソッドからそのメソッドを利用してみましょう。
+<br>
+<br>
+<br>
+<input type="checkbox"> (1) 「public class Test」の中括弧の間に以下の 「test」 メソッド(関数)を追加する。
+<pre class="prog">
+public void test()
+{
+	System.out.println("Testクラスです");
+}
+</pre>
+<br>
+<input type="checkbox"> (2) main メソッドを開き、以下のコードを追加する。
+<pre class="prog">
+Test t = new Test();
+t.test();
+</pre>
+<br>
+<input type="checkbox"> (3) 実行すると main メソッドから Test クラスの test メソッドが呼び出されていることが確認できる。
+<br>
+<br>
+<br>
+</body>
+</html>
