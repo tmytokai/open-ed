@@ -1,79 +1,96 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-<!--
-pre.prog { 
-border: 2px solid black;
-padding-top:10px;
-padding-left:10px;
-padding-right:10px;
-padding-bottom:10px;
-}
-
-table.info{
-border: 2px solid #000000;
-font-weight: bold;
-}
-
-td.info{
-padding: 10px;
-line-height: 130%;
-}
-
-
--->
-</style>
-<title>クラスの追加</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. クラスの追加</title>
 </head>
+<body>
 
-<body bgcolor="#ffffff" link="#ff0000" text="#000000" vlink="#0000ff">
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語のHelloWorld</a></li>
+<li>学習項目: [1] HelloWorld</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>クラスの追加 </h2>
+<h2><script>GetTitle()</script></h2>
 
+<p>
 プロジェクトに「クラス」を新規に作成追加してそれを利用する方法を学びます。
-<br>
-<br>
-<h2>(1) クラスの新規作成</h2>
+</p>
+
+<h3>
+1. クラスの新規作成
+</h3>
+
+<p>
 「クラス」が一体何かはおいおい説明しますので、とりあえず下の手順で新しいクラスを作ってみてください。
+</p>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span>
+画面左側にある「パッケージ・エクスプローラ」の「デフォルトパッケージ」を右クリックして「新規」→「クラス」を選ぶ。
 <br>
+<span class="olradio"><input type="radio" name="r1"></span>
+「新規Javaクラス」ダイアログが出たら「名前」に「Test」と入れる。
 <br>
+もし「どのメソッド・スタブを作成しますか？」の「public static void main(String[] args)」にチェックが入っていたら外す。
 <br>
-<input type="checkbox"> (1)  画面左側にある「パッケージ・エクスプローラ」の「デフォルトパッケージ」を右クリックして「新規」→「クラス」を選ぶ。
+最後に「完了」を押す。
 <br>
+<span class="olradio"><input type="radio" name="r1"></span>
+もしソースコード(Test.java)が表示されなかったり、間違ってタブを閉じてしまった場合は、パッケージ・エクスプローラの三角をクリックして行ってTest.javaを見つけてダブルクリックする。
+</p>
+</div>
+
 <br>
-<br>
-<input type="checkbox"> (2) 「新規Javaクラス」ダイアログが出たら「名前」に「Test」と入れる。もし「どのメソッド・スタブを作成しますか？」の「public static void main(String[] args)」にチェックが入っていたら外す。最後に「完了」を押す。
-<br>
-<br>
-<br>
-<input type="checkbox"> (3)もしソースコード(Test.java)が表示されなかったり、間違ってタブを閉じてしまった場合は、パッケージ・エクスプローラの三角をクリックして行ってTest.javaを見つけてダブルクリックする。
-<br>
-<br>
-<br>
-<h2>(2) クラスの利用</h2>
+<h3>
+2. クラスの利用
+</h3>
+
+<p>
 以上で「Test」という新しいクラスができますが、このままだと何も起きませんので、Testクラスに何かメソッド(関数)を追加して main メソッドからそのメソッドを利用してみましょう。
-<br>
-<br>
-<br>
-<input type="checkbox"> (1) 「public class Test」の中括弧の間に以下の 「test」 メソッド(関数)を追加する。
-<pre class="prog">
+</p>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r2"></span>
+「public class Test」の中括弧の間に以下の 「test」 メソッド(関数)を追加する。
+</p>
+
+<div class="info">
+<pre class="wrap">
 public void test()
 {
 	System.out.println("Testクラスです");
 }
 </pre>
-<br>
-<input type="checkbox"> (2) main メソッドを開き、以下のコードを追加する。
-<pre class="prog">
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="r2"></span>
+main メソッドを開き、以下のコードを追加する。
+</p>
+
+<div class="info">
+<pre class="wrap">
 Test t = new Test();
 t.test();
 </pre>
-<br>
-<input type="checkbox"> (3) 実行すると main メソッドから Test クラスの test メソッドが呼び出されていることが確認できる。
-<br>
-<br>
-<br>
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="r2"></span>
+実行すると main メソッドから Test クラスの test メソッドが呼び出されていることが確認できる。
+</p>
+</div>
+
+<script>PreNext(3,3)</script>
 </body>
 </html>
