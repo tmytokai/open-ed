@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>標準例外</title>
+</head>
+<body>
+
+<h2>標準例外</h2>
+<br>
+前のページのソース1に出てきた FileNotFoundException クラスは Java に初めから備わっている例外クラスでしたが、これ以外にも Java には例外(つまりエラー)の種類に合わせて様々な例外クラスが用意されています。
+<br>
+<br>
+これらの、 Java に初めから備わっている例外クラス(あるいは例外処理そのもの)の事を「標準例外」と言います。
+<br>
+<br>
+この「標準例外」は別に Java だけの機能ではなくて、オプジェクト指向プログラミング言語には大抵備わっています。
+<br>
+標準例外の種類は言語によって変わりますが、以下の標準例外は大抵の言語に備わっています(もちろん他にも沢山あります)。
+<br>
+<br>
+<table class="info"><tr><td class="info">
+・ファイル・ノットファウンド例外: ファイルが見つからない
+<br>
+<br>
+・ゼロ除算例外: ゼロで数字を割ろうとした
+<br>
+<br>
+・NULL ポインター例外: NULL ポインターにアクセスしようとした
+<br>
+</td><tr></table>
+<br>
+<br>
+Java では上の 3 つの標準例外は次の例外クラスに割当たっています。
+<br>
+<br>
+<table class="info"><tr><td class="info">
+・ファイル・ノットファウンド例外 → FileNotFoundException
+<br>
+<br>
+・ゼロ除算例外 → ArithmeticException
+<br>
+<br>
+・NULLポインター例外 → NullPointerException
+<br>
+</td><tr></table>
+
+<br>
+<br>
+</body>
+</html>

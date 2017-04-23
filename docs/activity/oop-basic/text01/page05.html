@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>メソッド</title>
+</head>
+<body>
+
+<h2>メソッド</h2>
+
+「メソッド」というのはクラス内で定義されているフィールドを操作するための関数で、言語によっては「メンバ関数」と呼ぶ事があります。
+<br>
+<br>
+以前のページで説明したようにメソッドはクラス定義の中で次のように定義します。
+<br>
+<br>
+<pre class="prog">
+<b>メソッド定義:</b>
+
+アクセス修飾子　戻り値の型　メソッド名1(引数){
+      内容;
+}
+</pre>
+
+このメソッド自体はただの関数なので、普段みなさんが書いているように手続き型のプログラムを書けば良いのですが、クラス内で定義されたフィールドにアクセスする時はクラス外からアクセスする時みたいに「．」を付ける必要は一般的にありません(ただし分かりやすいように this. キーワードを付けるときもあります)。
+<br>
+<br>
+では実際に Score クラスを使ってメソッドの例を示します。
+<br>
+次のソース1では Score クラスに数学と英語の平均を求める average メソッドを追加してみました。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public class Score {
+    public int math;
+    public int english;
+    
+    public double average(){
+    	return (math + english)/2.0;
+    }
+}
+</pre>
+この様にして追加したメソッドはフィールドのようにインスタンスを作って main などから
+<br>
+<br>
+<b>インスタンス名.メソッド名(引数)</b>
+<br>
+<br>
+で呼び出す事ができます。
+<br>
+ただし、あるクラスのメソッドから同じクラス内のメソッドを呼び出す時はフィールドの時と同様に「．」は必要ありません。
+<br>
+<br>
+では早速 main から追加した average メソッドを呼び出してみましょう。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public static void main(String[] args) {
+	Score sc_taro = new Score();
+	sc_taro.math = 5;
+	sc_taro.english = 3;
+
+	Score sc_hanako = new Score();
+	sc_hanako.math = 80;
+	sc_hanako.english = 70;
+
+	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
+	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+}
+</pre>
+
+これを実行すると次の結果が表示されます。
+<br>
+<pre class="prog">
+<b>ソース2の実行結果:</b>
+
+太郎: math = 5 english = 3 平均 = 4.0
+花子: math = 80 english = 70 平均 = 75.0
+</pre>
+
+この結果で注目して欲しいのは太郎と花子の平均が違うことです。このように
+<br>
+<br>
+<b>一般的には、同じメソッドを呼び出してもインスタンス毎にフィールドの値が違うのでメソッドの実行結果が変わります。</b>
+<br>
+<br>
+さて上の average メソッドには引数がありませんでしたが、当然メソッドには引数を持たせる事も出来ます。
+<br>
+例えば Score クラスに数学の点数を変更する set_math メソッドも追加してみます。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース3:</b>
+
+public class Score {
+    public int math;
+    public int english;
+    
+    public double average(){
+    	return (math + english)/2.0;
+    }
+    
+    public void set_math( int s ){
+    	math = s;
+    }
+}
+</pre>
+
+set_math メソッドの引数は int 型の s で、メソッド内部で math フィールドの値を修正しています。
+<br>
+<br>
+あとはインスタンスを作ってこの set_math メソッドを呼び出せば良いのですが、あるインスタンスの math フィールドの値を変えても他のインスタンスの math には影響がない事に注意して下さい。
+<br>
+例えば
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース4:</b>
+
+public static void main(String[] args) {
+	Score sc_taro = new Score();
+	sc_taro.math = 5;
+	sc_taro.english = 3;
+
+	Score sc_hanako = new Score();
+	sc_hanako.math = 80;
+	sc_hanako.english = 70;
+
+	
+	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
+	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+	
+	sc_taro.set_math(20); // (1)
+
+	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());	
+	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+}
+</pre>
+
+は (1) の所で太郎の数学の点数を20点に変更していますが、花子の数学の点数は変わりません。実際、実行結果は以下のとおりになります。
+<br>
+<pre class="prog">
+<b>ソース4の実行結果:</b>
+
+太郎: math = 5 english = 3 平均 = 4.0
+花子: math = 80 english = 70 平均 = 75.0
+太郎: math = 20 english = 3 平均 = 11.5
+花子: math = 80 english = 70 平均 = 75.0
+</pre>
+
+
+さてメソッドを使うことで得られる利点は色々あるのですが、一番の利点は
+<br>
+<br>
+<b>フィールドの定義と操作する場所が同じクラス内にある</b>
+<br>
+<br>
+ことだと思います。
+<br>
+これがなぜ利点になるのか、思いついた順に挙げて行きましょう。
+<br>
+<br>
+<br>
+・ コードがすっきりして見やすくなる
+<br>
+<br>
+・ クラスを再利用しやすくなる
+<br>
+<br>
+・ 他人がフィールドに対して想定外の値を代入するのを防げる　→　バグが減る
+<br>
+<br>
+<br>
+これらの項目以外にも利点は沢山あると思いますので自分で調べてみて下さい。
+<br>
+<br>
+<br>
+</body>
+</html>

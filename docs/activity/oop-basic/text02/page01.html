@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>例外処理とは</title>
+</head>
+<body>
+
+<h2>例外処理とは</h2>
+
+<br>
+例外とはプログラムエラーの事です。
+<br>
+<br>
+例外処理とは、ある処理を実行中に何らかのエラーが生じたらその処理を中断してエラー処理を行う機能を意味します。
+<br>
+この例外処理そのものは別にオブジェクト指向言語だけに特化された機能では無いのですが、相性が良いので大抵のオブジェクト指向言語には備わっています。
+<br>
+<br>
+さて例外処理の典型的な書き方は以下の通りです。
+<br>
+<pre class="prog">
+<b>例外処理の典型的な書き方:</b>
+
+   try
+   {
+   　 例外1〜Nが起きる可能性のある処理部
+   }
+   catch(例外その1){
+   {
+      例外1のエラー処理部
+   }
+   catch(例外その2){
+   {
+      例外2のエラー処理部   
+   }
+   ・・・
+   catch(例外そのN){
+   {
+      例外Nのエラー処理部
+   }
+</pre>
+まず「try」の中カッコの中に例外が起きる可能性のある処理部を書きます。
+<br>
+<br>
+次に例外が起きた時のエラー処理部を「catch」の中カッコの中に書きます。
+<br>
+もし try の中にある処理で例外が生じたらその処理の実行を中止し、catchの中にジャンプしてcatch内の処理を実行します(エラー処理が終わってもtry の中には戻りません)。
+<br>
+<br>
+この様に例外が起きてcatchの中に処理が移ることを<b>「例外が投げられた」</b>と言います。
+<br>
+<br>
+またcatchは上の様に例外の種類ごとに複数別々に並べてエラー処理することが出来ます。
+<br>
+例えば上では try の中から例外1、例外2、・・・、例外Nが投げられる可能性があるのでそれらに対応したcatchを用意しています。
+<br>
+<br>
+さて、例外処理のメリットは「処理部」と「エラー処理部」を分けて書けることにあります。
+<br>
+一般的にエラー処理部は煩雑で見づらい事が多いので、取り敢えずエラー処理は後回しにして処理部だけ書くことで、すっきりと見やすいソースコードになります。
+<br>
+<br>
+では、もう少し具体的な例外処理の例を見ましょう。
+<br>
+下のソース1は Java でファイルオープン時にそのファイルが存在しない時に投げられる例外(ファイル・ノットファウンド例外: FileNotFoundException クラス)の例外処理です。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+     try{ 
+         FileReader in = new FileReader( "hoge.txt" ); 
+     } 
+     catch( FileNotFoundException e ) { 
+         System.out.println( e.getMessage() ); 
+     } 
+
+</pre>
+try の中で FileReader クラスのインスタンス in を作っていますが、これは C 言語で言うと File 構造体を定義して fopen() することに相当します。
+<br>
+また catchの () 内にある e は Java に初めから備わっている例外クラスである FileNotFoundException クラスのインスタンスで、e.getMessage() によってエラー内容を文字列で取得できます。
+<br>
+<br>
+もしファイル(hoge.txt)が存在しない時は catch 内に処理が移って次のように表示されます。
+<br>
+<pre class="prog">
+<b>hoge.txtが無い時のソース1の実行結果::</b>
+
+hoge.txt (No such file or directory) 
+</pre>
+
+
+
+
+<br>
+<br>
+</body>
+</html>

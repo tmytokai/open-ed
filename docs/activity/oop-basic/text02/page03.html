@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>例外の自作</title>
+</head>
+<body>
+
+<h2>例外の自作</h2>
+<br>
+標準例外以外にも自分で例外クラスを作り、「throw」を使って投げる事が出来ます。
+<br>
+<br>
+さて自作の例外クラスの作り方はプログラミング言語によって変わりますが、Java では次のように作ります。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public class MyException extends RuntimeException {
+
+	  MyException(){
+		  super("自作した例外です");
+	  }	 
+}
+</pre>
+ここで出てきた「extends RuntimeException」とか「super」は「継承」のテキストで説明しますので、今の所はこう書くんだ程度の認識でいて下さい。
+<br>
+またこの自作例外クラスの作り方はかなり簡略化したものですので、実際の業務等で使う場合はちゃんとしたやり方を調べてから作って下さい。
+<br>
+<br>
+後は実行中に何か問題が生じたら、次のように throw 文でこの自作例外をnewして投げて catch で受け取るだけです。
+<br>
+「throw new MyException();」が自作例外を投げて(throw)している部分です。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+     try{ 
+         if( 何か問題があったら ) throw new MyException();
+     } 
+     catch( MyException e ) { 
+         System.out.println( e.getMessage() ); 
+     } 
+</pre>
+<br>
+<br>
+これを実行して何か問題が生じたら「自作した例外です」と表示されます。
+<br>
+<br>
+</body>
+</html>

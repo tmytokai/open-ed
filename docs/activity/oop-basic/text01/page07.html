@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>オーバーロード</title>
+</head>
+<body>
+
+<h2>オーバーロード</h2>
+
+<br>
+「オーバーロード(overload)」は日本語では「多重定義」と呼ばれていますが、一般的にはオーバーロードと呼ばれていますので、このアクティビティでもオーバーロードに呼び方を統一します。
+<br>
+<br>
+またオーバーロードには主に「メソッドのオーバーロード」と「演算子のオーバーロード」がありますが、今回は「メソッドのオーバーロード」だけ取り扱います。
+ただし「演算子のオーバーロード」の方も大変良く使われる機能ですので、もし今後必要になったら自分で調べて下さい。
+<br>
+<br>
+さて「メソッドのオーバーロード」とは簡単に言うと
+<br>
+<br>
+<b>名前は同じだけど引数の個数や型が違うメソッドを複数定義する機能</b>
+<br>
+<br>
+の事です。
+<br>
+<br>
+C言語の様に(メソッドの)オーバーロードが無い言語が無い言語の場合は、
+ほとんど同じ様な機能を持っているメソッドなのに、引数の数や型が少し違うだけで名前を変える必要があるため、hoge1()とかhoge2()とかhoge3()とか似たような名前のメソッドが氾濫し、プログラマーも「この型の場合はどのメソッド名だっけ？」みたいにいちいち気にする必要が出てきます。
+<br>
+<br>
+一方、Javaの様にオーバーロードがある言語の場合は引数の数や型が違ってもメソッドの名前を変える必要がないので、メソッド名の氾濫を防いでソースコードがすっきりクールになりますし、プログラマーもメソッド名をいちいち気にする必要が無くなるというメリットがあります。
+<br>
+<br>
+特に重要で一番使用例が多いオーバーロードはコンストラクタのオーバーロードです。
+コンストラクタのオーバーロードについては実際に演習で試してみたいと思います。
+<br>
+<br>
+では実際にオーバーロードの例を見てみましょう。
+まず以下の OLtest というクラスを定義します。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public class OLtest {
+
+    public void show(){
+    	System.out.println("引数なし");
+    }
+    
+    public void show( String a){
+    	System.out.println("引数は文字列: " + a);
+    }
+
+    public void show( int a){
+    	System.out.println("引数は整数: " +a);
+    }
+
+    public void show( int a, int b){
+    	System.out.println("引数は整数x2: " +a + "-" + b);
+    }
+}
+</pre>
+<br>
+次に この main メソッドを実行します。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public static void main(String[] args) {
+
+   OLtest ol = new OLtest();
+   ol.show();
+   ol.show( "ほげ" );
+   ol.show( 123 );
+   ol.show( 123, 456 );
+}
+</pre>
+<br>
+すると次の実行結果になります。
+<br>
+<pre class="prog">
+<b>ソース2の実行結果:</b>
+
+引数なし
+引数は文字列: ほげ
+引数は整数: 123
+引数は整数x2: 123-456
+</pre>
+<br>
+このように、同じ名前のメソッドを呼び出しているのに、引数の数や型が違うと異なる表示がされます。
+<br>
+<br>
+一方、もしJavaにオーバーロードが無かったらソース3のようにクラスを書かないと駄目になります。
+<br>
+もちろんこのクラスでも動きますが、ソース4のように引数の数や型毎にいちいち名前を変えないといけないので野暮ったくなります。
+<br>
+また「引数が文字型なのはshow2()だっけ、show3()だっけ？」とプログラマーも悩む必要が出てきます。
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース3: もしオーバーロードが無かったら・・・</b>
+
+public class OLtest {
+
+    public void show1(){
+    	System.out.println("引数なし");
+    }
+    
+    public void show2( String a){
+    	System.out.println("引数は文字列: " + a);
+    }
+
+    public void show3( int a){
+    	System.out.println("引数は整数: " +a);
+    }
+
+    public void show4( int a, int b){
+    	System.out.println("引数は整数x2: " +a + "-" + b);
+    }
+}
+</pre>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース4: 野暮ったい</b>
+
+public static void main(String[] args) {
+
+   OLtest ol = new OLtest();
+   ol.show1();
+   ol.show2( "ほげ" );
+   ol.show3( 123 );
+   ol.show4( 123, 456 );
+}
+</pre>
+
+
+<br>
+<br>
+</body>
+</html>
