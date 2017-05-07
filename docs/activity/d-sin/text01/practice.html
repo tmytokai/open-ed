@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタルサイン波</a></li>
+<li>学習項目: [1] 時間領域ディジタルサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: ?  分
+</p>
+
+<br>
+<h2><a href="./page01.pdf">1. 時間領域ディジタルサイン波</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1-1 (個人PC、10分):</b> 表計算ソフトで時間領域ディジタルサイン波
+</p>
+<p>
+$f[i] = 2 \cdot \sin( 2\pi / 5 \cdot i )$
+</p>
+<p>
+のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $i = 0, 1,  \cdots, 20$ とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 最初の列に各 $i$ をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 次の列に各 $i$ における $f[i]$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化ありとします。
+<br>
+
+<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「DSIN-1-1」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.pdf">2. 振幅</a></h2>
+
+<p>
+次の項目で演習を行います。
+</p>
+
+<br>
+<h2><a href="./page03.pdf">3. 角周波数、周波数、周期</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1-2 (個人ノート、10分):</b> 演習 1-1 の時間領域ディジタルサイン波
+</p>
+<p>
+$f[i] = 2 \cdot \sin( 2\pi / 5 \cdot i )$
+</p>
+<p>
+の振幅 $a$ 、周期 $\textrm{T}_d$ [点]、周波数 $f$ [Hz]、角周波数 $w$ [rad/秒]を求めてみましょう。
+<br>
+サンプリング周波数は $f_s = 10$ [Hz] とします。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> ノートに「DSIN-1-2」と記入し番号の下に赤線を引いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 各パラメータの値を求めてノートに記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「各パラメータの値」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-3 (個人ノート、10分):</b> 演習 1-2 の時間領域ディジタルサイン波
+</p>
+<p>
+$f[i] = 2 \cdot \sin( 2\pi / 5 \cdot i )$
+</p>
+<p>
+において、サンプリング周波数は $f_s = 10$ [Hz] のままで周波数を $f = 1/2$ [Hz]に変えた時、周期 $\textrm{T}_d$ [点] は何点になるか求めてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> ノートに「DSIN-1-3」と記入し番号の下に赤線を引いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 周期 $\textrm{T}_d$ [点]の値を求めてノートに記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「周期 $\textrm{T}_d$ [点] の値」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-4 (個人PC、10分):</b> 表計算ソフトで演習 1-3 の時間領域ディジタルサイン波のグラフを描き、演習1-1で描いたグラフとの違いを確認しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 時刻の範囲は $i = 0, 1,  \cdots, 20$ とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 最初の列に各 $i$ をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 次の列に各 $i$ における $f[i]$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化ありとします。
+<br>
+
+<span class="olradio"><input type="radio" name="p4"></span> シートを保存します。ファイル名は「DSIN-1-4」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.pdf">4. 初期位相と進み・遅れ</a></h2>
+
+<p>
+準備中
+</p>
+
+
+<br>
+<h2><a href="./page05.pdf">5. 位相反転</a></h2>
+
+<p>
+準備中
+</p>
+
+
+<br>
+<h2><a href="./page06.pdf">6. 直流(DC)信号</a></h2>
+
+<p>
+準備中
+</p>
+
+
+<script>PreNext(7,6)</script>
+</body>
+</html>
