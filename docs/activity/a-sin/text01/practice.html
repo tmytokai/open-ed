@@ -6,6 +6,49 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
+<script type="text/javascript">
+<!--
+  'use strict';
+  var context = null;
+  var oscillator = null;
+  var playing = false;
+  var freq = 440;
+
+  function play(){
+
+    if( !playing ){
+      var AudioContext = window.AudioContext || window.webkitAudioContext;
+      context = new AudioContext();
+      oscillator = context.createOscillator();
+      oscillator.connect( context.destination );
+      oscillator.frequency.value = freq;
+      oscillator.start();
+      playing = true;
+    }
+    else{
+      oscillator.stop();
+      context.close();
+      playing = false;
+    }
+ }
+
+  function up(){
+      if( freq < 880 ) freq += 20;
+      document.js.hz.value = freq;
+      if( playing ){
+        oscillator.frequency.value = freq;
+      }
+  }
+
+  function down(){
+      if( freq > 220 ) freq -= 20;
+      document.js.hz.value = freq;
+      if( playing ){
+        oscillator.frequency.value = freq;
+      }
+  }
+// -->
+</script>
 <title>演習</title>
 </head>
 <body>
@@ -21,7 +64,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: ?  分
+演習時間: 120 分
 </p>
 
 <br>
@@ -97,35 +140,210 @@ $f(t) = 2 \cdot \sin( \pi \cdot t )$
 <h2><a href="./page03.pdf">3. 角周波数、周波数、周期</a></h2>
 
 <p>
-準備中
+<input type="checkbox"><b>演習 1-5 (チーム、10分):</b> 時間領域アナログサイン波を音として再生し、周波数によってどう音が変化するか確認しましょう。
 </p>
+<form name="js">
+<input type="button" value="再生/停止" onclick="play()"/>
+<input type="button" value="UP" onclick="up()"/>
+<input type="button" value="DOWN" onclick="down()"/>
+<input type="text" name="hz" value="440" readonly> [Hz]
+</form>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 再生ボタンを押した後 UP、DOWN ボタンを押すとサイン波の周波数が変化します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で話し合い、指定場所に「サイン波を耳で実際に聞くとどの様な音になるのか」および「周波数を高くしたり低くしたりするとどう音が変わるか」を書いて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-6 (チーム、10分):</b> 行ってみたい外国の交流電圧の実行値 [V] と周波数 [Hz]を調べましょう。
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> チームみんなで手分けして Web 上等で調べ、指定場所に「実行値 [V] と周波数 [Hz]」を1人1件書いて下さい。 
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-7 (個人ノート、10分):</b> 演習 1-1 の時間領域アナログサイン波
+</p>
+<p>
+$f(t) = 2 \cdot \sin( \pi \cdot t )$
+</p>
+<p>
+の角周波数 $w$ [rad/秒]、周波数 $f$ [Hz]、周期 $\textrm{T}$ [秒]を求めてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> ノートに「ASIN-1-7」と記入し番号の下に赤線を引いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 各パラメータの値を求めてノートに記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「各パラメータの値」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-8 (個人PC、10分):</b> 演習 1-1 の時間領域アナログサイン波
+</p>
+<p>
+$f(t) = 2 \cdot \sin( \pi \cdot t )$
+</p>
+<p>
+の周波数を2倍にしたサイン波と 1/2 倍にしたサイン波のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 次の列に「周波数を2倍にしたサイン波」の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> その次の列に「周波数を1/2 倍にしたサイン波」の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 2 つのグラフを 1 枚のグラフ領域に表します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> シートを保存します。ファイル名は「ASIN-1-8」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
 
 <br>
 <h2><a href="./page04.pdf">4. 初期位相と進み・遅れ</a></h2>
 
 <p>
-準備中
+<input type="checkbox"><b>演習 1-9 (個人ノート、10分):</b> 時間領域アナログサイン波
 </p>
+<p>
+$f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)$
+</p>
+<p>
+の初期位相に関して、以下の表を完成させましょう。
+</p>
+<table>
+<tr><th>$\phi$ の値</th><th>$\phi$ の符号</th><th>位相が・・・</th><th>秒で言い換えると・・・</th><th>平行移動方向と距離</th></tr>
+<tr><td class="center">$\phi$ = ? [rad]</td><td class="center"> プラス / マイナス </td><td class="center"> ? [rad] 進んでいる / 遅れている </td><td class="center"> ? [秒] 進んでいる / 遅れている </td><td class="center"> 左 / 右 へ ? [秒]</td></tr>
+</table>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> ノートに「ASIN-1-9」と記入し番号の下に赤線を引いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 表の内容をノートに記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に「表の内容」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-10 (個人PC、10分):</b> 演習 1-9 の時間領域アナログサイン波
+</p>
+<p>
+$f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)$
+</p>
+<p>
+のグラフを表計算ソフトで描いて、演習 1-1 のグラフとの違いを確認しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p10"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> シートを保存します。ファイル名は「ASIN-1-10」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
 
 <br>
 <h2><a href="./page05.pdf">5. 位相反転</a></h2>
 
 <p>
-準備中
+<input type="checkbox"><b>演習 1-11 (個人PC、10分):</b> 演習 1-1 の時間領域アナログサイン波
 </p>
+<p>
+$f(t) = 2 \cdot \sin( \pi \cdot t )$
+</p>
+<p>
+の位相を反転させたサイン波のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p11"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 次の列に「位相を反転させたサイン波」の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> シートを保存します。ファイル名は「ASIN-1-11」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
 
 <br>
 <h2><a href="./page06.pdf">6. 直流(DC)信号</a></h2>
 
 <p>
-準備中
+<input type="checkbox"><b>演習 1-12 (個人PC、10分):</b> 表計算ソフトで直流(DC)信号
 </p>
+<p>
+$f(t) = -2$
+</p>
+<p>
+のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p12"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> シートを保存します。ファイル名は「ASIN-1-1」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
 
 <br>
 <h2><a href="./page07.pdf">7. グラフの描き方</a></h2>
 
 <p>
-準備中
+演習は行いませんが、サイン波を手描き出来るように自学自習しておいて下さい。
 </p>
 
 
