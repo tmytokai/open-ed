@@ -1,73 +1,81 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>オーバーロード</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>7. オーバーロード</title>
 </head>
 <body>
 
-<h2>オーバーロード</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li>学習項目: [1] オブジェクト指向プログラミングの基礎</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
+
+<p>
+オブジェクト指向言語の「オーバーロード(overload)」は日本語では「多重定義」と呼ばれていますが、一般的にはオーバーロードと呼ばれることが多いみたいですので、このアクティビティでもオーバーロードに呼び方を統一します。
+</p>
+<p>
+なおオーバーロードの種類には主に「メソッドのオーバーロード」と「演算子のオーバーロード」がありますが、今回は「メソッドのオーバーロード」だけ取り扱います。
 <br>
-「オーバーロード(overload)」は日本語では「多重定義」と呼ばれていますが、一般的にはオーバーロードと呼ばれていますので、このアクティビティでもオーバーロードに呼び方を統一します。
-<br>
-<br>
-またオーバーロードには主に「メソッドのオーバーロード」と「演算子のオーバーロード」がありますが、今回は「メソッドのオーバーロード」だけ取り扱います。
 ただし「演算子のオーバーロード」の方も大変良く使われる機能ですので、もし今後必要になったら自分で調べて下さい。
-<br>
-<br>
-さて「メソッドのオーバーロード」とは簡単に言うと
-<br>
-<br>
-<b>名前は同じだけど引数の個数や型が違うメソッドを複数定義する機能</b>
-<br>
-<br>
+</p>
+<p>
+さて「(メソッドの)オーバーロード」とは簡単に言うと
+</p>
+<p>
+<b>名前は同じだけど引数の個数や型が違うメソッドを複数個定義する機能</b>
+</p>
+<p>
 の事です。
-<br>
-<br>
-C言語の様に(メソッドの)オーバーロードが無い言語が無い言語の場合は、
-ほとんど同じ様な機能を持っているメソッドなのに、引数の数や型が少し違うだけで名前を変える必要があるため、hoge1()とかhoge2()とかhoge3()とか似たような名前のメソッドが氾濫し、プログラマーも「この型の場合はどのメソッド名だっけ？」みたいにいちいち気にする必要が出てきます。
-<br>
-<br>
-一方、Javaの様にオーバーロードがある言語の場合は引数の数や型が違ってもメソッドの名前を変える必要がないので、メソッド名の氾濫を防いでソースコードがすっきりクールになりますし、プログラマーもメソッド名をいちいち気にする必要が無くなるというメリットがあります。
-<br>
-<br>
-特に重要で一番使用例が多いオーバーロードはコンストラクタのオーバーロードです。
-コンストラクタのオーバーロードについては実際に演習で試してみたいと思います。
-<br>
-<br>
-では実際にオーバーロードの例を見てみましょう。
-まず以下の OLtest というクラスを定義します。
-<br>
-<pre class="prog">
+</p>
+
+<p>
+では実際にオーバーロードの例を見てみましょう。以下の OLtest というクラスを定義します。
+</p>
+<div class="info">
 <input type="checkbox"><b>ソース1:</b>
 
+<pre class="wrap">
 public class OLtest {
 
     public void show(){
     	System.out.println("引数なし");
     }
     
-    public void show( String a){
-    	System.out.println("引数は文字列: " + a);
+    public void show( String a ){
+    	System.out.println("引数は文字列クラス: " + a);
     }
 
-    public void show( int a){
-    	System.out.println("引数は整数: " +a);
+    public void show( int a ){
+    	System.out.println("引数は整数クラス: " +a);
     }
 
-    public void show( int a, int b){
-    	System.out.println("引数は整数x2: " +a + "-" + b);
+    public void show( int a, int b ){
+    	System.out.println("引数は整数クラスx2: " +a + "-" + b);
     }
 }
 </pre>
+
+</div>
+
+<p>
+定義したメソッドの名前がすべて show であることに注意して下さい。
 <br>
-次に この main メソッドを実行します。
-<br>
-<pre class="prog">
+ではこの OLtest クラスを次の main メソッドから使ってみましょう。
+</p>
+<div class="info">
 <input type="checkbox"><b>ソース2:</b>
 
+<pre class="wrap">
 public static void main(String[] args) {
 
    OLtest ol = new OLtest();
@@ -77,30 +85,34 @@ public static void main(String[] args) {
    ol.show( 123, 456 );
 }
 </pre>
-<br>
-すると次の実行結果になります。
-<br>
-<pre class="prog">
-<b>ソース2の実行結果:</b>
 
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース2の実行結果:</b>
+
+<pre class="wrap">
 引数なし
-引数は文字列: ほげ
-引数は整数: 123
-引数は整数x2: 123-456
+引数は文字列クラス: ほげ
+引数は整数クラス: 123
+引数は整数x2クラス: 123-456
 </pre>
-<br>
-このように、同じ名前のメソッドを呼び出しているのに、引数の数や型が違うと異なる表示がされます。
-<br>
-<br>
-一方、もしJavaにオーバーロードが無かったらソース3のようにクラスを書かないと駄目になります。
-<br>
-もちろんこのクラスでも動きますが、ソース4のように引数の数や型毎にいちいち名前を変えないといけないので野暮ったくなります。
-<br>
-また「引数が文字型なのはshow2()だっけ、show3()だっけ？」とプログラマーも悩む必要が出てきます。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース3: もしオーバーロードが無かったら・・・</b>
 
+</div>
+
+<p>
+このように、同じ名前のメソッド show を呼び出しているのに、引数の数や型が違うとそれらに対応した異なるメソッドが呼び出され、表示が変わります。
+</p>
+<p>
+一方、オーバーロードを利用しない場合はソース 3 のようにメソッド名を変える必要があります。
+<br>
+もちろんこのソース 3 でも動きますが、ソース 4 のように引数の数や型毎にいちいち呼び出すメソッド名を変えないといけないのでプログラマが混乱する原因となりがちです。
+</p>
+<div class="info">
+<input type="checkbox"><b>ソース3: オーバーロードを使わない書き方</b>
+
+<pre class="wrap">
 public class OLtest {
 
     public void show1(){
@@ -120,10 +132,14 @@ public class OLtest {
     }
 }
 </pre>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース4: 野暮ったい</b>
 
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース4: 引数に合わせていちいちメソッド名を変える必要が出てくる</b>
+
+<pre class="wrap">
 public static void main(String[] args) {
 
    OLtest ol = new OLtest();
@@ -134,8 +150,8 @@ public static void main(String[] args) {
 }
 </pre>
 
+</div>
 
-<br>
-<br>
+<script>PreNext(7,7)</script>
 </body>
 </html>

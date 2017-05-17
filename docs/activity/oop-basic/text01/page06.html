@@ -1,59 +1,78 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>コンストラクタ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>6. コンストラクタ</title>
 </head>
 <body>
 
-<h2>コンストラクタ</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li>学習項目: [1] オブジェクト指向プログラミングの基礎</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
+<h2><script>GetTitle()</script></h2>
+
+<p>
 「コンストラクタ」とは new によってインスタンスが作られた直後に一度だけ自動的に呼び出される特殊なメソッドです。
-<br>
-<br>
-では早速「コンストラクタ」の使い方を見てみましょう。
-<br>
-<br>
-以下のコードは Score クラスにコンストラクタを追加した例です。
-<br>
-<pre class="prog">
+</p>
+
+<p>
+さて以下のコードは Score クラスにコンストラクタを追加した例です。
+</p>
+
+<div class="info">
 <input type="checkbox"><b>ソース1:</b>
 
+<pre class="wrap">
 public class Score {
 
     public int math;
     public int english;
     
+    // コンストラクタ(引数なし)
     public Score(){
     	System.out.println("引数なしコンストラクタ実行");
     }
     
-    以下のメソッドは変更無し
-
+    // 以下のメソッド(average, set_math) は変更無し
+   
+    public double average(){
+    	return (math + english)/2.0;
+    }
+    
+    public void set_math( int s ){
+    	math = s;
+    }
 }
 </pre>
 
+</div>
+
+<p>
 ソース1のフィールド定義の下にある「public SCORE()」がコンストラクタで、
-<br>
-<br>
-<b>
-・メソッド名がクラス名と同じ
-<br>
-<br>
-・戻り値が無い
-</b>
-<br>
-<br>
+</p>
+<ol>
+<li>メソッド名がクラス名と同じ</li>
+<li>戻り値が無い</li>
+</ol>
+<p>
 という特徴があります。
-<br>
-<br>
+</p>
+<p>
 ではこの Score クラスを次の main メソッドから使ってみましょう。
-<br>
-<pre class="prog">
+</p>
+<div class="info">
 <input type="checkbox"><b>ソース2:</b>
 
+<pre class="wrap">
 public static void main(String[] args) {
 
 	Score sc_taro = new Score();
@@ -63,54 +82,75 @@ public static void main(String[] args) {
 	Score sc_hanako = new Score();
 	sc_hanako.math = 80;
 	sc_hanako.english = 70;
-	
 		
 	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
 	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
 }
 </pre>
 
-<br>
-<pre class="prog">
-<b>ソース2の実行結果:</b>
+</div>
 
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース2の実行結果:</b>
+
+<pre class="wrap">
 引数なしコンストラクタ実行
 引数なしコンストラクタ実行
 太郎: math = 5 english = 3 平均 = 4.0
 花子: math = 80 english = 70 平均 = 75.0
+
 </pre>
 
+</div>
+
+<p>
 この実行結果をみて分かるように、コンストラクタが自動的に実行されて「引数なしコンストラクタ実行」という文字列が表示されています。
 <br>
-<br>
-この様に自動的に呼び出されるという特性から、コンストラクタはフィールドの初期化やリソースの初期化(具体的にはメモリ確保やファイル・デバイスのオープンなど)に良く使われています。
-<br>
-<br>
-またコンストラクタは他のメソッドと同様に引数を使うことが出来ます。以下の例を見て下さい。
-<br>
-<br>
-<pre class="prog">
+この様に自動的に呼び出されるという特性を活かし、コンストラクタはフィールドの初期化やリソースの初期化(具体的にはメモリ確保やファイル・デバイスのオープンなど)に良く使われています。
+</p>
+<p>
+またコンストラクタは他のメソッドと同様に引数を使うことが出来ます。以下の Score クラスの例を見て下さい。
+</p>
+
+<div class="info">
 <input type="checkbox"><b>ソース3:</b>
 
+<pre class="wrap">
 public class Score {
 
     public int math;
     public int english;
     
+    // コンストラクタ(引数有り)
     public Score( int m, int e ){
     	System.out.println("引数有りコンストラクタ実行");
     	math = m;
     	english = e;
     }
-    
-    以下のメソッドは変更無し
 
+    // 以下のメソッド(average, set_math) は変更無し
+   
+    public double average(){
+    	return (math + english)/2.0;
+    }
+    
+    public void set_math( int s ){
+    	math = s;
+    }
 }
 </pre>
-<br>
-<pre class="prog">
+
+</div>
+
+<p>
+ソース3 の Score クラスを次の main メソッドから使ってみます。
+</p>
+
+<div class="info">
 <input type="checkbox"><b>ソース4:</b>
 
+<pre class="wrap">
 public static void main(String[] args) {
 
 	Score sc_taro = new Score( 5, 3 ); // (1)
@@ -121,27 +161,34 @@ public static void main(String[] args) {
 }
 </pre>
 
-<br>
-<pre class="prog">
-<b>ソース3,4の実行結果:</b>
+</div>
 
-ソース2の実行結果とほとんど同じ(ただし「引数なし」が「引数有り」に変わる)
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 4 の実行結果:</b>
+
+<pre class="wrap">
+引数有りコンストラクタ実行
+引数有りコンストラクタ実行
+太郎: math = 5 english = 3 平均 = 4.0
+花子: math = 80 english = 70 平均 = 75.0
+
 </pre>
 
-今度のコンストラクタは引数「 int m, int e 」を持っていて、main メソッドの(1)、(2)の new の所で値をコンストラクタに渡しています。
+</div>
+
+<p>
+今度のコンストラクタは引数「 int m, int e 」を持っていて、main メソッドの(1)、(2)でインスタンスを作成すると同時にmath と english の値をコンストラクタに渡しています。
+</p>
+<p>
+なおインスタンスがメモリから削除される時に一度だけ自動実行される「デストラクタ」という特殊メソッドを持つ言語(例えば C++ 等)もあり、インスタンスの後始末のために使用されます。
 <br>
+ただし最近のオブジェクト指向言語の場合はデストラクタが存在しない場合が多いので、今回のアクティビティではデストラクタを取り扱いません。
 <br>
-この様にコンストラクタに引数を持たせればクラス外でフィールドの値を初期化しなくても済むようになるため、コードがすっきりしてバグが減るというメリットがあります。
-<br>
-<br>
-なおインスタンスがdeleteによりメモリから削除される時に一度だけ自動実行される「デストラクタ」という特殊メソッドを持つ言語(例えばC++)もあり、インスタンスの後始末のために使用されます。
-<br>
-<br>
-ただし Java などの最近の言語の場合はデストラクタが無い場合が多いので、このアクティビティでは取り扱いません。
-<br>
-もし興味があれば自分で調べて下さい。
-<br>
-<br>
-<br>
+もし興味があれば自分で調べてみましょう。
+</p>
+
+<script>PreNext(6,7)</script>
 </body>
 </html>
+
