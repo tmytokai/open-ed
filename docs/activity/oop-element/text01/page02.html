@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>フィールドとメソッドの再利用</title>
+</head>
+<body>
+
+<h2>フィールドとメソッドの再利用</h2>
+
+<br>
+前のページで「ある定義済みのクラスを親とし、親が持つ機能を受け継ぎつつ新しい機能を追加して子クラスを作り出すことをインヘリタンスと言う」と書きましたが、具体的にはスーパークラスで定義されたフィールドやメソッドをサブクラスで再利用することが出来ます。
+<br>
+<br>
+例えば前のページで定義した APPLE サブクラスと ORANGE サブクラスの name フィールドと eat()メソッドの中身は全く同じなので、二度書くのは無駄な感じがします。
+<br>
+そこで次のように name と eat() を FRUIT スーパークラスに移してしまいましょう(ソース1)。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public class FRUIT {
+
+	public String name;
+	
+	public void eat()
+	{
+		System.out.println(name+"美味い");
+	}
+}
+</pre>
+
+<br>
+次は APPLE と ORANGE サブクラスを書き換えますが、name フィールドと eat() メソッドはスーパークラスで定義済みなので削除出来ます(ソース2,3)。
+<br>
+ただし名前は異なるのでコンストラクタで別々の名前を name フィールドにセットします。
+<br>
+ここでは name フィールドが APPLE と ORANGE の定義に含まれていないのに使われている事に注目してください。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class APPLE extends FRUIT{
+
+	public APPLE()
+	{
+		name = "りんご";
+	}
+}
+</pre>
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース3:</b>
+
+public class ORANGE extends FRUIT{
+
+	public ORANGE()
+	{
+		name = "みかん";
+	}
+}
+</pre>
+
+<br>
+main メソッドは前のページの main メソッドと同じコードです(ソース4)。
+実行結果も前のページと同じなので省略します。
+<br>
+ここでは eat() メソッドが APPLE と ORANGE の定義に含まれていないのに使われている事に注目してください。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース4:</b>
+
+public static void main(String[] args) {
+	APPLE apple = new APPLE();
+	ORANGE orange = new ORANGE();
+
+	apple.eat();
+	orange.eat();
+}
+</pre>
+
+<br>
+さてこの様にスーパークラスで定義したフィールドやメソッドを再利用することにすると仕様変更に強くなるというメリットがあります。
+<br>
+例えば
+<br>
+<br>
+<table class="info"><tr><td class="info">
+仕様変更:
+<br>
+(1) eat() メソッドの表示を"不味い"に変えよ
+<br>
+(2) public int weight(重さ) というフィールドを追加せよ
+<br>
+(3) public void show_weight() という重さを表示するメソッドを追加せよ
+<br>
+(4) weight はサブクラスのコンストラクタでセットせよ
+</td><tr></table>
+<br>
+という仕様変更はソース5〜7のようにします。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース5:</b>
+
+public class FRUIT {
+
+	public String name;
+	public int weight;
+	
+	public void eat()
+	{
+		System.out.println(name+"不味い");
+	}
+
+	public void show_weight()
+	{
+		System.out.println("重さは "+weight+" g");
+	}
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース6:</b>
+
+public class APPLE extends FRUIT{
+
+	public APPLE()
+	{
+		name = "りんご";
+		weight = 100;
+	}
+}
+</pre>
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース7:</b>
+
+public class ORANGE extends FRUIT{
+
+	public ORANGE()
+	{
+		name = "みかん";
+		weight = 50;
+	}
+}
+</pre>
+
+<br>
+このように、eat() メソッドの表示内容の変更と、weight フィールドの追加、 show_weight() メソッドの追加はスーパークラスの FRUIT にだけ行えば良く、 APPLE と ORANGE の変更はコンストラクタのみで済みます。
+<br>
+<br>
+<br>
+</body>
+</html>

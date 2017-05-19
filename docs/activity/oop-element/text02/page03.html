@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>getter と setter</title>
+</head>
+<body>
+
+<h2>getter と setter</h2>
+
+前のページで「フィールドは原則 private にして隠蔽しましょう」と書きましたが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
+<br>
+その場合は「getter」と「setter」というテクニックを使うことが一般的です。
+<br>
+<br>
+「getter」 (ゲッター）は private により隠蔽されたフィールドの値を外部から取得するために使うメソッドです。
+<br>
+例えばJavaではソース1の様に定義します。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1: getter の定義</b>
+
+public class HOGE{
+
+  private int abc;
+
+  // フィールド abc の getter
+  // メソッド名は何でも良いが　get〜 とするのが一般的
+  public int get_abc(){ return abc; }
+}
+</pre>
+
+<br>
+それでHOGE以外のクラスや main メソッドなどから private なフィールド abc の値を取得したい場合はソース2のようにします。
+
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2: getter の使い方</b>
+
+HOGE hoge = new HOGE();
+int a = hoge.get_abc();
+</pre>
+
+<br>
+一方「setter」(セッター）は private により隠蔽されたフィールドの値を外部から変更するために使うメソッドです。
+<br>
+例えばJavaではソース3の様に書きます。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース3: setter の定義</b>
+
+public class HOGE{
+
+  private int abc;
+  
+  // フィールド abc の setter
+  // メソッド名は何でも良いが set〜 とするのが一般的
+  // 引数名は何でも良い。人によって名前付けの流儀もまちまち
+  public void set_abc( int _abc ){ abc = _abc; }
+}
+</pre>
+
+<br>
+それでHOGE以外のクラスや main メソッドなどから private なフィールド abc の値をセットしたい場合はソース4のようにします。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース4: setter の使い方</b>
+
+HOGE hoge = new HOGE();
+hoge.set_abc( 123 );
+</pre>
+
+<br>
+さて実はこの getter/setter のテクニックは最近は世界中のプログラマーから嫌われていて、C# や swift などの新し目の言語では代わりに「プロパティ」という似たような機能が用意されています(※)。
+<br>
+例えば C# のプロパティはソース5の様に書きます。
+<br>
+<br>
+※ 古めのC++やJavaには有りません
+<br>
+<br>
+詳しくはここでは取り扱いませんが、「プロパティ」は最近のプログラミングでは必須の機能ですので、詳細については自分で調べておきましょう。
+<pre class="prog">
+<input type="checkbox"><b>ソース5: C#のプロパティの例</b>
+
+定義:
+
+class HOGE{
+
+  private int abc;
+
+  public int Abc{
+      get { return abc; }
+      set { abc = value; }
+  }
+}
+
+使い方:
+
+HOGE hoge = new HOGE();
+int a = hoge.Abc;
+hoge.Abc = 123;
+</pre>
+
+<br>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>インヘリタンスとは</title>
+</head>
+<body>
+
+<h2>インヘリタンスとは</h2>
+
+<br>
+ある定義済みのクラスを親とし、親が持つ機能を受け継ぎつつ新しい機能を追加して子クラスを作り出すことを「インヘリタンス」または「継承」と言います。
+<br>
+この親クラスの事を「スーパークラス」や「基底クラス」「基本クラス」などと呼びます。また子クラスの事を「サブクラス」や「派生クラス」と呼びます。
+<br>
+<br>
+例えばスーパークラスとして次の中身が空っぽの果物(FRUIT)クラスが定義されているとします。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public class FRUIT {
+}
+</pre>
+<br>
+次に果物(FRUIT)を継承したリンゴ(APPLE)サブクラスを定義してみます。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class APPLE extends FRUIT{
+
+	public String name;
+	
+	public APPLE()
+	{
+		name = "りんご";
+	}
+	
+	public void eat()
+	{
+		System.out.println(name+"美味い");
+	}
+}
+</pre>
+
+<br>
+ソース2のクラス名(APPLE)の後に出てきた「extends FRUIT」によりリンゴ(APPLE)が果物(FRUIT)を継承して作られたことを表しています。
+<br>
+<br>
+同様に果物(FRUIT)を継承したみかん(ORANGE)サブクラスも定義してみましょう。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース3:</b>
+
+public class ORANGE extends FRUIT{
+
+	public String name;
+	
+	public ORANGE()
+	{
+		name = "みかん";
+	}
+	
+	public void eat()
+	{
+		System.out.println(name+"美味い");
+	}
+
+}
+</pre>
+
+<br>
+<br>
+さて継承によって定義したサブクラスは普通のクラスと同様にインスタンスを作って利用できます。
+<br>
+例えばソース4に示した main メソッドを実行した結果が実行結果1です。
+<br>
+コンストラクタで名前(name)に「りんご」「みかん」を代入してますのでインスタンスappleとorangeで表示が異なっています。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース4:</b>
+
+public static void main(String[] args) {
+	APPLE apple = new APPLE();
+	ORANGE orange = new ORANGE();
+
+	apple.eat();
+	orange.eat();
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>実行結果1:</b>
+
+りんご美味い
+みかん美味い
+</pre>
+<br>
+<br>
+<br>
+</body>
+</html>

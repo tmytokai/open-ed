@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>インヘリタンスによるポリモーフィズム</title>
+</head>
+<body>
+
+<h2>インヘリタンスによるポリモーフィズム</h2>
+
+学習項目「インヘリタンス(継承)」の「<a href="../text01/page03.html">スーパークラスとしてインスタンス作成</a>」のページで説明した「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」こともポリモーフィズムの一種です。
+<br>
+<br>
+例えば次のmainメソッドを見て下さい(ソース1)。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public static void main(String[] args) {
+	        
+        FRUIT fruit[] = new FRUIT[2];
+        fruit[0] = new APPLE();
+        fruit[1] = new ORANGE();
+        
+        for(int i=0;i<2;++i) fruit[i].eat();
+}
+</pre>
+
+<br>
+この fruit[0] と fruit[1] は同じ FRUIT スーパークラス(ソース2)のインスタンス配列で、同じ eat メソッドが呼び出されています。
+<br>
+ただし各インスタンスの実態は APPLE(ソース3)、 ORANGE(ソース4) サブクラスのインスタンスです。
+<br>
+<br>
+一見すると前のページの main メソッドと似ていますが、インスタンスを new する時にパラメータ("りんご"とか"みかん"とか)を指定していませんので、main メソッドと FRUIT クラス間の独立性が上がってバグの混入を防げます。
+<br>
+一方でインヘリタンスを多用するとクラスが無駄に増えたり、クラス間の関係が複雑になるという問題が出てきます。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class FRUIT {
+
+    public String name;
+
+    public void eat(){
+        System.out.println(name+"美味い");
+    }
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース3:</b>
+
+public class APPLE extends FRUIT{
+
+    public APPLE(){
+        name = "りんご";
+    }
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース4:</b>
+
+public class ORANGE extends FRUIT {
+
+    public ORANGE(){
+        name = "みかん";
+    }
+}
+</pre>
+
+<br>
+実行結果は次の通りです。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>結果1:</b>
+
+りんご美味しい
+みかん美味しい
+</pre>
+
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

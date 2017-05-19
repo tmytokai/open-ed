@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>メソッドのポリモーフィズム</title>
+</head>
+<body>
+
+<h2>メソッドのポリモーフィズム</h2>
+
+次に「同じ名前のメソッドによるポリモーフィズム」について例を示します。
+<br>
+<br>
+これは「同じ名前のメソッドを使ってもインスタンス毎に動作が異なる」という性質のことです。
+<br>
+例えば次のmainメソッドを見て下さい(ソース1)。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public static void main(String[] args) {
+	        
+        FRUIT fruit[] = new FRUIT[2];
+        fruit[0] = new FRUIT( "りんご" );
+        fruit[1] = new FRUIT( "みかん" );
+        
+        for(int i=0;i<2;++i) fruit[i].eat();
+}
+</pre>
+
+<br>
+この fruit[0] と fruit[1] は同じ FRUIT クラス(ソース2)のインスタンス配列で、同じ eat メソッドが呼び出されています。
+<br>
+ただしコンストラクタで違う名前をセットしています。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class FRUIT {
+
+    public String name;
+
+
+    public FRUIT( String n ){
+        name = n;
+    }
+
+    public void eat(){
+        System.out.println( name + "美味しい");
+    }
+}
+</pre>
+
+<br>
+実行結果は次の通りです。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>結果1:</b>
+
+りんご美味しい
+みかん美味しい
+</pre>
+
+<br>
+<br>
+<br>
+</body>
+</html>

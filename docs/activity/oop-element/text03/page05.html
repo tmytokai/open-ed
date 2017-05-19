@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>オーバーライドによるポリモーフィズム</title>
+</head>
+<body>
+
+<h2>オーバーライドによるポリモーフィズム</h2>
+
+<br>
+「オーバーライド」とはスーパークラスのメソッドをサブクラスで上書きし、そのサブクラスのインスタンスを呼び出した時に書き換えたサブクラスの方のメソッドを呼び出す機能で、これもポリフォーリズムのひとつです。
+<br>
+<br>
+と書いても何のことか良く分からないと思うので具体的な例を使って説明します。
+<br>
+例えば次の main メソッドを見て下さい(ソース1)。
+<br>
+基本的には例4のソースと同じですが、新たに GRAPE サブクラスを追加しています。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+public static void main(String[] args) {
+	        
+        FRUIT fruit[] = new FRUIT[3];
+        fruit[0] = new APPLE();
+        fruit[1] = new ORANGE();
+        fruit[2] = new GRAPE();
+        
+        for(int i=0;i<3;++i) fruit[i].eat();
+}
+</pre>
+
+<br>
+FRUIT スーパークラス、APPLE、 ORANGE、GRAPE サブクラスのソースは次の通りです(ソース2〜5)。
+<br>
+FRUIT スーパークラス、APPLE、 ORANGE サブクラスは例4のソースと同じです。
+<br>
+GRAPE サブクラスも「現時点では」他のサブクラスと殆ど同じ内容になっています。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class FRUIT {
+
+    public String name;
+
+    public void eat(){
+        System.out.println(name+"美味い");
+    }
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース3:</b>
+
+public class APPLE extends FRUIT{
+
+    public APPLE(){
+        name = "りんご";
+    }
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース4:</b>
+
+public class ORANGE extends FRUIT {
+
+    public ORANGE(){
+        name = "みかん";
+    }
+}
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース5:</b>
+
+public class GRAPE extends FRUIT {
+
+    public GRAPE(){
+        name = "ぶどう";
+    }
+}
+</pre>
+
+<br>
+ここまでの実行結果は次の通りです。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>結果1:</b>
+
+りんご美味しい
+みかん美味しい
+ぶどう美味しい
+</pre>
+
+<br>
+さて、ここで GRAPE サブクラスのインスタンス を eat() したら不味かったという問題が生じましたので、 そこだけ「ぶどう不味い」と表示したいと思います。
+<br>
+<br>
+もしオーバーライドの事を知らないプログラマーなら FRUIT スーパークラスを多分次のように書き換えるでしょう。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース6: 非常に良くないのでやってはいけない例</b>
+
+public class FRUIT {
+
+    public String name;
+
+    public void eat(){
+
+        if( name == "ぶどう" ) System.out.println(name+"不味い");
+        else System.out.println(name+"美味い");
+    }
+}
+</pre>
+
+<br>
+しかしこのコードには大問題があります。というのも
+<br>
+<br>
+更にもし「いちご」サブクラスを追加した時に「いちごまあまあ」と表示したいとしたら eat() に if 文を追加する
+<br>
+更にもし「バナナ」サブクラスを追加した時に「バナナ腐ってる」と表示したいとしたら eat() に if 文を追加する
+<br>
+更にもし・・・
+<br>
+<br>
+というように、サブクラスを追加する度に if 文がスーパークラスの eat() に追加されて行くことになり、ソースの見た目や独立性、保守性が最悪なコードになるためです。
+<br>
+<br>
+一般的に、<b>スーパークラスのメソッド内ではサブクラス別の処理を書いてはいけません</b>
+<br>
+<br>
+そこで、1部のサブクラスのメソッドだけスーパークラスのメソッドと違う動作をさせたい時は、スーパークラスのメソッドを次のようにサブクラスで「オーバーライド」します。
+
+<pre class="prog">
+<input type="checkbox"><b>ソース7: スーパークラスの eat() をオーバーライド</b>
+
+public class GRAPE extends FRUIT {
+
+    public GRAPE(){
+        name = "ぶどう";
+    }
+
+    public void eat(){
+        System.out.println(name+"不味い");
+    }
+}
+</pre>
+
+
+<br>
+すると GRAPE サブクラスのインスタンスを eat() した時はスーパークラスの eat() では無くて GRAPE サブクラスの eat() が代わりに呼び出されますので次のような結果が表示されます。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox"><b>結果2:</b>
+
+りんご美味しい
+みかん美味しい
+ぶどう不味い
+</pre>
+
+<br>
+この様に「オーバーライド」を使うと自分以外のクラス(上の例では FRUIT、APPLE、ORANGE)のメソッドを書き換える必要が無いので、コードの独立性が上がるというメリットがあります。
+<br>
+デメリットに関しては演習課題とします。
+<br>
+<br>
+<br>
+</body>
+</html>
