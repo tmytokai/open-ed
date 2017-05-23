@@ -4,6 +4,7 @@ margin-right: 32px;
 margin-bottom: 32px; 
 /* モバイル機器のフォントサイズ対策 */
 -webkit-text-size-adjust: 100%;
+counter-reset: cnt2;
 }
 
 p{
@@ -126,13 +127,20 @@ line-height: 120%;
 /* カウンタ付きラジオボックス */
 
 div.olradio{
-counter-reset: cnt0;
+counter-reset: cnt1;
 }
 
 span.olradio:after{
-counter-increment: cnt0;
-content: "(" counter(cnt0) ") ";
+counter-increment: cnt1;
+content: "(" counter(cnt1) ") ";
 }
+
+/* ページ内で通し番号 */
+span.olradio2:after{
+counter-increment: cnt2;
+content: "(" counter(cnt2) ") ";
+}
+
 
 /* パンくず */
 nav.brcr ol{

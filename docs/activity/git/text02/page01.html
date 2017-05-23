@@ -2,25 +2,29 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>初期設定</title>
+<script src="../../../common.js"></script>
+<title>1. 初期設定</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>初期設定</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 最初に開発者がプライベートで自由に使えるローカルリポジトリの操作方法について説明します。
 </p>
 
 <p>
-git を初めて使う場合、以下のように git config コマンドを使って自分のユーザーIDやメールアドレスを登録します(※)。
+git を初めて使う場合、以下の手順で git config コマンドを使って自分のユーザーIDやメールアドレスを登録します(※)。
 </p>
 
 <p>
@@ -31,22 +35,29 @@ git を初めて使う場合、以下のように git config コマンドを使�
 ここでユーザーIDやメールアドレスはローカルリポジトリしか使わない場合は適当で良いのですが、もしリモートリポジトリを使う場合は管理者に訪ねて下さい。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) 端末(※)を開いてホームディレクトリに移動する
-
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> 端末(※)を開いてホームディレクトリに移動する
+</p>
+<p>
 ※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
-
-<input type="checkbox"> (2) git config --global user.name "自分のID"
-
-<input type="checkbox"> (3) git config --global user.email "メールアドレス"
-
-<input type="checkbox"> (4) 登録内容の確認: git config --global --list 
-</pre>
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> git config --global user.name "自分のID"
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> git config --global user.email "メールアドレス"
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> 登録内容の確認: git config --global --list 
+</p>
+</div>
+</div>
 
 <p>
 以上のコマンドを実行するとホームディレクトリ直下に設定ファイル(.gitconfig)が出来ます。
 </p>
 設定を全てリセットしたい場合はその設定ファイルを消して下さい。
 
+<script>PreNext(1,11)</script>
 </body>
 </html>

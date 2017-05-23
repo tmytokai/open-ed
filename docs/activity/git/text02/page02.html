@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>ローカルリポジトリの新規作成</title>
+<script src="../../../common.js"></script>
+<title>2. ローカルリポジトリの新規作成</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>ローカルリポジトリの新規作成</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 次は git init コマンドを使ってローカルリポジトリを新規作成してみましょう。
@@ -21,13 +25,18 @@
 今回は例として「gitlocal」という名前のローカルリポジトリを新規作成してみます。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) 「gitlocal」というフォルダを作る 
-
-<input type="checkbox"> (2) そのフォルダの中に移動する 
-
-<input type="checkbox"> (3) git init
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> 「gitlocal」というフォルダを作る 
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> そのフォルダの中に移動する 
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> 
+git init
+</p>
+</div>
+</div>
 
 <p>
 これでローカルリポジトリ「gitlocal」が出来ました。
@@ -38,7 +47,7 @@
 <p>
 なおワーキングツリーの中に出来た「.git」というフォルダがローカルリポジトリの本体ですが、.git は隠しフォルダ扱いになっているのでそのままでは見えません。
 <br>
-もし .git があるかどうか確認したい場合はLinuxなら「ls -al」、Windowsなら「dir /AH」を実行してください。 
+もし .git があるかどうか確認したい場合はLinuxなら「ls -al」コマンド、Windowsなら「dir /AH」コマンドを実行してください。 
 </p>
 
 <p>
@@ -48,7 +57,7 @@
 </p>
 
 <p>
-※ 正確にはワーキングツリーには .git フォルダが含まれていますが省略します。
+※ より正確に言えばワーキングツリーには .git フォルダが含まれていますが省略します。
 </p>
 
 <br>
@@ -94,5 +103,6 @@ HEAD 無し
 
 </tr></table>
 
+<script>PreNext(2,11)</script>
 </body>
 </html>

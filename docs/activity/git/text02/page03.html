@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>新規ファイルの追加</title>
+<script src="../../../common.js"></script>
+<title>3. 新規ファイルの追加</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>新規ファイルの追加</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 ローカルリポジトリ「gitlocal」を作成したので、次はこのリポジトリに何か適当なファイルをコミットしてみましょう。
@@ -23,11 +27,16 @@
 まずは登録するファイル(今回はテキストファイル形式)を作成します。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) ワーキングツリー内に「hoge.txt」というテキストファイルを新規作成する
-
-<input type="checkbox"> (2) hoge.txt に a という文字を入力して保存する(改行は入れない)
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリー内に「hoge.txt」というテキストファイルを新規作成する
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 
+hoge.txt に a という文字を入力して保存する(改行は入れない)
+</p>
+</div>
+</div>
 
 <p>
 この時点での「ワーキングツリー」「インデックス」「HEAD」は次の状態 2 になります。
@@ -94,21 +103,25 @@ HEAD 無し
 git add コマンドの構文は次の通りです。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>新規ファイルのインデックス登録:</b>
-
+<pre class="wrap">
 git add &lt;ファイル名&gt;
 </pre>
+</div>
 
 <p>
 では早速やってみましょう。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (3) git add hoge.txt
-
-<input type="checkbox"> (4) hoge.txt がインデックスに登録されているか確認: git status
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> git add hoge.txt
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt がインデックスに登録されているか確認: git status
+</div>
+</div>
 
 <p>
 この時点での「ワーキングツリー」「インデックス」「HEAD」は次の状態 3 になります。
@@ -173,23 +186,28 @@ HEAD 無し
 git commit コマンドの構文は次の通りです。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>コミット実行:</b>
-
+<pre class="wrap">
 git commit -m "コメント"
 </pre>
+</div>
 
 <p>
 ではやってみましょう。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (5) git commit -m "hoge.txtを追加"
-
-<input type="checkbox"> (6) コミットするファイルが無いか確認: git status
-
-<input type="checkbox"> (7) コミットログを確認: git log
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> git commit -m "hoge.txtを追加(S4)"
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> コミットするファイルが無いか確認: git status
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> コミットログを確認: git log
+</p>
+</div>
+</div>
 
 <p>
 するとインデックスの内容でスナップショットが作られてローカルリポジトリに登録され、そのスナップショットにHEADという識別子が割り当てられます。
@@ -248,7 +266,7 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 </tr></table>
@@ -260,7 +278,7 @@ a
 </p>
 
 <p>
-なおコミット時のコメントは"piyo.txtを追加"とします。
+なおコミット時のコメントは"piyo.txtを追加(S5)"とします。
 <br>
 またコミットが一つ増えて HEAD の位置が移動している事に注目して下さい。
 </p>
@@ -328,7 +346,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを追加"
+"piyo.txtを追加(S5)"
 </td>
 
 <td class="noborder">←</td>
@@ -341,11 +359,13 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 
 </tr></table>
 
+
+<script>PreNext(3,11)</script>
 </body>
 </html>

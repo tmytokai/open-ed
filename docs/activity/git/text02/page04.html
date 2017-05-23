@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>既存ファイルの更新</title>
+<script src="../../../common.js"></script>
+<title>4. 既存ファイルの更新</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>既存ファイルの更新</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 次に既存のファイルを更新してコミットしてみますが、基本的には新規作成と同じ様に add して commit という流れになります。
@@ -21,9 +25,15 @@
 では実際にやってみましょう。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) hoge.txtに b という文字を追加(改行は入れない)して保存する
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txtに b という文字を追加(改行は入れない)
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt を保存
+</p>
+</div>
+</div>
 
 <p>
 この時点での「ワーキングツリー」「インデックス」「HEAD」は次の状態 6 になります。
@@ -94,7 +104,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを追加"
+"piyo.txtを追加(S5)"
 </td>
 
 <td class="noborder">←</td>
@@ -107,7 +117,7 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 </tr></table>
@@ -116,13 +126,17 @@ a
 次に前のページで学んだ git add コマンドを使って hoge.txt をインデックスに登録します。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (2) hoge.txt が更新されていることを確認: git status
-
-<input type="checkbox"> (3) git add hoge.txt
-
-<input type="checkbox"> (4) hoge.txt がインデックスに登録されているか確認: git status
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt が更新されていることを確認: git status
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> git add hoge.txt
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt がインデックスに登録されているか確認: git status
+</p>
+</div>
+</div>
 
 <p>
 この時点でワーキングツリーとインデックスが同じである状態 7 になりますが、まだコミットしていませんのでHEADはそのままです。
@@ -191,7 +205,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを追加"
+"piyo.txtを追加(S5)"
 </td>
 
 <td class="noborder">←</td>
@@ -204,7 +218,7 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 </tr></table>
@@ -213,13 +227,16 @@ a
 最後に git commit コマンドを使ってコミットします。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (5) git commit -m "hoge.txtを更新"
-
-<input type="checkbox"> (6) コミットするファイルが無いか確認: git status
-
-<input type="checkbox"> (7) コミットログを確認: git log
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> git commit -m "hoge.txtを更新(S8)"
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> コミットするファイルが無いか確認: git status
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> コミットログを確認: git log
+</div>
+</div>
 
 <p>
 するとインデックスの内容でスナップショットが作られてローカルリポジトリに登録され、そのスナップショットにHEADが移動します(状態 8 )。
@@ -288,7 +305,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを更新"
+"hoge.txtを更新(S8)"
 </td>
 
 <td class="noborder">←</td>
@@ -305,7 +322,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを追加"
+"piyo.txtを追加(S5)"
 </td>
 
 <td class="noborder">←</td>
@@ -318,15 +335,15 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 </tr></table>
 
 <p>
-ではまた演習として、今度は piyo.txt に B を追加して次の状態 9 にして下さい。
+では練習として手順は示しませんが、今度は piyo.txt に B を追加して次の状態 9 にして下さい。
 <br>
-コミット時のコメントは"piyo.txtを更新"とします。
+コミット時のコメントは "piyo.txtを更新(S9)" とします。
 </p>
 
 <br>
@@ -392,7 +409,7 @@ piyo.txt
 AB
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを更新"
+"piyo.txtを更新(S9)"
 </td>
 
 <td class="noborder">←</td>
@@ -409,7 +426,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを更新"
+"hoge.txtを更新(S8)"
 </td>
 
 <td class="noborder">←</td>
@@ -426,7 +443,7 @@ piyo.txt
 A
 </td></tr></table>
 </td></tr></table>
-"piyo.txtを追加"
+"piyo.txtを追加(S5)"
 </td>
 
 <td class="noborder">←</td>
@@ -439,10 +456,11 @@ hoge.txt
 a
 </td></tr></table>
 </td></tr></table>
-"hoge.txtを追加"
+"hoge.txtを追加(S4)"
 </td>
 
 </tr></table>
 
+<script>PreNext(4,11)</script>
 </body>
 </html>
