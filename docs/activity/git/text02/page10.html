@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>コミットの巻き戻し</title>
+<script src="../../../common.js"></script>
+<title>10. コミットの巻き戻し</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>コミットの巻き戻し</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 あるコミットで致命的なバグが混入した時に、そのコミットの前まで状態を巻き戻したい場合があります。
@@ -23,18 +27,18 @@
 
 <br>
 <h3>
-1. HEADの状態までワーキングツリーとインデックスを強制リセット
+(1) HEADの状態までワーキングツリーとインデックスを強制リセット
 </h3>
 
 <p>
 まず、現在作業中に致命的なミスをやらかしてしまったので、HEADの状態までワーキングツリーとインデックスを強制リセットする方法について学びます。
 <br>
-出来れば使いたくないコマンドですが、実際の開発中は意外に良くお世話になります。
+出来れば使いたくないコマンドですが、実際の開発中は良くお世話になります。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>HEADの状態までワーキングツリーとインデックスを強制リセット( やや危険 ):</b>
-
+<pre class="wrap">
 git reset --hard HEAD
 
 ※ HEAD 後に更新した内容が完全に全て消えるので実行する時は要注意
@@ -44,6 +48,7 @@ git reset --hard HEAD
 
   を使う方法と異なって add した新規ファイルも全て消えます
 </pre>
+</div>
 
 <p>
 試しに状態 18に対して上のコマンドを実行すると次の状態19になります。
@@ -174,7 +179,7 @@ a
 
 <br>
 <h3>
-2. N 回コミットを巻き戻す(安全で面倒な方法) 
+(2) N 回コミットを巻き戻す(安全で面倒な方法) 
 </h3>
 
 <p>
@@ -185,10 +190,10 @@ a
 まずは安全だけど面倒な方法からです。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>N 回コミットを巻き戻す(安全な方法):</b>
-
-<input type="checkbox"> (1) 以下のように revert コマンドを N 回繰り返す
+<pre class="wrap">
+<input type="radio" name="r1"> (1) revert コマンドを N 回繰り返す
 
 git revert -n HEAD
 git revert -n HEAD~1
@@ -198,27 +203,28 @@ git revert -n HEAD~2
 git revert -n HEAD~(N-1)
 
 ※ 1 回だけ巻き戻したい時は git revert -n HEAD だけで結構です。
-※ -n オプションを付けないと(有難迷惑なことに)コミットが実行されます。
+※ -n オプションを付けないと同時にコミットが実行されてしまうので気をつけましょう。
 
-<input type="checkbox"> (2) diff コマンドで差分が無いか調べる
+<input type="radio" name="r1"> (2) diff コマンドで差分が無いか調べる
 
 git diff HEAD~N
 
-<input type="checkbox"> (3) コミットする
+<input type="radio" name="r1"> (3) コミットする
 
 git commit -m "N回巻き戻し"
 </pre>
+</div>
 
 <p>
 「巻き戻し」がどういう動作なのかピンと来ない人がいると思いますので、実際に演習してみましょう。
 <br>
 例えば状態19から N = 3 回巻き戻した状態が以下の状態20となります。
 <br>
-状態20のワーキングツリー、インデックス、HEADの内容が状態19のHEAD~3と同じ内容になっていることに注目して下さい。
+状態20のワーキングツリー、インデックス、HEADの内容が状態19のHEAD~3( = 状態20のHEAD~4)と同じ内容になっていることに注目して下さい。
 </p>
 
 <p>
-ただし、過去のコミットは残っていますので、もし巻き戻した結果が気に入らなければいつでも前の状態に戻れます(だから安全な訳です)。
+ただし、過去のコミットは残っていますので、もし巻き戻した結果が気に入らなければまた revert を使っていつでも前の状態に戻れます。
 </p>
 
 <br>
@@ -368,20 +374,21 @@ a
 
 <br>
 <h3>
-3. N 回コミットを巻き戻す(危険で簡単な方法)
+(3) N 回コミットを巻き戻す(危険で簡単な方法)
 </h3>
 
 <p>
 最後に、危険(だけど簡単)な方法について学びます。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>N 回コミットを巻き戻す(危険な方法):</b>
-
+<pre class="wrap">
 git reset --hard HEAD~N
 
 ※ HEAD~N以降にコミットした内容が完全に全て消えるので実行する時は要注意
 </pre>
+</div>
 
 <p>
 取り上げておいて何ですが普通はこの方法は使わないで、上で教えた面倒な方法で巻き戻した方が無難です。
@@ -504,5 +511,6 @@ a
 
 </tr></table>
 
+<script>PreNext(10,11)</script>
 </body>
 </html>

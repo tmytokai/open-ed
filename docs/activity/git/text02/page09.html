@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>一時的に過去のコミットに戻る</title>
+<script src="../../../common.js"></script>
+<title>9. 一時的に過去のコミットに戻る</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>一時的に過去のコミットに戻る</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 バグがどこで混入したのか調べたい時など、一時的に過去のコミットに戻って作業したい場合があります。
@@ -21,11 +25,12 @@
 その場合は次の checkout コマンドを使います。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>一時的に過去のコミットに戻る:</b>
-
+<pre class="wrap">
 git checkout &lt;コミット&gt;
 </pre>
+</div>
 
 <p>
 <a href="./page07.html">ファイル内容の復元</a>で出てきたのと同じ checkout コマンドを使っていますが、今回は復元するファイル名を指定していないのでワーキングツリーとインデックス全体が指定したコミットの内容に変わり、HEADもそのコミットに移動します。
@@ -42,33 +47,24 @@ git checkout &lt;コミット&gt;
 <br>
 例えば前のページの状態16ではワーキングツリーと HEAD の hoge.txt の内容が異なっているのでコマンドを実行できません。
 <br>
-そういう場合は stash 機能を使ってワーキングツリーとインデックスの内容を一時的に保存してから checkout します。
+そういう場合は次の様に stash 機能を使ってワーキングツリーとインデックスの内容を一時的に保存してから checkout します。
 </p>
 
+
+<div class="info">
+<input type="checkbox"><b>一時的に過去のコミットに戻る(stash を使う場合):</b>
+<div class="olradio">
 <p>
-まとめると次のような流れで一時的に過去のコミットに戻ることが出来ます。
+<span class="olradio2"><input type="radio" name="r1"></span> 対象コミットのハッシュ値を調べる: git log
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash に一時保存: git stash
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 過去のコミットに戻る: git checkout &lt;コミット&gt;
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと過去に戻れたか確認: git show
 </p>
-
-<pre class="prog">
-<input type="checkbox"><b>一時的に過去のコミットに戻る方法の流れ:</b>
-
-<input type="checkbox"> (1) 対象コミットのハッシュ値を調べる
-
-git log
-
-<input type="checkbox"> (2) ワーキングツリーとインデックスの内容を一時保存
-
-git stash
-
-<input type="checkbox"> (3) 過去のコミットに戻る
-
-git checkout &lt;コミット&gt;
-
-<input type="checkbox"> (4) ちゃんと過去に戻れたか確認
-
-git show
-
-</pre>
+</div>
+</div>
 
 <p>
 例えば状態16から HEAD~2 に戻った状態が以下の状態17となります。
@@ -248,32 +244,30 @@ a
 何らかの作業が終わったら以下の手順で元の状態に戻すことが出来ます。
 </p>
 
-
-<pre class="prog">
-<input type="checkbox"><b>元の状態に戻る方法の流れ:</b>
-
-<input type="checkbox"> (1) 本来の HEAD (master) に戻る
-
-git checkout -f master
-
-※ -f はワーキングツリーとインデックスの更新内容を全部捨てて
-　強制的に master に戻ることを指示するオプションです
-
-<input type="checkbox"> (2) ちゃんと元に戻れたか確認
-
-git show
-
-<input type="checkbox"> (3) ワーキングツリーとインデックスの内容を復元
-
-git stash pop --index
-
+<div class="info">
+<input type="checkbox"><b>元の状態に復帰する:</b>
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD (master) に戻る: git checkout -f master
+</p>
+<p>
+※ -f はワーキングツリーとインデックスの更新内容を全部捨てて強制的に master に戻ることを指示するオプションです
+</p>
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと元に戻れたか確認: git show
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash から復元: git stash pop --index
+</p>
+<p>
 ※ --index はインデックスも復元するという意味のオプションです
-</pre>
+</p>
+</div>
+</div>
 
 <p>
 さて状態 17 の状態から上の作業を行うと次の状態18になります。
 <br>
-これは元の状態16と同じ状態です。
+当然これは元の状態16と同じ状態です。
 </p>
 
 <br>
@@ -396,5 +390,6 @@ a
 
 </tr></table>
 
+<script>PreNext(9,11)</script>
 </body>
 </html>

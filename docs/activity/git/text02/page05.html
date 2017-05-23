@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>コミットの指定方法</title>
+<script src="../../../common.js"></script>
+<title>5. コミットの指定方法</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>コミットの指定方法</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 さてコミットするだけではあまり git を使う意味がありませんので、これからコミットを使ってファイルの更新差分を表示したり、ファイルの更新をキャンセルしたり、過去のファイル内容に復元するという操作をおこなって行きたいと思います。
@@ -33,9 +37,9 @@ HEAD は何回も言っている通りローカルリポジトリの最新コミ
 ※ Windowsのコマンドプロンプトではハットはエスケープ文字になりますので、「^」は「^^」と2回入力する必要があります。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>HEADでコミット指定:</b>
-
+<pre class="wrap">
 HEAD ・・・ 最新のコミット
 
 HEAD~ または HEAD^ ・・・1つ前のコミット
@@ -44,6 +48,7 @@ HEAD~~ または HEAD^^ または HEAD~2 または HEAD^2 ・・・2つ前のコ
 
 HEAD~n または HEAD^n ・・・nつ前のコミット
 </pre>
+</div>
 
 <p>
 なお「~」と「~」の意味は厳密には違うのですが(※)、とりあえず今回の演習では同じ意味であると考えて結構です。
@@ -60,7 +65,7 @@ HEAD~n または HEAD^n ・・・nつ前のコミット
 </p>
 
 <br>
-<h2>状態 9 (チルダ形式)</h2>
+<h2>状態 9 (チルダ形式追加)</h2>
 <br>
 
 <b>ワーキングツリー</b>
@@ -181,13 +186,16 @@ a
 その場合は git log コマンドで出てくるリビジョン番号(ハッシュ値とも言う)で指定します。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) git log
-
-<input type="checkbox"> (2) 日付やコメントで対象となるコミットを見つける
-
-<input type="checkbox"> (3) commit の後にある英数字の羅列がリビジョン番号(ハッシュ値)
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> git log
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 日付やコメントで対象となるコミットを見つける
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> commit の後にある英数字の羅列がリビジョン番号(ハッシュ値)
+</div>
+</div>
 
 <p>
 さてこれで対象となるコミットの指定方法が分かりましたので、試しに演習で git show コマンドを使って過去のコミットで何をしたのか確かめてみましょう。
@@ -195,11 +203,13 @@ a
 git show コマンドの構文は次の通りです。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>指定したコミットの情報取得:</b>
-
+<pre class="wrap">
 git show &lt;コミット&gt;
 </pre>
+</div>
 
+<script>PreNext(5,11)</script>
 </body>
 </html>

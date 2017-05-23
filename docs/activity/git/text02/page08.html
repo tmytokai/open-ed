@@ -2,21 +2,25 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>ファイルの削除</title>
+<script src="../../../common.js"></script>
+<title>8. ファイルの削除</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>ファイルの削除</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
-こごてはファイルの削除方法を学びます。
+次にファイルの削除方法を学びます。
 </p>
 
 <p>
@@ -25,11 +29,12 @@
 そこで git で管理しているファイルは次の git rm コマンドを使ってワーキングツリーとインデックスから同時に消す必要があります。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>ワーキングツリーとインデックスからファイルを同時に消す:</b>
-
+<pre class="wrap">
 git rm &lt;ファイル&gt;
 </pre>
+</div>
 
 <p>
 ちなみにインデックスからは消したいけど、ワーキングツリーにはファイルを残したい場合(※)は --cached オプションを付けます。
@@ -39,15 +44,133 @@ git rm &lt;ファイル&gt;
 ※ 要するにあるファイルの git による管理を取りやめたい場合です。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>インデックスからファイルを消す(＝ git による管理を止める):</b>
-
+<pre class="wrap">
 git rm --cached &lt;ファイル&gt;
 </pre>
+</div>
 
 <p>
 では演習として前のページの状態 13 の状態において piyo.txt を削除してみましょう。
+</p>
+
 <br>
+<h2>状態 13 (再掲)</h2>
+<br>
+
+<b>ワーキングツリー</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+<br>
+<br>
+<b>インデックス</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+</td>
+
+</tr></table>
+
+
+<br>
+<br>
+<b>ローカルリポジトリ「gitlocal」</b>
+<br>
+<table class="noborder"><tr>
+
+<td class="noborder" style="width: 10em;">
+HEAD
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+AB
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを更新(S9)"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+ab
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを更新(S8)"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~2
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+piyo.txt
+<table class="innerbox"><tr><td>
+A
+</td></tr></table>
+</td></tr></table>
+"piyo.txtを追加(S5)"
+</td>
+
+<td class="noborder">←</td>
+
+<td class="noborder" style="width: 10em;">
+HEAD~3
+<table style="width: 100%;"><tr><td class="centerbold">
+hoge.txt
+<table class="innerbox"><tr><td>
+a
+</td></tr></table>
+</td></tr></table>
+"hoge.txtを追加(S4)"
+</td>
+
+</tr></table>
+
+<p>
 すると状態 14 の様にワーキングツリーとインデックスの piyo.txt は消えます。ただしまだコミットしていないので HEAD には piyo.txt は残っています。
 </p>
 
@@ -162,12 +285,14 @@ a
 <p>
 さて、間違ってファイルを消してしまったとか言う場合は<a href="./page07.html">ファイル内容の復元</a>で学んだ checkout コマンドを使って復元できます。
 <br>
-ただしインデックスからも対象のファイルは消えてますので
+ただし<b>インデックスからも対象のファイルは消えてます</b>ので
 </p>
 
-<pre class="prog">
+<div class="info">
+<pre class="wrap">
 git checkout HEAD -- &lt;ファイル名&gt;
 </pre>
+</div>
 
 <p>
 を使って HEAD から復元する必要があります。
@@ -420,5 +545,6 @@ a
 
 </tr></table>
 
+<script>PreNext(8,11)</script>
 </body>
 </html>

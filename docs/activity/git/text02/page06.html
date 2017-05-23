@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
-<title>ファイルの更新差分表示</title>
+<script src="../../../common.js"></script>
+<title>6. ファイルの更新差分表示</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>ファイルの更新差分表示</h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
 コミットの指定方法が分かったので、あるファイルが過去の状態からどの様に更新されたか差分を調べてみましょう。
@@ -23,13 +27,17 @@
 状態 9 のままだとワーキングツリーとインデックスとHEADが同じ状態で面白くないので、次の手順でファイルを更新します。
 </p>
 
-<pre class="prog">
-<input type="checkbox"> (1) hoge.txt に c を追加して保存
-
-<input type="checkbox"> (2) git add hoge.txt でインデックスに hoge.txt を登録
-
-<input type="checkbox"> (3) hoge.txt に d を追加して保存
-</pre>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に c を追加して保存
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> git add hoge.txt でインデックスに hoge.txt を登録
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に d を追加して保存
+</p>
+</div>
+</div>
 
 <p>
 すると次の状態 10 に変わります。ワーキングツリー、インデックス、HEADの hoge.txt の違いに注目して下さい。
@@ -152,7 +160,7 @@ a
 
 <br>
 <h3>
-1. ワーキングツリーとインデックス間の差分
+(1) ワーキングツリーとインデックス間の差分
 </h3>
 
 <p>
@@ -161,22 +169,26 @@ a
 実際の開発中は一番良く使うコマンドです。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>ワーキングツリーとインデックス間(インデックス → ワーキングツリー)の差分:</b>
-
+<pre class="wrap">
 git diff &lt;ファイル名&gt;
 
 ※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルの差分を表示します。
 </pre>
+</div>
 
 <p>
-例えば git diff hoge.txt を実行すると
+例えば状態 10 で git diff hoge.txt を実行すると
 </p>
 
-<pre class="prog">
+<div class="info">
+<pre class="wrap">
 -abc
 +abcd
 </pre>
+</div>
 
 <p>
 と表示されますが、-が付いている行が削除された行、+が付いている行が追加された行になります。
@@ -184,57 +196,64 @@ git diff &lt;ファイル名&gt;
 
 <br>
 <h3>
-2. ワーキングツリーと指定したコミット間の差分
+(2) ワーキングツリーと指定したコミット間の差分
 </h3>
 
 <p>
 次はワーキングツリーと指定したコミット間の差分を見る方法です。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>ワーキングツリーと指定したコミット間(コミット → ワーキングツリー)の差分:</b>
-
+<pre class="wrap">
 git diff &lt;コミット&gt; &lt;ファイル名&gt;
 
 ※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルの差分を表示します。
 ※ コミットの所を HEAD にすると HEAD との差分になります。
 </pre>
+</div>
 
 <br>
 <h3>
-3. インデックスと指定したコミット間の差分
+(3) インデックスと指定したコミット間の差分
 </h3>
 
 <p>
 次はインデックスと指定したコミット間の差分を見る方法です。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>インデックスと指定したコミット間(コミット → インデックス)の差分</b>
-
+<pre class="wrap">
 git diff --cached &lt;コミット&gt; &lt;ファイル名&gt;
 
 ※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルの差分を表示します。
 ※ コミットの所を HEAD にすると HEAD との差分になります。
 </pre>
+</div>
 
 <br>
 <h3>
-4. 指定したコミット間の差分
+(4) 指定したコミット間の差分
 </h3>
 
 <p>
 最後は指定したコミット間の差分を見る方法です。
 </p>
 
-<pre class="prog">
+<div class="info">
 <input type="checkbox"><b>指定したコミット間(コミットA → コミットB)の差分:</b>
-
+<pre class="wrap">
 git diff &lt;コミットA&gt; &lt;コミットB&gt; &lt;ファイル名&gt;
 
 ※ ファイル名を省略すると更新した全てのファイルの差分を表示します。
+※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルの差分を表示します。
 ※ コミットの所を HEAD にすると HEAD との差分になります。
 </pre>
+</div>
 
+<script>PreNext(6,11)</script>
 </body>
 </html>
