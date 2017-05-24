@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 複素数の基礎</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<h4>
+(1) 虚数単位
+</h4>
+
+<p>
+まず虚数単位について復習します。
+</p>
+
+<p>
+昔習った様に、虚数というのは $\sqrt{-5}$ とか $\sqrt{-8}$ みたいに $2$ 乗するとマイナスになるという実際には存在しない不思議な数字です。
+<br>
+特に 2 乗すると -1 になる数字を<b>虚数単位</b>と言います。
+</p>
+
+<p>
+なお数学では虚数単位の記号として $i$ を使いますが、工学では $i$ は電流を意味しますので、代わりに $j$ を使って
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 虚数単位</b>
+
+\[
+j = \sqrt{-1}, \quad  j^2 = -1
+\]
+
+</div>
+
+<p>
+を虚数単位の定義として使うことが多いです。
+<br>
+このアクティビティでも $j$ を虚数単位として使うことにします。
+</p>
+
+<br>
+<h4>
+(2) 複素数
+</h4>
+
+<p>
+実数と虚数を同時に表現している数字のことを<b>複素数</b>(complex number)といいます。
+</p>
+
+<p>
+この複素数には人間の目には見えない「虚数」という数字が含まれていますので実際の日常生活で使うことは滅多にありませんが、複素数を計算時に使うと数学や物理で出てくる色々な数式が簡単に解けるようになるので工学では大変重宝されています。
+</p>
+
+<p>
+さて複素数の定義は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 複素数</b>
+
+<p>
+$a$ と $b$ が実数の時
+</p>
+
+\[
+z = a + j \cdot b
+\]
+
+<p>
+を複素数 $z$ と呼ぶ
+</p>
+
+</div>
+
+<p>
+ここで $a$ の事を<b>実部</b>(Real part)、$b$の事を<b>虚部</b>(Imaginary part)と言って、記号では次のように表します。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>定義： 複素数 $z$ の実部、虚部</b>
+
+<p>
+$z = a + j \cdot b$ の時
+</p>
+
+<p>
+複素数 $z$ の実部： Re[z] = $a$
+</p>
+<p>
+複素数 $z$ の虚部： Im[z] = $b$ 
+</p>
+
+</div>
+
+<br>
+<h4>
+(3) 絶対値
+</h4>
+
+<p>
+複素数 $z = a + j \cdot b$ の絶対値は次のように定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 複素数 $z$ の絶対値</b>
+
+\[
+|z| = \sqrt{a^2 + b^2}
+\]
+
+</div>
+
+<p>
+この式から分かるように、絶対値は必ず $0$ 以上の実数になります。
+</p>
+
+<br>
+<h4>
+(4) 複素共役
+</h4>
+
+<p>
+ある複素数と虚部の符号だけが異なる複素数のことを<b>複素共役</b>といいます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 複素数 $z$ の複素共役</b>
+
+<p>
+$z$ と虚部の符号がだけ異なる複素数のことを複素共役と言って記号 $z^*$ で表す。
+</p>
+<p>
+例えば $z = a + j \cdot b$ の時
+</p>
+
+\[
+z^* = a - j \cdot b
+\]
+
+</div>
+
+<script>PreNext(1,5)</script>
+</body>
+</html>
