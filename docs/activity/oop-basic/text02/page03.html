@@ -1,22 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>例外の自作</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. 自作例外</title>
 </head>
 <body>
 
-<h2>例外の自作</h2>
-<br>
-標準例外以外にも自分で例外クラスを作り、「throw」を使って投げる事が出来ます。
-<br>
-<br>
-さて自作の例外クラスの作り方はプログラミング言語によって変わりますが、Java では次のように作ります。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li>学習項目: [2] 例外処理</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
+
+<p>
+例外クラスを自作して「throw」を使って投げる事も出来ます。
+<br>
+自作例外クラスの作り方はプログラミング言語によって変わりますが、Java では次のように作ります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース1:</b>
+<pre class="wrap">
 public class MyException extends RuntimeException {
 
 	  MyException(){
@@ -24,18 +35,23 @@ public class MyException extends RuntimeException {
 	  }	 
 }
 </pre>
+</div>
+
+<p>
 ここで出てきた「extends RuntimeException」とか「super」は「継承」のテキストで説明しますので、今の所はこう書くんだ程度の認識でいて下さい。
 <br>
 またこの自作例外クラスの作り方はかなり簡略化したものですので、実際の業務等で使う場合はちゃんとしたやり方を調べてから作って下さい。
-<br>
-<br>
+</p>
+
+<p>
 後は実行中に何か問題が生じたら、次のように throw 文でこの自作例外をnewして投げて catch で受け取るだけです。
 <br>
 「throw new MyException();」が自作例外を投げて(throw)している部分です。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース2:</b>
+</p>
 
+<div class="info">
+<input type="checkbox"><b>ソース2:</b>
+<pre class="wrap">
      try{ 
          if( 何か問題があったら ) throw new MyException();
      } 
@@ -43,10 +59,12 @@ public class MyException extends RuntimeException {
          System.out.println( e.getMessage() ); 
      } 
 </pre>
-<br>
-<br>
+</div>
+
+<p>
 これを実行して何か問題が生じたら「自作した例外です」と表示されます。
-<br>
-<br>
+</p>
+
+<script>PreNext(3,3)</script>
 </body>
 </html>
