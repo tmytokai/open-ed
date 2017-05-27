@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. オイラー公式</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+オイラー公式は極形式の複素数を $\sin$ と $\cos$ を使って直交形式に変換するための公式です(もっとも歴史的にはオイラー公式の発見が先で、オイラー公式から極形式が生まれたらしいですが)。
+</p>
+<p>
+大元の定義は次のとおりです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: オイラー公式 その1</b>
+<p>
+$\theta$ を任意の実数とした時、
+</p>
+\[
+\textrm{e}^{\{j\cdot \theta \}} = \cos \theta + j \cdot \sin \theta
+\]
+</div>
+
+<p>
+このオイラー公式を変形することで $\cos$ と $\sin$ を複素数の和または差で表す事ができます。
+<br>
+文献によっては次の式をオイラー公式の定義としている場合もあります。
+
+
+<div class="info">
+<input type="checkbox"><b>定義: オイラー公式 その2</b>
+
+\begin{align*}
+\cos \theta &= \frac{ \textrm{e}^{\{j\cdot \theta \}} + \textrm{e}^{\{-j\cdot \theta \}}}{2} \\
+\\
+\sin \theta &= \frac{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}}}{2\cdot j} \\
+&= \frac{\textrm{e}^{\{-j\cdot \pi/2\}}}{2} \left \{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}} \right \} 
+\end{align*}
+</div>
+
+<p>
+ここで $\sin$ の方の 2 行目の変形は
+
+\[
+1/j = j/j^2 = -j = \textrm{e}^{\{-j\cdot \pi/2\}}
+\]
+
+<p>
+の関係を利用して求めました。どちらの定義も同じくらい良く使われるので両方覚えておくと良いでしょう。
+</p>
+
+<script>PreNext(4,6)</script>
+</body>
+</html>

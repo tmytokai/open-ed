@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 極形式と直交形式の変換相互</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+オイラー公式を極形式に当てはめることで、極形式を簡単に直交形式に変換することができます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>極形式 → 直交形式に変換</b>
+\[
+|z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}} 
+= |z| \cdot \cos \angle \ z + j \cdot |z| \cdot \sin \angle \ z
+\]
+</div>
+
+<p>
+一方、直交形式を極形式に変換するには紙の上に複素平面と矢印を描き、矢印の長さを定規で測り、角度を分度器で測るという原始的な手段もありますが、プログラミング言語や表計算ソフトの atan2 関数を使って求める方が早いし楽です。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>直交形式 → 極形式に変換</b>
+\[
+z = a + j \cdot b
+\]
+<p>
+に対し、絶対値と偏角を以下のようにして求める。
+</p>
+\[
+|z| = \sqrt{ a^2 + b^2} \ ,\ \angle \ z = \textrm{atan2}(b,a)
+\]
+<p>
+※ プログラミング言語や表計算ソフトによっては $\textrm{atan2}(a,b)$ の順の場合もあるので注意
+</p>
+</div>
+
+<p>
+このように、形式と直交形式は1対1で簡単に相互変換出来るので、状況に応じて扱いやすい形式に変換して使うことが可能になっています。
+</p>
+
+<script>PreNext(5,6)</script>
+</body>
+</html>
