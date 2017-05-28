@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 複素平面</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<p>
+複素数のことをきちんと理解して道具として使えるようになるためには<b>複素平面</b>(又はガウス平面)について学ぶ必要があります。
+</p>
+
+<p>
+まず実数とは何だったか思い出してみましょう。
+<br>
+実数は「実数直線」と呼ばれる $-\infty$ から $\infty$ まで続く直線の上のある点のことでした(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 実数は実数直線上の点である</b>
+<p>
+$x = -2, \ 0, \ 1.5$ の位置
+</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+一方複素数 $z$ には実数を表す実部 Re[z] の他に虚数を表す虚部 Im[z] がありましたので、複素数を実数直線上の一点として考えることは出来ません。
+</p>
+
+<p>
+ではどうするかというと実数直線に対して、原点で直角に交わる(虚数を表す)軸を一つ加えて平面に拡張します。
+そして複素数はその<b>複素平面</b>上の点、あるいは<b>ベクトル</b>とみなします(図2)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 複素数は複素平面上の点(あるいはベクトル)である</b>
+<p>
+$z = 1+j\cdot 2, \ -2 - j$ の位置
+</p>
+<img src="./img/page02-fig2.png" alt="">
+</div>
+
+
+<p>
+図2において、実数を表す横軸を<b>実数軸</b>(または実軸)、虚数を表す縦軸を<b>虚数軸</b>(または虚軸)と言います。
+<br>
+また複素数 $z$ がベクトルであることを特に強調したい場合は、図2の様に $z$ の位置を表す点に向かって原点から矢印を引きます。この矢印の長さが複素数の絶対値を表しています。
+</p>
+
+<p>
+さて複素数は実数直線を拡張して作った複素平面上の点ですので、当然ながら複素数には実数も含まれます。
+<br>
+実際のところ虚部が $0$ の複素数、つまり実数軸上にある複素数は実数そのものです(図3)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: 実数は複素平面の実数軸上にある点</b>
+<p>
+$z = 1, \ -2$ の位置
+</p>
+<img src="./img/page02-fig3.png" alt="">
+</div>
+
+<script>PreNext(2,6)</script>
+</body>
+</html>
