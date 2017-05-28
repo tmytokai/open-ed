@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>6. 四則演算</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h4>
+(1) 足し算
+</h4>
+
+<p>
+複素数と複素数の足し算は直交形式で考えると楽です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>足し算</b>
+<p>
+直交形式を使って実数、虚数成分別に足し合わせる。つまり
+</p>
+\[
+z_1 = a + j \cdot b
+\]
+<p>
+かつ
+</p>
+\[
+z_2 = c + j \cdot d
+\]
+</p>
+の時
+</p>
+\[
+z_1 + z_2 = (a + c) + j \cdot (b + d)
+\]
+</div>
+
+<p>
+実際には複素数どうしの足し算は複素平面上のベクトルの足し算になります(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 足し算は複素平面上のベクトルの足し算である</b>
+<p>
+</p>
+<img src="./img/page06-fig1.png" alt="">
+</div>
+
+<br>
+<h4>
+(2) 掛け算
+</h4>
+
+<p>
+掛け算は極形式で考えたほうが楽です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>掛け算</b>
+<p>
+極形式を使ってネイピア数 e の掛け算をおこなう。つまり
+</p>
+\[
+z_1 = |z_1| \cdot \textrm{e}^{\{j\cdot \angle \ z_1\}}
+\]
+<p>
+かつ
+</p>
+\[
+z_2 = |z_2| \cdot \textrm{e}^{\{j\cdot \angle \ z_2\}}
+\]
+<p>
+の時
+</p>
+\[
+z_1 \times z_2 = (|z_1|\cdot|z_2|) \cdot \textrm{e}^{\{j\cdot (\angle \ z_1 + \angle \ z_2)\}}
+\]
+</div>
+
+<p>
+この様に、掛け算では<b>絶対値どうしは掛ける、偏角どうしは足す</b>という演算手順になります。
+</p>
+
+<br>
+<h4>
+(3) 回転
+</h4>
+
+<p>
+引き算の話をする前に、掛け算の特殊な場合である回転について話します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>回転</b>
+<p>
+$\theta$ を任意の角度(rad: ラジアン)とする。ある複素数 $z$ に
+</p>
+\[
+\textrm{e}^{\{j\cdot \theta\}}
+\]
+<p>
+を掛けることは、原点を中心として$z$ を $\theta$ [rad] だけ反時計回りに回転させることに相当する。つまり
+</p>
+\[
+z \times \textrm{e}^{\{j\cdot \theta\}} = |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta)\}}
+\]
+</div>
+
+<p>
+回転は図で考えた方が分かりやすいでしょう。図2を見れば元の複素数が回転して移動していることが一目瞭然です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 回転</b>
+<p>
+</p>
+<img src="./img/page06-fig2.png" alt="">
+</div>
+
+<p>
+一応念の為に言っておきますが<b>$\theta$ がマイナスの時は時計回りに回転します</b>。
+</p>
+
+<br>
+<h4>
+(4)  $-1$ を掛ける
+</h4>
+<p>
+さらに回転の特別の場合として複素数に $-1$ を掛けた時の話をします。
+</p>
+<p>
+ある複素数に -1 をかけるという行為は、その複素数を直交形式で考えているのか、極形式で考えているのかによって意味が変わってきます。まず直交形式の場合ですが至極当たり前の話になります。
+</p>
+<div class="info">
+<input type="checkbox"><b>直交形式で考えた場合</b>
+</p>
+実数成分と虚数成分の符号を変える。つまり
+</p>
+\[
+z = a + j \cdot b
+\]
+<p>
+の時
+</p>
+\[
+-z = (-a) + j \cdot (-b)
+\]
+</div>
+
+<p>
+一方、極形式で考えた場合は $-1 = \textrm{e}^{j\pi}$ ですので、<b>元の複素数 $z$ を 180 度回転させる</b>ことを意味しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>極形式で考えた場合</b>
+<p>
+$\pi$ [rad] 回転させる。つまり
+</p>
+\[
+z = |z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}}
+\]
+<p>
+の時
+</p>
+\[
+-z = |z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}} \cdot \textrm{e}^{j\pi}
+= |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
+\]
+</div>
+
+<p>
+なお、直交形式で考えようが、極形式で考えようが、複素数に -1 を掛けるという行為は複素平面上ではベクトルの向きが逆になることを意味します(図3)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: -1 をかけるとベクトルの向きが180度逆になる</b>
+<p>
+</p>
+<img src="./img/page06-fig3.png" alt="">
+</div>
+
+<br>
+<h4>
+(5) 極形式で実数をかける
+</h4>
+
+<p>
+極形式で考えている時に実数 $a$ を $z$ にかける場合は $a$ の符号に気を付けて下さい。
+</p>
+<p>
+もし $a>0$ ならそのまま
+\[
+z = (a \cdot |z|) \cdot \textrm{e}^{\{j\cdot \angle \ z\}}
+\]
+<p>
+で結構です。
+</p>
+<p>
+一方、$a<0$ なら (4) で説明したようにベクトルの向きが逆になりますので
+</p>
+\[
+z = ( |a| \cdot |z| )\cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
+\]
+<p>
+となります。
+</p>
+
+<br>
+<h4>
+(6) 引き算
+</h4>
+
+<p>
+次に引き算の話をします。引き算は足し算と同様に直交形式で考えると楽です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>引き算</b>
+<p>
+直交形式を使って実数、虚数成分別に引く。つまり
+</p>
+\[
+z_1 = a + j \cdot b
+\]
+<p>
+かつ
+</p>
+\[
+z_2 = c + j \cdot d
+\]
+<p>
+の時
+</p>
+\[
+z_1 - z_2 = (a - c) + j \cdot (b - d)
+\]
+</div>
+
+<p>
+なおベクトル的には $z_1$ から $z_2$ を引くという行為は、$z_1$ に $z_2$ を 180 度回転させた $-z_2$ を足すことを意味します。
+<br>
+図4が引き算 $z_1 - z_2$ をベクトルで表した図になります。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>図4: 引き算</b>
+<p>
+</p>
+<img src="./img/page06-fig4.png" alt="">
+</div>
+
+<br>
+<h4>
+(7) 割り算
+</h4>
+
+<p>
+最後に割り算について話します。割り算は掛け算と同様に極形式で考えると楽です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>割り算</b>
+<p>
+<p>
+極形式を使ってネイピア数 e の割り算をおこなう。つまり
+</p>
+\[
+z_1 = |z_1| \cdot \textrm{e}^{\{j\cdot \angle \ z_1\}}
+\]
+<p>
+かつ
+</p>
+\[
+z_2 = |z_2| \cdot \textrm{e}^{\{j\cdot \angle \ z_2\}}
+\]
+<p>
+の時
+</p>
+\[
+\frac{1}{z_2} = \frac{1}{|z_2|} \cdot \textrm{e}^{\{-j\cdot \angle \ z_2\}}
+\]
+<p>
+なので
+</p>
+\[
+\frac{z_1}{z_2} = \frac{|z_1|}{|z_2|} \cdot \textrm{e}^{\{j\cdot (\angle \ z_1 - \angle \ z_2)\}}
+\]
+</div>
+
+<p>
+要するに割り算は<b>絶対値どうしは割る、偏角どうしは引く</b>という演算手順になります。
+
+<script>PreNext(6,6)</script>
+</body>
+</html>
