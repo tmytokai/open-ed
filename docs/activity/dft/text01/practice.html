@@ -21,14 +21,14 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: ?  分
+演習時間: 140  分
 </p>
 
 <br>
 <h2><a href="./page01.pdf">1. 周期性時間領域ディジタル信号</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-1 (個人PC、10分):</b> 表計算ソフトを使って周期性時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-1 (個人PC、15分):</b> 表計算ソフトを使って周期性時間領域ディジタル信号
 </p>
 <p>
 \[
@@ -71,10 +71,10 @@ f[i] =
 </p>
 
 <br>
-<h2><a href="./page03.pdf">3. プログラミング</a></h2>
+<h2><a href="./page03.html">3. プログラミング</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-2 (個人PC、15分):</b> 演習 1-1 の時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-2 (個人PC、20分):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
 <p>
 \[
@@ -110,7 +110,7 @@ f[i] =
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-3 (個人PC、85分):</b> 演習 1-1 の時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-3 (個人PC、60分):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
 <p>
 \[
@@ -148,7 +148,7 @@ f[i] =
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 argC[]  に代入して下さい。
 </p>
 <p>
- ※  絶対値の値が小さいと偏角の値が正しく出ないので、ある k において argC[k] <  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
+ ※  絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] <  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を画面に表示して下さい。
@@ -172,7 +172,7 @@ f[i] =
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人PC、60分):</b> 演習 1-3 で求めた DFT 係数 $\textrm{C}[k]$ の値から元の周期性時間領域ディジタル信号 $f[i]$ を IDFT を使って復元してみましょう。
+<input type="checkbox"><b>演習 1-4 (個人PC、30分):</b> 演習 1-3 で求めた DFT 係数 $\textrm{C}[k]$ の値から元の周期性時間領域ディジタル信号 $f[i]$ を IDFT を使って復元してみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -211,18 +211,49 @@ f[i] =
 
 
 <br>
-<h2><a href="./page04.pdf">4. DFT と IDFTの意味</a></h2>
+<h2><a href="./page04.html">4. DFT と IDFTの意味</a></h2>
 
+<br>
 <p>
-準備中
+<input type="checkbox"><b>演習 1-5 (個人PC、15分):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
+<p>
+\[
+f[i] = 
+-1
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
+\]
+</p>
+<p>
+の直流成分、基本波、高調波をプログラム上で求めて表示しましょう。
+</p>
+<div class="olradio">
+<span class="olradio"><input type="radio" name="p5"></span> C言語 の開発環境を起動します。ソース名は「DFT-1-5.cpp」とします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span>  演習 1-4 で作成したソースコード(DFT-1-4.cpp)をコピーし、続きから作成します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 直流成分の値を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 基本波の振幅、周期、初期位相を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 残りの高調波の振幅、周期、初期位相を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、理論値とほぼ一致していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「各値」を貼り付けて下さい。
+</p>
+</div>
 
 
 <br>
-<h2><a href="./page05.pdf">5. 高速フーリエ変換 (FFT)</a></h2>
+<h2><a href="./page05.html">5. 高速フーリエ変換 (FFT)</a></h2>
 
 <p>
-準備中
+演習無し
 </p>
 
 <script>PreNext(6,5)</script>

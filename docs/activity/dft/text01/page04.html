@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. DFT と IDFTの意味</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="../../fourier/">アクティビティ: 複素フーリエ級数展開</a>において
+</p>
+
+<p>
+<b>複素フーリエ係数を求めると任意の周期性時間領域アナログ信号 $f(t)$ を直流成分、基本波、無限個の第$k$ 高調波の和に分解出来る</b>
+</p>
+
+<p>
+ことを学びました。いわゆる「フーリエの定理」です。
+</p>
+
+<p>
+一方、IDFT は複素フーリエ級数展開のディジタル版に相当しますので、やはり
+</p>
+
+<p>
+<b>DFT 係数を求めると任意の周期性時間領域ディジタル信号 $f[i]$ を直流成分、基本波、有限個(無限個で無いことに注意！)の第$k$ 高調波の和に分解出来る</b>
+</p>
+
+<p>
+ことを意味しています。
+</p>
+
+<p>
+以上のことを詳しく説明すると次の通りになります。
+<br>
+ただし周期 $\textrm{N}$ が奇数か偶数かによって最後の高調波の振幅の求め方が若干変わるので場合分けする必要があります。
+</p>
+
+<p>
+まず周期 $\textrm{N}$ が奇数の場合です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期 $\textrm{N}$ が奇数の場合</b>
+
+<p>
+周期性時間領域ディジタル信号 $f[i]$ は以下のように直流成分、基本波、第 $k$ 高調波の和に分解可能である。
+</p>
+
+\[
+f[i] = a_0 + \sum_{k=1}^{(\textrm{N}-1)/2}
+\left \{
+a_k \cdot \cos \left ( \frac{2\pi}{\textrm{T}_k} \cdot i + \phi_k \right )
+\right \}
+\]
+
+\[
+a_0 = \textrm{C}[0]
+\]
+
+\[
+a_k = 2 \cdot |\textrm{C}[k]|
+\]
+
+\[
+\textrm{T}_k = \frac{\textrm{N}}{k}
+\]
+
+\[
+\phi_k = \angle \textrm{C}[k]
+\]
+
+<p>
+ここで
+</p>
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] (ただし奇数) の周期性時間領域ディジタル信号
+</p>
+<p>
+$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数
+</p>
+<p>
+$a_0$・・・直流成分、実数の定数、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+<p>
+$a_k$・・・第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の定数、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+<p>
+$\textrm{T}_k$・・・第 $k$ 高調波($k=1$の時は基本波)の周期、実数の定数、単位は [点]
+</p>
+<p>
+$\phi_k$ ・・・第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の定数、単位は [rad]
+</p>
+</div>
+
+<p>
+次は $\textrm{N}$ が偶数の場合です。
+<br>
+最後の高調波の振幅の計算方法が他の高調波と異なることに気をつけて下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期 $\textrm{N}$ が偶数の場合</b>
+
+<p>
+周期性時間領域ディジタル信号 $f[i]$ は以下のように直流成分、基本波、第 $k$ 高調波の和に分解可能である。
+</p>
+
+\[
+f[i] = a_0 + \sum_{k=1}^{\textrm{N}/2-1}
+\left \{
+a_k \cdot \cos \left ( \frac{2\pi}{\textrm{T}_k} \cdot i + \phi_k \right )
+\right \}
++
+a_{(\textrm{N}/2)} \cdot \cos \left ( \frac{2\pi}{\textrm{T}_{(\textrm{N}/2)}} \cdot i + \phi_{(\textrm{N}/2)} \right )
+\]
+
+\[
+a_0 = \textrm{C}[0]
+\]
+
+\[
+a_k = 2 \cdot |\textrm{C}[k]| 
+\]
+
+\[
+\textrm{T}_k = \frac{\textrm{N}}{k}
+\]
+
+\[
+\phi_k = \angle \textrm{C}[k]
+\]
+
+\[
+a_{(\textrm{N}/2)} = |\textrm{C}[\textrm{N}/2]|  \ \mbox{・・・ 他の $a_k$ と違って 2 倍しない!}
+\]
+
+\[
+\textrm{T}_{(\textrm{N}/2)} = \frac{\textrm{N}}{(\textrm{N}/2)} = 2
+\]
+
+\[
+\phi_{(\textrm{N}/2)} = \angle \textrm{C}[\textrm{N}/2]
+\]
+
+<p>
+ここで
+</p>
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] (ただし偶数) の周期性時間領域ディジタル信号
+</p>
+<p>
+$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数
+</p>
+<p>
+$a_0$・・・直流成分、実数の定数、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+<p>
+$a_k$・・・第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の定数、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+<p>
+$\textrm{T}_k$・・・第 $k$ 高調波($k=1$の時は基本波)の周期、実数の定数、単位は [点]
+</p>
+<p>
+$\phi_k$ ・・・第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の定数、単位は [rad]
+</p>
+<p>
+$a_{(\textrm{N}/2)}$・・・第 $(\textrm{N}/2)$ 高調波の振幅
+</p>
+<p>
+$\textrm{T}_{(\textrm{N}/2)}$・・・第 $(\textrm{N}/2)$ 高調波の周期
+</p>
+<p>
+$\phi_{(\textrm{N}/2)}$ ・・・第 $(\textrm{N}/2)$ 高調波の初期位相
+</p>
+</div>
+
+<script>PreNext(4,5)</script>
+</body>
+</html>

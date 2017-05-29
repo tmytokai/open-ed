@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. プログラミング</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+DFTの演算中には複素数が含まれていますので、プログラミングで DFT 係数を求めるためには
+</p>
+
+\[
+\textrm{C}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
+\]
+
+<p>
+の様にDFT係数 $\textrm{C}[k]$ を実数成分 $\textrm{A}[k]$ と虚数成分 $\textrm{B}[k]$ に分けて求めると楽です。
+</p>
+
+<p>
+そこでオイラー公式を使ってDFTの演算中に含まれる複素数を $\sin$ と $\cos$ の和に分解してみましょう。
+<br>
+すると $\textrm{A}[k]$ と $\textrm{B}[k]$ は次の様にして求められます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ の求め方</b>
+
+\begin{align*}
+\textrm{A}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i ) 
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
+\textrm{B}[k] &= -\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+\end{align*}
+
+<p>
+ここで
+</p>
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性ディジタル信号
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</div>
+
+<p>
+このようにすると DFT の演算中に複素数が含まれなくなるので、普通に外側が $k$、内側が $i$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ を求められます。
+</p>
+
+<p>
+またプログラミング言語や表計算ソフトを使えば
+</p>
+
+<div class="info">
+<input type="checkbox"><b>絶対値と偏角の求め方</b>
+\[
+|\textrm{C}[k]| = \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k])
+\]
+\[
+\angle \ \textrm{C}[k] = \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
+\]
+
+<p>
+※ プログラミング言語によっては $\textrm{atan2}(\textrm{A}[k],\textrm{B}[k])$ の順の場合もあります。
+</p>
+</div>
+
+<p>
+より DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \ \textrm{C}[k]$ も簡単に求められます。
+</p>
+
+
+<p>
+同様に IDFT を $\textrm{A}[k]$ と $\textrm{B}[k]$ を使って書き直すと次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ を用いた IDFT</b>
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+- 
+\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1)
+\]
+
+<p>
+ここで
+</p>
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性ディジタル信号
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</div>
+
+<p>
+この場合は外側が $i$、内側が $k$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ から $f[i]$ を復元できます。
+</p>
+
+<script>PreNext(3,5)</script>
+</body>
+</html>

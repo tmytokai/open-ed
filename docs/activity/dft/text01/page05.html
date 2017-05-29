@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 高速フーリエ変換 (FFT)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+DFT / IDFT の最大の欠点は計算量が多くて時間がかかることです。具体的な DFT / IDFT の計算量(オーダー)は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>DFT / IDFT の計算量(オーダー)</b>
+
+<p>
+$\textrm{N}$ を周期とした時
+<p>
+
+\[
+\textrm{O}(\textrm{N}^2)
+\]
+</div>
+
+<p>
+そこで DFT を高速化した高速フーリエ変換( Fast Fourier Transform, FFT )、及び高速フーリエ逆変換( Inverse Fast Fourier Transform, IFFT )が考案されました。
+</p>
+
+<p>
+FFT / IFFT は周期 $\textrm{N}$ が $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ )でないと使えないという制限はありますが、次の様に計算量が劇的に減ります。もちろん計算結果は DFT / IDFT と同一です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FFT / IFFT の計算量(オーダー)</b>
+
+<p>
+$\textrm{N}$ を周期とした時(※)
+</p>
+
+\[
+\textrm{O}(\textrm{N}\log\textrm{N})
+\]
+
+<p>
+※ ただし $\textrm{N}$ は $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ ) である必要がある。
+</p>
+</div>
+
+<p>
+$\textrm{N}$ が小さい時はそれ程計算速度は変わりませんが、大きくなるにつれて速度の差が大きくなっていきます。
+<br>
+例えば $\textrm{N} = 1000$ の時は 300 倍位 FFT の方が速いです。
+<br>
+従って世間一般的には DFT は普通使わず、代わりに FFT が良く使われています。
+</p>
+
+<p>
+具体的な FFT / IFFT の計算方法についてはこのアクティビティの範囲外になりますし、フリーの FFT ライブラリが Web 上に沢山ありますので興味がある人は自分で調べて下さい。
+</p>
+
+<script>PreNext(5,5)</script>
+</body>
+</html>
