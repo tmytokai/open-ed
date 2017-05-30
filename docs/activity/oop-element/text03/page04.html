@@ -1,23 +1,113 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>インヘリタンスによるポリモーフィズム</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. インヘリタンスによるポリモーフィズム</title>
 </head>
 <body>
 
-<h2>インヘリタンスによるポリモーフィズム</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの三大要素</a></li>
+<li>学習項目: [3] ポリモーフィズム</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-学習項目「インヘリタンス(継承)」の「<a href="../text01/page03.html">スーパークラスとしてインスタンス作成</a>」のページで説明した「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」こともポリモーフィズムの一種です。
-<br>
-<br>
-例えば次のmainメソッドを見て下さい(ソース1)。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+<h2><script>GetTitle()</script></h2>
 
+<p>
+オブジェクト指向言語では「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」ことが出来て、これもポリモーフィズムの一種とみなすことが出来ます。
+</p>
+<p>
+といきなり言っても何のことか良く分からないと思うので、これから具体的なコードを使って段階的に説明していきます。
+</p>
+<p>
+まず大元の FRUIT スーパークラスをソース 1 で定義します。
+</p>
+<div class="info">
+<input type="checkbox"><b>ソース 1 : FRUIT スーパークラス</b>
+<pre class="wrap">
+public class FRUIT {
+
+    public String name;
+
+    public void eat(){
+        System.out.println(name+"美味い");
+    }
+}
+</pre>
+</div>
+<p>
+この FRUIT スーパークラスを継承させて APPLE サブクラス(ソース 2 )と ORANGE サブクラス(ソース 3 )を作ります。
+</p>
+<div class="info">
+<input type="checkbox"><b>ソース 2 : APPLE サブクラス</b>
+<pre class="wrap">
+public class APPLE extends FRUIT{
+
+    public APPLE(){
+        name = "りんご";
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 3 : ORANGE サブクラス</b>
+<pre class="wrap">
+public class ORANGE extends FRUIT{
+
+    public ORANGE(){
+        name = "みかん";
+    }
+}
+</pre>
+</div>
+
+<p>
+次に main メソッドをソース 4 に示しますが、今まで使ってきた main メソッドと違い<b>apple と orange が FRUIT スーパークラスのインスタンスになっている</b>ことに注目して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 4 : main メソッド</b>
+<pre class="wrap">
+public static void main(String[] args) {
+
+	FRUIT apple = new APPLE();   // ※ 今までは「APPLE apple = new APPLE();」 だった！
+	FRUIT orange = new ORANGE(); // ※ 今までは「ORANGE orange = new ORANGE();」 だった！
+
+	apple.eat();
+	orange.eat();
+}
+</pre>
+</div>
+
+<p>
+すると「apple と orange は見かけ上は FRUIT スーパークラスのインスタンスだけど、実態はそれぞれ APPLE、ORANGE サブクラスのインスタンス」なのでポリフォーリズムが生じて、apple と orange は異なる動作になります(実行結果 1 )。
+
+<div class="info">
+<input type="checkbox"><b>実行結果 1 :</b>
+<pre class="wrap">
+りんご美味しい
+みかん美味しい
+</pre>
+</div>
+
+<p>
+なお、インヘリタンスによるポリフォーリズムを応用すると、次のソース 5 の様にスーパークラスのインスタンス配列と for ループを使って複数のインスタンスを一元管理出来るようになります。
+</p>
+<p>
+このテクニックは非常に良く使われますので覚えておくと良いでしょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 5 : main メソッド 改</b>
+<pre class="wrap">
 public static void main(String[] args) {
 	        
         FRUIT fruit[] = new FRUIT[2];
@@ -28,67 +118,10 @@ public static void main(String[] args) {
 }
 </pre>
 
-<br>
-この fruit[0] と fruit[1] は同じ FRUIT スーパークラス(ソース2)のインスタンス配列で、同じ eat メソッドが呼び出されています。
-<br>
-ただし各インスタンスの実態は APPLE(ソース3)、 ORANGE(ソース4) サブクラスのインスタンスです。
-<br>
-<br>
-一見すると前のページの main メソッドと似ていますが、インスタンスを new する時にパラメータ("りんご"とか"みかん"とか)を指定していませんので、main メソッドと FRUIT クラス間の独立性が上がってバグの混入を防げます。
-<br>
-一方でインヘリタンスを多用するとクラスが無駄に増えたり、クラス間の関係が複雑になるという問題が出てきます。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース2:</b>
-
-public class FRUIT {
-
-    public String name;
-
-    public void eat(){
-        System.out.println(name+"美味い");
-    }
-}
-</pre>
-
-<pre class="prog">
-<input type="checkbox"><b>ソース3:</b>
-
-public class APPLE extends FRUIT{
-
-    public APPLE(){
-        name = "りんご";
-    }
-}
-</pre>
-
-<pre class="prog">
-<input type="checkbox"><b>ソース4:</b>
-
-public class ORANGE extends FRUIT {
-
-    public ORANGE(){
-        name = "みかん";
-    }
-}
-</pre>
+※ オブジェクト指向言語ではこういう状況では普通は配列 + for ループではなくて vector クラス + iterator クラスを使います。詳細は自分で調べて下さい。
+</div>
 
 <br>
-実行結果は次の通りです。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>結果1:</b>
-
-りんご美味しい
-みかん美味しい
-</pre>
-
-
-
-<br>
-<br>
-<br>
+<script>PreNext(4,5)</script>
 </body>
 </html>

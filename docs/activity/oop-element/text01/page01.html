@@ -1,37 +1,52 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>インヘリタンスとは</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. インヘリタンスとは</title>
 </head>
 <body>
 
-<h2>インヘリタンスとは</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの三大要素</a></li>
+<li>学習項目: [1] インヘリタンス</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
-ある定義済みのクラスを親とし、親が持つ機能を受け継ぎつつ新しい機能を追加して子クラスを作り出すことを「インヘリタンス」または「継承」と言います。
-<br>
-この親クラスの事を「スーパークラス」や「基底クラス」「基本クラス」などと呼びます。また子クラスの事を「サブクラス」や「派生クラス」と呼びます。
-<br>
-<br>
-例えばスーパークラスとして次の中身が空っぽの果物(FRUIT)クラスが定義されているとします。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+<h2><script>GetTitle()</script></h2>
 
+<p>
+ある定義済みのクラスを親とし、親が持つ機能を受け継ぎつつ新しい機能を追加して子クラスを作り出すことを<b>「インヘリタンス」</b>または<b>「継承」</b>と言います。
+</p>
+<p>
+この親クラスの事を<b>「スーパークラス」</b>や「基底クラス」「基本クラス」などと呼びます。
+<br>
+また子クラスの事を<b>「サブクラス」</b>や「派生クラス」と呼びます。
+</p>
+<p>
+例えばスーパークラスとして、中身が空の FRUIT スーパークラスが定義されているとします(ソース 1 )。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : FRUIT スーパークラス</b>
+<pre class="wrap">
 public class FRUIT {
 }
 </pre>
-<br>
-次に果物(FRUIT)を継承したリンゴ(APPLE)サブクラスを定義してみます。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース2:</b>
+</div>
 
-public class APPLE extends FRUIT{
+<p>
+この FRUIT スーパークラスを継承して APPLE サブクラスを作るには、クラス名の後に<b>「extends FRUIT」</b>を追加して次のソース 2 の様にします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : APPLE サブクラス</b>
+<pre class="wrap">
+public class APPLE extends FRUIT{ // ※ extends FRUIT は FRUIT を継承するの意味
 
 	public String name;
 	
@@ -46,18 +61,16 @@ public class APPLE extends FRUIT{
 	}
 }
 </pre>
+</div>
 
-<br>
-ソース2のクラス名(APPLE)の後に出てきた「extends FRUIT」によりリンゴ(APPLE)が果物(FRUIT)を継承して作られたことを表しています。
-<br>
-<br>
-同様に果物(FRUIT)を継承したみかん(ORANGE)サブクラスも定義してみましょう。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース3:</b>
+<p>
+同様に FRUIT スーパークラスを継承した ORANGE サブクラスも作ってみましょう(ソース 3)。
+</p>
 
-public class ORANGE extends FRUIT{
+<div class="info">
+<input type="checkbox"><b>ソース 3 : ORANGE サブクラス</b>
+<pre class="wrap">
+public class ORANGE extends FRUIT{  // ※ extends FRUIT は FRUIT を継承するの意味
 
 	public String name;
 	
@@ -73,20 +86,17 @@ public class ORANGE extends FRUIT{
 
 }
 </pre>
+</div>
 
-<br>
-<br>
-さて継承によって定義したサブクラスは普通のクラスと同様にインスタンスを作って利用できます。
-<br>
-例えばソース4に示した main メソッドを実行した結果が実行結果1です。
-<br>
-コンストラクタで名前(name)に「りんご」「みかん」を代入してますのでインスタンスappleとorangeで表示が異なっています。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース4:</b>
+<p>
+さて継承によって作ったサブクラスは、ソース 4 の様に普通のクラスと同様にインスタンスを作って利用できます。
+</p>
 
+<div class="info">
+<input type="checkbox"><b>ソース 4 : main メソッド</b>
+<pre class="wrap">
 public static void main(String[] args) {
+
 	APPLE apple = new APPLE();
 	ORANGE orange = new ORANGE();
 
@@ -94,15 +104,20 @@ public static void main(String[] args) {
 	orange.eat();
 }
 </pre>
+</div>
 
-<pre class="prog">
-<input type="checkbox"><b>実行結果1:</b>
+<p>
+実行結果は次の様になります。
+</p>
 
-りんご美味い
-みかん美味い
+<div class="info">
+<input type="checkbox"><b>実行結果 1 :</b>
+<pre class="wrap">
+りんご美味しい
+みかん美味しい
 </pre>
-<br>
-<br>
-<br>
+</div>
+
+<script>PreNext(1,2)</script>
 </body>
 </html>
