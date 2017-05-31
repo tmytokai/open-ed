@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 位相反転</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログサイン波</a></li>
+<li>学習項目: [1] 時間領域アナログサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+元の時間領域アナログサイン波の初期位相が $\phi$ [rad] である時、$\phi \pm \pi$ [rad] の初期位相を持つ時間領域アナログサイン波は<b>「位相が反転している」</b>と言い、元のサイン波のグラフを上下反転したグラフとなります。
+</p>
+
+<p>
+式で表せば、元の時間領域アナログサイン波の式が
+</p>
+\[
+f(t) = a \cdot \sin( w \cdot t + \phi )
+\]
+<p>
+ならば、位相が反転しているサイン波の式は
+</p>
+\[
+f(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
+\]
+<p>
+となります。cos の時も同じように元の時間領域アナログサイン波の式が
+</p>
+\[
+f(t) = a \cdot \cos( w \cdot t + \phi )
+\]
+<p>
+ならば、位相が反転しているサイン波の式は
+</p>
+\[
+f(t) = a \cdot \cos \{ w \cdot t + (\phi \pm \pi) \}
+\]
+<p>
+です。
+</p>
+
+<p>
+ちなみにグラフが上下反転するということは、<b>位相反転は振幅 $a$ の符号を反転させることと同じ</b>意味となります。
+</p>
+
+<p>
+例えば次の図 1 は振幅が $a=1$、角周波数が $w=2\pi$、初期位相が $\phi= 0$ の典型的な時間領域アナログサイン波です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: $f(t) = 1 \cdot \sin( 2\pi \cdot t )$</b>
+<p>
+</p>
+<img src="./img/page05-fig1.png" alt="">
+</div>
+
+<p>
+一方、次の図 2 は振幅と角周波数は同じですが初期位相を $\phi= -\pi$ とした時のアナログサイン波です。もちろん初期位相を $\phi= \pi$ としたり、初期位相は元のままで振幅を $a = -1$ としても同じグラフになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: $f(t) = 1 \cdot \sin( 2\pi \cdot t -\pi )$ 又は $f(t) = 1 \cdot \sin( 2\pi \cdot t +\pi )$  又は $f(t) = -1 \cdot \sin( 2\pi \cdot t )$</b>
+<p>
+</p>
+<img src="./img/page05-fig2.png" alt="">
+</div>
+
+<br>
+<script>PreNext(5,7)</script>
+</body>
+</html>
