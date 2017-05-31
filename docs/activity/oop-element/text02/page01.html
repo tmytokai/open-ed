@@ -1,54 +1,54 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>アクセス修飾子</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. アクセス修飾子</title>
 </head>
 <body>
 
-<h2>アクセス修飾子</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの三大要素</a></li>
+<li>学習項目: [2] カプセル化</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
-今まで特に説明も無くクラス名、フィールド、メソッドの前に「public」というキーワードをつけていましたが、この「public」は専門的には「アクセス修飾子」と呼ばれるものです。
-<br>
-参考までにクラスの定義方法を再掲します。
-<br>
-<br>
-<pre class="prog">
-<b>クラスの基本的な定義方法:</b>
+<h2><script>GetTitle()</script></h2>
 
-アクセス修飾子 class クラス名{
+<p>
+今まで特に説明も無くフィールドとメソッドの前に「public」というキーワードをつけていましたが、この「public」は専門的には<b>「アクセス修飾子」</b>と呼ばれています。
+</p>
 
-    アクセス修飾子　型　フィールド名1;
-    アクセス修飾子　型　フィールド名2;
-    
-    アクセス修飾子　戻り値の型　メソッド名1(引数){
-        内容;
-    }
+<p>
+この「アクセス修飾子」はフィールドやメソッドのアクセス権を決めるための修飾子で、大抵のオブジェクト指向言語には<b>「public」「private」「protected」</b>の3つの修飾子が用意されています。
+</p>
 
-    アクセス修飾子　戻り値の型　メソッド名2(引数){
-        内容;
-    }
-}
-</pre>
-<br>
-<br>
-この「アクセス修飾子」はそのクラスやフィールド、メソッドのアクセス権を決めるためのキーワードで、大抵のオブジェクト指向言語には「public」「private」「protected」の3つの修飾子が用意されています。
-<br>
-<br>
-「public」なフィールドやメソッドは他の全てのクラスやメソッドから自由にアクセスすることが出来ます。
-<br>
-<br>
-「private」なフィールドやメソッドはそれらを定義したクラスの中からしかアクセス出来ません。
-<br>
-<br>
-「protected」は実は言語によって動作が微妙に異なるのですが、「protected」なフィールドやメソッドは他のクラスからは原則アクセス出来ないけどサブクラスからは例外的にアクセス出来る、という「public」と「private」の中間の様な性質を持っています。
-<br>
-<br>
-なおクラスのアクセス権については少し複雑な話になるので今回のアクティビティでは説明を省いて「public class」のみを使用することにします。
-<br>
-興味のある人は自分で調べて下さい。
-<br>
+<p>
+さてアクセス修飾子のうち、public と private は次のような意味を持っています。
+<p>
+
+<table>
+<tr><th>アクセス修飾子</th><th>意味</th></tr>
+<tr><td class="center">public</td><td>フィールドやメソッドは他の全てのクラスやメソッドから自由にアクセスすることが出来る</td></tr>
+<tr><td class="center">private</td><td>フィールドやメソッドはそれらを定義したクラスの中からしかアクセス出来ない</td></tr>
+</table>
+
+<p>
+なお「protected」は言語によって動作が微妙に異なるので今回のアクティビティでは詳しく説明しませんが、一般的に「protected」なフィールドやメソッドは他のクラスからは原則アクセス出来ないけどサブクラスからは例外的にアクセス出来るという「public」と「private」の中間の様な性質を持っています。
+</p>
+
+<p>
+またクラスそのものにもアクセス修飾子を付けることが出来ますが(※)、これも言語によって動作が微妙に異なるので今回のアクティビティでは詳しく説明しません。興味のある人は自分で調べてみて下さい。
+</p>
+
+<p>
+※ 今回のアクティビティでは常に public class 〜 でクラス定義しています。
+</p>
+
+<script>PreNext(1,3)</script>
 </body>
 </html>

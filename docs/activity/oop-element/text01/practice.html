@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 40  分
+演習時間: 45  分
 </p>
 
 <br>
@@ -56,13 +56,13 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Score クラスを作成し、「OBSC-1-14」の Score クラスの中身をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Score スーパークラスを継承した Taro クラスを作成して下さい(中身は空のまま) 。
+<span class="olradio"><input type="radio" name="p2"></span> Score スーパークラスを継承した Taro クラスを新規作成して下さい(中身は空のまま) 。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Score スーパークラスを継承した Hanako クラスを作成して下さい(中身は空のまま) 。
+<span class="olradio"><input type="radio" name="p2"></span> Score スーパークラスを継承した Hanako クラスを新規作成して下さい(中身は空のまま) 。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Main クラスを作成して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Main クラスを新規作成して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro クラスのインスタンス taro を作成して下さい(コンストラクタは引数無し)。
+<span class="olradio"><input type="radio" name="p2"></span> main メソッドの中で Taro クラスのインスタンス taro を作成して下さい(コンストラクタは引数無し)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 同様に Hanako クラスのインスタンス hanako を作成して下さい(コンストラクタは引数無し)。
 <br>
@@ -87,7 +87,7 @@ System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.engl
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-3 (個人PC、15分):</b> 演習 1-2 を仕様変更し、スーバークラスに name フィールドを追加してみましょう。
+<input type="checkbox"><b>演習 1-3 (個人PC、10分):</b> 演習 1-2 を仕様変更し、スーバークラスに name フィールドを追加してみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -95,11 +95,11 @@ System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.engl
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Score スーパークラスに public String name というフィールドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Taro クラスに引数無しコンストラクタを追加し、コンストラクタ内で name フィールドに "太郎" を代入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Taro クラスに引数無しコンストラクタ Taro() を追加し、そのコンストラクタ内で name フィールドに "太郎" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 同様に Hanako クラスに引数無しコンストラクタを追加し、コンストラクタ内で name フィールドに "花子" を代入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 同様に Hanako クラスに引数無しコンストラクタ Hanako() を追加し、そのコンストラクタ内で name フィールドに "花子" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> taro と hanako の情報表示部を以下のように変更して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> taro と hanako の情報表示部を以下のように書き換えてして下さい。
 </p>
 <div class="info">
 
@@ -117,6 +117,38 @@ System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " englis
 <span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-4 (個人PC、10分):</b> 演習 1-3 に引き続き、今度はスーバークラスに math と english の合計点を返す total() メソッドを追加してみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> プロジェクト「OELM-1-3」を丸ごとコピーし、名前を「OELM-1-4」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Score スーパークラスに public int total() というメソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> total() の中で math と english を合計して return して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> taro と hanako の情報表示部を以下のように書き換えてして下さい。
+</p>
+<div class="info">
+
+<pre class="wrap">
+System.out.println( "name = " + taro.name + " math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average() + " 合計 = " +taro.total() );
+System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " english = " + hanako.english + " 平均 = " + hanako.average()+ " 合計 = " + hanako.total());
+</pre>
+
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 実行します。taro と hanako の合計点が表示されていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
 
 <script>PreNext(3,2)</script>
 </body>

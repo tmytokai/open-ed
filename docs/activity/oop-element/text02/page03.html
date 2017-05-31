@@ -1,93 +1,107 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>getter と setter</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. getter と setter</title>
 </head>
 <body>
 
-<h2>getter と setter</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの三大要素</a></li>
+<li>学習項目: [2] カプセル化</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
+
+<p>
 前のページで「フィールドは原則 private にして隠蔽しましょう」と書きましたが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
 <br>
-その場合は「getter」と「setter」というテクニックを使うことが一般的です。
-<br>
-<br>
-「getter」 (ゲッター）は private により隠蔽されたフィールドの値を外部から取得するために使うメソッドです。
-<br>
-例えばJavaではソース1の様に定義します。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1: getter の定義</b>
+その場合は「getter」と「setter」というテクニックがよく使われています。
+</p>
 
+<p>
+「getter」は private により隠蔽されたフィールドの値を外部から取得するために使うメソッドで、例えばJavaではソース 1 の様に定義します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : getter の定義</b>
+<pre class="wrap">
 public class HOGE{
 
   private int abc;
 
   // フィールド abc の getter
-  // メソッド名は何でも良いが　get〜 とするのが一般的
+  // メソッド名は何でも良いが　get〜 とするのが一般的(かも)
   public int get_abc(){ return abc; }
 }
 </pre>
+</div>
 
-<br>
-それでHOGE以外のクラスや main メソッドなどから private なフィールド abc の値を取得したい場合はソース2のようにします。
+<p>
+HOGE 以外のクラスから abc フィールドの値を取得したい場合はソース 2 のようにします。
+</p>
 
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース2: getter の使い方</b>
-
+<div class="info">
+<input type="checkbox"><b>ソース 2 : getter の使い方</b>
+<pre class="wrap">
 HOGE hoge = new HOGE();
 int a = hoge.get_abc();
 </pre>
+</div>
 
-<br>
-一方「setter」(セッター）は private により隠蔽されたフィールドの値を外部から変更するために使うメソッドです。
-<br>
-例えばJavaではソース3の様に書きます。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース3: setter の定義</b>
+<p>
+一方「setter」は private により隠蔽されたフィールドの値を外部から変更するために使うメソッドで、例えばJavaではソース 3 の様に書きます。
+</p>
 
+<div class="info">
+<input type="checkbox"><b>ソース 3 : setter の定義</b>
+<pre class="wrap">
 public class HOGE{
 
   private int abc;
   
   // フィールド abc の setter
-  // メソッド名は何でも良いが set〜 とするのが一般的
+  // メソッド名は何でも良いが set〜 とするのが一般的(かも)
   // 引数名は何でも良い。人によって名前付けの流儀もまちまち
   public void set_abc( int _abc ){ abc = _abc; }
 }
 </pre>
+</div>
 
-<br>
-それでHOGE以外のクラスや main メソッドなどから private なフィールド abc の値をセットしたい場合はソース4のようにします。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース4: setter の使い方</b>
+<p>
+HOGE 以外のクラスから abc フィールドに値をセットしたい場合はソース 4 のようにします。
+</p>
 
+<div class="info">
+<input type="checkbox"><b>ソース 4 : setter の使い方</b>
+<pre class="wrap">
 HOGE hoge = new HOGE();
 hoge.set_abc( 123 );
 </pre>
+</div>
 
-<br>
-さて実はこの getter/setter のテクニックは最近は世界中のプログラマーから嫌われていて、C# や swift などの新し目の言語では代わりに「プロパティ」という似たような機能が用意されています(※)。
-<br>
-例えば C# のプロパティはソース5の様に書きます。
-<br>
-<br>
-※ 古めのC++やJavaには有りません
-<br>
-<br>
-詳しくはここでは取り扱いませんが、「プロパティ」は最近のプログラミングでは必須の機能ですので、詳細については自分で調べておきましょう。
-<pre class="prog">
-<input type="checkbox"><b>ソース5: C#のプロパティの例</b>
 
+<p>
+ところで「getter」と「setter」を使ってしまうとフィールドを public にすることとあまり違いがなくなるという問題があります。
+<br>
+よって「getter」と「setter」は絶対に使っていけないと主張する人も多いです。
+</p>
+
+<p>
+また C# や swift などの新し目の言語では「getter」と「setter」の代わりに「プロパティ」という似たような機能が用意されています。
+<br>
+参考までに C# ではプロパティはソース 5 の様にして使います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 5 : C# でのプロパティの使い方</b>
+<pre class="wrap">
 定義:
 
 class HOGE{
@@ -106,7 +120,12 @@ HOGE hoge = new HOGE();
 int a = hoge.Abc;
 hoge.Abc = 123;
 </pre>
+</div>
 
-<br>
+<p>
+これ以上詳しくはこのアクティビィティでは取り扱いませんが、「プロパティ」は最近のオブジェクト指向プログラミングでは必須の機能ですので、興味がある人は自分で調べておきましょう。
+</p>
+
+<script>PreNext(3,3)</script>
 </body>
 </html>
