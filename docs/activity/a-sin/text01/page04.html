@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 初期位相と進み・遅れ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログサイン波</a></li>
+<li>学習項目: [1] 時間領域アナログサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+初期位相 $\phi$ [rad] が取り得る範囲は実数値全体、つまり $-\infty < \phi < \infty$ なのですが、
+</p>
+
+\[
+f(t) = a \cdot \sin( w \cdot t +  \phi ) = a \cdot \sin\{ w \cdot t +  (\phi \pm 2\pi) \}
+\]
+
+<p>
+という公式から $f(t)$ は $\phi$ に関して周期 $2\pi$ [rad] で周期的になっていることが分かります。
+</p>
+<p>
+従って一般的に $\phi$ の取り得る範囲を $-\pi \leq \phi \leq \pi$ だけに限定し、この範囲を超えている場合はこの範囲内に収まるように数値を変換することが多いです。
+<br>
+例えば $\phi = 3 \pi /2$ は $\phi = -\pi/2 \ ( = 3 \pi /2 - 2\pi)$ と変換できますし、$\phi = -3 \pi /2$ は $\phi = \pi/2 \ ( = -3 \pi /2 + 2\pi)$ と変換できます。
+
+</p>
+<p>
+さて、初期位相 $\phi$ [rad] は時間領域アナログサイン波の時間的な進みまたは遅れを意味します。
+<br>
+グラフで言えばグラフ全体が左右に平行移動することを意味します。
+</p>
+
+<p>
+$\phi$がプラス値の時は<b>「$\phi$ [rad]だけ位相が進んでいる」</b>と言って時間領域アナログサイン波が時間的に進んでいる( ＝ グラフ全体が左に平行移動する)ことを意味しています。
+</p>
+
+<p>
+一方、$\phi$ がマイナス値の時は<b>「$|\phi|$ [rad]だけ位相が遅れている(※)」</b>と言って時間領域アナログサイン波が時間的に遅れている(＝ グラフ全体が右に平行移動する)ことを意味しています。
+</p>
+
+<p>
+※ $\phi$ はマイナスなので絶対値を取っています。
+</p>
+
+<p>
+ただ $\phi$ を使って進み・遅れを考えることは慣れないうちは難しいので、以下の公式を使って「$\phi$ による進み・遅れ」を「秒による進み・遅れ」に変換します。
+<br>
+ただし話を簡単にするため、今回は $\phi$ は $-\pi \leq \phi \leq \pi$ の範囲内に収まるように変換済みで、かつ $w > 0$ とします。
+</p>
+
+
+\[
+f(t) = a \cdot \sin( w \cdot t + \phi ) = a \cdot \sin[ w \{  t - (- \phi/w) \} ]
+\]
+
+<p>
+この公式より表 1 に書いた内容が直接導かれます。
+</p>
+
+
+<input type="checkbox"><b>表 1 : 初期位相 $\phi$ [rad] と進み・遅れの関係 (ただし $-\pi \leq \phi \leq \pi$ かつ $w>0$ )</b>
+<table>
+<tr><th>$\phi$ の符号</th><th>位相が・・・</th><th>秒で言い換えると・・・</th><th>平行移動方向と距離</th></tr>
+<tr><td class="center">プラス</td><td class="center">$\phi$ [rad] 進んでいる</td><td class="center">$\phi/w$ [秒] 進んでいる</td><td class="center">左へ$\phi/w$ [秒]</td></tr>
+<tr><td class="center">マイナス</td><td class="center">$|\phi|$ [rad] 遅れている</td><td class="center">$|\phi|/w$ [秒] 遅れている</td><td class="center">右へ$|\phi|/w$ [秒]</td></tr>
+</table>
+
+<p>
+ところで公式 $w = 2 \pi / \textrm{T}$ より、$w$ の代わりに周期 $\textrm{T}$  [秒]を使って秒数を求めることも出来ます(表 2 )。
+<br>
+$\phi$を$2\pi$で割って$\textrm{T}$ を掛けるだけで秒数が求まるので、実用上は表 2 を使う方が便利な事が多いです。
+</p>
+
+<input type="checkbox"><b>表 2 : 周期 $\textrm{T}$ [秒]を使った初期位相 $\phi$ [rad]と進み・遅れの関係  (ただし $-\pi \leq \phi \leq \pi$ )</b>
+<table>
+<tr><th>$\phi$ の符号</th><th>位相が・・・</th><th>秒で言い換えると・・・</th><th>平行移動方向と距離</th></tr>
+<tr><td class="center">プラス</td><td class="center">$\phi$ [rad] 進んでいる</td><td class="center">$\phi/(2\pi) \cdot \textrm{T}$ [秒] 進んでいる </td><td class="center"> 左へ $\phi/(2\pi) \cdot \textrm{T}$ [秒] </td></tr>
+<tr><td class="center">マイナス</td><td class="center">$|\phi|$ [rad] 遅れている</td><td class="center">$|\phi|/(2\pi) \cdot \textrm{T}$ [秒] 遅れている </td><td class="center"> 右へ $|\phi|/(2\pi) \cdot \textrm{T}$ [秒]</td></tr>
+</table>
+
+<br>
+<script>PreNext(4,7)</script>
+</body>
+</html>
