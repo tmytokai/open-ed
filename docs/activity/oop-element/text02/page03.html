@@ -75,17 +75,27 @@ public class HOGE{
 </div>
 
 <p>
-HOGE 以外のクラスから abc フィールドに値をセットしたい場合はソース 4 のようにします。
+さて、main メソッドや HOGE を継承していないクラスのメソッドから abc フィールドに値をセットしたい場合は HOGE のインスタンスを作った後にソース 4 のようにします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 4 : setter の使い方</b>
+<input type="checkbox"><b>ソース 4 : setter の使い方 (HOGE を継承していないクラスの場合)</b>
 <pre class="wrap">
 HOGE hoge = new HOGE();
 hoge.set_abc( 123 );
 </pre>
 </div>
 
+<p>
+一方、HOGE を継承しているサブクラスのメソッドから abc フィールドに値をセットしたい場合は<a href="../text01/page02.html">フィールドとメソッドの再利用</a>の所で説明したようにそのまま setter を呼び出せるのでソース 5 のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 5 : setter の使い方 (HOGE のサブクラスの場合)</b>
+<pre class="wrap">
+set_abc( 123 );
+</pre>
+</div>
 
 <p>
 ところで「getter」と「setter」を使ってしまうとフィールドを public にすることとあまり違いがなくなるという問題があります。
@@ -96,11 +106,11 @@ hoge.set_abc( 123 );
 <p>
 また C# や swift などの新し目の言語では「getter」と「setter」の代わりに「プロパティ」という似たような機能が用意されています。
 <br>
-参考までに C# ではプロパティはソース 5 の様にして使います。
+参考までに C# ではプロパティはソース 6 の様にして使います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 5 : C# でのプロパティの使い方</b>
+<input type="checkbox"><b>ソース 6 : C# でのプロパティの使い方</b>
 <pre class="wrap">
 定義:
 

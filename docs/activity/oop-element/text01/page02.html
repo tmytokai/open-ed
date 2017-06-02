@@ -111,8 +111,35 @@ public class FRUIT {
 	}
 }
 </pre>
-
 </div>
+
+<p>
+なおスーパークラスのメソッドはサブクラスからそのまま呼び出せます。
+<br>
+例えば APPLE クラスを次のように書き換えたとしましょう。
+<br>
+この例では APPLE サブクラスの mogu_mogu() メソッドから FRUIT スーパークラスの eat() メソッドを呼び出しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 5 : サブクラスからスーパークラスのメソッドを呼び出す例</b>
+<pre class="wrap">
+public class APPLE extends FRUIT{
+
+	public APPLE()
+	{
+		name = "りんご";
+	}
+
+        public void mogu_mogu()
+	{
+		eat();  // FURIT スーパークラスの eat() メソッドを呼び出す
+	}
+}
+</pre>
+</div>
+
+
 
 <br>
 <script>PreNext(2,2)</script>
