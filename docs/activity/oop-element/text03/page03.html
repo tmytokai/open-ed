@@ -79,8 +79,29 @@ public static void main(String[] args) {
 </p>
 
 <p>
-ちなみに、これまた当たり前な話過ぎるため、「同じ名前のメソッドによるポリモーフィズム」も一般的にはポリモーフィズムとしてみなされていない様です。
+ちなみに、次のソース 3 の様にインスタンス配列と for ループを使って main メソッドを書き換えることも可能です。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 3 : main メソッド 改</b>
+<pre class="wrap">
+public static void main(String[] args) {
+
+        FRUIT fruit[] = new FRUIT[2];
+
+        fruit[0] = new FRUIT();
+        fruit[1] = new FRUIT();
+
+        fruit[0].name = "りんご";
+        fruit[1].name = "みかん";
+
+        for(int i=0;i &lt; 2;++i) fruit[i].eat();
+}
+</pre>
+<p>
+※ オブジェクト指向言語ではこういう状況では普通は配列 + for ループではなくて vector クラス + iterator クラスを使います。詳細は自分で調べて下さい。
+</p>
+</div>
 
 <script>PreNext(3,5)</script>
 </body>
