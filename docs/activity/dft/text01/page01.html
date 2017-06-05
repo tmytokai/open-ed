@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 周期性時間領域ディジタル信号</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+まず DFT の大前提となる周期性時間領域ディジタル信号について説明します。
+</p>
+
+<p>
+周期性時間領域ディジタル信号とはある周期ごとに同じ波形を繰り返すディジタル信号のことで、定義は以下のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 周期性時間領域ディジタル信号 $f[i]$</b>
+
+<p>
+ある正整数 $\textrm{N}$ が与えられた時
+
+\[
+f[i] = f[i + n \cdot \textrm{N}]
+\]
+
+<p>
+の関係を満たすディジタル信号を周期性ディジタル信号という。
+</p>
+
+<p>
+$\textrm{N}$ ・・・ 周期、正整数の定数、単位は[点]
+</p>
+
+<p>
+$n$ ・・・ 任意の整数 $(n = 0, \pm 1, \pm 2, \cdots)$
+</p>
+
+<p>
+$i$・・・時刻、整数の変数、単位は無し(※ ディジタル信号なので<a href="../../d-signal">秒の概念は無い</a>)
+</p>
+
+</div>
+
+<p>
+当然ですが<a href="../../d-sin">時間領域ディジタルサイン波</a>は周期 $\textrm{N} = \textrm{T}_d$ [点] の周期性時間領域ディジタル信号になります。
+</p>
+
+<script>PreNext(1,5)</script>
+</body>
+</html>
