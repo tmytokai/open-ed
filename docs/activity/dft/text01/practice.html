@@ -39,6 +39,7 @@ f[i] =
 + 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
 \]
 </p>
+<p>
 のグラフを描いてみましょう。
 </p>
 <div class="olradio">
@@ -64,7 +65,7 @@ f[i] =
 </div>
 
 <br>
-<h2><a href="./page02.pdf">2. DFT と IDFTの定義</a></h2>
+<h2><a href="./page02.html">2. DFT と IDFTの定義</a></h2>
 
 <p>
 次の項目で演習を行います。
@@ -89,7 +90,7 @@ f[i] =
 の信号値をプログラム上で求めてみましょう。
 </p>
 <div class="olradio">
-<br>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> C言語 の開発環境を起動します。ソース名は「DFT-1-2.cpp」とします。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> main 関数で int 型変数 N を定義し、演習 1-1 で求めた周期 $\textrm{N}$ の値を代入して下さい。
@@ -148,7 +149,7 @@ f[i] =
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 argC[]  に代入して下さい。
 </p>
 <p>
- ※  絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] <  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
+ ※ 絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を画面に表示して下さい。
@@ -195,6 +196,7 @@ f[i] =
 <span class="olradio"><input type="radio" name="p4"></span> 最初の列に各 $i$ をオートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 次の列に IDFT で求めた f2[0] 〜  f2[N-1] の値をコピーします。
+</p>
 <p>
 　※ 周期的な信号なので足りない分は f2[0] 〜 f2[N-1] の値を繰り返しコピーして下さい。
 </p>
@@ -230,6 +232,7 @@ f[i] =
 の直流成分、基本波、高調波をプログラム上で求めて表示しましょう。
 </p>
 <div class="olradio">
+<p>
 <span class="olradio"><input type="radio" name="p5"></span> C言語 の開発環境を起動します。ソース名は「DFT-1-5.cpp」とします。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span>  演習 1-4 で作成したソースコード(DFT-1-4.cpp)をコピーし、続きから作成します。

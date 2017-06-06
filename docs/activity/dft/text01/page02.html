@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. DFT と IDFTの定義</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [1] DFT と IDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+周期性時間領域ディジタル信号 $f[i]$ から DFT係数 $\textrm{C}[k]$ を求める演算を DFT (Discrete Fourier Transform: 離散フーリエ変換 )と言います。
+</p>
+
+<p>
+DFT係数 $\textrm{C}[k]$ が何を意味しているかについては<a href="./page04.html">後で説明する</a>ことにして、とりあえずここでは機械的に DFT 係数を求める方法を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: DFT (Discrete Fourier Transform: 離散フーリエ変換)</b>
+
+\[
+\textrm{C}[k] = \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+\]
+
+<p>
+$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数、複素数の定数、個数は $\textrm{C}[0], \textrm{C}[1], \cdots, \textrm{C}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</p>
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
+</p>
+
+</div>
+
+<p>
+さて DFT とは逆に、DFT係数 $\textrm{C}[k]$ から元の $f[i]$ を復元する演算を IDFT (Inverse Discrete Fourier Transform: 逆離散フーリエ変換)と言います。
+</p>
+
+<p>
+IDFTの求め方は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: IDFT(Inverse Discrete Fourier Transform: 逆離散フーリエ変換)</b>
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1)
+\]
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
+</p>
+
+<p>
+$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数、DFT係数、複素数の定数、個数は $\textrm{C}[0], \textrm{C}[1], \cdots, \textrm{C}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+</p>
+
+</div>
+
+<p>
+この IDFT の式を見て<a href="../../fourier/">複素フーリエ級数展開</a>
+</p>
+
+\[
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\]
+
+<p>
+を思い出した人がいると思いますが、実は IDFT は複素フーリエ級数展開のディジタル版に相当します。
+<br>
+違いは $t$ [秒] がディジタル時刻 $i$ に代わったこと、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] が $2\pi/\textrm{N}$ に代わったこと、$\sum$ の範囲が代わったことだけです。
+</p>
+
+<p>
+また複素フーリエ級数展開の時と同様にDFT係数 $\textrm{C}[k]$ は複素共役関係の性質を持っています。つまり
+
+<ul>
+<li>$|\textrm{C}[k]|$ は $\textrm{N}/2$ を中心として対称</li>
+<li>$\angle \textrm{C}[k]$ は $\textrm{N}/2$ を中心として点対称</li>
+</ul>
+
+<p>
+です。
+よってDFT係数を全て求めなくても、半分だけ求めれば残り半分のDFT係数は求まります。
+</p>
+
+<script>PreNext(2,5)</script>
+</body>
+</html>
