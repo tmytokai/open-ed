@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. オーバーライドによるポリモーフィズム</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの三大要素</a></li>
+<li>学習項目: [3] ポリモーフィズム</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+「オーバーライド」とはスーパークラスのメソッドをサブクラスで上書きし、そのサブクラスのインスタンスを呼び出した時に書き換えたサブクラスの方のメソッドを呼び出す機能で、これもポリモーフィズムのひとつです。
+<br>
+<a href="./page04.html">オーバロード</a>と言葉は似ていますが全く違う機能です。
+</p>
+
+<p>
+この「オーバーライド」を使うと<b>サブクラスのメソッドの動きをスーパークラスと根本的に変えることが可能</b>になります。
+</p>
+
+<p>
+ではまた具体的な例を使って「オーバライド」について説明していきますが、<a href="./page05.html">前のページ</a>で使った FRUIT、APPLE、ORANGE クラスはそのまま使うことにします。
+<br>
+また main メソッドもソース 4 または 5 のものをそのまま使います。
+</p>
+
+<p>
+参考までに実行結果をもう一度示します。
+</p>
+<div class="info">
+<input type="checkbox"><b>実行結果 1 : </b>
+<pre class="wrap">
+りんご美味しい
+みかん美味しい
+</pre>
+</div>
+
+<p>
+さて、ここで ORANGE サブクラスのインスタンスを eat() したら不味かったという問題が生じましたので、 この時だけ「みかん不味い」と表示したいと思います。
+</p>
+
+<p>
+もしオーバーライドの事を知らないプログラマーなら FRUIT スーパークラスの eat() メソッドを多分次のソース 1 の様に書き換えるでしょう。
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 1: 非常に良くない例</b>
+<pre class="wrap">
+public class FRUIT {
+
+    public String name;
+
+    public void eat(){
+
+        if( name == "みかん" ) System.out.println(name+"不味い");
+        else System.out.println(name+"美味い");
+    }
+}
+</pre>
+</div>
+
+<p>
+しかしこのコードには大問題があります。というのも
+</p>
+
+<ul>
+<li>更にもし「いちご」サブクラスを追加した時に「いちごまあまあ」と表示したいとしたら eat() に別の if 文を追加する必要がある</li>
+<li>更にもし「バナナ」サブクラスを追加した時に「バナナ腐ってる」と表示したいとしたら eat() に別の if 文を追加する必要がある</li>
+<li>更にもし・・・</li>
+</ul>
+
+<p>
+というように、サブクラスを追加する度に if 文が eat() に追加されて行くことになり、ソースの見た目や独立性、保守性が最悪なコードになるからです。
+</p>
+
+<p>
+一般的に<b>スーパークラスのメソッド内ではサブクラス毎に条件分岐させる処理を書いてはいけません</b>。
+</p>
+
+<p>
+そこで、ある一部のサブクラスのメソッドだけスーパークラスのメソッドと違う動作をさせたい時は、スーパークラスのメソッドをサブクラスで「オーバーライド」、つまり上書きします。
+<p>
+
+<p>
+ソース 2 がスーパークラスの eat() を ORANGE サブクラスの eat() でオーバーライドした例です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : スーパークラスの eat() を ORANGE サブクラスの eat() でオーバーライド</b>
+<pre class="wrap">
+public class ORANGE extends FRUIT {
+
+    public ORANGE(){
+        name = "みかん";
+    }
+
+    public void eat(){
+        System.out.println(name+"不味い");
+    }
+}
+</pre>
+</div>
+
+<p>
+すると ORANGE サブクラスのインスタンスを eat() した時はスーパークラスの eat() では無く、代わりに ORANGE サブクラスの eat() が呼び出され次のような表示結果になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>実行結果 2 : </b>
+<pre class="wrap">
+りんご美味しい
+<b>みかん不味い</b>
+</pre>
+</div>
+
+<br>
+<script>PreNext(6,6)</script>
+</body>
+</html>

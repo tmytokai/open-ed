@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. インヘリタンスによるポリモーフィズム</title>
+<title>4. オーバーロードによるポリモーフィズム</title>
 </head>
 <body>
 
@@ -20,115 +20,16 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-オブジェクト指向言語では「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」ことが出来ます。
+以前「<a href="../../oop-basic/">オブジェクト指向プログラミングの基礎</a>」で勉強した<a href="../../oop-basic/text01/page07.html">オーバロード</a>は「同じクラス内に同じ名前のメソッドを複数個定義する機能」でした。
 <br>
-この機能を利用すると、前のページと同様に「同じ名前のメソッドを使ってもインスタンス毎に動作を異ならせることが可能」になります。
+演習で確認したように、同じ名前のメソッドを使っても引数が変わると動作が変わりますので、実はオーバロードもポリモーフィズムのひとつです。
 </p>
-<p>
-といきなり言っても何のことか良く分からないと思うので、これから具体的なコードを使って段階的に説明していきます。
-</p>
-<p>
-まず大元の FRUIT スーパークラスをソース 1 で定義します。
-</p>
-<div class="info">
-<input type="checkbox"><b>ソース 1 : FRUIT スーパークラス</b>
-<pre class="wrap">
-public class FRUIT {
 
-    public String name;
-
-    public void eat(){
-        System.out.println(name+"美味い");
-    }
-}
-</pre>
-</div>
 <p>
-この FRUIT スーパークラスを継承させて APPLE サブクラス(ソース 2 )と ORANGE サブクラス(ソース 3 )を作ります。
+ただオーバロードについては既に演習済みですので、今回は説明を省きます。
 </p>
-<div class="info">
-<input type="checkbox"><b>ソース 2 : APPLE サブクラス</b>
-<pre class="wrap">
-public class APPLE extends FRUIT{
-
-    public APPLE(){
-        name = "りんご";
-    }
-}
-</pre>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>ソース 3 : ORANGE サブクラス</b>
-<pre class="wrap">
-public class ORANGE extends FRUIT{
-
-    public ORANGE(){
-        name = "みかん";
-    }
-}
-</pre>
-</div>
-
-<p>
-次に main メソッドをソース 4 に示しますが、今まで使ってきた main メソッドと違い<b>apple と orange が FRUIT スーパークラスのインスタンスになっている</b>ことに注目して下さい。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>ソース 4 : main メソッド</b>
-<pre class="wrap">
-public static void main(String[] args) {
-
-	FRUIT apple = new APPLE();   // ※ 今までは「APPLE apple = new APPLE();」 だった！
-	FRUIT orange = new ORANGE(); // ※ 今までは「ORANGE orange = new ORANGE();」 だった！
-
-	apple.eat();
-	orange.eat();
-}
-</pre>
-</div>
-
-<p>
-すると「apple と orange は見かけ上は FRUIT スーパークラスのインスタンスだけど、実態はそれぞれ APPLE、ORANGE サブクラスのインスタンス」なので、同じ eat() メソッドを呼び出しているのに apple と orange で結果が変わります(実行結果 1 )。
-
-<div class="info">
-<input type="checkbox"><b>実行結果 1 :</b>
-<pre class="wrap">
-りんご美味しい
-みかん美味しい
-</pre>
-</div>
-
-<p>
-なお、インヘリタンスによるポリモーフィズムを応用すると、次のソース 5 の様にスーパークラスのインスタンス配列と for ループを使って異なるサブクラスの複数のインスタンスを一元管理出来るようになります。
-</p>
-<p>
-このテクニックは非常に良く使われますので覚えておくと良いでしょう。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>ソース 5 : main メソッド 改</b>
-<pre class="wrap">
-public static void main(String[] args) {
-	        
-        FRUIT fruit[] = new FRUIT[2];
-
-        fruit[0] = new APPLE();
-        fruit[1] = new ORANGE();
-        
-        for(int i=0;i &lt; 2;++i) fruit[i].eat();
-}
-</pre>
-<p>
-※1 オブジェクト指向言語ではこういう状況では普通は配列 + for ループではなくて vector クラス + iterator クラスを使います。詳細は自分で調べて下さい。
-</p>
-<p>
-※2 <a href="./page03.html">前のページ</a>のソース 3 と似ていますが、ソース 3 では FRUIT クラスのインスタンスを FRUIT の配列に代入していたのに対し、ここでは APPLE と ORANGE のインスタンスを FRUIT の配列に代入しているという違いが有ります。この違いを良く覚えておきましょう。
-</p>
-</div>
-
-<br>
-<script>PreNext(4,5)</script>
+<script>PreNext(4,6)</script>
 </body>
 </html>

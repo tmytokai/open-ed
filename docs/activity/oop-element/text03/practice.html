@@ -20,14 +20,14 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: ?  分
+演習時間: 40  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. ポリモーフィズムとは</a></h2>
 
 <p>
-このページの最後に問題を出します。
+演習は省略します。
 </p>
 
 <br>
@@ -41,59 +41,80 @@
 <h2><a href="./page03.html">3. メソッドによるポリモーフィズム</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 3-1 (個人PC、10分):</b> テキストのソース 1 と 3 を実行し、これまで演習してきたメソッドによるポリモーフィズムを意識して再確認してみましょう。
+これまでの演習で既に体験しているので省略します。
+</p>
+
+<br>
+<h2><a href="./page04.html">4. オーバロードによるポリモーフィズム</a></h2>
+
+<p>
+これまでの演習で既に体験しているので省略します。
+</p>
+
+<br>
+<h2><a href="./page05.html">5. インヘリタンスによるポリモーフィズム</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 3-1 (個人PC、15分):</b> インヘリタンスによるポリモーフィズムの便利さを確認してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 新規のJavaプロジェクトを作ります。プロジェクト名は「OELM-3-1」とします。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「OELM-2-3」を丸ごとコピーし、名前を「OELM-3-1」とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> FRUIT(ソース1)、 Main クラス(ソース3)を作成します。
+<span class="olradio"><input type="radio" name="p1"></span> main メソッドの上に public static void show( Score s ) メソッドを追加します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 実行します。
+<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の taro の情報表示部を show メソッド内に移動し、ソース 5 を参考にして Score クラスのインスタンス s の情報表示に変えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の hanako の情報表示部を消して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main メソッド内から show メソッドを呼び出して、taro と hanako の情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行し、便利さ確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main メソッドのソースコード」を記入して下さい。
 </p>
 </div>
 
 <br>
-<h2><a href="./page04.html">4. インヘリタンスによるポリモーフィズム</a></h2>
-
 <p>
-<input type="checkbox"><b>演習 3-2 (個人PC、10分):</b> インヘリタンスによるポリモーフィズムを体験してみましょう。
+<input type="checkbox"><b>演習 3-2 (個人PC、15分):</b> 子クラスを 3 つに増やし、インヘリタンスによるポリモーフィズムとインスタンス配列を組み合わせると便利な事を確認してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「OELM-2-3」を丸ごとコピーし、名前を「OELM-3-2」とします。
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「OELM-3-1」を丸ごとコピーし、名前を「OELM-3-2」とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> ソース 4 を参考にし、main クラスの taro と hanako を Score クラスのインスタンスにして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Taro クラスを丸ごとコピーして Jiro クラスを作ります。name には "次郎" をセットして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 実行します。
+<span class="olradio"><input type="radio" name="p2"></span> ソース 6 を参考にし、長さ 3 の Score クラスのインタンス配列 score[3] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 同様にソース 6 を参考にし、score[0] に Taro クラス、score[1] に Hanako クラス、 score[2] に Jiro クラスのインスタンスを new して代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 同様にソース 6 を参考にし、for ループ内で show メソッドを呼び出し、各score[i] の情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行し、便利さを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main メソッドのソースコード」を記入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main メソッドのソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
+
 <br>
+<h2><a href="./page06.html">6. オーバーライドによるポリモーフィズム</a></h2>
+
 <p>
-<input type="checkbox"><b>演習 3-3 (個人PC、10分):</b> インヘリタンスによるポリモーフィズムとインスタンス配列を組み合わせると便利な事を確認してみましょう。
+<input type="checkbox"><b>演習 3-3 (個人PC、10分):</b> オーバーライドを使って、次郎の合計点が本来の2倍になるようにしてみましょう。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> プロジェクト「OELM-3-2」を丸ごとコピーし、名前を「OELM-3-3」とします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Taro クラスを丸ごとコピーして Jiro クラスを作ります。name には "次郎" をセットして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Jiro クラスで total メソッドをオーバーライドし、合計点の 2 倍を retrun して下さい。(ヒント) getter を使う必要有
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> ソース 5 を参考にし、長さ 3 の Score クラスのインタンス配列 score[3] を定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 同様にソース 5 を参考にし、score[0] に Taro クラス、score[1] に Hanako クラス、 score[2] に Jiro クラスのインスタンスを new して代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 同様にソース 5 を参考にし、for ループを使って score[0] 〜 score[2] の各インスタンスの情報を表示して下さい。
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> 実行します。
+<span class="olradio"><input type="radio" name="p3"></span> 実行し、太郎と花子は従来通りだけど次郎の合計点だけが本来の2倍になっていることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>
@@ -102,14 +123,6 @@
 </div>
 
 
-<br>
-<h2><a href="./page05.html">5. オーバーライドによるポリモーフィズム</a></h2>
-
-<p>
-準備中
-</p>
-
-
-<script>PreNext(6,5)</script>
+<script>PreNext(7,6)</script>
 </body>
 </html>
