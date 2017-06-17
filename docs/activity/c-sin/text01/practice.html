@@ -107,7 +107,7 @@ z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm
 ※ マクロが実行できないという警告が出たらマクロセキュリティレベルを「中」にしてからファイルを開き直し、演習が終わってから元のレベルに戻して下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 振幅、角周波数、初期位相をセットします。
+<span class="olradio"><input type="radio" name="p3"></span> 振幅、初期位相、角周波数をセットします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 開始する前に、動きと周期を予想して下さい。
 <br>
@@ -131,7 +131,7 @@ z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトで CSIN-1-4.ods を開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 振幅、初期位相と角周波数をセットします。
+<span class="olradio"><input type="radio" name="p4"></span> 振幅、初期位相、角周波数をセットします。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 開始する前に、周期と動きがどう変わるか予想して下さい。
 <br>
@@ -146,11 +146,68 @@ z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm
 </div>
 
 <br>
-<h2><a href="./page03.pdf">3. 時間領域アナログサイン波との関係</a></h2>
+<h2><a href="./page03.html">3. サイン波との関係</a></h2>
 
 <br>
 <p>
-準備中
+<input type="checkbox"><b>演習 1-5 (個人PC、10分):</b> 
+
+\[
+z_1(t) =   \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
+\]
+
+\[
+z_2(t) = \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<p>
+とした時、表計算ソフトを使ってテキストで出てきた分解式
+</p>
+\begin{align*}
+f(t) 
+& = a \cdot \cos ( w \cdot t + \phi ) \\
+&=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \\
+&= z_1(t) + z_2(t)
+\end{align*}
+
+<p>
+が正しい事を確かめてみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="./CSIN-1-5.ods">CSIN-1-5.ods</a>をダウンロードし、演習フォルダに移して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 表計算ソフトで CSIN-1-5.ods を開いて下さい。
+</p>
+<p>
+※ マクロが実行できないという警告が出たらマクロセキュリティレベルを「中」にしてからファイルを開き直し、演習が終わってから元のレベルに戻して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> $z_1(t)$ と $z_2(t)$ の振幅、初期位相、角周波数をセットします。まずは $a=4$、$\phi = 0$、$w = \pi/2$ とします ($f(t) = 4 \cdot \cos ( \pi/2 \cdot t)$ )。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> $f(t)$ の直交成分に計算式をセットします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 開始ボタンを押します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> $z_1(t)$ 、$z_2(t)$、$f(t)$ の動きを見て分解式が正しいことを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 次は $a=2$、$\phi = -\pi/2$、$w = \pi/4$ とします ($f(t) = 2 \cdot \cos ( \pi/4 \cdot t - \pi/2 ) = 2 \cdot \sin( \pi/4 \cdot t )$ )。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> $z_1(t)$ 、$z_2(t)$、$f(t)$ の動きを見て分解式が正しいことを再確認したらシートを上書き保存します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.html">4. 工学と複素正弦波</a></h2>
+
+<p>
+過去問で演習します。
 </p>
 
 <script>PreNext(5,4)</script>
