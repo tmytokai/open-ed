@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>集約 (has a 関係)</title>
+</head>
+<body>
+
+<h2>集約 (has a 関係)</h2>
+
+<br>
+クラス図の話に戻って、今度は「関連」の一種である「集約」について学びます。
+<br>
+<br>
+「集約」は「あるクラスが他のクラスを所有している」「他のクラスから構成されている」などの主従関係を明確に示すために使われます。
+<br>
+「集約」をクラス図で表す場合は所有する側のクラスに中抜きのダイヤマークを付けます。
+<br>
+<br>
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>図1　集約のクラス図の基本 (クリックで拡大)</b>
+<a href="./img/hasa.png">
+<img src="./img/hasa.png" width="600px" border="0" >
+</a>
+</pre>
+
+<br>
+この関係を英語で書くと
+<br>
+<br>
+<b>
+A has a B (AはBを持っている)
+</b>
+<br>
+<br>
+となりますので、「集約」は別名「has a 関係」とも言います。
+<br>
+<br>
+例えば、これまで使ってきた関連のクラス図の例
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>図2　関連のクラス図の例 (クリックで拡大)</b>
+<a href="./img/assoc-car.png">
+<img src="./img/assoc-car.png" width="600px" border="0" >
+</a>
+</pre>
+
+<br>
+は常識的に考えれば
+<br>
+<br>
+「1台の車にはタイヤが4個ついている」 
+<br><br>
+又は
+<br><br>
+「1個のタイヤは1台の車に取り付けられている」 
+<br>
+<br>
+事を意味していますが、実は TIRE がタイヤではなくて外国人の TIRE 家の人達だったら意味が全く変わって、
+<br>
+<br>
+「TIRE 家に住む 4 名が 1 台の車をシェアしている」
+<br><br>
+又は
+<br><br>
+「1台の車はTIRE家に住む 4 名の所有物である」
+<br>
+<br>
+という意味になります(図3)。
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>図3　TIRE が苗字だった時のオブジェクト図 (クリックで拡大)</b>
+<a href="./img/object-tire.png">
+<img src="./img/object-tire.png" width="600px" border="0" >
+</a>
+</pre>
+
+<br>
+従って TIRE は CAR を構成する4個のタイヤであるという事を明確にしたい場合は、CAR 側に中抜きダイヤを付けて集約にする必要があります(図4)
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>図4　集約のクラス図の例 (クリックで拡大)</b>
+<a href="./img/hasa-car.png">
+<img src="./img/hasa-car.png" width="600px" border="0" >
+</a>
+</pre>
+
+<br>
+なお、中抜きダイヤマークが多いと図が見辛くなるので、主従関係が明らかな場合は中抜きダイヤマークを省略して「関連」だけ使う場合もあります。
+<br>
+どの状況では「関連」を使って、どの状況では「集約」を使うべきかという具体的な決まりは特にありませんので、自分でやり易いやり方を見つけたり、所属するチームのやり方に従って下さい。 
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

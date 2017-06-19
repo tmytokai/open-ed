@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>汎化 (is a 関係)</title>
+</head>
+<body>
+
+<h2>汎化 (is a 関係)</h2>
+
+<br>
+前のページではクラスがひとつだけの場合のクラス図を描きましたが、クラスが2つ以上ある場合はあるクラスと他のクラスの関係も図に表す必要があります。
+<br>
+<br>
+クラス間の関係は大きく分けると「汎化」「関連」の２つがあり、「関連」は更に「集約」「コンポジション」「依存」の 3 つのサブ関係に分かれます。
+<br>
+ここではまず「汎化」について学びます。
+<br>
+<br>
+さて「汎化」とは具体的には「インヘリタンス(継承)」の関係を表します。
+<br>
+例えば次の CAR (車) スーパークラス(ソース1)を継承して TRUCK (トラック) サブクラス(ソース2)を作ったとします。
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>ソース1:</b>
+
+class CAR
+{
+   public CAR(){}
+};
+</pre>
+
+<pre class="prog">
+<input type="checkbox"><b>ソース2:</b>
+
+public class TRUCK extends CAR{
+{
+    public TRUCK(){}
+};
+</pre>
+<br>
+この関係を英語で書くと
+<br>
+<br>
+<b>
+TRUCK is a CAR (トラックは車です)
+</b>
+<br>
+<br>
+となりますので、「汎化」は別名「is a 関係」とも言います。
+<br>
+<br>
+さて「汎化」をクラス図で表す場合は中抜き三角の矢印線でクラスとクラスをつないで表します。
+<br>
+この矢印はスーパークラスの方に向けて付けます。
+<br>
+<br>
+例えば上の CAR スーパークラスと TRUCK サブクラスのクラス図は次のようになります。
+
+<br>
+<pre class="prog">
+<input type="checkbox"><b>図1　汎化(is a 関係) (クリックで拡大)</b>
+<a href="./img/isa.png">
+<img src="./img/isa.png" width="400px" border="0" >
+</a>
+</pre>
+
+<br>
+<br>
+</body>
+</html>
