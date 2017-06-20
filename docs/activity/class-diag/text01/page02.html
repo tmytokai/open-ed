@@ -1,73 +1,91 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>汎化 (is a 関係)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 汎化 (is a 関係)</title>
 </head>
 <body>
 
-<h2>汎化 (is a 関係)</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
-前のページではクラスがひとつだけの場合のクラス図を描きましたが、クラスが2つ以上ある場合はあるクラスと他のクラスの関係も図に表す必要があります。
-<br>
-<br>
-クラス間の関係は大きく分けると「汎化」「関連」の２つがあり、「関連」は更に「集約」「コンポジション」「依存」の 3 つのサブ関係に分かれます。
-<br>
-ここではまず「汎化」について学びます。
-<br>
-<br>
-さて「汎化」とは具体的には「インヘリタンス(継承)」の関係を表します。
-<br>
-例えば次の CAR (車) スーパークラス(ソース1)を継承して TRUCK (トラック) サブクラス(ソース2)を作ったとします。
+<h2><script>GetTitle()</script></h2>
 
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+<p>
+前のページではクラスがひとつだけの単一クラス図を描きましたが、クラスが 2 つ以上ある場合はあるクラスと他のクラスの関係も図に表す必要があります。
+</p>
 
-class CAR
-{
-   public CAR(){}
-};
+<p>
+クラス間の関係は大きく分けると
+</p>
+
+<ol>
+<li>「汎化」</li>
+<li>「関連」</li>
+</ol>
+
+<p>
+の２つがあるのですが、ここではまず「汎化」について学びます。
+</p>
+
+<p>
+さて「汎化」とは具体的には<a href="../../oop-element/text01/page01.html">インヘリタンス(継承)</a>の関係を表します。
+<br>
+例えば<a href="./page01.html">前ページ</a>の FRUIT スーパークラスを継承して次の ORANGE サブクラスを作ったとします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : </b>
+<pre class="wrap">
+public class ORANGE extends FRUIT{
+
+	public ORANGE() // コンストラクタ
+	{
+		set_name( "みかん" );
+	}
+}
 </pre>
+</div>
 
-<pre class="prog">
-<input type="checkbox"><b>ソース2:</b>
-
-public class TRUCK extends CAR{
-{
-    public TRUCK(){}
-};
-</pre>
-<br>
+<p>
 この関係を英語で書くと
-<br>
-<br>
-<b>
-TRUCK is a CAR (トラックは車です)
-</b>
-<br>
-<br>
-となりますので、「汎化」は別名「is a 関係」とも言います。
-<br>
-<br>
-さて「汎化」をクラス図で表す場合は中抜き三角の矢印線でクラスとクラスをつないで表します。
+</p>
+
+<p>
+<b>ORANGE is a FRUIT : みかんはフルーツです</b>
+</p>
+
+<p>
+となりますので(微妙に a の使い方が変な気もしますが)、「汎化」は別名<b>「is a 関係」</b>と言います。
+</p>
+
+<p>
+さてこの「汎化」をクラス図で表す場合は中抜き三角の矢印線でクラスとクラスをつないで表します。
 <br>
 この矢印はスーパークラスの方に向けて付けます。
-<br>
-<br>
-例えば上の CAR スーパークラスと TRUCK サブクラスのクラス図は次のようになります。
+</p>
+
+<p>
+例えば上の FRUIT スーパークラスと ORANGE サブクラスを含むクラス図は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 汎化(is a 関係) の例</b>
+<p>
+</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
 
 <br>
-<pre class="prog">
-<input type="checkbox"><b>図1　汎化(is a 関係) (クリックで拡大)</b>
-<a href="./img/isa.png">
-<img src="./img/isa.png" width="400px" border="0" >
-</a>
-</pre>
-
-<br>
-<br>
+<script>PreNext(2,5)</script>
 </body>
 </html>

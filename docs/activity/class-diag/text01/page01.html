@@ -1,103 +1,110 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>UMLとクラス図</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. UMLとクラス図</title>
 </head>
 <body>
 
-<h2>UMLとクラス図</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
 
-<br>
+<p>
 UML(統一モデリング言語)とはオブジェクト指向プログラミングを支援するために作られたモデリング言語のことで、数種類の図(ダイアグラム)の統一的な描き方を定めています。
-<br>
+</p>
+
+<p>
 それらの図の中には「状態遷移図」「シーケンス図」「クラス図」そして「ユースケース図」等が含まれています。
 <br>
 今回はその内、クラス設計で良く用いられる「クラス図」の描き方について学んで行きましょう。
-<br>
-<br>
-この「クラス図」は「あるクラスと他のクラスの関係を表した図」であり、最も基本となるのはひとつのクラスだけを表したクラス図です(図1)。
+</p>
 
-<pre class="prog">
-<input type="checkbox"><b>図1:クラスがひとつだけのクラス図 (クリックで拡大)</b>
-<a href="./img/class.png">
-<img src="./img/class.png" width="400px" border="0" >
-</a>
-</pre>
+<p>
+この「クラス図」は「あるクラスと他のクラスの関係を表した図」であり、最も基本となるのはひとつのクラスだけを表した単一クラス図です(図1)。
+</p>
 
-<br>
-この図1において
-<br>
-<br>
-<b>
-「クラス名」にはそのクラスの名前
-<br>
-<br>
-「属性」には各フィールド名
-<br>
-<br>
-「操作」には各メソッド名
-</b>
-<br>
-<br>
-を記入し、更にアクセス修飾子をそれらの名前の前に次の記号で記します。
-<br>
-<br>
-<b>
-「+」がpublic
-<br>
-<br>
-「-」がprivate
-<br>
-<br>
-「#」がprotected
-</b>
-<br>
-<br>
-なお、フィールドの型、メソッドの戻り値、メソッドの引数などは省略可能です。
-<br>
-またコンストラクタや getter/setter は普通は省略して書きません(※)。
-<br>
-<br>
-※ この辺りは特にこうしろという決まりは無いので、自分でやり易いやり方を見つけたり、所属するチームのやり方に従って下さい。
-<br>
-<br>
-では具体例を挙げてみましょう。例えば次の HUMAN (人間)クラス
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+<div class="info">
+<input type="checkbox"><b>図1: 単一クラス図</b>
+<p>
+</p>
+<img src="./img/page01-fig1.png" alt="">
+</div>
 
-public class HUMAN{
+<p>
+この単一クラス図において
+</p>
+
+<ul>
+<li>「クラス名」にはそのクラス名</li>
+<li>「属性」には各フィールド名</li>
+<li>「操作」には各メソッド名</li>
+</ul>
+
+<p>
+を記入し、更に<a href="../../oop-element/text02/page01.html">アクセス修飾子</a>を属性と操作の名前の前に次の記号で記します。
+</p>
+
+<ul>
+<li>public なら「+」</li>
+<li>private なら 「-」</li>
+<li>(参考) protected なら「#」</li>
+</ul>
+
+<p>
+なお、フィールドの型、メソッドの戻り値、メソッドの引数などは省略可能です(見辛くなければあっても構いません)。
+<br>
+またコンストラクタや getter/setter は普通は省略して書きません。
+<br>
+この辺りは特にこうしろという決まりは無いので、自分でやり易いやり方を見つけたり、所属するチームのやり方に従って下さい。
+</p>
+
+<p>
+では具体例を挙げてみましょう。例えば次の FRUIT クラス
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : </b>
+<pre class="wrap">
+public class FRUIT{
 
     private String name;
 
-    public HUMAN(){}
+    public FRUIT(){}  // コンストラクタ
 
-    public void change_name( String new_name ){
-          name = new_name; 
-    }
+    public String get_name(){ return name; } // getter
+    public void set_name( String _name ){ name = _name; } // setter
 
-    public void show_name(){ 
-          System.out.println(name); 
-    }
+    public void eat()
+    {
+           System.out.println( name + "美味い" );
+     }
 };
 </pre>
+</div>
+
+<p>
+をクラス図で表すと次の様になります。なおフィールドの型、メソッドの戻り値、メソッドの引数、コンストラクタや getter/setter は省略しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: ソース 1 のクラス図</b>
+<p>
+</p>
+<img src="./img/page01-fig2.png" alt="">
+</div>
 
 <br>
-をクラス図で表すと次の様になります。
-
-<pre class="prog">
-<input type="checkbox"><b>図2: HUMAN クラスのクラス図 (クリックで拡大)</b>
-<a href="./img/human.png">
-<img src="./img/human.png" width="400px" border="0" >
-</a>
-</pre>
-
-<br>
-<br>
-<br>
+<script>PreNext(1,5)</script>
 </body>
 </html>

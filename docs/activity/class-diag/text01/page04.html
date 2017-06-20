@@ -1,78 +1,96 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>オブジェクト図</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. オブジェクト図</title>
 </head>
 <body>
 
-<h2>オブジェクト図</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
-「関連」ではクラス間の関係を図にしましたが、「多重度」の意味がよく分からない人が多かったと思います。
-<br>
-この多重度は「オブジェクト図」を使うと理解しやすくなります。
-<br>
-<br>
-「オブジェクト図」はクラス間ではなく、プログラムが動作中のある時点で存在しているインスタンス間の具体的な関係を示す図(スナップショット)です。
-<br>
-1つのインスタンスからなる基本的なオブジェクト図の描き方は次のようになります。
-<br>
-<br>
-<pre class="prog">
-<input type="checkbox"><b>図1　オブジェクト図の基本 (クリックで拡大)</b>
-<a href="./img/object.png">
-<img src="./img/object.png" width="600px" border="0" >
-</a>
-</pre>
+<h2><script>GetTitle()</script></h2>
 
-<br>
+<p>
+「多重度」の意味がピンと来ない人はまだ多いと思いますが、多重度はここで学ぶ「オブジェクト図」を描くと理解しやすくなります。
+</p>
+
+<p>
+「オブジェクト図」はクラス図の様にクラス間ではなく、プログラムが動作中のある時点で存在している実際の<b>インスタンス(オブジェクト)間の関係を示す図</b>(スナップショット)です。
+</p>
+
+<p>
+1 つのインスタンスからなる単一オブジェクト図の描き方は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 単一オブジェクト図</b>
+<p>
+</p>
+<img src="./img/page04-fig1.png" alt="">
+</div>
+
+<p>
 この様に、クラス名の隣に具体的なインスタンス名を記入します。
 <br>
 また属性にはスナップショットを撮った時点における現在値を入れます。
-<br>
-<br>
-さてインスタンス間に関連がある場合はクラス図と同様にリンクで繋ぎますが、「あるクラスのインスタンスから他のクラスのインスタンスに張るリンク数は多重度と同じ」になります。
-<br>
-<br>
+</p>
+
+<p>
+さてインスタンス間に関連がある場合はクラス図と同様にリンクで繋ぎますが<b>「あるクラスのインスタンスから他のクラスのインスタンスに張るリンク数はクラス図の多重度と同じ数」</b>になります。
+</p>
+
+<p>
 例えば前のページに出てきた関連のクラス図の例
-<br>
-<pre class="prog">
-<input type="checkbox"><b>図2　関連のクラス図の例 (クリックで拡大)</b>
-<a href="./img/assoc-car.png">
-<img src="./img/assoc-car.png" width="600px" border="0" >
-</a>
-</pre>
 
-<br>
-を元にして適当にインスタンスを作った直後のオブジェクト図が次の図3です。
-<br>
-<br>
-CAR クラスから作ったインスタンス mycar からは TIRE クラスから作ったインスタンス tire1、tire2、tire3、tire4 へリンクが4本張られています。
-<br>
-つまり「mycar には tire1, tire2, tire3, tire4 がついている」ことを示しています。
-<br>
-<br>
-逆に tire1 から mycar を見ると 1 本しかリンクが張られていません(tire2,3,4も同様)。
-<br>
-つまり「tire1 は mycar に取り付けられている」・・・「tire4 は mycar に取り付けられている」ことを示しています。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>図3　図2を元にして作ったオブジェクト図の例 (クリックで拡大)</b>
-<a href="./img/object-car.png">
-<img src="./img/object-car.png" width="600px" border="0" >
-</a>
-</pre>
+<div class="info">
+<input type="checkbox"><b>図2: 関連のクラス図の例</b>
+<p>
+</p>
+<img src="./img/page03-fig2.png" alt="">
+</div>
 
+<p>
+を元にして、各インスタンスを作った直後のオブジェクト図が次の図 3 です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3　図 2 のクラス図を元にして作ったオブジェクト図</b>
+<p>
+</p>
+<img src="./img/page04-fig3.png" alt="">
+</div>
+
+<p>
+さてORANGE クラスのインスタンス orange から見ると、 FUSA クラスのインスタンス fusa1、fusa2、fusa3、fusa4 へリンクが 4 本張られています。
 <br>
-この様にオブジェクト図は多重度を理解するためには便利なツールですが、実際のシステムではインスタンスは不特定多数になることが多いのでオブジェクト図を設計時に描くことはあまりありません。
+つまり<b>「orange は fusa1, fusa2, fusa3, fusa4 を持っている」</b>ことを示しています。
+</p>
+
+<p>
+逆に fusa1、2、3、4 から orange を見ると 1 本しかリンクが張られていません。
 <br>
-<br>
+つまり<b>「fusa1 は orange に含まれている」、「fusa2 は orange に含まれている」、「fusa3 は orange に含まれている」、「fusa4 は orange に含まれている」</b>ことを示しています。
+</p>
+
+<p>
+この様にオブジェクト図は多重度を理解するためには便利なツールなのですが、実際に動いているアプリやシステムではインスタンス数はリアルタイムに変化して不特定多数になることが多いので、オブジェクト図を設計時に事前に描くことは難しい場合があります。
+</p>
+
+<p>
 よってエンジニアにはオブジェクト図を脳内で意識しながらクラス図を描くという技能が必要になります。
+</p>
+
 <br>
-<br>
-<br>
-<br>
+<script>PreNext(4,5)</script>
 </body>
 </html>
