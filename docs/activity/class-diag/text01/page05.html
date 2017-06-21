@@ -41,7 +41,13 @@
 <p>
 この様に、クラス名の隣に具体的なインスタンス名を記入します。
 <br>
-また属性名にはスナップショットを撮った時点における各フィールドの現在値を入れます。なお属性名は省略する場合もあります。
+なお「汎化」に行っている場合はスーパークラスの名前ではなく、実際にインスタンスを作成したサブクラスの名前を書きます。
+</p>
+
+<p>
+また属性名にはスナップショットを撮った時点における各フィールドの現在値を入れます。
+<br>
+なお属性名は省略する場合もあります。
 </p>
 
 <p>
@@ -70,14 +76,14 @@
 <pre class="wrap">
 public class MyWorld{
 
-    private ORANGE orange1,orange2,orange3,orange4;
+    private ORANGE orange0,orange1,orange2,orange3;
 
     public MyWorld() // コンストラクタ
     {
-         orange1 = new ORANGE();
-         orange2 = new ORANGE();
-         orange3 = new ORANGE();
-         orange4 = new ORANGE();
+         orange0 = new ORANGE(0);
+         orange1 = new ORANGE(1);
+         orange2 = new ORANGE(2);
+         orange3 = new ORANGE(3);
     }
 }
 </pre>
@@ -95,15 +101,15 @@ public class MyWorld{
 </div>
 
 <p>
-MyWorld クラスのインスタンス myworld から見ると、 ORANGE クラスのインスタンス orange1、orange2、orange3、orange4 へリンクが 4 本張られています。
+MyWorld クラスのインスタンス myworld から見ると、 ORANGE クラスのインスタンス orange0、orange1、orange2、orange3 へリンクが 4 本張られています。
 <br>
-つまり<b>「myworld は orange1, orange2, orange3, orange4 を持っている」</b>ことを示しています。
+つまり<b>「myworld は orange0, orange1, orange2, orange3 を持っている」</b>ことを示しています。
 </p>
 
 <p>
-逆に orange1、2、3、4 から myworld を見ると 1 本しかリンクが張られていません。
+逆に orange0、1、2、3 から myworld を見ると 1 本しかリンクが張られていません。
 <br>
-つまり<b>「orange1 は myworld に含まれている」、「orange2 は myworld に含まれている」、「orange3 は myworld に含まれている」、「orange4 は myworld に含まれている」</b>ことを示しています。
+つまり<b>「orange0 は myworld に含まれている」、「orange1 は myworld に含まれている」、「orange2 は myworld に含まれている」、「orange3 は myworld に含まれている」</b>ことを示しています。
 </p>
 
 <p>
