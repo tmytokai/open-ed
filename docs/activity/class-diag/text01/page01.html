@@ -79,10 +79,10 @@ public class FRUIT{
 
     private String name;
 
-    public FRUIT(){}  // コンストラクタ
+    public String get_name(){ return name; } // name の getter
+    public void set_name( String _name ){ name = _name; } // name の setter
 
-    public String get_name(){ return name; } // getter
-    public void set_name( String _name ){ name = _name; } // setter
+    public FRUIT(){}  // コンストラクタ
 
     public void eat()
     {
