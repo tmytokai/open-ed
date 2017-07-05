@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>左右に動かす</title>
+</head>
+<body>
+<b>Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See <a href="http://scratch.mit.edu">http://scratch.mit.edu</a></b>
+<br>
+
+<h2>左右に動かす</h2>
+
+今のままでは Ball は全く動きませんので、Ball に 「Rigidbody2D」コンポーネントをアタッチしてから「velocity」プロパティに方向と速さを指定してあげます。
+<br>
+<br>
+velocity を指定する場所ですが、今回は一度設定してしまえば途中で値を変更する必要が無いので Ball の Start イベントの中でセットしてあげれば良いと思います。
+<br>
+<br>
+もちろん、ホーミング弾みたいに実行中に方向や速さが変わる場合は Update イベントの中で velocity の値を随時変更します。
+
+<br>
+<br>
+<br>
+</body>
+</html>

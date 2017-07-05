@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>プレハブのインスタンス化</title>
+</head>
+<body>
+<b>Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See <a href="http://scratch.mit.edu">http://scratch.mit.edu</a></b>
+<br>
+
+<h2>プレハブのインスタンス化</h2>
+
+このページではショットボタンを押したら Cat のいる場所に Ball を表示してみたいと思います。
+<br>
+<br>
+まずキーボードのショットキー(今回はzキー)を押しているかどうかの判定はジャンプと同様に「Input」クラスの「GetAxis」というメソッドを"Fire1"を指定して使います。すると z キーを押していると true、話していると false という値が取得できます。
+<br>
+<br>
+次に Ball の表示ですが、<a href="../text02/page07.html">プレハブとインスタンス</a>のページに書いたように Ball は「プレハブ」に相当しますのでインスタンス化してインスタンスを作る必要があります。
+<br>
+<br>
+Unity で実際にインスタンス化を行うためには Instantiate というメソッドを使いますが、今回の scratch2unity で Ball をインスタンス化するためには図1の様なスクリプトを書きます。
+<br>
+<br>
+最初の2行は Ball を表示させる座標パラメータで、それぞれ x 、 y 座標に相当します。
+<br>
+最後の行でパラメーターに「ball」を指定して Ball をインスタンス化させています。
+<br>
+<br>
+なお本来の Unity はいくらでもインスタンスを作ることが出来ますが、scratch2unity では同時に1つしかインスタンスを作れないという制約があります。
+<br>
+<br>
+<pre class="prog">
+<input type="checkbox">図1: Ball をインスタンス化するスクリプト
+<br>
+<img src="./fig/inst.png">
+</pre>
+<br>
+試しにこのスクリプトを Cat の Start イベントの中に書くと、実行開始直後に 0, 0 座標に Ball が表示されます。
+<br>
+<br>
+ちなみにこのスクリプトは Cat だけでなくどのゲームオブジェクトのスクリプトからでも実行可能です。
+<br>
+従って、Ball のスクリプト内で Ball をインスタンス化することも出来ますし、(まだ作ってませんが)敵キャラの Bat のスクリプト内で Ball をインスタンス化することも出来ます。
+<br>
+<br>
+
+
+
+
+<br>
+<br>
+<br>
+</body>
+</html>

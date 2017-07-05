@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>当たり判定</title>
+</head>
+<body>
+<b>Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See <a href="http://scratch.mit.edu">http://scratch.mit.edu</a></b>
+<br>
+
+<h2>当たり判定</h2>
+
+このページでは Ball と Bat 間、及び Cat と Bat 間に当たり判定を付けます。
+<br>
+<br>
+ゲームオブジェクト間の当たり判定を行うためには <a href="../text02/page05.html">Collider</a> コンポーネントをアタッチするのですが、実際の Unity では当たり判定の方法はかなり複雑です。
+<br>
+<br>
+基本的に当たり判定の仕方は「OnCollision 系列」と呼ばれる方法と「OnTrigger 系列」と呼ばれる方法の２通りに分かれているのですが、どちらの方法を使えば良いのかは、そのオブジェクトに Rigidbody2D がアタッチされているか、トリガーかどうか(Collider の isTrigger プロパティで切り替え)、物理エンジンを使用しているかどうか(Rigidbody2D の isKinematic プロパティで切り替え)等の条件で変化します。
+<br>
+<br>
+従って今回の scratch2unity ではこの辺りを思いっきり簡略化し、
+<br>
+<br>
+(1) Ball が Bat に当たったら Ball の「OnTriggerEnter」イベントが呼び出される
+<br>
+<br>
+(2) Cat が Bat に当たったら Cat の「OnTriggerEnter」イベントが呼び出される
+<br>
+<br>
+ことにしています。
+<br>
+<br>
+当たり判定方法に関して詳しくは、本格的に Unity を使う際に自分で調べてみてください。
+<br>
+<br>
+<br>
+</body>
+</html>

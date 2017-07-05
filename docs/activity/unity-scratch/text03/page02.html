@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../../../common.css" type="text/css" />
+<title>向きを変える</title>
+</head>
+<body>
+<b>Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab. See <a href="http://scratch.mit.edu">http://scratch.mit.edu</a></b>
+<br>
+
+<h2>向きを変える</h2>
+
+今のままではずっと右を向いたままなので Cat の向きを変えてみましょう。
+<br>
+<br>
+Unity2Dのゲームオブジェクトを左右反転させるためには「Transform」コンポーネントをアタッチしてから「localScale.x」プロパティに値を入れます。
+<br>
+localScale.x に 1 を入れると右向き、-1 を入れると左向きになります。
+<br>
+<br>
+例えば Cat の「Start」イベントか「Update」イベントの中で図1の様なスクリプトを作成すると Cat は左を向きます。
+<br>
+<pre class="prog">
+<input type="checkbox">図1: 左を向くスクリプト
+<br>
+<img src="./fig/transform.png">
+</pre>
+<br>
+<br>
+<br>
+</body>
+</html>
