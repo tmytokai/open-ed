@@ -1,0 +1,137 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>スプリントの演習</title>
+</head>
+<body>
+<h1>演習</h1>
+
+<a href="./sprint.docx">レポート</a>( 兼 詳細仕様書 兼 チェックシート)
+<br>
+<br>
+※ マスターはスプリント開始時にこのファイルをDLし、スプリント番号を記入したら、スプリントプランニングで内容を記入する。
+
+
+<h2>第1スプリントが始まる前の準備</h2>
+
+<input type="checkbox"> (1) 各メンバーは演習用の<a href="../git/git-remote.html">リモートリポジトリを clone</a> する(アドレスは演習時に知らせる)。
+<br>
+<br>
+<input type="checkbox"> (2) マスターはリリースプランニングで作成した仕様書をローカルリポジトリに移動する。
+<br>
+<br>
+<input type="checkbox"> (3) マスターは仕様書を add/commit/push する。
+<br>
+<br>
+<input type="checkbox"> (4) 各メンバーは git pull して仕様書をダウンロードしておく。
+<br>
+<br>
+<input type="checkbox"> (5) マスターは<a href="../redmine/redmine.html">redmine 「ソフト開発演習xxxx」の下に「チーム(番号)」というサブプロジェクトを作る</a>。
+<br>
+<br>
+<input type="checkbox"> (6) マスターは仕様書を見ながらプロダクトバックログを redmine に入力していく。チケットの題名は
+<br><br>
+S(番号).PB: 内容
+<br>
+<br>
+とする(Sから:までは半角で入力する。Sはスプリント、PBはプロダクトバックログの略)。
+<br>
+<br>
+<h2>スプリントプランニング</h2>
+
+<input type="checkbox"> (1) 全員で全体計画を見直す。
+<br>
+<br>
+<input type="checkbox"> (2) もし計画変更があればマスターは全体仕様とプロダクトバックログを修正して git に add/commit/push する。
+<br>
+<br>
+<input type="checkbox"> (3) もしプロダクトバックログに変更があれば redmine のチケットも修正しておく。
+<br>
+<br>
+<input type="checkbox"> (4) 全体仕様書とプロダクトバックログをもとにして、現在のスプリントで行う内容の詳細仕様書とスプリントバックログを作成する。
+<br>
+<br>
+<input type="checkbox"> (5) マスターは詳細仕様書を git に add/commit/push する。
+<br>
+<br>
+<input type="checkbox"> (6) マスターはスプリントバックログを redmine に入力していく。チケットの題名は
+<br><br>
+S(番号).SB: 内容
+<br>
+<br>
+とする(Sから:までは半角で入力する。Sはスプリント、SBはスプリントバックログの略)。
+
+<br>
+<br>
+<br>
+<h2>デイリースクラムミーティング</h2>
+
+<input type="checkbox"> (1) 順番に自分の作業の進行状況を報告する。
+<br>
+<br>
+<input type="checkbox"> (2) 各自の現情報告後、もしスコープを逸脱してる人(＝余計な作業をしてる人)がいたらマスターは止めるように指示する。また、遅れている作業がある場合は作業が進んでいる人に手伝うようマスターが指示する。
+<br>
+<br>
+<input type="checkbox"> (2) 当日の各自の作業内容を再確認して作業開始
+<br>
+<br>
+<h2>開発作業</h2>
+
+<a href="../agile/agile.html#dev">テキスト</a>に書いてある項目に注意しながら作業を進める。
+
+<br>
+<br>
+原則:
+<br><br>
+<b>
+「常にテストする」
+<br><br>
+「常に動く状態に保つ」
+<br><br>
+「リモートリポジトリにバグ入りコードをpushしない」
+</b>
+<br>
+
+<br>
+<br>
+<h2>スプリントレビュー、振り返り</h2>
+
+<a href="../agile/agile.html#rev">テキスト</a>に書いてある項目に注意しながら作業を進める。
+<br>
+<br>
+<input type="checkbox"> (1) (レビュー) 実装を予定していたが出来なかった機能、バグ項目などを<u>感情を交えず機械的に</u>リストアップしてドキュメントにまとめる。
+<br>
+<br>
+<input type="checkbox"> (2) (振り返り) 反省点や次のスプリントで追加したい機能、優先して修正するバグなどを話し合ってドキュメントにまとめる。
+<br>
+<br>
+<h2>リリース</h2>
+
+<input type="checkbox"> (1) 実行ファイル、画像・音楽ファイル、マニュアル等を一つの zip に圧縮する(ソースコードは含めない)。ファイルサイズはアップローダの都合により5M以内に収めること。またファイル名は
+<br>
+<br>
+T(番号)S(番号).zip
+<br>
+<br>
+とする(半角で入力。Tはチーム、Sはスプリントの略。例えばチーム 4 の第 2 スプリントのzipなら T4S2.zip )。 
+<br>
+<br>
+<input type="checkbox"> (2) zip ファイルを別のフォルダにコピーして解凍し、きちんとプレイ出来ることを確認する。プレイできなかったら(1)に戻る。
+<br>
+<br>
+<input type="checkbox"> (3) zip ファイルをサーバにアップロードする。アップの仕方は演習中に知らせる。
+<br>
+<br>
+<h2>クロスレビューによるユーザー評価</h2>
+
+<a href="./review.pdf">クロスレビュー表</a>
+<br>
+<br>
+・あるチームが別のチームのゲームをDLして一斉にプレイし、星(1〜5の整数、高い程良い)とコメントをチーム内で話し合って記入する。
+<br>
+<br>
+・プレイ時間は 5分/ゲーム とする。
+<br>
+<br>
+</body>
+</html>
