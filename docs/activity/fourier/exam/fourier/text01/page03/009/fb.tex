@@ -1,0 +1,39 @@
+\noindent \textbf{【出題意図】}
+
+\noindent 式から周期性時間領域アナログ信号の各成分のグラフを求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\medskip
+\noindent ・フーリエの定理を式で表すと次の実フーリエ級数展開となる
+
+\begin{align*}
+f(t) = a_0 + \sum_{k=1}^{\infty}
+\left \{
+a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
+\right \}
+\end{align*}
+
+\medskip
+\noindent $f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+
+\medskip
+\noindent $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+
+\medskip
+\noindent $a_0$ ・・・ 直流成分、実数の\underline{定数}、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+
+\medskip
+\noindent $a_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の\underline{定数}、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+
+\medskip
+\noindent $\phi_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の\underline{定数}、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\noindent 実フーリエ級数展開の定義と問題の $f(t)$ を見比べると $a_2 = 4, \phi_2 = -\pi/4$ であることから答となるグラフが求まる。
