@@ -29,10 +29,13 @@
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、全てのプレイヤーキャラクターの基となる「HUMAN」サブクラスを「Actor」スーパークラスを継承して作成します。
-<br>
-「HUMAN」のオブジェクトは矢印キーで上下左右に動かすことが出来ます。
+このスプリントでは、(必要なら)「MyWorld」を作り、更に全てのプレイヤーキャラクターの基となる「HUMAN」サブクラスを「Actor」スーパークラスを継承して作成します。
 </p>
+<ul>
+<li>「MyWorld」の大きさは 600 x 400 とします。</li>
+<li>「HUMAN」のオブジェクトはキーボードの矢印キーで上下左右に動かすことが出来ます。</li>
+<li>「HUMAN」の画像は無し、move量は 4 とします。</li>
+</li>
 </div>
 
 <br>
@@ -42,26 +45,30 @@
 <ol>
 <li>(必要なら)「MyWorld」の作成</li>
 <li>「HUMAN」の作成</li>
-<li>「HUMAN」 の act メソッドのコーディング</li>
+<li>「HUMAN」 の act メソッドのコーディング(オブジェクトを動かす)</li>
 </ol>
 </div>
 
 <br>
 <div class="info">
 <input type="checkbox"><b>クラス図の作成:</b>
-<p>
-開発作業を行う前にクラス図を描いて下さい。
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>ファイル名は「GF-2-1」とします。</li>
+<li>World と MyWorld も忘れず描いて下さい。</li>
+<li>Greenfoot の内部では「World」が「Actor」を<a href="../../class-diag/text01/page04.html">集約</a>しています(多分)。
 <br>
-ファイル名は「GF-2-1」とします。
+よって「World」と「Actor」を線で結び、中抜きのダイヤマークを「World」側に付けて下さい。
 <br>
-World と MyWorld も忘れず描いて下さい。
-</p>
+多重度は省略して結構です(正確にはひとつの「World (実体はMyWorld)」は 0 個以上の「Actor」を持っているので、多重度は 1 - 0..* になります)。
+</li>
+</ul>
 </div>
 
 <br>
 <h2>2. 開発作業</h2>
 
-<br>
 <div class="info">
 <input type="checkbox"><b>準備:</b>
 <div class="olradio"> 
@@ -79,15 +86,15 @@ World と MyWorld も忘れず描いて下さい。
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「World」スーパークラスを継承して「MyWorld」サブクラスを作成して下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> 「World」スーパークラスを継承して「MyWorld」サブクラスを作成して下さい。 大きさは 600 x 400 とします。
 </p>
 <p>
 ※ Greenfoot のバージョンによっては最初から MyWorld があります。その場合は作成しなくても良いです。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「Actor」スーパークラスを継承して「HUMAN」サブクラスを作成して下さい。 画像は割り当てないで下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」スーパークラスを継承して「HUMAN」サブクラスを作成して下さい。 画像は無しです。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」サブクラスの act メソッド内に「矢印キーで上下左右に動かす」プログラムを記述して下さい。 
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」サブクラスの act メソッド内に「矢印キーで上下左右に動かす」プログラムを記述して下さい。 move 量は 4 です。
 </p>
 </div>
 </div>
@@ -107,8 +114,9 @@ World と MyWorld も忘れず描いて下さい。
 </div>
 
 <br>
+<h2>3. リリース</h2>
+
 <div class="info">
-<input type="checkbox"><b>リリース:</b>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMAN)を選んで下さい。
@@ -120,6 +128,7 @@ World と MyWorld も忘れず描いて下さい。
 </div>
 </div>
 
+<br>
 <script>PreNext(2,10)</script>
 </body>
 </html>
