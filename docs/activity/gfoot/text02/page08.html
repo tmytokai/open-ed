@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 7</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、タイムアップ処理を作ります。
+</p>
+<ul>
+<li>「MyWorld」に private int rtime フィールドを追加します。残り時間を表します。</li>
+<li>rtime の初期値は 1000 です。</li>
+<li>「MyWorld」に public void act メソッドを追加し、act メソッドで rtime をデクリメントして画面に表示します。表示位置は任意です。</li>
+<li> rtime が 0 になったらタイムアウトメッセージを表示してゲームを停止します。表示内容と表示位置は任意です。</li>
+</ul>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログの作成:</b>
+<p></p>
+<ol>
+<li>「MyWorld」のコンストラクタのコーディング( rtime フィールドの初期化)</li>
+<li>「MyWorld」の act メソッドのコーディング( rtime のデクリメントと表示とタイムアウト処理)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-6」をコピーし、ファイル名を「GF-2-7」に変更します。</li>
+<li>「MyWorld」に rtime フィールドと act メソッドを追加します。それぞれ private と public であることに注意してください。</li>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-6」をコピーし、シナリオ名を「GF-2-7」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-7」を開きます。
+</p>
+</div>
+</div>
+
+
+<br>
+<div class="info">
+<input type="checkbox"><b>コーディング:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「MyWorld」クラスに private int rtime フィールドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「MyWorld」のコンストラクタで rtime フィールドに 1000 を代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「MyWorld」クラスに public void act メソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドで rtime フィールドをデクリメントして値を画面に表示して下さい。表示位置は任意とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドに、rtime フィールドの値が 0 になったらタイムアップメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(MyWorld)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(8,9)</script>
+</body>
+</html>

@@ -19,10 +19,6 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 15  分
-</p>
-
 <br>
 <h2>1. スプリント プランニング</h2>
 
@@ -33,8 +29,8 @@
 </p>
 <ul>
 <li>「TARO」と「HANAKO」の画像は任意とします。</li>
-<li>実行開始時に「TARO」のオブジェクトを左上に配置します。座標は (0,0)とします。</li>
-<li>実行開始時に「HANAKO」のオブジェクトを右下に配置します。座標は (600,400)とします。</li>
+<li>実行開始時に「TARO」のオブジェクトをひとつ作成して左上に配置します。座標は (0,0)とします。</li>
+<li>実行開始時に「HANAKO」のオブジェクトをひとつ作成して右下に配置します。座標は (600,400)とします。</li>
 </ul>
 </div>
 
@@ -44,7 +40,7 @@
 <p></p>
 <ol>
 <li>「TARO」「HANAKO」の作成</li>
-<li>「MyWorld」 のコンストラクタのコーディング(TARO、HANAKOオブジェクトの配置)</li>
+<li>「MyWorld」 のコンストラクタのコーディング(TARO、HANAKOオブジェクトの作成と配置)</li>
 </ol>
 </div>
 
@@ -56,7 +52,9 @@
 <li>開発作業を行う前にクラス図を描いて下さい。</li>
 <li>クラス図「GF-2-1」をコピーし、ファイル名を「GF-2-2」に変更します。</li>
 <li>「TARO」と「HANAKO」を追加します。</li>
-<li>「World」と「Actor」間の多重度も追加して下さい。「World (実体はMyWorld)」がふたつの「Actor (実体はTAROとHANAKO)」を持っているので多重度は 1-2 です。</li>
+<li>「World」と「Actor」間の多重度も追加して下さい。
+<br>
+ひとつの「World (実体はMyWorld)」がふたつの「Actor (実体はTAROとHANAKO)」を持っているので多重度は 1-2 です。</li>
 </ul>
 </div>
 
@@ -83,7 +81,7 @@
 <span class="olradio"><input type="radio" name="p1"></span> 「HUMAN」スーパークラスを継承して「TARO」「HANAKO」サブクラスを作成して下さい。 画像は任意とします。
 </p>
 <p>
-※ そのままだと空の act メソッドがオーバライドされてオブジェクトが動かなくなるので消しましょう。
+※ そのままだと「HUMAN」の act メソッドがオーバライドされてオブジェクトが動かなくなるので、「TARO」と「HANAKO」の act メソッドを消します。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「TARO」と「HANAKO」のオブジェクトを作ってそれぞれ座標 (0,0) 、座標 (600,400) に動的配置します。
@@ -96,11 +94,11 @@
 <input type="checkbox"><b>テストとデバッグ:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset を押すと「TARO」と「HANAKO」のオブジェクトが左上と右下に表示されることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「TARO」と「HANAKO」のオブジェクトが左上と右下に表示されることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は動作を止めてデバッグして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
 </div>
 </div>
@@ -120,6 +118,6 @@
 </div>
 </div>
 
-<script>PreNext(3,10)</script>
+<script>PreNext(3,9)</script>
 </body>
 </html>

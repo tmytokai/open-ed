@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 5</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「TARO」と「HANAKO」の動きを逆にします。
+</p>
+<ul>
+<li>「HUMAN」に public void move メソッドを追加し(※)、act メソッド内の移動処理を全てそこに移します。</li>
+<li>「HUMAN」の act メソッドから move メソッドを呼び出します。</li>
+<li>「HANAKO」で move メソッドをオーバーライドし、上下左右が逆向きの移動処理を書きます。</li>
+</ul>
+※ 本来なら public ではなくて protected にした方が良いです。protected については自分で調べて下さい。
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログの作成:</b>
+<p></p>
+<ol>
+<li>「HUMAN」 に move メソッドを追加し、移動処理を全てそこに移して act から呼び出す</li>
+<li>「HANAKO」 で move メソッドをオーバライドしてコーディング(逆向きに移動)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-4」をコピーし、ファイル名を「GF-2-5」に変更します。</li>
+<li>「HUMAN」と「HANAKO」に move メソッドを追加します。public であることに注意してください。</li>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-4」をコピーし、シナリオ名を「GF-2-5」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-5」を開きます。
+</p>
+</div>
+</div>
+
+
+<br>
+<div class="info">
+<input type="checkbox"><b>コーディング:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「HUMAN」クラスに public void move メソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドの移動処理部を切り取り、move メソッド内に貼り付けてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドから move メソッドを呼び出して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」に「HUMAN」の act メソッドを丸ごとコピーして貼り付けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」の move メソッドを書き換えて上下左右の動きを逆にして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMANとHANAKO)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(6,9)</script>
+</body>
+</html>

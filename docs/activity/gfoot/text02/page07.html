@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 6</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、ゲームオーバーとゲームクリアの処理を作ります。
+<br>
+「TARO」が果物に触れたらゲームオーバーです。
+<br>
+「HANAKO」が果物を全て食べたらクリアです。
+</p>
+<ul>
+<li>「HUMAN」に public void eat メソッドを追加し(※)、act メソッド内の当たり判定処理を全てそこに移します。</li>
+<li>「HUMAN」の act メソッドから eat メソッドを呼び出します。</li>
+<li>「HUMAN」の eat メソッドで果物を 10 個食べたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
+<li>「TARO」で eat メソッドをオーバーライドし、果物に触れたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
+</ul>
+※ 本来なら public ではなくて protected にした方が良いです。protected については自分で調べて下さい。
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログの作成:</b>
+<p></p>
+<ol>
+<li>「HUMAN」 に eat メソッドを追加し、当たり判定処理を全てそこに移して act から呼び出す</li>
+<li>「HUMAN」の eat メソッド内にクリア処理を書く(10個食べたらクリア)</li>
+<li>「TARO」 で eat メソッドをオーバライドしてコーディング(果物に触れたらゲームオーバー)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-5」をコピーし、ファイル名を「GF-2-6」に変更します。</li>
+<li>「HUMAN」と「TARO」に eat メソッドを追加します。public であることに注意してください。</li>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-5」をコピーし、シナリオ名を「GF-2-6」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-6」を開きます。
+</p>
+</div>
+</div>
+
+
+<br>
+<div class="info">
+<input type="checkbox"><b>コーディング:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「HUMAN」クラスに public void eat メソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドの当たり判定処理部を切り取り、eat メソッド内に貼り付けてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> act メソッドから eat メソッドを呼び出して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」に「HUMAN」の eat メソッドを丸ごとコピーして貼り付けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」の eat メソッドを書き換えて、果物に触れたら即ゲームオーバーメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMANとTARO)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(7,9)</script>
+</body>
+</html>
