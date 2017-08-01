@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>8. 当たり判定処理</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ある Actor のサブクラスと他のサブクラスのオブジェクトが重なっているか判定するには、Actor クラスの getOneObjectAtOffset メソッドを利用します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ある Actor のサブクラスと他のサブクラスのオブジェクトが重なっているか判定</b>
+<pre class="wrap">
+protected Actor Actor.getOneObjectAtOffset( 0, 0, クラス名 )
+
+戻り値(Actor): もし指定したクラスのオブジェクトと重なっていたらそのオブジェクトが戻る。重なって無ければ null が戻る。
+</pre>
+</div>
+
+<p>
+このメソッドを使うと、いわゆる当たり判定処理が可能になります。
+</p>
+
+<p>
+例えばあるオブジェクトの act などのメソッド内で TARO オブジェクトとの当たり判定を行うにはソース 1 のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: あるオブジェクトが TARO オブジェクトにぶつかった時の当たり判定の例</b>
+<pre class="wrap">
+Actor actor = getOneObjectAtOffset( 0, 0, TARO.class );
+if( actor != null ){
+    // TARO とぶつかった時の処理を書く
+}       
+</pre>
+</div>
+
+<br>
+<script>PreNext(8,10)</script>
+</body>
+</html>

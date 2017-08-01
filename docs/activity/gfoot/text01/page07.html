@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>7. オブジェクトの動的配置</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Actor のサブクラスのオブジェクトをプログラム中で動的に作成して画面に配置するためには、そのオブジェクトを new してから World クラスの addObject メソッドを利用します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> Actor のサブクラスのオブジェクトを画面に配置</b>
+<pre class="wrap">
+public void World.addObject( オブジェクト, x 座標, y 座標 )
+
+戻り値(void): 無し。
+</pre>
+</div>
+
+<p>
+例えば World のサブクラスのコンストラクタなどのメソッド内で HOGE クラスのオブジェクトを new してから座標 (300,200) に配置するにはソース 1 のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: World のサブクラスのメソッド内でオブジェクトを動的配置する例</b>
+<pre class="wrap">
+addObject( new TARO(), 300, 200 );
+</pre>
+</div>
+
+<br>
+<script>PreNext(7,10)</script>
+</body>
+</html>

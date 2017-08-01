@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>9. オブジェクトの動的削除</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Greenfoot によるオブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Actor のサブクラスのオブジェクトをプログラム内で動的に削除するには、World クラスの removeObject メソッドを利用します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>Actor のサブクラスのオブジェクトを削除</b>
+<pre class="wrap">
+public void World.removeObject( オブジェクト )
+
+戻り値(void): 無し。
+</pre>
+</div>
+
+<p>
+ただし、このメソッドを使うには削除したいオブジェクトを取得する必要があります。
+</p>
+
+<p>
+削除対象のオブジェクトを取得する方法は色々ありますが、前のページの例の続きとして、あるオブジェクトが TARO オブジェクトにぶつかったら TARO オブジェクトを削除するにはソース 1 のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: あるオブジェクトが TARO オブジェクトにぶつかったら TARO オブジェクトを削除する例</b>
+<pre class="wrap">
+Actor actor = getOneObjectAtOffset( 0, 0, TARO.class );
+if( actor != null ){
+    getWorld().removeObject( actor ); // getWorld() は World オブジェクトの getter
+}       
+</pre>
+</div>
+
+<br>
+<script>PreNext(9,10)</script>
+</body>
+</html>
