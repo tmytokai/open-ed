@@ -37,7 +37,9 @@
 <li>「HUMAN」の eat メソッドで果物を 10 個食べたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
 <li>「TARO」で eat メソッドをオーバーライドし、果物に触れたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
 </ul>
-※ 本来なら public ではなくて protected にした方が良いです。protected については自分で調べて下さい。
+※ 本来なら public ではなくて protected にするか、抽象メソッド(純粋仮想関数)を使うか、又はデリゲーションを使った方が良いです。
+<br>
+それらについては自分で調べて下さい。
 </div>
 
 <br>
@@ -81,13 +83,13 @@
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「HUMAN」クラスに public void eat メソッドを追加して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスに public void eat メソッドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> act メソッドの当たり判定処理部を切り取り、eat メソッド内に貼り付けてください。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドの当たり判定処理部を切り取り、eat メソッド内に貼り付けてください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> act メソッドから eat メソッドを呼び出して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドから eat メソッドを呼び出して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 「TARO」に「HUMAN」の eat メソッドを丸ごとコピーして貼り付けて下さい。

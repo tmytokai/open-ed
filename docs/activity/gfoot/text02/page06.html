@@ -32,7 +32,9 @@
 <li>「HUMAN」の act メソッドから move メソッドを呼び出します。</li>
 <li>「HANAKO」で move メソッドをオーバーライドし、上下左右が逆向きの移動処理を書きます。</li>
 </ul>
-※ 本来なら public ではなくて protected にした方が良いです。protected については自分で調べて下さい。
+※ 本来なら public ではなくて protected にするか、抽象メソッド(純粋仮想関数)を使うか、又はデリゲーションを使った方が良いです。
+<br>
+それらについては自分で調べて下さい。
 </div>
 
 <br>
@@ -75,13 +77,13 @@
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「HUMAN」クラスに public void move メソッドを追加して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスに public void move メソッドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> act メソッドの移動処理部を切り取り、move メソッド内に貼り付けてください。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドの移動処理部を切り取り、move メソッド内に貼り付けてください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> act メソッドから move メソッドを呼び出して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドから move メソッドを呼び出して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」に「HUMAN」の act メソッドを丸ごとコピーして貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」に「HUMAN」の move メソッドを丸ごとコピーして貼り付けて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」の move メソッドを書き換えて上下左右の動きを逆にして下さい。
 </p>
