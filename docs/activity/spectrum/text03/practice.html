@@ -12,8 +12,8 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: ディジタル信号のスペクトル解析</a></li>
-<li>学習項目: [1] ディジタル信号のスペクトル解析</li>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [3] 周期性時間領域ディジタル信号</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -27,15 +27,13 @@
 <br>
 <h2><a href="./page01.html">1. 振幅・位相・パワースペクトル</a></h2>
 
-<p>
-次の項目で演習を行います。
-</p>
+<h2><a href="./page02.html">2. スペクトル図</a></h2>
+
+<h2><a href="./page03.html">3. スペクトル解析の手順</a></h2>
 
 <br>
-<h2><a href="./page02.html">2. スペクトル解析の手順</a></h2>
-
 <p>
-<input type="checkbox"><b>演習1-1 (個人PC、45分):</b> 自分の声をスペクトル解析してみましょう。
+<input type="checkbox"><b>演習3-1 (個人PC、45分):</b> 自分の声をスペクトル解析してみましょう。
 </p>
 
 <p>
@@ -52,11 +50,11 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./template01-1.cpp">テンプレートファイル</a>(template01-1.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./template03-1.cpp">テンプレートファイル</a>(template03-1.cpp)を test.wav と同じフォルダにダウンロードして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めして行って下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「g++ template01-1.cpp」でコンパイルして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「g++ template03-1.cpp」でコンパイルして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.csv 」いう CSV ファイルが出来ます。内容は 1 列目がディジタルサイン波の周波数、2列目が振幅スペクトル、3列目が位相スペクトルです。
 <br>
@@ -68,7 +66,9 @@
 ※2 行数が多い(8000行)ので範囲選択すると表計算ソフトが固まる時があります。Ctrlキーを押しながらAとかBみたいな列名だけをクリックして列の選択をして下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>  グラフは点「無し」、線あり、平滑化「無し」とします。
+<span class="olradio"><input type="radio" name="p1"></span>  グラフの種類は散布図、点「無し」、線あり、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「SPEC-3-1」として下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  振幅スペクトルを解析して自分の声の特徴を見つけて下さい。
 <br>

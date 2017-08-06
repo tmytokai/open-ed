@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. スペクトル解析の手順</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [3] 周期性時間領域ディジタル信号</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では具体時に DFT/FFT を用いて周期性時間領域ディジタル信号のスペクトル解析を行う手順について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域ディジタル信号に対するスペクトル解析の手順</b>
+
+<p>
+(手順 1) 解析対象の周期性時間領域ディジタル信号 $f[i]$ を手に入れて周期を求める。
+</p>
+
+<p>
+(手順 2) DFT 又は FFT をおこなって DFT 係数 $\textrm{C}[k]$ を求める。
+</p>
+
+<p>
+(手順 3) 基本角周波数 $w_1$ [rad/秒] を求める。
+</p>
+
+<p>
+(手順 4) 振幅スペクトル、パワースペクトル、位相スペクトルを求める。
+</p>
+
+<p>
+(手順 5) 振幅スペクトル図、パワースペクトル図、位相スペクトル図を描く。横軸は角周波数 $w$ [rad/秒] (又は周波数 $f$ [Hz]) とする。
+</p>
+
+<p>
+(手順 6) 各スペクトル図を見てディジタル信号の周波数的な特性を調べる
+</p>
+
+</div>
+
+<br>
+
+<script>PreNext(3,3)</script>
+</body>
+</html>

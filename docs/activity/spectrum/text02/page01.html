@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 振幅・位相・パワースペクトル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [2] 周期性時間領域アナログ信号</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+まず始めに<a href="../../fourier/text01/page01.pdf">周期性時間領域アナログ信号</a>のスペクトルを考えます。
+</p>
+
+<p>
+周期性時間領域アナログ信号の場合は、<a href="../../fourier/text01/page04.pdf">複素フーリエ係数</a> $\textrm{C}[k]$ がスペクトルになります。
+<br>
+ただし $k$ は整数値なので、次のように角周波数 $w$ [rad/秒]の値によってはスペクトル値が $0$ になる時があります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域アナログ信号のスペクトル</b>
+
+\[
+\textrm{F}(w)
+=
+\begin{cases}
+\textrm{C}[k] & , w = k \cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+$w_1 = 2\pi/\textrm{T}$ ・・・ 基本角周波数、 単位は [rad/秒]
+</p>
+
+<p>
+※  $k$ の符号が異なる複素フーリエ係数は共役関係にあるので、今回は $w<0$ の範囲は考えないことにしています。
+</p>
+
+</div>
+
+<p>
+また周期性時間領域アナログ信号の振幅・位相・パワースペクトルは複素フーリエ係数を使ってそれぞれ次のように表されます。
+</P>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域アナログ信号の振幅・位相・パワースペクトル</b>
+
+<p>
+<b>(1) 振幅スペクトル</b> (または振幅成分)
+</p>
+
+\[
+|\textrm{F}(w)|
+=
+\begin{cases}
+|\textrm{C}[k]| & ,w = k\cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+<b>(2) 位相スペクトル</b> (または位相成分)
+</p>
+
+\[
+\angle\textrm{F}(w)
+=
+\begin{cases}
+\angle\textrm{C}[k] & ,w = k\cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+<b>(3) パワースペクトル</b> (または(電力)スペクトル密度)
+</p>
+
+\[
+|\textrm{F}(w)|^2
+=
+\begin{cases}
+|\textrm{C}[k]|^2 & ,w = k\cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+</div>
+
+<p>
+以上から分かるように、
+</p>
+
+<p>
+<b>「周期性時間領域アナログ信号の場合は直流成分($k=0$)、基本波($k =1$)、高調波($k = 2, 3, \cdots$) に対応する角周波数の時だけスペクトル値が定まって、それ以外の角周波数におけるスペクトル値は $0$」</b>
+</p>
+
+<p>
+となります。あるいは
+</p>
+
+<p>
+<b>「ある周期性時間領域アナログ信号のスペクトルが分かれば、その信号の直流成分、基本波、高調波の各パラメータ値(角周波数、振幅、位相)が分かるので元の信号を復元できる」</b>
+</p>
+
+<p>
+と言うことも出来ます。
+</p>
+
+<script>PreNext(1,3)</script>
+</body>
+</html>

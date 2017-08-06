@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 振幅・位相・パワースペクトル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [3] 周期性時間領域ディジタル信号</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は<a href="../../dft/text01/page01.html">周期性時間領域ディジタル信号</a>のスペクトルを考えます。
+</p>
+
+<p>
+周期性時間領域ディジタル信号の場合は、<a href="../../dft/text01/page02.html">DFT 係数</a> $\textrm{C}[k]$ がスペクトルになります。
+</p>
+
+<p>
+ただし今回解析対象としている信号はディジタル信号なので、そのままでは基本角周波数が分からないという問題があります。
+<br>
+そこでまずは<a href="../../d-sin/text01/page03.pdf">時間領域ディジタルサイン波の所</a>で学んだ方法を応用して、周期性時間領域ディジタル信号の基本角周波数を求めます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期性時間領域ディジタル信号の基本角周波数を求める方法</b>
+
+<p>
+</p>
+<ul>
+<li>$w_1$ [rad/秒] ・・・基本角周波数</li>
+<li>$f_s$ [Hz]・・・サンプリング周波数</li>
+<li>$\textrm{N}$ [点]・・・周期性時間領域ディジタル信号の周期</li>
+</ul>
+
+<p>
+とすると
+</p>
+
+\[
+w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}
+\]
+
+</div>
+
+<p>
+後は周期性時間領域アナログ信号の時と同じ話になり、周期性時間領域ディジタル信号の場合も結局は<b>「周期性時間領域アナログ信号の場合は直流成分($k=0$)、基本波($k =1$)、高調波($k = 2, 3, \cdots, \textrm{N}/2$) に対応する角周波数の時だけスペクトル値が定まって、それ以外の角周波数におけるスペクトル値は $0$」</b>となります。
+<br>
+ただし、周期性時間領域アナログ信号の時は $k$ は無限大まで続く整数でしたが、今回は最大で $\textrm{N}/2$ までになります(※)。
+</p>
+
+<p>
+※ 標本化定理により、ディジタル信号にはナイキスト周波数 $f_s/2$ [Hz] 以上のサイン波が含まれないことがこの理由です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域ディジタル信号のスペクトル</b>
+
+\[
+\textrm{F}(w)
+=
+\begin{cases}
+\textrm{C}[k] & , w = k \cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+$w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}$ ・・・ 基本角周波数、 単位は [rad/秒]
+</p>
+
+</div>
+
+
+<p>
+周期性時間領域ディジタル信号の振幅・位相・パワースペクトルも DFT 係数を使ってそれぞれ次のように表されます。
+</P>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域ディジタル信号の振幅・位相・パワースペクトル</b>
+
+<p>
+<b>(1) 振幅スペクトル</b> (または振幅成分)
+</p>
+
+\[
+|\textrm{F}(w)|
+=
+\begin{cases}
+|\textrm{C}[k]| & , w = k \cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+<b>(2) 位相スペクトル</b> (または位相成分)
+</p>
+
+\[
+\angle\textrm{F}(w)
+=
+\begin{cases}
+\angle\textrm{C}[k] & , w = k \cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+<p>
+<b>(3) パワースペクトル</b> (または(電力)スペクトル密度)
+</p>
+
+\[
+|\textrm{F}(w)|^2
+=
+\begin{cases}
+|\textrm{C}[k]|^2 & , w = k \cdot w_1 \mbox{のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
+0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\end{cases}
+\]
+
+</div>
+
+<script>PreNext(1,3)</script>
+</body>
+</html>
