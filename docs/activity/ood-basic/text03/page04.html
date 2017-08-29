@@ -25,23 +25,26 @@
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、「Actor」スーパークラスを継承した「FRUIT」サブクラスと、「FRUIT」を継承した「APPLE」と「ORANGE」サブクラスを作成します。
+このスプリントでは、「Actor」クラスを継承した「FRUIT」クラスと、「FRUIT」を継承した「APPLE」クラスと「ORANGE」クラスを作成します。
 </p>
 <ul>
-<li>「FRUIT」の画像は無しとします。</li>
-<li>「APPLE」と「ORANGE」の画像は任意とします。</li>
-<li>実行開始時に「APPLE」のオブジェクトを 5 つ作成してランダムに配置します。</li>
-<li>実行開始時に「ORANGE」のオブジェクトを 5 つ作成してランダムに配置します。</li>
+<li>「FRUIT」クラスの画像は無しとします。</li>
+<li>「APPLE」クラスの画像は任意とします。</li>
+<li>「ORANGE」クラスの画像は任意とします。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「APPLE」オブジェクトを 5 つ作成してランダム位置に配置します(x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400)。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「ORANGE」オブジェクトを 5 つ作成してランダム位置に配置します(x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400)。</li>
 </ul>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリント バックログの作成:</b>
+<input type="checkbox"><b>スプリント バックログ:</b>
 <p></p>
 <ol>
-<li>「FRUIT」「APPLE」「ORANGE」の作成</li>
-<li>「MyWorld」 のコンストラクタのコーディング(APPLE、ORANGEオブジェクトの作成と配置)</li>
+<li>「FRUIT」クラスの作成</li>
+<li>「APPLE」クラスの作成</li>
+<li>「ORANGE」クラスの作成</li>
+<li>「MyWorld」のコンストラクタのコーディング(APPLE、ORANGEオブジェクトの作成と配置)</li>
 </ol>
 </div>
 
@@ -79,13 +82,13 @@
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「Actor」スーパークラスを継承して「FRUIT」サブクラスを作成して下さい。 画像は無しです。また act メソッドは削除して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「FRUIT」クラスを作成して下さい。 画像は無しです。また act メソッドは削除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「FRUIT」を継承して「APPLE」「ORANGE」サブクラスを作成して下さい。 画像は任意とします。また act メソッドは削除して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「FRUIT」クラスを継承して「APPLE」「ORANGE」クラスを作成して下さい。 画像は任意とします。また act メソッドは削除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「APPLE」と「ORANGE」のオブジェクトをそれぞれ 5 つ作り、ランダムに配置して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「APPLE」オブジェクトを 5 つ作り、ランダムに配置して下さい。x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
 <br>
-x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「ORANGE」オブジェクトを 5 つ作り、ランダムに配置して下さい。x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
 </p>
 </div>
 </div>
@@ -95,7 +98,7 @@ x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
 <input type="checkbox"><b>テストとデバッグ:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「APPLE」と「ORANGE」のオブジェクトがそれぞれ 5 つランダムに配置されることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「APPLE」と「ORANGE」オブジェクトがそれぞれ 5 つランダムに配置されることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
 <br>

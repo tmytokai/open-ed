@@ -25,22 +25,24 @@
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、「HUMAN」を継承してプレイヤーキャラクター「TARO」と「HANAKO」を作成します。
+このスプリントでは、「HUMAN」クラスを継承してプレイヤーキャラクター「TARO」と「HANAKO」のクラスを作成します。
 </p>
 <ul>
-<li>「TARO」と「HANAKO」の画像は任意とします。</li>
-<li>実行開始時に「TARO」のオブジェクトをひとつ作成して左上に配置します。座標は (0,0)とします。</li>
-<li>実行開始時に「HANAKO」のオブジェクトをひとつ作成して右下に配置します。座標は (600,400)とします。</li>
+<li>「TARO」クラスの画像は任意とします。</li>
+<li>「HANAKO」クラスの画像は任意とします。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「TARO」オブジェクトをひとつ作成して左上に配置します。座標は (0,0)とします。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「HANAKO」オブジェクトをひとつ作成して右下に配置します。座標は (600,400)とします。</li>
 </ul>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリント バックログの作成:</b>
+<input type="checkbox"><b>スプリント バックログ:</b>
 <p></p>
 <ol>
-<li>「TARO」「HANAKO」の作成</li>
-<li>「MyWorld」 のコンストラクタのコーディング(TARO、HANAKOオブジェクトの作成と配置)</li>
+<li>「TARO」クラスの作成</li>
+<li>「HANAKO」クラスの作成</li>
+<li>「MyWorld」のコンストラクタのコーディング(TARO、HANAKOオブジェクトの作成と配置)</li>
 </ol>
 </div>
 
@@ -78,10 +80,10 @@
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」スーパークラスを継承して「TARO」「HANAKO」サブクラスを作成して下さい。 画像は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスを継承して「TARO」「HANAKO」クラスを作成して下さい。 画像は任意とします。
 </p>
 <p>
-※ そのままだと「HUMAN」の act メソッドがオーバライドされてオブジェクトが動かなくなるので、「TARO」と「HANAKO」の act メソッドを消します。
+※ そのままだと「HUMAN」の act メソッドがオーバーライドされてオブジェクトが動かなくなるので、「TARO」と「HANAKO」の act メソッドを消します。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「TARO」と「HANAKO」のオブジェクトを作ってそれぞれ座標 (0,0) 、座標 (600,400) に動的配置します。
@@ -94,7 +96,7 @@
 <input type="checkbox"><b>テストとデバッグ:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「TARO」と「HANAKO」のオブジェクトが左上と右下に表示されることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「TARO」と「HANAKO」オブジェクトが左上と右下に表示されることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
 <br>

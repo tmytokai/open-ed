@@ -25,26 +25,27 @@
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、(必要なら)「MyWorld」を作ります。
+このスプリントでは、「MyWorld」クラスを作ります。
 <br>
-また全てのプレイヤーキャラクターの基となる「HUMAN」サブクラスを「Actor」スーパークラスを継承して作成します。
+また全てのプレイヤーキャラクターの基となる「HUMAN」クラスを「Actor」クラスを継承して作成します。
 </p>
 <ul>
 <li>「MyWorld」の大きさは 600 x 400 とします。</li>
 <li>「MyWorld」の画像は任意とします。</li>
 <li>「HUMAN」の画像は無しとします。</li>
-<li>「HUMAN」はキーボードの矢印キーで上下左右に動かすことが出来ます。move量は 4 とします。</li>
+<li>「HUMAN」はキーボードの矢印キーで上下左右に動かすことが出来ます。</li>
+<li>「HUMAN」の move 量は 4 とします。</li>
 </li>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリント バックログの作成:</b>
+<input type="checkbox"><b>スプリント バックログ:</b>
 <p></p>
 <ol>
-<li>(必要なら)「MyWorld」の作成</li>
-<li>「HUMAN」の作成</li>
-<li>「HUMAN」 の act メソッドのコーディング(オブジェクトを動かす)</li>
+<li>「MyWorld」クラスの作成</li>
+<li>「HUMAN」クラスの作成</li>
+<li>「HUMAN」クラス の act メソッドのコーディング</li>
 </ol>
 </div>
 
@@ -85,15 +86,15 @@
 <input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「World」スーパークラスを継承して「MyWorld」サブクラスを作成して下さい。 大きさは 600 x 400 とします。画像は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> 「World」クラスを継承して「MyWorld」クラスを作成して下さい。 大きさは 600 x 400 とします。画像は任意とします。
 </p>
 <p>
-※ Greenfoot のバージョンによっては最初から MyWorld があります。その場合は作成しなくても良いです。
+※ Greenfoot のバージョンによっては最初から MyWorld が出来ています。その場合は作成しなくても良いです。画像だけセットして下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「Actor」スーパークラスを継承して「HUMAN」サブクラスを作成して下さい。 画像は無しです。
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「HUMAN」クラスを作成して下さい。 <b>画像は無しです。</b>
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」サブクラスの act メソッド内に「矢印キーで上下左右に動かす」プログラムを記述して下さい。 move 量は 4 です。
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスの act メソッド内に「矢印キーで上下左右に動かす」プログラムを記述して下さい。 move 量は 4 です。
 </p>
 </div>
 </div>
@@ -103,7 +104,7 @@
 <input type="checkbox"><b>テストとデバッグ:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「HUMAN」のオブジェクトをワールドにマウスで手動配置して下さい。 
+<span class="olradio"><input type="radio" name="p3"></span> 「HUMAN」オブジェクトを「MyWorld」上にマウスを使って手動配置して下さい。 
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
 <br>

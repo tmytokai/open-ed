@@ -28,20 +28,20 @@
 このスプリントでは、タイムアップ処理を作ります。
 </p>
 <ul>
-<li>「MyWorld」に private int rtime フィールドを追加します。残り時間を表します。</li>
-<li>rtime の初期値は 1000 です。</li>
-<li>「MyWorld」に public void act メソッドを追加し、act メソッドで rtime をデクリメントして画面に表示します。表示位置は任意です。</li>
-<li> rtime が 0 以下になったらタイムアウトメッセージを表示してゲームを停止します。表示内容と表示位置は任意です。</li>
+<li>「MyWorld」クラスに private int rtime フィールドを追加します。rtime は残り時間を表す整数です。</li>
+<li> rtime の初期値は 1000 です。</li>
+<li>「MyWorld」クラスに public void act メソッドを追加し、act メソッドで rtime をデクリメントして画面に表示します。表示位置は左下なら任意の場所でOKです。</li>
+<li> rtime が 0 以下になったらタイムアウトメッセージを表示してゲームを停止します。メッセージ内容と表示位置は任意です。</li>
 </ul>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリント バックログの作成:</b>
+<input type="checkbox"><b>スプリント バックログ:</b>
 <p></p>
 <ol>
-<li>「MyWorld」のコンストラクタのコーディング( rtime フィールドの初期化)</li>
-<li>「MyWorld」の act メソッドのコーディング( rtime のデクリメントと表示とタイムアウト処理)</li>
+<li>「MyWorld」クラスのコンストラクタのコーディング( rtime フィールドの初期化)</li>
+<li>「MyWorld」クラスの act メソッドのコーディング( rtime のデクリメントと表示とタイムアウト処理)</li>
 </ol>
 </div>
 
@@ -77,13 +77,13 @@
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに private int rtime フィールドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで rtime フィールドに 1000 を代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスのコンストラクタで rtime フィールドに 1000 を代入して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに public void act メソッドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドで rtime フィールドをデクリメントして値を画面に表示して下さい。表示位置は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドで rtime フィールドをデクリメントして値を画面に表示して下さい。表示位置は左下なら任意の場所でOKです。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドに、rtime フィールドの値が 0 以下になったらタイムアップメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドに、rtime フィールドの値が 0 以下になったらタイムアップメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と表示位置は任意です。
 </p>
 </div>
 </div>

@@ -27,29 +27,29 @@
 <p>
 このスプリントでは、ゲームオーバーとゲームクリアの処理を作ります。
 <br>
-「TARO」が果物に触れたらゲームオーバーです。
+「TARO」オブジェクトが果物に触れたらゲームオーバーです。
 <br>
-「HANAKO」が果物を全て食べたらクリアです。
+「HANAKO」オブジェクトが果物を全て食べたらクリアです。
 </p>
 <ul>
-<li>「HUMAN」に public void eat メソッドを追加し(※)、act メソッド内の当たり判定処理を全てそこに移します。</li>
-<li>「HUMAN」の act メソッドから eat メソッドを呼び出します。</li>
-<li>「HUMAN」の eat メソッドで果物を 10 個食べたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
-<li>「TARO」で eat メソッドをオーバーライドし、果物に触れたらメッセージを表示してゲームを停止します。表示内容と位置は任意です。</li>
+<li>「HUMAN」クラスに public void eat メソッドを追加し(※)、act メソッド内の当たり判定処理を全てそこに移します。</li>
+<li>「HUMAN」クラスの act メソッド内から追加した eat メソッドを呼び出します。</li>
+<li>「HUMAN」クラスの eat メソッドで果物を 10 個食べたらメッセージを表示してゲームを停止します。メッセージ内容と位置は任意です。</li>
+<li>「TARO」クラスで eat メソッドをオーバーライドし、果物に触れたらメッセージを表示してゲームを停止します。メッセージ内容と位置は任意です。</li>
 </ul>
-※ 本来なら public ではなくて protected にするか、抽象メソッド(純粋仮想関数)を使うか、又はデリゲーションを使った方が良いです。
-<br>
-それらについては自分で調べて下さい。
+※ 本来なら public ではなくて protected にするか、抽象メソッド(純粋仮想関数)を使うか、又はデリゲーションを使った方が良いです。それらについては自分で調べて下さい。
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリント バックログの作成:</b>
+<input type="checkbox"><b>スプリント バックログ:</b>
 <p></p>
 <ol>
-<li>「HUMAN」 に eat メソッドを追加し、当たり判定処理を全てそこに移して act から呼び出す</li>
-<li>「HUMAN」の eat メソッド内にクリア処理を書く(10個食べたらクリア)</li>
-<li>「TARO」 で eat メソッドをオーバライドしてコーディング(果物に触れたらゲームオーバー)</li>
+<li>「HUMAN」クラスに eat メソッドを追加する</li>
+<li> eat メソッドに act メソッド内の当たり判定処理を切り取って貼り付ける</li>
+<li>「HUMAN」クラスの act メソッド内から eat メソッドを呼び出す</li>
+<li>「HUMAN」クラスの eat メソッド内にクリア処理を書く(果物を10個食べたらメッセージ出してクリア)</li>
+<li>「TARO」クラスで eat メソッドをオーバライドしてコーディング(果物に触れたらメッセージ出してゲームオーバー)</li>
 </ol>
 </div>
 
@@ -89,12 +89,12 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> act メソッドから eat メソッドを呼び出して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と位置は任意とします。
 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「TARO」に「HUMAN」の eat メソッドを丸ごとコピーして貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」クラスに「HUMAN」クラスの eat メソッドを丸ごとコピーして貼り付けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「TARO」の eat メソッドを書き換えて、果物に触れたら即ゲームオーバーメッセージを出してプログラムを停止する処理を追加して下さい。メッセージの内容と位置は任意とします。
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」クラスの eat メソッドを書き換えて、果物に触れたら即ゲームオーバーメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と位置は任意とします。
 </p>
 </div>
 </div>
