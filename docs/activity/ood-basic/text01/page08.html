@@ -20,11 +20,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ある Actor のサブクラスと他のサブクラスのオブジェクトが重なっているか判定するには、Actor クラスの getOneObjectAtOffset メソッドを利用します。
+ある Actor のサブクラスのオブジェクトが他のサブクラスのオブジェクトが重なっているかどうかを判定するには、Actor クラスの getOneObjectAtOffset メソッドを利用します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ある Actor のサブクラスと他のサブクラスのオブジェクトが重なっているか判定</b>
+<input type="checkbox"><b>他のサブクラスのオブジェクトと重なっているか判定</b>
 <pre class="wrap">
 protected Actor Actor.getOneObjectAtOffset( 0, 0, クラス名 )
 
@@ -37,11 +37,11 @@ protected Actor Actor.getOneObjectAtOffset( 0, 0, クラス名 )
 </p>
 
 <p>
-例えばあるオブジェクトの act などのメソッド内で TARO オブジェクトとの当たり判定を行うにはソース 1 のようにします。
+例えばあるクラスのメソッド内(actなど)で TARO オブジェクトとの当たり判定処理を行うにはソース 1 のようにします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: あるオブジェクトが TARO オブジェクトにぶつかった時の当たり判定の例</b>
+<input type="checkbox"><b>ソース 1: TARO オブジェクトとぶつかった時の当たり判定の例</b>
 <pre class="wrap">
 Actor actor = getOneObjectAtOffset( 0, 0, TARO.class );
 if( actor != null ){

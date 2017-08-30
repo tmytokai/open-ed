@@ -33,11 +33,22 @@ public void World.addObject( オブジェクト, x 座標, y 座標 )
 </div>
 
 <p>
-例えば World のサブクラスのコンストラクタなどのメソッド内で HOGE クラスのオブジェクトを new してから座標 (300,200) に配置するにはソース 1 のようにします。
+例えばあるクラスの任意のメソッドの中で TARO クラスのオブジェクトを new してから座標 (300,200) に配置するには、World オブジェクトの getter である getWorld メソッドを経由して ソース 1 の様にします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: World のサブクラスのメソッド内でオブジェクトを動的配置する例</b>
+<input type="checkbox"><b>ソース 1: あるクラスのメソッドの中でオブジェクトを動的配置する例</b>
+<pre class="wrap">
+getWorld().addObject( new TARO(), 300, 200 ); // getWorld() は World オブジェクトの getter
+</pre>
+</div>
+
+<p>
+なお World のサブクラスの場合は getWorld を使う必要はないので、ソース 2 の様に直接 addObject を呼び出せます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2: World のサブクラスのメソッドの中でオブジェクトを動的配置する例</b>
 <pre class="wrap">
 addObject( new TARO(), 300, 200 );
 </pre>
