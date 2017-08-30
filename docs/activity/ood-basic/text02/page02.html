@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. ブロジェクトの新規作成とシーン作成</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Unity2D の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Unity を起動するとプロジェクトの選択ウィザードが表示されますので、ここでプロジェクトを新規作成することが出来ます。
+<br>
+なお新規作成画面で開発モードを 3D モードにするか 2D モードにするか選択可能です。
+<br>
+今回は 2D モードの方を選びます。
+</p>
+
+<p>
+プロジェクトを新規作成すると 図1 のような画面が表示されます。
+<br>
+画面左上のエリアのことを「<b>Hierarchy(ヒエラルキー)ウィンドウ</b>」、
+中央上のマス目が描いてあるエリアのことを「<b>Scene(シーン)ビュー</b>」、
+右側のエリアの事を「<b>Inspector(インスペクター)ウィンドウ</b>」、
+下側のエリアの事を「<b>Project ウィンドウ</b>」、
+Project ウィンドウの右側パネルの事を「<b>Assets(アセット)フォルダ</b>」と言います。
+<br>
+他にも重要なエリアがありますが、必要になったらその都度説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. プロジェクト新規作成直後の画面</b>
+<p>
+</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+さて Unity ではタイトル画面やゲーム画面、ゲームオーバー画面などの各場面の事を「シーン」と呼び、それぞれの設定を異なるファイル(シーンファイルと呼びます)に保存する事が出来ます。
+<br>
+よって複数のシーンを用意することで、プログラマはゲーム中の適切なタイミングで各場面を切り替えることが可能になっています。
+</p>
+
+<p>
+プロジェクト新規作成直後の Snene 画面にはデフォルトのシーンが表示されています。
+<br>
+ただデフォルトでは背景画像はありませんので、ここでは以下の手順で背景をセットしてみたいと思います(※)。
+</p>
+
+<p>
+※ 今回は基本編なので、スクロール無しの 1 枚絵だけの表示とします。
+スクロールさせたいなら自分で調べてみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>背景画像のセット方法:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 背景画像を用意する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに背景画像を DnD すると画像が Asset として登録される(※)。
+</p>
+<p>
+※ Unity で使う画像やソースなどのファイルの事を「<b>Asset (アセット)</b>」と呼びます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 登録した背景画像をさらに Assets フォルダ から Scene ビューに DnD するとその画像がオブジェクト化され(※)、Hierarchy ウィンドウにオブジェクト名、Inspector ウィンドウにオブジェクトの情報が表示される。
+</p>
+<p>
+※ Unity ではインスタンスの事を「<b>ゲームオブジェクト</b>」と呼びますが、今回は簡単に「オブジェクト」とだけ書きます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Transform の x と y に 0、z に 1 をセットする(※)。
+</p>
+<p>
+※ z の値でオブジェクトの重なり具合を調節します。
+<br>
+(カメラの位置にも寄りますが)値が小さいほど他のオブジェクトの手前に表示されるようになります。
+</p>
+</div>
+</div>
+
+<p>
+これで背景画像がオブジェクト化されて Scene ビューの中央に表示されましたので、次は実際のゲーム画面でどの様に表示されるのか確認してみます。
+<br>
+Scene ビューのタブの隣に「Game」というタブがあるのでそれをクリックして「<b>Game ビュー</b>」に切り替えてください。
+<br>
+Game ビューに表示されている画像が実際のゲームでも表示されます。
+</p>
+
+<p>
+さて背景画像の形や大きさによっては Game ビューにピッタリ収まらないかもしれません。
+<br>
+その場合は以下の様にしてカメラを調整します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>カメラの調整:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> まず画面比率を決める。Game ビューに切り替え、ビューの上部にある「Free Aspect」と書いてあるプルダウンメニューをクリックし、好みの比率を選択する。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Scene ビュー に切り替える。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (もし背景画像が見辛かったら) 左上にある手のひらボタンをクリックしてから Scene ビューをドラッグするとビューの表示位置を調整出来る。またマウスホイール上下でビューの表示を拡大縮小出来る。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウの「Main Camera」をクリックすると Inspector ウィンドウにカメラ情報が表示される。また Scene ビューにプレビューが表示される。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Scene ビュー にカメラの撮影枠が表示されているので、枠の大きさをドラッグして調整する。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Game ビューに切り替えて実際の表示を確かめる。
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(2,10)</script>
+</body>
+</html>
