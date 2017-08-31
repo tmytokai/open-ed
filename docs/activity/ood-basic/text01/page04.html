@@ -1,9 +1,106 @@
-角度 r (int 型、0 〜 359 )の方向を向く: setRotation(r)
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. オブジェクトの移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+さてワールド上に配置したキャラクターのオブジェクトはそのままでは静止したままなので、これを動かしてみたいと思います。
+</p>
+
+<p>
+まずクラス画面上にある動かしたいキャラクターのクラスをダブルクリックしてエディタを起動し、その中に
+</p>
+
+<p>
+<b>public void act()</b>
+</p>
+
+<p>
+というメソッドが含まれていることを確認して下さい。
 <br>
+この act メソッドがタイマーにより繰り返し呼びだされます。
+</p>
+
+<p>
+次に act メソッドの中で Actor クラスの setRotation メソッドを利用して移動したい方向にオブジェクト向きを変えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>オブジェクトの向きを変更</b>
+<pre class="wrap">
+public void setRotation( 角度 )
+
+戻り値(void): 無し。
+
+角度(int): 0 〜 359 の範囲で角度を指定する。
+</pre>
+</div>
+
+<p>
+移動したい方向にオブジェクトを向けたら、同様に Actor クラスの move メソッドを利用してオブジェクトを移動させます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>オブジェクト移動</b>
+<pre class="wrap">
+public void move( 移動距離 )
+
+戻り値(void): 無し。
+
+移動距離(int): 大きいほど移動距離大
+</pre>
+</div>
+
+<p>
+例えばあるオブジェクトを 45 度の方向に移動距離 1 で動かしたい場合はソース 1 の様に act メソッド内に書きます。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: オブジェクトを 45 度の方向に移動距離 1 で動かす</b>
+<pre class="wrap">
+setRotation(45);
+move(1);
+</pre>
+</div>
+
+<p>
+さてコーディングが済んだら以下の手順でプログラムを実行してオブジェクトを動かしてみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>プログラム実行方法:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Reset ボタンを押して初期化する。
 <br>
-向いている方向を取得: getRotation()
+<span class="olradio"><input type="radio" name="p1"></span> (必要なら) オブジェクトを手動配置する。
 <br>
-戻り値: int 型、向いている方向(度)
+<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Run ボタンを押すとプログラムが実行する。ちなみに Act ボタンを押すと act メソッドが 1 回だけ実行される。
 <br>
+<span class="olradio"><input type="radio" name="p1"></span> Reset ボタンを押すと停止する。
+</p>
+</div>
+</div>
+
+
+
 <br>
-n 歩動く: move(n)
+<script>PreNext(4,10)</script>
+</body>
+</html>

@@ -1,1 +1,66 @@
-手動配置: shiftキー押しながらマウスボタンクリック
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. オブジェクトの作成と配置</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+さてデフォルトのワールド(MyWorld)の設定が済んだので、次はキャラクターなどのオブジェクトを作成してワールドの上に配置してみましょう。
+</p>
+
+<p>
+Greenfoot は Java がベースとなっていますので、オブジェクトを作成するにはまず元となるクラスを作る必要があります。
+<br>
+そして Greenfoot で画面に表示させるオブジェクトの元となるクラスは Actor クラスのサブクラスである必要があります。
+</p>
+
+<p>
+Actor クラスのサブクラスを作るには、クラス画面にある「Actor」クラスの上で右クリックしてメニューを表示し、New Subclass を選びます。
+<br>
+するとダイアログが表示されますので、クラス名と画像を選択して下さい。
+</p>
+
+<p>
+こうやって新規作成したキャラクターのクラスから手動で(※)オブジェクトを作ってワールドに配置する手順は以下のとおりです。
+</p>
+
+<p>
+※ new を使って動的に配置する方法は<a href="./page07.html">7ページ目</a>で説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>オブジェクトを手動で配置する方法:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 表示したいキャラクターのクラスをクラス画面からクリックで選択する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シフトキーを押すとカーソルの位置にオブジェクトが表示される。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 配置したい場所にカーソルを移動してクリックする。
+</p>
+</div>
+</div>
+
+<p>
+なお手動配置したオブジェクトを削除したい場合は、オブジェクトを右クリックしてメニューを表示し、Delete を選んで下さい。
+</p>
+
+<br>
+<script>PreNext(3,10)</script>
+</body>
+</html>
