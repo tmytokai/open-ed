@@ -1,15 +1,60 @@
-キー状態の判定: Greenfoot.isKeyDown( "キー" )
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. キーボードによるオブジェクトの移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+現在キーボード上の指定したキーを押しているかどうかを判定するには、Greenfoot というユーティリティクラスの isKeyDown メソッドを利用します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>指定したキーを押しているか判定</b>
+<pre class="wrap">
+public static boolean Greenfoot.isKeyDown( "キーの名前" )
+
+戻り値(boolean): 指定したキーを押してれば true、押して無ければ false が戻る 
+
+"キーの名前":
+文字キーなら "a", "b", ・・・, "z" 
+数字キーなら "0", ・・・ ,"9" 
+カーソルキーなら "up", "down", "left", "right" 
+その他 "enter", "space", "tab", "escape", "backspace", "shift", "control", "F1", "F2",・・・, "F12"
+</pre>
+</div>
+
+<p>
+このメソッドは public static なので、コード内のどこからでも呼び出すことが出来ます。 
 <br>
+従ってカーソルキーの右を押したら右に 1 だけ移動したい場合はソース 1 の様に act メソッド内に書きます。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: カーソルキーの右を押したら右に 1 だけ移動</b>
+<pre class="wrap">
+if( Greenfoot.isKeyDown( "right" ) ){
+        setRotation(0);
+        move(1);
+}
+</pre>
+</div>
+
 <br>
-戻り値: bool 型、指定したキーを押してれば true、押して無ければ false が戻る
-<br>
-<br>
-"キー名" :
-<br>
-"a", "b", ・・・, "z"
-<br>
- "0", ・・・ ,"9"
-<br>
-"up", "down", "left", "right"
-<br>
-"enter", "space", "tab", "escape", "backspace", "shift", "control", "F1", "F2",・・・, "F12"
+<script>PreNext(5,10)</script>
+</body>
+</html>

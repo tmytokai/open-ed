@@ -1,6 +1,71 @@
-文字列表示: getWorld().showText( "文字列", x, y )
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. 文字列の表示</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ワールド上に文字列を表示したい場合は、World クラスの showText メソッドを利用します。 
+
+</p>
+
+<div class="info">
+<input type="checkbox"><b>文字列表示</b>
+<pre class="wrap">
+public void World.showText( "文字列", x 座標, y 座標 ) 
+
+戻り値(void): 無し。
+
+同じ座標に違う文字列を上書き表示したいなら、座標はそのままで文字列だけ変える
+文字列を消すには同じ座標で "" を表示する
+</pre>
+</div>
+
+<p>
+ただし、あるクラスのメソッドの中で文字列を表示させたい場合は、そのオブジェクトが表示されているワールドのオブジェクトを取得しなければいけません。
 <br>
+それにはワールドオブジェクトの getter である getWorld メソッドを利用します。
+
+<p>
+例えばあるクラスの中で文字列 "HOGE" を座標 (100,50) に表示するには ソース 1 の様にします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: 文字列 "HOGE" を座標 (100,100) に表示</b>
+<pre class="wrap">
+getWorld().showText( "HOGE", 100, 50 ); // getWorld() は World オブジェクトの getter
+</pre>
+</div>
+
+<p>
+ちなみに MyWorld の様な World クラスのサブクラスの場合は showText が継承されていますので、ソース 2 の様に getWorld を使わず直接 showText を呼び出せます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2: World のサブクラス内で文字列を表示</b>
+<pre class="wrap">
+showText( "HOGE", 100, 50 );
+</pre>
+</pre>
+</div>
+
+
 <br>
-同じ座標で違う文字列を表示したいなら、座標そのままで文字列だけ変える。
-<br>
-消すには同じ座標で "" を表示する。
+<script>PreNext(6,10)</script>
+</body>
+</html>
