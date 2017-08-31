@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>リリース プランニング</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [3] オブジェクト指向開発演習(2) </li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここでは別のミニゲームを開発してみましょう。
+</p>
+
+<h3>
+1. 要求定義
+</h3>
+
+<p>
+要求仕様書は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>要求仕様書</b>
+
+<p>
+</p>
+
+<table>
+<tr><td class="center">名称</td><td>TARO と OBAKE</td></tr>
+<tr><td class="center">用途・目的</td><td>暇つぶし用ミニゲーム</td></tr>
+<tr><td class="center">対象ユーザ</td><td>6 歳以上の男女</td></tr>
+<tr><td class="center">システム構成</td>
+<td>
+OS: Windows 又は Linux
+<br>
+PC: 低スペック
+<br>開発環境: Unity2D
+</td></tr>
+<tr><td class="center">概要</td><td>
+・PC 上で動く 2 次元アクションゲーム
+<br>
+・キーボードのみで操作
+<br>
+・画面上に TARO というプレイヤーキャラと OBAKE という敵キャラと BLOCK という複数の障害物を表示する
+<br>
+・重力により TARO は下に落ち続ける
+<br>
+・ユーザーはキーボード操作により TARO を左右に動かしたりジャンプさせたり出来る
+<br>
+・TARO は BLOCK をすり抜けられない。
+<br>
+・TARO はキーボード操作により BALL という弾を投げられる
+<br>
+・BALL は最初に投げた方向に動き続ける
+<br>
+・OBAKE は動きまわる
+<br>
+・BALL が OBAKE に触れたらゲームクリア
+<br>
+・TARO が OBAKE に触れたらゲームオーバー
+</td></tr>
+</table>
+
+<p>
+</p>
+
+</div>
+
+<br>
+<h3>
+2. 全体仕様書の作成
+</h3>
+
+<p>
+ゲーム仕様は以下のように策定しました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ゲーム仕様</b>
+
+<p>
+・背景(MyWorld と名付ける)は一枚絵とし、スクロールしない
+<br>
+・TARO(x1)、OBAKE(x1)、BLOCK(x複数) は適当に配置する
+<br>
+・重力により TARO は下に落ち続ける 
+<br>
+・TARO は左右のカーソルキーで左右に動かせる
+<br>
+・TARO は z キーでジャンプする
+<br>
+・TAROジャンプ中でも左右移動可能
+<br>
+・TARO は x キーで向いている方向(左右)に BALL を投げる
+<br>
+・TARO は BLOCK をすり抜けられない
+<br>
+・BALL は複数個投げられる
+<br>
+・BALL は動いている途中に方向とスピードを変更しない
+<br>
+・BALL は BLOCK をすり抜けられる
+<br>
+・OBAKE は適当なアルゴリズムに従って動く
+<br>
+・OBAKE は BLOCK をすり抜けられる
+<br>
+・BALL が OBAKE に触れたらゲームクリアとなりメッセージ表示
+<br>
+・TARO が OBAKE に触れたらゲームオーバーとなりメッセージ表示
+</p>
+
+</div>
+
+<p>
+画面仕様図は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>画面仕様図</b>
+<p>
+</p>
+<img src="./img/screen.png" alt="">
+</div>
+
+<p>
+クラス設計は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>クラス設計</b>
+
+<p>
+</p>
+
+<table>
+<tr><th>クラス名</th><th>内容</th></tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・背景クラス
+<br>
+・特に何もしない
+</td>
+</tr>
+
+<tr><td>
+BLOCK
+</td><td>
+・障害物クラス
+<br>
+・特に何もしない
+</td>
+</tr>
+
+<tr><td>
+TARO
+</td><td>
+・プレイヤーキャラクラス
+<br>
+・キーボード操作(左右移動)を行う
+<br>
+・キーボード操作(ジャンプ)を行う
+<br>
+・BALL を投げる
+<br>
+・OBAKE に触れたか判定してゲームオーバー処理を行う
+</td>
+</tr>
+
+
+<tr><td>
+BALL
+</td><td>
+・弾クラス
+<br>
+・最初に投げた方向に動き続ける
+<br>
+・OBAKE に触れたか判定してゲームクリア処理を行う
+</td>
+</tr>
+
+<tr><td>
+OBAKE
+</td><td>
+・敵クラス
+<br>
+・適当に動く
+</td>
+</tr>
+
+</table>
+
+<p>
+</p>
+
+</div>
+
+<p>
+継承などは特に使っていないので、今回はクラス図は省略します。
+</p>
+
+<br>
+<h3>
+3. プロダクトバックログと WBS の作成
+</h3>
+
+<p>
+WBS は以下の通りです。バックログも中に含まれています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>WBS (Work Breakdown Structure: 作業分解構成図)</b>
+<p>
+<b>1 スプリント ＝ 20 分</b>
+</p>
+<p>
+※ クリックすると図だけ表示します。
+</p>
+<a href="./img/WBS.png"><img src="./img/WBS.png" alt=""></a>
+<p>
+<a href="./img/WBS.ods">元データ (ods形式)</a>
+</p>
+</div>
+
+<br>
+<script>PreNext(1,12)</script>
+</body>
+</html>
