@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. オブジェクトの作成と配置</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Unity2D の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+さて背景の設置とカメラの調整が済んだので、次はキャラクターなどのオブジェクトを作成して画面に配置してみましょう。
+</p>
+
+<p>
+Unity は基本的にオブジェクトベースの開発言語なので、プラモデルのようにオブジェクトを段階的に組み立てていくという手法で開発を勧めます。
+<br>
+まずキャラクターのオブジェクトの作り方ですが、前ページの背景画像の設置とほとんど同じ手順になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>キャラクターのオブジェクト作成方法:</b>
+<div class="olradio"> 
+<p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> キャラクター画像を用意する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに画像を DnD すると画像が Asset として登録される。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 登録した画像をさらに Assets フォルダ から Scene ビューに DnD するとその画像がオブジェクト化され、Hierarchy ウィンドウにオブジェクト名、Inspector ウィンドウにオブジェクトの情報が表示される。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (サイズを調整したい場合は) Inspector ウィンドウの Transform の Scale の x と y の値を変えるか、または、左上にある右から 2 番目のボタンをクリックしてからマウスで調節する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (位置を調整したい場合は) Inspector ウィンドウの Transform の Position の x と y の値を変えるか、または、左上にある左から 2 番目のボタンをクリックしてからマウスでドラッグする。
+</p>
+</div>
+</div>
+
+<p>
+なおオブジェクトをコピーしたい場合は、 Hierarchy ウィンドウでオブジェクトを選択してから Ctrl + c → Ctrl + v で出来ます。
+<br>
+ただし位置が重なっていますので適宜変更して下さい。
+</p>
+
+<p>
+オブジェクト名を変更したい場合は、Hierarchy ウィンドウでオブジェクトを選択してから右クリックメニュー → Rename で出来ます。
+</p>
+
+<p>
+オブジェクトを削除したい場合は、Hierarchy ウィンドウでオブジェクトを選択してから Delete キーを押して下さい。
+</p>
+
+<br>
+<script>PreNext(3,10)</script>
+</body>
+</html>

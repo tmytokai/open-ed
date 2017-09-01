@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>リリース プランニング</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門(1)</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここからはミニゲームの開発を通じてオブジェクト指向開発を実際に体験してみようと思います。
+</p>
+
+このページではまず「リリースプランニング(全体計画)」を行いますが、「リリースプランニング」とは何か分からない先に<a href="../text03/page01.html">Greenfoot版のリリースプランニング</a>を読んで下さい。
+</p>
+
+<h3>
+1. 要求定義
+</h3>
+
+<p>
+要求定義は<a href="../text03/page01.html">Greenfoot版</a>とほぼ共通ですので、そちらを参照して下さい。
+</p>
+
+<br>
+<h3>
+2. 全体仕様書の作成
+</h3>
+
+
+<p>
+ゲーム仕様と画面仕様図も<a href="../text03/page01.html">Greenfoot版</a>とほぼ共通ですので、そちらを参照して下さい。
+</p>
+
+<p>
+ただ Unity はオブジェクトベースの開発環境ですので、クラスをもとにした設計よりもオブジェクトをもとにした設計の方が開発を進めやすいです。
+<br>
+そこで今回は HUMAN や FRUIT の様なスーパークラスを考えず次の様なシンプルなオブジェクト設計としました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>オブジェクト</b>
+
+<p>
+</p>
+
+<table>
+<tr><th>オブジェクト名</th><th>内容</th></tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・背景
+<br>
+・キャラクターの初期配置やタイムアップ処理などのマネージャー処理も行う
+</td>
+</tr>
+
+<tr><td>
+TARO
+</td><td>
+・プレイヤーキャラ その 1
+<br>
+・キーボード操作(上下左右移動)を行う
+<br>
+・果物に触れたらゲームオーバー処理を行う
+</td>
+</tr>
+
+<tr><td>
+HANAKO
+</td><td>
+・プレイヤーキャラ その 2
+<br>
+・キーボード操作をオーバーライドし、動きを反転させる
+<br>
+・果物に全て触れたら果物を消し、全て消したらゲームクリア処理を行う
+</td>
+</tr>
+
+<tr><td>
+APPLE
+</td><td>
+・果物 その 1
+<br>
+・適当に動く
+</td>
+</tr>
+
+<tr><td>
+ORANGE
+</td><td>
+・果物 その 2
+</td>
+</tr>
+
+</table>
+
+<p>
+</p>
+
+</div>
+
+<br>
+<h3>
+3. プロダクトバックログと WBS の作成
+</h3>
+
+<p>
+WBS は以下の通りです。バックログも中に含まれています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>WBS (Work Breakdown Structure: 作業分解構成図)</b>
+<p>
+<b>1 スプリント ＝ 20 分</b>
+</p>
+<p>
+※ クリックすると図だけ表示します。
+</p>
+<a href="./img/WBS.png"><img src="./img/WBS.png" alt=""></a>
+<p>
+<a href="./img/WBS.ods">元データ (ods形式)</a>
+</p>
+</div>
+
+<br>
+<script>PreNext(1,9)</script>
+</body>
+</html>
