@@ -33,7 +33,7 @@
 <br>
 コンポーネントをオブジェクトにくっつけることをアタッチと言います。
 <br>
-例えばこれまでのページで使ってきた Transform も、アタッチされているオブジェクトの位置やサイズを定めるコンポーネントのひとつです。
+例えばこれまでのページで使ってきた Transform も、アタッチされているオブジェクトの位置やサイズ、向きを定めるコンポーネントのひとつです。
 <br>
 Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力などを定めるコンポーネントです。
 </p>
@@ -42,7 +42,7 @@ Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力�
 <input type="checkbox"><b>Rigidbody 2D コンポーネントのアタッチ方法:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 対象のオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Add Component ボタンを押してメニューを表示する。
 <br>
@@ -60,7 +60,7 @@ Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力�
 </p>
 
 <p>
-※ スクリプトの実体は C# 又は JavaScript で書かれたスクリプトファイルです。今回は C# の方を使います。
+※ スクリプトコンポーネントの実体は C# 又は JavaScript で書かれたスクリプトファイルです。今回は C# の方を使います。
 </p>
 
 <div class="info">
@@ -69,13 +69,13 @@ Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力�
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> Assets フォルダで右クリックし、Create → C# Script を選ぶとスクリプトファイルが出来るので、適切なファイル名に変更する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプトをアタッチしたいオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウでスクリプトをアタッチしたいオブジェクトを選択する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある先ほど作成したスクリプトファイルを Inspector ウィンドウの上にドラッグしてドロップするとアタッチされる。
+<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある、先ほど作成したスクリプトファイルを Inspector ウィンドウの上にドラッグしてドロップするとアタッチされる。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中のスクリプトファイルをダブルクリックするとエディタが起動する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプト内の Start メソッドはオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドである。
+<span class="olradio"><input type="radio" name="p2"></span> スクリプト内に Start、Update というメソッドが含まれている事を確認する。ここで Start メソッドはオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドである。
 </p>
 </div>
 </div>
@@ -116,9 +116,9 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 </div>
 
 <p>
-なお、摩擦が無い限り一度 velocity を設定すればその方向に動き続けます。
+なお、障害物にぶつかったり、摩擦が無い限りは一度 velocity を設定すればその方向に動き続けます。
 <br>
-また、重力が 0 で無い時は重力の影響も受けますので、想定した方向には動きませんのでご注意下さい。
+また重力が 0 で無い時は重力の影響も受けます。
 </p>
 
 <p>
@@ -144,7 +144,7 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 <input type="checkbox"><b>プログラム実行方法:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> スクリプトを上書き保存すると自動でコンパイルされる。
+<span class="olradio"><input type="radio" name="p3"></span> スクリプトを上書き保存すると自動でコンパイルされる。エラーが出たら修正する。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Unity エディタの画面に戻り、上部にある再生ボタンを押すと GAME ビューに画面が切り替わってプログラムが実行される。
 <br>
