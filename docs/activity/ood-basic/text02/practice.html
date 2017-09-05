@@ -50,7 +50,7 @@
 </p>
 </div>
 <p>
-※ 途中でデフォルトシーンのファイル名が尋ねられた場合、ファイル名は「MyWorld」として下さい。
+※ 途中でデフォルトシーンのファイル名を尋ねられた場合、ファイル名は「MyWorld」として下さい。
 </p>
 
 <br>
@@ -65,7 +65,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 適当な画像をネットから探し、「TARO」に名前変更して下さい(※ 拡張子は変更しないよう注意)。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 画像をオブジェクト化し、サイズと位置を調整して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 画像から「TARO」オブジェクトを作成し、サイズと位置を適宜調整して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 「TARO」オブジェクトをコピーして「TARO2」オブジェクトを作って下さい。
 <br>
@@ -86,11 +86,11 @@
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> プロジェクト「UNITY-1」に対して作業を続けます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> TARO オブジェクトに Rigidbody 2D コンポーネントをアタッチし、重力を 0 にしてください。
+<span class="olradio"><input type="radio" name="p3"></span> TARO オブジェクトに Rigidbody 2D コンポーネントをアタッチし、重力を 0 にし、Freeze Rotation の z をチェックしてください。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> TAROという C# のスクリプトファイルを作成して TARO オブジェクトにアタッチして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 「TARO」という C# のスクリプトファイルを新規作成して TARO オブジェクトにアタッチして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> TAROスクリプトを開き、Start メソッド内に、「TARO が斜め右下 45 度の方向に速度 0.5 で動く」プログラムを記述して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> TARO スクリプトをエディタで開き、Start メソッド内に「TARO が斜め右下 45 度の方向に速度 0.5 で動く」プログラムを記述して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> スクリプトを保存してコンパイルして下さい。
 <br>
@@ -113,7 +113,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 演習 1-3 で書いた部分をコメントアウトします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> TAROスクリプトを開き、void FixedUpdate() メソッドを追加して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> TAROスクリプトを開き、void Update() の下に void FixedUpdate() メソッドを追加して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> FixedUpdate メソッド内に、「方向ボタンで入力した方向に速度 0.5 でTARO が動く」プログラムを記述して下さい。
 <br>
@@ -141,6 +141,34 @@
 <span class="olradio"><input type="radio" name="p5"></span> 再生ボタンを押して動作確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 続けて次の演習を行うので提出物はありません。
+</p>
+</div>
+
+<br>
+<h2><a href="./page06.html">6. 文字列の表示</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1-6 (個人PC、10 分):</b>
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> プロジェクト「UNITY-1」に対して作業を続けます。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 「MyCanvas」という Canvas 型オブジェクトと「Text1」「Text2」という２つの Text 型オブジェクトを新規作成します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 「Text1」「Text2」の位置やフォントサイズ等を適宜調整します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> TARO スクリプトをエディタで開き、「using UnityEngine.UI;」を追加します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 演習 1-5 で書いた部分をコメントアウトし、代わりに演習 1-4 で書いた部分(上下移動)のコメントアウトを解除します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> TARO スクリプトの FixedUpdate メソッド内に、「Jump ボタン(デフォルトではスペースキー)を押したら Text1 に "HOGE"、Fire1 ホダン(デフォルトでは左 Ctrl キー)を押したら Text2 に "HELLO" と表示する」プログラムを記述して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> スクリプトを保存してコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 再生ボタンを押して動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 続けて次の演習を行うので提出物はありません。
 </p>
 </div>
 

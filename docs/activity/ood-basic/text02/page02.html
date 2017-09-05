@@ -81,12 +81,16 @@ Project ウィンドウの右側パネルの事を「<b>Assets(アセット)フ�
 ※ Unity ではインスタンスの事を「<b>ゲームオブジェクト</b>」と呼びますが、今回は簡単に「オブジェクト」とだけ書きます。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Transform の Position の x と y に 0、z に 1 をセットする(※)。
+<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Transform の Position の x と y と z に 0 をセットする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Sprite Renderer の Order in Layer に -1 をセットする(※)。
 </p>
 <p>
-※ z の値でオブジェクトの重なり具合を調節します。
+※ この値でオブジェクトの描画順番を調整します。
 <br>
-(カメラの位置にも寄りますが)値が小さいほど他のオブジェクトの手前に表示されるようになります。
+値が大きいほど他のオブジェクトの手前に表示されるようになります。
+<br>
+背景が他のキャラクターの前方にあるとまずいので値を小さくしました。
 </p>
 </div>
 </div>
@@ -109,13 +113,15 @@ Game ビューに表示されている画像が実際のゲームでも表示さ
 <input type="checkbox"><b>カメラの調整:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> まず画面比率を決める。Game ビューに切り替え、ビューの上部にある「Free Aspect」と書いてあるプルダウンメニューをクリックし、好みの比率を選択する。
+<span class="olradio"><input type="radio" name="p2"></span> まず画面比率を決める。Game ビューに切り替え、GAME ビュー上部の<img src="./img/button2.png">のうち、真ん中のプルダウンメニューをクリックして好みの比率を選択する。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Scene ビュー に切り替える。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし背景画像が見辛かったら) 左上にある手のひらボタンをクリックしてから Scene ビューをドラッグするとビューの表示位置を調整出来る。またマウスホイール上下でビューの表示を拡大縮小出来る。
+<span class="olradio"><input type="radio" name="p2"></span> (もし画像が見辛かったら) Unity エディタの左上にある<img src="./img/button1.png">のうち、一番左の手のひらボタンをクリックしてから Scene ビューをドラッグするとビューの表示位置を調整出来る。またマウスホイール上下でビューの表示を拡大縮小出来る。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウの「Main Camera」をクリックすると Inspector ウィンドウにカメラ情報が表示される。また Scene ビューにプレビューが表示される。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Inspector ウィンドウの Projection が Orthographic になっている事を確認する(理由は自分で調べて下さい)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Scene ビュー にカメラの撮影枠が表示されているので、枠の大きさをドラッグして調整する。
 <br>

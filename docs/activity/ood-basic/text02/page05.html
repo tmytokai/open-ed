@@ -39,8 +39,8 @@ public static float Input.GetAxisRaw( "軸" );
 戻り値(float): キー状態に従って -1 か 0 か 1 が戻る
 
 "軸":
-"Horizontal" なら右を押したら 1、左を押したら -1 、何も押さないと 0 が戻る
-"Vertical" なら上を押したら 1、下を押したら -1、何も押さないと 0 が 戻る
+"Horizontal" なら右を押してれば 1、左を押してれば -1 、押してないと 0 が戻る
+"Vertical" なら上を押してれば 1、下を押してれば -1、押してないと 0 が 戻る
 </pre>
 </div>
 
@@ -61,17 +61,25 @@ public static bool Input.GetButton( "ボタンの名前" );
 </div>
 
 <p>
-さてこれらのメソッドと前のページで学んだ Rigidbody2D の velocity を組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
+さてこれらのメソッドと前のページで学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
 <br>
 ただし
 </p>
 
 <p>
-「<b>Rigidbody2D のメソッドやプロパティを利用するコードは、Update メソッドではなくて FixedUpdate メソッド内に書かなければいけない</b>」
+「<b>Rigidbody2D の機能を利用するコードは、Update メソッドではなくて FixedUpdate メソッド内に書かなければいけない</b>」
 </p>
 
 <p>
-という制約があります(理由は自分で調べて下さい)ので、Rigidbody2D の velocity を値を変更するにはまず void FixedUpdate() というメソッドをスクリプトに追加してからその中に書きます。
+という制約がありますので(※)、Rigidbody2D の velocity プロパティの値を変更するにはまず void FixedUpdate() というメソッドをスクリプトに追加してからその中に書きます。
+</p>
+
+<p>
+※ 正確には GetAxisRaw などの Input 系のメソッドは Update メソッド、Rigidbody2D の機能は FixedUpdate メソッドの中に書く必要があります。
+<br>
+理由は自分で調べて下さい。
+<br>
+なお今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
 </p>
 
 <p>
@@ -82,8 +90,8 @@ public static bool Input.GetButton( "ボタンの名前" );
 <input type="checkbox"><b>ソース 1: オブジェクトを方向ボタンで入力した方向に速度 2.0 で動かす</b>
 <pre class="wrap">
 float speed = 2.0f;
-float x = Input.GetAxisRaw ("Horizontal"); // 右を押したら 1、左を押したら -1 、何も押さないと 0 が x に入る
-float y = Input.GetAxisRaw ("Vertical"); // 上を押したら 1、下を押したら -1、何も押さないと 0 が y に入る
+float x = Input.GetAxisRaw ("Horizontal"); // 右を押してれば 1、左を押してれば -1 、押してないと 0 が x に入る
+float y = Input.GetAxisRaw ("Vertical"); // 上を押してれば 1、下を押してれば -1、押してないと 0 が y に入る
 Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
 GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 </pre>
@@ -92,7 +100,7 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 <p>
 ちなみに方向ボタンを向いたらオブジェクトの画像の向きもそれに合わせて変更したい場合があります。
 <br>
-それを実現するには、オブジェクトの画像の描画を担当している <b>Sprite Renderer</b> コンポーネントの flipX 又は FlipY プロパティの値を次のように変更します。
+それを実現するには、オブジェクトの画像描画を担当している Sprite Renderer コンポーネントの flipX 又は FlipY プロパティの値を次のように変更します。
 </p>
 
 <div class="info">
