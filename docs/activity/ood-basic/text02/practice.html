@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: ?  分
+演習時間: 140  分
 </p>
 
 <br>
@@ -176,7 +176,7 @@
 
 
 <br>
-<h2><a href="./page07.html">7. 衝突判定処理</a></h2>
+<h2><a href="./page07.html">7. 衝突時の処理</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-7 (個人PC、10 分):</b>　 OnCollisionEnter2D の使い方を演習します。
@@ -265,23 +265,53 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-10 (個人PC、10 分):</b>　OnTriggerEnter2D の使い方を演習します。
+<input type="checkbox"><b>演習 1-10 (個人PC、10 分):</b>　マテリアルの使い方を演習します。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p10"></span> プロジェクト「UNITY-1」に対して作業を続けます。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> TARO オブジェクトにトリガーを設定して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 「BOUND」というマテリアルアセットを新規作成して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> TARO スクリプトをエディタで開き、OnCollisionEnter2D メソッドの下に void OnTriggerEnter2D( Collider2D collider )  メソッドを追加して下さい。 
+<span class="olradio"><input type="radio" name="p10"></span> 「BOUND」の Friction(摩擦) と Bounciness(弾性)を両方 0 にしてください。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> OnTriggerEnter2D メソッド内に、「HANAKO と重なったら Text1 に "Tr-HANAKO" と表示し、JIRO と重なったら Text1 に "Tr-JIRO" と表示する」プログラムを記述して下さい。 
+<span class="olradio"><input type="radio" name="p10"></span> 「BOUND」を「HANAKO」の Box Collider 2D の Material に DnD して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 「HANAKO」オブジェクトに Rigidbody 2D コンポーネントをアタッチし、重力を 0 にし、Freeze Rotation の z をチェックしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 「HANAKO」という C# のスクリプトファイルを新規作成して「HANAKO」オブジェクトにアタッチして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 「HANAKO」スクリプトをエディタで開き、Start メソッド内に「HANAKO が TARO 又は JIRO の方角に向かって適当な速度で動く」プログラムを記述して下さい。 方角は演算で求めず手入力で結構です。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> スクリプトを保存してコンパイルして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 再生ボタンを押して動作確認して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 再生ボタンを押して動作確認して下さい。跳ね返りが弱い場合は Unity エディタの  Edit メニュー → Project Settings → Physics2D の Velocity Threshold の値を 0.0001 にしてください。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> 続けて次の演習を行うので提出物はありません。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-11 (個人PC、10 分):</b>　OnTriggerEnter2D の使い方を演習します。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p11"></span> プロジェクト「UNITY-1」に対して作業を続けます。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 「HANAKO」スクリプトを開き、Start メソッドをコメントアウトして「HANAKO」オブジェクトが動かないようにして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 「TARO」オブジェクトにトリガーを設定して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 「TARO」スクリプトをエディタで開き、OnCollisionEnter2D メソッドの下に void OnTriggerEnter2D( Collider2D collider )  メソッドを追加して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> OnTriggerEnter2D メソッド内に、「HANAKO と重なったら Text1 に "Tr-HANAKO" と表示し、JIRO と重なったら Text1 に "Tr-JIRO" と表示する」プログラムを記述して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> スクリプトを保存してコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 再生ボタンを押して動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 続けて次の演習を行うので提出物はありません。
 </p>
 </div>
 
@@ -291,27 +321,67 @@
 <h2><a href="./page08.html">8. prefab とオブジェクトの動的配置</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-11 (個人PC、10 分):</b>
+<input type="checkbox"><b>演習 1-12 (個人PC、10 分):</b>
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p11"></span> プロジェクト「UNITY-1」に対して作業を続けます。
+<span class="olradio"><input type="radio" name="p12"></span> プロジェクト「UNITY-1」に対して作業を続けます。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 「TARO」オブジェクトの Prefab を作り、Hierarchy ウィンドウから TARO オブジェクトを削除して下さい。
+<span class="olradio"><input type="radio" name="p12"></span> 「TARO」オブジェクトの Prefab を作り、Hierarchy ウィンドウから TARO オブジェクトを削除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 「MyWorld」という C# のスクリプトファイルを新規作成して MyWorld オブジェクトにアタッチして下さい。 
+<span class="olradio"><input type="radio" name="p12"></span> 「MyWorld」という C# のスクリプトファイルを新規作成して MyWorld オブジェクトにアタッチして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> MyWorld スクリプトをエディタで開き、「public GameObject taro;」フィールドを追加します。
+<span class="olradio"><input type="radio" name="p12"></span> 「MyWorld」スクリプトをエディタで開き、「public GameObject taro;」フィールドを追加します。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> Start メソッドの中に「TARO を適当な位置に無回転で 2 体表示する」プログラムを記述して下さい。
+<span class="olradio"><input type="radio" name="p12"></span> Start メソッドの中に「TARO を適当な位置に無回転で 2 体表示する」プログラムを記述して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> スクリプトを保存して Unity エディタに戻ったら Hierarchy ウィンドウの MyWorld オブジェクトをクリックして Inspector ウィンドウを表示します。
+<span class="olradio"><input type="radio" name="p12"></span> スクリプトを保存して Unity エディタに戻ったら Hierarchy ウィンドウの MyWorld オブジェクトをクリックして Inspector ウィンドウを表示します。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> My World(Script) コンポーネントの Taro のエリアに Assets フォルダから TARO Prefab を DnD します。
+<span class="olradio"><input type="radio" name="p12"></span> My World(Script) コンポーネントの Taro のエリアに Assets フォルダから TARO Prefab を DnD します。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 再生ボタンを押して動作確認して下さい。
+<span class="olradio"><input type="radio" name="p12"></span> 再生ボタンを押して動作確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 続けて次の演習を行うので提出物はありません。
+<span class="olradio"><input type="radio" name="p12"></span> 続けて次の演習を行うので提出物はありません。
+</p>
+</div>
+
+<br>
+<h2><a href="./page09.html">9. オブジェクトの動的削除</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1-13 (個人PC、10 分):</b>
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p13"></span> プロジェクト「UNITY-1」に対して作業を続けます。
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> 「TARO」スクリプトを開き、OnTriggerEnter2D メソッド内に、「HANAKO と重なったら Text1 に "Tr-HANAKO" と表示してから HANAKO を削除し、JIRO と重なったら Text1 に "Tr-JIRO" と表示してから自分自身を削除する」プログラムを記述して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> スクリプトを保存してコンパイルして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> 再生ボタンを押して動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> 続けて次の演習を行うので提出物はありません。
+</p>
+</div>
+
+<br>
+<h2><a href="./page10.html">10. プログラムの停止</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 1-14 (個人PC、10 分):</b>
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p14"></span> プロジェクト「UNITY-1」に対して作業を続けます。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> 「TARO」スクリプトを開き、OnTriggerEnter2D メソッド内に、「HANAKO と重なったら Text1 に "Tr-HANAKO" と表示してから HANAKO を削除してからプログラムを停止し、JIRO と重なったら Text1 に "Tr-JIRO" と表示してから自分自身を削除してからプログラムを停止する」プログラムを記述して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> スクリプトを保存してコンパイルして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> 再生ボタンを押して動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> 続けて次の演習を行うので提出物はありません。
 </p>
 </div>
 

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>7. 衝突判定処理</title>
+<title>7. 衝突時の処理</title>
 </head>
 <body>
 
@@ -20,23 +20,30 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-オブジェクト間の衝突判定は主に OnCollision〜系、OnTrigger〜系に分かれます。
+ここではオブジェクトとオブジェクトが衝突した時の処理を取り上げます。
 <br>
-複雑な仕組みなので順を追って説明していきます。
+なかなか複雑な仕組みなので順を追って説明していきます。
 </p>
 
+<br>
 <h3>
 (1) OnCollision〜系による衝突判定
 </h3>
 
 <p>
-OnCollision〜系は基本的な衝突判定処理で、今回は色々あるメソッドのうち <b>OnCollisionEnter2D</b> を取り上げます。
-<br>
-OnCollisionEnter2D はあるオブジェクトとオブジェクトが衝突した瞬間に呼び出されるメソッドです。
+オブジェクト同士がぶつかった時の衝突判定方法は主に OnCollision〜系、OnTrigger〜系に分かれます。
 </p>
 
 <p>
-さて A と B というオブジェクトがあってそれらの衝突判定処理をしたい時は、まず次の様にして〜Collider 2D コンポーネントをアタッチします。
+ここでは基本的な衝突判定処理である OnCollision〜系、特に <b>OnCollisionEnter2D</b> について説明します。
+<br>
+OnCollisionEnter2D はあるオブジェクト同士が衝突した瞬間に呼び出されるメソッドです。
+</p>
+
+<p>
+さて A と B というオブジェクトがあってそれらの衝突判定処理をおこなうことにします。
+<br>
+その場合、まずは次の様にして A と B に〜Collider 2D コンポーネントをアタッチします。
 </p>
 
 <div class="info">
@@ -59,15 +66,15 @@ OnCollisionEnter2D はあるオブジェクトとオブジェクトが衝突し�
 </div>
 
 <p>
-するとこの時点で 〜Collider 2D をアタッチしたオブジェクト間に衝突が生じて重なる事が出来なくなります。
+するとこの時点でオブジェクト A、B 間に衝突が生じて重なる事が出来なくなります。
 </p>
 
 <p>
-〜Collider 2D をアタッチしたら次は衝突判定を行いますが、A 又は B どちらかのスクリプトに対して以下の  OnCollisionEnter2D メソッドを追加するだけで出来ます。
+後は A 又は B どちらかのスクリプトに対して以下の  OnCollisionEnter2D メソッドを追加するだけで衝突判定が出来ます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OnCollisionEnter2D</b>
+<input type="checkbox"><b>OnCollisionEnter2D : オブジェクト同士が衝突した瞬間に呼び出される</b>
 <pre class="wrap">
 void OnCollisionEnter2D( Collision2D collision )
 {
@@ -82,21 +89,23 @@ void OnCollisionEnter2D( Collision2D collision )
 </h3>
 
 <p>
-A と B と C というオブジェクトがあり、A は B とは衝突したいけど C とは衝突したくないという時はレイヤー機能を使います。
+3 つの A 、 B 、 C というオブジェクトがあり、A は B とは衝突したいけど C とは衝突したくないという時は<b>レイヤー</b>機能を使います。
 </p>
 
 <p>
-そもそもの前提として各オブジェクトは必ずある階層(レイヤー)に属しています。
+そもそもの前提として各オブジェクトは必ずある階層(レイヤー)に属しています(※)。
 <br>
-それで、異なるレイヤーにいるオブジェクト間は衝突させない様にすることが可能です(※)。
+デフォルトでは Default という名前のレイヤーに属しています。
 </p>
 
 <p>
-※ 建物の 1F にいる人と 4F にいる人は触れることが出来ないみたいなイメージです。
+※ 建物の 1F と 2F にオブジェクトがいるみたいなイメージです。
 </p>
 
 <p>
-まずオブジェクトにレイヤーを設定する手順は以下のとおりです。
+という訳でオブジェクトが属するレイヤーを変更すればオブジェクト同士が衝突出来ないようにすることが可能です。
+<br>
+オブジェクトにレイヤーを設定する手順は以下のとおりです。
 </p>
 
 <div class="info">
@@ -107,7 +116,7 @@ A と B と C というオブジェクトがあり、A は B とは衝突した�
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> (レイヤーを新規作成する場合) Layer プルダウンメニューをクリック → Add Layer を選択し、下の図の様に User Layer の空いている所に好きなレイヤー名を設定する。
 </p>
-<img src="./img/layer1.png">
+<img src="./img/layer1.png" alt="">
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>  Layer プルダウンメニューから適切なレイヤーを選択する。
 </p>
@@ -115,7 +124,7 @@ A と B と C というオブジェクトがあり、A は B とは衝突した�
 </div>
 
 <p>
-これでオブジェクトにレイヤーを設定出来ましたが、このままだとまだ全てのオブジェクト間と衝突が起きますので、以下のようにして特定のレイヤーに属するオブジェクトと衝突出来ないようにします。
+これでオブジェクトにレイヤーを設定出来ましたが、このままだとまだ全てのオブジェクト間と衝突が起きますので、以下のようにして特定のレイヤーに属するオブジェクト同士は衝突出来ないようにします。
 </p>
 
 <div class="info">
@@ -126,36 +135,38 @@ A と B と C というオブジェクトがあり、A は B とは衝突した�
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 以下の例のように Layer Collision Matrix の設定をする。チェックが付いているレイヤー間は衝突が起きる。
 </p>
-<img src="./img/layer2.png">
+<img src="./img/layer2.png" alt="">
 <br>
-※ この例の場合は LayerA と Layer B 間はチェックが付いているので衝突するが、LayerA と Layer C 間はチェックが無いので衝突しない。
+※ 上の例の場合 LayerA と Layer C の所がチェックが外れているので、LayerA に属するオブジェクトと LayerC に属するオブジェクトは衝突しない。
 </div>
 </div>
 
 <br>
 <h3>
-(3) タグによる衝突オブジェクトの判定
+(3) タグによる衝突したオブジェクトの判定
 </h3>
 
 <p>
-衝突したオブジェクトの種類によって処理を変えたい場合はタグ機能を使います。
+OnCollision〜 や OnTrigger〜 の中で衝突したオブジェクトによって処理を変えたい場合は<b>タグ</b>機能を使います。
 </p>
 
 <p>
-まずオブジェクトにタグを設定する手順は以下のとおりです。
+各オブジェクトはタグを付けて区別する事が出来ます(デフォルトではタグは付いていません)。
+<br>
+オブジェクトにタグを設定する手順は以下のとおりです。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>オブジェクトにタグを設定する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上でオブジェクトを選択して Inspector ウィンドウを開く。デフォルトでは Tag プルダウンメニューに Untagged と書いてあることを確認する。
+<span class="olradio"><input type="radio" name="p4"></span> Hierarchy ウィンドウ上でオブジェクトを選択して Inspector ウィンドウを開く。デフォルトでは Tag プルダウンメニューに Untagged と書いてあることを確認する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (タグを新規作成する場合) Tag プルダウンメニューをクリック → Add Tags を選択し、Tags の + ボタンを押し、下の図の様に好きなタグ名を入れて Save で保存する。
+<span class="olradio"><input type="radio" name="p4"></span> (タグを新規作成する場合) Tag プルダウンメニューをクリック → Add Tags を選択し、Tags の + ボタンを押し、下の図の様に好きなタグ名を入れて Save で保存する。
 </p>
-<img src="./img/tag1.png">
+<img src="./img/tag1.png" alt="">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>  Tag プルダウンメニューから適切なタグを選択する。
+<span class="olradio"><input type="radio" name="p4"></span>  Tag プルダウンメニューから適切なタグを選択する。
 </p>
 </div>
 </div>
@@ -187,45 +198,80 @@ void OnCollisionEnter2D( Collision2D collision )
 
 <br>
 <h3>
-(4) OnTrigger〜系による衝突判定
+(4) マテリアルによる摩擦と弾性の設定
+</h3>
+
+<p>
+〜Collider 2D コンポーネントをアタッチしたオブジェクトには<b>マテリアル</b>をセットすることで摩擦と弾性を設定する事が出来ます。
+<br>
+するとオブジェクト同士に摩擦を生じさせたり、ぶつかった時に跳ね返らせたりすることが可能になります。
+</p>
+
+<p>
+マテリアルの設定方法は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>マテリアルの設定</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> Assets フォルダ上で右クリック → Create → Physics Material 2D を選択して(※) マテリアルアセットを新規作成する。名前は適宜変更する。
+</p>
+<p>
+※ 項目に Physics Material と Physics Material 2D の 2 つありますが、後ろに 2D が付いている方を選択して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 新規作成したマテリアルをクリックし、 Inspector ウィンドウの Friction(摩擦) と Bounciness(弾性)を好みの値に変更する。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> Hierarchy ウィンドウでマテリアルを設定したいオブジェクトを選択する。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> Inspector ウィンドウの 〜Collider 2D の Material にマテリアルを DnD する。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> (跳ね返りが弱い場合) Unity エディタの  Edit メニュー → Project Settings → Physics2D の Velocity Threshold の値を小さくする(最小値は 0.0001)。
+</p>
+</div>
+</div>
+
+<br>
+<h3>
+(5) OnTrigger〜系による衝突判定
 </h3>
 
 <p>
 今まではオブジェクト間は衝突して重なる事が出来ない状況を考えていましたが、レーザー光線みたいに他のオブジェクトと重なって突き抜ける様なオブジェクトと衝突判定をしたい場合は OnTrigger〜系による衝突判定を行います。
-</p>
-
-<p>
-今回は色々あるメソッドのうち <b>OnTriggerEnter2D</b> を取り上げます。
+<br>
+今回は特に <b>OnTriggerEnter2D</b> を取り上げます。
 <br>
 OnTriggerEnter2D はあるオブジェクトとオブジェクトが重なった瞬間に呼び出されるメソッドです。
 </p>
 
 <p>
-さて A と B というオブジェクトがあって、A と B が重なられる様にし、かつ重なった時に衝突判定したい場合は次のようにしてどちらかのオブジェクトに対してトリガー設定をします(※)。
+2 つの A 、 B というオブジェクトがあり、A と B は重なる事が出来て、かつ重なった時に何か処理をしたいという場合、まずは A か B どちらかのオブジェクトに対して<b>トリガー</b>設定をします(※)。
 </p>
 
 <p>
-※ もちろん上で出てきたレイヤー機能を使っても重なられるように出来ますが衝突判定が出来ません。
+※ もちろん上で出てきたレイヤー機能を使っても重なるようにする事が出来ますが重なったという判定が出来ません。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>トリガー設定の方法</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。 
+<span class="olradio"><input type="radio" name="p6"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの 〜Collider 2D の Is Trigger プロパティをチェックする。
+<span class="olradio"><input type="radio" name="p6"></span> Inspector ウィンドウの 〜Collider 2D の Is Trigger プロパティをチェックする。
+</p>
 </div>
 </div>
 
 <p>
-するとこの時点でトリガー設定をしたオブジェクトは他のオブジェクトと重なることが可能になります。
+するとこの時点でトリガー設定をしたオブジェクトは他のオブジェクトと重なることが出来るようになります。
 </p>
 
 <p>
-ただし、今まで使ってきた OnCollisionEnter2D メソッドは呼び出されなくなりますので、代わりに次の OnTriggerEnter2D メソッドを使います。
+ただし、上で取り上げた OnCollisionEnter2D メソッドは呼び出されなくなりますので、代わりに次の OnTriggerEnter2D メソッドを使います。
 <br>
-もちろんタグを使って重なったオブジェクト種類の判定も出来ます。
+もちろんタグを使って重なったオブジェクトの判定も出来ます。
 </p>
 
 <div class="info">
@@ -256,11 +302,7 @@ void OnTriggerEnter2D( Collider2D collider ) // OnCollisionEnter2D と引数の�
 <p>
 ちなみに少し高度な話になりますが、親オブジェクトに Rigidbody 2D と 〜Collider 2D をアタッチし、子オブジェクトには 〜Collider 2D だけをアタッチした時、子オブジェクトの衝突イベントは親オブジェクトに送られます。
 <br>
-この仕様を応用すると親は非トリガー設定にしてレイヤーで衝突制御、子はトリガー設定ですり抜け可能とすることも可能になります。
-<br>
-つまり A と B はすり抜けられない、A と C はすり抜けられる、A と B が衝突したら OnCollision〜 で処理、A と C が重なったら OnTrigger〜 で処理、みたいな事が出来ます。
-<br>
-またジャンプ時の接地判定などにも使えます。
+この仕様を応用すると親は非トリガー設定にしてすり抜け不可、子はトリガー設定ですり抜け可能とすることも可能になるので接地判定などに使えます。
 </p>
 
 <br>
