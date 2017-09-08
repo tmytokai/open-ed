@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 3</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [3] オブジェクト指向開発演習(2)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「TARO」オブジェクトを作って左右に動かします。
+</p>
+<ul>
+<li>TARO の画像は任意とします。</li>
+<li>重力は 1 とします(デフォルト値のまま)。</li>
+<li>移動速度(speed) は任意とします。</li>
+</ul>
+<p>
+また TARO が左右から画面外に出られないように左右方向に見えない壁オブジェクトを作って置き、TARO を画面内に閉じ込めます。
+</p>
+<ul>
+<li>壁オブジェクトの名前は「left」「right」とします。</li>
+</ul>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「TARO」オブジェクトの作成</li>
+<li> 左右方向の壁オブジェクトの作成</li>
+</ol>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-2」に対して作業を続けます。 
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 1: 「TARO」オブジェクトの作成</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を用意し「TARO」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を「TARO」オブジェクト化して下さい。サイズは適宜変更して下さい。位置は適当で結構です。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」オブジェクトに Rigidbody 2D をアタッチして重力(Gravity Scale)が 1 なのを確認し、Constraints → Freeze Rotation → Z にチェックを入れて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」オブジェクトに Box Collider 2D をアタッチして下さい。衝突範囲は適宜調整して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」スクリプトを新規作成し、「TARO」オブジェクトにアタッチして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」スクリプトをエディタで開き、 void Update() の下に void FixedUpdate() メソッドを追加し、FixedUpdate メソッド内に「方向ボタンで左右に動かす」プログラムを記述して下さい。 speed は任意です。
+<br>
+ただし今回は重力があるため y 軸方向の速度は物理演算エンジンが自動計算してくれます。
+<br>
+従って次のようなコードを書いて y 軸方向の速度は変更しないようにして下さい。
+</p>
+<pre class="wrap">
+float speed = 任意;
+float x = Input.GetAxisRaw ("Horizontal");  // x 方向は今までやってきた様に GetAxisRaw で取得
+float y = GetComponent&lt;Rigidbody2D&gt;().velocity.y; // y 方向は物理演算エンジンに任せる
+GetComponent&lt;Rigidbody2D&gt; ().velocity = new Vector2 (x*speed, y);
+</pre>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> その続きで、「左ボタンを押していたら左を向く、右ボタンを押していたら右を向く」プログラムを記述して下さい。
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 2 : 左右方向の壁オブジェクトの作成</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> まず左から作ります。Hierarchy ウィンドウで右クリック → Create Empty で空のオブジェクトを作り、「left」に名前を変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「left」オブジェクトに Box Collider 2D をアタッチし、衝突範囲を表示画面の縦方向いっぱいに引き伸ばしてください。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 前ページと同じ理由で摩擦があると TARO が張り付くので、前ページで作った「SLIP」マテリアルを Box Collider 2D の Material に DnD して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「left」オブジェクトを画面外左に移動して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> コピーするなりして「right」オブジェクトも作成して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(TARO.cs)を選んで下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(4,9)</script>
+</body>
+</html>
