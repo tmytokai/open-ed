@@ -2,59 +2,77 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
 <title>演習</title>
 </head>
 <body>
 
-<p>
-<a href="../">アクティビティ: git によるバージョン管理</a>
-<br>
-学習項目: [2] ローカルリポジトリ
-<br>
-演習時間: 130 分
-</p>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [2] ローカルリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<h2>演習</h2>
-
-<br>
-<h2>1. <a href="./page01.html">初期設定</a></h2>
+<h2><script>GetTitle()</script></h2>
 
 <p>
-<input type="checkbox"> <b>演習 1 (個人、5分):</b> コマンドプロンプトを開いてホームディレクトリ(Z ドライブ)に移動し、git config コマンドで初期設定を行なって下さい。
-<br>
-ユーザーIDとメールアドレスは Office365 に合わせて下さい。
+演習時間: 100  分
 </p>
 
-<p>
-<input type="checkbox"> <b>演習 2 (個人、5分):</b> 自分のユーザーIDとメールアドレスが正しく設定されたか git config コマンドで確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 3 (個人、5分):</b> type コマンドで .gitconfig の内容を確認してみましょう。
-</p>
 
 <br>
-<h2>2. <a href="./page02.html">ローカルリポジトリの新規作成</a></h2>
+<h2><a href="./page01.html">1. 初期設定</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 4 (個人、5分):</b> ローカルリポジトリを作成します。
-<br>
-テキストの「状態1」 の状態まで持って行き、dir /AH コマンドで .git フォルダがあることを確認して下さい。
+<input type="checkbox"> <b>演習 2-1 (個人PC、10分):</b> 初期設定をします。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 端末を開いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> git config コマンドで初期設定を行なって下さい。ユーザーIDとメールアドレスは Office365 のものに合わせて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 自分のユーザーIDとメールアドレスが正しく設定されたか git config コマンドで確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> cat コマンドを使って .gitconfig の内容を確認して下さい。
+</p>
+</div>
 
 <br>
-<h2>3. <a href="./page03.html">新規ファイルの追加</a></h2>
+<h2><a href="./page02.html">2. ローカルリポジトリの新規作成</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 5 (個人、5分):</b> 新規ファイルを追加します。
-<br>
-テキストの「状態4」 の状態まで持って行き、git log コマンドでコミットログを確認して下さい。
+<input type="checkbox"> <b>演習 2-2 (個人PC、10分):</b> ローカルリポジトリを作成します。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> テキストの「状態1」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> ls -al コマンドで .git フォルダがあることを確認して下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page03.html">3. 新規ファイルの追加</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 6 (個人、5分):</b> 同様にテキストの「状態5」 の状態まで持って行き、git log コマンドでコミットログを確認し、コミットが2つ出来たことを確認して下さい。
+<input type="checkbox"> <b>演習 2-3 (個人PC、10分):</b> 新規ファイルを追加します。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> テキストの「状態4」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> git log コマンドでコミットログを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 更にテキストの「状態5」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> git log コマンドでコミットログを確認し、コミットが2つ出来たことを確認して下さい。
+</p>
+</div>
 
 <p>
 ※ もし他のメンバーとコミットログの表示が違っている時はどこかで間違えましたので
@@ -71,157 +89,134 @@ git reset --hard HEAD~
 </p>
 
 <br>
-<h2>4. <a href="./page04.html">既存ファイルの更新</a></h2>
+<h2><a href="./page04.html">4. 既存ファイルの更新</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 7 (個人、5分):</b> 既存ファイルを更新します。
-<br>
-テキストの「状態8」 の状態まで持って行き、git log コマンドでコミットログを確認して下さい。
+<input type="checkbox"> <b>演習 2-4 (個人PC、10分):</b> 既存ファイルを更新します。
 </p>
-
+<div class="olradio"> 
 <p>
-<input type="checkbox"> <b>演習 8 (個人、5分):</b> 同様にテキストの「状態9」 の状態まで持って行き、git log コマンドでコミットログを確認し、コミットが4つ出来たことを確認して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> テキストの「状態8」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> git log コマンドでコミットログを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 更にテキストの「状態9」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> git log コマンドでコミットログを確認し、コミットが4つ出来たことを確認して下さい。
 </p>
+</div>
 
 <p>
-※ もし他のメンバーとコミットログの表示が違っている時は演習6の※を参考にして「状態8」まで巻き戻してやり直して下さい。
-</p>
-
-<br>
-<h2>5. <a href="./page05.html">コミットの指定方法</a></h2>
-
-<p>
-<input type="checkbox"> <b>演習 9 (個人、5分):</b> git show コマンドでコミット情報を表示します。
-<br>
-まず HEAD のコミット情報を表示して下さい。
-<br>
-HEADの 場合は HEAD を省略して git show だけで表示可能です。
-<br>
-次に HEAD ＋チルダ形式を使って 2 つ前のコミットを指定して情報を表示して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 10 (個人、5分):</b> git log で "hoge.txtを更新" というコメントが付いているコミットのリビジョン番号を調べ、
-そのリビジョン番号を使ってコミットを指定して情報を表示して下さい。
+※ もし他のメンバーとコミットログの表示が違っている時は上の git reset コマンドで「状態8」まで巻き戻してやり直して下さい。
 </p>
 
 <br>
-<h2>6. <a href="./page06.html">ファイルの更新差分表示</a></h2>
+<h2><a href="./page05.html">5.コミットの指定方法</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 11 (個人、5分):</b> まず状態10の状態にしてください。
-<br>
-次にワーキングツリーとインデックス間の hoge.txt の更新差分をみてみましょう。
+<input type="checkbox"> <b>演習 2-5 (個人PC、10分):</b> git show コマンドでコミット情報を表示します。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> HEAD のコミット情報を表示して下さい。なお HEADの 場合は HEAD を省略して git show だけで表示可能です。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> HEAD ＋チルダ形式を使って 2 つ前のコミットを指定して情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> git log で "hoge.txtを更新(S8)" というコメントが付いているコミットのリビジョン番号を調べ、そのリビジョン番号を使ってコミットを指定して情報を表示して下さい。
+</p>
+</div>
+
+<br>
+<h2> <a href="./page06.html">6. ファイルの更新差分表示</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 12 (個人、5分):</b> 
-<br>
-次はワーキングツリーとHEAD~2間の hoge.txt の更新差分をみてみましょう。
+<input type="checkbox"> <b>演習 2-6 (個人PC、10分):</b> git show コマンドでコミット情報を表示します。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> テキストの「状態10」 の状態まで進めて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> ワーキングツリーとインデックス間の hoge.txt の更新差分をみてみましょう。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> ワーキングツリー とHEAD~2 間の hoge.txt の更新差分をみてみましょう。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> インデックスと HEAD~2 間の hoge.txt の更新差分をみてみましょう。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> HEAD と HEAD~2 間の hoge.txt の更新差分をみてみましょう。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> ワーキングツリーと HEAD~3 間の全てのファイルの更新差分をみてみましょう。
+</p>
+</div>
+
+<br>
+<h2><a href="./page07.html">7. ファイル内容の復元</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 13 (個人、5分):</b> 
-<br>
-次はインデックスとHEAD~2間の hoge.txt の更新差分をみてみましょう。
+<input type="checkbox"> <b>演習 2-7 (個人PC、10分):</b> 
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> ワーキングツリーにあるファイルをインデックスの内容で復元します。テキストの「状態11」 の状態まで進め、hoge.txt の内容がインデックスの内容に戻っていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元します。 テキストの「状態12」 の状態まで進め、hoge.txt の内容が HEAD~2 の内容に戻っていること、及び git status を実行してワーキングツリーとインデックスの hoge.txt の内容は同じであるが HEAD の内容とは異なっていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> アンステージをします。テキストの「状態13」 の状態まで進め、 git status を実行して hoge.txt がステージングされていないことを確認して下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page08.html">8. ファイルの削除</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 14 (個人、5分):</b> 
-<br>
-次は HEAD~2 → HEAD の hoge.txt の更新差分をみてみましょう。
+<input type="checkbox"> <b>演習 2-8 (個人PC、10分):</b> 
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> ワーキングツリーとインデックスからファイルを消します。テキストの「状態14」 の状態まで進め、piyo.txt が消えている事を確認して下さい。また git status コマンドで piyo.txt がインデックスからも消えている事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 消したファイルを復元します。テキストの「状態15」 の状態まで進め、piyo.txt が復元したことを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> テキストの「状態16」 の状態まで進め、git log でコミットログを確認して下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page09.html">9. 一時的に過去のコミットに戻る</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 15 (個人、5分):</b> 
-<br>
-次はワーキングツリーと HEAD~3 間の全てのファイルの更新差分をみてみましょう。
+<input type="checkbox"> <b>演習 2-9 (個人PC、10分):</b> 
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> テキストの「状態17」 の状態まで進め、hoge.txt と piyo.txt の中身を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> テキストの「状態18」 の状態まで進め、hoge.txt と piyo.txt の中身を確認して下さい。
+</p>
+</div>
 
 <br>
-<h2>7. <a href="./page07.html">ファイル内容の復元</a></h2>
+<h2><a href="./page10.html">10. コミットの巻き戻し</a></h2>
 
 <p>
-<input type="checkbox"> <b>演習 16 (個人、5分):</b> ワーキングツリーにあるファイルをインデックスの内容で復元します。
-<br>
-テキストの「状態11」 の状態まで持って行き、hoge.txt の内容がインデックスの内容に戻っていることを確認して下さい。
+<input type="checkbox"> <b>演習 2-10 (個人PC、10分):</b> 
 </p>
-
+<div class="olradio"> 
 <p>
-<input type="checkbox"> <b>演習 17 (個人、5分):</b> ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元します。
+<span class="olradio"><input type="radio" name="p10"></span> HEADの状態までワーキングツリーとインデックスを強制リセットします。テキストの「状態19」 の状態まで進め、git status で初期状態に戻っている事を確認して下さい。
 <br>
-テキストの「状態12」 の状態まで持って行き、hoge.txt の内容が HEAD~2 の内容に戻っていること、及び git status を実行してワーキングツリーとインデックスの hoge.txt の内容は同じであるが HEAD の内容とは異なっていることをを確認して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 安全な方法で N 回巻き戻します。テキストの「状態20」 の状態まで進め、git log でコミットログを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 危険な方法で N 回巻き戻します。テキストの「状態21」 の状態まで進め、git log でコミットログを確認して下さい。
 </p>
-
-<p>
-<input type="checkbox"> <b>演習 18 (個人、5分):</b> アンステージをします。
-<br>
-テキストの「状態13」 の状態まで持って行き、 git status を実行して hoge.txt がステージングされていないことを確認して下さい。
-</p>
+</div>
 
 <br>
-<h2>8. <a href="./page08.html">ファイルの削除</a></h2>
-
-<p>
-<input type="checkbox"> <b>演習 19 (個人、5分):</b> ワーキングツリーとインデックスからファイルを消します。
-<br>
-テキストの「状態14」 の状態まで持って行き、piyo.txt が消えている事を確認して下さい。また git status コマンドで piyo.txt がインデックスからも消えている事を確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 20 (個人、5分):</b> 消したファイルを復元します。
-<br>
-テキストの「状態15」 の状態まで持って行き、piyo.txt が復元したことを確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 21 (個人、5分):</b> 
-<br>
-テキストの「状態16」 の状態まで持って行き、git log でコミットログを確認して下さい。
-</p>
-
-<br>
-<h2>9. <a href="./page09.html">一時的に過去のコミットに戻る</a></h2>
-
-<p>
-<input type="checkbox"> <b>演習 22 (個人、5分):</b> 一時的に過去のコミットに戻って作業します。
-<br>
-テキストの「状態17」 の状態まで持って行き、hoge.txt と piyo.txt の中身を確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 23 (個人、5分):</b> 
-<br>
-テキストの「状態18」 の状態まで持って行き、hoge.txt と piyo.txt の中身を確認して下さい。
-</p>
-
-<br>
-<h2>10. <a href="./page10.html">コミットの巻き戻し</a></h2>
-
-<p>
-<input type="checkbox"> <b>演習 24 (個人、5分):</b> HEADの状態までワーキングツリーとインデックスを強制リセットします。
-<br>
-テキストの「状態19」 の状態まで持って行き、git status で初期状態に戻っている事を確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 25 (個人、5分):</b> N回安全な方法で巻き戻します。
-<br>
-テキストの「状態20」 の状態まで持って行き、git log でコミットログを確認して下さい。
-</p>
-
-<p>
-<input type="checkbox"> <b>演習 26 (個人、5分):</b> N回危険な方法で巻き戻します。
-<br>
-テキストの「状態21」 の状態まで持って行き、git log でコミットログを確認して下さい。
-</p>
-
-<br>
-<h2>11. <a href="./page11.html">その他</a></h2>
+<h2><a href="./page11.html">11. 補足</a></h2>
 
 <p>
 無し
 </p>
 
+<script>PreNext(12,11)</script>
 </body>
 </html>
