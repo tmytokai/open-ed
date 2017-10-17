@@ -27,22 +27,15 @@
 <h2><a href="./page01.html">1. SPI とは</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1 (個人PC、10分):</b> マスタ・スレーブ方式について調べてみましょう。
+演習無し
 </p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 「マスタ・スレーブ方式」について Web 等で調べて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果」をドキュメントファイルに記述して保存してください。
-</p>
-</div>
 
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2 (個人PC、60分):</b> Arduino UNO から SPI 経由で音声合成LSIにデータを送信し、任意の音声を出力をしてみましょう。
+<input type="checkbox"><b>演習 5-1 (個人PC、70分):</b> Arduino UNO から SPI 経由で音声合成LSIにデータを送信し、任意の音声を出力をしてみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -63,51 +56,159 @@
 (3) オーディオ出力(AOUT)に圧電スピーカーを直結する。
 </p>
 <p>
-(4) 動作モード(PMOD0,PMOD1)は「セーフモード」、通信モード(SMOD0,SMOD1)は「SPI (MODE0)」とする。
+(4) 通信モード(SMOD0,SMOD1)は「SPI (MODE0)」、動作モード(PMOD0,PMOD1)は「セーフモード」とする。
 </p>
 <p>
 (Arduino側)
 </p>
 <p>
-(5) SPI の設定はクロック「1000000」Hz、ビットオーダー「MSBFIRST」、モード「SPI_MODE0」とする。
+(5) SPI の設定はクロック「1 MHz = 1000000 Hz」、ビットオーダー「MSBFIRST」、モード「SPI_MODE0」とする。
 </p>
 <p>
 (6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
+その他 MOSI = 11、MISO = 12、SCK = 13。
 </p>
 <p>
 (6) 適当な間隔(2秒程度)で好きな音声を出力する。
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>ホワイトボードに回路図を描いて下さい。
+<span class="olradio"><input type="radio" name="p2"></span>以下のピン配置に従って回路を組んで下さい。
 </p>
+
+<table>
+<tr><th>ピン</th><th>名称</th><th>説明</th></tr>
+
+<tr>
+<td class="center">1-3</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">4</td>
+<td class="center">SMOD0</td>
+<td rowspan="2"> 通信モードの設定。両方 LOW にすると SPI(MODE0) になる</td>
+</tr>
+<tr>
+<td class="center">5</td>
+<td class="center">SMOD1</td>
+</tr>
+
+<tr>
+<td class="center">6</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">7</td>
+<td class="center">VCC</td>
+<td class="center">5V 接続</td>
+</tr>
+
+
+<tr>
+<td class="center">8</td>
+<td class="center">GND</td>
+<td class="center">-</td>
+</tr>
+
+
+<tr>
+<td class="center">9-11</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">12</td>
+<td class="center">AOUT</td>
+<td class="center">スピーカー接続</td>
+</tr>
+
+
+<tr>
+<td class="center">13</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+
+<tr>
+<td class="center">14</td>
+<td class="center">PMOD0</td>
+<td rowspan="2"> 動作モードの設定。PMOD0 を LOW、PMOD1 をHIGH にするとセーフモードになる</td>
+</tr>
+<tr>
+<td class="center">15</td>
+<td class="center">PMOD1</td>
+</tr>
+
+<tr>
+<td class="center">16</td>
+<td class="center"><span class="overline">SS</span></td>
+<td rowspan="4"class="center" > <b>SPI 接続用ピン</b> </td>
+</tr>
+<tr>
+<td class="center">17</td>
+<td class="center">MOSI</td>
+</tr>
+<tr>
+<td class="center">18</td>
+<td class="center">MISO</td>
+</tr>
+<tr>
+<td class="center">19</td>
+<td class="center">SCK</td>
+</tr>
+
+<tr>
+<td class="center">20</td>
+<td class="center">VCC</td>
+<td class="center">5V 接続</td>
+</tr>
+
+
+<tr>
+<td class="center">21</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">22</td>
+<td class="center">GND</td>
+<td class="center">-</td>
+</tr>
+
+
+<tr>
+<td class="center">23-28</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+</table>
+
 <p>
-※ VCCとGNDはそれぞれ 2 箇所あることに注意。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>回路図を描いたらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>設計図を見ながら回路を組んで下さい。
-<br>
 <span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
 </p>
 <p>
-※1 setup の中で SPI の初期設定を行うが、 setBitOrder、setClockDivider、setDataMode 関数を使う方法は古いやり方なので、beginTransaction + SPISettings の方を使用すること。
+※1 setup の中で SPI の初期設定を行うが、 Arduino UNO のシステムクロックは 16 MHz なので setClockDivider の値は SPI_CLOCK_DIV16 とする
+<br>
+　なお初期設定は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で setDataMode を使う
 </p>
 <p>
-※2 setup の中で <span class="overline">SS</span>ピンを LOW にしたら 1 秒程度 delay を入れること。
+※2 setup の中で <span class="overline">SS</span>ピンを LOW にしたら 1000 ミリ秒程度 delay を入れること。
 </p>
 <p>
-※3 文字は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
+※3 文字列は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
 </p>
 <p>
-※4 文字列の最後に '\r' を送らないと音が出ないので注意。
+※4 文字列の最後に '.' と '\r' を送らないと音が出ないので注意。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
@@ -116,7 +217,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
 </div>
 

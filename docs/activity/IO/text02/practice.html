@@ -20,29 +20,22 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 70  分
+演習時間: 60  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. RS-232Cとは</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1 (個人PC、10分):</b> シリアルインターフェースについて調べてみましょう。
+演習なし
 </p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 「RS-232C 以外のシリアルインターフェース」を最低ひとつWeb 等で調べて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果」をドキュメントファイルに記述して保存してください。
-</p>
-</div>
 
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2 (個人PC、40分):</b> Arduino UNO の Tx ピンと PC 側の Rx ピンを繋いで Arduino UNO から PC へ文字列を送ってみましょう。
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> Arduino UNO の Tx ピンと PC 側の Rx ピンを繋いで Arduino UNO から PC へ文字列を送ってみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -54,34 +47,26 @@
 (1) 電圧レベル変換ICとして ADM3202AN を使う。
 </p>
 <p>
-(2) T1in と T1out を使う。
+(2) データシートでは3.3V駆動になっているが<b>今回は 5V 駆動とする</b>。
 </p>
 <p>
-(3) PCにはシリアルポートが無いのでUSB-シリアル変換ケーブルを使う。
+(3) T1in と T1out を使う。
 </p>
 <p>
-(4) PC 側の通信アプリとして teraterm を使う。
+(4) PCにはシリアルポートが無いのでUSB-シリアル変換ケーブルを使う。
 </p>
 <p>
-(5) 100ミリ秒毎に Arduino UNO 側から PC 側へ適当な文字列が送られる。
+(5) PC 側の通信アプリとして screen を使う。
+</p>
+<p>
+(6) 通信速度は 9600 bps とする。
+</p>
+<p>
+(7) 100ミリ秒毎に Arduino UNO 側から PC 側へ数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)。
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>ホワイトボードに回路図を描いて下さい。
-</p>
-<p>
-　(注意) データシートでは3.3V駆動になっていますが 5V駆動にして下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>回路図を描いたらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
-</p>
-<p>
-　(注意) 次の課題でも殆ど同じ回路図を描きますのでホワイトボードは消さないで下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>設計図を見ながら回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span>データシートや Web 等で回路図を調べて回路を組んで下さい。
 </p>
 <p>
 　(注意) ジャンパーケーブルが多いと見づらいので
@@ -97,19 +82,25 @@
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
 <span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
 </p>
 <p>
-　(注意) Arduino UNO 側のRX/TXピンのジャンパケーブルを外さないとエラーが出ます。
+　(注意) Arduino UNO 側のRXピンのジャンパケーブルを外さないとエラーが出ます。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
+</p>
+<p>
+※ screen の起動方法: $ screen /dev/ttyUSB0 9600
 <br>
+※ screen の終了方法: Ctrl 押しながら a を押した後に k 押し、終了するか聞かれたら y 
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
 </div>
 
@@ -118,7 +109,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3 (個人PC、20分):</b> Arduino UNO の Rx ピンと PC 側の Tx ピンを繋いで PC から Arduino UNO を制御してみましょう。
+<input type="checkbox"><b>演習 2-2 (個人PC、30分):</b> Arduino UNO の Rx ピンと PC 側の Tx ピンを繋いで PC から Arduino UNO を制御してみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -127,7 +118,7 @@
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) 回路は演習2とほぼ同じだが、今回は R1in と R1out を使う(T1in と T1outからケーブルを付け替える)。
+(1) 回路や通信設定は演習 2-1 とほぼ同じだが、今回は R1in と R1out を使う(T1in と T1outからケーブルを付け替える)。
 </p>
 <p>
 (2) Arduino UNO の適当な GPIO に LED をつなげる。
@@ -140,29 +131,24 @@
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span>ホワイトボードに回路図を描いて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路図を描いたらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>設計図を見ながら回路を修正して下さい。
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>仕様に従って回路を修正して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>プログラムを書いて Arduino UNO に転送して下さい。
 </p>
 <p>
-　(注意) Arduino UNO 側のRX/TXピンのジャンパケーブルを外さないとエラーが出ます。
+　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>ドキュメントファイルに「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
 </div>
 
