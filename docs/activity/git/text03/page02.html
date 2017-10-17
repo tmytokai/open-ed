@@ -1,33 +1,45 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>ローカルリポジトリでの作業</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. ローカルリポジトリでの作業</title>
 </head>
 <body>
 
-<h2>ローカルリポジトリでの作業</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [3] リモートリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
+<h2><script>GetTitle()</script></h2>
+
+<p>
 次は各開発者が自分のローカルリポジトリ内で自分の作業を行いますが、次の点を常に念頭に置いて作業すると良いでしょう。
-<br>
-<br>
-<br>
+</p>
+<p>
 <b>「開発者間のローカルリポジトリは完全に独立しているので、自分のローカルリポジトリ内だけで作業している限り、何をしても他の開発者に影響は無い」</b>
+</p>
+<p>
+さて今回の演習ではhoge.txtに各自の名前(A〜D)を入力し(最後の改行を忘れずに)、git add してから git commit して下さい。
 <br>
-<br>
-さて今回の演習ではhoge.txtに各自の名前(A〜D)を入力し(最後の改行を忘れずに)、git add してから git commit して下さい(commit のコメントは my name is 〜)。
-<br>
-すると以下の状態2になります。
-<br>
+commit コメントは「my name is (A〜B)」として下さい。
+</p>
+<p>
+すると以下の状態2に全体が変わります。
 <br>
 この時点では、他の人やリモートリポジトリに何の影響も与えていないことに注目して下さい。
-<br>
+</p>
+
 <br>
 <h2>状態 2</h2>
-<br>
 
+<br>
 <table><tr>
 
 <td>
@@ -291,8 +303,6 @@ name?
 
 </td></tr></table>
 
-<br>
-<br>
-<br>
+<script>PreNext(2,5)</script>
 </body>
 </html>

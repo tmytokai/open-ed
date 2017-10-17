@@ -1,29 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>その他</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. その他</title>
 </head>
 <body>
 
-<h2>その他</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [3] リモートリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
+
+<p>
 さてチーム開発をしていると他のメンバーがどんどんリモートリポジトリに更新内容をプッシュしてきますので、自分のローカルリポジトリとリモートリポジトリの内容がかけ離れていきます。
-<br>
-<br>
+</p>
+
+<p>
 従って自分の作業が一区切りついて何か新しい作業を始める前にこまめにプルして、自分のローカルリポジトリとリモートリポジトリの内容の乖離をなるべく最小に保つように心がけると良いと思います(※)。
 <br>
 そうしないと、いざプルする時に衝突が起きまくって修正作業が大変になります。 
-<br>
-<br>
+</p>
+
+<p>
 ※ 逆に1分おきとか過剰にプルしすぎるのも、いちいち修正するのが大変で自分の作業が進まなくなるので止めましょう。 
-<br>
-<br>
+</p>
+
+<p>
 ではAさん、Bさん、Cさんはプルを実行し、全員が同じ内容となっている状態7にして下さい。
 <br>
 前のページに書いたように、衝突が無ければ git が自動的にマージ＆コミットしてくれます。
-<br>
+</p>
+
 <br>
 <h2>状態 7</h2>
 <br>
@@ -331,8 +346,6 @@ name?
 
 </td></tr></table>
 
-<br>
-<br>
-<br>
+<script>PreNext(5,5)</script>
 </body>
 </html>

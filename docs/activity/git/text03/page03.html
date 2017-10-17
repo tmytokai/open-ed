@@ -1,56 +1,82 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>更新内容のプッシュ (衝突が無い場合)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. 更新内容のプッシュ (衝突が無い場合)</title>
 </head>
 <body>
 
-<h2>更新内容のプッシュ (衝突が無い場合)</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li>学習項目: [3] リモートリポジトリ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
+<h2><script>GetTitle()</script></h2>
+
+<p>
 次にプッシュしてローカルリポジトリの更新内容をリモートリポジトリにアップロードして反映します。 
 <br>
-<br>
 ここではリモートリポジトリが更新されていない場合を試します。
-<br>
+
+<p>
 この場合は<a href="../text01/page03.html">git によるチーム開発の流れ</a>で学んだ「衝突(conflict)」は生じませんので非常にシンプルです。
+</p>
+
 <br>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Aさんだけ作業するので、他のメンバーはAさんの作業を後から見る。
 <br>
-<pre class="prog">
-<input type="checkbox"> (1) Aさんだけ作業するので、他のメンバーはAさんの作業を後から見る。
-<br>
-<input type="checkbox"> (2) Aさんはプルを実行し、リモートリポジトリの更新内容を
+<span class="olradio"><input type="radio" name="r1"></span> Aさんはプルを実行し、リモートリポジトリの更新内容を
 ダウンロードしてローカルリポジトリに取り込む
 (ただしこの時点ではリモートリポジトリは更新されていないので 何も起きない)。
-<br>
+</p>
+<p>
 git pull
-<br>
+</p>
+<p>
 すると「Already up-to-date」と表示される。
-<br>
-<input type="checkbox"> (3) Aさんはプッシュを実行してローカルリポジトリの更新内容をリモートリポジトリにアップロードする
-<br>
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Aさんはプッシュを実行してローカルリポジトリの更新内容をリモートリポジトリにアップロードする
+</p>
+<p>
 git push
-<br>
-※ IDとパスワードを聞かれますが演習時に知らせます
-<br>
-<input type="checkbox"> (4) Aさんは現在のローカルリポジトリの状態を確認する
-<br>
+</p>
+<p>
+※ GitHub のIDとパスワードを尋ねられます
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Aさんは現在のローカルリポジトリの状態を確認する
+</p>
+<p>
 git show
-<br>
-<input type="checkbox"> (4) Aさんは現在のリモートリポジトリの状態を確認する
-<br>
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Aさんは現在のリモートリポジトリの状態を確認する
+</p>
+<p>
 git show origin
-<br>
+</p>
+<p>
 ※ 前のテキストで説明したように、origin はリモートリポジトリの別名です
-</pre>
-<br>
+</p>
+</div>
+</div>
+
+<p>
 すると以下の状態3になります。
 <br>
-<br>
 AさんのローカルリポジトリのHEADの内容がそのままリモートリポジトリにアップロードされている事が分かります。
-<br>
+</p>
+
 <br>
 <h2>状態 3</h2>
 <br>
@@ -320,8 +346,6 @@ A
 
 </td></tr></table>
 
-<br>
-<br>
-<br>
+<script>PreNext(3,5)</script>
 </body>
 </html>
