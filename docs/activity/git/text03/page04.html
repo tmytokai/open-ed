@@ -22,80 +22,93 @@
 <p>
 次は衝突がある場合の演習を行います。
 <br>
-この場合はプルした後に手作業で衝突している部分を修正し、改めて add、commit、push をする必要があります。
+この場合は pull した後に手作業で衝突している部分を修正し、改めて add、commit、push をする必要があります。
 </p>
 
 <br>
-<pre class="prog">
-<input type="checkbox"> (1) まずBさんが作業するので、他のメンバーはBさんの作業を後から見る。
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> まずBさんが作業するので、他のメンバーはBさんの作業を後から見る
 <br>
-<input type="checkbox"> (2) Bさんは試しにプッシュを実行する。
-<br>
+<span class="olradio"><input type="radio" name="r1"></span> Bさんは試しに push を実行する
+</p>
+<p>
 git push
-<br>
+</p>
+<p>
 すると
 <br>
 ! [rejected]
 <br>
-と表示される。
-これはリモートリポジトリが他の人により更新されているので
-先にプルしないとプッシュ出来ないということを示している。
-<br>
-<input type="checkbox"> (3) Bさんはプルを実行し、リモートリポジトリの更新内容を
-ダウンロードしてローカルリポジトリに取り込む。
-<br>
+と表示されるが、これはリモートリポジトリが自分より先に他の人(Aさん)により更新されているので、先に pull しないと push 出来ないということを示している
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Bさんは pull を実行し、リモートリポジトリの更新内容をダウンロードしてローカルリポジトリに取り込む
+</p>
+<p>
 git pull
-<br>
+</p>
+<p>
 すると
 <br>
 CONFLICT (content)
-<br>
-と表示される。
-これは衝突が起きたので修正しろということを示している。
-<br>
-<input type="checkbox"> (4) Bさんは git status でどのファイルで衝突が起きたか確認する。
-<br>
+<br>と表示されるが、これは衝突が起きたので修正しろということを示している
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Bさんは git status でどのファイルで衝突が起きたか確認する
+</p>
+<p>
 git status
-<br>
-すると衝突が起きているファイル(hoge.txt)に対して「both modified」と表示される 。
-<br>
-<input type="checkbox"> (5) Bさんは git diff で衝突内容を確認する。
-<br>
+</p>
+<p>
+すると衝突が起きているファイル(hoge.txt)に対して「both modified」と表示される 
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Bさんは git diff で衝突内容を確認する
+</p>
+<p>
 git diff hoge.txt
-<br>
-<input type="checkbox"> (6) Bさんは hoge.txt を開く。
-ファイルの中身を見ると次のようになっている。
-<br>
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Bさんは hoge.txt を開いて中身が以下のようになっていることを確認する
+</p>
+<pre>
 name?
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 B
 =======
 A
->>>>>>> (環境によって値が異なるコミットのハッシュ値)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ハッシュ値
 <br>
-=======（マーカーという)よりも上の部分が自分がローカルリポジトリに対して行った更新内容、
-下がリモートリポジトリの更新内容である。
-<br>
+ここで「=======」（マーカーという)よりも上の部分が自分がローカルリポジトリに対して行った更新内容、下が他の人(Aさん)がリモートリポジトリに足して更新内容を表している
 </pre>
-<br>
+</div>
+</div>
+
+<p>
 この時点では以下の状態4になっています。
+</p>
+
+<p>
+Bさんのワーキングツリーにある hoge.txt の中身にはマーカー(=======)が付いていることに注目して下さい。
+</p>
+
+<p>
+これは上の囲みで説明したように同じ行にローカルとリモートで異なる文字(AとB)が追加されたため git がどうすれば良いのか分からなくて困っていることを意味します。
 <br>
-<br>
-Bさんのワーキングツリーにある hoge.txt の中身にはマーカー(=======)が付いています。
-<br>
-これは同じ行に異なる文字(AとB)が追加されたため git がどうすれば良いのか分からなくて困っていることを意味します(※)。
-<br>
-<br>
-※ なお更新内容が被っていない時は git は自動的に中身を修正(マージと言います)し、ついでにコミットもしてくれます。
-<br>
-<br>
-インデックスの hoge.txt には衝突フラグが付いています。
-<br>
+ちなみに更新内容が被っていない時は git は自動的に中身を修正(マージといいます)してコミットまでしてくれます。
+</p>
+
+<p>
+またインデックスの hoge.txt には衝突フラグが付いています。
 <br>
 HEAD はそのままです。
+</p>
+
 <br>
 <br>
-<h2>状態 4</h2>
+<h2>状態 4 (HEAD より前のコミットは省略)</h2>
 <br>
 
 <table><tr>
@@ -112,7 +125,7 @@ HEAD はそのままです。
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -130,7 +143,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -149,7 +162,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -172,10 +185,10 @@ name?
 <td class="noborder" style="width: 20em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 <br>
 B
 <br>
@@ -183,7 +196,7 @@ B
 <br>
 A
 <br>
->>>>>>> (ハッシュ値)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ハッシュ値
 </td></tr></table>
 </td></tr></table>
 </td>
@@ -214,7 +227,7 @@ hoge.txt → 衝突
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 </td></tr></table>
@@ -237,7 +250,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -255,7 +268,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -274,7 +287,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -297,7 +310,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -315,7 +328,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -334,7 +347,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -355,7 +368,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>
 A
@@ -368,64 +381,55 @@ A
 
 </td></tr></table>
 
-<br>
-<br>
-ではこれから hoge.txt を修正してプッシュしてみましょう。
-<br>
-<pre class="prog">
-<input type="checkbox"> (7) Bさんはマーカーを消して以下のように hoge.txt を修正する
-(Aの後に改行が入っているか確認。Aの下に余計な空行が入っていないか確認)。
-<br>
+<p>
+ではこれから Bさんは衝突している hoge.txt を修正して push してみましょう。
+</p>
+
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r2"></span> Bさんはマーカーを消して以下のように hoge.txt を修正する。A の下に空行が入っていないように気をつけること
+</p>
+<pre>
 name? 
 B 
 A
-<br>
-<input type="checkbox"> (8) Bさんは hoge.txt を add する。
-<br>
-git add hoge.txt
-<br>
-すると hoge.txt の衝突フラグが消える。
-<br>
-<input type="checkbox"> (9) Bさんは git status で衝突フラグが消えている事を確認する。
-<br>
-git status
-<br>
-<input type="checkbox"> (10) Bさんは hoge.txt をコミットする
-<br>
-git commit -m "merged A and B"
-<br>
-<input type="checkbox"> (11) Bさんはプルを再実行し、リモートリポジトリの更新内容を
-改めてダウンロードしてローカルリポジトリに取り込む
-(もちろんこの時点では他の人はリモートリポジトリを更新してないので何も起きないが
-プッシュする前にプルする習慣をつけよう)。
-<br>
-git pull
-<br>
-<input type="checkbox"> (12) Bさんはプッシュを実行してローカルリポジトリの更新内容をリモートリポジトリにアップロードする
-<br>
-git push
-<br>
-※ IDとパスワードは演習時に知らせます
-<br>
-<input type="checkbox"> (4) Bさんは現在のローカルリポジトリの状態を確認する
-<br>
-git show
-<br>
-<input type="checkbox"> (4) Bさんは現在のリモートリポジトリの状態を確認する
-<br>
-git show origin
-<br>
-※ 前のテキストで説明したように、origin はリモートリポジトリの別名です
 </pre>
+<p>
+<span class="olradio"><input type="radio" name="r2"></span> git add hoge.txt
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> git status で衝突フラグが消えている事を確認する
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> git commit -m "merged A and B"
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> git pull を再実行してリモートリポジトリの更新内容を改めてダウンロードしてローカルリポジトリに取り込む(※)
+</p>
+<p>
+※ もちろんこの時点では他の人はリモートリポジトリを更新してないので何も起きませんが push する前に pull する習慣をつけておくと良いです
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r2"></span> git push
+</p>
+<p>
+※ GitHub のIDとパスワードを尋ねられます
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r2"></span> 全員がブラウザを開き、リモートリポジトリ「gitremote」の表示を更新し、hoge.txt の内容が変わっていることを確認する。
+</p>
+</div>
+</div>
 
+<p>
 すると以下の状態5になります。
 <br>
-<br>
 BさんのローカルリポジトリのHEADの内容がそのままリモートリポジトリにアップロードされている事が分かります。
+<br>
+ただし A、C、DさんのHEADはそのままです。
+</p>
 
 <br>
 <br>
-<h2>状態 5</h2>
+<h2>状態 5 (HEAD より前のコミットは省略)</h2>
 <br>
 
 <table><tr>
@@ -442,7 +446,7 @@ BさんのローカルリポジトリのHEADの内容がそのままリモート
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -460,7 +464,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -479,7 +483,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -502,7 +506,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -521,7 +525,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -541,7 +545,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -565,7 +569,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -583,7 +587,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -602,7 +606,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -625,7 +629,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -643,7 +647,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -662,7 +666,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -683,7 +687,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -696,12 +700,14 @@ name?
 
 </td></tr></table>
 
+<p>
+では続けてCさんが pull ＆ pushし、終わったら最後に Dさんが pull ＆ push して以下の状態6にして下さい。
 <br>
+コミットのコメントは以下に合わせて下さい。
+</p>
+
 <br>
-では続けてCさん、Dさんも順にプル＆プッシュして以下の状態6にして下さい。
-<br>
-<br>
-<h2>状態 6</h2>
+<h2>状態 6 (HEAD より前のコミットは省略)</h2>
 <br>
 
 <table><tr>
@@ -718,7 +724,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -736,7 +742,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -755,7 +761,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -778,7 +784,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -797,7 +803,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -817,7 +823,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 <br>A
@@ -841,7 +847,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 <br>B
@@ -861,7 +867,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 <br>B
@@ -882,7 +888,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 <br>B
@@ -907,7 +913,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -928,7 +934,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -950,7 +956,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -974,7 +980,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C

@@ -20,27 +20,27 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-さてチーム開発をしていると他のメンバーがどんどんリモートリポジトリに更新内容をプッシュしてきますので、自分のローカルリポジトリとリモートリポジトリの内容がかけ離れていきます。
+さてチーム開発をしていると他のメンバーがどんどんリモートリポジトリに更新内容を push してきますので、自分のローカルリポジトリとリモートリポジトリの内容がかけ離れていきます。
 </p>
 
 <p>
-従って自分の作業が一区切りついて何か新しい作業を始める前にこまめにプルして、自分のローカルリポジトリとリモートリポジトリの内容の乖離をなるべく最小に保つように心がけると良いと思います(※)。
+従って自分の作業が一区切りついて何か新しい作業を始める前にこまめに pull して、自分のローカルリポジトリとリモートリポジトリの内容の乖離をなるべく最小に保つように心がけると良いと思います(※)。
 <br>
-そうしないと、いざプルする時に衝突が起きまくって修正作業が大変になります。 
+そうしないと、いざ pull する時に衝突が起こりまくって修正作業が大変になります。 
 </p>
 
 <p>
-※ 逆に1分おきとか過剰にプルしすぎるのも、いちいち修正するのが大変で自分の作業が進まなくなるので止めましょう。 
+※ ブランチ機能を使って効率よく並行作業する方法もありますが、このアクティビティではブランチ機能は取り扱いません。
 </p>
 
 <p>
-ではAさん、Bさん、Cさんはプルを実行し、全員が同じ内容となっている状態7にして下さい。
+ではAさん、Bさん、Cさんは pull を実行し、全員が同じ内容となっている状態7にして下さい。
 <br>
 前のページに書いたように、衝突が無ければ git が自動的にマージ＆コミットしてくれます。
 </p>
 
 <br>
-<h2>状態 7</h2>
+<h2>状態 7 (HEAD より前のコミットは省略)</h2>
 <br>
 
 <table><tr>
@@ -57,7 +57,7 @@
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -78,7 +78,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -100,7 +100,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -126,7 +126,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -147,7 +147,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -169,7 +169,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -195,7 +195,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -216,7 +216,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -238,7 +238,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -264,7 +264,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -285,7 +285,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -307,7 +307,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C
@@ -331,7 +331,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 <br>C

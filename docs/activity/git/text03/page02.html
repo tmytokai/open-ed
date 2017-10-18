@@ -26,18 +26,27 @@
 <b>「開発者間のローカルリポジトリは完全に独立しているので、自分のローカルリポジトリ内だけで作業している限り、何をしても他の開発者に影響は無い」</b>
 </p>
 <p>
-さて今回の演習ではhoge.txtに各自の名前(A〜D)を入力し(最後の改行を忘れずに)、git add してから git commit して下さい。
-<br>
-commit コメントは「my name is (A〜B)」として下さい。
-</p>
-<p>
-すると以下の状態2に全体が変わります。
-<br>
-この時点では、他の人やリモートリポジトリに何の影響も与えていないことに注目して下さい。
+では以下の手順で各自が作業を行って状態2まで進めましょう。
 </p>
 
 <br>
-<h2>状態 2</h2>
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> hoge.txt をエディタで開いて name? の後で改行して名前(A〜D)を入力します。なお 3 行目以降には空行が入らない気をつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> git add hoge.txt
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> git commit -m "my name is 自分の名前(A〜B)"
+</div>
+</div>
+
+<p>
+状態 2 の時点では他の人やリモートリポジトリに何の影響も与えていないことに注目して下さい。
+</p>
+
+<br>
+<h2>状態 2 (HEAD より前のコミットは省略)</h2>
 
 <br>
 <table><tr>
@@ -54,7 +63,7 @@ commit コメントは「my name is (A〜B)」として下さい。
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -72,7 +81,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -91,7 +100,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>A
 </td></tr></table>
@@ -114,7 +123,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 </td></tr></table>
@@ -132,7 +141,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 </td></tr></table>
@@ -151,7 +160,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>B
 </td></tr></table>
@@ -174,7 +183,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -192,7 +201,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -211,7 +220,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>C
 </td></tr></table>
@@ -234,7 +243,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -252,7 +261,7 @@ name?
 <td class="noborder" style="width: 10em;">
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -271,7 +280,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 <br>D
 </td></tr></table>
@@ -292,7 +301,7 @@ name?
 HEAD
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
-<table class="innerbox"><tr><td>
+<table class="innerbox"><tr><td class="left">
 name?
 </td></tr></table>
 </td></tr></table>

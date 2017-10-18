@@ -29,13 +29,15 @@
 <div class="info">
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub にログインし、「gitremote」という名前でリモートリポジトリを新規作成する。
+<span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub にログインし、「gitremote」という名前でリモートリポジトリを新規作成する。※ README の作成も忘れずに
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> A さんは「gitremote」に「hoge.txt」を追加し「init」というコメントでコミットする。中身は「name?」とする。
+<span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub の「gitremote」のページにある「Create New File」ボタンを押し、ファイル名に「hoge.txt」、中身に「name?」(改行無し)と入力し、「Commit new file」の欄に「init」というコメントを入力してコミットボタンを押す。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> A さんは「gitremote」の開発者として他のメンバーを登録する。
+<span class="olradio"><input type="radio" name="r1"></span> A さんは「hoge.txt」が「gitremote」に追加されている事を確認する。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> 全員はブラウザで「gitremote」のアドレスを確認する。
+<span class="olradio"><input type="radio" name="r1"></span> A さんは「Setting」→「Collaborators」のページを開き、他のメンバーからIDを尋ねて検索し、「gitremote」の開発者としてメンバー登録する。
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> 他のメンバーはブラウザで A さんの「gitremote」のページを開き、「Clone」ホダンを押して「gitremote」のアドレスをコピーする。
 <br>
 <span class="olradio"><input type="radio" name="r1"></span> 全員は端末(※)を開いて演習用のフォルダに移動する。
 </p>
@@ -43,15 +45,19 @@
 ※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
 </p>
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> 以下のコマンドでリモートリポジトリをクローンする
+<span class="olradio"><input type="radio" name="r1"></span> 以下のコマンドでリモートリポジトリ「gitremote」を clone する
 </p>
 <p>
-git clone &lt;リモートリポジトリのアドレス&gt;
+git clone アドレス
 </p>
 <p>
 <span class="olradio"><input type="radio" name="r1"></span> ls でローカルリポジトリが出来ているか確認する
 <br>
 <span class="olradio"><input type="radio" name="r1"></span> ローカルリポジトリに cd する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> ls で README と hoge.txt があることを確認する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> cat で hoge.txt の中身を確認する。
 </div>
 </div>
 
@@ -66,7 +72,7 @@ git clone &lt;リモートリポジトリのアドレス&gt;
 </p>
 
 <br>
-<h2>状態 1</h2>
+<h2>状態 1 (HEAD より前のコミットは省略)</h2>
 
 <br>
 <table><tr>
