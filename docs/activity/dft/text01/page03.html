@@ -42,12 +42,12 @@ DFTの演算中には複素数が含まれていますので、プログラミ�
 <input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ の求め方</b>
 
 \begin{align*}
-\textrm{A}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i ) 
 \right \}
 \ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
-\textrm{B}[k] &= -\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{B}[k] &= -\frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
