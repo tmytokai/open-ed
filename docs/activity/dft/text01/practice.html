@@ -134,7 +134,7 @@ f[i] =
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の虚数成分 $\textrm{B}[0]$ 〜 $\textrm{B}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 B[] に代入して下さい。
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を画面に表示して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を画面に表示して下さい。※ fopen,fprintf は使わないで下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 absC[N] と argC[N] を定義して下さい。
 </p>
@@ -150,15 +150,19 @@ f[i] =
  ※ 絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を画面に表示して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を画面に表示して下さい。※ fopen,fprintf は使わないで下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 実行します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を表計算ソフトにコピーして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 画面に表示されたabsC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を表計算ソフトの別々の列にコピペして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> まず絶対値のグラフを挿入します。グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
+<span class="olradio"><input type="radio" name="p3"></span> 列のタイトルを追加します。absC[0] 〜  absC[N-1]の列の先頭セルに「絶対値」、argC[0] 〜 argC[N-1]の列の先頭セルに「偏角」と入力して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 次に偏角のグラフを挿入します。グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
+<span class="olradio"><input type="radio" name="p3"></span> k列を挿入します。絶対値又は偏角の列の左列の先頭セルに「k」と入力し、その下から0,1,・・と数字を入力して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> まず絶対値のグラフを挿入します。横軸は k 列とし、グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 次に偏角のグラフを挿入します。横軸は k 列とし、グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> シートを保存します。ファイル名は「DFT-1-3」として下さい。
 <br>
