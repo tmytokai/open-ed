@@ -27,32 +27,22 @@
 <h2><a href="./page01.html">1. I2C とは</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1 (個人PC、10分):</b> 各シリアルインターフォースの特徴をまとめましょう。
+演習無し
 </p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> RS-232C、SPI、I2C の「利点」「欠点」について Web 等で調べて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果をまとめた表」をドキュメントファイルに記述して保存してください。
-</p>
-</div>
 
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
-<br>
 <p>
-演習 2 と兼ねる。
-
+演習無し
 </p>
-
 
 <br>
 <h2><a href="./page03.html">3. 入力</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2 (個人PC、60分):</b> Arduino UNO で I2C 経由で加速度センサからデータを受け取ってしてみましょう。
+<input type="checkbox"><b>演習 2 (個人PC、70分):</b> Arduino UNO で I2C 経由で加速度センサからデータを受け取りましょう。
 </p>
 <div class="olradio">
 <p>
@@ -67,61 +57,123 @@
 (1) 「３軸加速度センサモジュール　ＡＤＸＬ３４５」を I2C 経由で使用する。
 </p>
 <p>
-(2) 3.3V 駆動とする。
+(2) 3.3V 駆動とする。 
 </p>
 <p>
-(3) アドレス(SDO/ALT ADRESS)は「0x53」とする。
+　※ 本来は電圧レベル変換モジュールを挟まないと壊れますが、今回は短時間なので Arduino の3.3V出力へ直に接続します。
+</p>
+<p>
+(3) デバイスのアドレスは「0x53」とする ( SDO/ALT ADRESS ピン = 12 ピンを接地する)。
 </p>
 <p>
 (Arduino側)
 </p>
 <p>
-(4) I2Cの設定で、サンプリングモード「+-2G を 10bit(+512 〜 -512) で検出」とする。
+(4) I2Cの設定で、サンプリングモードを「+-2G を 10bit(+512 〜 -512) で検出」にする。
 </p>
 <p>
-(5) 適当な間隔(500ミリ秒程度)でサンプリングし、シリアルモニタ(虫めがねボタン)に結果を表示する。
+(5) Arduino 側の ピンは SDA = A4、SCL = A5 である。
+</p>
+<p>
+(6) 適当な間隔(500ミリ秒程度)でサンプリングし、シリアルモニタ(虫めがねボタン)に結果を表示する。
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>ホワイトボードに回路図を描いて下さい。
-</p>
-<p>
-※ SPI の演習の時は 「5V」 だったが、今回は 「3.3V」 なので注意。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>回路図を描いたらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路図の写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>設計図を見ながら回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span>データシート等を見ながら回路を組んで下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。プログラム内で利用するＡＤＸＬ３４５のレジスタは以下の通りです(その他のレジスタはデータシートの25ページ目を参照)。
+</p>
+<table>
+<tr><th>レジスタ名</th><th>番地</th><th>サイズ</th><th>説明</th></tr>
+
+<tr>
+<td class="center">POWER_CTL</td>
+<td class="center">0x2D</td>
+<td class="center">8 bit</td>
+<td>(読み書き可) 動作モード切り替え</td>
+</tr>
+
+<tr>
+<td class="center">DATA_FORMAT</td>
+<td class="center">0x31</td>
+<td class="center">8 bit</td>
+<td>(読み書き可) 各軸の出力データの形式を設定する</td>
+</tr>
+
+<tr>
+<td class="center">DATAX0</td>
+<td class="center">0x32</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) X軸の出力データの最下位バイト</td>
+</tr>
+
+<tr>
+<td class="center">DATAX1</td>
+<td class="center">0x33</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) X軸の出力データの最上位バイト</td>
+</tr>
+
+<tr>
+<td class="center">DATAY0</td>
+<td class="center">0x34</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) Y軸の出力データの最下位バイト</td>
+</tr>
+
+<tr>
+<td class="center">DATAY1</td>
+<td class="center">0x35</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) Y軸の出力データの最上位バイト</td>
+</tr>
+
+<tr>
+<td class="center">DATAZ0</td>
+<td class="center">0x36</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) Z軸の出力データの最下位バイト</td>
+</tr>
+
+<tr>
+<td class="center">DATAZ1</td>
+<td class="center">0x37</td>
+<td class="center">8 bit</td>
+<td>(読み出し専用) Z軸の出力データの最上位バイト</td>
+</tr>
+
+
+</table>
+<p>
+※1 setup の中で DATA_FORMAT に 0x00 を書き込むとサンプリングモードが「+-2G を 10bit(+512 〜 -512) で検出)」になります(詳細はデータシートの28P目参照)。
 </p>
 <p>
-※1 setup の中で ADXL345 のレジスタ設定を行うが、DATA_FORMAT(0x31番地)を「0x00 (+-2G を 10bit(+512 〜 -512) で検出)」、その他はデフォルトのままとする。その後POWER_CTL(0x2D番地)に「0x08」を書き込むと測定を開始する。
+※2 それ以外のレジスタ値はデフォルトのままにします。
 </p>
 <p>
-※2 loopの中でサンプリングした重力値を G (double型の値)に変換してからシリアル出力すること。+512 の時は +2G、-512 の時は -2G となる。
+※3 setup の中で POWER_CTL に「0x08」を書き込むと測定を開始します(詳細はデータシートの27P目参照)。
+</p>
+<p>
+※4 loopの中でサンプリング値を加速度に変換してから虫眼鏡に表示して下さい。サンプリング値が -512 の時は -2G、+512 の時は +2G です。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
 </p>
 <p>
-※ 加速度の検出方向はデータシートのP34に書いてある。
+※ 加速度の検出方向はデータシートのP34に書いてあります。
 </p>
-<p>
 <span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路図の写真」と「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ドキュメントファイルに「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
 <p>
-※ 組んだ回路は次回の演習でも再利用するので配線を外さないこと。
+※ 組んだ回路は次回の演習でも再利用するので配線を外さないで下さい。
 </p>
 </div>
 
