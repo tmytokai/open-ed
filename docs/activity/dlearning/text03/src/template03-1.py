@@ -36,23 +36,23 @@ op_const_label = tf.constant(
     , tf.float32
 )
 
-# ↓ ここから template02-3.py の内容をコピペ
+# ↓ ここから template02-2.py の内容をコピペ
 
 # 入力層 OP ノードの定義
 def input_layer( x ):
    ?
 
 # 隠れ層の重みとバイアス
-op_var_w_hidden = ?
-op_var_b_hidden = ?
+op_var_W_h = ?
+op_var_B_h = ?
 
 # 隠れ層 OP ノードの定義
 def hidden_layer( x, w, b ):
    ?
 
 # 出力層の重みとバイアス
-op_var_w_output = ?
-op_var_b_output = ?
+op_var_W_o = ?
+op_var_B_o = ?
 
 # 出力層 OP ノードの定義
 def output_layer( x, w, b ):
@@ -67,11 +67,14 @@ op_output_layer = ?
 def cross_entropy( r, l ):
    ?
 
+# 学習率
+r = ?
+
 # クロスエントロピーと勾配降下法 OP ノードの作成
 op_cross_entropy = ?
 op_grad_optimizer = ?
 
-# ↑ template02-3.py のコピペここまで
+# ↑ template02-2.py のコピペここまで
 
 # セッション開始
 sess.run( tf.initialize_all_variables() )

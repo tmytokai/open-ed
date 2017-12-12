@@ -24,7 +24,7 @@
 </p>
 
 <br>
-<h3>
+<h3 id="const">
 1. 定数(Constant) OP ノード
 </h3>
 
@@ -105,7 +105,7 @@ print( result )
 </p>
 
 <br>
-<h3>
+<h3 id="var">
 2. 変数(Variable) OP ノード
 </h3>
 
@@ -286,7 +286,7 @@ print( result )
 </div>
 
 <br>
-<h3>
+<h3 id="mul">
 4. 掛け算(Mul) OP ノード
 </h3>
 
@@ -434,23 +434,23 @@ print( result )
 </div>
 
 <br>
-<h3>
-6. log、 exp、sin、cos などの関数 OP ノード
+<h3 id="log">
+6. log、 exp、sin、cos、sigmoid などの関数 OP ノード
 </h3>
 
 <p>
-log、exp、sin、cos などの関数 OP ノードはそのままその通りの演算を行いますが、ベクトルや行列の場合は各要素毎に演算が行われます。
+log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP ノードはそのままその通りの演算を行いますが、ベクトルや行列の場合は各要素毎に演算が行われます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>: log、 exp、sin、cos などの関数 OP ノード</b>
+<input type="checkbox"><b>: log、 exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP ノード</b>
 
 <p>
 書式:  ノード名 = tf.f( x )
 </p>
 
 <p>
-f(x) = log(x)、exp(x)、sin(x)、cos(x)、その他色々
+f(x) = log(x)、exp(x)、sin(x)、cos(x)、sigmoid(x) その他色々
 </p>
 
 <p>
@@ -493,12 +493,14 @@ print( result )
 
 
 <br>
-<h3>
+<h3 id="softmax">
 7. SoftMax OP ノード
 </h3>
 
 <p>
-SoftMax OP ノードはニューラルネットワークの出力層で良く使われているノードで、出力されるテンソルの各要素の値は確率の数字を表しています。詳しくはディープラーニングの学習項目で説明します。
+<a href="https://en.wikipedia.org/wiki/Softmax_function">SoftMax</a> OP ノードはニューラルネットワークの出力層で良く使われているノードで、出力されるテンソルの各要素の値は確率の数字を表しています。
+<br>
+詳しくはディープラーニングの学習項目で説明します。
 </p>
 
 <div class="info">
@@ -555,7 +557,7 @@ print( result )
 
 
 <br>
-<h3>
+<h3 id="redsum">
 8. 総和(Reduce_Sum) OP ノード
 </h3>
 

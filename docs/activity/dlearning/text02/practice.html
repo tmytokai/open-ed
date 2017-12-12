@@ -26,31 +26,13 @@
 <br>
 <h2><a href="./page01.html">1. ディープラーニングとは</a></h2>
 
-<br>
-<p>
-<input type="checkbox"><b>演習 1 (個人PC、10分):</b>(※時間が足りない時はカット) ディープラーニングについて調べてみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 「現在ディープラーニングが使われている具体的的な例」を Web 等で調べて下さい(最低 1 件)。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「調べた結果」をドキュメントファイルに記述して保存してください。
-</p>
-</div>
-
-<br>
 <h2><a href="./page02.html">2. 多層ニューラルネットワーク</a></h2>
 
-<p>
-このページの演習は演習 2 で行います。
-</p>
-
-<br>
 <h2><a href="./page03.html">3. 3層ニューラルネットワークのデータフローグラフ化</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2 (個人PC、30分):</b>(※時間が足りない時はカット) TensorFlow を使って 3 層ニューラルネットワークを構成しましょう。
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> TensorFlow を使って 3 層ニューラルネットワークを作ってみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -60,47 +42,37 @@
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) N = 2、K = 3, M = 2 とする。
+(1) 入力層が N = 2 個、隠れ層が K = 3 個、出力層が M = 2 個のパーセプトロンで出来ている
 </p>
 <p>
-(2) 入力データは適当な値とする。
+(2) 入力信号は適当な値とする
 </p>
 <p>
-(3) 重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する。
+(3) 重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する
 </p>
 </div>
 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> ホワイトボードに上のニューラルネットワークのグラフを描いて下さい(w、bも記入)。
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/template02-1.py">テンプレートスクリプトファイル</a>(template02-1.py)をダウンロードして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> グラフを描いたらファシリテータの確認を受けて下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> グラフの写真を撮ってドキュメントファイルに貼りつけて下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/template02-2.py">テンプレートスクリプトファイル</a>(template02-2.py)をダウンロードして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> テキストとホワイトボードを参考にしながらスクリプトファイル内の ? の部分を上から穴埋めして行って下さい。
+<span class="olradio"><input type="radio" name="p2"></span> テキストを参考にしながらスクリプトファイル内の ? の部分を上から穴埋めして行って下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 穴埋めが終わったら実行して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「ネットワークの写真」が貼ってあることを確認し、「スクリプトファイルの内容」と「表示結果」をドキュメントファイルに記述して保存してください。
+<span class="olradio"><input type="radio" name="p2"></span> 「スクリプトファイルの内容」と「表示結果」をドキュメントファイルに記述して保存してください。
 </p>
 </div>
 
 <br>
 <h2><a href="./page04.html">4. ディープラーニングの実行</a></h2>
 
-<p>
-このページの演習は演習 3 で行います。
-</p>
-
 <br>
-<h2><a href="./page05.html">5. 未知入力データの分類</a></h2>
+<h2><a href="./page05.html">5. 未知入力信号の分類</a></h2>
 
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3 (個人PC、30分):</b> ディープラーニングで簡単な画像の分類をしてみましょう。
+<input type="checkbox"><b>演習 2-2 (個人PC、30分):</b> ディープラーニングで簡単な画像の分類をしてみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -110,10 +82,10 @@
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) N = 9、K = 5, M = 4 とする。
+(1) 入力層が N = 9 個、隠れ層が K = 5 個、出力層が M = 2 個のパーセプトロンで出来ている
 </p>
 <p>
-(2) 学習データは以下の 3x3 サイズ(つまり K = 9 )の 4 画像とする。
+(2) 学習信号は以下の 3x3 サイズ(つまり N = 9 )の 4 画像とする(つまり学習データは L = 4 組)。
 </p>
 
 <pre class="wrap">
@@ -146,7 +118,7 @@
 </pre>
 
 <p>
-(3) 各画像はそれぞれ別々のクラスに属するものとしてラベルを作成する(つまり M = 4 クラス)。
+(3) 画像1と2はクラス1、画像3と4はクラス2に属するものとしてラベルを作成する(つまり M = 2 クラス)。
 </p>
 
 <p>
@@ -158,7 +130,7 @@
 </p>
 
 <p>
-(5) 未知入力データは以下とする。
+(5) 未知入力信号は以下とする。
 </p>
 
 <pre class="wrap">
@@ -175,9 +147,9 @@
 </div>
 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/template02-3.py">テンプレートスクリプトファイル</a>(template02-3.py)をダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/template02-2.py">テンプレートスクリプトファイル</a>(template02-2.py)をダウンロードして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> テキストと template02-2.py を参考にしながらスクリプトファイル内の ? の部分を上から穴埋めして行って下さい。
+<span class="olradio"><input type="radio" name="p3"></span> テキストと template02-1.py を参考にしながらスクリプトファイル内の ? の部分を上から穴埋めして行って下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 穴埋めが終わったら実行して下さい。
 <br>
