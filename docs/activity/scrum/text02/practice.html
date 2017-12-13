@@ -143,7 +143,25 @@
 <p>
 <span class="olradio"><input type="radio" name="p6"></span> <a href="../../git/text01/practice.html">こちら</a>を参考にして、代表者は GitHub 上に新規でリモートリポジトリを作成します。名前はゲームのタイトルに合わせて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> <a href="../../git/text03/page01.html">こちら</a>を参考にし、代表者は他のチームメンバーにインビテーションを送ってコラボレーターとして登録をします。
+<span class="olradio"><input type="radio" name="p6"></span> 代表者は端末を開いてリモートリポジトリを clone します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 代表者は<a href="./dot.gitignore">こちら</a>の設定ファイル(※)をダウンロードしてローカルリポジトリの中に保存して下さい。
+<p>
+※ gitignore と呼ばれるファイルで、中に名前が書いてあるファイルは git の管理外に置かれます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 代表者はローカルリポジトリの中に移動して以下のコマンドをコピーして実行して下さい。
+</p>
+<pre class="wrap">
+mv dot.gitignore .gitignore
+git add .gitignore
+git commit -m "gitignore 追加"
+git push
+
+※ git push でIDとパスワードを聞かれたら入力する
+</pre>
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 再び GitHub に戻り、 <a href="../../git/text03/page01.html">こちら</a>を参考にして代表者は他のチームメンバーにインビテーションを送ってコラボレーターとして登録をします。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> 各メンバーはリモートリポジトリを clone します。
 <br>
@@ -170,14 +188,16 @@
 <br>
 <p>
 <input type="checkbox"><b>演習 2-8 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) スプリントプランニングミーティングを行います。
-</p>7
+</p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p8"></span> (必要なら)全体仕様書を見直し、「プロダクトバックログ」カンバンのToDo列に含まれるアイテムの修正を行います。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> 今回のスプリントで実施するプロダクトバックログアイテムを選択し、カンバンのDoing列に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 詳細仕様書を作成します。指定されたファイルに今回のスプリントで実装予定の内容を文章や箇条書き、クラス図、表、グラフ、イラスト等に詳しくまとめて下さい。
+<span class="olradio"><input type="radio" name="p8"></span> 詳細仕様書を作成します。
+<br>
+指定されたファイルに今回のスプリントで実装予定の内容を文章や箇条書き、クラス図、表、グラフ、イラスト等に詳しくまとめて下さい。
 </p>
 <ul>
 <li>画像のサイズとかキャラクターの移動スピードなど、かなり細かい数値まで決めて下さい。</li>
@@ -186,9 +206,15 @@
 <li>イラストは再利用可能な様に手描きではなくてドローツールやイラストレイター等を使って作成して下さい。</li>
 </ul>
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 代表者はリモートリポジトリの Projects タブを開き、「スプリントバックログ○」という名前でカンバン(プロジェクト)を新規作成します。○にはスプリント番号を入れて下さい。
+<span class="olradio"><input type="radio" name="p8"></span> 代表者はリモートリポジトリの Projects タブを開き、「スプリントバックログ○」(※)という名前でカンバン(プロジェクト)を新規作成します。
+</p>
+<p>
+※ ○の中にはスプリント番号を入れて下さい。 (例) スプリント2
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> 他のメンバーも作成したカンバンを表示し、 詳細仕様書を元にチーム内で話し合いながらバックログアイテムを作成・登録していきます。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 他のメンバーも作成したカンバンを表示し、 詳細仕様書を元にチーム内で話し合いながらバックログアイテムを作成・登録していきます。<b>担当者も決めて名前(個人特定されないように注意)を記入して下さい</b>。
+<b>担当者も決めて名前(個人特定されないように注意)を記入して下さい</b>。
 </p>
 </div>
 
@@ -200,7 +226,7 @@
 <p>
 <span class="olradio"><input type="radio" name="p9"></span> A〜Dさん役を決めます。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 全員リモートリポジトリの中に移動します。
+<span class="olradio"><input type="radio" name="p9"></span> 端末を開いて、全員リモートリポジトリの中に移動します。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> AさんはGreenfootを起動し、「SCR2-9」という名前の新規シナリオをリモートリポジトリ内に作ります。
 <br>
@@ -208,27 +234,35 @@
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> 一度 Run して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> AさんはGreenfootを閉じ、Greenfootが作成したファイルを全て add → commit (コメントは任意) → push してリモートリポジトリにアップして下さい。
+<span class="olradio"><input type="radio" name="p9"></span> Aさんは<b>Greenfootを閉じ</b>、Greenfootが作成したファイルを全て add → commit (コメントは任意) → push してリモートリポジトリにアップして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> B〜Dさんは pull してリポジトリを最新状態に更新し、SCR2-9 フォルダに移動して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> 全員は A さんが作ったシナリオを開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 全員は「Actor」のサブクラスとして適当なキャラを作って下さい。名前、画像は適当で結構です。またソースコードも空で結構です。
+<span class="olradio"><input type="radio" name="p9"></span> 全員は「Actor」のサブクラスとして適当なキャラを作って下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 全員は、キャラを適当な位置に貼り付けてから 一度 Run して下さい。
+名前、画像は適当で結構です。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 終わった人から順次Greenfootを閉じ、git status で状態を確認してから更新されたファイルを全て add → commit (コメントは任意)して下さい。
+またソースの中身は空で結構です。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 全員一度 Run して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 作業が終わった人から順次<b>Greenfootを閉じ</b>、git status で状態を確認してから更新されたファイルを全て add → commit (コメントは任意)して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> 終わった人から順次 pull して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> (以下、衝突処理) 「CONFLICT (content): Merge conflict in 〜」と表示された時は衝突が生じましたので、衝突したファイルをテキストエディタで開いて手作業で編集して下さい。
+<span class="olradio"><input type="radio" name="p9"></span> (以下、衝突処理) 「CONFLICT (content): Merge conflict in project.greenfoot」と表示された時は Greenfoot の設定ファイル(project.greenfoot)に衝突が生じましたので Greenfoot に修正してもらいます。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> Greenfoot を起動して正常動作することを確認して下さい。
+Greenfoot を起動してそのまま閉じて下さい(※)。
+</p>
+<p>
+※ キャラ画像の指定が外れている場合があります。その場合は右クリック → Setimage から画像を指定し直して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> git add project.greenfoot してから commit (コメントは任意) して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> Greenfoot を閉じ、衝突したファイルを add してから commit (コメントは任意) して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> 再び pull して衝突が生じたらまた衝突処理を実施して下さい。 (衝突処理ここまで)
+<span class="olradio"><input type="radio" name="p9"></span> 再び pull してまた衝突が生じたら上に戻って下さい。 (衝突処理ここまで)
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> (衝突が無くなったら) push して下さい。
 <br>
@@ -236,15 +270,27 @@
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> 全員は再びGreenfootを開き、Aさんが作ったキャラに対して同時編集をします。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> A さんは↑を押したら上に移動する処理を書いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> A さんは↑を押したら上に移動する処理を書いて動作確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> B さんは→を押したら右に移動する処理を書いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> B さんは→を押したら右に移動する処理を書いて動作確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> C さんは↓を押したら下に移動する処理を書いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> C さんは↓を押したら下に移動する処理を書いて動作確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> D さんは←を押したら左に移動する処理を書いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> D さんは←を押したら左に移動する処理を書いて動作確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 先ほどと同じように終わった人から add → commit → pull → 衝突処理 → add → commit → pull → ・・・ を繰り返し、 pull で衝突が無くなったら push して下さい。
+<span class="olradio"><input type="radio" name="p9"></span> 先ほどと同じように終わった人から順次<b>Greenfootを閉じ</b>、更新したファイルをadd → commit → pull して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> (以下、衝突処理) 「CONFLICT (content): Merge conflict in 〜」と表示された時はそのファイル内で衝突が生じましたが、設定ファイル以外は手作業で修正する必要があります。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> git status を実行し、「both modified」マークが付いているファイルを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> Greenfoot を起動し、エラーを修正して動作確認します。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 修正したファイルを全て add してから commit (コメントは任意) して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 再び pull してまた衝突が生じたら上に戻って下さい。 (衝突処理ここまで)
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> (衝突が無くなったら) push して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> 全員の push が終わったら、全員再び pull してリポジトリを最新状態に更新して下さい。
 </div>
