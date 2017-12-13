@@ -27,6 +27,7 @@
 <br>
 <h2><a href="./page01.html">1. 周期性時間領域ディジタル信号</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習 1-1 (個人PC、15分):</b> 表計算ソフトを使って周期性時間領域ディジタル信号
 </p>
@@ -44,7 +45,7 @@ f[i] =
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 表計算ソフトを起動します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。
+<span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $i = 0, 1,  \cdots, 44$ とします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 最初の列に各 $i$ をオートフィルを使って入力します。
 <br>
@@ -65,13 +66,9 @@ f[i] =
 <br>
 <h2><a href="./page02.html">2. DFT と IDFTの定義</a></h2>
 
-<p>
-次の項目で演習を行います。
-</p>
-
-<br>
 <h2><a href="./page03.html">3. プログラミング</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習 1-2 (個人PC、30分):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
@@ -91,8 +88,12 @@ f[i] =
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> C言語 の開発環境を起動します。ソース名は「DFT-1-2.cpp」とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> main 関数で int 型変数 N を定義し、演習 1-1 で求めた周期 $\textrm{N}$ の値を代入して下さい。
-<br>
+<span class="olradio"><input type="radio" name="p2"></span> main 関数で int 型変数 N を定義し(※)、演習 1-1 で求めた周期 $\textrm{N}$ の値を代入して下さい。
+</p>
+<p>
+※ コンパイルエラーが出る場合は const int 型にして下さい。
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> double 型の配列 f[N] を定義して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> f[0] 〜 f[N-1] の値を for ループを使って計算して代入して下さい。
@@ -134,9 +135,13 @@ f[i] =
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の虚数成分 $\textrm{B}[0]$ 〜 $\textrm{B}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 B[] に代入して下さい。
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を画面に表示して下さい。※ fopen,fprintf は使わないで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 absC[N] と argC[N] を定義して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を<b>画面に表示</b>して下さい(※)。
+</p>
+<p>
+※ fopen,fprintf,fclose は使わないで下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 absC[N] と argC[N] を定義して下さい(※)。
 </p>
 <p>
  ※ abs は absolute value(絶対値)、arg は argument(偏角)の略です。
@@ -145,13 +150,17 @@ f[i] =
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の絶対値 $|\textrm{C}[0]|$ 〜 $|\textrm{C}[\textrm{N}-1]|$ を k の for ループを使って計算して配列 absC[] に代入して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 argC[]  に代入して下さい。
-</p>
-<p>
- ※ 絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 の時は argC[k] = 0 として下さい(なお 0.01 という値は適当に決めたもので特に深い意味はありません)。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を画面に表示して下さい。※ fopen,fprintf は使わないで下さい。
 <br>
+なお絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 の時は argC[k] = 0 として下さい
+<br>
+( ちなみに 0.01 という値は適当に決めたもので特に深い意味はありません)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を<b>画面に表示</b>して下さい(※)。
+</p>
+<p>
+※ fopen,fprintf,fclose は使わないで下さい。
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p3"></span> 実行します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 画面に表示されたabsC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を表計算ソフトの別々の列にコピペして下さい。
@@ -193,21 +202,23 @@ f[i] =
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトを起動します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 時刻の範囲は $i = 0, 1,  \cdots, 45$ とします。
+<span class="olradio"><input type="radio" name="p4"></span> 時刻の範囲は $i = 0, 1,  \cdots, 44$ とします。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 最初の列に各 $i$ をオートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 次の列に IDFT で求めた f2[0] 〜  f2[N-1] の値をコピーします。
 </p>
 <p>
-　※ 周期的な信号なので足りない分は f2[0] 〜 f2[N-1] の値を繰り返しコピーして下さい。
+　※ 周期的な信号なので、足りない分は f2[0] 〜 f2[N-1] の値を範囲選択コピーしてから繰り返し貼り付けて下さい。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「無し」とします。 
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> シートを保存します。ファイル名は「DFT-1-4」として下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。 
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし演習 1-1 のグラフとほぼ一致していることを確認して下さい。
+<br>
+その後提出用のグラフを画像ファイルとして保存して下さい。 
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「画像ファイル」を貼り付けて下さい。
 </p>
@@ -243,8 +254,12 @@ f[i] =
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 基本波の振幅、周期、初期位相を表示して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 残りの高調波の振幅、周期、初期位相を表示して下さい。
-<br>
+<span class="olradio"><input type="radio" name="p5"></span> 残りの高調波の振幅、周期(※)、初期位相を表示して下さい。
+</p>
+<p>
+※ 周期 は N をdouble型にキャストしてから k で割らないと正しい値が出ないので注意しましょう。
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p5"></span> 実行します。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、理論値とほぼ一致していることを確認して下さい。
@@ -257,9 +272,8 @@ f[i] =
 <br>
 <h2><a href="./page05.html">5. 高速フーリエ変換 (FFT)</a></h2>
 
-<br>
 <p>
-<input type="checkbox"><b>演習 1-6 (個人PC、60分):</b> 準備中
+演習なし
 </p>
 
 <script>PreNext(6,5)</script>
