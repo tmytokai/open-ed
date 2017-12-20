@@ -378,7 +378,7 @@ print( result )
 </div>
 
 <br>
-<h3>
+<h3 id="matmul">
 5. 行列積(MatMul) OP ノード
 </h3>
 
@@ -415,9 +415,9 @@ sess = tf.Session()
 op_const_x = tf.constant( [[1,2], [3,4], [5,6]] )
 op_const_y = tf.constant( [[1],[2]] )
 
-op_mmul = tf.matmul( op_const_x, op_const_y )
+op_matmul = tf.matmul( op_const_x, op_const_y )
 
-result = sess.run( op_mmul )
+result = sess.run( op_matmul )
 print( result )
 # 表示結果
 #[[ 5]
@@ -538,9 +538,9 @@ sess = tf.Session()
 op_const_x = tf.constant( [ 1, 2, 3], tf.float32 )
 # tf.float32 は各要素を 32 bit浮動小数として扱うという意味
 
-op_smax = tf.nn.softmax( op_const_x )
+op_softmax = tf.nn.softmax( op_const_x )
 
-result = sess.run( op_smax )
+result = sess.run( op_softmax )
 print( result )
 # 表示結果
 # [ 0.09003057  0.24472848  0.66524094]
