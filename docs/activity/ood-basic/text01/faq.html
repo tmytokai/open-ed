@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>FAQ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Greenfoot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<h3>
+Q. <a href="./page04.html">setRotation と move を使ってオブジェクトを動かす</a>と画像が回転してしまうが、回転させないで動かす方法は無いか？
+</h3>
+
+<p>
+A. 以下のサンプルソースのように、 getX と getY で現在の座標を取得してから setLocation を使って移動先の座標を直接指定して動かせば画像は回転しません。
+</p>
+
+<div class="info">
+<pre class="wrap">
+int x = getX();
+int y = getY();
+if( Greenfoot.isKeyDown( "left" ) ){
+   setLocation( x-1,y );
+}
+if( Greenfoot.isKeyDown( "right" ) ){
+   setLocation( x+1,y );
+}
+</pre>
+</div>
+
+<br>
+<h3>
+Q. タイトル画面とかゲーム画面のように用途別にワールドを複数用意し、それらを切り替えて表示したい。
+</h3>
+
+<p>
+A. 例として WorldTitle と WorldGame という 2 つのワールドがあるとします。
+</p>
+
+<p>
+まずリセットボタンを押した時に表示するデフォルトワールドを WorldTitle にしたい時は、WorldTitle を右クリックして「new WorldTitle()」を選択します。
+</p>
+
+<p>
+次に WorldTitle 表示中にスペースキーを押したら WorldGame に画面を切り替えるようにするには、以下のように WorldTitle に act メソッドを追加し、その中で Greenfoot.setWorld を呼び出します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+public void act()
+{
+    if( Greenfoot.isKeyDown( "space" ) ){
+        World game = new WorldGame();
+        Greenfoot.setWorld( game );
+    }
+}
+</pre>
+</div>
+
+
+</body>
+</html>
