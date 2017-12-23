@@ -5,122 +5,118 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>8. prefab とオブジェクトの動的配置</title>
+<title>スプリント 7</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-<a href="./page03.html">オブジェクトの作成</a>のページで書いたように、あるオブジェクトのコピーをひとつだけ作りたい場合は、単にそのオブジェクトを選択してから手動で Ctrl+C → Ctrl+V するだけで OK です。
 <br>
-しかし弾丸みたいに大量のオブジェクトが必要な時にいちいち手動でコピーしていては大変なので、プログラム内で必要になった時に動的にコピー出来ないか考えてみましょう。
-</p>
-
-<p>
-さて、同じオブジェクトを大量にコピーして作成し画面に表示させたい場合、Java や C++ の様なクラスベースのオブジェクト指向言語ならキャラクターの元となるクラスのソースコードを書いてから new を繰り返すだけで良いのですが、Unity はプロトタイプベースの開発環境なので「<b>Prefab</b>(プレハブ)」機能という、クラスベース言語に慣れてる人にとっては少し変わった方法を用います。
-</p>
-
-<p>
-この Prefab 機能はコピー元となるオブジェクト(いわゆるプロトタイプです)から Prefab というアセットを作り、プログラム実行時に Prefab をインスタンス化してオブジェクトを作るという機能です。
-<br>
-と口でだけ説明しても良く分からないと思いますので、具体的なやり方をこれから説明していきます。
-</p>
-
-<p>
-まずコピー元となるオブジェクトを Prefab 化します。
-</p>
+<h2>1. スプリント プランニング</h2>
 
 <div class="info">
-<input type="checkbox"><b>コピー元となるオブジェクトを Prefab 化する</b>
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、タイムアップ処理を作ります。
+</p>
+<ul>
+<li>「MyWorld」クラスに private int rtime フィールドを追加します。rtime は残り時間を表す整数です。</li>
+<li> rtime の初期値は 1000 です。</li>
+<li>「MyWorld」クラスに public void act メソッドを追加し、act メソッドで rtime をデクリメントして画面に表示します。表示位置は左下なら任意の場所でOKです。</li>
+<li> rtime が 0 以下になったらタイムアウトメッセージを表示してゲームを停止します。メッセージ内容と表示位置は任意です。</li>
+</ul>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「MyWorld」クラスのコンストラクタのコーディング( rtime フィールドの初期化)</li>
+<li>「MyWorld」クラスの act メソッドのコーディング( rtime のデクリメントと表示とタイムアウト処理)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-6」をコピーし、ファイル名を「GF-2-7」に変更します。</li>
+<li>「MyWorld」に rtime フィールドと act メソッドを追加します。それぞれ private と public であることに注意してください。</li>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で Prefab 化したいオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-6」をコピーし、シナリオ名を「GF-2-7」に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに選択したオブジェクトを DnD すると同じ名前の Prefab が出来る。
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-7」を開きます。
+</p>
+</div>
+</div>
+
+
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で Prefab 化済みのオブジェクトを削除する。
-</p>
-</div>
-</div>
-
-<p>
-この Prefab をスクリプトの中でインスタンス化するためには次の Instantiate メソッドを使います。
-</p>
-
 <div class="info">
-<input type="checkbox"><b>Prefab をインスタンス化する</b>
-<pre class="wrap">
-public static Object Instantiate( prefab, 表示座標, 回転角度 );
-
-戻り値(Object): インスタンス化したオブジェクト
-
-prefab: インスタンス化したい Prefab
-表示座標: 下のソース 1 参照
-回転角度: 下のソース 1 参照
-</pre>
-</div>
-
-<p>
-例えば次のスクリプト HOGE は prefab を Start メソッドの中で座標 (0.5, -0.1)に無回転でインスタンス化する例です。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>ソース 1: Prefab を Start の中で座標 (0.5, -0.1) に無回転でインスタンス化するスクリプト</b>
-<pre class="wrap">
-public class HOGE : MonoBehaviour {
-
-	public GameObject prefab; // (※1) あとで Inspector ウィンドウでセットする
-
-	void Start () {
-		Vector2 position = new Vector2 (0.5f, -0.1f);  // Vector2 型で座標指定
-		Quaternion rotation = Quaternion.identity; // Quaternion 型で回転角度指定(※2)。Quaternion.identity は無回転の意味
-		Instantiate (prefab, position, rotation );                
-	}
-}
-
-※1 複数の Prefab をインスタンス化したい場合は例えば prefab1、prefab2、・・・みたいに GameObject 型のフィールドを複数用意する
-
-※2 回転角度を数字で指定したい場合は Quaternion rotation = Quaternion.Euler( x 軸回転角度, y 軸回転角度, z 軸回転角度 ); と書く
-</pre>
-</div>
-
-<p>
-ただし、このスクリプト HOGE を他のオブジェクトにアタッチしてプログラムを実行しても<b>※1 で定義した prefab フィールドが空のままなので何も起きません</b>。
-</p>
-
-<p>
-prefab フィールドにインスタンス化したい Prefab をセットするには以下のようにします。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>prefab フィールドにインスタンス化したい Prefab をセットする</b>
+<input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプトを保存して Unity エディタに戻る。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに private int rtime フィールドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上で HOGE スクリプトをアタッチしているオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスのコンストラクタで rtime フィールドに 1000 を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Inspector ウィンドウの HOGE(Script) コンポーネントに「prefab」というプロパティ(こういうの<img src="./img/prefab.png" alt="">)が出来ているのを確認する。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに public void act メソッドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダ上でインスタンス化したい Prefab を選択して、(3)の None と書いてあるエリアに DnD する。
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドで rtime フィールドをデクリメントして値を画面に表示して下さい。表示位置は左下なら任意の場所でOKです。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドに、rtime フィールドの値が 0 以下になったらタイムアップメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と表示位置は任意です。
 </p>
 </div>
 </div>
 
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
 <p>
-後は実行すれば Scene ビューに表示されていないオブジェクトが実行時には表示されていると思います。
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
+</div>
+</div>
 
 <br>
-<script>PreNext(8,10)</script>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(MyWorld)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(8,9)</script>
 </body>
 </html>

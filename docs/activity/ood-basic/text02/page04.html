@@ -5,160 +5,123 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. オブジェクトの移動</title>
+<title>スプリント 3</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-次にキャラクターのオブジェクトを動かしてみたいと思います。
-</p>
-
-<p>
-オブジェクトを動かす方法は色々ありますが、今回は物理演算エンジンを使って動かしてみたいと思います。
 <br>
-そのためにはまず、以下の手順で「<b>Rigidbody 2D</b>」というコンポーネントをオブジェクトにアタッチします(※)。
-
-<p>
-※ コンポーネント(Component)は各オブジェクトの振る舞いを定めるメソッドやプロパティ(＝パラメータ)のグループのことです。
-<br>
-コンポーネントをオブジェクトにくっつけることをアタッチと言います。
-<br>
-例えばこれまでのページで使ってきた Transform はオブジェクトの位置やサイズ、向きを定めるコンポーネントで、Sprite Renderer は画像を描画するコンポーネントです。
-<br>
-今回使う Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力などを定めるコンポーネントです。
-</p>
+<h2>1. スプリント プランニング</h2>
 
 <div class="info">
-<input type="checkbox"><b>Rigidbody 2D コンポーネントのアタッチ方法:</b>
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「Actor」クラスを継承した「FRUIT」クラスと、「FRUIT」を継承した「APPLE」クラスと「ORANGE」クラスを作成します。
+</p>
+<ul>
+<li>「FRUIT」クラスの画像は無しとします。</li>
+<li>「APPLE」クラスの画像は任意とします。</li>
+<li>「ORANGE」クラスの画像は任意とします。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「APPLE」オブジェクトを 5 つ作成してランダム位置に配置します(x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400)。</li>
+<li>実行開始時に「MyWorld」 のコンストラクタで「ORANGE」オブジェクトを 5 つ作成してランダム位置に配置します(x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400)。</li>
+</ul>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「FRUIT」クラスの作成</li>
+<li>「APPLE」クラスの作成</li>
+<li>「ORANGE」クラスの作成</li>
+<li>「MyWorld」のコンストラクタのコーディング(APPLE、ORANGEオブジェクトの作成と配置)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-2」をコピーし、ファイル名を「GF-2-3」に変更します。</li>
+<li>「FRUIT」「APPLE」「ORANGE」を追加します。</li>
+<li>「World」と「Actor」間の多重度を更新します。
+<br>
+ひとつの「World (実体はMyWorld)」が 12 個の「Actor (TARO x1、HANAKO x1、APPLE x5、ORANGE x5)」を持っているので多重度は 1-12 です。</li>
+</ul>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-2」をコピーし、シナリオ名を「GF-2-3」に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Add Component ボタンを押してメニューを表示する。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Physics 2D → Rigidbody 2D を選択すると Inspector ウィンドウに Rigidbody 2D の項目が現れる。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 重力が必要ない場合は Rigidbody 2D の Gravity Scale プロパティの値を 0 にする。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 他のオブジェクトと衝突した時に回転させたくない場合は、Constraints → Freeze Rotation → Z プロパティをチェックする。
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-3」を開きます。
 </p>
 </div>
 </div>
 
-<p>
-ただし Rigidbody 2D をアタッチしただけでは任意の方向にオブジェクトを動かす事は出来ませんので、次は「<b>Script</b>」コンポーネントもアタッチします(※)。
-</p>
 
-<p>
-※ Script コンポーネントの実体は C# 又は JavaScript で書かれたスクリプトファイルです。今回は C# の方を使います。
-</p>
-
+<br>
 <div class="info">
-<input type="checkbox"><b>Script コンポーネントのアタッチ方法:</b>
+<input type="checkbox"><b>コーディング:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダで右クリックし、Create → C# Script を選ぶと C# のスクリプトファイルが新規作成されるので、適切なファイル名に変更する。
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「FRUIT」クラスを作成して下さい。 画像は無しです。また act メソッドは削除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウでスクリプトをアタッチしたいオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p2"></span> 「FRUIT」クラスを継承して「APPLE」「ORANGE」クラスを作成して下さい。 画像は任意とします。また act メソッドは削除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある、先ほど作成したスクリプトファイルを Inspector ウィンドウの上に DnD するとアタッチされる。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「APPLE」オブジェクトを 5 つ作り、ランダムに配置して下さい。x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中のスクリプトファイルをダブルクリックするとエディタが起動する。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプト内に Start、Update というメソッド(※)が含まれている事を確認する。
-</p>
-<p>
-※ Start メソッドはオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドです。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」のコンストラクタで「ORANGE」オブジェクトを 5 つ作り、ランダムに配置して下さい。x 座標の範囲は 0 〜600、y 座標の範囲は 0〜400 です。
 </p>
 </div>
 </div>
 
-
-<p>
-では準備が済んだので実際にオブジェクトを動かしてみましょう。
-</p>
-
-<p>
-オブジェクトを動かすためには Rigidbody 2D コンポーネント の <b>velocity (ベロシティ)</b> プロパティに値をセットします。
 <br>
-この velocity は日本語では「速度」を意味する 2 次元ベクトルで、更に「velocity.x」と「velocity.y」というプロパティに分かれます。
-<br>
-velocity.x は横方向の速度、velocity.y は縦方向の速度であり、それらに指定した方向と速さでオブジェクトが動きます(図1)。 
-</p>
-
 <div class="info">
-<input type="checkbox"><b>図1.  Rigidbody 2D の velociy で指定した方角にオブジェクトが動く</b>
-<p>
-</p>
-<img src="./img/page04-fig1.png" alt="">
-</div>
-
-<p>
-ところがこの velociy の値は Inspector ウィンドウから変更出来ませんので、以下の様にしてスクリプトの中でセットする必要があります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>オブジェクトを移動させるスクリプト</b>
-<pre class="wrap">
-float speed = 移動スピード;
-float x = 横方向の移動量;
-float y = 縦方向の移動量;
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
-</pre>
-</div>
-
-<p>
-なお、障害物にぶつかったり、摩擦が無い限りは一度 velocity を設定すればその方向に動き続けます。
-<br>
-また重力が 0 で無い時は重力の影響も受けます。
-</p>
-
-<p>
-例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に速度 2.0 で動かしたい場合はソース 1 の様にスクリプト内に書きます。 
-</p>
-
-<div class="info">
-<input type="checkbox"><b>ソース 1: オブジェクトを斜め右上  45 度の方向に速度 2.0 で動かす</b>
-<pre class="wrap">
-float speed = 2.0f; // ※ float 型変数に定数を代入する時は後ろに f を付ける
-float x = 1.0f;  
-float y = 1.0f;
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
-</pre>
-</div>
-
-<p>
-さてコーディングが済んだら以下の手順でプログラムを実行してオブジェクトを動かしてみましょう。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>プログラム実行方法:</b>
+<input type="checkbox"><b>テストとデバッグ:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> スクリプトを上書き保存して Unity エディタの画面に戻ると自動でコンパイルされる。エラーが出たら修正する。
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押すと「APPLE」と「ORANGE」オブジェクトがそれぞれ 5 つランダムに配置されることを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 上部にある<img src="./img/button3.png" alt="">のうち一番左の再生ボタンを押すと GAME ビューに画面が切り替わってプログラムが実行される。
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> もう一度再生ボタンを押すと停止する。
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
 </div>
 </div>
 
-
-
 <br>
-<script>PreNext(4,10)</script>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(MyWorld)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(4,9)</script>
 </body>
 </html>

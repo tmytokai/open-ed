@@ -5,118 +5,113 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>5. ゲームパッドやキーボードによるオブジェクトの移動</title>
+<title>スプリント 4</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-ゲームパッドやキーボード上の指定したボタンを押しているかどうかを判定するには、Input というユーティリティクラスにある GetAxis〜、GetButton〜、GetKey〜メソッドを利用します。 
 <br>
-それらのメソッドは用途ごとに使い分けることが出来ますが、今回は GetAxisRaw メソッドと GetButton メソッドを用いることにします。
-<br>
-その他のメソッドの使い方は自分で調べて下さい。
-</p>
-
-<p>
-まずGetAxisRaw メソッドは、ゲームパッドやカーソルキーなどの方向ボタンを押しているかどうか判定するメソッドです。
-</p>
+<h2>1. スプリント プランニング</h2>
 
 <div class="info">
-<input type="checkbox"><b>方向ボタンを押しているか判定</b>
-<pre class="wrap">
-public static float Input.GetAxisRaw( "軸" );
-
-戻り値(float): キー状態に従って -1 か 0 か 1 が戻る
-
-"軸":
-"Horizontal" なら右を押してれば 1、左を押してれば -1 、押してないと 0 が戻る
-"Vertical" なら上を押してれば 1、下を押してれば -1、押してないと 0 が 戻る
-</pre>
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「TARO」と「HANAKO」オブジェクトが「FRUIT」オブジェクトを食べる処理、つまり当たり判定を実装します。
+</p>
+<ul>
+<li>「HUMAN」クラスに private int fruits フィールドを追加します。fruits は自分が果物をいくつ食べたかを表す整数です。</li>
+<li>「HUMAN」オブジェクトが「FRUIT」オブジェクトに触れたらそのオブジェクトを消し、fruits フィールドをインクリメントする処理を書きます。</li>
+</ul>
 </div>
 
-<p>
-次に GetButton メソッドは、攻撃ボタンとかジャンプボタンなどのボタンを押しているかどうかを判定するメソッドです。
-</p>
-
+<br>
 <div class="info">
-<input type="checkbox"><b>指定したボタンを押しているか判定</b>
-<pre class="wrap">
-public static bool Input.GetButton( "ボタンの名前" );
-
-戻り値(bool): 指定したボタンを押してれば true、押してなければ false が戻る 
-
-"ボタンの名前":
-"Fire1"、"Fire2"、"Fire3"、"Jump" など
-</pre>
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「HUMAN」クラスのコンストラクタのコーディング( fruits フィールドのリセット)</li>
+<li>「HUMAN」クラスの act メソッドのコーディング(果物に触れたら果物消して fruits をインクリメント)</li>
+</ol>
 </div>
 
-<p>
-さてこれらのメソッドと前のページで学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
 <br>
-ただし
-</p>
-
-<p>
-「<b>Rigidbody2D の機能を利用するコードは、Update メソッドではなくて FixedUpdate メソッド内に書かなければいけない</b>」
-</p>
-
-<p>
-という制約がありますので(※)、Rigidbody2D の velocity プロパティの値を変更するにはまず void FixedUpdate() というメソッドをスクリプトに追加してからその中に書きます。
-</p>
-
-<p>
-※ 正確には GetAxisRaw などの Input 系のメソッドは Update メソッド、Rigidbody2D の機能は FixedUpdate メソッドの中に書く必要があります。
-<br>
-理由は自分で調べて下さい。
-<br>
-なお今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
-</p>
-
-<p>
-例えばあるオブジェクトを(重力が 0 なら) 方向キーで入力した方向に速度 2.0 で動かしたい場合はソース 1 の様に FixedUpdate メソッド内に書きます。 
-</p>
-
 <div class="info">
-<input type="checkbox"><b>ソース 1: オブジェクトを方向ボタンで入力した方向に速度 2.0 で動かす</b>
-<pre class="wrap">
-float speed = 2.0f;
-float x = Input.GetAxisRaw ("Horizontal"); // 右を押してれば 1、左を押してれば -1 、押してないと 0 が x に入る
-float y = Input.GetAxisRaw ("Vertical"); // 上を押してれば 1、下を押してれば -1、押してないと 0 が y に入る
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
-</pre>
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-3」をコピーし、ファイル名を「GF-2-4」に変更します。</li>
+<li>「HUMAN」に fruits フィールドを追加します。private であることに注意してください。</li>
 </div>
 
-<p>
-ちなみに方向ボタンを向いたらオブジェクトの画像の向きもそれに合わせて変更したい場合があります。
 <br>
-それを実現するには、オブジェクトの画像描画を担当している Sprite Renderer コンポーネントの flipX 又は FlipY プロパティの値を次のように変更します。
-</p>
+<h2>2. 開発作業</h2>
 
 <div class="info">
-<input type="checkbox"><b>画像の向きを反転させる</b>
-<pre class="wrap">
-
-GetComponent&lt;SpriteRenderer&gt;().flipX = false; // 左右通常の向き
-GetComponent&lt;SpriteRenderer&gt;().flipX = true; // 左右反転
-
-GetComponent&lt;SpriteRenderer&gt;().flipY = false; // 上下通常の向き
-GetComponent&lt;SpriteRenderer&gt;().flipY = true; // 上下反転
-</pre>
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-3」をコピーし、シナリオ名を「GF-2-4」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-4」を開きます。
+</p>
+</div>
 </div>
 
 
 <br>
-<script>PreNext(5,10)</script>
+<div class="info">
+<input type="checkbox"><b>コーディング:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスに private int fruits フィールドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」にコンストラクタを追加して fruits をゼロクリアして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」の act メソッドの移動処理の下に、「FRUIT」型のオブジェクトに触れたら
+そのオブジェクトを削除し、fruitsをインクリメントする処理を書いて下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMAN)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(5,9)</script>
 </body>
 </html>

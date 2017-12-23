@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>1. Unity2D とは</title>
+<title>リリース プランニング</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,18 +20,236 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="https://unity3d.com/jp/">Unity</a>は米サンフランシスコに本社がある Unity Technologies が開発・販売しているゲームエンジンです。
+「<a href="../../scrum/">スクラム開発</a>」は反復型開発手法の一種で、オブジェクト指向型プログラミングを用いたソフトウェア開発ととても相性が良い手法なので広く使われています。
 <br>
-PCからモバイル機器まで様々なプラットフォーム向けに 3D/2D ゲームを開発出来るので、世界中のアマチュアやプロから利用されています。
+今回は簡易化したスクラムを使ってミニゲームを開発することでオブジェクト指向開発の流れを実際に体験してみようと思います。
+<br>
+なお用語等の詳しい説明や本格的なスクラムのやり方については<a href="../../scrum/">こちら</a>を参照して下さい。
 </p>
 
 <p>
-さて Unity には 3D ゲーム向けだけではなくて 2D ゲーム向けの開発機能も備わっています。
+さて、このページではまず<a href="../../scrum/text02/page02.html">リリースプランニング</a>を行います。
 <br>
-特に 2D ゲーム向けの開発機能だけを使う Unity の開発モードのことを「Unity2D」と言います。
+リリースプランニングはスクラムの最初に実施する作業工程で、要求仕様書の作成、全体仕様書の作成、プロダクトバックログの作成を行います。
+</p>
+
+<h3>
+1. 要求仕様書の作成
+</h3>
+
+<p>
+今回の演習では以下の様な要求仕様書を作成しました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>要求仕様書</b>
+
+<p>　</p>
+
+<table>
+<tr><td class="center">名称</td><td>TARO と HANAKO</td></tr>
+<tr><td class="center">用途・目的</td><td>暇つぶし用ミニゲーム</td></tr>
+<tr><td class="center">対象ユーザ</td><td>6 歳以上の男女</td></tr>
+<tr><td class="center">システム構成</td>
+<td>
+OS: Windows 又は Linux
+<br>
+PC: 低スペック
+<br>開発環境: Greenfoot
+</td></tr>
+<tr><td class="center">概要</td><td>
+・PC 上で動く 2 次元アクションゲーム
+<br>
+・キーボードのみで操作
+<br>
+・画面上に TARO と HANAKO というプレイヤーキャラクターと複数の果物を表示する
+<br>
+・ユーザーはキーボード操作により TARO と HANAKO を動かせる
+<br>
+・TARO が果物に触れたらゲームオーバー
+<br>
+・HANAKO が制限時間内に画面上の全ての果物を食べたらゲームクリア
+<br>
+・動きまわる果物もある
+</td></tr>
+</table>
+
+<p>　</p>
+
+</div>
+
+<br>
+<h3>
+2. 全体仕様書の作成
+</h3>
+
+<p>
+次に「<b>全体仕様書</b>」を作成します。
+<br>
+今回は以下の様にしてみました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ゲーム仕様</b>
+
+<p>
+・背景(MyWorld と名付ける)は一枚絵とし、スクロールしない
+<br>
+・ゲーム開始時の TARO の初期位置は画面左上
+<br>
+・ゲーム開始時の HANAKO の初期位置は画面右下
+<br>
+・TARO はカーソルキーで上下左右に動かせる
+<br>
+・HANAKO もカーソルキーで上下左右に動かせるが動きは逆になる(例えば上を押すと下に移動する)
+<br>
+・TARO と HANAKO 間に当たり判定は無い(スレ違い可能)
+<br>
+・TARO と HANAKO は画面外に移動できない
+<br>
+・果物には APPLE と ORANGE がある
+<br>
+・ゲーム開始時に APPLE と ORANGE をランダムな位置に複数個表示する
+<br>
+・APPLE は動きまわる
+<br>
+・ORANGE は静止している
+<br>
+・TARO が果物に触れたらゲームオーバーとなりメッセージ表示
+<br>
+・HANAKO が果物に触れたら食べたことにして果物を消す
+<br>
+・HANAKO が画面上全ての果物を食べたらゲームクリアとなりメッセージ表示
+<br>
+・時間制限を設け、時間内に全ての果物を消せなかったらタイムアップとなりメッセージ表示
+<br>
+・残り時間は画面左下に表示
 </p>
 
 <br>
-<script>PreNext(1,10)</script>
+<input type="checkbox"><b>画面仕様</b>
+
+<p>　</p>
+
+<img src="./img/screen.png" alt="">
+
+<p>　</p>
+
+<br>
+<input type="checkbox"><b>クラス仕様</b>
+
+<p>　</p>
+
+<table>
+<tr><th>クラス名</th><th>内容</th></tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・背景
+<br>
+・キャラクターの初期配置やタイムアップ処理などのマネージャー処理も行う
+</td>
+</tr>
+
+<tr><td>
+HUMAN
+</td><td>
+・TARO と HANAKO のスーパークラス
+<br>
+・キーボード操作(上下左右移動)を行う
+<br>
+・果物との当たり判定を行い、ゲームクリア処理を行う
+</td>
+</tr>
+
+<tr><td>
+TARO
+</td><td>
+・プレイヤーキャラ その 1
+<br>
+・当たり判定をオーバーライドし、果物に触れたらゲームオーバー処理を行う
+</td>
+</tr>
+
+<tr><td>
+HANAKO
+</td><td>
+・プレイヤーキャラ その 2
+<br>
+・キーボード操作をオーバーライドし、動きを反転させる
+</td>
+</tr>
+
+<tr><td>
+FRUIT
+</td><td>
+・APPLE と ORANGE のスーパークラス
+<br>
+・特に何もしない
+</td>
+</tr>
+
+<tr><td>
+APPLE
+</td><td>
+・果物 その 1
+<br>
+・適当に動く
+</td>
+</tr>
+
+<tr><td>
+ORANGE
+</td><td>
+・果物 その 2
+</td>
+</tr>
+
+</table>
+
+<p>※ クラス図は省略</p>
+
+</div>
+
+<br>
+<h3>
+3. プロダクトバックログの作成
+</h3>
+
+<p>
+全体仕様書を元にプロダクトバックログを作成します。
+</p>
+
+<p>
+プロダクトバックログは<a href="../../wbs">カンバン</a>で管理することが多いのですが、今回はソフトウェアの規模が小さいので、ウォーターフォールで良く使われる<a href="../../wbs">WBS</a>でバックログの管理をしたいと思います(※)。
+</p>
+
+<p>
+※ ちなみに WBS はスクラムと相性が悪いので使わない方が良いという意見もあります。
+</p>
+
+<p>
+それで今回は以下のような WBS を作成してみました。
+<br>
+なお、一般的なスプリント期間は1〜4週間なのですが、今回は簡易版スクラムなので 1 スプリント ＝ 20 分とします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>WBS (Work Breakdown Structure: 作業分解構成図)</b>
+<p>
+<b>1 スプリント ＝ 20 分</b>
+</p>
+<p>
+※ クリックすると図だけ表示します。
+</p>
+<a href="./img/WBS.png"><img src="./img/WBS.png" alt=""></a>
+<p>
+<a href="./img/WBS.ods">元データ (ods形式)</a>
+</p>
+</div>
+
+<br>
+<script>PreNext(1,9)</script>
 </body>
 </html>

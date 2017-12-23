@@ -5,89 +5,108 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>9. オブジェクトの動的削除</title>
+<title>スプリント 8</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-プログラム内で指定したオブジェクトを削除には次の Destroy メソッドを使います。
-</p>
+<br>
+<h2>1. スプリント プランニング</h2>
 
 <div class="info">
-<input type="checkbox"><b>オブジェクトを削除</b>
-<pre class="wrap">
-public static void Destroy( オブジェクト, 削除するまでの時間);
-
-戻り値(void): 無し
-
-オブジェクト: 削除したいオブジェクト
-削除するまでの時間(秒): 指定した秒数後に削除する。指定しなくても良い(その場合は即削除)
-</pre>
-</div>
-
+<input type="checkbox"><b>詳細設計:</b>
 <p>
-問題はどうやって削除したいオブジェクトを取得するかですが、自分自身を削除したい場合は次のようにして簡単に出来ます。
+このスプリントでは、「APPLE」オブジェクトを動かします。
 </p>
-
-<div class="info">
-<input type="checkbox"><b>自分自身を削除</b>
-<pre class="wrap">
-Destroy( gameObject );
-</pre>
-</div>
-
-<p>
-また、衝突時にぶつかったオブジェクトを削除したい場合も簡単に出来ます。
-</p>
-
-<p>
-OnCollisionEnter2D の場合は
-</p>
-
-<div class="info">
-<input type="checkbox"><b>OnCollisionEnter2D で衝突したオブジェクトを削除</b>
-<pre class="wrap">
-void OnCollisionEnter2D( Collision2D collision )
-{
-    if (collision.gameObject.tag == "TagA") {	
-
-       // TagA がついたオブジェクトと衝突したらそのオブジェクトを削除
-       Destroy (collision.gameObject);
-    }
-
-}
-</pre>
-</div>
-
-<p>
-OnTriggerEnter2D の場合は
-</p>
-
-<div class="info">
-<input type="checkbox"><b>OnTriggerEnter2D</b>
-<pre class="wrap">
-void OnTriggerEnter2D( Collider2D collider ) // OnCollisionEnter2D と引数の型が異なることに注意
-{
-    if ( collider.tag == "TagA") {	
-
-       // TagA がついたオブジェクトと重なったらそのオブジェクトを削除
-       Destroy (collider.gameObject);
-    }
-}
-</pre>
+<ul>
+<li>「APPLE」クラスに public void act メソッドを追加して「APPLE」オブジェクトを動かします。動かし方は任意です。</li>
+</ul>
 </div>
 
 <br>
-<script>PreNext(9,10)</script>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「APPLE」クラスの act メソッドのコーディング( APPLE を動かす)</li>
+</ol>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>クラス図の作成:</b>
+<p></p>
+<ul>
+<li>開発作業を行う前にクラス図を描いて下さい。</li>
+<li>クラス図「GF-2-7」をコピーし、ファイル名を「GF-2-8」に変更します。</li>
+<li>「APPLE」に act メソッドを追加します。public であることに注意してください。</li>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-7」をコピーし、シナリオ名を「GF-2-8」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-8」を開きます。
+</p>
+</div>
+</div>
+
+
+<br>
+<div class="info">
+<input type="checkbox"><b>コーディング:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」クラスに public void act メソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> act メソッドで「APPLE」オブジェクトを動かして下さい。動きのアルゴリズムは任意とします。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(APPLE)を選んで下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<script>PreNext(9,9)</script>
 </body>
 </html>
