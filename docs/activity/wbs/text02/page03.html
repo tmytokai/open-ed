@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. カンバンの使い方の例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: WBS とカンバンによるスケジュール管理</a></li>
+<li>学習項目: [2] カンバンの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+では実際に「ゆで卵を食べる」ことを目的にカンバンを使ってみましょう。
+<br>
+今回は <a href="https://github.com">Github</a>のカンバン(Projects)機能を使って説明します。
+</p>
+
+<p>
+まずタスクの初期状態は以下の様にしました( <a href="../text01/page04.html">WBS</a>と比較してください</a>)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. カンバンの初期状態</b>
+<p>　</p>
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<p>
+次に依存関係に気を付けつつ、2人のメンバー(太郎と花子)が自分が担当するタスクを選んで名前を記入し、「Doing」状態にします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. タスクを選んで Doing 状態に変更</b>
+<p>　</p>
+<img src="./img/page03-fig2.png" alt="">
+</div>
+
+<p>
+さて太郎は作業が終わったのでタスクを Done 状態にします。花子はまだ作業中です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3. タスクが終了したら Done 状態に変更</b>
+<p>　</p>
+<img src="./img/page03-fig3.png" alt="">
+</div>
+
+<p>
+花子はまだ作業中ですが、太郎は花子が実行しているタスクに依存しないタスクを選んでまた Doing 状態にし作業を開始します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4. 再びタスクを選んで Doing 状態に変更</b>
+<p>　</p>
+<img src="./img/page03-fig4.png" alt="">
+</div>
+
+<p>
+以上を繰り返すといつかは全てのタスクが Done 状態になってプロジェクト完了になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図5. 全てのタスクが Done 状態になったら終わり</b>
+<p>　</p>
+<img src="./img/page03-fig5.png" alt="">
+</div>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
+
+
