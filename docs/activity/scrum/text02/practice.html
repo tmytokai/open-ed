@@ -107,7 +107,7 @@
 </p>
 <ul>
 <li>要求定義で出てきた荒唐無稽な内容が実現可能か吟味し、無理そうなら除外します。</li>
-<li>WFと違って細かい仕様まで決める必要はありませんが(※)、要求定義の時よりは具体的な内容にして下さい。</li>
+<li>ウォーターフォールと違って細かい仕様まで決める必要はありませんが(※)、要求定義の時よりは具体的な内容にして下さい。</li>
 <li>簡潔で良いのでシーンの遷移図や画面等のイラストがあると今後の開発が楽になります。</li>
 <li>イラストは再利用可能な様に手描きではなくてドローツールやイラストレイター等を使って作成して下さい。</li>
 </ul>
@@ -187,17 +187,20 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-8 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) スプリントプランニングミーティングを行います。
+<input type="checkbox"><b>演習 2-8 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) <a href="./page03.html#smeeting">スプリントプランニングミーティング</a>を行います。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> (必要なら)全体仕様書を見直し、「プロダクトバックログ」カンバンのToDo列に含まれるアイテムの修正を行います。
+<span class="olradio"><input type="radio" name="p8"></span> 必要なら全体仕様書を見直します。スプリント2以降なら前のスプリントで実施した<a href="./page03.html#retro">レトロスペクティブ</a>やユーザーからのフィードバックも参考にして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> もし全体仕様書を見直したら「プロダクトバックログ」カンバンのToDo列に含まれるアイテムの修正も合わせて行います。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> 今回のスプリントで実施するプロダクトバックログアイテムを選択し、カンバンのDoing列に移動します。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> 詳細仕様書を作成します。
-<br>
-指定されたファイルに今回のスプリントで実装予定の内容を文章や箇条書き、クラス図、表、グラフ、イラスト等に詳しくまとめて下さい。
+</p>
+<p>
+指定場所に今回のスプリントで実装予定の内容を文章や箇条書き、クラス図、表、グラフ、イラスト等に詳しくまとめて下さい。
 </p>
 <ul>
 <li>画像のサイズとかキャラクターの移動スピードなど、かなり細かい数値まで決めて下さい。</li>
@@ -212,15 +215,17 @@ git push
 ※ ○の中にはスプリント番号を入れて下さい。 (例) スプリント2
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 他のメンバーも作成したカンバンを表示し、 詳細仕様書を元にチーム内で話し合いながらバックログアイテムを作成・登録していきます。
+<span class="olradio"><input type="radio" name="p8"></span> 他のメンバーも作成したカンバンを表示し、 詳細仕様書を元にチーム内で話し合いながらスプリントバックログアイテムを作成・登録していきます。
 <br>
 <b>担当者も決めて名前(個人特定されないように注意)を記入して下さい</b>。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> プロダクトバックログとスプリントバックログのスクリーンショットを指定場所に貼り付けて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-9 (チーム、45分):</b>  (シチュエーション: スクラムマスター主催の勉強会) Greenfoot による共同開発の流れ(新規シナリオ作成→同時編集→衝突処理)を練習してみましょう。
+<input type="checkbox"><b>演習 2-9 (チーム、45分) ※ スプリント1でだけ実施:</b>  (シチュエーション: スクラムマスター主催の勉強会) Greenfoot による共同開発の流れ(新規シナリオ作成→同時編集→衝突処理)を練習してみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -298,7 +303,7 @@ Greenfoot を起動してそのまま閉じて下さい(※)。
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-10 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) デイリースクラムミーティングと開発作業を行います。
+<input type="checkbox"><b>演習 2-10 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) <a href="./page03.html#dmeeting">デイリースクラムミーティング</a>と<a href="./page03.html#devel">開発作業</a>を行います。
 </p>
 <div class="olradio"> 
 <p>
@@ -306,19 +311,21 @@ Greenfoot を起動してそのまま閉じて下さい(※)。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> テキストを参考に開発作業に入って下さい。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 作業が一区切りしたら git add → commit → pull → push して下さい(※)。また<b>スプリントバックログも Done に更新して</b>次の作業に移って下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 作業が一区切りしたら git add → commit → pull → push して下さい(※)。
 </p>
 <p>
 ※ push するときは他のメンバーに「これからpushする」と一声かけましょう。
 </p>
 <p>
+<span class="olradio"><input type="radio" name="p10"></span> git push したら対応するスプリントバックログも忘れず Done に更新して下さい。また<b>Doing 状態にしていたプロダクトバックログも、対応するタスクが全て終わったら Done に更新して下さい</b>。
+<br>
 <span class="olradio"><input type="radio" name="p10"></span> まだ作業途中でも、演習が終わる前に一度 git add して状態を保存しておいてください。
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-11 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) スプリントレビューを行います。
+<input type="checkbox"><b>演習 2-11 (チーム、30分):</b>  (シチュエーション: 開発ルームでの作業) <a href="./page03.html#review">スプリントレビュー</a>を行います。
 </p>
 <div class="olradio"> 
 <p>
@@ -327,6 +334,8 @@ Greenfoot を起動してそのまま閉じて下さい(※)。
 <p>
 <input type="checkbox">スプリントバックログが全て Done 状態になっている(※)
 <br>
+<input type="checkbox">今回のスプリントで実施するプロダクトバックログが全て Done 状態になっている
+<br>
 <input type="checkbox">リモートリポジトリにあるプロジェクトにはビルドエラーが起きない
 <br>
 <input type="checkbox">ライセンス違反をしていない
@@ -334,19 +343,18 @@ Greenfoot を起動してそのまま閉じて下さい(※)。
 <input type="checkbox">人格権違反や個人情報の漏洩をしていない
 <br>
 <input type="checkbox">リモートリポジトリにあるプロジェクトにはバグが無い
-<br>
 </p>
 <p>
 ※ 時間内に Done 状態まで辿りつけなかったタスクは次のスプリントに回して下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p11"></span> 全て Done 状態になっているスプリントバックログのスクリーンショットを指定された場所に貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p11"></span> スプリントバックログとプロダクトバックログのスクリーンショットを指定場所に貼り付けて下さい。
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-12 (チーム、10分):</b>  (シチュエーション: 開発ルームでの作業) レトロスペクティブを行います。
+<input type="checkbox"><b>演習 2-12 (チーム、10分):</b>  (シチュエーション: 開発ルームでの作業) <a href="./page03.html#retro">レトロスペクティブ</a>を行います。
 </p>
 <div class="olradio"> 
 <p>
@@ -359,7 +367,7 @@ Greenfoot を起動してそのまま閉じて下さい(※)。
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-13 (チーム、10分):</b>  (シチュエーション: 市場) リリースとユーザーレビューを行います。
+<input type="checkbox"><b>演習 2-13 (チーム、10分):</b>  (シチュエーション: 市場) <a href="./page03.html#release">リリース</a>とユーザーレビューを行います。
 </p>
 <div class="olradio"> 
 <p>
