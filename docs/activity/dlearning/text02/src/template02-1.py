@@ -2,15 +2,18 @@
 import tensorflow as tf
 
 # セッション作成
-sess = ?
+sess = tf.Session()
 
 # パーセプトロンの数
 N = ?
 K = ?
 M = ?
 
-# 入力データ
-op_const_data = ?
+# 入力信号
+op_const_data = tf.constant(
+    ?
+    , tf.float32
+)
 
 # 入力層 OP ノードの定義
 def input_layer( x ):
@@ -40,8 +43,8 @@ op_output_layer = ?
 # セッション開始
 sess.run( tf.initialize_all_variables() )
 
-print('入力データ')
+print('入力信号')
 print( sess.run( op_input_layer ) )
 
-print('出力')
+print('出力信号')
 print( sess.run( op_output_layer ) )

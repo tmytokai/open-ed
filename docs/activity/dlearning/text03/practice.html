@@ -45,7 +45,7 @@
 (3) ニューラルネットワークのパーセプトロン数は N = 3、K = 4, M = 2 とする。
 </p>
 <p>
-(4) 学習データは「正常状態の x、y、z軸方向の G (つまり N = 3 )」を 5 組、「異常状態の x、y、z軸方向の G」を 5 組の計 L = 10 組とする。
+(4) 教師信号は「正常状態の x、y、z軸方向の G (つまり N = 3 )」を 5 組、「異常状態の x、y、z軸方向の G」を 5 組の計 L = 10 組とする。
 </p>
 <p>
 (5) 「正常状態」と「異常状態」のラベルを作成する(つまり M = 2 クラス)。
@@ -68,7 +68,7 @@
 ※ 今回は arduino UNO + ADXL345 (インターフェースは <a href="../../IO/text06/page01.html">I2C</a>) + USB 接続 の環境を使います。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/myserial.py">教師データ取得用スクリプト</a>(myserial.py)をダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/myserial.py">教師信号取得用スクリプト</a>(myserial.py)をダウンロードして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> myserial.py を実行して正常状態を 5 組サンプリングして下さい(※)。
 <br>

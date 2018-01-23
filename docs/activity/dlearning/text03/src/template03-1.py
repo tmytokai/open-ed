@@ -5,14 +5,14 @@ import re
 import tensorflow as tf
 
 # セッション作成
-sess = ?
+sess = tf.Session()
 
 # パーセプトロンの数
 N = ?
 K = ?
 M = ?
 
-# 教師データ
+# 教師信号
 op_const_teacher = tf.constant(
     [
         # 正常
@@ -79,15 +79,27 @@ op_grad_optimizer = ?
 # セッション開始
 sess.run( tf.initialize_all_variables() )
 
-print('学習前エントロピー')
-print( sess.run( op_cross_entropy ))
+print('教師信号')
+print( sess.run( op_const_teacher ) )
 
-print('学習中・・・')
+print('ラベル')
+print( sess.run( op_const_label ) )
+
+print('学習前エントロピー')
+print( sess.run( op_cross_entropy ) )
+
+print('教師信号の判別結果(学習前)  (´・ω・`) ')
+print( sess.run( op_output_layer ) )
+
+print('ディープラーニング中・・・')
 for i in range( ? ):
    sess.run( op_grad_optimizer )
 
 print('学習後エントロピー')
 print( sess.run( op_cross_entropy ) )
+
+print('教師信号の判別結果(学習後) (｀・ω・´)')
+print( sess.run( op_output_layer ) )
 
 print('Enterで測定開始')
 a = raw_input()
@@ -97,13 +109,13 @@ sr = serial.Serial('/dev/ttyACM0', 9600)
 
 while 1:
     str = sr.readline()
-    match = re.search(r'\[(.*),(.*),(.*)\]', str)
+    match = re.search(r'(.*),(.*),(.*)', str)
     if match:
        lst = []
        for i in match.groups():
            lst.append(float(i))
 
-       # 未知入力データ
+       # 未知入力信号
        op_const_data = tf.constant(
           [
               lst
@@ -111,16 +123,16 @@ while 1:
            , tf.float32
        )
 
-       # 学習した重みとバイアスを利用して入力データを判別 (template02-3.py の内容をコピペ)
+       # 学習済の重みとバイアスを利用して未知入力信号を判別 (template02-3.py の内容をコピペ)
        op_input_layer = ?
        op_hidden_layer = ?
        op_output_layer = ?
 
-       print('入力データ')
+       print('未知入力信号')
        result = sess.run( op_input_layer )
        print [ "{:0.2f}".format(x) for x in result[0] ]
 
-       print('判別結果')
+       print('未知入力信号の判別結果')
        result = sess.run( op_output_layer )
        print [ "{:0.2f}".format(x) for x in result[0] ]
 

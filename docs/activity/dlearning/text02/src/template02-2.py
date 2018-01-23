@@ -2,18 +2,24 @@
 import tensorflow as tf
 
 # セッション作成
-sess = ?
+sess = tf.Session()
 
 # パーセプトロンの数
 N = ?
 K = ?
 M = ?
 
-# 教師データ
-op_const_teacher = ?
+# 教師信号
+op_const_teacher = tf.constant(
+    ?
+    , tf.float32
+)
 
 # ラベル
-op_const_label = ?
+op_const_label = tf.constant(
+    ?
+    , tf.float32
+)
 
 # 入力層 OP ノードの定義
 def input_layer( x ):
@@ -54,32 +60,41 @@ op_grad_optimizer = ?
 # セッション開始
 sess.run( tf.initialize_all_variables() )
 
+print('教師信号')
+print( sess.run( op_const_teacher ) )
+
+print('ラベル')
+print( sess.run( op_const_label ) )
+
 print('学習前エントロピー')
 print( sess.run( op_cross_entropy ) )
 
-print('学習中・・・')
+print('教師信号の判別結果(学習前)  (´・ω・`) ')
+print( sess.run( op_output_layer ) )
+
+print('ディープラーニング中・・・')
 for i in range( ? ):
    sess.run( op_grad_optimizer )
 
 print('学習後エントロピー')
 print( sess.run( op_cross_entropy ) )
 
-# 未知入力データ
-op_const_data = ?
+print('教師信号の判別結果(学習後) (｀・ω・´)')
+print( sess.run( op_output_layer ) )
 
-# 学習した重みとバイアスを利用して入力画像を判別
+# 未知入力信号
+op_const_data = tf.constant(
+    ?
+    , tf.float32
+)
+
+# 学習済の重みとバイアスを利用して未知入力信号のクラスを判別
 op_input_layer = ?
 op_hidden_layer = ?
 op_output_layer = ?
 
-print('教師画像')
-print( sess.run( op_const_teacher ) )
-
-print('ラベル')
-print( sess.run( op_const_label ) )
-
-print('入力画像')
+print('未知入力信号')
 print( sess.run( op_input_layer ) )
 
-print('判別結果')
+print('未知入力信号の判別結果')
 print( sess.run( op_output_layer ) )
