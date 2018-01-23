@@ -20,11 +20,27 @@
 <h2><script>GetTitle()</script></h2>
 
 <h3>
+Q. act メソッドの中でオブジェクトの座標を取得したい
+</h3>
+
+<p>
+A. getX 、getY メソッドで現在の座標を取得できます。
+</p>
+
+<div class="info">
+<pre class="wrap">
+int x = getX();
+int y = getY();
+</pre>
+</div>
+
+<br>
+<h3>
 Q. <a href="./page04.html">setRotation と move を使ってオブジェクトを動かす</a>と画像が回転してしまうが、回転させないで動かす方法は無いか？
 </h3>
 
 <p>
-A. 以下のサンプルソースのように、 getX と getY で現在の座標を取得してから setLocation を使って移動先の座標を直接指定して動かせば画像は回転しません。
+A. 以下のサンプルソースのように、 getX メソッドと getY メソッドで現在の座標を取得してから setLocation メソッドを使って移動先の座標を直接指定して動かせば画像は回転しません。
 </p>
 
 <div class="info">
