@@ -20,11 +20,26 @@
 <h2><script>GetTitle()</script></h2>
 
 <h3>
-Q. act メソッドの中でオブジェクトの座標を取得したい
+Q. act メソッドの中で何かの条件を満たした時、他のオブジェクトでは無く自分自身を削除したい
 </h3>
 
 <p>
-A. getX 、getY メソッドで現在の座標を取得できます。
+A. <a href="./page09.html">removeObject メソッド</a>の引数に this を指定します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+getWorld().removeObject( this );
+</pre>
+</div>
+
+<br>
+<h3>
+Q. act メソッドの中で自分自身の座標を取得したい
+</h3>
+
+<p>
+A. getX 、getY メソッドで現在の自分の座標を取得できます。
 </p>
 
 <div class="info">
@@ -40,7 +55,7 @@ Q. <a href="./page04.html">setRotation と move を使ってオブジェクト�
 </h3>
 
 <p>
-A. 以下のサンプルソースのように、 getX メソッドと getY メソッドで現在の座標を取得してから setLocation メソッドを使って移動先の座標を直接指定して動かせば画像は回転しません。
+A. getX メソッドと getY メソッドで現在の座標を取得してから setLocation メソッドを使って移動先の座標を直接指定して動かせば画像は回転しません。
 </p>
 
 <div class="info">
@@ -84,6 +99,72 @@ public void act()
 }
 </pre>
 </div>
+
+<br>
+<h3>
+Q. 弾などを発射したい時、キーを押しっぱなしにすると高速で連射状態になってしまう。一度キーから指を離さないと次の弾が出ないようにするか、少し間隔を開けて連射されるようにしたい。
+</h3>
+
+<p>
+A. フィールドにフラグをひとつ用意すれば出来ます。
+</p>
+
+<div class="info">
+<p>スペースを押すと TAMA が高速に連射される失敗例</a>
+
+<pre class="wrap">
+public void act() 
+    {
+        if( Greenfoot.isKeyDown( "space" ) ){
+            getWorld().addObject( new TAMA(), getX(), getY() );
+        }
+    }    
+</pre>
+</div>
+
+<br>
+<div class="info">
+<p>ブール型フラグを用意して一度スペースを離さないと次の TAMA が出ない様にした例</a>
+
+<pre class="wrap">
+    private boolean flag_tama = false;
+
+    public void act() 
+    {
+        if( Greenfoot.isKeyDown( "space" ) ){
+            
+            if( flag_tama == false ){
+                getWorld().addObject( new TAMA(), getX(), getY() );
+                flag_tama = true;
+            }
+        }  
+        else flag_tama = false;
+    }  
+</pre>
+</div>
+
+<br>
+<div class="info">
+<p>int型フラグを用意してスペース押しっぱなしでも TAMA が発射される間隔を空ける様にした例</a>
+
+<pre class="wrap">
+    private int flag_tama = 0;
+
+    public void act() 
+    {
+        if( flag_tama > 0 ) flag_tama--;
+        if( Greenfoot.isKeyDown( "space" ) ){
+            
+            
+            if( flag_tama == 0 ){
+                getWorld().addObject( new TAMA(), getX(), getY() );
+                flag_tama = 50;
+            }
+        }
+    }    
+</pre>
+</div>
+
 
 
 </body>
