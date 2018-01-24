@@ -21,6 +21,8 @@ op_const_label = tf.constant(
     , tf.float32
 )
 
+# ↓ ここから template02-1.py の内容をコピペ
+
 # 入力層 OP ノードの定義
 def input_layer( x ):
    ?
@@ -40,6 +42,8 @@ op_var_B_o = ?
 # 出力層 OP ノードの定義
 def output_layer( x, w, b ):
    ?
+
+# ↑ template02-1.py のコピペここまで
 
 # 3 層ニューラルネットワーク作成
 op_input_layer = ?
@@ -70,7 +74,9 @@ print('学習前エントロピー')
 print( sess.run( op_cross_entropy ) )
 
 print('教師信号の判別結果(学習前)  (´・ω・`) ')
-print( sess.run( op_output_layer ) )
+result = sess.run( op_output_layer )
+for i in range( len(result) ):
+   print [ "{:0.2f}".format(x) for x in result[i] ]
 
 print('ディープラーニング中・・・')
 for i in range( ? ):
@@ -80,21 +86,6 @@ print('学習後エントロピー')
 print( sess.run( op_cross_entropy ) )
 
 print('教師信号の判別結果(学習後) (｀・ω・´)')
-print( sess.run( op_output_layer ) )
-
-# 未知入力信号
-op_const_data = tf.constant(
-    ?
-    , tf.float32
-)
-
-# 学習済の重みとバイアスを利用して未知入力信号のクラスを判別
-op_input_layer = ?
-op_hidden_layer = ?
-op_output_layer = ?
-
-print('未知入力信号')
-print( sess.run( op_input_layer ) )
-
-print('未知入力信号の判別結果')
-print( sess.run( op_output_layer ) )
+result = sess.run( op_output_layer )
+for i in range( len(result) ):
+   print [ "{:0.2f}".format(x) for x in result[i] ]

@@ -197,7 +197,7 @@ print( result )
 </p>
 
 <br>
-<h3>
+<h3 id="add">
 3. 足し算(Add) OP ノード
 </h3>
 
@@ -446,17 +446,13 @@ log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function"
 <input type="checkbox"><b>: log、 exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP ノード</b>
 
 <p>
-書式:  ノード名 = tf.f( x )
-</p>
-
-<p>
-f(x) = log(x)、exp(x)、sin(x)、cos(x)、sigmoid(x) その他色々
+書式:  ノード名 = tf.log(x) / tf.exp(x) / tf.sin(x) / tf.cos(x) / tf.sigmoid(x) / その他色々
 </p>
 
 <p>
 入力テンソル: x
 <br>
-出力テンソル: f(x)
+出力テンソル: それぞれの演算結果
 </p>
 </div>
 
@@ -465,7 +461,7 @@ f(x) = log(x)、exp(x)、sin(x)、cos(x)、sigmoid(x) その他色々
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード6: log、 exp、sin、cos、その他の OP ノードのコード例( log の場合 ):</b>
+<input type="checkbox"><b>コード6: log、 exp、sin、cos、その他の OP ノードのコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -475,12 +471,19 @@ sess = tf.Session()
 op_const_x = tf.constant( [ 1, 2, 3], tf.float32 )
 # tf.float32 は各要素を 32 bit浮動小数として扱うという意味
 
+# log の例
 op_log = tf.log( op_const_x )
-
 result = sess.run( op_log )
 print( result )
 # 表示結果
 # [ 0.          0.69314718  1.09861231]
+
+# sigmoid の例
+op_sigmoid = tf.sigmoid( op_const_x )
+result = sess.run( op_sigmoid )
+print( result )
+# 表示結果
+# [ 0.7310586 0.88079703 0.95257413]
 </pre>
 
 <br>

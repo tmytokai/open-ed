@@ -202,7 +202,7 @@ Y = f \left ( X\cdot W^{\textrm h} + B^{\textrm h} \right )
 <p>
 名前: hidden_layer
 <br>
-動作: 行列 x、w、b を受け取り、<a href="../text01/page04.html#matmul">行列積</a> x・w に b を足して<a href="../text01/page04.html#log">シグモイド関数</a>に通して出力する。
+動作: 行列 x、w、b を受け取り、<a href="../text01/page04.html#matmul">行列積</a> x・w に b を<a href="../text01/page04.html#add">足し</a>、更に<a href="../text01/page04.html#log">シグモイド関数</a>に通して出力する。
 </p>
 
 <img src="./img/page03-fig6.png" alt="">
@@ -270,7 +270,7 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 <p>
 名前: output_layer
 <br>
-動作: 行列 x、w、b を受け取り、<a href="../text01/page04.html#matmul">行列積</a> x・w に b を足して<a href="../text01/page04.html#softmax">SoftMax 関数</a>に通して出力する。
+動作: 行列 x、w、b を受け取り、<a href="../text01/page04.html#matmul">行列積</a> x・w に b を<a href="../text01/page04.html#add">足し</a>、<a href="../text01/page04.html#softmax">SoftMax 関数</a>に通して出力する。
 </p>
 
 <img src="./img/page03-fig9.png" alt="">

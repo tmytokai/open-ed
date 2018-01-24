@@ -89,7 +89,9 @@ print('学習前エントロピー')
 print( sess.run( op_cross_entropy ) )
 
 print('教師信号の判別結果(学習前)  (´・ω・`) ')
-print( sess.run( op_output_layer ) )
+result = sess.run( op_output_layer )
+for i in range( len(result) ):
+   print [ "{:0.2f}".format(x) for x in result[i] ]
 
 print('ディープラーニング中・・・')
 for i in range( ? ):
@@ -99,7 +101,9 @@ print('学習後エントロピー')
 print( sess.run( op_cross_entropy ) )
 
 print('教師信号の判別結果(学習後) (｀・ω・´)')
-print( sess.run( op_output_layer ) )
+result = sess.run( op_output_layer )
+for i in range( len(result) ):
+   print [ "{:0.2f}".format(x) for x in result[i] ]
 
 print('Enterで測定開始')
 a = raw_input()
