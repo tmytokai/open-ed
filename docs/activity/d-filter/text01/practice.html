@@ -85,7 +85,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習1 (個人PC、45分):</b> 例 4 と 5 を参考にし、伝達関数 $\textrm{H}(z) = a + b \cdot z^{-k}$ を持つフィルタ(ディレイ・フィルタと言います)を使って自分の声にディレイ効果をかけてみましょう。
+<input type="checkbox"><b>演習1-1 (個人PC、45分):</b> 例 4 と 5 を参考にし、伝達関数 $\textrm{H}(z) = a + b \cdot z^{-k}$ を持つフィルタ(ディレイ・フィルタと言います)を使って自分の声にディレイ効果をかけてみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -103,8 +103,14 @@
   ※音が小さい場合は alsamixer を起動して、master ボリュームを上げて下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/d-filter-t01-1.cpp">テンプレートファイル</a>(d-filter-t01-1.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。 
+</p>
+<p>
+<a href="./src/template01-1.cpp">UTF-8版</a> (template01-1.cpp)
 <br>
+<a href="./src/template01-1-SJIS.cpp">シフトJIS版</a> (template01-1-SJIS.cpp)
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「g++ d-filter-t01-1.cpp」でコンパイルして下さい。
@@ -115,7 +121,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  「ソースコード」をアップロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「ソースコード」を貼り付けて下さい。
 </p>
 </div>
 
@@ -124,14 +130,20 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習2 (個人PC、45分):</b> FIR ローパスフィルタを使って自分の声から高周波成分を取り除いてみましょう。
+<input type="checkbox"><b>演習1-2 (個人PC、45分):</b> FIR ローパスフィルタを使って自分の声から高周波成分を取り除いてみましょう。
 </p>
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 音声は演習 1 でサンプリングした「 test.wav 」を使用します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/d-filter-t01-2.cpp">テンプレートファイル</a>(d-filter-t01-2.cpp)を test.wav と同じフォルダにダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。 
+</p>
+<p>
+<a href="./src/template01-2.cpp">UTF-8版</a> (template01-2.cpp)
 <br>
+<a href="./src/template01-2-SJIS.cpp">シフトJIS版</a> (template01-2-SJIS.cpp)
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述と下のFIRローパスフィルタ係数の求め方に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおデフォルト値はフィルタ次数(タップ数) $\textrm{L} = 63$、カットオフ周波数 $f_c = 1000$ [Hz] とします。
 </p>
 
