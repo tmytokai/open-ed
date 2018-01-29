@@ -60,8 +60,8 @@ int main()
         fprintf( stderr, "8bit音声は使用できません\n" );
         exit(EXIT_FAILURE);
     }
-    if( wavefmt.rate != 8000 ){
-        fprintf( stderr, "サンプリング周波数が 8000 Hzでありません\n" );
+    if( wavefmt.rate != 11025 ){
+        fprintf( stderr, "サンプリング周波数が 11025 Hzでありません\n" );
         exit(EXIT_FAILURE);
     }
 
@@ -91,9 +91,9 @@ int main()
     //----------------------------------------------
     // ここから穴埋め開始
 
-    // x[i] を fs = 8000 [Hz] で 10 秒間サンプリングした音声のディジタル信号とする
+    // x[i] を fs = 11025 [Hz] で 10 秒間サンプリングした音声のディジタル信号とする
     // i の範囲は 0 <= i < N となる
-    const int fs = 8000;  // サンプリング周波数 [Hz]
+    const int fs = 11025;  // サンプリング周波数 [Hz]
     const int N = 10 * fs; // 10 [秒] * fs [Hz]
 
     // フィルタ次数(タップ数)

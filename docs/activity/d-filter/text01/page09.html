@@ -47,8 +47,7 @@
 <div class="info">
 <input type="checkbox"><b>例1のブロック図: </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig1.png" alt="">
 
@@ -86,8 +85,7 @@ y[i] = (a * b) *  x[i]
 <div class="info">
 <input type="checkbox"><b>例2のブロック図: </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig2.png" alt="">
 
@@ -134,8 +132,7 @@ y[i] = a * x[i-1]
 <div class="info">
 <input type="checkbox"><b>例 3 のブロック図: </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig3.png" alt="">
 
@@ -174,8 +171,7 @@ y[i] = x[i-2]
 <div class="info">
 <input type="checkbox"><b>例 4 のブロック図: </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig4.png" alt="">
 
@@ -195,26 +191,25 @@ y[i] = x[i-k]
 </div>
 
 <h3>
-(例5) $\textrm{H}(z) = a + b \cdot z^{-1}$ : 直列結合と並列結合の組み合わせ
+(例5) $\textrm{H}(z) = a + b \cdot z^{-k}$ : 直列結合と並列結合の組み合わせ
 </h3>
 
 \begin{align*}
-\textrm{H}(z) = a + b \cdot z^{-1}
+\textrm{H}(z) = a + b \cdot z^{-k}
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と遅延素子 $z^{-1}$ を直列結合した  $\textrm{H}_2(z) = b \cdot z^{-1}$ の並列結合と考えられます
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と $k$ 時刻遅延素子 $z^{-k}$ を直列結合した  $\textrm{H}_2(z) = b \cdot z^{-k}$ の並列結合と考えられます
 </p>
 
 <p>
-この時のブロック図は次の通りです。$\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-1}$ が加算器で結合されています。
+この時のブロック図は次の通りです。$\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-k}$ が加算器で結合されています。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>例5のブロック図: </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig5.png" alt="">
 
@@ -228,7 +223,7 @@ y[i] = x[i-k]
 <input type="checkbox"><b>例5のプログラム表現: </b>
 
 <pre class="wrap">
-y[i] = a * x[i] + b * x[i-1]
+y[i] = a * x[i] + b * x[i-k]
 </pre>
 
 </div>
@@ -252,8 +247,7 @@ y[i] = a * x[i] + b * x[i-1]
 <div class="info">
 <input type="checkbox"><b>例6のブロック図(素直な描き方): </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig6-1.png" alt="">
 
@@ -265,8 +259,7 @@ y[i] = a * x[i] + b * x[i-1]
 <div class="info">
 <input type="checkbox"><b>例6のブロック図(遅延素子を共通化した描き方): </b>
 
-<p>
-</p>
+<p>　</p>
 
 <img src="./img/page09-fig6-2.png" alt="">
 

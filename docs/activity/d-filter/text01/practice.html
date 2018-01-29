@@ -27,75 +27,46 @@
 <br>
 <h2><a href="./page01.html">1. ディジタルフィルタとは</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page02.html">2. ディジタル線形フィルタとは</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page03.html">3. インパルス応答</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page04.html">4. 伝達関数</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page05.html">5. ブロック図</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page06.html">6. 基本パーツ</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page07.html">7. フィルタの合成</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page08.html">8. フィードバック機構</a></h2>
 
-<p>
-無し
-</p>
-
-<br>
 <h2><a href="./page09.html">9. 伝達関数からブロック図を描く</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習1-1 (個人PC、45分):</b> 例 4 と 5 を参考にし、伝達関数 $\textrm{H}(z) = a + b \cdot z^{-k}$ を持つフィルタ(ディレイ・フィルタと言います)を使って自分の声にディレイ効果をかけてみましょう。
+<input type="checkbox"><b>演習1-1 (個人PC、45分):</b> <a href="./page06.html">6ページ</a>と<a href="./page09.html">9ページの例 4 と 5</a>を参考にし、伝達関数 $\textrm{H}(z) = a + b \cdot z^{-k}$ を持つフィルタ(ディレイ・フィルタと言います)を使って自分の声にディレイ効果をかけてみましょう。
 </p>
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 適当なフォルダに移動します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> マイクを PC の端子に繋ぎます。
+</p>
+<p>
+※ 以下、Linux を使っているか Windows を使っているかで演習方法が異なります。
 <br>
+※ Linux を使用している場合は以下の(3)〜(12)に従って下さい。
+<br>
+※ Windows を使用している場合は以下の(13)〜に従って下さい。 
+</p>
+<p>
+(Linux の場合)
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 $f_s = 8000$ [Hz] で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 $f_s$ = 8000 [Hz] 、モノラル、Wave 形式で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
 </p>
@@ -106,9 +77,7 @@
 <span class="olradio"><input type="radio" name="p1"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。 
 </p>
 <p>
-<a href="./src/template01-1.cpp">UTF-8版</a> (template01-1.cpp)
-<br>
-<a href="./src/template01-1-SJIS.cpp">シフトJIS版</a> (template01-1-SJIS.cpp)
+<a href="./src/template01-1.cpp">Linux 版</a> (template01-1.cpp)
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
@@ -118,6 +87,32 @@
 <span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 aplay out.wav 」を実行してディレイ効果がかかっている事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「ソースコード」を貼り付けて下さい。
+</p>
+<p>
+(Windows の場合)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 適当なアプリを使い、サンプリング周波数 $f_s$ = 11025 [Hz] 、モノラル、Wave 形式で 10 秒間録音して「 test.wav 」という名前の音声ファイルを作成して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 録音した音が小さい場合はミキサーを起動してボリューム調整して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。 
+</p>
+<p>
+<a href="./src/template01-1-SJIS.cpp">Windows 版</a> (template01-1-SJIS.cpp)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 適当なコンパイラでコンパイルして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プログラムを実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「 out.wav 」を適当なアプリで再生してディレイ効果がかかっている事を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
@@ -139,12 +134,12 @@
 <span class="olradio"><input type="radio" name="p2"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。 
 </p>
 <p>
-<a href="./src/template01-2.cpp">UTF-8版</a> (template01-2.cpp)
+<a href="./src/template01-2.cpp">Linux 版</a> (template01-2.cpp)
 <br>
-<a href="./src/template01-2-SJIS.cpp">シフトJIS版</a> (template01-2-SJIS.cpp)
+<a href="./src/template01-2-SJIS.cpp">Windows 版</a> (template01-2-SJIS.cpp)
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述と下のFIRローパスフィルタ係数の求め方に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおデフォルト値はフィルタ次数(タップ数) $\textrm{L} = 63$、カットオフ周波数 $f_c = 1000$ [Hz] とします。
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述と下のFIRローパスフィルタ係数の求め方に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおデフォルト値はフィルタ次数(タップ数) $\textrm{L}$ = 63、カットオフ周波数 $f_c$ = 1000 [Hz] とします。
 </p>
 
 <div class="info">
