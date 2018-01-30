@@ -51,6 +51,38 @@ int y = getY();
 
 <br>
 <h3>
+Q. act メソッドの中で自分自身の幅と高さを取得したい
+</h3>
+
+<p>
+A. getImage().getWidth() と getImage().getHeight() メソッドで自分の幅と高さを取得できます。
+</p>
+
+<div class="info">
+<pre class="wrap">
+int w = getImage().getWidth();
+int h = getImage().getHeight();
+getWorld().showText( "width="+w+",height="+h, 100, 50 );
+</pre>
+</div>
+
+<br>
+<h3>
+Q. 画像を半透明にしたい
+</h3>
+
+<p>
+A. getImage().setTransparency() で透明度(0:透明〜255:不透明)を指定できます。コンストラクタあたりで指定しておくと良いと思います。
+</p>
+
+<div class="info">
+<pre class="wrap">
+getImage().setTransparency(128);
+</pre>
+</div>
+
+<br>
+<h3>
 Q. <a href="./page04.html">setRotation と move を使ってオブジェクトを動かす</a>と画像が回転してしまうが、回転させないで動かす方法は無いか？
 </h3>
 
