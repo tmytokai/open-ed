@@ -115,7 +115,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "out.wav", "wb" );
+    FILE* fout = fopen( "out1.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);

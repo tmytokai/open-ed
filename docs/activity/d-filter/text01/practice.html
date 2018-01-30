@@ -84,9 +84,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「g++ d-filter-t01-1.cpp」でコンパイルして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out1.wav 」という  Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 aplay out.wav 」を実行してディレイ効果がかかっている事を確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「 aplay out1.wav 」を実行してディレイ効果がかかっている事を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
@@ -110,9 +110,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 適当なコンパイラでコンパイルして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プログラムを実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> プログラムを実行すると「 out1.wav 」という  Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 out.wav 」を適当なアプリで再生してディレイ効果がかかっている事を確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「 out1.wav 」を適当なアプリで再生してディレイ効果がかかっている事を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
@@ -156,19 +156,49 @@ h[\textrm{C}-j] &= h[\textrm{C}+j] = \frac{ \sin \left ( \pi \cdot j \cdot h[\te
 </div>
 
 <p>
+※ 以下、Linux を使っているか Windows を使っているかで演習方法が異なります。
+<br>
+※ Linux を使用している場合は以下の(4)〜(11)に従って下さい。
+<br>
+※ Windows を使用している場合は以下の(12)〜に従って下さい。 
+</p>
+<p>
+(Linux の場合)
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> 「g++ d-filter-t01-2.cpp」でコンパイルして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「./a.out」を実行すると「 out.wav 」という  Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p2"></span> 「./a.out」を実行すると「 out2.wav 」という  Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「 aplay out.wav 」を実行してローパス効果がかかっている事を確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「 aplay out2.wav 」を実行してローパス効果がかかっている事を確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「 audacity test.wav 」又は「 spek test.wav 」を実行し、自分の声のスペクトログラム表示のスクリーンショットを取って下さい(※)。
+<span class="olradio"><input type="radio" name="p2"></span> 「 audacity test.wav &amp; 」又は「 spek test.wav &amp; 」を実行し、自分の声のスペクトログラム表示のスクリーンショットを取って下さい(※)。
 </p>
 <p>
 ※ spek がインストールされているなら audacity よりも spek を使った方が楽です。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「 audacity out.wav 」又は「 spek out.wav 」を実行し、フィルタリング後の自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「 audacity out2.wav &amp; 」又は「 spek out2.wav &amp; 」を実行し、フィルタリング後の自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> フィルタリング前、フィルタリング後のスペクトログラム表示を見比べて、$f_c$ [Hz] 以上の成分が減衰していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> カットオフ周波数 $f_c$ [Hz] を色々変えると効果が色々変化することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  指定場所に「ソースコード」「チーム全員(名前忘れずに)の元の声のスペクトログラム表示とフィルタリング後のスペクトログラム表示」を貼りつけて下さい。 
+</p>
+<p>
+(Windows の場合)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 適当なコンパイラでコンパイルして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プログラムを実行すると「 out2.wav 」という Wave形式音声ファイルが出来ます。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「 out2.wav 」を適当なアプリで再生してローパス効果がかかっている事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定したアプリで test.wav を開き、自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定したアプリで out2.wav を開き、フィルタリング後の自分の声のスペクトログラム表示のスクリーンショットを取って下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> フィルタリング前、フィルタリング後のスペクトログラム表示を見比べて、$f_c$ [Hz] 以上の成分が減衰していることを確認して下さい。
 <br>
