@@ -66,7 +66,7 @@
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 $f_s$ = 8000 [Hz] 、モノラル、Wave 形式で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 10 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 $f_s$ = 8000 [Hz] 、モノラル、16 bit、Wave 形式で 10 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」という Wave形式音声ファイルが出来ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
 </p>
@@ -96,7 +96,7 @@
 (Windows の場合)
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 適当なアプリを使い、サンプリング周波数 $f_s$ = 11025 [Hz] 、モノラル、Wave 形式で 10 秒間録音して「 test.wav 」という名前の音声ファイルを作成して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 適当なアプリを使い、サンプリング周波数 $f_s$ = 11025 [Hz] 、モノラル、16 bit、Wave 形式で 10 秒間録音して「 test.wav 」という名前の音声ファイルを作成して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 録音した音が小さい場合はミキサーを起動してボリューム調整して下さい。
 <br>
