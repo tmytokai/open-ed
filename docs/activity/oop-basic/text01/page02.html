@@ -1,22 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>クラスの定義方法</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. クラスの定義方法</title>
 </head>
 <body>
 
-<h2>クラスの定義方法</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li>学習項目: [1] オブジェクト指向プログラミングの基礎</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
-<br>
+<h2><script>GetTitle()</script></h2>
+
+<p>
 クラスの基本的な定義方法は次の通りです。
-<br>
-この定義方法はJava言語向けに書いていますが、他のオブジェクト指向言語も基本的に似たような書き方になります。
-<br>
-<pre class="prog">
-<b>クラスの基本的な定義方法:</b>
+</p>
 
+<p>
+※ この定義方法はJava言語向けに書いていますが、他のオブジェクト指向言語も基本的に似た様な定義の仕方になります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>Java によるクラスの基本的な定義方法:</b>
+<pre class="wrap">
 アクセス修飾子　class クラス名{
 
     アクセス修飾子　型　フィールド名1;
@@ -31,58 +44,65 @@
     }
 }
 </pre>
-では用語について説明します。
-<br>
-<br>
-<br>
+</div>
+
+<p>
+次に各用語について説明します。
+</p>
+
+<p>
 <b>フィールド</b>・・・クラス内で使われる変数のことで、言語によっては「メンバ変数」とか「属性」とか単純に「変数」と呼ぶ事があります。
-<br>
-<br>
-<b>メソッド</b>・・・フィールドを操作するための関数で、言語によっては「メンバ関数」または単純に「関数」と呼ぶ事があります。
-<br>
-<br>
-<b>アクセス修飾子</b>・・・フィールドやメソッドに誰がアクセス出来るかを決めるアクセス権の事です。
-<br>
-<br>
-<br>
-メソッドとアクセス修飾子に関しては後のページで詳しく説明することにして、このページではフィールドだけで構成されたクラスの定義方法を取り扱います。
-<br>
-<br>
-さてフィールドだけで構成されたクラスはC言語の構造体の様に定義出来ます。
+</p>
+<p>
+<b><a href="./page05.html">メソッド</a></b>・・・フィールドを操作するための関数で、言語によっては「メンバ関数」または単純に「関数」と呼ぶ事があります。
+</p>
+<p>
+<b><a href="../../oop-element/text02/page01.html">アクセス修飾子</a></b>・・・フィールドやメソッドに誰がアクセス出来るかを決めるアクセス権の事です。
+</p>
+
+<p>
+<a href="./page05.html">メソッド</a>と<a href="../../oop-element/text02/page01.html">アクセス修飾子</a>に関しては後のページで詳しく説明することにして、このページではフィールドだけで構成されたクラスの定義方法を取り扱います。
+</p>
+
+<p>
+さてフィールドだけで構成されたクラスは C 言語の構造体の様に定義出来ます。
 <br>
 例えば次のソースのように数学(math)と英語(english)の得点を表す「Score」というクラスを作ってみましょう。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+</>
 
+<div class="info">
+<input type="checkbox"> <b>ソース1:</b>
+<pre class="wrap">
 public class Score {
     public int math;
     public int english;
 }
 </pre>
+</div>
 
+<p>
 このソース内に出てきた「public」がアクセス修飾子です。
 <br>
 publicの意味については後のページで説明します。
 <br>
 他にも struct が class になっていますが、それ以外はほとんどC言語の構造体の定義と同じ形をしていることが分かります。
-<br>
-<br>
-また各フィールドは以下のように定義と同時に初期値をセットしておくことも出来ます。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース2:</b>
+</p>
 
+<p>
+なお各フィールドは以下のように定義と同時に初期値をセットしておくことも出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2:</b>
+<pre class="wrap">
 public class Score {
     public int math = 100;
     public int english = 100;
 }
 </pre>
-<br>
+</div>
 <br>
 
-<br>
-<br>
-<br>
+<script>PreNext(2,7)</script>
 </body>
 </html>

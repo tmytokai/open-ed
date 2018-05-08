@@ -1,22 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="../../../common.css" type="text/css" />
-<title>複数インスタンスの生成</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. 複数インスタンスの生成</title>
 </head>
 <body>
 
-<h2>複数インスタンスの生成</h2>
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li>学習項目: [1] オブジェクト指向プログラミングの基礎</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
 
+<h2><script>GetTitle()</script></h2>
+
+<p>
 クラスはC言語で言う「構造体」、インスタンスは「mallocで確保した構造体のメモリ領域」に相当しますので、構造体の様にクラスをひとつ定義しておけば、それを元にして複数のインスタンスを生成することが出来ます。
-<br>
-<br>
-例えば次のソースでは Score クラスの定義を元に太郎の得点(sc_taro)と花子の得点(sc_hanako)の２つのインスタンスを new 演算子で作っています。
-<br>
-<pre class="prog">
-<input type="checkbox"><b>ソース1:</b>
+</p>
 
+<p>
+例えば次のソースでは Score クラスの定義を元に太郎の得点(sc_taro)と花子の得点(sc_hanako)の２つのインスタンスを new 演算子で作っています。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1:</b>
+<pre class="wrap">
 public static void main(String[] args) {
 	Score sc_taro = new Score();
 	sc_taro.math = 5;
@@ -30,9 +43,9 @@ public static void main(String[] args) {
 	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english );
 }
 </pre>
+</div>
 
 <br>
-<br>
-<br>
+<script>PreNext(4,7)</script>
 </body>
 </html>

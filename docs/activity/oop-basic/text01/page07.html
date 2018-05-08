@@ -40,9 +40,9 @@
 <p>
 では実際にオーバーロードの例を見てみましょう。以下の OLtest というクラスを定義します。
 </p>
+
 <div class="info">
 <input type="checkbox"><b>ソース1:</b>
-
 <pre class="wrap">
 public class OLtest {
 
@@ -63,17 +63,18 @@ public class OLtest {
     }
 }
 </pre>
-
 </div>
 
 <p>
-定義したメソッドの名前がすべて show であることに注意して下さい。
-<br>
+<b>定義したメソッドの名前がすべて show である</b>ことに注意して下さい。
+</p>
+
+<p>
 ではこの OLtest クラスを次の main メソッドから使ってみましょう。
 </p>
+
 <div class="info">
 <input type="checkbox"><b>ソース2:</b>
-
 <pre class="wrap">
 public static void main(String[] args) {
 
@@ -84,20 +85,17 @@ public static void main(String[] args) {
    ol.show( 123, 456 );
 }
 </pre>
-
 </div>
 
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース2の実行結果:</b>
-
 <pre class="wrap">
 引数なし
 引数は文字列クラス: ほげ
 引数は整数クラス: 123
 引数は整数x2クラス: 123-456
 </pre>
-
 </div>
 
 <p>
@@ -108,9 +106,9 @@ public static void main(String[] args) {
 <br>
 もちろんこのソース 3 でも動きますが、ソース 4 のように引数の数や型毎にいちいち呼び出すメソッド名を変えないといけないのでプログラマが混乱する原因となりがちです。
 </p>
+
 <div class="info">
 <input type="checkbox"><b>ソース3: オーバーロードを使わない書き方</b>
-
 <pre class="wrap">
 public class OLtest {
 
@@ -131,13 +129,11 @@ public class OLtest {
     }
 }
 </pre>
-
 </div>
 
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース4: 引数に合わせていちいちメソッド名を変える必要が出てくる</b>
-
 <pre class="wrap">
 public static void main(String[] args) {
 
@@ -148,8 +144,9 @@ public static void main(String[] args) {
    ol.show4( 123, 456 );
 }
 </pre>
-
 </div>
+
+<br>
 
 <script>PreNext(7,7)</script>
 </body>
