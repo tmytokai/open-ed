@@ -116,19 +116,15 @@ set_abc( 123 );
 
 class HOGE{
 
-  private int abc;
+  public int Abc{ get; set; }   // プロパティ「Abc」の定義
 
-  public int Abc{
-      get { return abc; }
-      set { abc = value; }
-  }
 }
 
 使い方:
 
-HOGE hoge = new HOGE();
-int a = hoge.Abc;
+var hoge = new HOGE();
 hoge.Abc = 123;
+Console.WriteLine( hoge.Abc );
 </pre>
 </div>
 
