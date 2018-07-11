@@ -1,0 +1,47 @@
+\noindent \textbf{【出題意図】}
+
+\bigskip
+\noindent 時間領域複素正弦波を合成してサイン波を求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\medskip
+\noindent ・ 時間領域アナログサイン波はオイラー公式を用いて2つの時間領域複素正弦波の和に分解できる
+
+\medskip
+\noindent \mbox{(サイン波として sin を使う場合)}
+
+\[
+a \cdot \sin ( w \cdot t + \phi )
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\frac{\pi}{2}) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\frac{\pi}{2} \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+\medskip
+\noindent \mbox{(サイン波として cos を使う場合))}
+
+\[
+a \cdot \cos ( w \cdot t + \phi )
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+\bigskip
+\noindent  $a$・・・アナログサイン波の振幅
+
+\bigskip
+\noindent $w$ ・・・アナログサイン波の角周波数、単位は [rad/秒]
+
+\bigskip
+\noindent $\phi$ ・・・アナログサイン波の初期位相、単位は [rad]
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\bigskip
+\noindent $\sin$ 版で、かつ $a = 3$、$w = \frac{\pi}{4}$、$\phi = \frac{\pi}{3}$ により求まる。
