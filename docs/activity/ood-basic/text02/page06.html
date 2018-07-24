@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>スプリント 5</title>
+<title>工程 5</title>
 </head>
 <body>
 
@@ -20,37 +20,33 @@
 <h2><script>GetTitle()</script></h2>
 
 <br>
-<h2>1. スプリント プランニング</h2>
+<h3>1. 詳細設計</h2>
+
+<p>
+このスプリントでは、「TARO」オブジェクトと「HANAKO」オブジェクトの動きを逆にします。
+<br>
+そのため「HUMAN」「HANAKO」クラスを以下のように拡張します。
+</p>
 
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
-<p>
-このスプリントでは、「TARO」オブジェクトと「HANAKO」オブジェクトの動きを逆にします。
-</p>
+<br>
+<br>
 <ul>
-<li>「HUMAN」クラスに public void move メソッドを追加し(※)、act メソッド内の移動処理を全てそこに移します。</li>
+<li>「HUMAN」クラスに public void move メソッドを追加し、act メソッド内の移動処理を全てそこに移します。</li>
 <li>「HUMAN」クラスの act メソッド内から追加した move メソッドを呼び出します。</li>
 <li>「HANAKO」クラスで move メソッドをオーバーライドし、上下左右が逆向きの移動処理を書きます。</li>
 </ul>
-※ 本来なら public ではなくて protected にするか、抽象メソッド(純粋仮想関数)を使うか、又はデリゲーションを使った方が良いです。それらについては自分で調べて下さい。
 </div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>スプリント バックログ:</b>
-<p></p>
-<ol>
-<li>「HUMAN」クラスに public void move メソッドを追加する</li>
-<li> move メソッドにact メソッド内の移動処理を切り取って貼り付ける</li>
-<li>「HUMAN」クラスの act メソッド内から move メソッドを呼び出す</li>
-<li>「HANAKO」クラスで move メソッドをオーバライドしてコーディング(逆向きに移動)</li>
-</ol>
-</div>
+<h3>2. 演習内容</h3>
 
 <br>
 <div class="info">
 <input type="checkbox"><b>クラス図の作成:</b>
-<p></p>
+<br>
+<br>
 <ul>
 <li>開発作業を行う前にクラス図を描いて下さい。</li>
 <li>クラス図「GF-2-4」をコピーし、ファイル名を「GF-2-5」に変更します。</li>
@@ -58,8 +54,6 @@
 </div>
 
 <br>
-<h2>2. 開発作業</h2>
-
 <div class="info">
 <input type="checkbox"><b>準備:</b>
 <div class="olradio"> 
@@ -105,9 +99,8 @@
 </div>
 
 <br>
-<h2>3. リリース</h2>
-
 <div class="info">
+<input type="checkbox"><b>提出:</b>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMANとHANAKO)を選んで下さい。

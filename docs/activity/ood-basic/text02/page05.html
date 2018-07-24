@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>スプリント 4</title>
+<title>工程 4</title>
 </head>
 <body>
 
@@ -20,33 +20,36 @@
 <h2><script>GetTitle()</script></h2>
 
 <br>
-<h2>1. スプリント プランニング</h2>
+<h3>1. 詳細設計</h2>
+
+<p>
+この工程では、「TARO」と「HANAKO」オブジェクトが「FRUIT」オブジェクトを食べる処理、つまり当たり判定を実装します。
+<br>
+そのため「HUMAN」クラスを以下のように拡張します(※)。
+<br>
+<br>
+※ ちなみに厳密なウォーターフォールでは出戻りが許されないので、今回のように工程の途中でクラスを拡張する事は出来ません。
+</p>
 
 <div class="info">
 <input type="checkbox"><b>詳細設計:</b>
-<p>
-このスプリントでは、「TARO」と「HANAKO」オブジェクトが「FRUIT」オブジェクトを食べる処理、つまり当たり判定を実装します。
-</p>
+<br>
+<br>
 <ul>
 <li>「HUMAN」クラスに private int fruits フィールドを追加します。fruits は自分が果物をいくつ食べたかを表す整数です。</li>
 <li>「HUMAN」オブジェクトが「FRUIT」オブジェクトに触れたらそのオブジェクトを消し、fruits フィールドをインクリメントする処理を書きます。</li>
 </ul>
 </div>
 
+
 <br>
-<div class="info">
-<input type="checkbox"><b>スプリント バックログ:</b>
-<p></p>
-<ol>
-<li>「HUMAN」クラスのコンストラクタのコーディング( fruits フィールドのリセット)</li>
-<li>「HUMAN」クラスの act メソッドのコーディング(果物に触れたら果物消して fruits をインクリメント)</li>
-</ol>
-</div>
+<h3>2. 演習内容</h3>
 
 <br>
 <div class="info">
 <input type="checkbox"><b>クラス図の作成:</b>
-<p></p>
+<br>
+<br>
 <ul>
 <li>開発作業を行う前にクラス図を描いて下さい。</li>
 <li>クラス図「GF-2-3」をコピーし、ファイル名を「GF-2-4」に変更します。</li>
@@ -54,8 +57,6 @@
 </div>
 
 <br>
-<h2>2. 開発作業</h2>
-
 <div class="info">
 <input type="checkbox"><b>準備:</b>
 <div class="olradio"> 
@@ -98,9 +99,8 @@
 </div>
 
 <br>
-<h2>3. リリース</h2>
-
 <div class="info">
+<input type="checkbox"><b>提出:</b>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMAN)を選んで下さい。
