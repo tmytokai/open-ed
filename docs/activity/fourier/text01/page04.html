@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 複素フーリエ級数展開</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素フーリエ級数展開</a></li>
+<li>学習項目: [1] 複素フーリエ級数展開</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+フーリエの定理を<a href="../../c-sin/">時間領域複素正弦波</a>を使って書き直すと次のような級数になります。
+<br>
+この式を「<b>複素フーリエ級数展開</b>」といいます。
+<br>
+何故フーリエの定理からこの式が出てくるのかについては次のページで説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 複素フーリエ級数展開: </b>
+
+\begin{align*}
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+<p>
+$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+</p>
+
+<p>
+$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+</p>
+
+<p>
+$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+</p>
+
+</div>
+
+<p>
+上の式に出てきた無限個の複素フーリエ係数 $\textrm{C}[k]$ は次の式で求められます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ係数の求め方: </b>
+
+\begin{align*}
+\textrm{C}[k] = \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
+\ ,\  (k = 0, \pm 1, \pm 2, \cdots)
+\end{align*}
+
+<p>
+$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+</p>
+
+<p>
+$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+</p>
+
+<p>
+$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+</p>
+
+</div>
+
+<p>
+当然ながら $\textrm{C}[k]$ は $f(t)$ が異なれば違う値になりますのでご注意下さい。
+<br>
+また $\textrm{C}[k]$ の求め方の式は「直交関数展開」という理論から出てきたのですが、結構難しい理論なので今回のアクティビティでは触れません。
+<br>
+もし興味のある人は自分で調べて下さい。
+</p>
+
+<p>
+ところで $\textrm{C}[k]$ の定義から $\textrm{C}[k]$ と $\textrm{C}[-k]$ は複素共役関係、つまり
+</p>
+
+\begin{align*}
+\textrm{C}[k] = \textrm{C}^{*}[-k]
+\end{align*}
+
+<p>
+あるいは同じ意味ですが
+</p>
+
+\begin{align*}
+\textrm{C}^{*}[k] = \textrm{C}[-k]
+\end{align*}
+
+<p>
+となることが分かりますので、実は $k=0,1,2,\cdots$ に対応する複素フーリエ係数さえ
+求めれば $k=-1,-2,\cdots$ に対応する複素フーリエ係数は求める必要がありません。
+</p>
+
+<br>
+<h2>参考資料: 周期性角周波数領域アナログ信号の複素フーリエ級数展開</h2>
+
+<p>
+※ 以下は<a href="../../d-filter/">ディジタル線形フィルタの設計</a>で使う内容なので、必要ない場合は読み飛ばして結構です。
+</p>
+
+<p>
+$f$ が周期性時間領域ではなく、周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号アナログ信号の時の複素フーリエ級数展開は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 周期性角周波数領域アナログ信号の複素フーリエ級数展開: </b>
+
+\begin{align*}
+f(w) = \sum_{i = -\infty}^{\infty} 
+\left \{
+\textrm{C}[i] \cdot \textrm{e}^{\{-j \cdot i \cdot \textrm{T} \cdot w \}}
+\right \}
+\end{align*}
+
+<p>
+$f(w)$ ・・・周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号
+</p>
+
+<p>
+$\textrm{C}[i]$ ・・・ $i$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+</p>
+
+<p>
+$\textrm{T}$ ・・・ 周期、$ \textrm{T} = 2\pi/\textrm{W}$、単位は [秒]
+</p>
+
+</div>
+
+<p>
+無限個の複素フーリエ係数 $\textrm{C}[i]$ は次の式で求められます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>周期性角周波数領域アナログ信号の複素フーリエ係数の求め方: </b>
+
+\begin{align*}
+\textrm{C}[i] = \frac{1}{\textrm{W}} \int_{-\textrm{W}/2}^{\textrm{W}/2} 
+\left \{
+f(w) \cdot \textrm{e}^{\{j \cdot i \cdot \textrm{T} \cdot w \}} 
+\right \}
+\textrm{dw}
+\ ,\  (i = 0, \pm 1, \pm 2, \cdots)
+\end{align*}
+
+<p>
+$f(w)$ ・・・周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号
+</p>
+
+<p>
+$\textrm{C}[i]$ ・・・ $i$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+</p>
+
+<p>
+$\textrm{T}$ ・・・ 周期、$ \textrm{T} = 2\pi/\textrm{W}$、単位は [秒]
+</p>
+
+</div>
+
+<script>PreNext(4,5)</script>
+</body>
+</html>
