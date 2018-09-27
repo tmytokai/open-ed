@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. ローパスフィルタの設計</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [2] FIRフィルタの設計</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+この学習項目では<a href="../text01/page10.html">FIR フィルタ</a>のインパルス応答 $h[i]$ を<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により導出したいと思います。
+</p>
+
+<p>
+FIR フィルタを考える前に、まずインパルス応答が時刻 $-\infty$ から $\infty$ まである仮想のディジタルフィルタを考えます。
+<br>
+このフィルタは時刻 $0$ にインパルス信号を入力する前からインパルス応答が出力されているという不思議なフィルタなので現実には存在しません(非因果的なディジタルフィルタと呼びます)。
+</p>
+
+<p>
+それでこのフィルタのインパルス応答を<a href="../../z"> Z 変換</a>して<a href="../text01/page04.html">伝達関数</a>を求めます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>非因果的なディジタルフィルタの伝達関数: </b>
+
+
+<p>
+インパルス応答が時刻 $-\infty$ から $\infty$ まであるディジタルフィルタのことを非因果的なディジタルフィルタと呼び、その伝達関数は以下で表される。
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+= \sum_{i=-\infty}^{\infty} \{ h[i] \cdot z^{-i} \}
+\end{align*}
+
+<p>
+ここで、$\sum$ の範囲が $-\infty$ から $\infty$ まであることに注意する。
+<br>
+今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼ぶが、$\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを<b>両側Z変換</b>と呼ぶ。
+<br>
+
+</p>
+
+</div>
+
+<p>
+この伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して周波数特性 $\textrm{H}(w)$ を求めます。
+<br>
+ここで $\tau$ [秒] はサンプリング間隔です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>非因果的なディジタルフィルタの周波数特性: </b>
+
+\begin{align*}
+\textrm{H}(w) 
+= \sum_{i = -\infty}^{\infty} 
+\left \{
+h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
+\right \}
+\end{align*}
+
+</div>
+
+<p>
+ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんので、周波数特性$\textrm{H}(w)$ は偶関数かつ周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号であると考えます(図1)。
+<br>
+ここで $w_s$ [rad/秒] はサンプリング角周波数です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1： 偶関数かつ周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号の例: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<p>
+するとインパルス応答は $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>となります。
+<p>
+
+<div class="info">
+<input type="checkbox"><b>非因果的なディジタルフィルタのインパルス応答: </b>
+
+\begin{align*}
+h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}} 
+\left \{
+\textrm{H}(w) \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{dw}
+\ ,\  (i = 0, \pm 1, \pm 2, \cdots)
+\end{align*}
+
+</div>
+
+<p>
+以下準備中
+</p>
+
+
+<script>PreNext(1,2)</script>
+</body>
+</html>
