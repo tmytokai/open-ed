@@ -31,7 +31,7 @@ FIR フィルタを考える前に、まずインパルス応答が時刻 $-\inf
 </p>
 
 <p>
-それでこのフィルタのインパルス応答を<a href="../../z"> Z 変換</a>して<a href="../text01/page04.html">伝達関数</a>を求めます。
+それで、まずはこのフィルタのインパルス応答を<a href="../../z"> Z 変換</a>して<a href="../text01/page04.html">伝達関数</a>を求めます。
 </p>
 
 <div class="info">
@@ -77,13 +77,17 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 </div>
 
 <p>
-ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんので、周波数特性$\textrm{H}(w)$ は偶関数かつ周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号であると考えます(図1)。
+ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので、周波数特性$\textrm{H}(w)$ の位相特性は 0 で、振幅特性が偶関数かつ周期 $w_s$ [rad/秒] で周期的であると仮定します。
 <br>
 ここで $w_s$ [rad/秒] はサンプリング角周波数です。
 </p>
 
+<p>
+すると 周波数特性 $\textrm{H}(w)$ は実関数で、かつ周期性角周波数領域アナログ信号になります(図1)。
+</p>
+
 <div class="info">
-<input type="checkbox"><b>図1： 偶関数かつ周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号の例: </b>
+<input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数と仮定する: </b>
 
 <p>
 　
@@ -94,7 +98,7 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 </div>
 
 <p>
-するとインパルス応答は $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>となります。
+よってインパルス応答は $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により求められます。
 <p>
 
 <div class="info">
@@ -112,9 +116,136 @@ h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}}
 </div>
 
 <p>
-以下準備中
+当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
+<br>
+今回はローパスフィルタの設計ですので、$\textrm{H}(w)$ としてカットオフ角周波数を $w_c$ [rad/秒] とした理想的なローパス特性をセットします(図2)。
 </p>
 
+<div class="info">
+<input type="checkbox"><b>図2： 理想的なローパス特性: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+<p>
+$w_c$ ・・・ カットオフ角周波数、$w_c \leq w_s/2$、単位は[rad/秒]
+</p>
+
+</div>
+
+<p>
+図2の $\textrm{H}(w)$ に対して<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>を行ってインパルス応答を求めると、
+</p>
+
+\begin{align*}
+h[i] &= \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}} 
+\left \{
+\textrm{H}(w) \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{dw} \\
+&= \frac{1}{w_s} \int_{-w_c}^{w_c} 
+\left \{
+1 \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{dw} \\
+&= \frac{1}{w_s} \cdot \frac{1}{ j \cdot i \cdot \tau}
+\left \{
+\textrm{e}^{\{ j \cdot i \cdot w_c \cdot \tau \}} 
+-\textrm{e}^{\{ -j \cdot i \cdot w_c \cdot \tau \}} 
+\right \} \\
+(オイラー公式より) &= \frac{1}{w_s} \cdot \frac{2}{ i \cdot \tau} \cdot \sin ( i \cdot w_c \cdot \tau ) \\
+(\tau = 2\pi/w_s より) &= \frac{1}{\pi \cdot i } \cdot \sin \left [ \pi \cdot i \cdot \frac{w_c}{(w_s/2)} \right ] \\
+(\alpha = \frac{w_c}{(w_s/2)} とおいて) &= \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }
+\end{align*}
+
+<p>
+となります。
+<br>
+なお $i=0$ の時は $\lim_{x\rightarrow 0} \sin(x)/x = 1$ の公式を使って $h[0] = \alpha$ になります。
+</p>
+
+<p>
+また$f_s$ [Hz] をサンプリング周波数、$f_c$ [Hz] をカットオフ周波数とすると $\alpha = w_c/(w_s/2) = 2\pi f_c / ( 2\pi f_s /2 ) = f_c / (f_s/2)$ と変形できます。
+<br>
+すると $\alpha$ はカットオフ周波数 $f_c$ がナイキスト角周波数 $f_s/2$ の時に $\alpha = 1$ になるように正規化されていることになりますので、$\alpha$のことを「正規化カットオフ周波数」と言います。
+</p>
+
+<p>
+以上をまとめると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>非因果的な理想ローパスフィルタのインパルス応答: </b>
+
+<p>
+$\alpha$ を正規化カットオフ周波数
+<p>
+
+\begin{align*}
+\alpha = \frac{w_c}{(w_s/2)} = \frac{f_c}{(f_s/2)}
+\end{align*}
+
+<p>
+とする。
+<br>
+ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
+<br>
+また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
+</p>
+
+<p>
+すると非因果的な理想ローパスフィルタのインパルス応答は次の式で表される。
+</p>
+
+\begin{align*}
+h[0] = \alpha
+\end{align*}
+
+\begin{align*}
+h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i \pm 1, \pm 2, \cdots)
+\end{align*}
+
+</div>
+
+
+<p>
+ただこれではインパルス応答が無限個存在する IIR フィルタになってしまうので、インパルス応答を途中で打ち切って無理やり FIR フィルタにします。
+<br>
+そのためにはまず FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とします)、次に正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義し、$h[-\textrm{C}]$ から $h[\textrm{C}]$ までの $\textrm{L}$ 個のインパルス応答だけ取り出します(図3)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3： インパルス応答を $\textrm{L}$ 個だけ取り出して無理やり FIR フィルタにする: </b>
+
+<p>
+$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
+</p>
+
+<br>
+<h2>[ビフォー]</h2>
+<img src="./img/page01-fig3-1.png" alt="">
+
+<h2>→　[アフター]</h2>
+<img src="./img/page01-fig3-2.png" alt="">
+
+</div>
+
+<p>
+もちろん無理やりFIRフィルタにしたので周波数特性も変化します。
+</p>
+
+<p>
+このあと実際に演習で周波数特性のグラフを描いてみますが、周波数特性が波打っているような形に変化します。
+<br>
+この現象の事を「<b>ギブズ現象</b>」と言います。
+</p>
+
+<p>
+以下準備中
+</p>
 
 <script>PreNext(1,2)</script>
 </body>
