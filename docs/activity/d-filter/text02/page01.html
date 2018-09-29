@@ -116,7 +116,19 @@ h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}}
 </div>
 
 <p>
-当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
+なお、$\textrm{H}(w)$ は偶関数と仮定したので
+</p>
+
+\begin{align*}
+h[i] = h[-i]
+\end{align*}
+
+<p>
+が成り立ちます。つまり $h[i]$ も偶関数になります。
+</p>
+
+<p>
+また当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
 <br>
 今回はローパスフィルタの設計ですので、$\textrm{H}(w)$ としてカットオフ角周波数を $w_c$ [rad/秒] とした理想的なローパス特性をセットします(図2)。
 </p>
@@ -205,11 +217,10 @@ h[0] = \alpha
 \end{align*}
 
 \begin{align*}
-h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i \pm 1, \pm 2, \cdots)
+h[i] = h[-i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, 2, \cdots)
 \end{align*}
 
 </div>
-
 
 <p>
 ただこれではインパルス応答が無限個存在する IIR フィルタになってしまうので、インパルス応答を途中で打ち切って無理やり FIR フィルタにします。
@@ -235,13 +246,100 @@ $\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
 
 <p>
 もちろん無理やりFIRフィルタにしたので周波数特性も変化します。
+<br>
+具体的には、$h[i]$ に $-\textrm{C}$ から $\textrm{C}$ までの範囲で両側Z変換を行って伝達関数
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+= \sum_{i=-\textrm{C}}^{\textrm{C}} \{ h[i] \cdot z^{-i} \}
+\end{align*}
+
+<p>
+を求めたあと $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して周波数特性を求めます。
+</p>
+
+\begin{align*}
+\textrm{H}(w) 
+&= \sum_{i = -\textrm{C}}^{\textrm{C}} 
+\left \{
+h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
+\right \} \\
+& = h[0] 
++ \sum_{i = -1}^{-\textrm{C}} 
+\left \{
+h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
+\right \} 
++ \sum_{i = 1}^{\textrm{C}} 
+\left \{
+h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
+\right \}  \\
+(h[i] = h[-i] なので) & = h[0] 
++ \sum_{i = 1}^{\textrm{C}} 
+\left [
+h[i] \cdot \left \{ 
+\textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} + \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
+\right \}
+\right ] \\
+\end{align*}
+
+<p>
+最後の式にオイラー公式を適用すると、FIR フィルタの周波数特性が次のように出てきます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>非因果的な FIR ローパスフィルタの周波数特性: </b>
+
+<p>
+　
+</p>
+
+\begin{align*}
+\textrm{H}(w) = h[0] 
++ \sum_{i = 1}^{\textrm{C}} 
+\left \{
+2 \cdot h[i] \cdot \cos (i\cdot w \cdot \tau )
+\right \}
+\end{align*}
+
+<p>
+ここで
+</p>
+
+\begin{align*}
+h[0] = \alpha
+\end{align*}
+
+\begin{align*}
+h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, \cdots, \textrm{C} )
+\end{align*}
+
+</div>
+
+<p>
+周波数特性のグラフ例を図4に示します。
+<br>
+このように、無限インパルス応答を途中で打ち切った影響で周波数特性が波打っているような形に変化します(図2と見比べてみましょう)。
+<br>
+この波打ち現象の事を「<b>ギブズ現象</b>」と言います。
 </p>
 
 <p>
-このあと実際に演習で周波数特性のグラフを描いてみますが、周波数特性が波打っているような形に変化します。
+さて、このギブス現象を軽減させるために実際にFIRフィルタを設計する際にはハミング窓などの「<b>窓関数</b>」がインパルス応答にかけられます。
 <br>
-この現象の事を「<b>ギブズ現象</b>」と言います。
+ただ今回のアクティビティでは窓関数は扱いませんので、必要になった時に自分で調べて下さい。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>図4： 非因果的な理想ローパスフィルタの周波数特性の例: </b>
+
+<p>
+$w_s = 2\pi$、$w_c = \pi/4$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
+</p>
+
+<img src="./img/page01-fig4.png" alt="">
+
+</div>
 
 <p>
 以下準備中
