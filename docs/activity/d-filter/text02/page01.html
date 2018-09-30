@@ -27,7 +27,9 @@
 <p>
 FIR フィルタを考える前に、まずインパルス応答が時刻 $-\infty$ から $\infty$ まである仮想のディジタルフィルタを考えます。
 <br>
-このフィルタは時刻 $0$ にインパルス信号を入力する前からインパルス応答が出力されているという不思議なフィルタなので現実には存在しません(非因果的なディジタルフィルタと呼びます)。
+このフィルタは時刻 $0$ にインパルス信号を入力する前からインパルス応答が出力されているという不思議なフィルタなので現実には存在しません。
+<br>
+この様なフィルタを「<b>非因果的なディジタルフィルタ</b>」と呼びます。
 </p>
 
 <p>
@@ -120,7 +122,7 @@ h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}}
 </p>
 
 \begin{align*}
-h[i] = h[-i]
+h[-i] = h[i]
 \end{align*}
 
 <p>
@@ -217,7 +219,7 @@ h[0] = \alpha
 \end{align*}
 
 \begin{align*}
-h[i] = h[-i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, 2, \cdots)
+h[-i] = h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, 2, \cdots)
 \end{align*}
 
 </div>
@@ -331,7 +333,7 @@ h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, \cdo
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図4： 非因果的な理想ローパスフィルタの周波数特性の例: </b>
+<input type="checkbox"><b>図4： 非因果的な FIR ローパスフィルタの周波数特性の例: </b>
 
 <p>
 $w_s = 2\pi$、$w_c = \pi/2$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
@@ -342,9 +344,81 @@ $w_s = 2\pi$、$w_c = \pi/2$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=
 </div>
 
 <p>
-以下準備中
+次に因果性(※)を満たすようにインパルス応答を変化させます。 (※ インパルス信号を入力してからインパルス応答が出てくる普通のディジタルフィルタのこと)
+<br>
+と言っても単に時刻 $\textrm{C}$ だけ遅延させるだけなので、結局 FIR ローパスフィルタのインパルス応答は次のようになります。
 </p>
 
+<div class="info">
+<input type="checkbox"><b>FIR ローパスフィルタのインパルス応答: </b>
+
+<p>
+$\alpha$ を正規化カットオフ周波数
+<p>
+
+\begin{align*}
+\alpha = \frac{w_c}{(w_s/2)} = \frac{f_c}{(f_s/2)}
+\end{align*}
+
+<p>
+とする。
+<br>
+ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
+<br>
+また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
+</p>
+
+<p>
+さらに FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とする)、正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義する。
+</p>
+
+<p>
+この時、FIR ローパスフィルタのインパルス応答は次の式で表される。
+</p>
+
+\begin{align*}
+h[\textrm{C}] = \alpha
+\end{align*}
+
+\begin{align*}
+h[\textrm{C}-i] = h[\textrm{C}+i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, 2, \cdots, \textrm{C} )
+\end{align*}
+
+</div>
+
+<p>
+なおインパルス応答を時刻 $\textrm{C}$ だけ遅延させた影響で位相特性が変化しますが、元の非因果的なFIRフィルタに $\textrm{C}$ 時刻<a href="../text01/page06.html">遅延素子</a> $z^{-\textrm{C}}$ を<a href="../text01/page07.html">直列結合</a> しただけなので、FIRローパスフィルタの周波数特性は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR ローパスフィルタの周波数特性: </b>
+
+<p>
+　
+</p>
+
+\begin{align*}
+\textrm{H}(w) = 
+\left (
+h[\textrm{C}] 
++ \sum_{i = 1}^{\textrm{C}} 
+\left \{
+2 \cdot h[\textrm{C}+i] \cdot \cos (i\cdot w \cdot \tau )
+\right \}
+\right )
+\cdot
+\textrm{e}^{ -j \cdot w \cdot \textrm{C} \cdot \tau }
+\end{align*}
+
+</div>
+
+<p>
+つまりFIRローパスフィルタの位相特性は $\angle \textrm{H}(w) = - w \cdot \textrm{C} \cdot \tau$ [rad] となるのですが、これは $w$ [rad/秒] に対して傾き $-\textrm{C} \cdot \tau$の直線を表していますので、FIRローパスフィルタの位相特性の事を「<b>直線位相特性</b>」と呼びます。
+<br>
+逆に、FIRローパスフィルタは直線位相特性を持っているので、どんな角周波数のサイン波を入力しても必ず $\textrm{C}$ 時刻だけ遅れて出てくるとも言えます。
+</p>
+
+<br>
 <script>PreNext(1,2)</script>
 </body>
 </html>
