@@ -1,2 +1,3 @@
 # open-ed
-オープンエデュケーション
+
+Website for Open Education
