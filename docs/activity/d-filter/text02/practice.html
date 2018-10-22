@@ -21,29 +21,29 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: ?  分
+演習時間: 15  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. ローパスフィルタの設計</a></h2>
 
 <p>
-<input type="checkbox"><b>演習2-1 (個人、?分):</b> FIR ローパスフィルタのインパルス応答のグラフを描いてみましょう。
+<input type="checkbox"><b>演習2-1 (個人、15分):</b> FIR ローパスフィルタのインパルス応答を計算してそのグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 表計算ソフトを起動します。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-2-1.cpp">テンプレートソース</a>(D-FILTER-2-1.cpp)をダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> パラメータは $\textrm{L} = 63$、$f_c = 1000$ (Hz)、$f_s = 11025$ (Hz) とします。
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートソースを開いて穴埋めをします。パラメータは $\textrm{L} = 63$、$f_c = 1000$ (Hz)、$f_s = 22050$ (Hz) として下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 最初の列に時刻 $i$ をオートフィルを使って入力します ($i=0 \cdots \text{L}$。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-1.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 次の列に各 $i$ における $h[i]$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> D-FILTER-2-1.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に h[i] と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
 
-<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「D-FILTER-2-1」として下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-1」として下さい(拡張子は使用する表計算ソフトによって変わります)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。 
 <br>
@@ -51,22 +51,147 @@
 </p>
 </div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習2-2 (個人、15分):</b> FIR ローパスフィルタの振幅特性のグラフを描いてみましょう。
 </p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/D-FILTER-2-2.cpp">テンプレートソース</a>(D-FILTER-2-2.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートソースを開いて穴埋めをします。各パラメータ値は演習 2-1 と同じです。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-2.csv)が出力されます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> D-FILTER-2-2.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に f 、次の列の先頭に H(f) と入力します。
+</p>
+<p>
+※ テキストの振幅特性のグラフ(図4)では横軸を角周波数(rad/秒)にしていますが、今回は分かりやすく周波数(Hz)形式にしています。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> カットオフ周波数 $f_c$ (Hz) 前後で減衰していることを確認します。またギブズ現象が起きていることも確認します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-2」として下さい(拡張子は使用する表計算ソフトによって変わります)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習2-3 (個人、10分):</b> 演習 2-2 で $\textrm{L}$ の値を変えた時に振幅特性がどう変化するかグラフを描いて確認してみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で使ったテンプレートソース(D-FILTER-2-2.cpp)を使い回します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開き、$\textrm{L} = 127$ に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-2.csv)が出力されます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> D-FILTER-2-2.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に f 、次の列の先頭に H(f) と入力します。
+</p>
+<p>
+※ テキストの振幅特性のグラフ(図4)では横軸を角周波数(rad/秒)にしていますが、今回は分かりやすく周波数(Hz)形式にしています。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> カットオフ周波数 $f_c$ (Hz) 前後で減衰していることを確認します。またギブズ現象が演習 2-2 に比べて控えめになっていることを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-3-L127」として下さい(拡張子は使用する表計算ソフトによって変わります)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 同様に、$\textrm{L} = 511$ のグラフもかいて「D-FILTER-2-3-L511」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。またギブズ現象が更に控えめになっていることを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のグラフ 2 枚を画像ファイルとして保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「画像ファイル 2 枚」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.html">2. 移動平均フィルタ</a></h2>
 
 <p>
-<input type="checkbox"><b>演習2-2 (個人、?分):</b> $\textrm{L}$ の値を変えた時に振幅特性がどう変化するかグラフを描いて確認してみましょう。
+<input type="checkbox"><b>演習2-4 (個人、15分):</b> 移動平均フィルタの振幅特性のグラフを描いてみましょう。
 </p>
-
-<h2><a href="./page01.html">2. 移動平均フィルタ</a></h2>
-
+<div class="olradio"> 
 <p>
-<input type="checkbox"><b>演習2-3 (個人、?分):</b> 移動平均フィルタの振幅特性のグラフを描く。
+<span class="olradio"><input type="radio" name="p4"></span> 演習 2-3 で使ったテンプレートソース(D-FILTER-2-2.cpp)を D-FILTER-2-4.cpp の名前でコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コピーしたテンプレートソース(D-FILTER-2-4.cpp)を開き、周波数特性(振幅特性)の計算部を修正します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> $\textrm{L} = 3$ に変更してからFIR ローパスフィルタのインパルス応答の計算部を削除します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-2.csv)が出力されます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> D-FILTER-2-2.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に f 、次の列の先頭に H(f) と入力します。
 </p>
+<p>
+※ テキストの振幅特性のグラフ(図4)では横軸を角周波数(rad/秒)にしていますが、今回は分かりやすく周波数(Hz)形式にしています。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 移動平均フィルタがローパス特性であることを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-4-L3」として下さい(拡張子は使用する表計算ソフトによって変わります)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 同様に、$\textrm{L} = 31$ のグラフもかいて「D-FILTER-2-4-L31」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。また減衰が急になっていることも確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のグラフ 2 枚を画像ファイルとして保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「画像ファイル 2 枚」を貼り付けて下さい。  
+</p>
+</div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習2-5 (個人、30 分):</b> 移動平均フィルタを使ってサンプル音声から高周波成分を取り除いてみましょう。 
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="../text01/practice.html">演習 1-2</a> で使った FIR ローパスフィルタのテンプレートソースを D-FILTER-2-5.cpp の名前でコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コピーしたテンプレートソースを開いて $\textrm{L} = 31$ の移動平均フィルタを作成します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>をダウンロードして「 test.wav 」と名前を変更します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行すると「 out2.wav 」という Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で test.wav を演奏し、スペクトログラム表示のスクリーンショットを取って下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 同様に<a href="../../../lib/sound/analyzer.html">アナライザ</a>で out2.wav を演奏し、実際に音声を聞いたりスペクトログラム表示を見て高周波成分が減衰していることを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> out2.wav のスペクトログラム表示のスクリーンショットを取って下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」「スペクトログラム」を貼りつけて下さい。 
+</p>
+</div>
+
+
+<br>
 <h2><a href="./page02.html">3. ハイパスフィルタの設計</a></h2>
 
 <p>
-<input type="checkbox"><b>演習2-4 (個人、?分):</b> FIR ハイパスフィルタを使って自分の声から低周波成分を取り除いてみましょう。
+<input type="checkbox"><b>演習2-6 (個人、?分):</b> FIR ハイパスフィルタインパルス応答のグラフ
+</p>
+
+<p>
+<input type="checkbox"><b>演習2-7 (個人、?分):</b> FIR ハイパスフィルタの振幅特性のグラフを描く。
+</p>
+
+<p>
+<input type="checkbox"><b>演習2-8 (個人、?分):</b> FIR ハイパスフィルタフィルタにサンプル音声を通してスペクトログラムを見る。
+</p>
+
+<p>
+<input type="checkbox"><b>演習2-9 (個人、?分):</b> FIR ハイパスフィルタを使って自分の声から低周波成分を取り除いてみましょう。
 </p>
 
 

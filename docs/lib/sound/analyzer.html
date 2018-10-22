@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Audio Analyzer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="https://cindyjs.org/dist/latest/CindyJS.css">
+<script type="text/javascript" src="https://cindyjs.org/dist/latest/Cindy.js"></script>
+
+<script type="text/javascript" src="https://tmytokai.github.io/CindyJSPlugins/dist/latest/audio/audio.js"></script>
+
+<script type="text/javascript">
+  CindyJS( {
+    ports: [ 
+      { 
+        id: "CSCanvas", 
+        width: 400, height: 600, 
+        transform: [ { visibleRect: [ 0, 6, 4, 0 ] } ] 
+      }
+    ],
+    scripts:"cs*",
+    autoplay: true,
+    use: [ "audio" ],
+    geometry: [
+
+      {name: "Play", type: "Button", pos: [3.0, 5.5], color: [0.0, 0.0, 0.0], text: "Play"
+                   , script: 'playaudio( "file://audiofile" );' },
+      {name: "Stop", type: "Button", pos: [3.0, 5.0], color: [0.0, 0.0, 0.0], text: "Stop"
+                   , script: 'stopaudio();' },
+
+      {name:"Spectrogram", type:"Free", pos:[ 0.25,  5.75 ], size:0, labeled: true, pinned: true},
+      {name:"Spectrum",    type:"Free", pos:[ 0.25,  2.75 ], size:0, labeled: true, pinned: true},
+    ],
+  } );
+</script>
+
+<script id="csdraw" type="text/x-cindyscript">
+  audiodrawspectrogram( Spectrogram, 0 );
+  audiodrawspectrum( Spectrum,0 );
+</script>
+
+</head>
+
+<body>
+<h2>アナライザー</h2>
+<ol>
+<li>ファイルを選択する  <input type="file" id="audiofile"></li>
+<li>Play を押す</li>
+</ol>
+<div id="CSCanvas" style="width:400px; height:600px;"></div>
+</body>
+
+</html>

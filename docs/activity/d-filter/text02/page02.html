@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 移動平均フィルタ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [2] FIRフィルタの設計</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は(単純)移動平均フィルタ(Simple Moving Average Filter)について説明します。
+</p>
+
+<p>
+この移動平均フィルタは現在時刻時間を移動させながら過去 $\textrm{L}$ 時刻分の入力信号値の単純平均を出力するというだけのフィルタですので、インパルス応答は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>(単純)移動平均フィルタのインパルス応答: </b>
+
+<p>
+さらに移動平均フィルタフィルタ長として適当な正整数 $\textrm{L}$ を決める。
+</p>
+
+<p>
+この時、移動平均フィルタのインパルス応答は次の式で表される。
+</p>
+
+\begin{align*}
+h[i] = \frac{1}{\textrm{L}}\ ,\  (i = 0, 1, \cdots, \textrm{L}-1 )
+\end{align*}
+
+</div>
+
+<p>
+伝達関数は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>移動平均フィルタの伝達関数: </b>
+
+
+\begin{align*}
+\textrm{H}(z) 
+= \frac{1}{\textrm{L}}\cdot\sum_{i=0}^{\textrm{L}-1} \{ z^{-i} \}
+\end{align*}
+
+</p>
+
+</div>
+
+
+<p>
+移動平均フィルタの周波数特性はFIRローパスフィルタの時と同様に考えて次のようになります。
+<br>
+ただし式を簡単にするために今回は $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ を定義しました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>移動平均フィルタの周波数特性: </b>
+
+<p>
+$\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする。
+</p>
+
+\begin{align*}
+\textrm{H}(w) = 
+\left (
+\frac{1}{\textrm{L}}
++ 
+\sum_{i = 1}^{\textrm{C}} 
+\left \{
+\frac{1}{\textrm{L}}\cdot
+2 \cdot \cos (i\cdot w \cdot \tau )
+\right \}
+\right )
+\cdot
+\textrm{e}^{ -j \cdot w \cdot \textrm{C} \cdot \tau }
+\end{align*}
+
+</div>
+
+<p>
+この後演習で確認しますが、移動平均フィルタの周波数特性はローパス特性になります。
+<br>
+ただしフィルタ長 $\textrm{L}$ が短いと緩慢な減衰特性になるので、高周波ノイズをきちんと取り除きたい場合はある程度の長さにしないといけません。
+</p>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
