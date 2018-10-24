@@ -62,14 +62,20 @@
 (Arduino側)
 </p>
 <p>
-(5) SPI の設定はクロック「1 MHz = 1000000 Hz」、ビットオーダー「MSBFIRST」、モード「SPI_MODE0」とする。
+(5) SPI の設定はビットオーダー「MSBFIRST」、クロック「SPI_CLOCK_DIV16 (= 1 MHz ※)」、通信モード「SPI_MODE0」とする。
+</p>
+<p>
+※ Arduino UNO のシステムクロックは 16 MHz なので 16 で割る(DIVide 16MHz by 16 = 1MHz)と丁度1MHzになる
 </p>
 <p>
 (6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
 その他 MOSI = 11、MISO = 12、SCK = 13。
 </p>
 <p>
-(6) 適当な間隔(2秒程度)で好きな音声を出力する。
+(6) 適当な音声(2秒程度)を出力する。
+</p>
+<p>
+(7) 2000ミリ秒間隔を空けて音声出力を繰り返す。
 </p>
 </div>
 <p>
@@ -197,18 +203,30 @@
 <span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
 </p>
 <p>
-※1 setup の中で SPI の初期設定を行うが、 Arduino UNO のシステムクロックは 16 MHz なので setClockDivider の値は SPI_CLOCK_DIV16 とする
-<br>
-　なお初期設定は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で setDataMode を使う
+※1 setup の中で SPI の初期設定を行う。
 </p>
 <p>
-※2 setup の中で <span class="overline">SS</span>ピンを LOW にしたら 1000 ミリ秒程度 delay を入れること。
+　ビットオーダー: SPI.setBitOrder(MSBFIRST)
+<br>
+　クロック: SPI.setClockDivider(SPI_CLOCK_DIV16)
+<br>
+　通信モード: SPI.setDataMode(SPI_MODE0)
+</p>
+<p>
+　以上の設定をしたら SPI.begin() で SPI 通信を開始する。
+<br>
+　なお初期設定方法は現在は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で以上の古い関数を使う。
+</p>
+<p>
+※2 今回は接続機器が 1 台しか無いので setup の中で <span class="overline">SS</span>ピンを予め LOW にしておく。
+<br>
+なお LOW にしたら 1000 ミリ秒程度 delay を入れること。
 </p>
 <p>
 ※3 文字列は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
 </p>
 <p>
-※4 文字列の最後に '.' と '\r' を送らないと音が出ないので注意。
+※4 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
