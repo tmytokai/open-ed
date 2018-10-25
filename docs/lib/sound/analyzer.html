@@ -18,18 +18,22 @@
         transform: [ { visibleRect: [ 0, 6, 4, 0 ] } ] 
       }
     ],
+    defaultAppearance: {
+       fontFamily: "sans-serif",
+       textsize: 12.0
+    },
     scripts:"cs*",
     autoplay: true,
     use: [ "audio" ],
     geometry: [
 
-      {name: "Play", type: "Button", pos: [3.0, 5.5], color: [0.0, 0.0, 0.0], text: "Play"
+      {name: "Play", type: "Button", pos: [3.25, 5.5], color: [0.0, 0.0, 0.0], text: "Play"
                    , script: 'playaudio( "file://audiofile" );' },
-      {name: "Stop", type: "Button", pos: [3.0, 5.0], color: [0.0, 0.0, 0.0], text: "Stop"
+      {name: "Stop", type: "Button", pos: [3.25, 5.0], color: [0.0, 0.0, 0.0], text: "Stop"
                    , script: 'stopaudio();' },
 
-      {name:"Spectrogram", type:"Free", pos:[ 0.25,  5.75 ], size:0, labeled: true, pinned: true},
-      {name:"Spectrum",    type:"Free", pos:[ 0.25,  2.75 ], size:0, labeled: true, pinned: true},
+      {name:"Spectrogram", type:"Free", pos:[ 0.5,  5.75 ], size:0, labeled: true, pinned: true},
+      {name:"Spectrum",    type:"Free", pos:[ 0.5,  2.75 ], size:0, labeled: true, pinned: true},
     ],
   } );
 </script>
