@@ -4,25 +4,25 @@
 
 int main()
 {
-    // FIRフィルタ次数(タップ数)
-    const int L = ? ;
-
-    // インパルス応答
-    double h[L];
-
-    // カットオフ周波数 [Hz]
-    const double fc = ?;
-
     // サンプリング周波数 [Hz]
     const double fs = ?;  
 
-    // インパルス応答を計算
+    // FIR フィルタ次数(タップ数)
+    const int L = ? ;
+
+    // フィルタ係数 = インパルス応答
+    double h[L];
+
+    // カットオフ周波数 [Hz]
+    const double fc = ? ;
+
+    // FIR ローパスフィルタ係数を計算
     // 円周率は M_PI を使用する
-    const double Alpha = ?;
-    const int C = ?;
-    h[C] = ?;
-    for( int i = 1; i <= C ; ++i ){
-        h[C-i] = h[C+i] = ?;
+    const int C = (L-1)/2;
+    const double Alpha = ? ;
+    h[C] = ? ;
+    for( int i = 1; i <= ? ; ++i ){
+        h[C-i] = h[C+i] = ? ;
     }
 
     FILE* f = fopen( "D-FILTER-2-1.csv", "wb");

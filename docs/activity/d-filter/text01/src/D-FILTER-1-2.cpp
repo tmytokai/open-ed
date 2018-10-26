@@ -26,7 +26,7 @@ typedef struct
 
 int main()
 {
-    FILE * fin = fopen( "test.wav", "rb" );
+    FILE * fin = fopen( "D-FILTER-1-1.wav", "rb" );
     if( !fin ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
@@ -60,8 +60,8 @@ int main()
         fprintf( stderr, "8bit音声は使用できません\n" );
         exit(EXIT_FAILURE);
     }
-    if( wavefmt.rate != 11025 ){
-        fprintf( stderr, "サンプリング周波数が 11025 Hzでありません\n" );
+    if( wavefmt.rate != 22050 ){
+        fprintf( stderr, "サンプリング周波数が 22050 Hzでありません\n" );
         exit(EXIT_FAILURE);
     }
 
@@ -91,24 +91,29 @@ int main()
     //----------------------------------------------
     // ここから穴埋め開始
 
-    // x[i] を fs = 11025 [Hz] で 10 秒間サンプリングした音声のディジタル信号とする
-    // i の範囲は 0 <= i < N となる
-    const int fs = 11025;  // サンプリング周波数 [Hz]
-    const int N = 10 * fs; // 10 [秒] * fs [Hz]
+    // サンプリング周波数 [Hz]
+    const double fs = 22050;  
 
-    // フィルタ次数(タップ数)
+    // x[i] を fs = 22050 [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
+    // i の範囲は 0 <= i < N となる
+    const int N = 5 * fs; // 10 [秒] * fs [Hz]
+
+    // FIR フィルタ次数(タップ数)
     const int L = ? ;
+
+    // フィルタ係数 = インパルス応答
+    double h[L];
 
     // カットオフ周波数 [Hz]
     const double fc = ? ;
 
     // FIR ローパスフィルタ係数を計算
     // 円周率は M_PI を使用する
-    double h[L];
     const int C = (L-1)/2;
+    const double Alpha = ? ;
     h[C] = ? ;
-    for( int j = 1; j < ? ; ++j ){
-        h[C-j] = h[C+j] = ? ;
+    for( int i = 1; i <= ? ; ++i ){
+        h[C-i] = h[C+i] = ? ;
     }
 
     // FIR フィルタ
@@ -122,7 +127,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "out2.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-1-2-out.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
