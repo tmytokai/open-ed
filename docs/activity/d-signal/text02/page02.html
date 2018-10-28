@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 標本化定理</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号処理の基礎</a></li>
+<li>学習項目: [2] サンプリング(標本化)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+このページを読む前に、まず世の中にある全ての時間領域アナログ信号 $f(t)$ は様々な周波数の<a href="../../a-sin/">アナログサイン波</a>の無限個の和によって出来ていることを思い出して下さい。
+</p>
+
+<p>
+さて前ページで説明したように、連続的な時間領域アナログ信号 $f(t)$ からサンプリングによって時間領域ディジタル信号 $f[i]$ を作り出しますが、そもそも連続的なアナログ信号を無理矢理ディジタル化する訳ですのでどこかで限界が生じて無理が出てきます。
+</p>
+
+<p>
+このサンプリングの限界を与える重要な定理として以下の「<b>標本化定理</b>」があります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>標本化定理: </b>
+
+<p>
+サンプリング周波数 $f_s$ (Hz) で時間領域アナログ信号 $f(t)$ をサンプリングする場合、元の $f(t)$ に含まれる $f_s/2$ (Hz) 以上の周波数のアナログサイン波は正しくサンプリング出来ない。
+</p>
+
+<p>
+ここで $f_s/2$ (Hz)の事を「<b>ナイキスト周波数</b>」と呼ぶ。
+</p>
+
+<p>
+同様に $2\pi \cdot f_s/2$ (rad/秒)の事を「<b>ナイキスト角周波数</b>」と呼ぶ。
+</p>
+
+</div>
+
+<p>
+さてナイキスト周波数 $fs/2$ (Hz) を使って標本化定理を言い換えると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>標本化定理 (言い換えたバージョン): </b>
+
+<p>
+ サンプリング周波数 $f_s$ (Hz) で時間領域アナログ信号 $f(t)$ をサンプリングする場合、元の $f(t)$ に含まれるナイキスト周波数 $fs/2$ (Hz)以上の周波数のアナログサイン波は正しくサンプリング出来ない。
+</p>
+
+</div>
+
+<p>
+もっと簡単に言い換えると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>標本化定理 (更に言い換えたバージョン): </b>
+
+<p>
+元の時間領域アナログ信号 $f(t)$ にナイキスト周波数 $fs/2$ (Hz) 以上の周波数のアナログサイン波が含まれていると正しくサンプリング出来ず $f[i]$ は元の信号と全然異なる波形になる
+</p>
+
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>

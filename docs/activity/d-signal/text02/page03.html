@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. エイリアシング(折り返しひずみ)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号処理の基礎</a></li>
+<li>学習項目: [2] サンプリング(標本化)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+前ページで説明した<a href="./page02.html">標本化定理</a>によると、元の時間領域アナログ信号 $f(t)$ にナイキスト周波数 $fs/2$ (Hz) 以上の周波数のアナログサイン波が含まれていると正しくサンプリング出来ず全然異なる波形となって $f[i]$ が出てきます。
+</p>
+
+<p>
+何故全然違う波形になるかと言うと、ナイキスト周波数 $fs/2$ (Hz) 以上の周波数のアナログサイン波をサンプリングすると、そのサイン波が
+</p>
+
+<p>
+「<b>エイリアシング</b> (または<b>折り返しひずみ</b>)」
+</p>
+
+<p>
+と呼ばれるノイズ(雑音やひずみと言い換えても可)に変化するためです。
+</p>
+
+<p>
+「折り返し」と呼ばれる理由はきちんとあるのですが、今回のアクティビティの範疇を超えるので興味のある人は自分で調べて下さい。
+</p>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
