@@ -55,7 +55,7 @@ h[i] = \frac{1}{\textrm{L}}\ ,\  (i = 0, 1, \cdots, \textrm{L}-1 )
 
 \begin{align*}
 \textrm{H}(z) 
-= \frac{1}{\textrm{L}}\cdot\sum_{i=0}^{\textrm{L}-1} \{ z^{-i} \}
+= \sum_{i=0}^{\textrm{L}-1} \{ \frac{1}{\textrm{L}} \cdot z^{-i} \}
 \end{align*}
 
 </p>
@@ -83,8 +83,9 @@ $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする。
 + 
 \sum_{i = 1}^{\textrm{C}} 
 \left \{
-\frac{1}{\textrm{L}}\cdot
-2 \cdot \cos (i\cdot w \cdot \tau )
+2 \cdot 
+\frac{1}{\textrm{L}} \cdot 
+\cos (i\cdot w \cdot \tau )
 \right \}
 \right )
 \cdot

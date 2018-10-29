@@ -387,6 +387,25 @@ h[\textrm{C}-i] = h[\textrm{C}+i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\p
 </div>
 
 <p>
+伝達関数は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR ローパスフィルタの伝達関数: </b>
+
+<p>
+$h[i]$ を上で計算した FIR ローパスフィルタのインパルス応答とした時
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+= \sum_{i=0}^{\textrm{L}-1} \{ h[i] \cdot z^{-i} \}
+\end{align*}
+
+</div>
+
+
+<p>
 なおインパルス応答を時刻 $\textrm{C}$ だけ遅延させた影響で位相特性が変化しますが、元の非因果的なFIRフィルタに $\textrm{C}$ 時刻<a href="../text01/page06.html">遅延素子</a> $z^{-\textrm{C}}$ を<a href="../text01/page07.html">直列結合</a> しただけなので、FIRローパスフィルタの周波数特性は次のようになります。
 </p>
 
@@ -394,7 +413,7 @@ h[\textrm{C}-i] = h[\textrm{C}+i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\p
 <input type="checkbox"><b>FIR ローパスフィルタの周波数特性: </b>
 
 <p>
-　
+$h[i]$ を上で計算した FIR ローパスフィルタのインパルス応答とした時
 </p>
 
 \begin{align*}
