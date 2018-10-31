@@ -66,7 +66,7 @@
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>データシートや Web 等で回路図を調べて回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span> ADM3202AN のデータシートや Web 等で回路図を調べて回路を組んで下さい。
 </p>
 <p>
 　(注意) ジャンパーケーブルが多いと見づらいので
@@ -83,20 +83,18 @@
 <span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
-</p>
-<p>
-　(注意) Arduino UNO 側のRXピンのジャンパケーブルを外さないとエラーが出ます。
-</p>
-<p>
+<br>
 <span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
 </p>
 <p>
 ※ screen の起動方法: $ screen /dev/ttyUSB0 9600
 <br>
 ※ screen の終了方法: Ctrl 押しながら a を押した後に k 押し、終了するか聞かれたら y 
+<br>
+※ 途中で screen の反応が無くなったらUSB-シリアル変換ケーブルを挿し直す
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい(回路の写真は必要ありません)。
+<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
 </p>
 </div>
 
@@ -117,13 +115,13 @@
 (1) 回路や通信設定は演習 2-1 とほぼ同じだが、今回は R1in と R1out を使う(T1in と T1outからケーブルを付け替える)。
 </p>
 <p>
-(2) Arduino UNO の適当な GPIO に LED をつなげる。
+(2) Arduino UNO の内蔵 LED (GPIO 13 番ピン) を使用する。
 </p>
 <p>
-(3) PC から 'a' が送られたら LED を点灯する。
+(3) PC から 'a' が送られたら内蔵 LED を点灯する。
 </p>
 <p>
-(4) PC から 'b' が送られたら LED を消灯する。
+(4) PC から 'b' が送られたら内蔵 LED を消灯する。
 </p>
 </div>
 <p>
@@ -135,16 +133,14 @@
 <span class="olradio"><input type="radio" name="p3"></span>プログラムを書いて Arduino UNO に転送して下さい。
 </p>
 <p>
-　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
+※ Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出る
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
+<p>
+※ ちなみに USB-シリアル変換ケーブルにGND線を繋がなくても動作する
+</p>
 <span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路の全体写真を撮ってドキュメントファイルに貼りつけて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>ドキュメントファイルに「回路の全体写真」と「ソースコード」が記入されていることを確認して下さい。
 </p>
 </div>
 
