@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 角周波数、周波数、周期</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタルサイン波</a></li>
+<li>学習項目: [1] 時間領域ディジタルサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="../../d-signal/">時間領域ディジタル信号</a>の一種である時間領域ディジタルサイン波にも秒の概念はありませんので、周波数という概念は本来はありません。
+<br>
+よって角周波数という概念も本来はありません。
+<br>
+その代わり<a href="./page01.html">1ページ目</a>で示したように周期 $\textrm{T}_d$ を使って時間領域ディジタルサイン波は定義されます。
+</p>
+
+<p>
+周期 $\textrm{T}_d$ は、 $i$ が何点進めば波が 1 回振動するのかを表す数字です。
+<br>
+この $\textrm{T}_d$ の値を変えるとグラフでは横方向の伸縮が変わります。
+<br>
+$\textrm{T}_d$ が大きいとグラフは横方向で伸びます。逆に小さいと横方向で縮みます。
+</p>
+
+<p>
+なお$\textrm{T}_d$ は実数でも構いませんが、特に整数の場合はきれいにアップダウンするようなグラフになります。
+<br>
+例えば<a href="./page01.html">1ページ目</a>で例示したサイン波(下に再掲)は $\textrm{T}_d = 5$ [点]なので、 $i$ が $5$ 点進む毎に 1 回サイン波がアップダウンしていることが分かります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ディジタルサイン波の例(再掲) :</b>
+
+<p>$f[i] = 1 \cdot \sin( 2\pi /5 \cdot i -\pi/2 ) \ , \  (i=0,1, \cdots, 10)$</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<p>
+ところで、時間領域ディジタルサイン波には周波数や角周波数という概念は無いと上で言いましたが、実際には(角)周波数があった方が色々都合の良い場合が多いです。
+<br>
+そこで、
+</p>
+
+<p>
+<b>角周波数 $w$ [rad/秒] の時間領域アナログサイン波 $f(t)$ をサンプリング周波数 $f_s$ [Hz] でサンプリングして時間領域ディジタルサイン波 $f[i]$ を求めた</b>
+</p>
+
+<p>
+という状況を仮定し、元のアナログサイン波 $f(t)$ の角周波数 $w$ [rad/秒]、または周波数 $f$ [Hz] をディジタルサイン波 $f[i]$ の(角)周波数とみなすことにします。
+</p>
+
+<p>
+さて、アナログサイン波を $f_s$ [Hz] でサンプリングした場合、$1$ 点サンプリングする毎にサンプリング間隔 $\tau = 1/f_s$ [秒]だけ間隔が空きます。
+<br>
+つまり周期 $\textrm{T}_d$ [点]の分だけ信号値をサンプリングするには $\textrm{T}_d \cdot \tau $ [秒]必要です。
+</p>
+
+<p>
+このことから、次のように時間領域ディジタルサイン波の角周波数や周波数が定義できます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 時間領域ディジタルサイン波の(角)周波数</b>
+
+<p>
+サンプリング周波数 $f_s$ [Hz] と周期 $\textrm{T}_d$ [点]を使って時間領域ディジタルサイン波の(角)周波数を定義する。
+</p>
+
+<p>
+サンプリング間隔 ・・・ $\tau = 1/f_s$ [秒]
+</p>
+
+<p>
+周期 $\textrm{T}_d$ [点] サンプリングするのに必要な時間(つまり秒に換算した周期) ・・・ $\textrm{T} = \textrm{T}_d \cdot \tau$ [秒]
+</p>
+
+<p>
+(定義) 時間領域ディジタルサイン波の周波数・・・ $f = \frac{1}{\textrm{T}} = \frac{1}{\textrm{T}_d \cdot \tau} = \frac{f_s}{\textrm{T}_d}$ [Hz]
+</p>
+
+<p>
+(定義) 時間領域ディジタルサイン波の角周波数 ・・・ $w = 2\pi \cdot f = 2 \pi \cdot \frac{f_s}{\textrm{T}_d}$ [rad/秒]
+</p>
+
+</div>
+
+<p>
+なお、最後の公式を変形すると
+</p>
+
+\[
+\textrm{T}_d = 2 \pi \cdot \frac{f_s}{w}
+\]
+
+<p>
+となりますので角周波数 $w$ [rad/秒] とサンプリング周波数 $f_s$ [Hz]を使って時間領域ディジタルサイン波の定義を書きなおすことも出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: $w$ (rad/秒)と $f_s$ (Hz)を用いた時間領域ディジタルサイン波の定義</b>
+
+\[
+f[i] = a \cdot \sin \left ( \frac{w}{f_s}  \cdot i + \phi \right )
+\]
+
+<p>
+または
+</p>
+
+\[
+f[i] = a \cdot \cos \left ( \frac{w}{f_s}  \cdot i + \phi \right )
+\]
+
+</div>
+
+<script>PreNext(3,6)</script>
+</body>
+</html>
