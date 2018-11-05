@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>11. IIRフィルタ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [1] ディジタル線形フィルタの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<div class="info">
+<input type="checkbox"><b>定義： 標準形 L 次 IIR (infinite impulse response: 無限インパルス応答)フィルタ : </b>
+
+
+<p>
+正整数 $\textrm{L}$ を有限の数、$a[i]$ 、$b[i]$を実定数とした時、標準形 IIR フィルタの伝達関数は以下で表される。
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+& = \frac{ \sum_{i=0}^{\textrm{L}} \{ b[i] \cdot z^{-i} \}}{ 1 - \sum_{i=1}^{\textrm{L}} \{ a[i] \cdot z^{-i} \} } \\
+& = \frac{ b[0] + b[1] \cdot z^{-1} + b[2] \cdot z^{-2} + \cdots + b[\textrm{L}] \cdot z^{-\textrm{L}} }
+{ 1 - a[1] \cdot z^{-1} - a[2] \cdot z^{-2} + \cdots + a[\textrm{L}] \cdot z^{-\textrm{L}} }
+\end{align*}
+
+<p>
+なお実定数 $a[i]$ 、$b[i]$ をIIRフィルタ係数と呼ぶ。
+<br>
+また整数 $\textrm{L}$ を「フィルタ次数」と言う。
+</p>
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 標準形 L 次 IIR フィルタのブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page11-fig1.png" alt="">
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b>標準形 L 次 IIR フィルタのプログラム表現: </b>
+
+<p>
+x[i] は時刻 i が負の時は 0 とする。
+<br>
+また z[i] を $z^{-i}$ の値とする。
+</p>
+
+<pre class="wrap">
+// 前段フィードバック部
+z[0] = x[i];
+for( j = 1; j &lt= L; ++j ) z[0] += a[j] * z[j]
+// 後段フィードフォワード部
+y[i] = 0;
+for( j = 0; j &lt= L; ++j ) y[i] += b[j] * z[j]
+// バッファシフト
+for( j = 1; j &lt= L; ++j ) z[j] = z[j-1]
+</pre>
+
+</div>
+
+
+
+<script>PreNext(11,13)</script>
+</body>
+</html>

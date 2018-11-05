@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. ローパスフィルタの設計</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [3] IIRフィルタの設計</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+インパルス不変法で 1 次 IIR フィルタ係数を求める。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> RC ローパスフィルタ: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> RC ローパスフィルタの伝達関数: </b>
+
+<p>
+カットオフ角周波数を $w_c = \frac{1}{RC}$ [rad/秒] とする。
+</p>
+
+\begin{align*}
+\textrm{H}(s) 
+& = \frac{ 1 }{ 1 + \frac{s}{w_c} } \\
+& = \frac{ w_c }{ s + w_c } \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> RC ローパスフィルタの周波数特性: </b>
+
+\begin{align*}
+\textrm{H}(w) 
+& = \frac{ w_c }{ j\cdot w + w_c } \\
+& = \frac{ w_c }{ \sqrt{w^2 + w_c^2 } \cdot \textrm{e}^{ j\cdot \tan^{-1}(w/w_c) } } \\
+& = \frac{ w_c }{ \sqrt{w^2 + w_c^2 }}  \cdot \textrm{e}^{ -j\cdot \tan^{-1}(w/w_c) } \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> RC ローパスフィルタのインパルス応答: </b>
+
+\begin{align*}
+h(t)
+& = w_c \cdot \textrm{e}^{-w_c\cdot t}
+\end{align*}
+
+</div>
+
+<p>
+RC ローパスフィルタのインパルス応答を<a href="../../d-signal/text02/page01.html">サンプリング</a>してディジタルインパルス応答 $h[i]$ を求める。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> RC ローパスフィルタのインパルス応答をサンプリングしてディジタル化: </b>
+
+<p>
+$\tau$ [秒] を<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>とした時、
+</p>
+
+\begin{align*}
+h[i] = h(\tau \cdot i ) = w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
+\end{align*}
+
+</div>
+
+<p>
+ディジタルインパルス応答 $h[i]$ を<a href="../../z/">Z 変換</a>する。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> ディジタルインパルス応答を Z 変換: </b>
+
+\begin{align*}
+\textrm{H}(z) &= \sum_{i=0}^\infty \{ h[i] \cdot z^{-i} \} \\
+&= \sum_{i=0}^\infty \{ w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
+&= w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
+(無限級数和の公式より) &= \frac{ w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+\end{align*}
+
+</div>
+
+<p>
+ゲイン調整のため $\tau$ をかけて 1 次 IIR ローパスフィルタの伝達関数 $\textrm{H}(z)$ を求める。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ローパスフィルタの伝達関数: </b>
+
+\begin{align*}
+\textrm{H}(z) &= \frac{ w_c \cdot \tau }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} }
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ローパスフィルタ係数: </b>
+
+\begin{align*}
+a[1] &= \textrm{e}^{-w_c \cdot \tau} \\
+b[0] &= w_c \cdot \tau \\
+b[1] &= 0 \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ローパスフィルタの周波数特性 (近似解): </b>
+
+<p>
+$|x|$ が十分小さい時、$\textrm{e}^{x}$ をマクローリン展開すると $ \textrm{e}^x \approx 1+x$ と近似できるから
+</p>
+
+\begin{align*}
+\textrm{H}(w)
+&= \frac{ w_c \cdot \tau }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot \textrm{e}^{-j\cdot w \cdot \tau} } \\
+&\approx \frac{ w_c \cdot \tau }{ 1 - (1-w_c \cdot \tau) \cdot (1-j\cdot w \cdot \tau) } \\
+&= \frac{ w_c \cdot \tau }{ 1 - (1 - j\cdot w \cdot \tau -w_c \cdot \tau + j \cdot w_c \cdot w \cdot \tau^2) } \\
+(\tau^2 \approx 0 とみなして) &= \frac{ w_c \cdot \tau }{ j \cdot w \cdot \tau +w_c \cdot \tau  } \\
+&= \frac{ w_c}{ j \cdot w + w_c  } 
+\end{align*}
+
+<p>
+よって(低周波数領域では) 1次 IIR ローパスフィルタの周波数特性は RC ローパスフィルタの周波数特性に近似される。
+</p>
+
+</div>
+
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>
