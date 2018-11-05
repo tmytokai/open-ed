@@ -86,46 +86,37 @@ h(t)
 
 <p>
 RC ローパスフィルタのインパルス応答を<a href="../../d-signal/text02/page01.html">サンプリング</a>してディジタルインパルス応答 $h[i]$ を求める。
+<br>
+ただしゲイン調整のため $\tau$ をかける。
+</p>
+
 </p>
 
 <div class="info">
-<input type="checkbox"><b> RC ローパスフィルタのインパルス応答をサンプリングしてディジタル化: </b>
+<input type="checkbox"><b> 1次 IIR ローパスフィルタのインパルス応答: </b>
 
 <p>
 $\tau$ [秒] を<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>とした時、
 </p>
 
 \begin{align*}
-h[i] = h(\tau \cdot i ) = w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
+h[i] = \tau \cdot h(\tau \cdot i ) = \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 \end{align*}
 
 </div>
 
 <p>
-ディジタルインパルス応答 $h[i]$ を<a href="../../z/">Z 変換</a>する。
-</p>
-
-<div class="info">
-<input type="checkbox"><b> ディジタルインパルス応答を Z 変換: </b>
-
-\begin{align*}
-\textrm{H}(z) &= \sum_{i=0}^\infty \{ h[i] \cdot z^{-i} \} \\
-&= \sum_{i=0}^\infty \{ w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
-&= w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
-(無限級数和の公式より) &= \frac{ w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
-\end{align*}
-
-</div>
-
-<p>
-ゲイン調整のため $\tau$ をかけて 1 次 IIR ローパスフィルタの伝達関数 $\textrm{H}(z)$ を求める。
+ディジタルインパルス応答 $h[i]$ を<a href="../../z/">Z 変換</a>して 1 次 IIR ローパスフィルタの伝達関数 $\textrm{H}(z)$ を求める。
 </p>
 
 <div class="info">
 <input type="checkbox"><b> 1次 IIR ローパスフィルタの伝達関数: </b>
 
 \begin{align*}
-\textrm{H}(z) &= \frac{ w_c \cdot \tau }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} }
+\textrm{H}(z) &= \sum_{i=0}^\infty \{ h[i] \cdot z^{-i} \} \\
+&= \sum_{i=0}^\infty \{ \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
+&= \tau \cdot w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
+(無限級数和の公式より) &= \frac{ \tau \cdot w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
 \end{align*}
 
 </div>
