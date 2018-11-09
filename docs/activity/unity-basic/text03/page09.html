@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>工程 8</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習(2D編-1)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「APPLE」オブジェクトを動かします。
+</p>
+<ul>
+<li>「APPLE」は常に自分から見て上方向に動き続けます。</li>
+<li>「APPLE」は壁や ORANGE とぶつかると跳ね返ります。</li>
+<li> 「APPLE」にセットするマテリアルの名前は「BOUND」とします。Friction(摩擦)は 0 、Bounciness(弾性)は 1 にします。</li>
+<li>「ORANGE」は最初の場所に静止したままです。</li>
+</ul>
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「APPLE」が跳ね返るように動かす</li>
+<li>「ORANGE」を最初の位置に固定する</li>
+</ol>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-2」に対して作業を続けます。 
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 1: 「APPLE」が跳ね返るように動かす</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」スクリプトを新規作成して 「APPLE」 Prefab にアタッチして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」スクリプトを開き、Start メソッドで次のように上方向に velocity をセットします。speed の範囲はランダムです。
+</p>
+<p>
+float speed = Random.Range( 0f, 最大速度 );
+<br>
+GetComponent&lt;Rigidbody2D&gt;().velocity = transform.up * speed;  // transform.up でオブジェクトの上の方角が取得できる
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「BOUND」マテリアルを新規作成して下さい( Physics Material ではなくて Physics Material 2D にするのを間違わないこと)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「BOUND」マテリアルをクリックし、 Friction(摩擦)を 0 、Bounciness(弾性)を 1 にします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」Prefabをクリックし、 Inspector ウィンドウの Circle Collider 2D の Material に「BOUND」を DnD します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (実行した際に跳ね返り方が弱い場合) Unity エディタの  Edit メニュー → Project Settings → Physics2D の Velocity Threshold の値を 0.0001 に変更して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 2 : 「ORANGE」を最初の位置に固定する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 「ORANGE」Prefabをクリックし、 Rigidbody 2D の Constraints → Freeze Rotation の x と y にチェックを入れます。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(APPLE.cs)を選んで下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(9,9)</script>
+</body>
+</html>

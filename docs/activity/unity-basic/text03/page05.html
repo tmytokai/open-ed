@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>工程 4</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習(2D編-1)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「APPLE」と「ORANGE」を作成し、Prefab化して MyWorld に初期配置します。
+</p>
+<ul>
+<li>APPLE、ORANGE の画像は任意とします。</li>
+</ul>
+<p>
+また Prefab のインスタンス化は MyWorld のスクリプトの中で行います。
+</p>
+<ul>
+<li> Start メソッドの中でそれぞれ 5 個ずつインタンス化します。</li>
+<li>位置と回転方向はランダムです。</li>
+</ul>
+
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「APPLE」「ORANGE」オブジェクトを作成して Prefab 化</li>
+<li> 「APPLE」「ORANGE」のインスタンス化</li>
+</ol>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-2」に対して作業を続けます。 
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 1: 「APPLE」「ORANGE」オブジェクトを作成して Prefab 化</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を用意し「APPLE」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を「APPLE」オブジェクト化して下さい。サイズは適宜変更して下さい。位置は適当で結構です。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」オブジェクトに Rigidbody 2D をアタッチして重力(Gravity Scale)を 0 にして下さい。<b>Constraints → Freeze Rotation → Z にチェックは入れないで下さい</b>。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」オブジェクトに <b>Circle</b> Collider 2D をアタッチして下さい。衝突範囲は適宜調整して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」を Prefab 化し、オブジェクトを削除して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 同様に「ORANGE」の Prefab も作成して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 2 : 「APPLE」「ORANGE」のインスタンス化</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 「MyWorld」スクリプトを新規作成して MyWorld にアタッチして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「MyWorld」スクリプトを開き、以下のフイールドを追加して下さい。
+</p>
+<p>
+public GameObject apple;
+<br>
+public GameObject orange;
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Start メソッドの中で「APPLE」と「ORANGE」をそれぞれ 5 つ、計 10 個インスタンス化して下さい。
+<br>
+表示位置は以下のようにランダムとします。
+</p>
+<p>
+float x = Random.Range( 最小の横座標, 最大の横座標 );  // Random.Range は指定した範囲の乱数を返す
+<br>
+float y = Random.Range( 最小の縦座標, 最大の縦座標  );
+<br>
+Vector2 position = new Vector2 ( x, y );
+</p>
+<p>
+なお乱数の範囲は本来ならカメラから正確な表示範囲の座標を取得するべきですが、今回は適当に決めて結構です(Sceneビューで TARO を動かして Inspector の Position の x, y を見ると楽に範囲が分かります)。
+<br>
+また回転角度は
+</p>
+<p>
+Quaternion rotation = Quaternion.Euler( 0f, 0f, Random.Range( 0, 360 ) ); 
+</p>
+<p>
+で0度から360度までランダムにセットできます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> スクリプトを保存して Unity エディタに戻って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> MyWorld の Inspector ウィンドウを開き、MyWorld(Script) の Apple と Orange に「APPLE」「ORANGE」Prefab　を DnD して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(MyWorld.cs)を選んで下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(5,9)</script>
+</body>
+</html>

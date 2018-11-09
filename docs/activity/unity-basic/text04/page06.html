@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 5</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [3] オブジェクト指向開発演習(2)</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>1. スプリント プランニング</h2>
+
+<div class="info">
+<input type="checkbox"><b>詳細設計:</b>
+<p>
+このスプリントでは、「BALL」オブジェクトを作成して Prefab化します。
+</p>
+<ul>
+<li>「BALL」の画像は任意とします。</li>
+<li>「BALL」は常に自分から見て上方向に動き続けます。</li>
+<li>「BALL」は他のオブジェクトをすり抜けます。</li>
+<li>「BALL」は一定時間後に自動的に削除されます。</li>
+<li> 移動速度(speed) は任意とします。</li>
+</ul>
+
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリント バックログ:</b>
+<p></p>
+<ol>
+<li>「BALL」オブジェクトを作成して Prefab 化</li>
+</ol>
+</div>
+
+<br>
+<h2>2. 開発作業</h2>
+
+<div class="info">
+<input type="checkbox"><b>準備:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-3」に対して作業を続けます。 
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>スプリントバックログ 1: 「BALL」オブジェクトを作成して Prefab 化</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を用意し「BALL」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 画像を「BALL」オブジェクト化して下さい。サイズは適宜変更して下さい。位置は適当で結構です。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「BALL」オブジェクトに Rigidbody 2D をアタッチして重力(Gravity Scale)を 0 にして下さい。なお<b>Constraints → Freeze Rotation → Z にチェックは入れないで下さい</b>。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「BALL」オブジェクトに <b>Circle</b> Collider 2D をアタッチして下さい。なお<b>is Trigger をチェックして下さい</b>。衝突範囲は適宜調整して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「BALL」スクリプトを新規作成して 「BALL」オブジェクトにアタッチして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「BALL」スクリプトを開き、Start メソッドで次のように上方向に velocity をセットします。speed の値は任意です。
+</p>
+<p>
+float speed = 任意;
+<br>
+GetComponent&lt;Rigidbody2D&gt;().velocity = transform.up * speed;  // transform.up でオブジェクトの上の方角が取得できる
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> このままだと「BALL」が発射されてから永久に動き続けるので、上のコードのすぐ後ろに「数秒したら自動で自分自身を削除する」プログラムを書いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> この時点で一度実行し、「BALL」が上に動いて設定した秒数後に Hierarchy ウィンドウから「BALL」の表示が消える事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行を停止し、「BALL」を Prefab 化し、オブジェクトを削除して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>テストとデバッグ:</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h2>3. リリース</h2>
+
+<div class="info">
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(BALL.cs)を選んで下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(6,9)</script>
+</body>
+</html>

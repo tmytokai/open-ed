@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. 文字列の表示</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Unity2D の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Unity で文字列やボタンといったユーザーインターフェイス(UI)オブジェクトを画面に表示するには uGUI という機能を使います。
+<br>
+ここでは文字列を表示してみましょう。
+</p>
+
+<p>
+まず以下の様にして描画領域の Canvas 型オブジェクトを作成し、Canvas 型オブジェクトの上に文字列を表示する Text 型オブジェクトを配置します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>Canvas 型オブジェクトと Text 型オブジェクトの新規作成</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で右クリック → UI → Text を選択すると 「Canvas」という名前の Canvas 型オブジェクトと 「Text」という名前の Text 型オブジェクトが出来る(名前は適宜変更可能)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Canvas オブジェクトをクリックすると Inspector ウィンドウに情報が表示されるので、Canvas コンポーネントの Render Mode プロパティが「Screen Space - Overlay」になっている事を確認する(※)。
+</p>
+<p>
+※ UI オブジェクトの描画方法を決めるプロパティです。他の設定については自分で調べて下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Canvas オブジェクトをダブルクリックすると Scene ビューがズームアウトして UI オブジェクトの配置状態を確認できるので、この画面でまず Text オブジェクトの位置を調整する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで Text オブジェクトをクリックすると Inspector ウィンドウに情報が表示される。Text コンポーネントの Text プロパティが表示される文字列である。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Text コンポーネントには他にも Font 名やサイズ、色の設定があるので適宜変更する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Game ビューに切り替えると実際のゲーム画面が表示されるので位置やサイズなどを確認する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scene ビューに戻って Hierarchy ウィンドウ上の適当なキャラクターオブジェクトをダブルクリックすると Scene ビューがズームインする(※)。
+</p>
+<p>
+※ この様に uGUI の設定方法は結構独特なので、初めて uGUI を使う人は操作に少し戸惑うかもしれません。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Text オブジェクトを追加で設置したい場合は Hierarchy ウィンドウ の Canvas オブジェクトを右クリック → UI → Text を選択する。
+</p>
+</div>
+</div>
+
+<p>
+さてスクリプト内でテキストの文字列を変更するには次の様にします。
+</p>
+
+<div class="info">
+<pre class="wrap">
+using の中に
+
+using UnityEngine.UI;
+
+を追加してから
+
+GameObject.Find ("Canvas 型オブジェクト名/Text 型オブジェクト名").GetComponent&lt;Text&gt; ().text = "文字列";
+</pre>
+</div>
+
+<p>
+例えば MyCanvas という名前のオブジェクトの中にある Text1 という名前のオブジェクトの文字列を "HOGE" に変更したい時は次のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: Text1 オブジェクトの文字列を変更</b>
+<pre class="wrap">
+using の中に
+
+using UnityEngine.UI;
+
+を追加してから
+
+GameObject.Find ("MyCanvas/Text1").GetComponent&lt;Text&gt; ().text = "HOGE";
+</pre>
+</div>
+
+
+<br>
+<script>PreNext(6,10)</script>
+</body>
+</html>
