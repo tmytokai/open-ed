@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>6. 直流(DC)信号</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタルサイン波</a></li>
+<li>学習項目: [1] 時間領域ディジタルサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+直流(DC)信号はすべての時刻において同じ大きさを取る信号で、数式的には周期 $\textrm{T}_d$ が無限大であるディジタルサイン波
+
+\[
+f[i] = a \cdot \sin( 0 \cdot i +\phi ) = a\cdot\sin(\phi)
+\]
+
+<p>
+である考えられます。
+</p>
+
+<p>
+ただし $a \cdot \sin( \phi )$ は実数の定数ですので、これを記号 $\alpha$ でまとめると次のような定義が出てきます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 直流(DC)信号 :</b>
+
+\[
+f[i] = \alpha
+\]
+
+<p>
+$\alpha$・・・実数の定数、範囲は実数全体、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+</p>
+
+</div>
+
+<p>
+例えば下のグラフは $\alpha = 1$、つまり$f[i] = 1 $ 、$i = 0, 1, \cdots 12$です。
+<br>
+この様に、グラフ的には直流(DC)信号は高さ $\alpha$ の位置にある、マイナス無限大からプラス無限大まで続く横方向の点列になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$f[i] = 1$ :</b>
+
+<p>
+　
+</p>
+
+<img src="./img/page06-fig1.png" alt="">
+
+</div>
+
+<script>PreNext(6,6)</script>
+</body>
+</html>

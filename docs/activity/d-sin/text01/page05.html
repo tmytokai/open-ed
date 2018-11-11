@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 位相反転</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタルサイン波</a></li>
+<li>学習項目: [1] 時間領域ディジタルサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page04.html">前ページ</a>の表より、位相 $\phi$ がぴったり $\pi$ [rad] 進んでいる場合と $\pi$ [rad] 遅れている場合は周期の半分(つまり $\textrm{T}_d/2$ [点])だけ等しく平行移動します。
+<br>
+このように $\phi = \pm\pi$の時、「<b>時間領域ディジタルサイン波の位相が反転している</b>」と言って、元の(初期位相 $0$ の)ディジタルサイン波が上下反転したグラフになります。
+</p>
+
+<p>
+例えば次の図1は $a=1$、$\textrm{T}_d = 6$、$\phi= 0$、$i=0,1, \cdots, 12$ の時の時間領域ディジタルサイン波(sin関数版)のグラフです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. $f[i] = 1 \cdot \sin( 2\pi /6 \cdot i )$ :</b>
+
+<p>
+　
+</p>
+
+<img src="./img/page05-fig1.png" alt="">
+
+</div>
+
+<p>
+次の図2は $a=1$、$\textrm{T}_d = 6$ は同じですが $\phi= -\pi$とした時のアナログサイン波で、確かに上下が反転していることが分かります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. $f[i] = 1 \cdot \sin( 2\pi /6 \cdot i -\pi )$ :</b>
+
+<p>
+　
+</p>
+
+<img src="./img/page05-fig2.png" alt="">
+
+</div>
+
+<p>
+なお、位相反転は振幅 $a$ の符号を反転させることと同じ意味です。
+<br>
+例えば次の図3は $a=-1$、$\textrm{T}_d = 6$ 、$\phi= 0$とした時のアナログサイン波で、図2と同じく上下反転しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. $f[i] = -1 \cdot \sin( 2\pi /6 \cdot i )$ :</b>
+
+<p>
+　
+</p>
+
+<img src="./img/page05-fig2.png" alt="">
+
+</div>
+
+<script>PreNext(5,6)</script>
+</body>
+</html>

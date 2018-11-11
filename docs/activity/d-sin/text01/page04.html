@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 初期位相と進み・遅れ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタルサイン波</a></li>
+<li>学習項目: [1] 時間領域ディジタルサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+初期位相 $\phi$ [rad]はサイン波の進み・遅れ、つまりグラフ全体が左(進む場合)または右(遅れる場合)に並行移動することを意味します。
+<br>
+この辺りの話は<a href="../../a-sin/">時間領域アナログサイン波</a>の時と全く同じなので、詳細はそちらを参考にして下さい。
+<p>
+なお時間領域アナログサイン波の時はグラフの移動距離の単位は「秒」でしたが、今回はディジタル信号ですので「点」になります。
+<br>
+位相と平行移動点数の関係は以下の表で表されます。
+</p>
+
+<p>
+<b>初期位相 $\phi$ [rad] と進み・遅れの関係:</b>
+</p>
+<p>
+$\phi$ [rad] を移送、$\textrm{T}_d$ [点] を周期とした時
+</p>
+<table>
+<tr><th> $\phi$ の符号</th><th>位相が・・・</th><th>点で言い換えると・・・</th><th>平行移動方向と距離</th></tr>
+<tr><td class="center">プラス </td><td class="center">  $\phi$ [rad] 進んでいる </td><td class="center"> $\phi/(2\pi) \cdot \textrm{T}_d$ [点] 進んでいる </td><td class="center"> 左へ $\phi/(2\pi) \cdot \textrm{T}_d$ [点] </td></tr>
+<td class="center">マイナス </td><td class="center">  $|\phi|$ [rad] 遅れている </td><td class="center"> $|\phi|/(2\pi) \cdot \textrm{T}_d$ [点] 遅れている </td><td class="center"> 右へ $|\phi|/(2\pi) \cdot \textrm{T}_d$ [点] </td></tr>
+</table>
+
+<script>PreNext(4,6)</script>
+</body>
+</html>
