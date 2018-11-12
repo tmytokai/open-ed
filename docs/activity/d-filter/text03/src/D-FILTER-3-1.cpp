@@ -26,7 +26,7 @@ typedef struct
 
 int main()
 {
-    FILE * fin = fopen( "D-FILTER-1-1.wav", "rb" );
+    FILE * fin = fopen( "trumpet_22k_mono.wav", "rb" );
     if( !fin ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
@@ -88,46 +88,57 @@ int main()
     double* y = ( double* )malloc( lng * sizeof(double) );
     memset( y, 0, lng * sizeof(double) );
 
+    double z[256] = {0};
+
     //----------------------------------------------
     // ここから穴埋め開始
 
     // サンプリング周波数 [Hz]
-    const double fs = 22050;  
+    const double fs = ?;  
 
-    // x[i] を fs = 22050 [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
+    // x[i] を fs [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
     // i の範囲は 0 <= i < N となる
-    const int N = 5 * fs; // 10 [秒] * fs [Hz]
-
-    // FIR フィルタ次数(タップ数)
-    const int L = ? ;
-
-    // フィルタ係数 = インパルス応答
-    double h[L];
+    const int N = 5 * fs; // 5 [秒] * fs [Hz]
 
     // カットオフ周波数 [Hz]
     const double fc = ? ;
 
-    // FIR ローパスフィルタ係数を計算
-    // 円周率は M_PI を使用する
-    const int C = (L-1)/2;
-    const double Alpha = ? ;
-    h[C] = ? ;
-    for( int i = 1; i <= ? ; ++i ){
-        h[C-i] = h[C+i] = ? ;
-    }
+    // サンプリング間隔 [秒]
+    const double tau = ? ;
 
-    // FIR フィルタ
+    // IIR フィルタ次数 (今回は 1 次)
+    const int L = 1;
+
+    // 1次 IIR ローパスフィルタ係数を計算
+    // 円周率は M_PI を使用する
+    double a[2] = {0};
+    double b[2] = {0};
+    a[1] = ? ;
+    b[0] = ? ;
+    b[1] = ? ;
+
+    // L 次 IIR フィルタ
     // 出力信号は y[i]
-    // i-k が負の場合は x[i-k] = 0 と既になっているので、場合分けせずにそのまま使って OK
+    // z[k] は k 時刻前の☆の値
+
     for( int i = 0; i < N; ++i ){
-        y[i] = ?;
-        for( int k = 0; k < ? ; ++k ) y[i] += ? ;
+
+        // 前段フィードバック部
+        z[0] = ? ;
+        for( int k = 1; k <= L; ++k ) z[0] += ? ;
+
+        // 後段フィードフォワード部
+        y[i] = ? ;
+        for( int k = 0; k <= L; ++k ) y[i] += ? ;
+
+        // バッファシフト
+        for( int k = 1; k <= L; ++k ) z[k] = ? ;
     }
 
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-1-2-out.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-3-1-out.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);

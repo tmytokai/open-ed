@@ -20,6 +20,22 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+次に IIR (Infinite Impulse Response) フィルタですが、このフィルタは日本語では「無限インパルス応答フィルタ」と呼ばれています。
+<br>
+つまり、インパルス応答が無限に出続けるフィルタです。
+</p>
+
+<p>
+従ってこのインパルス応答を Z 変換して伝達関数を求めても、伝達関数は<a href="../../z/text01/page01.html">Z変換の定義</a>そのものになるため、FIR フィルタのように簡単にプログラミングすることは出来ません(無限のforループになります)。
+<br>
+そこで IIR フィルタの場合は<a href="./page08.html">フィードバック機構</a>を使って設計をします。
+</p>
+
+<p>
+IIR フィルタには色々な種類があるのですが、今回は話を簡単にするために、次に示す標準形 L 次 IIR フィルタだけを考えます。
+</p>
+
 <div class="info">
 <input type="checkbox"><b>定義： 標準形 L 次 IIR (infinite impulse response: 無限インパルス応答)フィルタ : </b>
 
@@ -32,7 +48,7 @@
 \textrm{H}(z) 
 & = \frac{ \sum_{i=0}^{\textrm{L}} \{ b[i] \cdot z^{-i} \}}{ 1 - \sum_{i=1}^{\textrm{L}} \{ a[i] \cdot z^{-i} \} } \\
 & = \frac{ b[0] + b[1] \cdot z^{-1} + b[2] \cdot z^{-2} + \cdots + b[\textrm{L}] \cdot z^{-\textrm{L}} }
-{ 1 - a[1] \cdot z^{-1} - a[2] \cdot z^{-2} + \cdots + a[\textrm{L}] \cdot z^{-\textrm{L}} }
+{ 1 - \{ a[1] \cdot z^{-1} + a[2] \cdot z^{-2} + \cdots + a[\textrm{L}] \cdot z^{-\textrm{L}} \} }
 \end{align*}
 
 <p>
@@ -44,11 +60,31 @@
 </div>
 
 <p>
-　
+この伝達関数はフィードバック機構
+
+\begin{align*}
+\frac{ 1}{ 1 - \sum_{i=1}^{\textrm{L}} \{ a[i] \cdot z^{-i} \} } \\
+\end{align*}
+
+<p>
+と FIR フィルタ
 </p>
 
+\begin{align*}
+\sum_{i=0}^{\textrm{L}} \{ b[i] \cdot z^{-i} \}
+\end{align*}
+
+<p>
+の<a href="./page07.html">直列結合</a>になっています。
+</p>
+
+<p>
+前段のフィードバック機構は 9 ページの<a href="./page09.html#ex6">例6</a>と<a href="./page09.html#ex7">例7</a>より以下のブロック図で表されます。
+</p>
+
+
 <div class="info">
-<input type="checkbox"><b>定義： 標準形 L 次 IIR フィルタのブロック図: </b>
+<input type="checkbox"><b> $ \textrm{H}(z) = 1/( 1 - \sum_{i=1}^{\textrm{L}} \{ a[i] \cdot z^{-i} \} )$ のブロック図: </b>
 
 <p>
 　
@@ -59,33 +95,62 @@
 </div>
 
 <p>
+従って FIR フィルタと直列結合した時のブロック図は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 標準形 L 次 IIR フィルタのブロック図(未完成): </b>
+
+<p>
 　
+</p>
+
+<img src="./img/page11-fig2.png" alt="">
+
+</div>
+
+<p>
+ただこのままでは遅延器が重複してもったいないので１つにまとめ、最終的に標準形 L 次 IIR フィルタのブロック図は以下のように表されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 標準形 L 次 IIR フィルタのブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page11-fig3.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は以下の通りです。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>標準形 L 次 IIR フィルタのプログラム表現: </b>
 
 <p>
-x[i] は時刻 i が負の時は 0 とする。
-<br>
-また z[i] を $z^{-i}$ の値とする。
+z[k] を k 時刻前の☆の値とする。
 </p>
 
 <pre class="wrap">
 // 前段フィードバック部
 z[0] = x[i];
-for( j = 1; j &lt= L; ++j ) z[0] += a[j] * z[j]
+for( int k = 1; k &lt= L; ++k ) z[0] += a[k] * z[k];
+
 // 後段フィードフォワード部
 y[i] = 0;
-for( j = 0; j &lt= L; ++j ) y[i] += b[j] * z[j]
+for( int k = 0; k &lt= L; ++k ) y[i] += b[k] * z[k];
+
 // バッファシフト
-for( j = 1; j &lt= L; ++j ) z[j] = z[j-1]
+for( int k = 1; k &lt= L; ++k ) z[k] = z[k-1];
 </pre>
 
 </div>
 
-
-
+<br>
 <script>PreNext(11,13)</script>
 </body>
 </html>
