@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>6. 基本パーツ</title>
+<title>6. ブロック図</title>
 </head>
 <body>
 
@@ -21,317 +21,44 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-どんな複雑なディジタル線形フィルタも、実は
+あるフィルタの<a href="./page05.html">伝達関数</a> $\textrm{H}(z)$ を求めたら<b>「ブロック図」</b>または「<b>ブロック線図</b>」を描くことが出来るようになります。
 </p>
 
 <p>
-<b>
-「乗算器」「遅延素子」「加算器」
-</b>
+ブロック図とはフィルタの内部構造を記号で表し、更に記号間を矢印で繋いで信号の流れを表した図の事で<b>フィルタの設計図</b>に相当します。
 </p>
 
 <p>
-と呼ばれるたった 3 つの基本パーツだけが組み合わされて出来ています。これら基本パーツのうち「乗算器」「遅延素子」はフィルタの一種なので伝達関数を持っています。
-</p>
-
-<p>
-ここではこれら基本パーツの伝達関数とそれに対応するプロック図の描き方について説明します。
-<br>
-また基本パーツのプログラム表現についても示します。
-</p>
-
-<br>
-<h3>
-1. 乗算器
-</h3>
-
-<p>
-あるフィルタのインパルス応答が $h[i] = \{a,0,0,\cdots\}$ であるとき($a$ は実数)、伝達関数は $h[i]$ を<a href="../../z/">Z変換</a>して
-</p>
-
-<p>
-$\textrm{H}(z) = a$
-</p>
-
-<p>
-となりますが、この伝達関数を持つフィルタの事を<b>「乗算器」</b>と呼びます。
-</p>
-
-<p>
-乗算器に $x[i]$ を入力すると出力は
-</p>
-
-<p>
-$y[i] = a \cdot x[i]$
-</p>
-
-<p>
-の様に入力が $a$ 倍されて出てきます。ブロック図は次の通りです。
+例えば図1は「伝達関数 $\textrm{H}(z)$ を持つディジタル線形時不変フィルタに $x[i]$ を入力したら $y[i]$ が出てきた」という意味を持つ基本的なブロック図になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1: 乗算器のブロック図: </b>
+<input type="checkbox"><b>図1: 基本的なブロック図: </b>
 
 <p>
-伝達関数 $\textrm{H}(z) = a$ を持つフィルタは乗算器を意味し、$a$ を三角で囲む(※)。
+　
 </p>
 
-<p>
-※ 四角で囲んでいる文献もあります。
-</p>
-
-<img src="./img/page05-fig1.png" alt="">
+<img src="./img/page06-fig1.png" alt="">
 
 </div>
 
 <p>
-また乗算器はブログラムでは次のように表されます。
+ちなみに<a href="../../z/text01/page05.html">インパルス信号</a> $\delta[i]$ と<a href="./page03.html">インパルス応答</a> $h[i]$ と伝達関数 $\textrm{H}(z)$ の関係をブロック図で書けば次のように表されます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>乗算器のプログラム表現: </b>
+<input type="checkbox"><b>図2: インパルス信号とインパルス応答と伝達関数の関係: </b>
 
-<pre class="wrap">
-y[i] = a * x[i]
-</pre>
+<p>
+　
+</p>
+
+<img src="./img/page06-fig2.png" alt="">
+
 </div>
-
-<p>
-なお乗算器の出力が $y[i] = a \cdot x[i]$ となる理由は伝達関数の定義を使って次のように証明されます。<a href="./page04.html">伝達関数の定義は 2 つありました</a>ので両方のやり方を示します。
-</p>
-
-<p>
-(定義1を使った証明)
-</p>
-
-<p>
-出力が
-</p>
-
-\begin{align*}
-y[i] = a\cdot x[i]
-\end{align*}
-
-<p>
-で得られるフィルタにディジタルインパルス信号 $\delta[i] = \{1,0,0,\cdots\}$ を入力した時のインパルス応答は $h[i] = \{a,0,0,\cdots\}$ なので、それを Z 変換すると乗算器の伝達関数である $\textrm{H}(z) = a$ が得られる (証明終)
-
-<p>
-(定義2を使った証明)
-</p>
-
-<p>
-入力信号 $x[i]$ の Z 変換を $\textrm{X}(z)$、出力信号 $y[i]$ の Z 変換を $\textrm{Y}(z)$ とする。
-出力が
-</p>
-
-\begin{align*}
-y[i] = a\cdot x[i]
-\end{align*}
-
-<p>
-で得られるフィルタがあるとき、この両辺を Z 変換すると
-</p>
-
-\begin{align*}
-\textrm{Y}(z) = a\cdot \textrm{X}(z)
-\end{align*}
-
-<p>
-となるが、両辺を $\textrm{X}(z)$ で割ると
-</p>
-
-\begin{align*}
-\frac{\textrm{Y}(z)}{\textrm{X}(z)} = \textrm{H}(z) = a
-\end{align*}
-
-<p>
-というように乗算器の伝達関数が得られる(証明終)。
-</p>
 
 <br>
-<h3>
-2. 遅延素子
-</h3>
-
-<p>
-あるフィルタのインパルス応答が $h[i] = \{0,1,0,0,\cdots\}$ であるとき、伝達関数は $h[i]$ を<a href="../../z/">Z変換</a>して
-
-<p>
-$\textrm{H}(z) = z^{-1}$
-</p>
-
-<p>
-となりますが、この伝達関数を持つフィルタの事を<b>「(1 時刻)遅延素子」</b>と呼びます。
-</p>
-
-<p>
-遅延素子に $x[i]$ を入力すると出力は
-</p>
-
-<p>
-$y[i] = x[i-1]$
-</p>
-
-<p>
-の様に 1 時刻前の入力が遅れて出てきます。ブロック図は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図2: (1 時刻)遅延素子のブロック図: </b>
-
-<p>
-伝達関数 $\textrm{H}(z) = z^{-1}$ は遅延素子を意味し、$z^{-1}$ を四角で囲む。
-</p>
-
-<img src="./img/page05-fig2.png" alt="">
-
-</div>
-
-<p>
-また遅延素子はブログラムでは次のように表されます。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>遅延素子のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = x[i-1]
-</pre>
-</div>
-
-<p>
-なお遅延素子の出力が $y[i] = x[i-1]$ となる理由は伝達関数の定義を使って次のように証明されます。<a href="./page04.html">伝達関数の定義は 2 つありました</a>ので両方のやり方を示します。
-</p>
-
-<p>
-(定義1を使った証明)
-</p>
-
-<p>
-出力が 
-</p>
-
-\begin{align*}
-y[i] = x[i-1]
-\end{align*}
-
-<p>
-で得られるフィルタにディジタルインパルス信号 $\delta[i] = \{1,0,0,\cdots\}$ を入力した時のインパルス応答は $h[i] = \{0,1,0,\cdots\}$ なので、それを Z 変換すると遅延素子の伝達関数である $\textrm{H}(z) = z^{-1}$ が得られる(証明終)
-
-<p>
-(定義2を使った証明)
-</p>
-
-<p>
-入力信号 $x[i]$ の Z 変換を $\textrm{X}(z)$、出力信号 $y[i]$ の Z 変換を $\textrm{Y}(z)$ とする。
-出力が 
-</p>
-
-\begin{align*}
-y[i] = x[i-1]
-\end{align*}
-
-<p>
-で得られるフィルタがあるとき、この両辺を Z 変換すると
-</p>
-
-\begin{align*}
-\textrm{Y}(z) &= \sum_{i=0}^{\infty} \{ x[i-1] \cdot z^{-i} \} \\
-&= \left [ \sum_{i=0}^{\infty} \{ x[i-1] \cdot z^{-(i-1)} \} \right ] \cdot z^{-1}
-\end{align*}
-
-<p>
-ここで $i'=i-1$ と置くと
-</p>
-
-\begin{align*}
-\textrm{Y}(z) = \left [ \sum_{i'=-1}^{\infty} \{ x[i'] \cdot z^{-i'} \} \right ] \cdot z^{-1}
-\end{align*}
-
-<p>
-となるが、$x[-1] = 0$ なので
-</p>
-
-\begin{align*}
-\textrm{Y}(z) = \left [ \sum_{i'=0}^{\infty} \{ x[i'] \cdot z^{-i'} \} \right ] \cdot z^{-1}
-\end{align*}
-
-<p>
-となる。再び $i'$ を $i$ に置き換えると
-</p>
-
-\begin{align*}
-\textrm{Y}(z) &= \left [ \sum_{i=0}^{\infty} \{ x[i] \cdot z^{-i} \} \right ] \cdot z^{-1} \\
-&= \textrm{X}(z)  \cdot z^{-1} \\
-\end{align*}
-
-<p>
-となるので、後は両辺を $\textrm{X}(z)$ で割ると
-</p>
-
-\begin{align*}
-\frac{\textrm{Y}(z)}{\textrm{X}(z)} = \textrm{H}(z) = z^{-1}
-\end{align*}
-
-<p>
-というように遅延素子の伝達関数が得られる(証明終)。
-</p>
-
-<br>
-<h3>
-3. 可算器
-</h3>
-
-<p>
-$x_0[i]$ から $x_{\textrm{L}-1}[i]$ まで計 $\textrm{L}$ 個の入力信号があるとき、それらを足しあわせて
-</p>
-
-\begin{align*}
-y[i] = \sum_{k=0}^{\textrm{L}-1} x_k[i]
-\end{align*}
-
-<p>
-を出力する装置を加算器と呼びます。
-</p>
-
-
-<p>
-加算器は厳密に言うと次のページで説明する「並列結合」であり、フィルタでは無いので伝達関数はありませんが、ブロック図は次の様に表されます。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図3: 可算器のブロック図: </b>
-
-<p>
-加算器は＋記号を丸で囲む(※)。
-</p>
-
-<p>
-※ 四角で囲んでいる文献もあります。また＋ではなくて SUM や Σ を使う場合もあります。
-</p>
-
-
-<img src="./img/page05-fig3.png" alt="">
-
-</div>
-
-<p>
-また可算器はブログラムでは次のように表されます。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>可算器のプログラム表現: </b>
-
-<p>
-x[k][i] を k 番目の入力信号の時刻 i における値とすると
-</p>
-
-<pre class="wrap">
-y[i] = 0;
-for( k = 0; k &lt L; ++k ) y[i] += x[k][i]
-</pre>
-</div>
-
-<script>PreNext(6,13)</script>
+<script>PreNext(6,12)</script>
 </body>
 </html>

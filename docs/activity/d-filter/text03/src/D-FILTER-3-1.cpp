@@ -138,7 +138,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-3-1-out.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-3-1.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);

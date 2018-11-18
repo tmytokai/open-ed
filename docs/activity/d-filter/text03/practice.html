@@ -25,7 +25,8 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. ローパスフィルタの設計</a></h2>
+<h2><a href="./page01.html">1. IIR フィルタ</a></h2>
+<h2><a href="./page02.html">2. ローパスフィルタの設計</a></h2>
 
 <p>
 <input type="checkbox"><b>演習3-1 (個人、? 分):</b> 1次 IIR ローパスフィルタを使ってサンプル音声から低周波成分を取り除いてみましょう。 
@@ -35,17 +36,17 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>(trumpet_22k_mono.wav)をソースと同じフォルダにダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、カットオフ周波数は $f_c$ = 500 [Hz] とします。
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、カットオフ周波数は $f_c$ = 500 [Hz] とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「D-FILTER-3-1-out.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「D-FILTER-3-1.wav 」という Wave形式音声ファイルが出来ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で元の音声(trumpet_22k_mono.wav)を演奏し、元の音声のスペクトログラム表示を確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>を違うタブで開き、フィルタリング後の音声(D-FILTER-3-1-out.wav)を演奏して高周波成分が減衰していることを確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>を違うタブで開き、フィルタリング後の音声(D-FILTER-3-1.wav)を演奏して高周波成分が減衰していることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 元の音声(trumpet_22k_mono.wav)のスペクトログラム表示のスクリーンショットを取って下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(D-FILTER-3-1-out.wav)のスペクトログラム表示のスクリーンショットを取って下さい。
+<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(D-FILTER-3-1.wav)のスペクトログラム表示のスクリーンショットを取って下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム表示とフィルタリング後の音声のスペクトログラム表示」を貼りつけて下さい。 
 </p>
@@ -171,6 +172,6 @@
 
 
 
-<script>PreNext(3,2)</script>
+<script>PreNext(4,3)</script>
 </body>
 </html>

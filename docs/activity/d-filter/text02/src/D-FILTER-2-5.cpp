@@ -26,7 +26,7 @@ typedef struct
 
 int main()
 {
-    FILE * fin = fopen( "myvoice.wav", "rb" );
+    FILE * fin = fopen( "trumpet_22k_mono.wav", "rb" );
     if( !fin ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
@@ -129,7 +129,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-1-2.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-2-5.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);

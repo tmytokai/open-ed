@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. ハイパスフィルタの設計</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [2] FIRフィルタの設計</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+最後に FIR ハイパスフィルタのインパルス応答、伝達関数、周波数特性を示します。
+<br>
+これらの式は全て<a href="./page03.html">FIR ローパスパスフィルタ</a>と同様の計算で求めることが出来るので、興味のある人は自分で計算してみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR ハイパスフィルタのインパルス応答: </b>
+
+<p>
+$\alpha$ を正規化カットオフ周波数
+<p>
+
+\begin{align*}
+\alpha = \frac{w_c}{(w_s/2)} = \frac{f_c}{(f_s/2)}
+\end{align*}
+
+<p>
+とする。
+</p>
+
+<p>
+ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
+<br>
+また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
+</p>
+
+<p>
+さらに FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とする)、正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義する。
+</p>
+
+<p>
+この時、FIR ハイパスパスフィルタのインパルス応答は次の式で表される。
+</p>
+
+\begin{align*}
+h[\textrm{C}] = 1 - \alpha
+\end{align*}
+
+\begin{align*}
+h[\textrm{C}-i] = h[\textrm{C}+i] = -\frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }\ ,\  (i = 1, 2, \cdots, \textrm{C} )
+\end{align*}
+
+</div>
+
+<p>
+伝達関数は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR ハイパスフィルタの伝達関数: </b>
+
+<p>
+$h[i]$ を上で計算した FIR ハイパスフィルタのインパルス応答とした時
+</p>
+
+\begin{align*}
+\textrm{H}(z) 
+= \sum_{i=0}^{\textrm{L}-1} \{ h[i] \cdot z^{-i} \}
+\end{align*}
+
+</div>
+
+
+<p>
+周波数特性は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>FIR ハイパスフィルタの周波数特性: </b>
+
+<p>
+$h[i]$ を上で計算した FIR ハイパスフィルタのインパルス応答とした時
+</p>
+
+\begin{align*}
+\textrm{H}(w) = 
+\left (
+h[\textrm{C}] 
++ \sum_{i = 1}^{\textrm{C}} 
+\left \{
+2 \cdot h[\textrm{C}+i] \cdot \cos (i\cdot w \cdot \tau )
+\right \}
+\right )
+\cdot
+\textrm{e}^{ -j \cdot w \cdot \textrm{C} \cdot \tau }
+\end{align*}
+
+</div>
+
+<br>
+<script>PreNext(4,4)</script>
+</body>
+</html>

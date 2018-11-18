@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>10. FIRフィルタ</title>
+<title>10. 伝達関数からブロック図を描く</title>
 </head>
 <body>
 
@@ -21,79 +21,319 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前のページではいくつか簡単な例を挙げて伝達関数とブロック図の関係を示しましたが、ここから実際に世の中でよく使われている FIR フィルタとIIR フィルタについて説明します。
+フィルタの<a href="./page08.html#seri">直列結合</a>、<a href="./page08.html#para">並列結合</a>、<a href="./page09.html">フィードバック機構</a>について学びましたので、いよいよ<a href="./page07.html">基本パーツ</a>を使って複雑な伝達関数を持つフィルタのブロック図を描けるようになりました。
 </p>
 
 <p>
-まず FIR (Finite Impulse Response) フィルタですが、このフィルタは日本語では「有限インパルス応答フィルタ」と呼ばれています。
+ここでは伝達関数→ブロック図の変換例をいくつか紹介したいと思います。
 <br>
-つまり、正整数 $\textrm{L}$ を有限の数とした時、インパルス応答が $h[0]$ から $h[\textrm{L}-1]$ まで値が入っていて、残りは全て $h[i]=0, (i=\textrm{L},\textrm{L}+1,\cdots)$ となるフィルタです。
+またそのプログラム表現についても紹介します。
 </p>
 
-<p>
-従ってこのインパルス応答を Z 変換して伝達関数を求めると、伝達関数は<a href="../../z/text01/page04.html">有限長の時間領域ディジタル信号のZ変換</a>の所で勉強した式と同じ形で表されます。
-</p>
-
-<p>
-以上をまとめると FIR フィルタの定義は以下の通りになります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>定義： FIR (finite impulse response: 有限インパルス応答)フィルタ: </b>
-
-
-<p>
-正整数 $\textrm{L}$ を有限の数とした時、インパルス応答が $h[0]$ から $h[\textrm{L}-1]$ まで値が入っていて、残りは全て $h[i]=0, (i=\textrm{L},\textrm{L}+1,\cdots)$ となるフィルタのことを FIR フィルタと呼び、その伝達関数は以下で表される。
-</p>
+<br>
+<h3>
+(例1) 乗算器と乗算器の直列結合
+</h3>
 
 \begin{align*}
-\textrm{H}(z) 
-& = \sum_{i=0}^{\textrm{L}-1} \{ h[i] \cdot z^{-i} \} \\
-& = h[0] + h[1] \cdot z^{-1} + h[2] \cdot z^{-2} + \cdots + h[\textrm{L}-1] \cdot z^{-(\textrm{L}-1)}
+\textrm{H}(z) = a \cdot b
 \end{align*}
 
 <p>
-なおインパルス応答 $h[i]$ は「FIRフィルタ係数」または「タップ係数」と呼ばれることもある。
-<br>
-また整数 $\textrm{L}$ を「フィルタ長」または「フィルタ次数」または「タップ数」と言う。
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と乗算器 $\textrm{H}_2(z) = b$ の<a href="./page08.html#seri">直列結合</a>と考えられますので結局乗算器 1 つだけのブロック図に変わります。
 </p>
 
-</div>
-
 <p>
-FIR フィルタのブロック図は前のページの<a href="./page09.html#ex5">例 5</a> と<a href="./page09.html#ex6">例 6</a>を組み合わせて次のようになります。
+この時のブロック図は次の通りです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： FIR フィルタのブロック図: </b>
+<input type="checkbox"><b>例1のブロック図: </b>
 
-<p>
-　
-</p>
+<p>　</p>
 
 <img src="./img/page10-fig1.png" alt="">
 
 </div>
 
 <p>
-FIRフィルタのプログラム表現は次の通りになります。
+プログラム表現は次の通りです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR フィルタのプログラム表現: </b>
-
-<p>
-x[i] は時刻 i が負の時は 0 とする
-</p>
+<input type="checkbox"><b>例1のプログラム表現: </b>
 
 <pre class="wrap">
-y[i] = 0;
-for( k = 0; k &lt L; ++k ) y[i] += h[k] * x[i-k]
+y[i] = (a * b) *  x[i]
 </pre>
 
 </div>
 
 <br>
-<script>PreNext(10,13)</script>
+<h3 id="ex2">
+(例2) 乗算器と 1 時刻遅延素子の直列結合
+</h3>
+
+\begin{align*}
+\textrm{H}(z) = a \cdot z^{-1}
+\end{align*}
+
+<p>
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の<a href="./page08.html#seri">直列結合</a>と考えられます
+</p>
+
+<p>
+この時のブロック図は次の通りです。
+<br>
+なお一般的に乗算器は遅延素子の後に置くことが多いのでこの図では乗算器と遅延素子の順番を入れ替えています(もちろん乗算器→遅延素子の順でも問題ないです)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例2のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig2.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例2のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] = a * x[i-1]
+</pre>
+
+</div>
+
+<br>
+<h3>
+(例3) 2 つの 1 時刻遅延素子の直列結合 = 2 時刻遅延素子
+</h3>
+
+\begin{align*}
+\textrm{H}(z) = z^{-1} \cdot z^{-1}
+\end{align*}
+
+<p>
+という伝達関数を持つフィルタは 1時刻遅延素子 $\textrm{H}_1(z) = z^{-1}$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の<a href="./page08.html#seri">直列結合</a>と考えられますが、これを $z$ の項でまとめると伝達関数は
+</p>
+
+\begin{align*}
+\textrm{H}(z) = z^{-2}
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<p>
+この伝達関数を持つフィルタを<b>「2 時刻遅延素子」</b>と呼び、入力が 2 時刻遅れて出てくるフィルタになります。
+<br>
+2時刻遅延素子の時のブロック図は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例 3 のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig3.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例3 のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] = x[i-2]
+</pre>
+
+</div>
+
+<br>
+<h3 id="ex4">
+(例4) $n$ 個の 1 時刻遅延素子の直列結合 = $n$ 時刻遅延素子
+</h3>
+
+<p>
+同様に遅延素子を $n$ 個の 1 時刻遅延素子を<a href="./page08.html#seri">直列結合</a>することで<b>「$n$ 時刻遅延素子」</b>を作ることが出来ます。
+<br>
+伝達関数は次の通りです。
+</p>
+
+\begin{align*}
+\textrm{H}(z) = z^{-n}
+\end{align*}
+
+<p>
+ブロック図は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例 4 のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig4.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例4 のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] = x[i-n]
+</pre>
+
+</div>
+
+<br>
+<h3 id="ex5">
+(例5) 直列結合と並列結合の組み合わせ
+</h3>
+
+\begin{align*}
+\textrm{H}(z) = a + b \cdot z^{-n}
+\end{align*}
+
+<p>
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と $n$ 時刻遅延素子 $z^{-n}$ を<a href="./page08.html#seri">直列結合</a>した  $\textrm{H}_2(z) = b \cdot z^{-n}$ の<a href="./page08.html#para">並列結合</a>と考えられます
+</p>
+
+<p>
+この時のブロック図は次の通りです。
+<br>
+$\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-n}$ が加算器で結合されています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例5のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig5.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例5のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] = a * x[i] + b * x[i-n]
+</pre>
+
+</div>
+
+<br>
+<h3 id="ex6">
+(例6) $n$ 時刻遅延素子の並列結合
+</h3>
+
+\begin{align*}
+\textrm{H}(z) = z^{-2} + z^{-3}
+\end{align*}
+
+<p>
+という伝達関数を持つフィルタは 2 時刻遅延素子 $\textrm{H}_1(z) = z^{-2}$ と 3 時刻遅延素子 $\textrm{H}_2(z) = z^{-3}$ の<a href="./page08.html#para">並列結合</a>と考えられます
+</p>
+
+<p>
+この時のブロック図を素直に描くと次の通りになります。
+<br>
+$\textrm{H}_1(z) = z^{-2}$ と $\textrm{H}_2(z) = z^{-3}$ が加算器で結合されています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例6のブロック図(素直な描き方): </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig6-1.png" alt="">
+
+</div>
+
+<p>
+ただし、このままだと遅延素子が無駄に多く含まれていてもったいないので、遅延素子を一部共通化して次の様なブロック図にします。
+
+<div class="info">
+<input type="checkbox"><b>例6のブロック図(遅延素子を共通化した描き方): </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig6-2.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例6のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] =  x[i-2] + x[i-3]
+</pre>
+
+</div>
+
+<br>
+<h3 id="ex7">
+(例7) 直列結合とフィードバック機構の組み合わせ
+</h3>
+
+\begin{align*}
+\textrm{H}(z) = \frac{1}{1- a \cdot z^{-1}}
+\end{align*}
+
+<p>
+という伝達関数を持つフィルタは<a href="#ex2">例2</a>で考えたフィルタを<a href="./page09.html">フィードバック機構</a>の $\textrm{H}_1(z)$ にしたフィルタであると考えられます。
+</p>
+
+<p>
+従ってブロック図は次の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例7のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page10-fig7.png" alt="">
+
+</div>
+
+<p>
+プログラム表現は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>例7のプログラム表現: </b>
+
+<pre class="wrap">
+y[i] =  x[i] + a * y[i-1]
+</pre>
+
+</div>
+
+<br>
+<script>PreNext(10,12)</script>
 </body>
 </html>

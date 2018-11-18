@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>9. 伝達関数からブロック図を描く</title>
+<title>9. フィードバック機構</title>
 </head>
 <body>
 
@@ -21,309 +21,35 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-フィルタの<a href="./page07.html">直列・並列結合</a>と<a href="./page08.html">フィードバック機構</a>を学びましたので伝達関数からブロック図を描き、プログラム表現を求める事ができるようになりました。
+伝達関数
 </p>
-
-<p>
-基本的なやり方は、伝達関数を直列結合・並列結合・フィードバック機構の 3 構造に分け、さらにそれぞれを乗算器、遅延素子を使って描き直すことです。
-<br>
-ただし複雑な伝達関数でこの作業をするのは結構大変ですので、ここでは簡単な伝達関数→ブロック図→プログラム表現の変換例をいくつか紹介したいと思います。
-</p>
-
-<br>
-<h3>
-(例1) $\textrm{H}(z) = a \cdot b$ : 乗算器と乗算器の直列結合
-</h3>
 
 \begin{align*}
-\textrm{H}(z) = a \cdot b
+\textrm{H}(z) = \frac{1}{1-\textrm{H}_1(z)}
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と乗算器 $\textrm{H}_2(z) = b$ の直列結合と考えられますので結局乗算器 1 つだけのブロック図に変わります。
+
+<br>
+を持つフィルタの事を「<b>フィードバック機構</b>」または「<b>フィードバック経路</b>」と呼びます。
 </p>
 
 <p>
-この時のブロック図は次の通りです。
+簡単に言うとフィードバック機構とは、出力信号が伝達関数 $\textrm{H}_1(z)$ を持つフィルタに通されてから入力信号に再加算される仕組みのことで、ブロック図は次の様になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例1のブロック図: </b>
+<input type="checkbox"><b>図: フィードバック機構のブロック図: </b>
 
-<p>　</p>
+<p>
+　
+</p>
 
 <img src="./img/page09-fig1.png" alt="">
 
 </div>
 
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例1のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = (a * b) *  x[i]
-</pre>
-
-</div>
-
 <br>
-<h3 id="ex2">
-(例2) $\textrm{H}(z) =a \cdot z^{-1}$ : 乗算器と遅延素子の直列結合
-</h3>
-
-\begin{align*}
-\textrm{H}(z) = a \cdot z^{-1}
-\end{align*}
-
-<p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と遅延素子 $\textrm{H}_2(z) = z^{-1}$ の直列結合と考えられます
-</p>
-
-<p>
-この時のブロック図は次の通りです。なお一般的に乗算器は遅延素子の後に置くことが多いのでこの図では乗算器と遅延素子の順番を入れ替えています(もちろん乗算器→遅延素子の順でも問題ないです)。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例2のブロック図: </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig2.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例2のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = a * x[i-1]
-</pre>
-
-</div>
-
-<br>
-<h3>
-(例3) $\textrm{H}(z) = z^{-2}$ : 2時刻遅延素子
-</h3>
-
-\begin{align*}
-\textrm{H}(z) = z^{-1} \cdot z^{-1}
-\end{align*}
-
-<p>
-という伝達関数を持つフィルタは遅延素子 $\textrm{H}_1(z) = z^{-1}$ と 遅延素子 $\textrm{H}_2(z) = z^{-1}$ の直列結合と考えられますが、これを $z$ の項でまとめると伝達関数は
-</p>
-
-\begin{align*}
-\textrm{H}(z) = z^{-2}
-\end{align*}
-
-<p>
-となります。
-</p>
-
-<p>
-この伝達関数を持つフィルタを<b>「2時刻遅延素子」</b>と呼び、入力が 2 時刻遅れて出てくるフィルタになります。2時刻遅延素子の時のブロック図は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例 3 のブロック図: </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig3.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例3 のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = x[i-2]
-</pre>
-
-</div>
-
-<br>
-<h3 id="ex4">
-(例4) $\textrm{H}(z) = z^{-k}$ : $k$ 時刻遅延素子
-</h3>
-
-<p>
-同様に遅延素子を $k$ 個直列結合することで<b>「$k$ 時刻遅延素子」</b>を作ることが出来ます。
-伝達関数は
-</p>
-
-\begin{align*}
-\textrm{H}(z) = z^{-k}
-\end{align*}
-
-<p>
-で、ブロック図は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例 4 のブロック図: </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig4.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例4 のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = x[i-k]
-</pre>
-
-</div>
-
-<br>
-<h3 id="ex5">
-(例5) $\textrm{H}(z) = a + b \cdot z^{-k}$ : 直列結合と並列結合の組み合わせ
-</h3>
-
-\begin{align*}
-\textrm{H}(z) = a + b \cdot z^{-k}
-\end{align*}
-
-<p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と $k$ 時刻遅延素子 $z^{-k}$ を直列結合した  $\textrm{H}_2(z) = b \cdot z^{-k}$ の並列結合と考えられます
-</p>
-
-<p>
-この時のブロック図は次の通りです。$\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-k}$ が加算器で結合されています。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例5のブロック図: </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig5.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例5のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] = a * x[i] + b * x[i-k]
-</pre>
-
-</div>
-
-<br>
-<h3 id="ex6">
-(例6) $\textrm{H}(z) = z^{-2} + z^{-3}$ : $k$ 時刻遅延素子の並列結合
-</h3>
-
-\begin{align*}
-\textrm{H}(z) = z^{-2} + z^{-3}
-\end{align*}
-
-<p>
-という伝達関数を持つフィルタは$2$ 時刻遅延素子 $\textrm{H}_1(z) = z^{-2}$ と $3$ 時刻遅延素子 $\textrm{H}_2(z) = z^{-3}$ の並列結合と考えられます
-</p>
-
-<p>
-この時のブロック図を素直に描くと次の通りになります。$\textrm{H}_1(z) = z^{-2}$ と $\textrm{H}_2(z) = z^{-3}$ が加算器で結合されています。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例6のブロック図(素直な描き方): </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig6-1.png" alt="">
-
-</div>
-
-<p>
-ただし、このブロック図のままだと遅延素子が無駄に多く含まれていてもったいないので、$k$ 時刻遅延素子を並列結合する場合は一般的には遅延素子を一部共通化して次の様なブロック図にします。
-
-<div class="info">
-<input type="checkbox"><b>例6のブロック図(遅延素子を共通化した描き方): </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig6-2.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例6のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] =  x[i-2] + x[i-3]
-</pre>
-
-</div>
-
-<br>
-<h3 id="ex7">
-(例7) $\textrm{H}(z) = 1/(1- a \cdot z^{-1})$ : 直列結合と並列結合とフィードバック機構の組み合わせ
-</h3>
-
-\begin{align*}
-\textrm{H}(z) = \frac{1}{1- a \cdot z^{-1}}
-\end{align*}
-
-<p>
-という伝達関数を持つフィルタは<a href="#ex2">例2</a>で考えたフィルタを<a href="./page08.html">フィードバック機構</a>の $\textrm{H}_1(z)$ にしたフィルタであると考えられます。
-</p>
-
-<p>
-従ってブロック図は次の通りになります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例7のブロック図: </b>
-
-<p>　</p>
-
-<img src="./img/page09-fig7.png" alt="">
-
-</div>
-
-<p>
-プログラム表現は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>例7のプログラム表現: </b>
-
-<pre class="wrap">
-y[i] =  x[i] + a * y[i-1]
-</pre>
-
-</div>
-
-<script>PreNext(9,13)</script>
+<script>PreNext(9,12)</script>
 </body>
 </html>

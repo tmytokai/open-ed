@@ -21,18 +21,34 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次は(単純)移動平均フィルタ(Simple Moving Average Filter)について説明します。
+最も基本的な FIR フィルタは(単純)移動平均フィルタ(Simple Moving Average Filter)です。
 </p>
 
 <p>
-この移動平均フィルタは現在時刻時間を移動させながら過去 $\textrm{L}$ 時刻分の入力信号値の単純平均を出力するというだけのフィルタですので、インパルス応答は次のようになります。
+この移動平均フィルタは現在時刻を移動させながら過去 $\textrm{L}$ 時刻分の入力信号値の単純平均を出力するというだけのフィルタで、出力は次の計算で求められます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>移動平均フィルタの出力: </b>
+
+\begin{align*}
+y[i]
+& = \frac{ \sum_{n=0}^{\textrm{L-1}} x[i-n] }{\textrm{L}} \\
+& = \sum_{n=0}^{ \textrm{L-1}} \left \{ \frac{1}{\textrm{L}} \cdot  x[i-n] \right \}
+\end{align*}
+
+</div>
+
+
+<p>
+この式は<a href="./page01.html">前ページ</a>で示した FIR フィルタの畳込み演算そのものですので、従って<a href="../text01/page03.html">インパルス応答</a>は次のようになります。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>(単純)移動平均フィルタのインパルス応答: </b>
 
 <p>
-さらに移動平均フィルタフィルタ長として適当な正整数 $\textrm{L}$ を決める。
+移動平均フィルタ長として適当な正整数 $\textrm{L}$ を決める。
 </p>
 
 <p>
@@ -46,27 +62,31 @@ h[i] = \frac{1}{\textrm{L}}\ ,\  (i = 0, 1, \cdots, \textrm{L}-1 )
 </div>
 
 <p>
-伝達関数は次のようになります。
+伝達関数はインパルス応答を<a href="../../z/">Z 変換</a>して次のようになります。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>移動平均フィルタの伝達関数: </b>
 
+<p>　</p>
 
 \begin{align*}
 \textrm{H}(z) 
 = \sum_{i=0}^{\textrm{L}-1} \{ \frac{1}{\textrm{L}} \cdot z^{-i} \}
 \end{align*}
 
-</p>
 
 </div>
 
 
 <p>
-移動平均フィルタの周波数特性はFIRローパスフィルタの時と同様に考えて次のようになります。
+移動平均フィルタの<a href="../text01/page11.html">周波数特性</a>は次のようになります(※)。
 <br>
 ただし式を簡単にするために今回は $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ を定義しました。
+</p>
+
+<p>
+※ この特性式の求め方はインパルス応答の遅延等を考える必要があって結構難しいので<a href="./page03.html">次ページ</a>でじっくりと説明します。
 </p>
 
 <div class="info">
@@ -95,12 +115,12 @@ $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする。
 </div>
 
 <p>
-この後演習で確認しますが、移動平均フィルタの周波数特性はローパス特性になります。
+この後<a href="./practice.html">演習</a>で確認しますが、移動平均フィルタの周波数特性はローパス特性になります。
 <br>
 ただしフィルタ長 $\textrm{L}$ が短いと緩慢な減衰特性になるので、高周波ノイズをきちんと取り除きたい場合はある程度の長さにしないといけません。
 </p>
 
 <br>
-<script>PreNext(2,3)</script>
+<script>PreNext(2,4)</script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>8. フィードバック機構</title>
+<title>8. フィルタの合成</title>
 </head>
 <body>
 
@@ -21,23 +21,36 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-フィードバック機構とは、出力信号が伝達関数 $\textrm{H}_1(z)$ を持つフィルタに通されて入力信号に加算される仕組みのことです。
+<a href="./page07.html">前ページ</a>で 3 つの基本パーツについて学びましたので、次は基本パーツを使って複雑な伝達関数を持つフィルタのプロック図を描いてみましょう。
+</p>
+
+<p>
+そのために、ここではまず 2つ以上のフィルタを合成して作ったフィルタの伝達関数の求め方について説明します。
 <br>
-フィードバック機構を持つフィルタの伝達関数は
+また<a href="./page09.html">次のページ</a>ではフィードバック機構について説明します。
+</p>
+
+<br>
+<h3 id="seri">
+1. 直列結合
+</h3>
+
+<p>
+直列結合とは、伝達関数 $\textrm{H}_1(z)$ を持つフィルタ 1 と伝達関数 $\textrm{H}_2(z)$ を持つフィルタ 2 を直列に結合して新しいフィルタを作り出すことです。
+<br>
+この新しいフィルタの伝達関数は 2 つのフィルタの伝達関数の積
 </p>
 
 \begin{align*}
-\textrm{H}(z) = \frac{1}{1-\textrm{H}_1(z)}
+\textrm{H}(z) = \textrm{H}_1(z) \cdot \textrm{H}_2(z)
 \end{align*}
 
 <p>
-となります。
-<br>
-以上の関係を示したブロック図は次の様になります。
+となります。以上の関係を示したブロック図は次の様になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図: フィードバック機構のブロック図: </b>
+<input type="checkbox"><b>図1: 直列結合のブロック図: </b>
 
 <p>
 　
@@ -47,6 +60,35 @@
 
 </div>
 
-<script>PreNext(8,13)</script>
+<br>
+<h3 id="para">
+2. 並列結合
+</h3>
+
+<p>
+並列結合とは、伝達関数 $\textrm{H}_1(z)$ を持つフィルタ 1 と伝達関数 $\textrm{H}_2(z)$ を持つフィルタ 2 を並列に結合して新しいフィルタを作り出すことです。この新しいフィルタの伝達関数は 2 つのフィルタの伝達関数の和
+</p>
+
+\begin{align*}
+\textrm{H}(z) = \textrm{H}_1(z) + \textrm{H}_2(z)
+\end{align*}
+
+<p>
+となります。以上の関係を示したブロック図は次の様になります。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 並列結合のブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page08-fig2.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(8,12)</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ typedef struct
 
 int main()
 {
-    FILE * fin = fopen( "D-FILTER-1-1.wav", "rb" );
+    FILE * fin = fopen( "myvoice.wav", "rb" );
     if( !fin ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
@@ -101,13 +101,13 @@ int main()
     const double a = ?;
     const double b = ?;
 
-    // 遅延素子の遅延時刻 k の計算
+    // 遅延素子の遅延時刻 n の計算
     const double delay = ?; // 遅れ秒数
-    const int k = (int)( delay * fs ); // k = 遅れ秒数 * fs
+    const int n = (int)( delay * fs ); // n = 遅れ秒数 * fs
 
-    // ディジタル線形フィルタ H(z) = a + b・z^{-k}
+    // ディジタル線形フィルタ H(z) = a + b・z^{-n}
     // 出力信号は y[i]
-    // i-k が負の場合は x[i-k] = 0 と既になっているので、場合分けせずにそのまま使って OK
+    // i-n が負の場合は x[i-n] = 0 と既になっているので、場合分けせずにそのまま使って OK
     for( int i = 0; i < N; ++i ){
         y[i] = ?
     }
@@ -115,7 +115,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-1-1-out.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-1-1.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
