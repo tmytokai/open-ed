@@ -103,15 +103,15 @@ $i$ は整数値でしたので、$i=0,1,2,\cdots$ の様に $i=0$ からサン�
 <p>
 この $i$ の最大値 $i_{\textrm{MAX}}$ は $f(t)$ を何秒間サンプリングするかによって決まります。
 <br>
-$1$ 秒間に $f_s$ 回サンプリングしますので、 $\textrm{T}_s$ 秒間サンプリングするとしたら $i$ の最大値は $f_s \cdot \textrm{T}_s$ になります。
+$1$ 秒間に $f_s$ 回サンプリングしますので、 $\textrm{T}_s$ 秒間サンプリングするとしたら $i_{\textrm{MAX}} = f_s \cdot \textrm{T}_s$ になります。
 <br>
-ただし $f_s \cdot \textrm{T}_s$ が整数値でない時は、その値を超える最小の整数値を $i$ の最大値 $i_{\textrm{MAX}}$ にすることに今回はします(※)。
+ただし $f_s \cdot \textrm{T}_s$ が整数値でない時は、その値を超える最小の整数値を $i$ の最大値 $i_{\textrm{MAX}}$ にすることに今回はします(※1,2)。
 </p>
 
 <p>
-※ 例えば $f_s = 10$で $\textrm{T}_s = 1.55$ なら $f_s \cdot \textrm{T}_s = 15.5$ なので $i_{\textrm{MAX}} = 16$
+※1 例えば $f_s = 10$で $\textrm{T}_s = 1.55$ なら $f_s \cdot \textrm{T}_s = 15.5$ なので $i_{\textrm{MAX}} = 16$
 <br>
-ちなみに$f_s \cdot \textrm{T}_s$の値を超えない最大の整数値を$i_{\textrm{MAX}}$にする場合もあります(システムの仕様による)。
+※2 ちなみに$f_s \cdot \textrm{T}_s$の値を超えない最大の整数値を$i_{\textrm{MAX}}$にする場合もあります(システムの仕様による)。
 </p>
 
 <br>
