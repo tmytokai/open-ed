@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 線形量子化</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号処理の基礎</a></li>
+<li>学習項目: [3] 量子化</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+サンプリング直後のディジタル時間領域信号 $f[i]$ はアナログ値のままになりますが、コンピュータはアナログ値、つまり無限少数を扱う事が出来ないので(※)、$f[i]$ の値もディジタル化(離散化)する場合があります。
+<br>
+アナログ値の $f[i]$ を離散化してディジタル値にする処理を「<b>量子化</b>」と言います。
+</p>
+
+<p>
+※ double 型や short 型の様な浮動小数点型の変数では無限少数を扱えません。
+</p>
+
+<p>
+まず量子化に関する用語を挙げます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>基本的な用語: </b>
+
+<p>
+・ 量子化・・ アナログ値のままの $f[i]$ を離散化してディジタル値に変換する処理
+</p>
+
+<p>
+・ 量子化幅 $\Delta$ ・・・ 離散化の幅。単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+</p>
+
+<p>
+・ 線形量子化 ・・・ 量子化幅  $\Delta$ が可変でなく常に一定である量子化のこと
+</p>
+
+<p>
+・ 非線形量子化 ・・・ 量子化幅  $\Delta$ が可変で状況によって変化する量子化のこと
+</p>
+
+<p>
+・ 量子化誤差 ・・・ 元の $f[i]$ の値と量子化後の $f[i]$ の値の差
+</p>
+
+</div>
+
+<p>
+なお、このアクティビティでは話を簡単にするため線形量子化のみ扱います。
+<br>
+線形量子化は以下のようにして行います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>線形量子化の方法: </b>
+
+<p>
+<b>ステップ 1： 量子化幅 $\Delta$ を決める</b>
+</p>
+
+<p>
+システム要件や制約などを元にして決定する。
+<br>
+大きくしても小さくしてもそれぞれメリット・デメリットがある。
+</p>
+
+<p>
+<b>ステップ 2： 量子化する</b>
+</p>
+
+<p>
+$f[i]$ のグラフに対して縦方向に $\Delta$ の間隔で補助線を引き、各 $f[i]$の値に一番近い補助線の値に変更する。
+</p>
+
+</div>
+
+<p>
+具体例を以下に示します。
+<br>
+図1は量子化前のディジタル信号$f[i]$です。
+<br>
+図2は 縦に量子化幅 $\Delta = 0.5$ の間隔で補助線を引いて各 $f[i]$ を補助線の上に移動中の図です。
+<br>
+図3が最終的に得られた量子化済みの $f[i]$ です。
+</p>
+
+<p>
+なお図2から分かるように、一般的に量子化後の各$f[i]$の値は元の値から変わります。
+<br>
+この差が「<b>量子化誤差</b>」になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. 量子化前のディジタル信号 $f[i]$ </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図2. $\Delta = 0.5$ 間隔で補助線を引く </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3. 線形量子化後の $f[i]$ </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig3.png" alt="">
+
+</div>
+
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>
