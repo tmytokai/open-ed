@@ -169,8 +169,87 @@
 </p>
 </div>
 
+<br>
+<h2><a href="./page03.html">3. ハイパスフィルタの設計</a></h2>
 
+<p>
+<input type="checkbox"><b>演習3-6 (個人、? 分):</b> 1次 IIR ハイパスフィルタを使ってサンプル音声から高周波成分を取り除いてみましょう。 
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 演習 3-1 のテンプレートソース(D-FILTER-3-1.cpp)を D-FILTER-3-6.cpp の名前でコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> D-FILTER-3-6.cpp を開いてハイパスフィルタになるようにパラメータを変更します。なおサンプリング周波数は $f_s = 22050$ [Hz]、カットオフ周波数は $f_c$ = 500 [Hz] とします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 「D-FILTER-3-1.wav」をfopenしている部分を「D-FILTER-3-6.wav」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行すると「D-FILTER-3-6.wav 」という Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で元の音声(trumpet_22k_mono.wav)を演奏し、元の音声のスペクトログラム表示を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>を違うタブで開き、フィルタリング後の音声(D-FILTER-3-6.wav)を演奏して高周波成分が減衰していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 元の音声(trumpet_22k_mono.wav)のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> フィルタリング後の音声(D-FILTER-3-6.wav)のスペクトログラム表示のスクリーンショットを取って下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム表示とフィルタリング後の音声のスペクトログラム表示」を貼りつけて下さい。 
+</p>
+</div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習3-7 (個人、? 分):</b> CR アナログハイパスフィルタのインパルス応答のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> 表計算ソフトを起動します。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 今回考えるハイパスフィルタのカットオフ周波数は 500 [Hz] とします。 一番上の最初の列のセルに「fc」と書き、その隣のセルに「500」と入力して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 2行目の最初の列のセルに「t」と書き、その下のセルから各 $t$ の値を 0 [秒] から 0.01 [秒] まで 0.0001 [秒] 間隔で オートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 「t」と書いた右隣のセルに「h(t)」と書き、その下のセルから各 $t$ における $h(t)$ の値をオートフィルを使って入力します。ただし $h(0) = 1$ とします。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 「t」と「h(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> シートを保存します。ファイル名は「D-FILTER-3-7」として下さい(拡張子は表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 各自が指定場所に「画像ファイル」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習3-8 (個人、? 分):</b> 1次 IIR ローパスフィルタのインパルス応答のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> 演習 3-3のテンプレートソース</a>(D-FILTER-3-3.cpp)をD-FILTER-3-8.cppの名前でコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> D-FILTER-3-8.cpp を開いてハイパスフィルタのインパルス応答になるようにパラメータを変更します。パラメータは サンプリング周波数 $f_s = 22050$ [Hz]、$f_c = 500$ [Hz] として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 「D-FILTER-3-3.csv」をfopenしている部分を「D-FILTER-3-8.csv」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行するとCSVファイル(D-FILTER-3-8.csv)が出力されます。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> D-FILTER-3-8.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に h[i] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> グラフを挿入します。グラフの種類は散布図、点あり、「<b>線無し</b>」とします。なお点の数が多いので、点の大きさは小さめにして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-3-8」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをし、結果のグラフが演習3-7で求めた CR アナログハイパスフィルタのインパルス応答と同じ形になっている事を確認して下さい(※)。
+</p>
+<p>
+※ ゲイン調整のためサンプリングした後に $\tau$ を掛けているので値は一致しない。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> 各自が指定場所に「画像ファイル」を貼り付けて下さい。 
+</p>
+</div>
 
 
 <script>PreNext(4,3)</script>
