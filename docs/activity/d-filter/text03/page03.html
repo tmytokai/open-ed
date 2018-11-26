@@ -20,9 +20,122 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<div class="info">
+<input type="checkbox"><b> CR ハイパスフィルタ: </b>
+
 <p>
-準備中
+　
 </p>
+
+<img src="./img/page03-fig1.png" alt="">
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> CR ハイパスフィルタの伝達関数: </b>
+
+<p>
+カットオフ角周波数を $w_c = \frac{1}{RC}$ [rad/秒] とする。
+</p>
+
+\begin{align*}
+\textrm{H}(s) 
+& = \frac{ 1 }{ 1 + \frac{w_c}{s} } \\
+& = \frac{ s }{ s + w_c } \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> CR ハイパスフィルタの周波数特性: </b>
+
+\begin{align*}
+\textrm{H}(w) 
+& = \frac{ j\cdot w }{ j\cdot w + w_c } \\
+& = \frac{ w\cdot \textrm{e}^{j\cdot \pi/2} }{ \sqrt{w^2 + w_c^2 } \cdot \textrm{e}^{ j\cdot \tan^{-1}(w/w_c) } } \\
+& = \sqrt{ \frac{ w^2 }{ w^2 + w_c^2 } }  \cdot \textrm{e}^{ j\cdot \{\pi/2 - \tan^{-1}(w/w_c) \} } \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> CR ハイパスフィルタのインパルス応答: </b>
+
+\begin{align*}
+h(t)
+& = \delta(t) - w_c \cdot \textrm{e}^{-w_c\cdot t}
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ハイパスフィルタのインパルス応答: </b>
+
+<p>
+$\tau$ [秒] を<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>とした時、
+</p>
+
+\begin{align*}
+h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
+\end{align*}
+
+</div>
+
+<p>
+
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ハイパスフィルタの伝達関数: </b>
+
+\begin{align*}
+\textrm{H}(z)
+&= 1 - \sum_{i=0}^\infty \{ \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
+&= 1 - \tau \cdot w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
+(無限級数和の公式より) &= 1 - \frac{ \tau \cdot w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+&= \frac{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} - \tau \cdot w_c  }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+&= \frac{ (1 - \tau \cdot w_c ) - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+\end{align*}
+
+</div>
+
+<p>
+　
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 1次 IIR ハイパスフィルタ係数: </b>
+
+\begin{align*}
+a[1] &= \textrm{e}^{-w_c \cdot \tau} \\
+b[0] &= 1 - w_c \\
+b[1] &= -\textrm{e}^{-w_c \cdot \tau} \\
+\end{align*}
+
+</div>
+
+<p>
+RC ローパスフィルタと同様に(低周波数領域では) 1次 IIR ハイパスフィルタの周波数特性も CR ハイパスフィルタの周波数特性に近似されるが、カットオフ周波数が高くなるとエイリアシングの影響でかなり特性が歪むので注意が必要。
+</p>
+
+</div>
+
 
 
 <br>
