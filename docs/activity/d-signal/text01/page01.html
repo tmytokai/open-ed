@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. ディジタル信号</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号処理の基礎</a></li>
+<li>学習項目: [1] 時間領域ディジタル信号の定義とグラフ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+ディジタル信号は関数 $f[i]$ の形で表されます。
+</p>
+
+<p>
+関数 $f[i]$ の変数 $i$ の事を $f[i]$ の「<b>独立変数</b>」と言って場所や時点などに相当します。
+<br>
+この $i$ が取り得る値の範囲の事を $f[i]$ の「<b>定義域</b>」と言います。
+</p>
+
+<p>
+一方 $f[i]$ そのものが取り得る値の範囲の事を$f[i]$の「<b>値域</b>」といいます。
+<br>
+なお $f[i]$ の値は実数でも複素数でもどちらでも OK です。
+</p>
+
+<p>
+さて、ディジタル信号の定義は文献によって微妙に違うのですが、一般的には独立変数 $i$ が離散的な値を取るとき、 この $f[i]$ のことを「<b>ディジタル信号</b>」または「<b>ディジタル信号列</b>」といいます。
+<br>
+ここで離散値とは $i=0,\ 1,\ 2$ のような整数値や $i=0.10,\ 0.11,\ 0.12$ のような飛び飛びの実数値のことです。
+</p>
+
+<p>
+例として図1にディジタル信号 $f[i] = i^2, ( i = 0,\ 1, \cdots,\ 10) $ のグラフを示します。
+<br>
+また上で書いたように $i$ は必ずしも整数である必要はありませんので、例えば $i = 0, \ 2.3, \ 4.9, \ 9.2, \ 10$ とすると図2の様なグラフになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1： ディジタル信号のグラフ例: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図2： $i = 0, \ 2.3, \ 4.9, \ 9.2, \ 10$ のグラフ例: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(1,3)</script>
+</body>
+</html>

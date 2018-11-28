@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 時間領域ディジタル信号</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル信号処理の基礎</a></li>
+<li>学習項目: [1] 時間領域ディジタル信号の定義とグラフ</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<b>時間領域</b>ディジタル信号とは独立変数 $i$ が時間を表している信号の事です。
+<br>
+この時 $f[i]$ は動画や音声など、時間によって値が変化するデータとなります。
+<br>
+なお話を簡単にするために今回のアクティビティでは  $i$ は整数値だけを取ることにします。
+</p>
+
+<p>
+さて<a href="../../a-signal/">時間領域アナログ信号</a>と違って $i$ に秒などの単位はありません。
+<br>
+詳しくは後のページで説明しますが、ユーザーが自分で決めた<a href="../text02/page01.html">サンプリング間隔</a> $\tau$ [秒] によって $f[i]$ が何秒地点の信号値なのか変化します。
+</p>
+
+<p>
+したがって $i$ は「$i$ 秒」とか「$i$ 時」みたいに単位を付けて呼ばず、単に「<b>時刻 $i$</b>」とだけ呼びます。
+<br>
+例えば下のグラフにおいて「時刻 $i = 3$ 時点における信号値は $f[1] = 9$」、「時刻 $i = 10$ 時点における信号値は $f[10] = 100$」などと言います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1： ディジタル信号のグラフ例: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
