@@ -25,10 +25,108 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">自己相関関数とは</a></h2>
-<h2><a href="./page02.html">周期性信号の場合</a></h2>
-<h2><a href="./page03.html">ホワイトノイズの場合</a></h2>
-<h2><a href="./page04.html">パワースペクトルとの関係</a></h2>
+<h2><a href="./page01.html">1. 自己相関関数とは</a></h2>
+<h2><a href="./page02.html">2. 雑音を含む周期性信号の場合</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-1 (個人、? 分):</b> <a href="./page02.html">テキスト</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/ACR-1-1.cpp">テンプレートソース</a>(ACR-1-1.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートソースを開いて穴埋めをします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-1-f.csv、ACR-1-1-R.csv)が出力されます。ACR-1-1-f.csv が信号値で ACR-1-1-R.csv が自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ACR-1-1-f.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に f[i] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-1-f」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に ACR-1-1-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に n 、次の列の先頭に R[n] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-1-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page03.html">3. 白色雑音の場合</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-2 (個人、? 分):</b> <a href="./page03.html">テキスト</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/ACR-1-2.cpp">テンプレートソース</a>(ACR-1-2.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートソースを開いて穴埋めをします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-2-f.csv、ACR-1-2-R.csv)が出力されます。ACR-1-2-f.csv が信号値で ACR-1-2-R.csv が自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> ACR-1-2-f.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に f[i] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-2-f」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 同様に ACR-1-2-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に n 、次の列の先頭に R[n] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> グラフのタイトルに乱数の平均と分散の値を追加します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-2-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-3 (個人、? 分):</b> 一様乱数を用いた白色雑音と自己相関関数のグラフを描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/ACR-1-3.cpp">テンプレートソース</a>(ACR-1-3.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開いて穴埋めをします。一様乱数として U( -2, 4 ) を用います。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-3-f.csv、ACR-1-3-R.csv)が出力されます。ACR-1-3-f.csv が信号値で ACR-1-3-R.csv が自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> ACR-1-3-f.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に f[i] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-3-f」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 同様に ACR-1-3-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に n 、次の列の先頭に R[n] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> グラフのタイトルに乱数の平均と分散の値を追加します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-3-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.html">4. パワースペクトルとの関係</a></h2>
 
 <script>PreNext(5,4)</script>
 </body>
