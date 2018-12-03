@@ -2,40 +2,49 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ä¸€æ§˜ä¹±æ•° U(a,b)ã®å‡ºåŠ›
+// ˆê—l—” U(a,b)‚Ìo—Í
 double urand( double a, double b )
 {
     return a + (b-a)*(double)rand()/RAND_MAX;
 }
 
-// è‡ªå·±ç›¸é–¢ R[n]
+// ©ŒÈ‘ŠŠÖ R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // æ¼”ç¿’ 1-1 ã®å†…å®¹ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+    // ‰‰K 1-1 ‚Ì“à—e‚ğƒRƒs[‚·‚é
 }
 
 int main()
 {
     const int N = 10000;
+    const int Nout = 20;
     double f[N];
-    double R[N];
+    double R[Nout];
 
     for(int i=0;i < N; ++i ){
         f[i] = ? ;
     }
 
-    for(int n=0; n < N; ++n ){
+    for(int n=0; n < Nout; ++n ){
         R[n] = ACR( n, f, N );
     }
 
     FILE* file = fopen( "ACR-1-3-f.csv", "wb");
-    for( int i = 0; i <100 ; ++i ){
+    if( file == NULL ){
+        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        exit(1);
+    }
+    for( int i = 0; i <Nout ; ++i ){
         fprintf( file, "%lf\n", f[i] );
     }
     fclose(file);
 
     file = fopen( "ACR-1-3-R.csv", "wb");
-    for( int i = 0; i <100 ; ++i ){
+    if( file == NULL ){
+        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        exit(1);
+    }
+    for( int i = 0; i <Nout ; ++i ){
         fprintf( file, "%lf\n", R[i] );
     }
     fclose(file);
