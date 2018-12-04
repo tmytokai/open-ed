@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>5. OP ノードの自作</title>
+<title>5. オペレーションの自作</title>
 </head>
 <body>
 
@@ -20,22 +20,24 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Python の関数オブジェクト(def)を利用して OP ノードを自作することができます。
+Python の関数オブジェクト(def)を利用してオペレーション(以下 OP)を自作することができます。
 </p>
 
 <p>
-以下は (x+y)*z の演算を行う OP ノード hoge を作成する例です。内部で足し算 OP ノードと掛け算 OP ノードを使用しています。
+以下は (x+y)*z の演算を行う hoge という名の OP を作成する例です。
+<br>
+内部で<a href="./page04.html#add">足し算 OP</a> と<a href="./page04.html#mul">掛け算 OP</a> を使用しています。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OP ノードの自作例:</b>
+<input type="checkbox"><b>OP の自作例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
 import tensorflow as tf
 sess = tf.Session()
 
-#自作 OP ノード  (x+y)*z
+#自作 OP   (x+y)*z
 def hoge(x, y, z):
   op_add = tf.add( x, y )
   op_mul = tf.mul( op_add, z )
@@ -51,13 +53,13 @@ print( result )
 
 <br>
 <p>
-hoge OP ノード内部のデータフローグラフ
+hoge 内部のデータフロー・グラフ
 </p>
 
 <img src="./img/page05-fig1.png" alt="">
 
 <p>
-全体のデータフローグラフ
+全体のデータフロー・グラフ
 </p>
 
 <img src="./img/page05-fig2.png" alt="">

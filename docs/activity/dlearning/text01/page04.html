@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. 基本的な OP ノード</title>
+<title>4. 基本的なオペレーション</title>
 </head>
 <body>
 
@@ -20,29 +20,31 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは今回のアクティビティで使用する基本的な OP ノードについて学びます。
+ここでは今回のアクティビティで使用する基本的なオペレーション(以下 OP)について学びます。
 </p>
 
 <br>
 <h3 id="const">
-1. 定数(Constant) OP ノード
+1. 定数(Constant) OP 
 </h3>
 
 <p>
-定数 OP ノードはセットした定数テンソルをエッジに出力する OP ノードです。
+定数 OP はセットした定数テンソルをエッジに出力するだけの OP です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定数 OP ノード: </b>
+<input type="checkbox"><b>定数 OP : </b>
 
 <p>
-書式:  ノード名 = tf.constant(定数値)
+書式:  OP名 = tf.constant( x )
 </p>
 
 <p>
-入力テンソル: 無し
-<br>
-出力テンソル: カッコ内で指定した定数値
+入力テンソル: x ・・・ 定数値
+</p>
+
+<p>
+出力テンソル : x で指定した定数値
 </p>
 </div>
 
@@ -51,7 +53,7 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード1: 定数 OP ノードのコード例:</b>
+<input type="checkbox"><b>コード1: 定数 OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -101,52 +103,57 @@ print( result )
 </div>
 
 <p>
-データフローグラフは前のページで示した<a href="./img/page03-fig3.png">ハローワールドのグラフ</a>とほとんど同じなので省略します。
+データフロー・グラフは前のページで示した<a href="./img/page03-fig3.png">ハローワールドのグラフ</a>とほとんど同じなので省略します。
 </p>
 
 <br>
 <h3 id="var">
-2. 変数(Variable) OP ノード
+2. 変数(Variable) OP
 </h3>
 
 <p>
-変数 OP ノードは定数 OP ノードと同様にセットしたテンソルをエッジに出力する OP ノードです。
+変数 OP は<a href="#const">定数 OP</a> と同様にセットしたテンソルをエッジに出力するだけの OP です。
 </p>
 
 <p>
-定数 OP ノードの場合はセッションの途中で最初にセットした値を変更できませんが、変数 OP ノードは最初にセットした値(つまり初期値)を途中で変更する事ができます。ただし
+定数 OP の場合はセッションの途中で最初にセットした値を変更できませんが、変数 OP は最初にセットした値(つまり初期値)を途中で変更する事ができます。
+<br>
+ただし
 </p>
 
 <p>
 <b>
-「変数 OP ノードは最初の run を実行する前に初期化しておかないとエラーが出ます」。
+「変数 OP は最初の run を実行する前に初期化しておかないとエラーが出ます」。
 </b>
 </p>
 
 <p>
-なお値の変更方法についてはこのページの最後にある「代入 OP ノード」の説明を参照して下さい。
+なお値の変更方法についてはこのページの最後にある「<a href="#assign">代入 OP </a>」の説明を参照して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>変数 OP ノード: </b>
+<input type="checkbox"><b>変数 OP : </b>
 
 <p>
-書式:  ノード名 = tf.Variable( x )
+書式:  OP名 = tf.Variable( x )
 </p>
 
 <p>
 入力テンソル: x ・・・ 初期値
-<br>
+</p>
+<p>
 出力テンソル: 現在値
 </p>
 </div>
 
 <p>
-では具体的なコード例を示します。コード内で初期値のセット例と初期化方法についても説明しています。
+では具体的なコード例を示します。
+<br>
+コード内で初期値のセット例と初期化方法についても説明しています。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード2: 変数 OP ノードのコード例:</b>
+<input type="checkbox"><b>コード2: 変数 OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -157,6 +164,8 @@ sess = tf.Session()
 op_var = tf.Variable( 1 )
 
 # run する前にグラフ内の変数全てを初期化する
+# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
+# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
 
 result = sess.run( op_var )
@@ -168,6 +177,8 @@ print( result )
 op_var = tf.Variable( tf.zeros([3,2]) )
 
 # run する前にグラフ内の変数全てを初期化する
+# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
+# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
 
 result = sess.run( op_var )
@@ -181,6 +192,8 @@ print( result )
 op_var = tf.Variable( tf.random_normal( [3, 2], mean=0.0, stddev=0.1 ) )
 
 # run する前にグラフ内の変数全てを初期化する
+# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
+# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
 
 result = sess.run( op_var )
@@ -198,38 +211,41 @@ print( result )
 
 <br>
 <h3 id="add">
-3. 足し算(Add) OP ノード
+3. 足し算(Add) OP 
 </h3>
 
 <p>
-足し算 OP ノードは 2 つのテンソルの足し算を行うノードです。
+足し算 OP は 2 つのテンソルの足し算を行う OP です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>足し算 OP ノード: </b>
+<input type="checkbox"><b>足し算 OP : </b>
 
 <p>
-書式:  ノード名 = tf.add( x, y )
+書式:  OP名 = tf.add( x, y )
 </p>
 
 <p>
-※ ノード名 = x + y と書いてもOK
+※ OP名 = x + y と書いてもOK
 </p>
 
 <p>
 入力テンソル: x と y
-<br>
+</p>
+<p>
 出力テンソル: x + y
 </p>
 
 </div>
 
 <p>
-具体的なコード例とデータフローグラフは次の通りです。入力テンソル x、y はスカラーでもベクトルでも行列でも構いませんが、テンソルの種類や行数、列数が違うとエラーになります。
+具体的なコード例とデータフローグラフは次の通りです。
+<br>
+入力テンソル x、y はスカラーでもベクトルでも行列でも構いませんが、テンソルの種類や行数、列数が違うとエラーになります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード3-1: 足し算 OP ノードのコード例 (スカラーの場合):</b>
+<input type="checkbox"><b>コード3-1: 足し算 OP のコード例 (スカラーの場合):</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -250,7 +266,7 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig3.png" alt="">
@@ -261,7 +277,7 @@ print( result )
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード3-2: 足し算 OP ノードのコード例 (ベクトルの場合):</b>
+<input type="checkbox"><b>コード3-2: 足し算 OP のコード例 (ベクトルの場合):</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -281,47 +297,52 @@ print( result )
 </pre>
 
 <p>
-データフローグラフは同じなので略
+データフロー・グラフは同じなので略
 </p>
 </div>
 
 <br>
 <h3 id="mul">
-4. 掛け算(Mul) OP ノード
+4. 掛け算(Mul) OP 
 </h3>
 
 <p>
-掛け算 OP ノードは 2 つのテンソルの掛け算を行うノードです。
+掛け算 OP は 2 つのテンソルの掛け算を行う OP です。
 </p>
 
 <p>
-なお行列積ではありませんのでテンソルが行列の場合は要素毎に値が掛け合わされます。行列積は次の項目で扱います。
+なお<b>行列積ではありません</b>のでテンソルが行列の場合は要素毎に値が掛け合わされます。
+<br>
+行列積は次に説明する<a href="#matmul">tf.matmul</a>を使います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>掛け算 OP ノード: </b>
+<input type="checkbox"><b>掛け算 OP : </b>
 
 <p>
-書式:  ノード名 = tf.mul( x, y )
+書式:  OP名 = tf.mul( x, y )
 </p>
 
 <p>
-※ ノード名 = x * y と書いてもOK
+※ OP名 = x * y と書いてもOK
 </p>
 
 <p>
 入力テンソル: x と y
-<br>
+</p>
+<p>
 出力テンソル: x * y
 </p>
 </div>
 
 <p>
-具体的なコード例は次の通りです。入力テンソル x、y はスカラーでもベクトルでも行列でも構いませんが、テンソルの種類が違うとエラーになります。
+具体的なコード例は次の通りです。
+<br>
+入力テンソル x、y はスカラーでもベクトルでも行列でも構いませんが、テンソルの種類が違うとエラーになります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード4-1: 掛け算 OP ノードのコード例(スカラーの場合):</b>
+<input type="checkbox"><b>コード4-1: 掛け算 OP のコード例(スカラーの場合):</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -342,7 +363,7 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig4.png" alt="">
@@ -353,7 +374,7 @@ print( result )
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード4-2: 掛け算 OP ノードのコード例 (ベクトルの場合):</b>
+<input type="checkbox"><b>コード4-2: 掛け算 OP のコード例 (ベクトルの場合):</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -373,29 +394,30 @@ print( result )
 </pre>
 
 <p>
-データフローグラフは同じなので略
+データフロー・グラフは同じなので略
 </p>
 </div>
 
 <br>
 <h3 id="matmul">
-5. 行列積(MatMul) OP ノード
+5. 行列積(MatMul) OP 
 </h3>
 
 <p>
-行列積 OP ノードは 2 つの行列の行列積を行うノードです。
+行列積 OP は 2 つの行列の行列積を行う OP です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>行列積 OP ノード: </b>
+<input type="checkbox"><b>行列積 OP : </b>
 
 <p>
-書式:  ノード名 = tf.matmul( x, y )
+書式:  OP名 = tf.matmul( x, y )
 </p>
 
 <p>
 入力テンソル: x と y (どちらも行列、x の列数と y の行数が異なるとエラー)
-<br>
+</p>
+<p>
 出力テンソル: x・y
 </p>
 </div>
@@ -405,7 +427,7 @@ print( result )
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード5: 行列積 OP ノードのコード例:</b>
+<input type="checkbox"><b>コード5: 行列積 OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -427,7 +449,7 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig5.png" alt="">
@@ -435,23 +457,24 @@ print( result )
 
 <br>
 <h3 id="log">
-6. log、 exp、sin、cos、sigmoid などの関数 OP ノード
+6. log、 exp、sin、cos、sigmoid などの関数 OP 
 </h3>
 
 <p>
-log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP ノードはそのままその通りの演算を行いますが、ベクトルや行列の場合は各要素毎に演算が行われます。
+log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP はそのまま名前通りの演算を行いますが、ベクトルや行列の場合は各要素毎に演算が行われます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>: log、 exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP ノード</b>
+<input type="checkbox"><b>: log、 exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの関数 OP </b>
 
 <p>
-書式:  ノード名 = tf.log(x) / tf.exp(x) / tf.sin(x) / tf.cos(x) / tf.sigmoid(x) / その他色々
+書式:  OP名 = tf.log(x) / tf.exp(x) / tf.sin(x) / tf.cos(x) / tf.sigmoid(x) / その他色々
 </p>
 
 <p>
 入力テンソル: x
-<br>
+</p>
+<p>
 出力テンソル: それぞれの演算結果
 </p>
 </div>
@@ -461,7 +484,7 @@ log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function"
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード6: log、 exp、sin、cos、その他の OP ノードのコード例:</b>
+<input type="checkbox"><b>コード6: log、 exp、sin、cos、その他の OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -488,7 +511,7 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig6.png" alt="">
@@ -497,25 +520,26 @@ print( result )
 
 <br>
 <h3 id="softmax">
-7. SoftMax OP ノード
+7. SoftMax OP 
 </h3>
 
 <p>
-<a href="https://en.wikipedia.org/wiki/Softmax_function">SoftMax</a> OP ノードはニューラルネットワークの出力層で良く使われているノードで、出力されるテンソルの各要素の値は確率の数字を表しています。
+<a href="https://en.wikipedia.org/wiki/Softmax_function">SoftMax</a> OP はニューラルネットワークの出力層で良く使われている OP です。
 <br>
-詳しくはディープラーニングの学習項目で説明します。
+出力されるテンソルの各要素の値は確率の数字を表しています(詳しくはディープラーニングの学習項目で説明します)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>: SoftMax OP ノード</b>
+<input type="checkbox"><b>: SoftMax OP </b>
 
 <p>
-書式:  ノード名 = tf.nn.softmax( x )
+書式:  OP名 = tf.nn.softmax( x )
 </p>
 
 <p>
-入力テンソル: x
-<br>
+入力テンソル: x (ベクトルまたは行列)
+</p>
+<p>
 出力テンソル: 以下のようにして求めたテンソル B を出力する。
 </p>
 <ol>
@@ -531,7 +555,7 @@ print( result )
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード7: SoftMax OP ノードのコード例:</b>
+<input type="checkbox"><b>コード7: SoftMax OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -552,7 +576,7 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig7.png" alt="">
@@ -561,23 +585,24 @@ print( result )
 
 <br>
 <h3 id="redsum">
-8. 総和(Reduce_Sum) OP ノード
+8. 総和(Reduce_Sum) OP 
 </h3>
 
 <p>
-総和 OP ノードはテンソルの要素を全て足しあわせて出力するノードです。
+総和 OP はテンソルの要素を全て足しあわせて出力する OP です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>総和 OP ノード: </b>
+<input type="checkbox"><b>総和 OP : </b>
 
 <p>
-書式:  ノード名 = tf.reduce_sum( x )
+書式:  OP名 = tf.reduce_sum( x )
 </p>
 
 <p>
-入力テンソル: x
-<br>
+入力テンソル: x  (ベクトルまたは行列)
+</p>
+<p>
 出力テンソル: 要素の総和
 </p>
 </div>
@@ -587,7 +612,7 @@ print( result )
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード8: 総和 OP ノードのコード例:</b>
+<input type="checkbox"><b>コード8: 総和 OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -606,47 +631,55 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig8.png" alt="">
 </div>
 
 <br>
-<h3>
-9. 代入(Assign) OP ノード
+<h3 id="assign">
+9. 代入(Assign) OP 
 </h3>
 
 <p>
-代入(Assign) OP ノードは変数 OP ノードに保存されている値を変更するノードです。
+代入(Assign) OP は<a href="#var">変数 OP</a> に保存されている値を変更する OP です。
+<br>
 今回のアクティビティでは使いませんが一応説明しておきます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>代入(Assign) OP ノード: </b>
+<input type="checkbox"><b>代入(Assign) OP : </b>
 
 <p>
-書式:  ノード名 = tf.assign( x )
+書式:  OP名 = tf.assign( x, y )
 </p>
 
 <p>
-※ 変数の値が変更されるタイミングは run が完了した時
-</p>
-
-<p>
-入力テンソル: x ・・・ 新しい値
+入力テンソル: 
 <br>
-出力テンソル: x がそのまま出力される
+x ・・・ 出力値を変更したい<a href="#var">変数 OP</a> (※)
+<br>
+y ・・・ 新しい値
+</p>
+<p>
+出力テンソル: y がそのまま出力される
+</p>
+
+<p>
+※ x の値が変更されるタイミングは run が完了した時です
 </p>
 
 </div>
 
 <p>
-具体的なコード例とデータフローグラフは次の通りです。sess.run(tf.initialize_all_variables()) で初期化すると変数の値が元に戻っていることに注目して下さい。
+具体的なコード例とデータフロー・グラフは次の通りです。
+<br>
+初期化すると変数の値が元に戻っていることに注目して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コード9: 代入 OP ノードのコード例:</b>
+<input type="checkbox"><b>コード9: 代入 OP のコード例:</b>
 
 <pre class="wrap">
 #coding: UTF-8
@@ -657,6 +690,8 @@ sess = tf.Session()
 op_var = tf.Variable( 1 )
 
 # run する前にグラフ内の変数全てを初期化する
+# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
+# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run(tf.initialize_all_variables())
 
 result = sess.run( op_var )
@@ -678,6 +713,8 @@ print( result )
 # 2
 
 # 再びグラフ内の変数全てを初期化する
+# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
+# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run(tf.initialize_all_variables())
 
 result = sess.run( op_var )
@@ -688,12 +725,13 @@ print( result )
 
 <br>
 <p>
-データフローグラフ
+データフロー・グラフ
 </p>
 
 <img src="./img/page04-fig9.png" alt="">
 </div>
 
+<br>
 <script>PreNext(4,5)</script>
 </body>
 </html>

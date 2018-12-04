@@ -61,7 +61,7 @@
 </p>
 
 <p>
-という訳で TensorFlow を使って高速学習を行うためには入力側教師信号と出力側教師信号も OP ノードで表す必要があります。
+という訳で TensorFlow を使って高速学習を行うためには入力側教師信号と出力側教師信号も OP で表す必要があります。
 <br>
 なお出力側教師信号は別名「<b>ラベル</b>」と呼ばれますので、特に断りの無い限り
 </p>
@@ -85,7 +85,7 @@
 </h3>
 
 <p>
-まずニューラルネットワークへ入力される教師信号を OP ノードで表してみます。
+まずニューラルネットワークへ入力される教師信号を OP で表してみます。
 <br>
 この様な教師信号としては画像データのピクセル値とか音声データとか、データの種類によって色々な形式が考えられます。
 </p>
@@ -93,14 +93,14 @@
 <p>
 今回取り扱っている 3 層ニューラルネットワークの入力信号は N 次元ベクトルとしたので教師信号は N 次元ベクトルが L 組あることになります。
 <br>
-つまり $i$ 番目の教師信号はベクトル $\{x_{i1}, x_{i2}, \cdots, x_{iN}\},(i = 1,2,\cdots,L)$ で表すことができるので、教師信号全体は図 1 の様に L x N 行列の<a href="../text01/page04.html#const">定数 OP ノード</a>で表す事が出来ます。
+つまり $i$ 番目の教師信号はベクトル $\{x_{i1}, x_{i2}, \cdots, x_{iN}\},(i = 1,2,\cdots,L)$ で表すことができるので、教師信号全体は図 1 の様に L x N 行列の<a href="../text01/page04.html#const">定数 OP</a> で表す事が出来ます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図1: 教師信号:</b>
 
 <p>
-L x N 行列の教師信号を<a href="../text01/page04.html#const">定数 OP ノード</a>として表現する
+L x N 行列の教師信号を<a href="../text01/page04.html#const">定数 OP</a> として表現する
 <br>
 $i$ 行目の $[x_{i1}, x_{i2}, \cdots, x_{iN}]$ が $i$ 番目の教師信号となる
 </p>
@@ -114,7 +114,7 @@ $i$ 行目の $[x_{i1}, x_{i2}, \cdots, x_{iN}]$ が $i$ 番目の教師信号�
 </h3>
 
 <p>
-次はラベルを OP ノードで表してみます。
+次はラベルを OP で表してみます。
 </p>
 
 <p>
@@ -144,14 +144,14 @@ $i$ 行目の $[x_{i1}, x_{i2}, \cdots, x_{iN}]$ が $i$ 番目の教師信号�
 <p>
 とラベルの値にセットします。
 <br>
-その様なラベルが全部で L 組あるので、ラベル全体は図 2 の様に L x M 行列の<a href="../text01/page04.html#const">定数 OP ノード</a>で表す事が出来ます。
+その様なラベルが全部で L 組あるので、ラベル全体は図 2 の様に L x M 行列の<a href="../text01/page04.html#const">定数 OP</a> で表す事が出来ます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図2: ラベル:</b>
 
 <p>
-L x M 行列のラベルを<a href="../text01/page04.html#const">定数 OP ノード</a>として表現する
+L x M 行列のラベルを<a href="../text01/page04.html#const">定数 OP</a> として表現する
 <br>
 $i$ 行目 の $[y_{i1}, y_{i2}, \cdots, y_{iM}]$ が $i$ 番目の教師信号に対するラベルとなる
 </p>
@@ -253,11 +253,11 @@ $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信�
 </div>
 
 <p>
-従ってクロスエントロピーの<a href="../text01/page05.html">自作 OP ノード</a>は<a href="../text01/page04.html#redsum">総和(Reduce_Sum) OP ノード</a>を使って次のように表す事が出来ます。
+従ってクロスエントロピーの<a href="../text01/page05.html">自作 OP</a> は<a href="../text01/page04.html#redsum">総和(Reduce_Sum) OP</a> を使って次のように表す事が出来ます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図4: クロスエントロピー OP ノード:</b>
+<input type="checkbox"><b>図4: クロスエントロピー OP:</b>
 
 <p>
 名前: cross_entropy
@@ -281,13 +281,13 @@ $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信�
 </p>
 
 <p>
-この勾配降下法は非常に難しい数学の知識が必要なのですが、TensorFlow では OP ノードとして既に用意されているので誰でも簡単に利用できます。
+この勾配降下法は非常に難しい数学の知識が必要なのですが、TensorFlow では OP として既に用意されているので誰でも簡単に利用できます。
 
 <div class="info">
-<input type="checkbox"><b>勾配降下法 OP ノード: </b>
+<input type="checkbox"><b>勾配降下法 OP : </b>
 
 <p>
-書式:  ノード名 = tf.train.GradientDescentOptimizer( r ).minimize( c )
+書式:  OP名 = tf.train.GradientDescentOptimizer( r ).minimize( c )
 </p>
 
 <p>
