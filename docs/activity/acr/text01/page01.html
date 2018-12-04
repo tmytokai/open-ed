@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 自己相関関数とは</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己相関関数</a></li>
+<li>学習項目: [1] 自己相関関数</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+長さ N の<a href="../../d-signal/text01/page02.html">時間領域ディジタル信号</a> $f[i],  (i = 0, \cdots, \textrm{N}-1)$ が与えられた時に、その信号が周期的な信号であるのか、それともただのノイズなのかは<b>自己相関関数</b>(autocorrelation function) $R[n]$ を使って判定できます。
+</p>
+
+<p>
+自己相関関数 $R[n]$ の本来の定義は、ある時刻 $i$ における信号値 $f[i]$ とそこから $n$ 時刻だけ遅延させた信号値 $f[i+n]$ を定常な(つまり平均と共分散が時間変化しない)確率変数とみなした時の自己相関関数
+</p>
+\[
+\textrm{E}\left [ f[i] \cdot f[i+n] \right ]
+\]
+<p>
+です。
+</p>
+
+<p>
+従って $R[n]$ の値が相対的に大きい値の時、$f[i]$ とそこから時刻 $n$ だけ遅延させた $f[i+n]$ の間には強い相関があるということを意味します(※)。
+</p>
+
+<p>
+※ 自己相関「関数」と自己相関「係数」は似ているので混同している人も多いですが、自己相関関数の場合は平均と分散を使って正規化していないので、 自己相関係数の様に値が -1 から 1 の間に収まるとは限りません。
+</p>
+
+<p>
+ただし $f[i]$ と $f[i+n]$ の真の確率分布は普通分かりませんので、ディジタル信号処理の世界では実際に観測された $f[i]$ の値を使った<b>標本自己相関関数</b>(sample autocorrelation function)で代用します。
+</p>
+
+<p>
+それでこの(標本)自己相関関数の定義は $f[i]$ が周期 $\textrm{N}$ で周期的であるとみなすかどうかによって変わるのですが、今回のアクティビティでは周期的であるとみなして次のように定義します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: (標本)自己相関関数:</b>
+
+<p>
+$f[i]$ が周期 $\textrm{N}$ で周期的とみなしたとき
+</p>
+
+\[
+R[n] = \frac{1}{\textrm{N}}\sum_{i = 0}^{\textrm{N-1}} 
+\left \{
+f[\ i\ ] \cdot f[\ (i+n)\ \textrm{mod}\ \textrm{N} \ ]
+\right \}
+\]
+
+<p>
+$n$・・・遅延時刻、ラグ(lag)、整数の変数、範囲は $n=0,1,\cdots,\textrm{N-1}$、単位は[点]
+</p>
+
+<p>
+A mod N・・・割った余りを求める剰余演算(modulo)、(例) 5 mod 2 = 1
+</p>
+
+</div>
+
+<p>
+上の定義の中でも触れている通り独立変数 $n$ の範囲は $n=0,1,\cdots,\textrm{N-1}$ なので、自己相関関数も $R[0]$ から $R[\textrm{N}-1]$ までの長さ N のディジタル信号になります。
+<br>
+ただし独立変数 $n$ は時刻ではなく遅延時刻(ラグ)を表しますので、$R[n]$ は時間領域信号ではありません。
+<br>
+また $\sum$ の計算をしたあと全体を $\textrm{N}$ で割っていますが、文献によっては割らない場合もあります。
+<br>
+なお $R[0]$ の時は同じ信号間の相関関数になりますので値は必ず最大値になり、
+</p>
+
+\[
+R[0] = \frac{1}{\textrm{N}}\sum_{i = 0}^{\textrm{N-1}} 
+\left \{
+f[\ i\ ]
+\right \}^2
+\]
+
+<p>
+より、$R[0]$ は信号の平均パワーを表します。
+</p>
+
+<p>
+ではここで例として<a href="../../d-sin">ディジタルサイン波</a>
+</p>
+
+\[
+f[i] = 1 \cdot \sin( 2\pi /5 \cdot i -\pi/2 )
+\]
+
+<p>
+を N=10 点生成した信号を考えます。
+<br>
+実際に得られた信号は以下です。
+</p>
+
+
+<img src="./img/page01-fig1.png" alt="">
+
+<p>
+この信号の自己相関関数のグラフを以下に示します。
+<br>
+ここで $R[0] = 1/2$ は振幅 1 のサイン波の平均パワー(= 実効値( $1/\sqrt{2}$ )の自乗)に相当します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>自己相関関数の例 :</b>
+
+<p>
+$f[i] = 1 \cdot \sin( 2\pi /5 \cdot i -\pi/2 )$ の自己相関関数
+</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(1,4)</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 白色雑音の場合</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己相関関数</a></li>
+<li>学習項目: [1] 自己相関関数</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+$f[i]$ が一様分布や正規分布の様な白色雑音(ホワイトノイズ)の場合は $R[0]$ が最大値になるのは通常の信号の時と同じなのですが、 $n > 0$ の $R[n]$ の値は $f[i]$ と $f[i+n]$ が無相関なのでほぼ一定値になります。
+</p>
+
+<p>
+具体的には $f[i]$ が平均 $\mu$、分散 $\sigma^2$ の白色雑音なら
+</p>
+
+<p>
+$R[0] = \mu^2 + \sigma^2$
+<br>
+$R[n] = \mu^2 \ ,\ n \geq 1$
+</p>
+
+<p>
+の値に近づきます。
+</p>
+
+<p>
+ではここで例として正規乱数 N(-2, 9) を N=10000 点生成した信号を考えます。
+<br>
+実際に得られた信号は以下です(最初の 20 点だけ表示)。
+</p>
+
+<img src="./img/page03-fig1.png" alt="">
+
+<p>
+この信号の自己相関関数のグラフを以下に示します(最初の 20 点だけ表示)。
+<br>
+この様に自己相関関数を計算してみたら $R[0]$ は $\mu^2 + \sigma^2 = 13$ に近く、その他の自己相関関数値は $\mu^2 = 4 $ に近い値でほぼ一定なので、元の信号は白色雑音である(可能性がある)事が分かりました。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>上の信号の自己相関関数 :</b>
+
+<p>
+　
+</p>
+
+<img src="./img/page03-fig2.png" alt="">
+
+</div>
+
+
+<br>
+<script>PreNext(3,4)</script>
+</body>
+</html>
