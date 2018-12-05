@@ -40,7 +40,7 @@
 </p>
 
 <p>
-入力テンソル: x ・・・ 定数値
+入力テンソル: x ・・・ 定数値 (スカラー、文字列、ベクトル、行列)
 </p>
 
 <p>
@@ -78,17 +78,6 @@ print( result )
 # 表示結果
 # [1. 2. 3.]
 
-# 3 x 1 行列
-op_const = tf.constant( [[1], [2], [3]], tf.float32 )
-# tf.float32 は各要素を 32 bit浮動小数として扱うという意味
-
-result = sess.run( op_const )
-print( result )
-# 表示結果
-#[[1.]
-# [2.]
-# [3.]]
-
 # 3 x 2 行列
 op_const = tf.constant([[1, 2], [3, 4], [5, 6]], tf.float32 )
 # tf.float32 は各要素を 32 bit浮動小数として扱うという意味
@@ -99,6 +88,17 @@ print( result )
 # [[1. 2.]
 #  [3. 4.]
 #  [5. 6.]]
+
+# 3 x 1 行列 ※ 3 次元ベクトルとの違いに注意！
+op_const = tf.constant( [[1], [2], [3]], tf.float32 )
+# tf.float32 は各要素を 32 bit浮動小数として扱うという意味
+
+result = sess.run( op_const )
+print( result )
+# 表示結果
+#[[1.]
+# [2.]
+# [3.]]
 </pre>
 </div>
 

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. 3層ニューラルネットワークのデータフローグラフ化</title>
+<title>3. 3層ニューラルネットワークのデータフロー・グラフ化</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは 3 層ニューラルネットワークのグラフを TensorFlow のデータフローグラフに変換してみましょう。
+では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークのグラフを <a href="../text01/page03.html">TensorFlow のデータフロー・グラフ</a>に変換してみましょう。
 </p>
 
 <br>
@@ -35,6 +35,11 @@
 
 <div class="info">
 <input type="checkbox"><b>図1: 入力層のグラフ:</b>
+
+<p>
+※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+</p>
+
 
 <img src="./img/page03-fig1.png" alt="">
 </div>
@@ -50,7 +55,7 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2: 入力信号:</b>
+<input type="checkbox"><b>図2: 入力信号の OP:</b>
 
 <p>
 入力信号は 1 x N 行列の<a href="../text01/page04.html#const">定数 OP</a> として表される。
@@ -60,7 +65,7 @@
 </div>
 
 <p>
-次に入力層をデータフローグラフ化します。色々なやり方があるのですが、一般的に入力層のパーセプトロンは入力されたデータをそのままスルーして出力するだけのものが多いです。
+次に入力層をデータフロー・グラフ化します。色々なやり方があるのですが、一般的に入力層のパーセプトロンは入力されたデータをそのままスルーして出力するだけのものが多いです。
 <br>
 よって入力層は図 3 のような<a href="../text01/page05.html">自作 OP</a> として表現できます。
 </p>
@@ -89,6 +94,11 @@
 <div class="info">
 <input type="checkbox"><b>図4: 隠れ層のグラフ:</b>
 
+<p>
+※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+</p>
+
+<img src="./img/page03-fig4.png" alt="">
 
 <p>
 $w_{ij}^{\textrm h}$ ・・・ 入力層のパーセプトロン No.$i$ の出力信号から、隠れ層のパーセプトロン No.$j$ への入力に掛けられる重み
@@ -97,7 +107,6 @@ $w_{ij}^{\textrm h}$ ・・・ 入力層のパーセプトロン No.$i$ の出�
 $b_{j}^{\textrm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイアス
 </p>
 
-<img src="./img/page03-fig4.png" alt="">
 </div>
 
 <p>
@@ -168,21 +177,21 @@ Y = f \left ( X\cdot W^{\textrm h} + B^{\textrm h} \right )
 </p>
 
 <p>
-ではこの行列演算を元に隠れ層をデータフローグラフ化してみましょう。
+ではこの行列演算を元に隠れ層を<a href="../text01/page03.html">データフロー・グラフ</a>化してみましょう。
 </p>
 
 <p>
-まず重みとバイアスは前のページで触れたように定数ではなくてディープラーニングによって値が変化する変数ですので<a href="../text01/page04.html#var">変数 OP</a> で表現します。
+まず重みとバイアスは定数ではなくて値が変化する変数ですので<a href="../text01/page04.html#var">変数 OP</a> で表現します。
 <br>
-また要素は一般的には乱数を使って初期化します。
+なお要素は一般的には乱数を使って初期化します。
 </p>
 
 
 <div class="info">
-<input type="checkbox"><b>図5: 隠れ層の重みとバイアス:</b>
+<input type="checkbox"><b>図5: 隠れ層の重み OP とバイアス OP:</b>
 
 <p>
-重み $W^{\textrm h}$ を N x K 行列の<a href="../text01/page04.html#var">変数 OP</a>、バイアス $B^{\textrm h}$ を 1 x K 行列の<a href="../text01/page04.html#var">変数 OP</a> で表す。
+隠れ層の重み $W^{\textrm h}$ を N x K 行列の<a href="../text01/page04.html#var">変数 OP</a>、バイアス $B^{\textrm h}$ を 1 x K 行列の<a href="../text01/page04.html#var">変数 OP</a> で表す。
 <br>
 各要素は乱数で初期化する。
 </p>
@@ -191,7 +200,9 @@ Y = f \left ( X\cdot W^{\textrm h} + B^{\textrm h} \right )
 </div>
 
 <p>
-次に隠れ層をデータフローグラフ化します。活性化関数 $f()$ の選び方は色々な流儀がありますが、今回のアクティビティでは「<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>」を使いたいと思います。
+次に隠れ層を<a href="../text01/page03.html">データフロー・グラフ</a>化します。
+<br>
+活性化関数 $f()$ の選び方は色々な流儀がありますが、今回のアクティビティでは<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>を使いたいと思います。
 <br>
 すると隠れ層は図 6 のような<a href="../text01/page05.html">自作 OP</a> として表現できます。
 </p>
@@ -220,13 +231,18 @@ Y = f \left ( X\cdot W^{\textrm h} + B^{\textrm h} \right )
 <input type="checkbox"><b>図7: 出力層のグラフ:</b>
 
 <p>
+※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+</p>
+
+<img src="./img/page03-fig7.png" alt="">
+
+<p>
 $w_{ij}^{\textrm o}$ ・・・ 隠れ層のパーセプトロン No.$i$ の出力信号から、出力層のパーセプトロン No.$j$ への入力に掛けられる重み
 </p>
 <p>
 $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバイアス
 </p>
 
-<img src="./img/page03-fig7.png" alt="">
 </div>
 
 <p>
@@ -238,7 +254,7 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 </p>
 
 <p>
-つまり、隠れ層と全く同じ構造をしているので、隠れ層と同じ様なデータフローグラフとなります。
+つまり、隠れ層と全く同じ構造をしているので、隠れ層と同じ様なデータフロー・グラフとなります。
 </p>
 
 <p>
@@ -247,10 +263,10 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 
 
 <div class="info">
-<input type="checkbox"><b>図8: 出力層の重みとバイアスのデータフローグラフ:</b>
+<input type="checkbox"><b>図8: 出力層の重み OP とバイアス OP:</b>
 
 <p>
-重み $W^{\textrm o}$を K x M 行列の<a href="../text01/page04.html#var">変数 OP</a>、バイアス $B^{\textrm o}$を 1 x M 行列の<a href="../text01/page04.html#var">変数 OP</a> として表現する。
+出力層の重み $W^{\textrm o}$を K x M 行列の<a href="../text01/page04.html#var">変数 OP</a>、バイアス $B^{\textrm o}$を 1 x M 行列の<a href="../text01/page04.html#var">変数 OP</a> として表現する。
 <br>
 各要素は乱数で初期化する。
 </p>
@@ -261,7 +277,7 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 <p>
 出力層の<a href="../text01/page05.html">自作 OP</a> も図 9 のように表現できます。
 <br>
-やはり出力層の活性化関数 $f()$ の選び方も色々な流儀がありますが、今回のアクティビティでは「<a href="../text01/page04.html#softmax">SoftMax 関数</a>」を使いたいと思います。
+やはり出力層の活性化関数 $f()$ の選び方も色々な流儀がありますが、今回のアクティビティでは<a href="../text01/page04.html#softmax">SoftMax 関数</a>を使いたいと思います。
 </p>
 
 <div class="info">
@@ -278,22 +294,25 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 
 <br>
 <h3>
-4. 全体のデータフローグラフ
+4. 全体のデータフロー・グラフ
 </h3>
 
 <p>
-以上の各 OP を組み合わせると、3層ニューラルネットワーク全体では次のようなデータフローグラフとなります。
+以上の各 OP を組み合わせると、3層ニューラルネットワーク全体では次のようなデータ・フローグラフとなります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図10: 3層ニューラルネットワーク全体のデータフローグラフ:</b>
+<input type="checkbox"><b>図10: 3層ニューラルネットワーク全体のデータ・フローグラフ:</b>
+
+<p>
+※ 定数入力は省略しています
+</p>
 
 <img src="./img/page03-fig10.png" alt="">
 </div>
 
 
 <br>
-
 <script>PreNext(3,5)</script>
 </body>
 </html>

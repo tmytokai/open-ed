@@ -97,7 +97,7 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1: 教師信号:</b>
+<input type="checkbox"><b>図1: 教師信号 OP:</b>
 
 <p>
 L x N 行列の教師信号を<a href="../text01/page04.html#const">定数 OP</a> として表現する
@@ -148,7 +148,7 @@ $i$ 行目の $[x_{i1}, x_{i2}, \cdots, x_{iN}]$ が $i$ 番目の教師信号�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2: ラベル:</b>
+<input type="checkbox"><b>図2: ラベル OP:</b>
 
 <p>
 L x M 行列のラベルを<a href="../text01/page04.html#const">定数 OP</a> として表現する
@@ -231,11 +231,11 @@ H(y,y') = -\sum_{i=1}^L \sum_{j=1}^M y_{ij}\log y'_{ij}
 
 <br>
 <h3>
-5. クロスエントロピーのデータフローグラフ
+5. クロスエントロピーのデータフロー・グラフ
 </h3>
 
 <p>
-ではこのクロスエントロピーをデータフローグラフ化します。
+ではこのクロスエントロピーを<a href="../text01/page03.html">データフロー・グラフ</a>化します。
 </p>
 
 <p>
@@ -244,6 +244,10 @@ H(y,y') = -\sum_{i=1}^L \sum_{j=1}^M y_{ij}\log y'_{ij}
 
 <div class="info">
 <input type="checkbox"><b>図3: 教師信号を入力した時のニューラルネットワークからの出力信号:</b>
+
+<p>
+※ 出力層 OP (op_output_layer)だけ抜粋しています
+</p>
 
 <p>
 $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信号に対応する出力(result)
@@ -262,7 +266,7 @@ $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信�
 <p>
 名前: cross_entropy
 <br>
-動作: 行列 r (= result) と行列 l (= label) を受け取り、行列 r に<a href="../text01/page04.html#log">log</a> を通した行列と行列 l を<a href="../text01/page04.html#mul">掛け合わせ</a>(<b>※ 行列積ではない</b>)、さらに<a href="../text01/page04.html#redsum">総和</a>を取って -1 倍して出力する。
+動作: 行列 r (= result) と行列 l (= op_const_label) を受け取り、行列 r に<a href="../text01/page04.html#log">log</a> を通した行列と行列 l を<a href="../text01/page04.html#mul">掛け合わせ</a>(<b>※ 行列積ではない</b>)、さらに<a href="../text01/page04.html#redsum">総和</a>を取って -1 倍して出力する。
 </p>
 
 <img src="./img/page04-fig4.png" alt="">
@@ -291,8 +295,13 @@ $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信�
 </p>
 
 <p>
-入力テンソル: r は学習率(スカラー)、c はクロスエントロピー
+入力テンソル: 
 <br>
+r : 学習率(スカラー)
+<br>
+c : クロスエントロピー
+</p>
+<p>
 出力テンソル: 無し
 </p>
 </div>
@@ -308,15 +317,24 @@ $i$ 行目の $[y'_{i1}, y'_{i2}, \cdots, y'_{iN}]$ が $i$ 番目の教師信�
 </p>
 
 <p>
-では最後にディープラーニング全体のデータフローグラフを示してこのページの話を締めたいと思います。
+では最後にディープラーニング全体のデータフロー・グラフを示してこのページの話を締めたいと思います。
+<br>
+今回は 勾配降下法 OP の名前を op_grad_optimizer としました。
+<br>
+全体のグラフを作成した後に op_grad_optimizer を run すると１回だけ学習を行います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図5: ディープラーニング全体のデータフローグラフ:</b>
+<input type="checkbox"><b>図5: ディープラーニング全体のデータフロー・グラフ:</b>
+
+<p>
+※ 定数入力は省略しています
+</p>
 
 <img src="./img/page04-fig5.png" alt="">
 </div>
 
+<br>
 <script>PreNext(4,5)</script>
 </body>
 </html>

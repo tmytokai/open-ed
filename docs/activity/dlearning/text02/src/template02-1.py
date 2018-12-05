@@ -15,7 +15,7 @@ op_const_data = tf.constant(
     , tf.float32
 )
 
-# 入力層 OP ノードの定義
+# 入力層 OP の定義
 def input_layer( x ):
    ?
 
@@ -23,7 +23,7 @@ def input_layer( x ):
 op_var_W_h = ?
 op_var_B_h = ?
 
-# 隠れ層 OP ノードの定義
+# 隠れ層 OP の定義
 def hidden_layer( x, w, b ):
    ?
 
@@ -31,7 +31,7 @@ def hidden_layer( x, w, b ):
 op_var_W_o = ?
 op_var_B_o = ?
 
-# 出力層 OP ノードの定義
+# 出力層 OP の定義
 def output_layer( x, w, b ):
    ?
 
