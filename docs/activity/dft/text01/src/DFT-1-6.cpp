@@ -6,7 +6,7 @@
 
 int main()
 {
-    const int N = 8;
+    const int N = 256;
     double *f;
     double *A;
     double *B;
