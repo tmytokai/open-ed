@@ -35,51 +35,45 @@
 <input type="checkbox"><b>演習3-1 (個人、45分):</b> 自分の声をスペクトル解析してみましょう。
 </p>
 
-<p>
-※ Linux で演習する事を前提に説明していますので、その他の OS の場合は適当なアプリやコンパイラを利用して下さい。
-</p>
-
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> マイクを PC の端子に繋ぎます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> マイクの設定を開いて音量調整をします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 2 -f S16_LE -c 1 -r 8000 test.wav 」(サンプリング周波数 8000 [Hz] で 2 秒間録音の意味)を実行して声を録音して下さい。すると「 test.wav 」いう Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/recorder.html" onclick="window.open( '../../../lib/sound/recorder.html', 'recorder','width=300,height=200 ');return false;" >レコーダー</a>を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 aplay test.wav 」を実行して録音出来ていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「2 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 以下のテンプレートファイルを test.wav と同じフォルダにダウンロードして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> out.wav を試しに再生し、もし音が小さい場合は録音し直します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> out.wav を演習フォルダに移動して「 SPEC-3-1.wav 」に名前を変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/SPEC-3-1.cpp">テンプレートソース</a>(SPEC-3-1.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従ってプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 SPEC-3-1.csv 」という CSV ファイルと、1秒地点から0.5秒分の音声を切り出した「 SPEC-3-1-out.wav 」が出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  SPEC-3-1.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「Hz」、次の列の先頭に「振幅スペクトル」、その次の列の先頭に「位相スペクトル」と入力します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 振幅スペクトルのグラフを挿入します。グラフの種類は散布図、点「無し」、線あり、平滑化「無し」とします。
 </p>
 <p>
-<a href="./template03-1.cpp">UTF-8版</a> (template03-1.cpp)
+※1 今回は 8000 Hz までのスペクトルを出力しています。
 <br>
-<a href="./template03-1-SJIS.cpp">シフトJIS版</a> (template03-1-SJIS.cpp)
+※2 行数が多いので範囲選択すると表計算ソフトが固まる時があります。Ctrlキーを押しながら「Hz」列と「振幅スペクトル」列をクリックして列の選択をして下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めして行って下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に位相スペクトルのグラフを挿入します。グラフの種類は散布図、点「無し」、線あり、平滑化「無し」とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「g++ template03-1.cpp」でコンパイルして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 out.csv 」いう CSV ファイルが出来ます。内容は 1 列目がディジタルサイン波の周波数、2列目が振幅スペクトル、3列目が位相スペクトルです。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>  csv ファイルを表計算ソフトに取り込み、振幅スペクトルと位相スペクトルのグラフを描いて下さい。Hz もちゃんと分かるようにして下さい。
-</p>
-<p>
-※1 csv を読み込む時は「コンマ」だけをチェックしそれ以外のチェックを外して下さい。
-<br>
-※2 行数が多い(8000行)ので範囲選択すると表計算ソフトが固まる時があります。Ctrlキーを押しながらAとかBみたいな列名だけをクリックして列の選択をして下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>  グラフの種類は散布図、点「無し」、線あり、平滑化「無し」とします。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「SPEC-3-1」として下さい。
+<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「SPEC-3-1」として下さい(拡張子は表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  振幅スペクトルを解析し、自分の声の<b>周波数的な</b>特徴を見つけて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  チーム内で答え合わせをし、各メンバーは提出用のグラフを画像ファイルとして保存して下さい。 
+<span class="olradio"><input type="radio" name="p1"></span>  チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  指定場所に各メンバーの「振幅スペクトル」を貼り付け、その下に「各メンバーの声の周波数的特徴」を記入して下さい。
+<span class="olradio"><input type="radio" name="p1"></span>  各自が指定場所に「振幅スペクトル」と「自分の声の周波数的特徴」を記入して下さい。
 </p>
 </div>
 
