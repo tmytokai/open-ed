@@ -30,29 +30,22 @@ int main()
     double a[L+1]; // LPC 係数
     double a2[L+1];
 
+    // 演習 4-1 の x[i] をコピーする
     for(int i=0;i < N; ++i ){
         x[i] = ? ;
     }
 
-    // レビンソン・ダービン(Levinson-Durbin)・アルゴリズム
-    for(int n=0; n <= L; ++n ){
-        R[n] = ACR( n, x, N );
-    }
-    double e = ? ;
-    double W = ? ;
-    for( int n = 1; n <= L; ++n ){
+    // 演習 4-1 のレビンソン・ダービン(Levinson-Durbin)・アルゴリズムをコピーする
 
-        for(int i = 1; i<=n; ++i ) a2[i] = ? ;
-        P[n] = ? ;
-        a[n] = ? ;
-        for(int i = 1; i<=n-1; ++i ){
-            a[i] = ? ;
+
+    // 線形予測モデル
+    double hatx[Nout];
+    for( int i = 0; i < Nout; ++i ){
+        hatx[i] = 0;
+        for( int n = 1; n <= L; ++n ){
+            hatx[i] += ? ;
         }
-        e = ? ;
-        W = R[n+1];
-        for(int i = 1; i<=n; ++i ){
-            W += ? ;
-        }
+        hatx[i] *= ? ;
     }
 
     printf("LPC係数\n");
@@ -60,18 +53,13 @@ int main()
         printf( "a[%d] = %lf\n", n, a[n] );
     }
 
-    printf("PARCOR係数\n");
-    for( int n = 1; n <= L; ++n ){
-        printf( "P[%d] = %lf\n", n, P[n] );
-    }
-
-    FILE* file = fopen( "DFILTER-4-1-x.csv", "wb");
+    FILE* file = fopen( "DFILTER-4-2-hatx.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d, %lf\n", i, x[i] );
+        fprintf( file, "%d, %lf\n", i, hatx[i] );
     }
     fclose(file);
 

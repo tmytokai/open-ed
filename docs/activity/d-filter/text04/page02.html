@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 線形予測誤差</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [4] ARモデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page01.html">前ページ</a>で $x[i]$ の予測値 $\hat{x}[i]$ を求めましたので、次は真の値と予測値の誤差について考えましよう。
+<br>
+その誤差のことを「<b>線形予測誤差</b>」または「<b>線形予測残差</b>」などといいます。
+</p>
+
+<p>
+時刻 $i$ における線形予測誤差を記号 $err[i]$ で表すことにすると、$err[i]$ は次の計算式で求められます。
+
+
+<div class="info">
+<input type="checkbox"><b>定義： 線形予測誤差 : </b>
+
+<p>
+$\textrm{L}$ を正の整数とした時
+</p>
+
+\begin{align*}
+err[i] 
+& = x[i] - \hat{x}[i] \\
+& = x[i] + \sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
+\end{align*}
+
+<p>
+$\hat{x}[i]$ ・・・ $x[i]$ の予測値
+</p>
+
+<p>
+$a[n]$ ・・・ <b>LPC 係数</b>(Linear Prediction Coefficient)、または<b>線形予測係数</b>と呼ぶ
+</p>
+
+</div>
+
+<p>
+<a href="./page01.html">前ページ</a>の線形予測モデルの式で $\sum$ の前にマイナスが付いていた理由は、上の線形予測誤差の $\sum$ の前をプラスにしたかったためです。
+</p>
+
+<p>
+ところでこの線形予測誤差も線形予測モデルと同様に $\textrm{L}$ 次の<a href="../text02/page01.html">FIR フィルタ</a>の形式になっていて、「<b>(前向き)線形予測誤差フィルタ</b>」または「<b>線形予測器</b>」などと呼ばれています。
+<br>
+この線形予測誤差フィルタは次のブロック図で表されます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b> $\textrm{L}$ 次(前向き)線形予測誤差フィルタのブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page02-fig1.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(2,4)</script>
+</body>
+</html>
