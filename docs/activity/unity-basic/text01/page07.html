@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,9 +20,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここではオブジェクトとオブジェクトが衝突した時の処理を取り上げます。
+ここではゲームオブジェクトとゲームオブジェクトが衝突した時の処理を取り上げます。
 <br>
-なかなか複雑な仕組みなので順を追って説明していきます。
+初心者にとっては複雑な仕組みなので順を追って説明していきます。
 </p>
 
 <br>
@@ -37,11 +37,11 @@
 <p>
 ここでは基本的な衝突判定処理である OnCollision〜系、特に <b>OnCollisionEnter2D</b> について説明します。
 <br>
-OnCollisionEnter2D はあるオブジェクト同士が衝突した瞬間に呼び出されるメソッドです。
+OnCollisionEnter2D はゲームオブジェクト同士が衝突した瞬間に呼び出されるメソッドです。
 </p>
 
 <p>
-さて A と B というオブジェクトがあってそれらの衝突判定処理をおこなうことにします。
+さて A と B というゲームオブジェクトがあってそれらの衝突判定処理をおこなうことにします。
 <br>
 その場合、まずは次の様にして A と B に〜Collider 2D コンポーネントをアタッチします。
 </p>
@@ -66,7 +66,7 @@ OnCollisionEnter2D はあるオブジェクト同士が衝突した瞬間に呼�
 </div>
 
 <p>
-するとこの時点でオブジェクト A、B 間に衝突が生じて重なる事が出来なくなります。
+するとこの時点でゲームオブジェクト A、B 間に衝突が生じて重なる事が出来なくなります。
 </p>
 
 <p>
@@ -74,7 +74,7 @@ OnCollisionEnter2D はあるオブジェクト同士が衝突した瞬間に呼�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OnCollisionEnter2D : オブジェクト同士が衝突した瞬間に呼び出される</b>
+<input type="checkbox"><b>OnCollisionEnter2D : ゲームオブジェクト同士が衝突した瞬間に呼び出される</b>
 <pre class="wrap">
 void OnCollisionEnter2D( Collision2D collision )
 {
@@ -89,13 +89,13 @@ void OnCollisionEnter2D( Collision2D collision )
 </h3>
 
 <p>
-3 つの A 、 B 、 C というオブジェクトがあり、A は B とは衝突したいけど C とは衝突したくないという時は<b>レイヤー</b>機能を使います。
+3 つの A 、 B 、 C というゲームオブジェクトがあり、A は B とは衝突したいけど C とは衝突したくないという時は<b>レイヤー機能</b>を使います。
 </p>
 
 <p>
-そもそもの前提として各オブジェクトは必ずある階層(レイヤー)に属しています(※)。
+まず大前提として各ゲームオブジェクトは必ずある階層(レイヤー)に属しています(※)。
 <br>
-デフォルトでは Default という名前のレイヤーに属しています。
+デフォルトでは全てのゲームオブジェクトは Default という名前のレイヤーに属しています。
 </p>
 
 <p>
@@ -103,16 +103,16 @@ void OnCollisionEnter2D( Collision2D collision )
 </p>
 
 <p>
-という訳でオブジェクトが属するレイヤーを変更すればオブジェクト同士が衝突出来ないようにすることが可能です。
+従って属するレイヤーを違うものにすればゲームオブジェクト同士が衝突出来ないようにすることが可能です。
 <br>
-オブジェクトにレイヤーを設定する手順は以下のとおりです。
+ゲームオブジェクトにレイヤーを設定する手順は以下のとおりです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>オブジェクトにレイヤーを設定する</b>
+<input type="checkbox"><b>ゲームオブジェクトにレイヤーを設定する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上でオブジェクトを選択してInspector ウィンドウを開く。デフォルトでは Layer プルダウンメニューに Default と書いてあることを確認する。
+<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上でゲームオブジェクトを選択してInspector ウィンドウを開く。デフォルトでは Layer プルダウンメニューに Default と書いてあることを確認する。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> (レイヤーを新規作成する場合) Layer プルダウンメニューをクリック → Add Layer を選択し、下の図の様に User Layer の空いている所に好きなレイヤー名を設定する。
 </p>
@@ -124,7 +124,7 @@ void OnCollisionEnter2D( Collision2D collision )
 </div>
 
 <p>
-これでオブジェクトにレイヤーを設定出来ましたが、このままだとまだ全てのオブジェクト間と衝突が起きますので、以下のようにして特定のレイヤーに属するオブジェクト同士は衝突出来ないようにします。
+これでゲームオブジェクトにレイヤーを設定出来ましたが、このままだとまだ全てのオブジェクト間と衝突が起きますので、以下のようにして特定のレイヤーに属するゲームオブジェクト同士は衝突出来ないようにします。
 </p>
 
 <div class="info">
@@ -137,7 +137,7 @@ void OnCollisionEnter2D( Collision2D collision )
 </p>
 <img src="./img/layer2.png" alt="">
 <br>
-※ 上の例の場合 LayerA と Layer C の所がチェックが外れているので、LayerA に属するオブジェクトと LayerC に属するオブジェクトは衝突しない。
+※ 上の例の場合 LayerA と Layer C の所がチェックが外れているので、LayerA に属するゲームオブジェクトと LayerC に属するゲームオブジェクトは衝突しない。
 </div>
 </div>
 
@@ -147,20 +147,20 @@ void OnCollisionEnter2D( Collision2D collision )
 </h3>
 
 <p>
-OnCollision〜 や OnTrigger〜 の中で衝突したオブジェクトによって処理を変えたい場合は<b>タグ</b>機能を使います。
+OnCollision〜 や OnTrigger〜 の中で衝突したゲームオブジェクトによって処理を変えたい場合は<b>タグ</b>機能を使います。
 </p>
 
 <p>
-各オブジェクトはタグを付けて区別する事が出来ます(デフォルトではタグは付いていません)。
+各ゲームオブジェクトはタグを付けて区別する事が出来ます(デフォルトではタグは付いていません)。
 <br>
-オブジェクトにタグを設定する手順は以下のとおりです。
+ゲームオブジェクトにタグを設定する手順は以下のとおりです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>オブジェクトにタグを設定する</b>
+<input type="checkbox"><b>ゲームオブジェクトにタグを設定する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> Hierarchy ウィンドウ上でオブジェクトを選択して Inspector ウィンドウを開く。デフォルトでは Tag プルダウンメニューに Untagged と書いてあることを確認する。
+<span class="olradio"><input type="radio" name="p4"></span> Hierarchy ウィンドウ上でゲームオブジェクトを選択して Inspector ウィンドウを開く。デフォルトでは Tag プルダウンメニューに Untagged と書いてあることを確認する。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> (タグを新規作成する場合) Tag プルダウンメニューをクリック → Add Tags を選択し、Tags の + ボタンを押し、下の図の様に好きなタグ名を入れて Save で保存する。
 </p>
@@ -182,12 +182,12 @@ void OnCollisionEnter2D( Collision2D collision )
 {
     if (collision.gameObject.tag == "TagA") {	
 
-       // TagA がついたオブジェクトと衝突した時の処理
+       // TagA がついたゲームオブジェクトと衝突した時の処理
 
     }
     if (collision.gameObject.tag == "TagB") {	
 
-       // TagB がついたオブジェクトと衝突した時の処理
+       // TagB がついたゲームオブジェクトと衝突した時の処理
 
     }
     // 以下同様
@@ -202,7 +202,7 @@ void OnCollisionEnter2D( Collision2D collision )
 </h3>
 
 <p>
-〜Collider 2D コンポーネントをアタッチしたオブジェクトには<b>マテリアル</b>をセットすることで摩擦と弾性を設定する事が出来ます。
+〜Collider 2D コンポーネントをアタッチしたゲームオブジェクトには<b>マテリアル</b>をセットすることで摩擦と弾性を設定する事が出来ます。
 <br>
 するとオブジェクト同士に摩擦を生じさせたり、ぶつかった時に跳ね返らせたりすることが可能になります。
 </p>
@@ -223,7 +223,7 @@ void OnCollisionEnter2D( Collision2D collision )
 <p>
 <span class="olradio"><input type="radio" name="p5"></span> 新規作成したマテリアルをクリックし、 Inspector ウィンドウの Friction(摩擦) と Bounciness(弾性)を好みの値に変更する。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> Hierarchy ウィンドウでマテリアルを設定したいオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p5"></span> Hierarchy ウィンドウでマテリアルを設定したいゲームオブジェクトを選択する。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> Inspector ウィンドウの 〜Collider 2D の Material にマテリアルを DnD する。
 <br>
@@ -238,15 +238,17 @@ void OnCollisionEnter2D( Collision2D collision )
 </h3>
 
 <p>
-今まではオブジェクト間は衝突して重なる事が出来ない状況を考えていましたが、レーザー光線みたいに他のオブジェクトと重なって突き抜ける様なオブジェクトと衝突判定をしたい場合は OnTrigger〜系による衝突判定を行います。
-<br>
-今回は特に <b>OnTriggerEnter2D</b> を取り上げます。
-<br>
-OnTriggerEnter2D はあるオブジェクトとオブジェクトが重なった瞬間に呼び出されるメソッドです。
+今までゲームオブジェクト間は衝突して重なる事が出来ない状況を考えていましたが、レーザー光線みたいに他のゲームオブジェクトと重なっても突き抜ける様なゲームオブジェクトと衝突判定をしたい場合は OnTrigger〜系による衝突判定を行います。
 </p>
 
 <p>
-2 つの A 、 B というオブジェクトがあり、A と B は重なる事が出来て、かつ重なった時に何か処理をしたいという場合、まずは A か B どちらかのオブジェクトに対して<b>トリガー</b>設定をします(※)。
+今回は特に <b>OnTriggerEnter2D</b> を取り上げます。
+<br>
+OnTriggerEnter2D はゲームオブジェクト間が重なった瞬間に呼び出されるメソッドです。
+</p>
+
+<p>
+2 つの A 、 B というゲームオブジェクトがあり、A と B は重なる事が出来て、かつ重なった時に何か処理をしたいという場合、まずは A か B どちらかのゲームオブジェクトに対して<b>トリガー</b>設定をします(※)。
 </p>
 
 <p>
@@ -257,7 +259,7 @@ OnTriggerEnter2D はあるオブジェクトとオブジェクトが重なった
 <input type="checkbox"><b>トリガー設定の方法</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。 
+<span class="olradio"><input type="radio" name="p6"></span> Hierarchy ウィンドウで対象のゲームオブジェクトを選択する。 
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> Inspector ウィンドウの 〜Collider 2D の Is Trigger プロパティをチェックする。
 </p>
@@ -265,13 +267,13 @@ OnTriggerEnter2D はあるオブジェクトとオブジェクトが重なった
 </div>
 
 <p>
-するとこの時点でトリガー設定をしたオブジェクトは他のオブジェクトと重なることが出来るようになります。
+するとこの時点でトリガー設定をしたゲームオブジェクトは他のゲームオブジェクトと重なることが出来るようになります。
 </p>
 
 <p>
 ただし、上で取り上げた OnCollisionEnter2D メソッドは呼び出されなくなりますので、代わりに次の OnTriggerEnter2D メソッドを使います。
 <br>
-もちろんタグを使って重なったオブジェクトの判定も出来ます。
+もちろんタグを使って重なったゲームオブジェクトの判定も出来ます。
 </p>
 
 <div class="info">
@@ -281,12 +283,12 @@ void OnTriggerEnter2D( Collider2D collider ) // OnCollisionEnter2D と引数の�
 {
     if ( collider.tag == "TagA") {	
 
-       // TagA がついたオブジェクトと重なった時の処理
+       // TagA がついたゲームオブジェクトと重なった時の処理
 
     }
     if ( collider.tag == "TagB") {	
 
-       // TagB がついたオブジェクトと重なった時の処理
+       // TagB がついたゲームオブジェクトと重なった時の処理
 
     }
     // 以下同様
@@ -296,7 +298,7 @@ void OnTriggerEnter2D( Collider2D collider ) // OnCollisionEnter2D と引数の�
 </div>
 
 <p>
-なおトリガーよりもレイヤーが優先されますので、レイヤーで衝突出来ないように設定している場合はオブジェクトが重なっても OnTriggerEnter2D は呼び出されません。
+なおトリガーよりもレイヤーが優先されますので、レイヤーで衝突出来ないように設定している場合はゲームオブジェクトが重なっても OnTriggerEnter2D は呼び出されません。
 </p>
 
 <p>

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>5. ゲームパッドやキーボードによるオブジェクトの移動</title>
+<title>5. ゲームパッドやキーボードによるゲームオブジェクトの移動</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -42,6 +42,11 @@ public static float Input.GetAxisRaw( "軸" );
 "Horizontal" なら右を押してれば 1、左を押してれば -1 、押してないと 0 が戻る
 "Vertical" なら上を押してれば 1、下を押してれば -1、押してないと 0 が 戻る
 </pre>
+
+<p>
+※ キーパッドによっては GetAxisRaw メソッドが上手く動作しない場合もあります。その場合は GetAxis メソッドの方を使って下さい。
+</p>
+
 </div>
 
 <p>
@@ -61,9 +66,9 @@ public static bool Input.GetButton( "ボタンの名前" );
 </div>
 
 <p>
-さてこれらのメソッドと前のページで学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
+これらのメソッドと<a href="./page04.html">前ページ</a>で学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
 <br>
-ただし
+なお
 </p>
 
 <p>
@@ -75,19 +80,17 @@ public static bool Input.GetButton( "ボタンの名前" );
 </p>
 
 <p>
-※ 正確には GetAxisRaw などの Input 系のメソッドは Update メソッド、Rigidbody2D の機能は FixedUpdate メソッドの中に書く必要があります。
+※ 正確には GetAxisRaw などの Input 系のメソッドは Update メソッド、Rigidbody2D の機能は FixedUpdate メソッドの中に書く必要があります(理由は自分で調べてみましょう)。
 <br>
-理由は自分で調べて下さい。
-<br>
-なお今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
+今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
 </p>
 
 <p>
-例えばあるオブジェクトを(重力が 0 なら) 方向キーで入力した方向に速度 2.0 で動かしたい場合はソース 1 の様に FixedUpdate メソッド内に書きます。 
+例えばあるゲームオブジェクトを(重力が 0 なら) 方向キーで入力した方向に速度 2.0 で動かしたい場合はソース 1 の様に FixedUpdate メソッド内に書きます。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: オブジェクトを方向ボタンで入力した方向に速度 2.0 で動かす</b>
+<input type="checkbox"><b>ソース 1: ゲームオブジェクトを方向ボタンで入力した方向に速度 2.0 で動かす</b>
 <pre class="wrap">
 float speed = 2.0f;
 float x = Input.GetAxisRaw ("Horizontal"); // 右を押してれば 1、左を押してれば -1 、押してないと 0 が x に入る
@@ -98,20 +101,22 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 </div>
 
 <p>
-ちなみに方向ボタンを向いたらオブジェクトの画像の向きもそれに合わせて変更したい場合があります。
+ちなみに方向ボタンを押した方向にゲームオブジェクトの画像の向きもそれに合わせて変更したい場合があります。
 <br>
-それを実現するには、オブジェクトの画像描画を担当している Sprite Renderer コンポーネントの flipX 又は FlipY プロパティの値を次のように変更します。
+それを実現するには、ソース 2 の様に Sprite Renderer コンポーネントの flipX 又は FlipY プロパティの値を次のように変更します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>画像の向きを反転させる</b>
+<input type="checkbox"><b>ソース 2 : 画像の向きを反転させる</b>
 <pre class="wrap">
 
-GetComponent&lt;SpriteRenderer&gt;().flipX = false; // 左右通常の向き
-GetComponent&lt;SpriteRenderer&gt;().flipX = true; // 左右反転
+GetComponent&lt;SpriteRenderer&gt;().flipX = false; // 左右を通常の向きにする
 
-GetComponent&lt;SpriteRenderer&gt;().flipY = false; // 上下通常の向き
-GetComponent&lt;SpriteRenderer&gt;().flipY = true; // 上下反転
+GetComponent&lt;SpriteRenderer&gt;().flipX = true; // 左右を反転させる
+
+GetComponent&lt;SpriteRenderer&gt;().flipY = false; // 上下を通常の向きにする
+
+GetComponent&lt;SpriteRenderer&gt;().flipY = true; // 上下を反転させる
 </pre>
 </div>
 

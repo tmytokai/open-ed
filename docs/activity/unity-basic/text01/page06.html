@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,13 +20,13 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Unity で文字列やボタンといったユーザーインターフェイス(UI)オブジェクトを画面に表示するには uGUI という機能を使います。
+Unity で文字列やボタンといったユーザーインターフェイス(UI)オブジェクトを画面に表示するには <b>uGUI</b> という機能を使います。
 <br>
 ここでは文字列を表示してみましょう。
 </p>
 
 <p>
-まず以下の様にして描画領域の Canvas 型オブジェクトを作成し、Canvas 型オブジェクトの上に文字列を表示する Text 型オブジェクトを配置します。
+文字列を表示するにはまず Canvas 型オブジェクトと Text 型オブジェクトを作成します。
 </p>
 
 <div class="info">
@@ -38,7 +38,7 @@ Unity で文字列やボタンといったユーザーインターフェイス(U
 <span class="olradio"><input type="radio" name="p1"></span> Canvas オブジェクトをクリックすると Inspector ウィンドウに情報が表示されるので、Canvas コンポーネントの Render Mode プロパティが「Screen Space - Overlay」になっている事を確認する(※)。
 </p>
 <p>
-※ UI オブジェクトの描画方法を決めるプロパティです。他の設定については自分で調べて下さい。
+※ UI オブジェクトの描画方法を決めるプロパティです。他の設定にするとどうなるかは自分で試してみましょう。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> Canvas オブジェクトをダブルクリックすると Scene ビューがズームアウトして UI オブジェクトの配置状態を確認できるので、この画面でまず Text オブジェクトの位置を調整する。
@@ -66,7 +66,7 @@ Unity で文字列やボタンといったユーザーインターフェイス(U
 
 <div class="info">
 <pre class="wrap">
-using の中に
+スクリプトの先頭に
 
 using UnityEngine.UI;
 
@@ -77,13 +77,13 @@ GameObject.Find ("Canvas 型オブジェクト名/Text 型オブジェクト名"
 </div>
 
 <p>
-例えば MyCanvas という名前のオブジェクトの中にある Text1 という名前のオブジェクトの文字列を "HOGE" に変更したい時は次のようにします。
+例えば MyCanvas という名前の Canvas 型オブジェクトの中にある Text1 の文字列を "HOGE" に変更したい時は次のようにします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: Text1 オブジェクトの文字列を変更</b>
+<input type="checkbox"><b>ソース 1: Text1 の文字列を変更</b>
 <pre class="wrap">
-using の中に
+スクリプトの先頭に
 
 using UnityEngine.UI;
 

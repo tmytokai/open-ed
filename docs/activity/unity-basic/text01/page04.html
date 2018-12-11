@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. オブジェクトの移動</title>
+<title>4. ゲームオブジェクトの移動</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,29 +20,29 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次にキャラクターのオブジェクトを動かしてみたいと思います。
+次にゲームオブジェクトを動かしてみたいと思います。
 </p>
 
 <p>
-オブジェクトを動かす方法は色々ありますが、今回は物理演算エンジンを使って動かしてみたいと思います。
+ゲームオブジェクトを動かす方法は色々ありますが、今回は<b>物理演算エンジン</b>を使って動かしてみたいと思います。
 <br>
-そのためにはまず、以下の手順で「<b>Rigidbody 2D</b>」というコンポーネントをオブジェクトにアタッチします(※)。
+そのためにはまず、以下の手順で「<b>Rigidbody 2D コンポーネント</b>」をゲームオブジェクトにアタッチします(※)。
 
 <p>
 ※ コンポーネント(Component)は各オブジェクトの振る舞いを定めるメソッドやプロパティ(＝パラメータ)のグループのことです。
 <br>
-コンポーネントをオブジェクトにくっつけることをアタッチと言います。
+コンポーネントをゲームオブジェクトにくっつけることをアタッチと言います。
 <br>
-例えばこれまでのページで使ってきた Transform はオブジェクトの位置やサイズ、向きを定めるコンポーネントで、Sprite Renderer は画像を描画するコンポーネントです。
+例えば Transform コンポーネントはゲームオブジェクトの位置やサイズ、向きを定めるコンポーネントで、Sprite Renderer コンポーネントは画像を描画するコンポーネントです。
 <br>
-今回使う Rigidbody 2D はアタッチするオブジェクトの速度や重さ、重力などを定めるコンポーネントです。
+Rigidbody 2D コンポーネントはゲームオブジェクトの速度や重さ、重力などを定めるコンポーネントです。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>Rigidbody 2D コンポーネントのアタッチ方法:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のゲームオブジェクトを選択する。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Add Component ボタンを押してメニューを表示する。
 <br>
@@ -50,17 +50,19 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 重力が必要ない場合は Rigidbody 2D の Gravity Scale プロパティの値を 0 にする。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 他のオブジェクトと衝突した時に回転させたくない場合は、Constraints → Freeze Rotation → Z プロパティをチェックする。
+<span class="olradio"><input type="radio" name="p1"></span> 他のゲームオブジェクトと衝突した時に回転させたくない場合は、Constraints → Freeze Rotation → Z プロパティをチェックする。
 </p>
 </div>
 </div>
 
 <p>
-ただし Rigidbody 2D をアタッチしただけでは任意の方向にオブジェクトを動かす事は出来ませんので、次は「<b>Script</b>」コンポーネントもアタッチします(※)。
+ただし Rigidbody 2D をアタッチしただけでは任意の方向にオブジェクトを動かす事は出来ませんので、次は「<b>Script コンポーネント</b>」もアタッチします。
 </p>
 
 <p>
-※ Script コンポーネントの実体は C# 又は JavaScript で書かれたスクリプトファイルです。今回は C# の方を使います。
+なおScript コンポーネントの実体は C# 又は JavaScript で書かれたスクリプトファイルです。
+<br>
+今回は C# の方を使います。
 </p>
 
 <div class="info">
@@ -71,44 +73,46 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウでスクリプトをアタッチしたいオブジェクトを選択する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある、先ほど作成したスクリプトファイルを Inspector ウィンドウの上に DnD するとアタッチされる。
+<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある、先ほど作成したスクリプトファイルを Inspector ウィンドウの上に DnD するとスクリプトがアタッチされる。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中のスクリプトファイルをダブルクリックするとエディタが起動する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプト内に Start、Update というメソッド(※)が含まれている事を確認する。
+<span class="olradio"><input type="radio" name="p2"></span> スクリプト内に Start、Update という<a href="../../oop-basic/text01/page05.html">メソッド</a>が含まれている事を確認する(※)。
 </p>
 <p>
-※ Start メソッドはオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドです。
+※ Start メソッドはゲームオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドです。
 </p>
 </div>
 </div>
 
 
 <p>
-では準備が済んだので実際にオブジェクトを動かしてみましょう。
+では準備が済んだので実際にゲームオブジェクトを動かしてみましょう。
 </p>
 
 <p>
-オブジェクトを動かすためには Rigidbody 2D コンポーネント の <b>velocity (ベロシティ)</b> プロパティに値をセットします。
+ゲームオブジェクトを動かすためには Rigidbody 2D コンポーネント の <b>velocity (ベロシティ)</b> プロパティに値をセットします。
 <br>
 この velocity は日本語では「速度」を意味する 2 次元ベクトルで、更に「velocity.x」と「velocity.y」というプロパティに分かれます。
 <br>
-velocity.x は横方向の速度、velocity.y は縦方向の速度であり、それらに指定した方向と速さでオブジェクトが動きます(図1)。 
+velocity.x は横方向の速度、velocity.y は縦方向の速度であり、それらに指定した方向と速さでゲームオブジェクトが動きます(図1)。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1.  Rigidbody 2D の velociy で指定した方角にオブジェクトが動く</b>
+<input type="checkbox"><b>図1.  Rigidbody 2D の velociy で指定した方角に指定した速さでゲームオブジェクトが動く</b>
 <p>
 </p>
 <img src="./img/page04-fig1.png" alt="">
 </div>
 
 <p>
-ところがこの velociy の値は Inspector ウィンドウから変更出来ませんので、以下の様にしてスクリプトの中でセットする必要があります。
+ところがこの velocity の値は Inspector ウィンドウから変更出来ません。
+<br>
+従って以下のソース 1 に示したコードをスクリプト内の Start または Update メソッドの中に書いて velocity の値をセットする必要があります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>オブジェクトを移動させるスクリプト</b>
+<input type="checkbox"><b>ソース 1: ゲームオブジェクトを移動させるスクリプト</b>
 <pre class="wrap">
 float speed = 移動スピード;
 float x = 横方向の移動量;
@@ -125,11 +129,11 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 </p>
 
 <p>
-例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に速度 2.0 で動かしたい場合はソース 1 の様にスクリプト内に書きます。 
+例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に速度 2.0 で動かしたい場合はソース 2 の様に Start または Update メソッド内に書きます。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: オブジェクトを斜め右上  45 度の方向に速度 2.0 で動かす</b>
+<input type="checkbox"><b>ソース 2: ゲームオブジェクトを斜め右上  45 度の方向に速度 2.0 で動かす</b>
 <pre class="wrap">
 float speed = 2.0f; // ※ float 型変数に定数を代入する時は後ろに f を付ける
 float x = 1.0f;  
