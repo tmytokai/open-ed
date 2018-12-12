@@ -113,7 +113,7 @@ sr = serial.Serial('/dev/ttyACM0', 9600)
 
 while 1:
     str = sr.readline()
-    match = re.search(r'(.*),(.*),(.*)', str)
+    match = re.search(r'\[(.*),(.*),(.*)\],', str)
     if match:
        lst = []
        for i in match.groups():
@@ -127,7 +127,7 @@ while 1:
            , tf.float32
        )
 
-       # 学習済の重みとバイアスを利用して未知入力信号を判別 (template02-3.py の内容をコピペ)
+       # 学習済の重みとバイアスを利用して未知入力信号を判別 (template02-3.py の内容をコピペする。先頭のスペースを合わせるのを忘れない)
        op_input_layer = ?
        op_hidden_layer = ?
        op_output_layer = ?
