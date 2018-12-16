@@ -164,9 +164,8 @@ sess = tf.Session()
 op_var = tf.Variable( 1 )
 
 # run する前にグラフ内の変数全てを初期化する
-# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
-# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
+# <font color="red">(注) TFV1 以降は sess.run( tf.global_variables_initializer() )</font>
 
 result = sess.run( op_var )
 print( result )
@@ -177,9 +176,8 @@ print( result )
 op_var = tf.Variable( tf.zeros([3,2]) )
 
 # run する前にグラフ内の変数全てを初期化する
-# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
-# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
+# <font color="red">(注) TFV1 以降は sess.run( tf.global_variables_initializer() )</font>
 
 result = sess.run( op_var )
 print( result )
@@ -192,9 +190,8 @@ print( result )
 op_var = tf.Variable( tf.random_normal( [3, 2], mean=0.0, stddev=0.1 ) )
 
 # run する前にグラフ内の変数全てを初期化する
-# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
-# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run( tf.initialize_all_variables() )
+# <font color="red">(注) TFV1 以降は sess.run( tf.global_variables_initializer() )</font>
 
 result = sess.run( op_var )
 print( result )
@@ -355,7 +352,7 @@ op_const_x = tf.constant( 2 )
 op_const_y = tf.constant( 3 )
 
 op_mul = tf.mul( op_const_x, op_const_y )
-# <font color="red">TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
+# <font color="red">(注) TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
 # op_mul = op_const_x * op_const_y でも可
 
 result = sess.run( op_mul )
@@ -388,7 +385,7 @@ op_const_x = tf.constant( [1, 2] )
 op_const_y = tf.constant( [3, 4] )
 
 op_mul = tf.mul( op_const_x, op_const_y )
-# <font color="red">TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
+# <font color="red">(注) TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
 # op_mul = op_const_x * op_const_y でも可
 
 result = sess.run( op_mul )
@@ -694,9 +691,8 @@ sess = tf.Session()
 op_var = tf.Variable( 1 )
 
 # run する前にグラフ内の変数全てを初期化する
-# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
-# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run(tf.initialize_all_variables())
+# <font color="red">(注) TFV1 以降は sess.run( tf.global_variables_initializer() )</font>
 
 result = sess.run( op_var )
 print( result )
@@ -717,9 +713,8 @@ print( result )
 # 2
 
 # 再びグラフ内の変数全てを初期化する
-# (注) 最新の Tensorflow では tf.initialize_all_variables() は deprecated 指定されています
-# 代わりに tf.global_variables_initializer() を使って下さい
 sess.run(tf.initialize_all_variables())
+# <font color="red">(注) TFV1 以降は sess.run( tf.global_variables_initializer() )</font>
 
 result = sess.run( op_var )
 print( result )

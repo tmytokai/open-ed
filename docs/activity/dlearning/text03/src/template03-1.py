@@ -38,7 +38,7 @@ op_const_label = tf.constant(
 
 # ↓ ここから template02-2.py の内容をコピペ
 
-# 入力層 OP ノードの定義
+# 入力層 OP の定義
 def input_layer( x ):
    ?
 
@@ -46,7 +46,7 @@ def input_layer( x ):
 op_var_W_h = ?
 op_var_B_h = ?
 
-# 隠れ層 OP ノードの定義
+# 隠れ層 OP の定義
 def hidden_layer( x, w, b ):
    ?
 
@@ -54,7 +54,7 @@ def hidden_layer( x, w, b ):
 op_var_W_o = ?
 op_var_B_o = ?
 
-# 出力層 OP ノードの定義
+# 出力層 OP の定義
 def output_layer( x, w, b ):
    ?
 
@@ -63,14 +63,14 @@ op_input_layer = ?
 op_hidden_layer = ?
 op_output_layer = ?
 
-# クロスエントロピー  OP ノードの定義
+# クロスエントロピー  OP の定義
 def cross_entropy( r, l ):
    ?
 
 # 学習率
 r = ?
 
-# クロスエントロピーと勾配降下法 OP ノードの作成
+# クロスエントロピーと勾配降下法 OP の作成
 op_cross_entropy = ?
 op_grad_optimizer = ?
 
@@ -78,6 +78,7 @@ op_grad_optimizer = ?
 
 # セッション開始
 sess.run( tf.initialize_all_variables() )
+# (注) TFV1 以降は sess.run( tf.global_variables_initializer() )
 
 print('教師信号')
 print( sess.run( op_const_teacher ) )

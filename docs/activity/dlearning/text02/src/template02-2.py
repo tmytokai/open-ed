@@ -63,6 +63,7 @@ op_grad_optimizer = ?
 
 # セッション開始
 sess.run( tf.initialize_all_variables() )
+# (注) TFV1 以降は sess.run( tf.global_variables_initializer() )
 
 print('教師信号')
 print( sess.run( op_const_teacher ) )
