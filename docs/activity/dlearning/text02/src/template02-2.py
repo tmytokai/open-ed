@@ -76,7 +76,7 @@ print( sess.run( op_cross_entropy ) )
 print('教師信号の判別結果(学習前)  (´・ω・`) ')
 result = sess.run( op_output_layer )
 for i in range( len(result) ):
-   print [ "{:0.2f}".format(x) for x in result[i] ]
+   print( [ "{:0.2f}".format(x) for x in result[i] ] )
 
 print('ディープラーニング中・・・')
 for i in range( ? ):
@@ -88,4 +88,4 @@ print( sess.run( op_cross_entropy ) )
 print('教師信号の判別結果(学習後) (｀・ω・´)')
 result = sess.run( op_output_layer )
 for i in range( len(result) ):
-   print [ "{:0.2f}".format(x) for x in result[i] ]
+   print( [ "{:0.2f}".format(x) for x in result[i] ] )

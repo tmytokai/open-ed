@@ -324,7 +324,9 @@ print( result )
 </p>
 
 <p>
-※ OP名 = x * y と書いてもOK
+<font color="red">※1 Tensorflow V1 以降では mul 関数は無くなりました。代わりに multiply 関数を使います。</font>
+<br>
+※2 OP名 = x * y と書いてもOK
 </p>
 
 <p>
@@ -353,6 +355,7 @@ op_const_x = tf.constant( 2 )
 op_const_y = tf.constant( 3 )
 
 op_mul = tf.mul( op_const_x, op_const_y )
+# <font color="red">TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
 # op_mul = op_const_x * op_const_y でも可
 
 result = sess.run( op_mul )
@@ -385,6 +388,7 @@ op_const_x = tf.constant( [1, 2] )
 op_const_y = tf.constant( [3, 4] )
 
 op_mul = tf.mul( op_const_x, op_const_y )
+# <font color="red">TFV1 以降は op_mul = tf.multiply( op_const_x, op_const_y )</font>
 # op_mul = op_const_x * op_const_y でも可
 
 result = sess.run( op_mul )

@@ -41,6 +41,7 @@ sess = tf.Session()
 def hoge(x, y, z):
   op_add = tf.add( x, y )
   op_mul = tf.mul( op_add, z )
+  # <font color="red">TFV1 以降は op_mul = tf.multiply( op_add, z )</font>
   return op_mul
 
 op_hoge = hoge( 1, 2, 3 )

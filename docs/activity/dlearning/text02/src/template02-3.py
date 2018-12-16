@@ -20,4 +20,4 @@ print( sess.run( op_input_layer ) )
 print('未知入力信号の判別結果')
 result = sess.run( op_output_layer )
 for i in range( len(result) ):
-   print [ "{:0.2f}".format(x) for x in result[i] ]
+   print( [ "{:0.2f}".format(x) for x in result[i] ] )
