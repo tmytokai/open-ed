@@ -113,7 +113,7 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 
 <br>
 <p>
-<input type="checkbox"><b>演習4-4 (個人、? 分):</b> 自分の声の LPC 係数を求め、更に線形予測をしてみましょう。L = 10 とします。 
+<input type="checkbox"><b>演習4-4 (個人、? 分):</b> 自分の声の線形予測値 $\hat{x}[i]$ と線形予測誤差 $err[i]$ を求めてみましょう。L = 100 とします。 
 </p>
 <div class="olradio">
 <p>
@@ -127,22 +127,52 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> out.wav を試しに再生し、もし音が小さい場合は録音し直します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> out.wav を演習フォルダに移動して「 D-FILTER-4-4.wav 」に名前を変更します。
+<span class="olradio"><input type="radio" name="p4"></span> out.wav を演習フォルダに移動して「 a.wav 」に名前を変更します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> <a href="./src/D-FILTER-4-4.cpp">テンプレートソース</a>(D-FILTER-4-4.cpp)をダウンロードします。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると L 個の LPC 係数と、1 秒地点から 0.5 秒分の音声を切り出した「 D-FILTER-4-4-out.wav 」、その線形予測値 「 D-FILTER-4-4-hatx.wav 」が出来ます。
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると1 秒地点から 0.5 秒分の音声を切り出した「 D-FILTER-4-4-out.wav 」、その線形予測値 「 D-FILTER-4-4-hatx.wav 」、及び線形予測誤差「D-FILTER-4-4-err.wav」が出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 また D-FILTER-4-4-out.wav と D-FILTER-4-4-hatx.wav を聴き比べて下さい。
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 また出力された各 Wave ファイルを聴き比べて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「自分の声の LPC 係数」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「ソースコード(※ 「ここから」〜「ここまで」の部分だけ)」を貼り付けて下さい。  
 </div>
 
 <br>
 <h2><a href="./page04.html">4. AR モデル</a></h2>
 
+<br>
+<p>
+<input type="checkbox"><b>演習4-5 (個人、? 分):</b> AR モデルを使って自分の声をモデルとした音声合成をしてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> マイクを PC の端子に繋ぎます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> マイクの設定を開いて音量調整をします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> <a href="../../../lib/sound/recorder.html" onclick="window.open( '../../../lib/sound/recorder.html', 'recorder','width=300,height=200 ');return false;" >レコーダー</a>を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span>「イー」の声を「2 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> out.wav を試しに再生し、もし音が小さい場合は録音し直します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> out.wav を演習フォルダに移動して「 i.wav 」に名前を変更します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span>同様に「イー」の声を「i.wav」、「ウー」の声を「u.wav」、「エー」の声を「e.wav」、「オー」の声を「o.wav」に保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/D-FILTER-4-5.cpp">テンプレートソース</a>(D-FILTER-4-5.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開いて穴埋めをします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると合成音声 「 D-FILTER-4-5-ar.wav 」、入力信号として人工的に作成した線形予測誤差「D-FILTER-4-5-err.wav」が出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 また出力された各 Wave ファイルを聴き比べて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「ソースコード(※ 「ここから」〜「ここまで」の部分だけ)」を貼り付けて下さい。  
+</div>
 
 <script>PreNext(5,4)</script>
 </body>

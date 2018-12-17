@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4.AR モデル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
+<li>学習項目: [4] ARモデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page02.html">線形予測誤差</a>の定義式を以下のように変形したとき、この式の事を「<b>$\textrm{L}$ 次 AR モデル</b>」( Auto-Regressive model : <b>自己回帰モデル</b>)と呼び、記号では  $AR(\textrm{L})$ で表します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： $\textrm{L}$ 次 AR モデル $AR(\textrm{L})$: </b>
+
+<p>
+$\textrm{L}$ を正の整数とした時
+</p>
+
+\begin{align*}
+x[i]
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + err[i] \\
+& = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + err[i] \\
+\end{align*}
+
+<p>
+$a[n]$ ・・・ <b>LPC 係数</b>(Linear Prediction Coefficient)、または<b>線形予測係数</b>
+</p>
+
+</div>
+
+<p>
+ただし<a href="./page02.html">線形予測誤差</a>は $x[i]$ を入力した時の予測誤差 $err[i]$ を出力する<a href="../text02/page01.html">FIR フィルタ</a>とみなしていましたが、
+AR モデルでは
+</p>
+
+<p>
+<b>$err[i]$ を任意のホワイトノイズ入力、$x[i]$ を出力信号</b>
+</p>
+
+
+<p>
+とする<a href="../text03/page01.html">IIR フィルタ</a>と考えます。
+<br>
+よって AR モデルは次のブロック図で表されます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b> $\textrm{L}$ 次 AR モデルのブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page04-fig1.png" alt="">
+
+</div>
+
+<br>
+<script>PreNext(4,4)</script>
+</body>
+</html>
