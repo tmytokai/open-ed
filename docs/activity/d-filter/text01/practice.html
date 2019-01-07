@@ -37,66 +37,31 @@
 <p>
 <a href="./page10.html#ex5">10ページ-例 5</a>を参考にしてディレイフィルタを作り、自分の声にディレイ効果をかけてみましょう。
 </p>
-<p>
-※ 使用するOSにより演習方法が異なります。
-</p>
 <div class="olradio">
 <p>
-(Linux の場合)
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 適当なフォルダに移動します。
-<br>
 <span class="olradio"><input type="radio" name="p1"></span> マイクを PC の端子に繋ぎます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 alsamixer 」を起動し、F4 を押して録音コントローラに切り替えて Mic Boost を 50 程度、Capture の音量を 80 程度に変更して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> マイクの設定を開いて音量調整をします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「 arecord -d 5 -f S16_LE -c 1 -r 22050 myvoice.wav 」(サンプリング周波数 $f_s$ = 22050 [Hz] 、モノラル、16 bit、Wave 形式で 5 秒間録音の意味)を実行して声を録音して下さい。すると「 myvoice.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/recorder.html" onclick="window.open( '../../../lib/sound/recorder.html', 'recorder','width=300,height=200 ');return false;" >レコーダー</a>を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で myvoice.wav を再生し、音が小さい場合は alsamixer を起動して、master ボリュームを上げて録り直して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「5 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-1-1.cpp">テンプレートソース</a>(D-FILTER-1-1.cpp)を myvoice.wav と同じフォルダにダウンロードして下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> out.wav を試しに再生し、もし音が小さい場合は録音し直します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> out.wav を演習フォルダに移動して「 D-FILTER-1-1.wav 」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「g++ D-FILTER-1-1.cpp」でコンパイルして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-1-1.cpp">テンプレートソース</a>(D-FILTER-1-1.cpp)をダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「./a.out」を実行すると「 D-FILTER-1-1.wav 」という  Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従ってプログラムを完成させて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で D-FILTER-1-1.wav を演奏してディレイ効果がかかっている事を確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 D-FILTER-1-1-out.wav 」という  Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で D-FILTER-1-1-out.wav を演奏してディレイ効果がかかっている事を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  各自が指定場所に「ソースコード」を貼り付けて下さい。
-</p>
-</div>
-
-<div class="olradio">
-<p>
-(Windows の場合)
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1w"></span> 適当なフォルダに移動します。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> マイクを PC の端子に繋ぎます。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> 適当なアプリを使い、サンプリング周波数 $f_s$ = 22050 [Hz] 、モノラル、16 bit、Wave 形式で 5 秒以上録音して「 myvoice.wav 」という名前の音声ファイルを作成して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で myvoice を再生し、音が小さい場合はミキサーを起動してボリュームを上げて録り直して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> <a href="./src/D-FILTER-1-1.cpp">テンプレートソース</a>(D-FILTER-1-1.cpp)を myvoice.wav と同じフォルダにダウンロードして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> 適当なコンパイラでコンパイルして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> プログラムを実行すると「 D-FILTER-1-1.wav 」という  Wave形式音声ファイルが出来ます。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span> <a href="../../../lib/sound/analyzer.html">アナライザ</a>で D-FILTER-1-1.wav を演奏してディレイ効果がかかっている事を確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span>  パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1w"></span>  各自が指定場所に「ソースコード」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p1"></span>  各自が各自が指定場所に「ソースコード」を貼り付けて下さい。
 </p>
 </div>
 
