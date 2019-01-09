@@ -21,8 +21,31 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+<a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%8A%E3%83%BC%EF%BC%9D%E3%83%92%E3%83%B3%E3%83%81%E3%83%B3%E3%81%AE%E5%AE%9A%E7%90%86">ウィーナー＝ヒンチンの定理</a>によると、<a href="../../d-signal/text01/page02.html">時間領域ディジタル信号</a> $f[i]$の<a href="./page01.html">自己相関関数</a> $R[n]$ の<a href="../../dft/">DFT</a>(の実数成分)は $f[i]$ の<a href="../../spectrum/text03/page01.html">パワースペクトル</a> $|\textrm{C}[k]|^2$ になります。
 </p>
+
+<p>
+逆に言うと、$f[i]$ のパワースペクトルの<a href="../../dft/">IDFT</a>は自己相関関数になります。
+</p>
+
+<p>
+この関係を利用すると、以下の様に<a href="../../dft/text01/page05.html">FFT</a>を用いて自己相関関数を高速に求めることが出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>自己相関関数をFFTで高速に求める方法</b>
+
+<p>
+　
+</p>
+
+<ol>
+<li>$f[i]$ をFFTしてDFT係数 $\textrm{C}[k]$ を求める</li>
+<li>パワースペクトル $|\textrm{C}[k]|^2$ を求める</li>
+<li>パワースペクトル $|\textrm{C}[k]|^2$ をIFFTして自己相関関数 $R[n]$ を求める</li>
+</ol>
+
+</div>
 
 <br>
 <script>PreNext(4,4)</script>

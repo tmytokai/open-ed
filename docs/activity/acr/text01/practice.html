@@ -54,7 +54,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「信号値のグラフ」と「自己相関関数値のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -89,7 +89,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「信号値のグラフ」と「自己相関関数値のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -121,12 +121,95 @@
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 各自が指定場所に「画像ファイルを貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p3"></span> 各自が指定場所に「信号値のグラフ」と「自己相関関数値のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
 <br>
 <h2><a href="./page04.html">4. パワースペクトルとの関係</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-4 (個人、30分):</b> 時間領域ディジタル信号
+</p>
+\[
+f[i] = 
+-1
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
+\]
+<p>
+の自己相関関数値を求めてみましょう。なお N = 15 とします。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/ACR-1-4.cpp">テンプレートソース</a>(ACR-1-4.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開いて穴埋めをします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-4-f.csv、ACR-1-4-R.csv)が出力されます。ACR-1-4-f.csv が信号値で ACR-1-4-R.csv が自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> ACR-1-4-f.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に f[i] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-4-f」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 同様に ACR-1-4-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に n 、次の列の先頭に R[n] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-4-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「信号値のグラフ」と「自己相関関数値のグラフ」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-5 (個人、30分):</b> 演習 1-4 で使用した時間領域ディジタル信号
+</p>
+\[
+f[i] = 
+-1
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
+\]
+<p>
+の自己相関関数値をパワースペクトルのIDFTから求めてみましょう。なお N = 15 とします。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/ACR-1-5.cpp">テンプレートソース</a>(ACR-1-5.cpp)をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開いて穴埋めをします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-5-P.csv、ACR-1-5-R.csv)が出力されます。ACR-1-5-P.csv がパワースペクトル値で ACR-1-5-R.csv がパワースペクトルのIDFTから求めた自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> ACR-1-5-P.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に k 、次の列の先頭に |C[k]|^2 と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-5-P」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 同様に ACR-1-5-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に n 、次の列の先頭に R[n] と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、点のみ (線「なし」)とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-5-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、自己相関関数のグラフが演習 1-4 のグラフと一致することを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「パワースペクトル値のグラフ」と「自己相関関数値のグラフ」を貼り付けて下さい。  
+</p>
+</div>
+
+
+
 
 <script>PreNext(5,4)</script>
 </body>
