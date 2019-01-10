@@ -2,16 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma : 標準偏差 = √分散
-double nrand( double mu, double sigma )
-{
-    // Box-Muller 法を使用
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
-
 // 自己相関 R[n]
 double ACR( const int n, const double* f, const int N )
 {
@@ -20,35 +10,34 @@ double ACR( const int n, const double* f, const int N )
 
 int main()
 {
-    const int N = 10000;
-    const int Nout = 20;
+    const int N = 45;
     double f[N];
-    double R[Nout];
+    double R[N];
 
     for(int i=0;i < N; ++i ){
         f[i] = ? ;
     }
 
-    for(int n=0; n < Nout; ++n ){
+    for(int n=0; n < N; ++n ){
         R[n] = ACR( n, f, N );
     }
 
-    FILE* file = fopen( "ACR-1-2-f.csv", "wb");
+    FILE* file = fopen( "ACR-1-4-f.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
     }
-    for( int i = 0; i <Nout ; ++i ){
+    for( int i = 0; i <N ; ++i ){
         fprintf( file, "%d,%lf\n", i,f[i] );
     }
     fclose(file);
 
-    file = fopen( "ACR-1-2-R.csv", "wb");
+    file = fopen( "ACR-1-4-R.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
     }
-    for( int i = 0; i <Nout ; ++i ){
+    for( int i = 0; i <N ; ++i ){
         fprintf( file, "%d,%lf\n", i,R[i] );
     }
     fclose(file);

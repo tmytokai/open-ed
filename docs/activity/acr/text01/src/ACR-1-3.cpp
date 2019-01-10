@@ -35,7 +35,7 @@ int main()
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%lf\n", f[i] );
+        fprintf( file, "%d,%lf\n", i,f[i] );
     }
     fclose(file);
 
@@ -45,7 +45,7 @@ int main()
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%lf\n", R[i] );
+        fprintf( file, "%d,%lf\n", i,R[i] );
     }
     fclose(file);
 
