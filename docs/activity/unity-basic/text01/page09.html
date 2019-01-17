@@ -20,23 +20,23 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-プログラム内で指定したオブジェクトを削除には次の Destroy メソッドを使います。
+プログラム内で指定したゲームオブジェクトを動的に削除するには次の Destroy メソッドを使います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>オブジェクトを削除</b>
+<input type="checkbox"><b>ゲームオブジェクトの削除</b>
 <pre class="wrap">
-public static void Destroy( オブジェクト, 削除するまでの時間);
+public static void Destroy( ゲームオブジェクト, 削除するまでの時間);
 
 戻り値(void): 無し
 
-オブジェクト: 削除したいオブジェクト
+ゲームオブジェクト: 削除したいゲームオブジェクト
 削除するまでの時間(秒): 指定した秒数後に削除する。指定しなくても良い(その場合は即削除)
 </pre>
 </div>
 
 <p>
-問題はどうやって削除したいオブジェクトを取得するかですが、自分自身を削除したい場合は次のようにして簡単に出来ます。
+問題はどうやって削除したいゲームオブジェクトを取得するかですが、自分自身を削除したい場合は次のようにして簡単に出来ます。
 </p>
 
 <div class="info">
@@ -47,21 +47,21 @@ Destroy( gameObject );
 </div>
 
 <p>
-また、衝突時にぶつかったオブジェクトを削除したい場合も簡単に出来ます。
+また、衝突時にぶつかったゲームオブジェクトを削除したい場合も簡単に出来ます。
 </p>
 
 <p>
-OnCollisionEnter2D の場合は
+OnCollisionEnter2D の場合
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OnCollisionEnter2D で衝突したオブジェクトを削除</b>
+<input type="checkbox"><b>OnCollisionEnter2D で衝突したゲームオブジェクトを削除</b>
 <pre class="wrap">
 void OnCollisionEnter2D( Collision2D collision )
 {
     if (collision.gameObject.tag == "TagA") {	
 
-       // TagA がついたオブジェクトと衝突したらそのオブジェクトを削除
+       // TagA がついたゲームオブジェクトと衝突したらそのオブジェクトを削除
        Destroy (collision.gameObject);
     }
 
@@ -70,17 +70,17 @@ void OnCollisionEnter2D( Collision2D collision )
 </div>
 
 <p>
-OnTriggerEnter2D の場合は
+OnTriggerEnter2D の場合
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OnTriggerEnter2D</b>
+<input type="checkbox"><b>OnTriggerEnter2D で衝突したゲームオブジェクトを削除</b>
 <pre class="wrap">
 void OnTriggerEnter2D( Collider2D collider ) // OnCollisionEnter2D と引数の型が異なることに注意
 {
     if ( collider.tag == "TagA") {	
 
-       // TagA がついたオブジェクトと重なったらそのオブジェクトを削除
+       // TagA がついたゲームオブジェクトと重なったらそのオブジェクトを削除
        Destroy (collider.gameObject);
     }
 }

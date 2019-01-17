@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [1] Unity2D の基本</li>
+<li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,7 +24,7 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. Unity2D とは</a></h2>
+<h2><a href="./page01.html">1. Unity とは</a></h2>
 
 <p>
 演習無し
@@ -54,7 +54,7 @@
 </p>
 
 <br>
-<h2><a href="./page03.html">3. オブジェクトの作成と配置</a></h2>
+<h2><a href="./page03.html">3. ゲームオブジェクトの作成と配置</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-2 (個人PC、10 分):</b>
@@ -77,7 +77,7 @@
 
 <br>
 <h2>
-<a href="./page04.html">4. オブジェクトの移動</a></h2>
+<a href="./page04.html">4. ゲームオブジェクトの移動</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-3 (個人PC、10 分):</b>
@@ -102,7 +102,7 @@
 
 
 <br>
-<h2><a href="./page05.html">5. ゲームパッドやキーボードによるオブジェクトの移動</a></h2>
+<h2><a href="./page05.html">5. ゲームパッドやキーボードによるゲームオブジェクトの移動</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-4 (個人PC、10 分):</b>　 Input.GetAxisRaw の使い方を演習します。
@@ -111,11 +111,13 @@
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> プロジェクト「UNITY-BASIC1」に対して作業を続けます。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 演習 1-3 で書いた部分をコメントアウトします。
+<span class="olradio"><input type="radio" name="p4"></span> 演習 1-3 で Start メソッド内に書いた部分をコメントアウトします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> TAROスクリプトを開き、void Update() の下に void FixedUpdate() メソッドを追加して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> FixedUpdate メソッド内に、「方向ボタンで入力した方向に速度 0.5 でTARO が動く」プログラムを記述して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 更に、左と右に移動している時に画像の向きを逆にするプログラムの記述もして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> スクリプトを保存してコンパイルして下さい。
 <br>
@@ -133,9 +135,9 @@
 <p>
 <span class="olradio"><input type="radio" name="p5"></span> プロジェクト「UNITY-BASIC1」に対して作業を続けます。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 演習 1-4 で書いた部分をコメントアウトします。
+<span class="olradio"><input type="radio" name="p5"></span> 演習 1-4 で書いたスクリプトの下から続けます。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> FixedUpdate メソッド内に、「Jump ボタン(デフォルトではスペースキー)を押している間、TARO が斜め右下 45 度の方向に速度 0.5 で動く」プログラムを記述して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> FixedUpdate メソッド内に、「Jump ボタンを押している間、TARO が斜め右下 45 度の方向に速度 0.5 で動く」プログラムを記述して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> スクリプトを保存してコンパイルして下さい。
 <br>
@@ -161,9 +163,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> TARO スクリプトをエディタで開き、using 部に「using UnityEngine.UI;」を追加します。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 演習 1-5 で書いた部分をコメントアウトし、代わりに演習 1-4 で書いた部分(上下移動)のコメントアウトを解除します。
+<span class="olradio"><input type="radio" name="p6"></span> 演習 1-5 で書いたスクリプトの下から続けます。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> TARO スクリプトの FixedUpdate メソッド内に、「Jump ボタン(デフォルトではスペースキー)を押したら Text1 に "HOGE"、Fire1 ホダン(デフォルトでは左 Ctrl キー)を押したら Text2 に "HELLO" と表示する」プログラムを記述して下さい。
+<span class="olradio"><input type="radio" name="p6"></span> TARO スクリプトの FixedUpdate メソッド内に、「Fire1 ボタンを押したら Text1 に "HOGE"、Fire2 ボタンを押したら Text2 に "HELLO" と表示する」プログラムを記述して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> スクリプトを保存してコンパイルして下さい。
 <br>
@@ -318,7 +320,7 @@
 
 
 <br>
-<h2><a href="./page08.html">8. Prefab とオブジェクトの動的配置</a></h2>
+<h2><a href="./page08.html">8. Prefab とゲームオブジェクトの動的配置</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-12 (個人PC、10 分):</b>
@@ -331,7 +333,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p12"></span> 「MyWorld」という C# のスクリプトファイルを新規作成して MyWorld オブジェクトにアタッチして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p12"></span> 「MyWorld」スクリプトをエディタで開き、「public GameObject taro;」フィールドを追加します。
+<span class="olradio"><input type="radio" name="p12"></span> 「MyWorld」スクリプトをエディタで開き、「[SerializeField] private GameObject taro;」フィールドを追加します。
 <br>
 <span class="olradio"><input type="radio" name="p12"></span> Start メソッドの中に「TARO を適当な位置に無回転で 2 体表示する」プログラムを記述して下さい。
 <br>
@@ -346,7 +348,7 @@
 </div>
 
 <br>
-<h2><a href="./page09.html">9. オブジェクトの動的削除</a></h2>
+<h2><a href="./page09.html">9. ゲームオブジェクトの動的削除</a></h2>
 
 <p>
 <input type="checkbox"><b>演習 1-13 (個人PC、10 分):</b>

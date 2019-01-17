@@ -20,34 +20,28 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="./page03.html">オブジェクトの作成</a>のページで書いたように、あるオブジェクトのコピーをひとつだけ作りたい場合は、単にそのオブジェクトを選択してから手動で Ctrl+C → Ctrl+V するだけで OK です。
+<a href="./page03.html">ゲームオブジェクトの作成</a>のページで書いたように、あるゲームオブジェクトのコピーをひとつだけ作りたい場合は、単にそのゲームオブジェクトを選択してから手動で Ctrl+C → Ctrl+V するだけで OK です。
 <br>
-しかし弾丸みたいに大量のオブジェクトが必要な時にいちいち手動でコピーしていては大変なので、プログラム内で必要になった時に動的にコピー出来ないか考えてみましょう。
+しかし弾丸みたいに大量のゲームオブジェクトが必要な時にいちいち手動でコピーしていては大変なので、スクリプトを使ってプログラム的にコピーする「<b>Prefab</b>(プレハブ)」という機能について説明します。
 </p>
 
 <p>
-さて、同じオブジェクトを大量にコピーして作成し画面に表示させたい場合、Java や C++ の様なクラスベースのオブジェクト指向言語ならキャラクターの元となるクラスのソースコードを書いてから new を繰り返すだけで良いのですが、Unity はプロトタイプベースの開発環境なので「<b>Prefab</b>(プレハブ)」機能という、クラスベース言語に慣れてる人にとっては少し変わった方法を用います。
+この Prefab 機能はコピー元となるゲームオブジェクトから Prefab というアセットを作り、プログラム実行時に Prefab をコピーして新しいゲームオブジェクトを作る(<a href="../../oop-basic/text01/page03.html">インスタンス化</a>)という機能です。
 </p>
 
 <p>
-この Prefab 機能はコピー元となるオブジェクト(いわゆるプロトタイプです)から Prefab というアセットを作り、プログラム実行時に Prefab をインスタンス化してオブジェクトを作るという機能です。
-<br>
-と口でだけ説明しても良く分からないと思いますので、具体的なやり方をこれから説明していきます。
-</p>
-
-<p>
-まずコピー元となるオブジェクトを Prefab 化します。
+まず元となるゲームオブジェクトを Prefab 化します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>コピー元となるオブジェクトを Prefab 化する</b>
+<input type="checkbox"><b>ゲームオブジェクトの Prefab 化</b>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で Prefab 化したいオブジェクトを選択する。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに選択したオブジェクトを DnD すると同じ名前の Prefab が出来る。
+<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに選択したオブジェクトを DnD する。すると同じ名前の Prefab が出来る。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で Prefab 化済みのオブジェクトを削除する。
+<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウ上で Prefab 化済みのオブジェクトを削除する(もちろん場合によっては残しておくのも可)。
 </p>
 </div>
 </div>
@@ -70,21 +64,19 @@ prefab: インスタンス化したい Prefab
 </div>
 
 <p>
-例えば次のスクリプト HOGE は prefab を Start メソッドの中で座標 (0.5, -0.1)に無回転でインスタンス化する例です。
+例えばソース 1 は prefab を Start メソッドの中で座標 (0.5, -0.1)に無回転でインスタンス化する例です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: Prefab を Start の中で座標 (0.5, -0.1) に無回転でインスタンス化するスクリプト</b>
+<input type="checkbox"><b>ソース 1: Prefab を開始時に座標 (0.5, -0.1) に無回転でインスタンス化するスクリプト</b>
 <pre class="wrap">
-public class HOGE : MonoBehaviour {
 
-	public GameObject prefab; // (※1) あとで Inspector ウィンドウでセットする
+[SerializeField] private GameObject prefab; // (※1) あとで Inspector ウィンドウでセットする
 
-	void Start () {
-		Vector2 position = new Vector2 (0.5f, -0.1f);  // Vector2 型で座標指定
-		Quaternion rotation = Quaternion.identity; // Quaternion 型で回転角度指定(※2)。Quaternion.identity は無回転の意味
-		Instantiate (prefab, position, rotation );                
-	}
+void Start () {
+	Vector2 position = new Vector2 (0.5f, -0.1f);  // Vector2 型で座標指定
+	Quaternion rotation = Quaternion.identity; // Quaternion 型で回転角度指定(※2)。Quaternion.identity は無回転の意味
+	Instantiate (prefab, position, rotation );                
 }
 
 ※1 複数の Prefab をインスタンス化したい場合は例えば prefab1、prefab2、・・・みたいに GameObject 型のフィールドを複数用意する
@@ -94,7 +86,7 @@ public class HOGE : MonoBehaviour {
 </div>
 
 <p>
-ただし、このスクリプト HOGE を他のオブジェクトにアタッチしてプログラムを実行しても<b>※1 で定義した prefab フィールドが空のままなので何も起きません</b>。
+ただし、このスクリプトをゲームオブジェクトにアタッチしてプログラムを実行しても<b>※1 で定義した prefab フィールドが空のままなので何も起きません</b>。
 </p>
 
 <p>
@@ -107,17 +99,21 @@ prefab フィールドにインスタンス化したい Prefab をセットす�
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> スクリプトを保存して Unity エディタに戻る。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上で HOGE スクリプトをアタッチしているオブジェクトを選択する。
+<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウ上でソース 1 を含むスクリプトをアタッチしているゲームオブジェクトを選択する。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Inspector ウィンドウの HOGE(Script) コンポーネントに「prefab」というプロパティ(こういうの<img src="./img/prefab.png" alt="">)が出来ているのを確認する。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダ上でインスタンス化したい Prefab を選択して、(3)の None と書いてあるエリアに DnD する。
+<span class="olradio"><input type="radio" name="p2"></span> Inspector ウィンドウに表示された「prefab」というプロパティ(※)が出来ているのを確認する。
+</p>
+<p>
+※ こういう枠<img src="./img/prefab.png" alt="">
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダ上でインスタンス化したい Prefab を選択して、(3)の None と書いてある枠に DnD する。
 </p>
 </div>
 </div>
 
 <p>
-後は実行すれば Scene ビューに表示されていないオブジェクトが実行時には表示されていると思います。
+後は実行すれば Scene ビューに表示されていないゲームオブジェクトが実行時に表示されます。
 </p>
 
 <br>
