@@ -83,6 +83,22 @@ getImage().setTransparency(128);
 
 <br>
 <h3>
+Q. 画像の大きさを変更したい
+</h3>
+
+<p>
+A. getImage().scale メソッドで幅と高さを変更できます。
+</p>
+
+<div class="info">
+<pre class="wrap">
+getImage().scale( 120, 30 );
+</pre>
+</div>
+
+
+<br>
+<h3>
 Q. <a href="./page04.html">setRotation と move を使ってオブジェクトを動かす</a>と画像が回転してしまうが、回転させないで動かす方法は無いか？
 </h3>
 
@@ -146,6 +162,110 @@ public void act()
 }
 </pre>
 </div>
+
+<br>
+<h3>
+Q. 画像ファイルを読み込んでワールドクラスの背景に描画したい
+</h3>
+
+<p>
+A. GreenfootImage クラスのコンストラクタでプロジェクトフォルダ内にあるファイル名を指定すると画像インスタンスを作成できます。
+<br>
+さらに World.getBackgournd メソッドでワールドクラスの背景画像インスタンスを取得できるので、GreenfootImage.drawImage メソッドを使って画像インスタンスを描画できます。
+</p>
+
+<p>
+
+</p>
+
+<p>
+例えば以下の例では、左キーを押したら images フォルダ内にある img1.png を座標(100,100)に、 img2.png を座標(200,200)に描画します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+public class MyWorld extends World
+{
+    public MyWorld()
+    {    
+        super(600, 400, 1); 
+    }
+    
+        public void act() 
+    {
+        if( Greenfoot.isKeyDown( "left" ) ){
+            GreenfootImage img1 = new GreenfootImage( "images/img1.png" );
+            GreenfootImage img2 = new GreenfootImage( "images/img2.png" );
+            getBackground().drawImage( img1, 100, 100 );
+            getBackground().drawImage( img2, 200, 200 );
+        }
+    }    
+
+}
+</pre>
+</div>
+
+<br>
+<h3>
+Q. ワールドを切り替えたときに、他のワールドで使っていた(得点とかハイスコアみたいな)フィールドの値を使いたい
+</h3>
+
+<p>
+A.  <a href="../../oop-element/text02/page02.html">カプセル化</a>の観点からは好ましくありませんが、static public でフィールドを定義するのが一番手っ取り早いです。
+</p>
+
+<p>
+下の例では MyWorld で定義したカウンタを MyWorld2 でも使い続けています。
+</p>
+
+
+<div class="info">
+<p>MyWorld でカウンタの本体を定義</a>
+
+<pre class="wrap">
+public class MyWorld extends World
+{
+    static public int counter = 0;  // カウンタ本体
+
+    public MyWorld()
+    {    
+        super(600, 400, 1); 
+    }
+    
+    public void act() 
+    {
+        ++counter;
+
+        if( Greenfoot.isKeyDown( "space" ) ){ // スペースで MyWorld2 表示
+            World world2 = new MyWorld2();
+            Greenfoot.setWorld( world2 );
+        }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<p>MyWorld2 でも MyWorldのカウンタを利用出来る</a>
+
+<pre class="wrap">
+public class MyWorld2 extends World
+{
+    public MyWorld2()
+    {    
+        super(600, 400, 1); 
+    }
+    
+    public void act()
+    {
+        // MyWorldのカウンタを利用
+        MyWorld.counter++;  
+        showText( "counter = " + MyWorld.counter, 100, 50 );
+    }
+}
+</pre>
+</div>
+
 
 <br>
 <h3>
