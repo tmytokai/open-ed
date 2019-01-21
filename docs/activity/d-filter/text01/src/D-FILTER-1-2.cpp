@@ -26,7 +26,7 @@ typedef struct
 
 int main()
 {
-    FILE * fin = fopen( "myvoice.wav", "rb" );
+    FILE * fin = fopen( "D-FILTER-1-1.wav", "rb" );
     if( !fin ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
@@ -60,10 +60,6 @@ int main()
         fprintf( stderr, "8bit音声は使用できません\n" );
         exit(EXIT_FAILURE);
     }
-    if( wavefmt.rate != 22050 ){
-        fprintf( stderr, "サンプリング周波数が 22050 Hzでありません\n" );
-        exit(EXIT_FAILURE);
-    }
 
     fprintf( stderr,"fmt_size = %d\n", wavefmt.fmt_size );
     fprintf( stderr,"channel = %d\n", wavefmt.channel );
@@ -88,13 +84,12 @@ int main()
     double* y = ( double* )malloc( lng * sizeof(double) );
     memset( y, 0, lng * sizeof(double) );
 
+    const int fs = wavefmt.rate;  // サンプリング周波数 [Hz]
+
     //----------------------------------------------
     // ここから穴埋め開始
 
-    // サンプリング周波数 [Hz]
-    const double fs = 22050;  
-
-    // x[i] を fs = 22050 [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
+    // x[i] を fs [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
     // i の範囲は 0 <= i < N となる
     const int N = 5 * fs; // 10 [秒] * fs [Hz]
 
@@ -129,7 +124,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-1-2.wav", "wb" );
+    FILE* fout = fopen( "D-FILTER-1-2-out.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);
