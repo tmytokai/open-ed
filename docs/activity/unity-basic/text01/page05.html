@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
 <li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -27,8 +27,13 @@
 その他のメソッドの使い方は自分で調べて下さい。
 </p>
 
+<br>
+<h3 id="getaxis">
+・Input.GetAxisRaw
+</h3>
+
 <p>
-まずGetAxisRaw メソッドは、ゲームパッドやカーソルキーなどの方向ボタンを押しているかどうか判定するメソッドです。
+まず Input.GetAxisRaw メソッドは、ゲームパッドやカーソルキーなどの方向ボタンを押しているかどうか判定するメソッドです。
 </p>
 
 <div class="info">
@@ -50,25 +55,11 @@ public static float Input.GetAxisRaw( "軸" );
 </div>
 
 <p>
-次に GetButton メソッドは、攻撃ボタンとかジャンプボタンなどのボタンを押しているかどうかを判定するメソッドです。
+このメソッドと<a href="./page04.html">前ページ</a>で学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>指定したボタンを押しているか判定</b>
-<pre class="wrap">
-public static bool Input.GetButton( "ボタンの名前" );
-
-戻り値(bool): 指定したボタンを押してれば true、押してなければ false が戻る 
-
-"ボタンの名前":
-"Fire1"、"Fire2"、"Fire3"、"Jump" など
-</pre>
-</div>
-
 <p>
-これらのメソッドと<a href="./page04.html">前ページ</a>で学んだ Rigidbody2D の velocity プロパティを組み合わせればユーザーの入力に従って自由にオブジェクトを動かせるようになります。
-<br>
-なお
+ただし
 </p>
 
 <p>
@@ -82,21 +73,19 @@ public static bool Input.GetButton( "ボタンの名前" );
 <p>
 ※ 正確には GetAxisRaw などの Input 系のメソッドは Update メソッド、Rigidbody2D の機能は FixedUpdate メソッドの中に書く必要があります(理由は自分で調べてみましょう)。
 <br>
-今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
+※ 今回は説明を簡単にするため Input 系のメソッドも FixedUpdate 内にまとめて書くことにします。
 </p>
 
 <p>
-例えばあるゲームオブジェクトを(重力が 0 なら) 方向キーで入力した方向に速度 2.0 で動かしたい場合はソース 1 の様に FixedUpdate メソッド内に書きます。 
+例えばあるゲームオブジェクトを(重力が 0 なら) 方向キーで入力した方向に動かしたい場合はソース 1 の様に FixedUpdate メソッド内に書きます。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: ゲームオブジェクトを方向ボタンで入力した方向に速度 2.0 で動かす</b>
+<input type="checkbox"><b>ソース 1: ゲームオブジェクトを方向ボタンで入力した方向に動かす</b>
 <pre class="wrap">
-float speed = 2.0f;
-float x = Input.GetAxisRaw ("Horizontal"); // 右を押してれば 1、左を押してれば -1 、押してないと 0 が x に入る
-float y = Input.GetAxisRaw ("Vertical"); // 上を押してれば 1、下を押してれば -1、押してないと 0 が y に入る
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
+var x = Input.GetAxisRaw ("Horizontal"); // 右を押してれば 1、左を押してれば -1 、押してないと 0 が x に入る
+var y = Input.GetAxisRaw ("Vertical"); // 上を押してれば 1、下を押してれば -1、押してないと 0 が y に入る
+GetComponent&lt;Rigidbody2D&gt;().velocity = new Vector2( x, y );
 </pre>
 </div>
 
@@ -117,6 +106,29 @@ GetComponent&lt;SpriteRenderer&gt;().flipX = true; // 左右を反転させる
 GetComponent&lt;SpriteRenderer&gt;().flipY = false; // 上下を通常の向きにする
 
 GetComponent&lt;SpriteRenderer&gt;().flipY = true; // 上下を反転させる
+</pre>
+</div>
+
+<br>
+<h3 id="getbutton">
+・Input.GetButton
+</h3>
+
+<p>
+Input.GetButton メソッドは、攻撃ボタンとかジャンプボタンなどのボタンを押しているかどうかを判定するメソッドです。
+<br>
+指定したボタンを押していると true が戻るだけの簡単なメソッドです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>指定したボタンを押しているか判定</b>
+<pre class="wrap">
+public static bool Input.GetButton( "ボタンの名前" );
+
+戻り値(bool): 指定したボタンを押してれば true、押してなければ false が戻る 
+
+"ボタンの名前":
+"Fire1"、"Fire2"、"Fire3"、"Jump" など
 </pre>
 </div>
 

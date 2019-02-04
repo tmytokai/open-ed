@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
 <li>学習項目: [1] Unity の基本(2D編)</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -114,11 +114,9 @@ velocity.x は横方向の速度、velocity.y は縦方向の速度であり、�
 <div class="info">
 <input type="checkbox"><b>ソース 1: ゲームオブジェクトを移動させるスクリプト</b>
 <pre class="wrap">
-float speed = 移動スピード;
-float x = 横方向の移動量;
-float y = 縦方向の移動量;
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
+var x = 横方向の移動量;
+var y = 縦方向の移動量;
+GetComponent&lt;Rigidbody2D&gt;().velocity = new Vector2( x, y );
 </pre>
 </div>
 
@@ -129,17 +127,15 @@ GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
 </p>
 
 <p>
-例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に速度 2.0 で動かしたい場合はソース 2 の様に Start または Update メソッド内に書きます。 
+例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に動かしたい場合はソース 2 の様に Start または Update メソッド内に書きます。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 2: ゲームオブジェクトを斜め右上  45 度の方向に速度 2.0 で動かす</b>
+<input type="checkbox"><b>ソース 2: ゲームオブジェクトを斜め右上  45 度の方向に動かす</b>
 <pre class="wrap">
-float speed = 2.0f; // ※ float 型変数に定数を代入する時は後ろに f を付ける
-float x = 1.0f;  
-float y = 1.0f;
-Vector2 v = new Vector2( x, y ).normalized; // ※ .normalized はベクトル v を長さ 1 に正規化するの意味
-GetComponent&lt;Rigidbody2D&gt;().velocity = v * speed;
+var x = 1.0f;  
+var y = 1.0f;
+GetComponent&lt;Rigidbody2D&gt;().velocity = new Vector2( x, y );
 </pre>
 </div>
 
