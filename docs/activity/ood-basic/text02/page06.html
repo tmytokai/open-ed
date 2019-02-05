@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 5</title>
+<title>スプリント 3</title>
 </head>
 <body>
 
@@ -19,99 +19,130 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h3>1. 詳細設計</h2>
+<h3>プロダクトバックログアイテムの選択</h2>
 
 <p>
-このスプリントでは、「TARO」オブジェクトと「HANAKO」オブジェクトの動きを逆にします。
+プロダクトバックログから今回のスプリントで行うタスクを選択して Doing に移します。
 <br>
-そのため「HUMAN」「HANAKO」クラスを以下のように拡張します。
+だいぶゲームらしくなってきたので、そろそろ当たり判定を作ってみましょう。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
-<br>
-<br>
-<ul>
-<li>「HUMAN」クラスに public void move メソッドを追加し、act メソッド内の移動処理を全てそこに移します。</li>
-<li>「HUMAN」クラスの act メソッド内から追加した move メソッドを呼び出します。</li>
-<li>「HANAKO」クラスで move メソッドをオーバーライドし、上下左右が逆向きの移動処理を書きます。</li>
-</ul>
-</div>
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td>当たり判定をする</td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
 
 <br>
-<h3>2. 演習内容</h3>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次の様に詳細仕様書を作りました。
+<br>
+とりあえずクリア処理とゲームオーバー処理は後回しにして、今回は TARO と HANAKO が敵に当たったらゲームを停止するようにしました。
+</p>
+
+<table>
+<tr><th>クラス名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+TARO
+</td><td>
+・APPLE と ORANGE に当たったらゲームを停止する
+</td>
+</tr>
+
+<tr><td>
+HANAKO
+</td><td>
+・APPLE と ORANGE に当たったらゲームを停止する
+</td>
+</tr>
+
+
+</table>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>クラス図の作成:</b>
-<br>
-<br>
-<ul>
-<li>開発作業を行う前にクラス図を描いて下さい。</li>
-<li>クラス図「GF-2-4」をコピーし、ファイル名を「GF-2-5」に変更します。</li>
-<li>「HUMAN」と「HANAKO」に move メソッドを追加します。public であることに注意してください。</li>
-</div>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+今回は以下のようなスプリントバックログを作りました。※ DoingとDoneの列は省略
+</p>
+
+<table>
+<tr><th>ToDo</th></tr>
+<tr> <td>TARO の当たり判定をする</td></tr>
+<tr> <td>HANAKO の当たり判定をする</td></tr>
+</table>
+
 
 <br>
-<div class="info">
-<input type="checkbox"><b>準備:</b>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-4」をコピーし、シナリオ名を「GF-2-5」に変更します。
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot を起動します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-5」を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2」を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、act メソッドの移動処理の後に、「APPLE」または「ORANGE」クラスの<a href="../text01/page08.html">オブジェクトに触れた</a>ら<a href="../text01/page10.html">ゲームを停止</a>する処理を追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「HANAKO」クラスのソースを開き、act メソッドの移動処理の後に、「APPLE」または「ORANGE」クラスの<a href="../text01/page08.html">オブジェクトに触れた</a>ら<a href="../text01/page10.html">ゲームを停止</a>する処理を追加して下さい。
 </p>
 </div>
-</div>
-
 
 <br>
-<div class="info">
-<input type="checkbox"><b>コーディング:</b>
-<div class="olradio"> 
+<h3>テスト</h3>
+
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスに public void move メソッドを追加して下さい。
+コーディングが終わったらテストします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドの移動処理部を切り取り、move メソッド内に貼り付けてください。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッド内から move メソッドを呼び出して下さい。
+Run ボタンを押して動作確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」に「HUMAN」の move メソッドを丸ごとコピーして貼り付けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」の move メソッドを書き換えて上下左右の動きを逆にして下さい。
+上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
-</div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
 </p>
-</div>
-</div>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>提出:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMANとHANAKO)を選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+なお、この時点でのプロダクトバックログの状態は次の通りです。
 </p>
-</div>
-</div>
 
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+<br>
 <script>PreNext(6,9)</script>
 </body>
 </html>

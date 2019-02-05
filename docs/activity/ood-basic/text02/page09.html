@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 8</title>
+<title>スプリント 6</title>
 </head>
 <body>
 
@@ -19,91 +19,119 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h3>1. 詳細設計</h2>
+<h3>プロダクトバックログアイテムの選択</h2>
 
 <p>
-このスプリントでは、「APPLE」オブジェクトを動かします。
+プロダクトバックログから今回のスプリントで行うタスクを選択して Doing に移します。
 <br>
-そのため「APPLE」クラスを以下のように拡張します。
+いよいよ最後のスプリントです。APPLE を動かして開発終了です。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
-<br>
-<br>
-<ul>
-<li>「APPLE」クラスに public void act メソッドを追加して「APPLE」オブジェクトを動かします。動かし方は任意です。</li>
-</ul>
-</div>
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td> </td> <td>APPLE を動かす</td> <td> </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td> </td> <td>ゲームクリア処理をする</td> </tr>
+<tr> <td> </td> <td> </td> <td>ゲームオーバー処理をする</td> </tr>
+</table>
 
 <br>
-<h3>2. 演習内容</h3>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次の様に詳細仕様書を作りました。
+</p>
+
+<table>
+<tr><th>クラス名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+TARO
+</td><td>
+・プログラムループ(act メソッド)が呼び出される度に 360 度ランダム方向に動く(移動量 = 5)
+</td>
+</tr>
+
+</table>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>クラス図の作成:</b>
-<br>
-<br>
-<ul>
-<li>開発作業を行う前にクラス図を描いて下さい。</li>
-<li>クラス図「GF-2-7」をコピーし、ファイル名を「GF-2-8」に変更します。</li>
-<li>「APPLE」に act メソッドを追加します。public であることに注意してください。</li>
-</div>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+今回は以下のようなスプリントバックログを作りました。※ DoingとDoneの列は省略
+</p>
+
+<table>
+<tr><th>ToDo</th></tr>
+<tr> <td>APPLE を動かす</td></tr>
+</table>
+
 
 <br>
-<div class="info">
-<input type="checkbox"><b>準備:</b>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-7」をコピーし、シナリオ名を「GF-2-8」に変更します。
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot を起動します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-8」を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2」を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「APPLE」クラスのソースを開き、act メソッド内に「<a href="../../java-HW/text01/page02.html">ランダム</a>に方角を決めて動かす」プログラムを記述して下さい。 move 量は 5 です。
 </p>
 </div>
-</div>
-
 
 <br>
-<div class="info">
-<input type="checkbox"><b>コーディング:</b>
-<div class="olradio"> 
+<h3>テスト</h3>
+
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」クラスに public void act メソッドを追加して下さい。
+コーディングが終わったらテストします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドで「APPLE」オブジェクトを動かして下さい。動きのアルゴリズムは任意とします。
+<br>
+Run ボタンを押して動作確認して下さい。 
+<br>
+上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
-</div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略します。
 </p>
-</div>
-</div>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>提出:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(APPLE)を選んで下さい。
+最終的なプロダクトバックログの状態は次の通りです。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+全ての項目が Done になっています。
 </p>
-</div>
-</div>
 
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td> </td> <td>ゲームクリア処理をする</td> </tr>
+<tr> <td> </td> <td> </td> <td>ゲームオーバー処理をする</td> </tr>
+</table>
+
+<br>
 <script>PreNext(9,9)</script>
 </body>
 </html>

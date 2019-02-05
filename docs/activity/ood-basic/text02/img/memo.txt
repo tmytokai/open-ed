@@ -1,4 +1,0 @@
-PDF化してから
-
-convert -density 300 -alpha remove WBS.pdf WBS.png
-

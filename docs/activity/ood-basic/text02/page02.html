@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 1</title>
+<title>全体設計 (全体仕様書の作成)</title>
 </head>
 <body>
 
@@ -19,107 +19,259 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h3>1. 詳細設計</h2>
-
 <p>
-この工程では、「MyWorld」クラスを「World」クラスを継承して作ります。
+次は要求仕様書を元に全体設計を行って全体仕様書を作成します。
 <br>
-また全てのプレイヤーキャラクターの基となる「HUMAN」クラスを「Actor」クラスを継承して作成します。
-<br>
-各クラスの詳細設計書は以下の通りです。
+今回は以下の様な全体仕様書を作成しました。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
+<hr>
+<input type="checkbox"><b>タイトル</b>
+
+<p>
+TARO と HANAKO
+</p>
+
+<hr>
+<input type="checkbox"><b>ジャンル</b>
+
+<p>
+2D アクション
+</p>
+
+<hr>
+<input type="checkbox"><b>コンセプト</b>
+
+<p>
+Who（〜が）: HANAKO が
 <br>
+When（〜の時代に）: 現代の
 <br>
-<ul>
-<li>「MyWorld」の大きさは 600 x 400 とします。</li>
-<li>「MyWorld」の画像は任意とします。</li>
-<li>「HUMAN」の画像は無しとします。</li>
-<li>「HUMAN」はキーボードの矢印キーで上下左右に動かすことが出来ます。</li>
-<li>「HUMAN」の move 量は 4 とします。</li>
-</li>
-</div>
+Where（〜において）: 日本で
+<br>
+Why（〜のために）: TARO を守るために
+<br>
+How（〜することで）: 動き回る果物を捕まえて
+<br>
+What（〜をする）: 食べる
+</p>
+
+<hr>
+<input type="checkbox"><b>プラットフォーム</b>
+
+<p>
+動作環境: パソコン
+<br>
+開発環境: Greenfoot または Unity
+</p>
+
+<hr>
+<input type="checkbox"><b>ターゲット</b>
+
+<p>
+10歳以上のライト層
+</p>
+
+<hr>
+<input type="checkbox"><b>開発担当</b>
+
+<p>
+ディレクター: 自分
+<br>
+企画: 自分
+<br>
+デザイン: 自分
+<br>
+プログラム: 自分
+<br>
+サウンド: 無し
+</p>
+
+<hr>
+<input type="checkbox"><b>世界観</b>
+
+<p>
+現代日本
+</p>
+
+<hr>
+<input type="checkbox"><b>ストーリー</b>
+
+<p>
+果物が TARO を襲い始めた
+<br>
+TARO を守るため HANAKO が動き回る果物を捕まえて食べて退治する
+</p>
+
+<hr>
+<input type="checkbox"><b>概要 (フィーチャー)</b>
+
+<p>
+・タイトルは無し。いきなりゲームを開始する。
+<br>
+・背景は一枚絵。スクロールしない
+<br>
+・ゲーム開始時の TARO の初期位置は画面左上
+<br>
+・ゲーム開始時の HANAKO の初期位置は画面右下
+<br>
+・TARO は上下左右に動かせる
+<br>
+・HANAKO も上下左右に動かせるが TARO と逆方向に同時に動く
+<br>
+　(例えば TARO を上に動かすとき HANAKO は下に動く)
+<br>
+・TARO と HANAKO 間に当たり判定無し (つまりスレ違い可能)
+<br>
+・TARO と HANAKO は画面外に移動できない
+<br>
+・果物は APPLE と ORANGE の 2 種類
+<br>
+・ゲーム開始時に APPLE と ORANGE をランダムな位置に複数個表示する
+<br>
+・APPLE は動きまわる
+<br>
+・ORANGE は静止している
+<br>
+・HANAKO が果物に触れたらその果物を消す
+<br>
+・時間制限を設ける
+<br>
+・残り時間は画面左下に表示する
+</p>
+
+<p>
+ゲーム画面イメージ:
+</p>
+<img src="./img/screen.png" alt="">
+
+<p>
+クリア条件: 
+<br>
+・HANAKO が全ての果物を食べる
+</p>
+
+<p>
+ゲームオーバー条件: 
+<br>
+・TARO が果物に食べられる
+<br>
+・制限時間切れ
+</p>
+
+<hr>
+<input type="checkbox"><b>ステージ</b>
+
+<p>
+ステージ名: 街
+<br>
+見た目・特徴: 普通の街中
+<br>
+追加フィーチャー: 無し
+<br>
+備考: 無し
+<br>
+画面イメージ: 
+<br>
+<img src="./img/MyWorld.jpg">
+<br>
+<a href="https://www.irasutoya.com/2018/06/blog-post_148.html">元画像</a> (いらすとや)
+</p>
+
+<hr>
+<input type="checkbox"><b>キャラクター</b>
+
+<p>
+キャラクター名: TARO
+<br>
+役割: 主人公1
+<br>
+見た目・特徴: 少年、果物から逃げ回る
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/TARO.png">
+<br>
+<a href="https://www.irasutoya.com/2014/04/blog-post_15.html">元画像</a> (いらすとや)
+</p>
 
 <br>
-<h3>2. 演習内容</h3>
-
-<div class="info">
-<input type="checkbox"><b>クラス図の作成:</b>
-<br>
-<br>
-<ul>
-<li>開発作業を行う前にクラス図を描いて下さい。</li>
-<li>ファイル名は「GF-2-1」とします。</li>
-<li>World と MyWorld も忘れず描いて下さい。</li>
-<li>Greenfoot の内部では「World」が「Actor」を<a href="../../class-diag/text01/page04.html">集約</a>しています(多分)。
-<br>
-よって「World」と「Actor」を線で結び、中抜きのダイヤマークを「World」側に付けて下さい。
-<br>
-多重度は省略して結構です(正確にはひとつの「World」が 0 個以上の「Actor」を持っているので、多重度は 1 - 0..* になります)。
-</li>
-</ul>
-</div>
-
-<br>
-<div class="info">
-<input type="checkbox"><b>準備:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Greenfoot を起動します。
+キャラクター名: HANAKO
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 新規 Java シナリオを作成します。シナリオ名は「GF-2-1」として下さい。
+役割: 主人公2
+<br>
+見た目・特徴: 少女、果物を食べる
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/HANAKO.png">
+<br>
+<a href="https://www.irasutoya.com/2014/04/blog-post_16.html">元画像</a> (いらすとや)
 </p>
-</div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>コーディング:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「World」クラスを継承して「MyWorld」クラスを作成して下さい。 大きさは 600 x 400 とします。画像は任意とします。
-</p>
-<p>
-※ Greenfoot のバージョンによっては最初から MyWorld が出来ています。その場合は作成しなくても良いです。画像だけセットして下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「HUMAN」クラスを作成して下さい。 <b>画像は無しです。</b>
+キャラクター名: APPLE
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスの act メソッド内に「矢印キーで上下左右に動かす」プログラムを記述して下さい。 move 量は 4 です。
+役割: 敵
+<br>
+見た目・特徴: りんご、ランダムに動く
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/APPLE.png">
+<br>
+<a href="https://www.irasutoya.com/2014/10/blog-post_766.html">元画像</a> (いらすとや)
 </p>
-</div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「HUMAN」オブジェクトを「MyWorld」上にマウスを使って手動配置して下さい。 
+キャラクター名: ORANGE
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
+役割: 敵
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+見た目・特徴: みかん、静止したまま動かない
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/ORANGE.png">
+<br>
+<a href="https://www.irasutoya.com/2012/11/blog-post_18.html">元画像</a> (いらすとや)
 </p>
-</div>
-</div>
+
+<hr>
+<input type="checkbox"><b>・操作方法</b>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>提出:</b>
-<div class="olradio"> 
+<br>
+<table>
+<tr><th>項目</th><th>操作方法</th></tr>
+<tr><td>上下左右移動</td><td>キーボードのカーソルキー<br>またはゲームコントローラの方向キー</td></tr>
+</table>
+
+<hr>
+<input type="checkbox"><b>・画面遷移</b>
+
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMAN)を選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+画面遷移無し(ゲーム画面のみ)
 </p>
-</div>
-</div>
 
 <br>
 <script>PreNext(2,9)</script>

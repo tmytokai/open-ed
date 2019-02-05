@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 6</title>
+<title>スプリント 4</title>
 </head>
 <body>
 
@@ -19,107 +19,140 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h3>1. 詳細設計</h2>
+<h3>プロダクトバックログアイテムの選択</h2>
 
 <p>
-この工程では、ゲームオーバーとゲームクリアの処理を作ります。
+プロダクトバックログから今回のスプリントで行うタスクを選択して Doing に移します。
 <br>
-「TARO」オブジェクトが果物に触れたらゲームオーバーです。
-<br>
-「HANAKO」オブジェクトが果物を全て食べたらクリアです。
-<br>
-そのため「HUMAN」「TARO」クラスを以下のように拡張します。
+次はゲームクリアの処理を作りましょう。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
-<br>
-<br>
-<ul>
-<li>「HUMAN」クラスに public void eat メソッドを追加し、act メソッド内の当たり判定処理を全てそこに移します。</li>
-<li>「HUMAN」クラスの act メソッド内から追加した eat メソッドを呼び出します。</li>
-<li>「HUMAN」クラスの eat メソッドで果物を 10 個食べたらメッセージを表示してゲームを停止します。メッセージ内容と位置は任意です。</li>
-<li>「TARO」クラスで eat メソッドをオーバーライドし、果物に触れたらメッセージを表示してゲームを停止します。メッセージ内容と位置は任意です。</li>
-</ul>
-</div>
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td>ゲームクリア処理をする</td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
 
 <br>
-<h3>2. 演習内容</h3>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次の様に詳細仕様書を作りました。
+<br>
+HANAKO が敵に当たったらその敵を消し、10匹敵を倒したらメッセージを出してゲームを停止するようにしました。
+</p>
+
+<table>
+<tr><th>クラス名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+HANAKO
+</td><td>
+・倒した敵の数を記憶するカウンターをフィールドに追加する (フィールド名は private int fruits = 0 )
+<br>
+・敵に触れたら敵を消してカウンターを1増やす
+<br>
+・カウンターが10になったら「CLEAR」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+</td>
+</tr>
+
+
+</table>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>クラス図の作成:</b>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+今回は以下のようなスプリントバックログを作りました。※ DoingとDoneの列は省略
 <br>
-<br>
-<ul>
-<li>開発作業を行う前にクラス図を描いて下さい。</li>
-<li>クラス図「GF-2-5」をコピーし、ファイル名を「GF-2-6」に変更します。</li>
-<li>「HUMAN」と「TARO」に eat メソッドを追加します。public であることに注意してください。</li>
-</div>
+単純な作業なのでプロダクトバックログと同じ内容になります。
+</p>
+
+<table>
+<tr><th>ToDo</th></tr>
+<tr> <td>ゲームクリア処理をする</td></tr>
+</table>
+
 
 <br>
-<div class="info">
-<input type="checkbox"><b>準備:</b>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2-5」をコピーし、シナリオ名を「GF-2-6」に変更します。
+<span class="olradio"><input type="radio" name="p1"></span> Greenfoot を起動します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Greenfoot でシナリオ「GF-2-6」を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2」を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」クラスのソースを開き、フィールドに private int fruits = 0 を追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」クラスの当たり判定処理の中を
 </p>
-</div>
-</div>
-
-
-<br>
-<div class="info">
-<input type="checkbox"><b>コーディング:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「HUMAN」クラスに public void eat メソッドを追加して下さい。
+カウンター(fruit)の数を1増やす 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドの当たり判定処理部を切り取り、eat メソッド内に貼り付けてください。
+→ 触れた<a href="../text01/page09.html">オブジェクトを消す</a>
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> act メソッドから eat メソッドを呼び出して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> eat メソッドに、fruits フィールドの値が 10 になったらクリアメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と位置は任意とします。
-
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「TARO」クラスに「HUMAN」クラスの eat メソッドを丸ごとコピーして貼り付けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「TARO」クラスの eat メソッドを書き換えて、果物に触れたら即ゲームオーバーメッセージを出してプログラムを停止する処理を追加して下さい。メッセージ内容と位置は任意とします。
+→カウンターが 10 になったら「CLEAR」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
 </p>
-</div>
-</div>
-
-<br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Reset ボタンを押して初期化して下さい。
+という処理に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Run ボタンを１回押して動作確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中のゲームを停止するコードをコメントアウトする ※ スプリントバックログにはありませんが、デバッグのため TARO が敵に触れてもゲームが停止しないようにします
 </p>
-</div>
 </div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>提出:</b>
-<div class="olradio"> 
+<h3>テスト</h3>
+
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のクラス図とソースコード(HUMANとTARO)を選んで下さい。
+コーディングが終わったらテストします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 提出用にクラス図の画像ファイルをエクスポートして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「クラス図」と「ソースコード」を貼り付けて下さい。 
+Run ボタンを押して動作確認して下さい。 
+<br>
+上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
 </p>
-</div>
-</div>
 
+<br>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td>  </td> <td>ゲームクリア処理をする</td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+<br>
 <script>PreNext(7,9)</script>
 </body>
 </html>
