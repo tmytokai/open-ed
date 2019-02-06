@@ -64,11 +64,11 @@ TARO
 <tr><td>
 MyWorld
 </td><td>
-・タイマーカウンターをカウンターをフィールドに追加する (フィールド名は private int timecount = 1000 ) 
+・残り時間カウンターをフィールドに追加する (フィールド名は private int timecount = 1000 ) 
 <br>
-・プログラムループ(act メソッド)が呼び出される度にタイマーカウンターの数字を1減らして残り時間を画面に表示する。文字列の表示座標は (50,50) 
+・プログラムループ(act メソッド)が呼び出される度に残り時間カウンターの数字を1減らして残り時間を画面に表示する。文字列の表示座標は (50,50) 
 <br>
-・タイマーカウンターが 0 になったら「TIME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+・残り時間カウンターが 0 になったら「TIME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
 </td>
 </tr>
 
@@ -102,13 +102,7 @@ MyWorld
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> シナリオ「GF-2」を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中を
-</p>
-<p>
-「GAME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
-</p>
-<p>
-という処理に変更して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中を「GAME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>するプログラムに変更して下さい。文字列の座標は(400,200)とします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「MyWorld」クラスのソースを開き、フィールドに private int timecount = 1000 を追加して下さい。
 <br>
@@ -117,11 +111,13 @@ MyWorld
 <span class="olradio"><input type="radio" name="p1"></span> 「MyWorld」クラスの act メソッドの中で
 </p>
 <p>
-タイマーカウンター(timecount)の数を1減らす
+残り時間カウンター(timecount)の数を1減らす
 <br>
-→タイマーカウンターの値を画面に表示する。文字列の表示座標は (50,50) 
 <br>
-→タイマーカウンターが 0 になったら「TIME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
+→残り時間カウンターの値を画面に<a href="../text01/page06.html">表示する</a>。文字列の表示座標は (50,50) 
+<br>
+<br>
+→残り時間カウンターが 0 になったら「TIME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
 </p>
 <p>
 という処理を追加して下さい
