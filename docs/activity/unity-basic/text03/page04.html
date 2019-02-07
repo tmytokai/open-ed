@@ -5,120 +5,190 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 3</title>
+<title>スプリント 1</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [2] オブジェクト指向開発演習(2D編-1)</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h2>1. スプリント プランニング</h2>
-
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、「HANAKO」オブジェクトを作って上下左右に動かします(ただし動きは反転)。
+では最初の<a href="../../scrum/text02/page03.html">スプリント</a>を開始しましょう。
 </p>
-<ul>
-<li>HANAKO の画像は任意とします。</li>
-<li>移動速度(speed) は TARO と同じとします。</li>
-</ul>
+
+<h3>プロダクトバックログアイテムの選択</h2>
+
 <p>
-また TARO とはスレ違い可能にし壁オブジェクトはすり抜けられないようにレイヤーを設定します。
+まずプロダクトバックログから今回のスプリントで行うアイテム(タスク)を選択して Doing に移します。
+<br>
+まずは背景を表示しいので、以下の様にプロダクトバックログを更新しました。
 </p>
-<ul>
-<li>TARO と HANAKO のレイヤーは「LayerPlayer」とします。</li>
-</ul>
-</div>
+
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td>背景を表示する</td> <td>  </td> </tr>
+<tr> <td>TARO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>TARO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>スプリント バックログ:</b>
-<p></p>
-<ol>
-<li>「HANAKO」オブジェクトの作成</li>
-<li> レイヤーの設定</li>
-</ol>
-</div>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次に詳細仕様書を作成します。
+</p>
+
+<p>
+このスプリントでは背景をカメラを使って表示するので、それらのゲームオブジェクトの設計を兼ねて行います。
+<br>
+今回は次の様に詳細仕様書を作りました。
+</p>
+
+<table>
+<tr><th>ゲームオブジェクト名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・背景オブジェクト
+<br>
+・全体仕様書に貼った画像を使う (800x450 ピクセル)
+<br>
+</td>
+</tr>
+
+<tr><td>
+Main Camera
+</td><td>
+・デフォルトのカメラオブジェクト
+<br>
+・Projection のタイプは Orthographic
+<br>
+・表示領域のサイズは MyWorld と合わせる(800x450 ピクセル)
+<br>
+</td>
+</tr>
+
+
+</table>
 
 <br>
-<h2>2. 開発作業</h2>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+次に詳細仕様書から具体的な作業(タスク)をリストアップしてスプリントバックログを作ります。
+<br>
+今回は以下のようなスプリントバックログを作りました。※ DoingとDoneの列は省略
+</p>
+
+<table>
+<tr><th>ToDo</th></tr>
+<tr> <td>新規プロジェクトを作成する</td></tr>
+<tr> <td>MyWorld を表示する</td></tr>
+<tr> <td>カメラの調整をする</td></tr>
+</table>
+
+
+<br>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
 
 <div class="info">
-<input type="checkbox"><b>準備:</b>
+<input type="checkbox"><b>新規プロジェクトを作成する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-2」に対して作業を続けます。 
+<span class="olradio"><input type="radio" name="p1"></span> Unity エディタ を起動します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page02.html#newp">新規プロジェクトを作成します</a>。モードは「2Dモード」、ブロジェクト名は「UNITY-BASIC3」として下さい。
 </p>
 </div>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリントバックログ 1: 「HANAKO」オブジェクトの作成</b>
+<input type="checkbox"><b>MyWorld を表示する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 画像を用意し「HANAKO」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<span class="olradio"><input type="radio" name="p2"></span> 背景用画像を「MyWorld」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 画像を「HANAKO」オブジェクト化して下さい。サイズは適宜変更して下さい。位置は右下の適当な位置で結構です。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」オブジェクトに Rigidbody 2D をアタッチして重力(Gravity Scale)を 0 にし、Constraints → Freeze Rotation → Z にチェックを入れて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」オブジェクトに Box Collider 2D をアタッチして下さい。衝突範囲は適宜調整して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」スクリプトを新規作成し、「HANAKO」オブジェクトにアタッチして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「HANAKO」スクリプトをエディタで開き、 void Update() の下に void FixedUpdate() メソッドを追加し、FixedUpdate メソッド内に「方向ボタンで上下左右に動かす。ただし上を押したら下、下を押したら上、左を押したら右、右を押したら左に動く」プログラムを記述して下さい。 speed は TARO と合わせて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> <a href="../text01/page02.html#back">画像をアセットに登録し、更にゲームオブジェクト化して下さい</a>。
 </p>
 </div>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリントバックログ 2 : レイヤーの設定</b>
+<input type="checkbox"><b>カメラの調整をする</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「TARO」、「HANAKO」オブジェクトのレイヤーを「LayerPlayer」にしてください。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Layer Collision Matrix の設定を開き、LayerPlayer - LayerPlayer 間のチェックを外して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> <a href="../text01/page02.html#camera">カメラを調整して下さい</a>。表示領域のサイズは 800x450 とします。サイズ設定メニューで + ボタンを押し、ラベルを「MyWorld」、Width と Height をそれぞれ 800, 450 として下さい。
 </p>
 </div>
 </div>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+この時点での開発画面は以下の様になっています(クリックで画像のみ表示)
 </p>
-</div>
-</div>
+
+<a href="img/page04-fig1.png"><img src="./img/page04-fig1.png" alt=""></a>
 
 <br>
-<h2>3. リリース</h2>
+<h3>テスト</h3>
 
-<div class="info">
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(HANAKO.cs)を選んで下さい。 
+コーディングが終わったらテストします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+実行ボタンを押して動作確認して下さい。 
+<br>
+上手く動作しなかった場合は動作を止めてデバッグして下さい。
 </p>
-</div>
-</div>
 
 <br>
-<script>PreNext(4,9)</script>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td>TARO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>TARO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+
+<br>
+<script>PreNext(4,11)</script>
 </body>
 </html>

@@ -5,155 +5,250 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>工程 4</title>
+<title>スプリント 2</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [2] オブジェクト指向開発演習(2D編-1)</li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h2>1. スプリント プランニング</h2>
-
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、「APPLE」と「ORANGE」を作成し、Prefab化して MyWorld に初期配置します。
+では最初の<a href="../../scrum/text02/page03.html">スプリント</a>を開始しましょう。
 </p>
-<ul>
-<li>APPLE、ORANGE の画像は任意とします。</li>
-</ul>
+
+<h3>プロダクトバックログアイテムの選択</h2>
+
 <p>
-また Prefab のインスタンス化は MyWorld のスクリプトの中で行います。
+まずプロダクトバックログから今回のスプリントで行うアイテム(タスク)を選択して Doing に移します。
+<br>
+今回は「TARO」ゲームオブジェクトを作って上下左右に動かします。
 </p>
-<ul>
-<li> Start メソッドの中でそれぞれ 5 個ずつインタンス化します。</li>
-<li>位置と回転方向はランダムです。</li>
-</ul>
 
-
-</div>
-
-<br>
-<div class="info">
-<input type="checkbox"><b>スプリント バックログ:</b>
-<p></p>
-<ol>
-<li>「APPLE」「ORANGE」オブジェクトを作成して Prefab 化</li>
-<li> 「APPLE」「ORANGE」のインスタンス化</li>
-</ol>
-</div>
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td>TARO を表示する</td> <td>  </td> </tr>
+<tr> <td> </td> <td>TARO を動かす</td> <td>  </td> </tr>
+<tr> <td>HANAKO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
 
 <br>
-<h2>2. 開発作業</h2>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次に詳細仕様書を作成します。
+</p>
+
+<p>
+今回は次の様に詳細仕様書を作りました。
+<br>
+何もしないと「TARO」は画面から自由に出たり入ったり出来てしまうので、カメラの表示領域外に見えない壁オブジェクトを置いて「TARO」を画面内に閉じ込めることにしました。
+</p>
+
+<table>
+<tr><th>ゲームオブジェクト名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+TARO
+</td><td>
+・主人公オブジェクト1
+<br>
+・全体仕様書に貼った画像を使う (50x57 ピクセル)
+<br>
+・ゲーム開始時の初期座標は(-3.7,1.9)
+<br>
+・重力無し、重さはデフォルト、他のオブジェクトとぶつかっても回転しない
+<br>
+・キーボードのカーソルキー又はコントローラーの方向ボタンで上下左右移動を行う(移動速度は x 方向、y 方向ともに 2f )
+<br>
+・当たり判定の形状は四角(Box Collider 2D)、大きさはデフォルト
+</td>
+</tr>
+
+<tr><td>
+TOPWALL
+</td><td>
+・上側の壁オブジェクト
+<br>
+・画像は無し(透明)
+<br>
+・重さなし (Rigidbody 2D をアタッチしない)
+<br>
+・当たり判定の形状は四角(Box Collider 2D)、幅は表示画面幅と同じ、高さは任意
+</td>
+</tr>
+
+<tr><td>
+UNDERWALL
+</td><td>
+・下側の壁オブジェクト
+<br>
+・画像は無し(透明)
+<br>
+・重さなし (Rigidbody 2D をアタッチしない)
+<br>
+・当たり判定の形状は四角(Box Collider 2D)、幅は表示画面幅と同じ、高さは任意
+</td>
+</tr>
+
+<tr><td>
+LEFTWALL
+</td><td>
+・左側の壁オブジェクト
+<br>
+・画像は無し(透明)
+<br>
+・重さなし (Rigidbody 2D をアタッチしない)
+<br>
+・当たり判定の形状は四角(Box Collider 2D)、幅は任意、高さは表示画面高さと同じ
+</td>
+</tr>
+
+<tr><td>
+RIGHTWALL
+</td><td>
+・左側の壁オブジェクト
+<br>
+・画像は無し(透明)
+<br>
+・重さなし (Rigidbody 2D をアタッチしない)
+<br>
+・当たり判定の形状は四角(Box Collider 2D)、幅は任意、高さは表示画面高さと同じ
+</td>
+</tr>
+
+</table>
+
+<br>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+次に詳細仕様書から具体的な作業(タスク)をリストアップしてスプリントバックログを作ります。
+<br>
+今回は以下のようなスプリントバックログを作りました。※ DoingとDoneの列は省略
+</p>
+
+<table>
+<tr><th>ToDo</th></tr>
+<tr> <td>TARO を表示する</td></tr>
+<tr> <td>TARO を上下左右に動かす</td></tr>
+<tr> <td>壁を設置してTAROを閉じ込める</td></tr>
+</table>
+
+
+<br>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
 
 <div class="info">
-<input type="checkbox"><b>準備:</b>
+<input type="checkbox"><b>TARO を表示する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「UNITY-2」に対して作業を続けます。 
+<span class="olradio"><input type="radio" name="p1"></span> 画像を用意し「TARO」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page03.html">画像をアセットに登録し、更にゲームオブジェクト化して下さい</a>。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Transform の Position の x と y  で TARO の初期位置をセットして下さい。座標は(-3.7,1.9)です。 
 </p>
 </div>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリントバックログ 1: 「APPLE」「ORANGE」オブジェクトを作成して Prefab 化</b>
+<input type="checkbox"><b>TARO を上下左右に動かす</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 画像を用意し「APPLE」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」を選択し、Inspector で <a href="../text01/page04.html">Rigidbody 2D をアタッチして設定します</a>。重力(Gravity Scale)を 0 にし、他のオブジェクトとぶつかっても回転しない様に Constraints → Freeze Rotation → Z にチェックを入れて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 画像を「APPLE」オブジェクト化して下さい。サイズは適宜変更して下さい。位置は適当で結構です。
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」スクリプトを新規作成し、「TARO」オブジェクトにアタッチして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」オブジェクトに Rigidbody 2D をアタッチして重力(Gravity Scale)を 0 にして下さい。<b>Constraints → Freeze Rotation → Z にチェックは入れないで下さい</b>。
+<span class="olradio"><input type="radio" name="p2"></span> 「TARO」スクリプトをエディタで開き、 Update メソッドの下に void FixedUpdate() メソッドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」オブジェクトに <b>Circle</b> Collider 2D をアタッチして下さい。衝突範囲は適宜調整して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「APPLE」を Prefab 化し、オブジェクトを削除して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様に「ORANGE」の Prefab も作成して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> FixedUpdate メソッド内に「<a href="../text01/page05.html">上下左右に動かす</a>」プログラムを記述して下さい。移動速度は x 方向、y 方向ともに 2f です。
 </p>
 </div>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>スプリントバックログ 2 : 「APPLE」「ORANGE」のインスタンス化</b>
+<input type="checkbox"><b>壁を設置してTAROを閉じ込める</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「MyWorld」スクリプトを新規作成して MyWorld にアタッチして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 「TARO」を選択し、Inspector で<a href="../text01/page07.html"> Box Collider 2D をアタッチ</a>して下さい。衝突の範囲はデフォルトのままで結構です。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「MyWorld」スクリプトを開き、以下のフイールドを追加して下さい。
-</p>
-<p>
-public GameObject apple;
+<span class="olradio"><input type="radio" name="p3"></span> 底(UNDERWALL)を作ります。Hierarchy ウィンドウで右クリックし Create Empty で空のオブジェクトを作り、「UNDERWALL」に名前を変更して下さい。
 <br>
-public GameObject orange;
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> Start メソッドの中で「APPLE」と「ORANGE」をそれぞれ 5 つ、計 10 個インスタンス化して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>「UNDERWALL」オブジェクトを画面外の底に移動して下さい。
 <br>
-表示位置は以下のようにランダムとします。
-</p>
-<p>
-float x = Random.Range( 最小の横座標, 最大の横座標 );  // Random.Range は指定した範囲の乱数を返す
+<span class="olradio"><input type="radio" name="p3"></span> 「UNDERWALL」オブジェクトに<a href="../text01/page07.html"> Box Collider 2D をアタッチ</a>して下さい。更に衝突範囲の幅を表示画面幅と同じサイズに引き伸ばしてください(下の画面写真を参考にして下さい)。高さは任意です。
 <br>
-float y = Random.Range( 最小の縦座標, 最大の縦座標  );
-<br>
-Vector2 position = new Vector2 ( x, y );
-</p>
-<p>
-なお乱数の範囲は本来ならカメラから正確な表示範囲の座標を取得するべきですが、今回は適当に決めて結構です(Sceneビューで TARO を動かして Inspector の Position の x, y を見ると楽に範囲が分かります)。
-<br>
-また回転角度は
-</p>
-<p>
-Quaternion rotation = Quaternion.Euler( 0f, 0f, Random.Range( 0, 360 ) ); 
-</p>
-<p>
-で0度から360度までランダムにセットできます。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> スクリプトを保存して Unity エディタに戻って下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> MyWorld の Inspector ウィンドウを開き、MyWorld(Script) の Apple と Orange に「APPLE」「ORANGE」Prefab　を DnD して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>同様に「TOPWALL」、「LEFTWALL」、「RIGHTWALL」も作成して下さい。
 </p>
 </div>
 </div>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+この時点での開発画面は以下の様になっています(クリックで画像のみ表示)
 </p>
-</div>
-</div>
+
+<a href="img/page05-fig1.png"><img src="./img/page05-fig1.png" alt=""></a>
 
 <br>
-<h2>3. リリース</h2>
+<h3>テスト</h3>
 
-<div class="info">
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のスクリプト(MyWorld.cs)を選んで下さい。 
+コーディングが終わったらテストします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」を貼り付けて下さい。 
+実行ボタンを押して動作確認して下さい。 
+<br>
+上手く動作しなかった場合は動作を止めてデバッグして下さい。
 </p>
-</div>
-</div>
 
 <br>
-<script>PreNext(5,9)</script>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>Doing</th><th>Done</th></tr>
+<tr> <td> </td> <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td>HANAKO を表示する</td> <td> </td> <td>  </td> </tr>
+<tr> <td>HANAKO を動かす</td> <td> </td> <td>  </td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+
+<br>
+<script>PreNext(5,11)</script>
 </body>
 </html>
