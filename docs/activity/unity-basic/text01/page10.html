@@ -26,18 +26,27 @@ Unity エディタの再生をスクリプトから停止したい場合は次�
 <div class="info">
 <input type="checkbox"><b>Unity エディタの再生を停止</b>
 <pre class="wrap">
-※ using UnityEditor; を追加してから
+using の所に
 
+#if UNITY_EDITOR 
+using UnityEditor; 
+#endif
+
+を追加してから
+
+#if UNITY_EDITOR 
 EditorApplication.isPlaying = false;
+#endif
+
 </pre>
 </div>
 
 <p>
-またビルドして作成したアプリをスクリプトから停止したい場合は次のように書きます。
+またビルドして作成したアプリケーションをスクリプトから停止したい場合は次のように書きます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>アプリを終了</b>
+<input type="checkbox"><b>アプリケーションを終了</b>
 <pre class="wrap">
 Application.Quit();
 </pre>
@@ -45,16 +54,26 @@ Application.Quit();
 
 
 <p>
-以上を組み合わせて、例えば ESC キーを押したらゲームを終了するには Update メソッドの中で次の様に書きます。
+以上を組み合わせて、例えば ESC キーを押したらUnityエディタでもアプリケーションでもゲームを終了するには Update メソッドの中で次の様に書きます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ESCキーを押したらゲーム終了</b>
 <pre class="wrap">
-※ using UnityEditor; を追加してから
+using の所に
+
+#if UNITY_EDITOR 
+using UnityEditor; 
+#endif
+
+を追加してから
 
 if (Input.GetKey (KeyCode.Escape)) {
+
+       #if UNITY_EDITOR 
        EditorApplication.isPlaying = false;
+       #endif
+
        Application.Quit();
 }
 </pre>
