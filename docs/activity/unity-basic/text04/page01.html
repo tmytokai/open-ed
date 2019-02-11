@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>リリース プランニング</title>
+<title>要求定義 (要求仕様書の作成)</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [3] オブジェクト指向開発演習(2) </li>
+<li><a href="../">アクティビティ:  Unity 入門</a></li>
+<li>学習項目: [3] 2Dジャンプアクションの作成</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,227 +20,47 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは違うミニゲームを開発してみましょう。
-</p>
-
-<h3>
-動作サンプル
-</h3>
-
-<p>
-<a href="./binary/unity3.zip">Windows 版</a> (Windows10,32 bit版で動作確認)
-</p>
-<p>
-<a href="./binary/unity3.tgz">Linux 版</a> (Ubuntu 16.04 LTSで動作確認)
-</p>
-<p>
-※ <a href="http://www.irasutoya.com/">いらすとや</a>の画像素材を利用させて頂いています。
+この学習項目では 2D のジャンプアクションゲームを作成してみましょう。
 <br>
-※ 画面サイズは 1024 x 768、Windowed モードで最適になるように作っています。
+なお画像として学習項目[2] に引き続き <a href="https://www.irasutoya.com/">いらすとや</a>様の作品を利用させて頂いてます。
 </p>
-
-<br>
-<h3>
-1. 要求仕様書の作成
-</h3>
 
 <p>
-今回の演習では以下の様な要求仕様書を作成しました。
+まず要求定義を行って要求仕様書を作成します。
+<br>
+今回は以下の様な要求仕様書を作成しました。
 </p>
 
-<div class="info">
+
+<p>
 <input type="checkbox"><b>要求仕様書</b>
-
-<p>　</p>
-
+</p>
 <table>
-<tr><td class="center">名称</td><td>TARO と OBAKE</td></tr>
-<tr><td class="center">用途・目的</td><td>暇つぶし用ミニゲーム</td></tr>
-<tr><td class="center">対象ユーザ</td><td>6 歳以上の男女</td></tr>
-<tr><td class="center">システム構成</td>
-<td>
-OS: Windows 又は Linux
+<tr><td class="center">タイトル</td><td>TARO と OBAKE</td></tr>
+<tr><td class="center">要求</td><td>
+・暇つぶし用ミニゲーム
 <br>
-PC: 低スペック
-<br>開発環境: Unity2D
-</td></tr>
-<tr><td class="center">概要</td><td>
-・PC 上で動く 2 次元アクションゲーム
+・ライト層向け
 <br>
-・ボタン(ゲームパッドやキーボード)で操作
+・2 次元ジャンプアクションゲーム
 <br>
-・画面上に TARO というプレイヤーキャラと OBAKE という敵キャラと BLOCK という複数の障害物を表示する
+・PC 用
 <br>
-・重力により TARO は下に落ち続ける
+・画面上に TARO というプレイヤーキャラと OBAKE という複数の敵キャラと障害物を表示する
 <br>
-・ユーザーはボタン操作により TARO を左右に動かしたりジャンプさせたり出来る
+・ユーザーは TARO を動かせる
 <br>
-・TARO は BLOCK をすり抜けられない。
+・TARO はボールを投げて OBAKE を退治できる
 <br>
-・TARO はボタン操作により BALL という弾を投げられる
+・OBAKE はランダムに動きまわる
 <br>
-・BALL は最初に投げた方向に動き続ける
-<br>
-・OBAKE は重力無しで動きまわる
-<br>
-・BALL が OBAKE に触れたらゲームクリア
+・全ての OBAKE を倒したらゲームクリア
 <br>
 ・TARO が OBAKE に触れたらゲームオーバー
 </td></tr>
 </table>
 
-<p>　</p>
-
-</div>
-
 <br>
-<h3>
-2. 全体仕様書の作成
-</h3>
-
-<p>
-次に「<b>全体仕様書</b>」を作成します。
-<br>
-今回は以下の様にしてみました。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>ゲーム仕様</b>
-
-<p>
-・背景(MyWorld と名付ける)は一枚絵とし、スクロールしない
-<br>
-・TARO(x1)、OBAKE(x1)、BLOCK(x複数) は Prefab を使わず適当に配置する
-<br>
-・重力により TARO は下に落ち続ける 
-<br>
-・TARO は左右ボタンで左右に動かせる
-<br>
-・TARO は Jump ボタンでジャンプする
-<br>
-・TAROジャンプ中でも左右移動可能
-<br>
-・TARO は Fire1 ボタンで向いている方向(左右)に BALL を投げる
-<br>
-・TARO は BLOCK をすり抜けられない
-<br>
-・BALL は Prefab を使って複数個投げられる
-<br>
-・BALL は動いている途中に方向とスピードを変更しない
-<br>
-・BALL は BLOCK をすり抜けられる
-<br>
-・OBAKE は TARO の方向に向かって動く。重力は無し
-<br>
-・OBAKE は BLOCK をすり抜けられる
-<br>
-・BALL が OBAKE に触れたらゲームクリアとなりメッセージ表示
-<br>
-・TARO が OBAKE に触れたらゲームオーバーとなりメッセージ表示
-</p>
-
-<br>
-<input type="checkbox"><b>画面仕様</b>
-
-<p>　</p>
-
-<img src="./img/screen.png" alt="">
-
-<p>　</p>
-
-<input type="checkbox"><b>オブジェクト仕様</b>
-
-<p>　</p>
-
-<table>
-<tr><th>オブジェクト名</th><th>内容</th></tr>
-
-<tr><td>
-MyWorld
-</td><td>
-・背景
-<br>
-・特に何もしない
-</td>
-</tr>
-
-<tr><td>
-BLOCK
-</td><td>
-・障害物
-<br>
-・特に何もしない
-</td>
-</tr>
-
-<tr><td>
-TARO
-</td><td>
-・プレイヤーキャラ
-<br>
-・ボタン操作(左右移動)を行う
-<br>
-・ボタン操作(ジャンプ)を行う
-<br>
-・BALL を投げる
-<br>
-・OBAKE に触れたか判定してゲームオーバー処理を行う
-</td>
-</tr>
-
-
-<tr><td>
-BALL
-</td><td>
-・弾
-<br>
-・最初に投げた方向に動き続ける
-<br>
-・OBAKE に触れたか判定してゲームクリア処理を行う
-</td>
-</tr>
-
-<tr><td>
-OBAKE
-</td><td>
-・敵
-<br>
-・TARO に向かって動く
-</td>
-</tr>
-
-</table>
-
-<p>　</p>
-
-</div>
-
-<br>
-<h3>
-3. プロダクトバックログの作成
-</h3>
-
-<p>
-全体仕様書を元にプロダクトバックログを作成します。
-</br>
-今回も<a href="../../wbs">WBS</a>でバックログ管理することにします。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>WBS (Work Breakdown Structure: 作業分解構成図)</b>
-<p>
-<b>1 スプリント ＝ 20 分</b>
-</p>
-<p>
-※ クリックすると図だけ表示します。
-</p>
-<a href="./img/WBS.png"><img src="./img/WBS.png" alt=""></a>
-<p>
-<a href="./img/WBS.ods">元データ (ods形式)</a>
-</p>
-</div>
-
-<br>
-<script>PreNext(1,11)</script>
+<script>PreNext(1,9)</script>
 </body>
 </html>

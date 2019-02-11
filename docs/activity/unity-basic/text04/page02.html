@@ -5,101 +5,314 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>スプリント 1</title>
+<title>全体設計 (全体仕様書の作成)</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
-<li>学習項目: [3] オブジェクト指向開発演習(2)</li>
+<li><a href="../">アクティビティ:  Unity 入門</a></li>
+<li>学習項目: [3] 2Dジャンプアクションの作成</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h2>1. スプリント プランニング</h2>
-
-<div class="info">
-<input type="checkbox"><b>詳細設計:</b>
 <p>
-このスプリントでは、背景となる「MyWorld」オブジェクトを作ってカメラ調整をします。
+次は要求仕様書を元に全体設計を行って全体仕様書を作成します。
+<br>
+今回は以下の様な全体仕様書を作成しました。
 </p>
-<ul>
-<li>背景画像は任意とします。</li>
-<li>画面比率は 5:4 とします。</li>
-</ul>
-</div>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>スプリントバックログ:</b>
-<p></p>
-<ol>
-<li>「MyWorld」オブジェクトの作成</li>
-<li>カメラの調整</li>
-</ol>
-</div>
+<hr>
+<div>
+<input type="checkbox"><b>タイトル</b>
 
-<br>
-<h2>2. 開発作業</h2>
-
-<div class="info">
-<input type="checkbox"><b>準備:</b>
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Unity エディタ を起動します。
+TARO と OBAKE
+</p>
+
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 新規プロジェクトを作成します。ブロジェクト名は「UNITY-3」として下さい。
+<hr>
+<div><input type="checkbox"><b>ジャンル</b></div>
+
+<p>
+2D ジャンプアクション
 </p>
 </div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>スプリントバックログ 1: 「MyWorld」オブジェクトの作成</b>
-<div class="olradio"> 
+<hr>
+<div>
+<input type="checkbox"><b>コンセプト</b>
+
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 背景画像を用意し「MyWorld」に名前変更して下さい(※ 拡張子は変更しないよう注意)。 
+Who（〜が）: TARO が
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 画像を「MyWorld」オブジェクト化して下さい。
+When（〜の時代に）: 中世の
+<br>
+Where（〜において）: ヨーロッパのお墓で
+<br>
+Why（〜のために）: 現代日本に戻るため
+<br>
+How（〜することで）: OBAKE にボールを当てて
+<br>
+What（〜をする）: 退治する
 </p>
 </div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>スプリントバックログ 2: カメラの調整</b>
-<div class="olradio"> 
+<hr>
+<div>
+<input type="checkbox"><b>プラットフォーム</b>
+
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> カメラを調整して下さい。画面比率は 5:4 とします。
+動作環境: パソコン
+<br>
+開発環境: Unity
+</p>
+
+<br>
+<hr>
+<input type="checkbox"><b>ターゲット</b>
+
+<p>
+10歳以上のライト層
 </p>
 </div>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>テストとデバッグ:</b>
-<div class="olradio"> 
+<hr>
+<div>
+<input type="checkbox"><b>開発担当</b>
+
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 実行ボタンを押して動作確認して下さい。 
+ディレクター: 自分
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 上手く動作しなかった場合は実行ボタンを押して動作を止めてデバッグして下さい。
+企画: 自分
+<br>
+デザイン: 自分
+<br>
+プログラム: 自分
+<br>
+サウンド: 無し
 </p>
 </div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>世界観</b>
+
+<p>
+中世ヨーロッパ
+</p>
 </div>
 
 <br>
-<h2>3. リリース</h2>
+<hr>
+<div>
+<input type="checkbox"><b>ストーリー</b>
 
-<div class="info">
-<div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 今回は提出物はありません。
+気がついたら TARO は中世ヨーロッパにタイムスリップしていた
+<br>
+うろうろしてたら OBAKE が襲ってきた
+<br>
+現代日本に帰るため OBAKE をボールで倒す
 </p>
 </div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>概要 (フィーチャー)</b>
+
+<p>
+・タイトルは無し。いきなりゲームを開始する。
+<br>
+・背景は一枚絵。スクロールしない
+<br>
+・ゲーム開始時の TARO の初期位置は画面左下
+<br>
+・TARO は重力により下に落ちる
+<br>
+・TARO は左右に動かせる
+<br>
+・TARO はジャンプできる
+<br>
+・TARO は BALL という弾を投げられる
+<br>
+・BALL には重力が無い
+<br>
+・BALL は投げた方向に動き続ける
+<br>
+・OBAKE は 1 種類
+<br>
+・ゲーム開始時に OBAKE をランダムな位置に複数匹表示する
+<br>
+・OBAKE には重力が無い
+<br>
+・OBAKE は適当に動きまわる
+<br>
+・OBAKE は BALL に当たると消える
+<br>
+・BLOCK という障害物を作る
+<br>
+・BLOCK は複数あり、それぞれ位置とサイズが決まっている
+<br>
+・TARO は BLOCK をすり抜けられない
+<br>
+・BALL は BLOCK をすり抜けられない
+<br>
+・OBAKE は BLOCK をすり抜けられる
+</p>
+
+<p>
+ゲーム画面イメージ:
+</p>
+<img src="./img/screen.png" alt="">
+
+<p>
+クリア条件: 
+<br>
+・TARO が全ての OBAKE を倒す
+</p>
+
+<p>
+ゲームオーバー条件: 
+<br>
+・TARO が OBAKE に触れる
+<br>
+・TARO が画面の下に落ちる
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>ステージ</b>
+
+<p>
+ステージ名: お墓
+<br>
+見た目・特徴: おどろおどろしいお墓
+<br>
+追加フィーチャー: 無し
+<br>
+備考: 無し
+<br>
+画面イメージ: 
+<br>
+<img src="./img/MyWorld.png">
+<br>
+<a href="https://www.irasutoya.com/2014/10/blog-post_9.html">元画像</a> (いらすとや)
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>キャラクター</b>
+
+<p>
+キャラクター名: TARO
+<br>
+役割: 主人公
+<br>
+見た目・特徴: 少年
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/TARO.png">
+<br>
+<a href="https://www.irasutoya.com/2014/04/blog-post_15.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: BALL
+<br>
+役割: ボール
+<br>
+見た目・特徴: 野球のたま
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/BALL.png">
+<br>
+<a href="https://www.irasutoya.com/2016/04/blog-post_661.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: OBAKE
+<br>
+役割: 敵
+<br>
+見た目・特徴: お化け、適当に動く
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/OBAKE.png">
+<br>
+<a href="https://www.irasutoya.com/2018/10/blog-post_814.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: BLOCK
+<br>
+役割: 障害物
+<br>
+見た目・特徴: TARO、BALLはすり抜けられない。OBAKE はすり抜けられる
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/BLOCK.png">
+<br>
+<a href="https://www.irasutoya.com/2014/01/blog-post_5442.html">元画像</a> (いらすとや)
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>・操作方法</b>
+
+<br>
+<br>
+<table>
+<tr><th>項目</th><th>操作方法</th></tr>
+<tr><td>TARO の左右移動</td><td>左右ボタン</td></tr>
+<tr><td>TARO のジャンプ</td><td>Jump ボタン</td></tr>
+<tr><td>TARO が BALL を投げる</td><td>Fire1 ボタン</td></tr>
+</table>
+
+<br>
+<hr>
+<input type="checkbox"><b>・画面遷移</b>
+
+<p>
+画面遷移無し(ゲーム画面のみ)
+</p>
 </div>
 
 <br>
