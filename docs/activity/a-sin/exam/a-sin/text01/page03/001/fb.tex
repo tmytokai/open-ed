@@ -6,19 +6,15 @@
 \vspace{1em}
 \noindent \textbf{【重要事項】}
 
-\fleqnoff
 \[
 f(t) = a \cdot \sin( w \cdot t + \phi )
 \]
-\fleqnon
 %
 \noindent または
 %
-\fleqnoff
 \[
 f(t) = a \cdot \cos( w \cdot t + \phi )
 \]
-\fleqnon
 
 \medskip
 \noindent を時間領域アナログサイン波と呼ぶ
@@ -27,7 +23,7 @@ f(t) = a \cdot \cos( w \cdot t + \phi )
 \noindent $a$・・・振幅
 
 \bigskip
-\noindent $w$ ・・・角周波数 [rad/秒]
+\noindent $w = 2\pi \cdot f$ ・・・角周波数 [rad/秒]
 
 \bigskip
 \noindent $\phi$ ・・・初期位相 [rad]
@@ -36,13 +32,11 @@ f(t) = a \cdot \cos( w \cdot t + \phi )
 \noindent $t$ ・・・時刻 [秒]
 
 \bigskip
-$w = 2\pi \cdot f = 2 \pi \cdot \frac{1}{\textrm{T}}$
+$\textrm{T}$・・・周期 [秒]、$\textrm{T} = \frac{1}{f} = \frac{2\pi}{w}$
 
-\bigskip
-$f = \frac{1}{\textrm{T}} = \frac{w}{2\pi}$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1em}
 \noindent \textbf{【解説】}
 
-\noindent $w = 2\pi \cdot 0.5 = \pi$ [rad/秒]が答となる。
+\noindent $w = 2\pi \cdot f = 2\pi \cdot 0.5 = \pi$ [rad/秒]が答となる。
