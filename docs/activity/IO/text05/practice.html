@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [5] SPI</li>
+<li>学習項目: 学習項目: [4] Bluetooth</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,14 +20,14 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 70  分
+演習時間: 40  分
 </p>
 
 <br>
-<h2><a href="./page01.html">1. SPI とは</a></h2>
+<h2><a href="./page01.html">1. Bluetooth とは</a></h2>
 
 <p>
-演習無し
+演習なし
 </p>
 
 <br>
@@ -35,7 +35,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-1 (個人PC、70分):</b> Arduino UNO から SPI 経由で音声合成LSIにデータを送信し、任意の音声を出力をしてみましょう。
+<input type="checkbox"><b>演習 4-1 (個人PC、20分):</b> Arduino UNO から Bluetooth 経由でタブレットやスマートフォンなどのモバイル端末に文字列を送ってみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -44,192 +44,33 @@
 <div class="info">
 <b>仕様:</b>
 <p>
-(LSI側)
+(1) Bluetooth 機器として「ＲＮ－４２使用Ｂｌｕｅｔｏｏｔｈ無線モジュール評価キット」を使用する。
 </p>
 <p>
-(1) 「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する。
+※ 動作電圧は 3.3 V なので<b>Arduino UNO の3.3V出力ピンとつなげること</b>(5V 出力につなげると壊れる)
 </p>
 <p>
-(2) 5V 駆動とする。
+(2) プロファイルは SPP を使用する。
 </p>
 <p>
-(3) オーディオ出力(AOUT)に圧電スピーカーを直結する。
+(3) モバイル端末はファシリテーターが用意する。
 </p>
 <p>
-(4) 通信モード(SMOD0,SMOD1)は「SPI (MODE0)」、動作モード(PMOD0,PMOD1)は「セーフモード」とする。
-</p>
-<p>
-(Arduino側)
-</p>
-<p>
-(5) SPI の設定はビットオーダー「MSBFIRST」、クロック「SPI_CLOCK_DIV16 (= 1 MHz ※)」、通信モード「SPI_MODE0」とする。
-</p>
-<p>
-※ Arduino UNO のシステムクロックは 16 MHz なので 16 で割る(DIVide 16MHz by 16 = 1MHz)と丁度1MHzになる
-</p>
-<p>
-(6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
-その他 MOSI = 11、MISO = 12、SCK = 13。
-</p>
-<p>
-(6) 適当な音声( 1 秒程度)を出力する。
-</p>
-<p>
-(7) 100ミリ秒間隔を空けて音声出力を繰り返す。
+(4) 100ミリ秒毎に Arduino UNO 側からモバイル端末側へ数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)。
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>以下のピン配置に従って回路を組んで下さい。
-</p>
-
-<table>
-<tr><th>ピン</th><th>名称</th><th>説明</th></tr>
-
-<tr>
-<td class="center">1-3</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-<tr>
-<td class="center">4</td>
-<td class="center">SMOD0</td>
-<td rowspan="2"> 通信モードの設定。両方 LOW にすると SPI(MODE0) になる</td>
-</tr>
-<tr>
-<td class="center">5</td>
-<td class="center">SMOD1</td>
-</tr>
-
-<tr>
-<td class="center">6</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-<tr>
-<td class="center">7</td>
-<td class="center">VCC</td>
-<td class="center">5V 接続</td>
-</tr>
-
-
-<tr>
-<td class="center">8</td>
-<td class="center">GND</td>
-<td class="center">-</td>
-</tr>
-
-
-<tr>
-<td class="center">9-11</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-<tr>
-<td class="center">12</td>
-<td class="center">AOUT</td>
-<td class="center">スピーカー接続</td>
-</tr>
-
-
-<tr>
-<td class="center">13</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-
-<tr>
-<td class="center">14</td>
-<td class="center">PMOD0</td>
-<td rowspan="2"> 動作モードの設定。PMOD0 を LOW、PMOD1 をHIGH にするとセーフモードになる</td>
-</tr>
-<tr>
-<td class="center">15</td>
-<td class="center">PMOD1</td>
-</tr>
-
-<tr>
-<td class="center">16</td>
-<td class="center"><span class="overline">SS</span></td>
-<td rowspan="4"class="center" > <b>SPI 接続用ピン</b> </td>
-</tr>
-<tr>
-<td class="center">17</td>
-<td class="center">MOSI</td>
-</tr>
-<tr>
-<td class="center">18</td>
-<td class="center">MISO</td>
-</tr>
-<tr>
-<td class="center">19</td>
-<td class="center">SCK</td>
-</tr>
-
-<tr>
-<td class="center">20</td>
-<td class="center">VCC</td>
-<td class="center">5V 接続</td>
-</tr>
-
-
-<tr>
-<td class="center">21</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-<tr>
-<td class="center">22</td>
-<td class="center">GND</td>
-<td class="center">-</td>
-</tr>
-
-
-<tr>
-<td class="center">23-28</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
-</tr>
-
-</table>
-
-<p>
+<span class="olradio"><input type="radio" name="p2"></span>データシートや Web 等で回路図を調べて回路を組んで下さい。
+<br>
 <span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
+<span class="olradio"><input type="radio" name="p2"></span><a href="../text02/practice.html">演習2-1</a>で使用したプログラムをコピーし、setup関数を修正してから Arduino UNO に転送して下さい。
 </p>
 <p>
-※1 setup の中で SPI の初期設定を行う。
+　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
 </p>
 <p>
-　ビットオーダー: SPI.setBitOrder(MSBFIRST)
-<br>
-　クロック: SPI.setClockDivider(SPI_CLOCK_DIV16)
-<br>
-　通信モード: SPI.setDataMode(SPI_MODE0)
-</p>
-<p>
-　以上の設定をしたら SPI.begin() で SPI 通信を開始する。
-<br>
-　なお初期設定方法は現在は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で以上の古い関数を使う。
-</p>
-<p>
-※2 今回は接続機器が 1 台しか無いので setup の中で <span class="overline">SS</span>ピンを予め LOW にしておく。
-<br>
-なお LOW にしたら 1000 ミリ秒程度 delay を入れること。
-</p>
-<p>
-※3 文字列は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
-</p>
-<p>
-※4 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>モバイル端末との通信を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
 <br>
@@ -242,8 +83,46 @@
 
 <br>
 <p>
-演習無し
+<input type="checkbox"><b>演習 4-2 (個人PC、20分):</b> Arduino UNO を Bluetooth 経由でモバイル端末から制御してみましょう。
 </p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>仕様は以下の通りです。
+</p>
+<div class="info">
+<b>仕様:</b>
+<p>
+<p>
+(1) 回路は演習4-1とほぼ同じだが Arduino UNO の内蔵 LED (GPIO 13 番ピン) を使用する。
+</p>
+<p>
+(2) プロファイルは SPP を使用する。
+</p>
+<p>
+(3) モバイル端末から文字 'a' が送られたら内蔵 LED を点灯する。
+</p>
+<p>
+(4) モバイル端末から文字 'b' が送られたら内蔵 LED を消灯する。
+</p>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>仕様に従って回路を修正して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span><a href="../text02/practice.html">演習2-2</a>で使用したプログラムをコピーし、setup関数を修正してから Arduino UNO に転送して下さい。
+</p>
+<p>
+　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>モバイル端末との通信を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
+</p>
+</div>
 
 <script>PreNext(4,3)</script>
 </body>

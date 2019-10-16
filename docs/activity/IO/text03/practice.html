@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [3] DAC と ADC</li>
+<li>学習項目: [3] ADC</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,97 +24,42 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. DAC と ADC とは</a></h2>
+<h2><a href="./page01.html">1. ADC とは</a></h2>
 
 <p>
 演習なし
 </p>
 
 <br>
-<h2><a href="./page02.html">2. 出力</a></h2>
+<h2><a href="./page02.html">2. 入力</a></h2>
 
-<br>
-<p>
-<input type="checkbox"><b>演習 3-1 (個人PC、20分):</b> Arduino UNO の アナログ出力ピンから出力される電圧を測定してみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
-</p>
-<div class="info">
-<b>仕様:</b>
-<p>
-(1) 任意のアナログ出力ピン(※) → 適当な抵抗 → GND とつなぐ。
-</p>
-<p>
-(2) 2000ミリ秒毎に 0V → 2.5V → 5V → 0V → 2.5V → … と出力値を変える。
-</p>
-<p>
-　※ 実は Arduino UNO には DAC が内蔵されていないためアナログ出力ピンはありません。
-<br>
-　その代わり GPIO の 3、5、6、9、10、11 ピンから PWM を使って擬似アナログ出力を得られます。
-<br>
-　PWM の周波数は5、6ピンが 980 Hz、その他は 490 Hzです。
-</p>
-</div>
-<p>
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>仕様に従って回路を組んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>抵抗の両端にかかっている電圧を測定して正しく動作しているか確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
+<pre>
+(注意)  pickit4の出力は 3.3V
 
-<br>
-<h2><a href="./page03.html">3. 入力</a></h2>
+可変抵抗をアナログ入力ピンに繋いで電圧とADCの変換値の対応を調べる
 
-<br>
-<p>
-<input type="checkbox"><b>演習 3-2 (個人PC、20分):</b> Arduino UNO のアナログ入力ピンに温度センサをつないで温度を測定してみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>仕様は以下の通りです。
-</p>
-<div class="info">
-<b>仕様:</b>
-<p>
-(1) 任意のアナログ入力ピンに温度センサ(lm61ciz)を接続する。
-</p>
-<p>
-(2) Arduino UNO に入力されている電圧(をmap関数を使って予測した値※)、及び現在の室温(をmap関数を使って予測した値)をシリアルモニタ(虫めがねボタン)に 100 ミリ秒おきに出力する。
-</p>
-<p>
-※ VsとGNDの間が正確に5Vとは限らないのでVsとGNDの間をテスターで測ってから map 関数で理論的な入力電圧値を求めて下さい。
-<br>
-   また理論的な入力電圧値が実際の入力電圧値に近いことも確認して下さい。
-</p>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>データシートや Web 等で回路図を調べて回路を組んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>プログラムを書いて Arduino UNO に転送して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>シリアルモニタに表示される温度が現在の室温と大体合っていることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>指で温度センサをつまんでシリアルモニタに表示される温度が変化することを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
+0V → ?
+1V → ?
+2V → ?
+3.3V → ?
 
-<script>PreNext(4,3)</script>
+ANSELx ・・・ 使用するピンを1(アナログ)にする
+TRISx ・・使用するピンを1(出力)にする
+
+ADCON0 = 0b 0 xxxxx 0 1 ・・・ ADC CONTROL REGISTER 0, p119
+ADCON1 = 0b 1 000 00 00 ・・・ ADC CONTROL REGISTER 1, p120
+ADCON2 = 0b 0000 0000 ・・・ ADC CONTROL REGISTER 2, p121
+
+アクィジョンタイム（コンデンサの充電待ち時間）は __delay_us(20) くらい
+
+ADCON0bits.GO_nDONE = 1; で ADC 開始
+while (ADCON0bits.GO_nDONE) continue; で終了待ち
+
+ADRESH ・・・ ADC RESULT REGISTER HIGH, p122
+ADRESL ・・・ ADC RESULT REGISTER LOW, p122
+
+</pre>
+
+<script>PreNext(3,2)</script>
 </body>
 </html>

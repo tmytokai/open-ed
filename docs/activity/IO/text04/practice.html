@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: 学習項目: [4] Bluetooth</li>
+<li>学習項目: [4] PWM</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,7 +24,7 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. Bluetooth とは</a></h2>
+<h2><a href="./page01.html">1. PWM とは</a></h2>
 
 <p>
 演習なし
@@ -33,97 +33,58 @@
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
-<br>
-<p>
-<input type="checkbox"><b>演習 4-1 (個人PC、20分):</b> Arduino UNO から Bluetooth 経由でタブレットやスマートフォンなどのモバイル端末に文字列を送ってみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
-</p>
-<div class="info">
-<b>仕様:</b>
-<p>
-(1) Bluetooth 機器として「ＲＮ－４２使用Ｂｌｕｅｔｏｏｔｈ無線モジュール評価キット」を使用する。
-</p>
-<p>
-※ 動作電圧は 3.3 V なので<b>Arduino UNO の3.3V出力ピンとつなげること</b>(5V 出力につなげると壊れる)
-</p>
-<p>
-(2) プロファイルは SPP を使用する。
-</p>
-<p>
-(3) モバイル端末はファシリテーターが用意する。
-</p>
-<p>
-(4) 100ミリ秒毎に Arduino UNO 側からモバイル端末側へ数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)。
-</p>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>データシートや Web 等で回路図を調べて回路を組んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span><a href="../text02/practice.html">演習2-1</a>で使用したプログラムをコピーし、setup関数を修正してから Arduino UNO に転送して下さい。
-</p>
-<p>
-　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>モバイル端末との通信を確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
+<pre>
+T2CON = 0b 0 0000 1 xx  ・・・ Timer2 Control Register p153
 
-<br>
-<h2><a href="./page03.html">3. 入力</a></h2>
+PWMxCON = 0b 1 1 0 0 0000 ・・・PWMx Control Register p213
 
-<br>
-<p>
-<input type="checkbox"><b>演習 4-2 (個人PC、20分):</b> Arduino UNO を Bluetooth 経由でモバイル端末から制御してみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>仕様は以下の通りです。
-</p>
-<div class="info">
-<b>仕様:</b>
-<p>
-<p>
-(1) 回路は演習4-1とほぼ同じだが Arduino UNO の内蔵 LED (GPIO 13 番ピン) を使用する。
-</p>
-<p>
-(2) プロファイルは SPP を使用する。
-</p>
-<p>
-(3) モバイル端末から文字 'a' が送られたら内蔵 LED を点灯する。
-</p>
-<p>
-(4) モバイル端末から文字 'b' が送られたら内蔵 LED を消灯する。
-</p>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>仕様に従って回路を修正して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span><a href="../text02/practice.html">演習2-2</a>で使用したプログラムをコピーし、setup関数を修正してから Arduino UNO に転送して下さい。
-</p>
-<p>
-　(注意) Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出ます。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>モバイル端末との通信を確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
+PWM周期とPWM幅の計算式 ・・・ p210
 
-<script>PreNext(4,3)</script>
+PWMxDCH ・・・ PWM DUTY CYCLE HIGH BITS p214
+PWMxDCL ・・・ PWM DUTY CYCLE LOW BITS p214
+PR2 ・・・ Timer2 Period Register
+
+FOSC ・・・ Frequency of Oscillator マイコンの動作周波数のこと
+TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC 
+
+</pre>
+
+<pre>
+(注意)  pickit4の出力は 3.3V
+
+(1)
+
+PR2 = 124
+PWMxDCH:PWMxDCL<7:6> =  0b 01111101 11 = 375
+
+の時の PWM周期とPWM幅の理論値を計算 → 実際にオシロスコープで確認する
+</pre>
+
+<pre>
+
+(2)
+
+圧電スピーカから「ド・レ・ミ」と鳴らす(3秒毎にチェンジ)
+
+FOSC = 8000000
+prescale = 64
+
+        printf("O3C = 131 Hz\r\n");
+
+        // PWM周期 = 131 Hz = 7.63 ミリ秒
+        // パルス幅は PWM 周期の半分とする
+
+        printf("O3E = 165 Hz\r\n");
+
+        // PWM周期 = 165 Hz = 6.06 ミリ秒
+        // パルス幅は PWM 周期の半分とする
+
+        printf("O3G = 196 Hz\r\n");
+
+        // PWM 周期 = 196 Hz = 5.10 ミリ秒
+        // パルス幅は PWM 周期の半分とする
+</pre>
+
+<script>PreNext(3,2)</script>
 </body>
 </html>

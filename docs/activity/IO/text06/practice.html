@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [6] I2C</li>
+<li>学習項目: [5] SPI</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,7 +24,7 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. I2C とは</a></h2>
+<h2><a href="./page01.html">1. SPI とは</a></h2>
 
 <p>
 演習無し
@@ -33,186 +33,217 @@
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
+<br>
 <p>
-演習無し
+<input type="checkbox"><b>演習 5-1 (個人PC、70分):</b> Arduino UNO から SPI 経由で音声合成LSIにデータを送信し、任意の音声を出力をしてみましょう。
 </p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
+</p>
+<div class="info">
+<b>仕様:</b>
+<p>
+(LSI側)
+</p>
+<p>
+(1) 「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する。
+</p>
+<p>
+(2) 5V 駆動とする。
+</p>
+<p>
+(3) オーディオ出力(AOUT)に圧電スピーカーを直結する。
+</p>
+<p>
+(4) 通信モード(SMOD0,SMOD1)は「SPI (MODE0)」、動作モード(PMOD0,PMOD1)は「セーフモード」とする。
+</p>
+<p>
+(Arduino側)
+</p>
+<p>
+(5) SPI の設定はビットオーダー「MSBFIRST」、クロック「SPI_CLOCK_DIV16 (= 1 MHz ※)」、通信モード「SPI_MODE0」とする。
+</p>
+<p>
+※ Arduino UNO のシステムクロックは 16 MHz なので 16 で割る(DIVide 16MHz by 16 = 1MHz)と丁度1MHzになる
+</p>
+<p>
+(6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
+その他 MOSI = 11、MISO = 12、SCK = 13。
+</p>
+<p>
+(6) 適当な音声( 1 秒程度)を出力する。
+</p>
+<p>
+(7) 100ミリ秒間隔を空けて音声出力を繰り返す。
+</p>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>以下のピン配置に従って回路を組んで下さい。
+</p>
+
+<table>
+<tr><th>ピン</th><th>名称</th><th>説明</th></tr>
+
+<tr>
+<td class="center">1-3</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">4</td>
+<td class="center">SMOD0</td>
+<td rowspan="2"> 通信モードの設定。両方 LOW にすると SPI(MODE0) になる</td>
+</tr>
+<tr>
+<td class="center">5</td>
+<td class="center">SMOD1</td>
+</tr>
+
+<tr>
+<td class="center">6</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">7</td>
+<td class="center">VCC</td>
+<td class="center">5V 接続</td>
+</tr>
+
+
+<tr>
+<td class="center">8</td>
+<td class="center">GND</td>
+<td class="center">-</td>
+</tr>
+
+
+<tr>
+<td class="center">9-11</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">12</td>
+<td class="center">AOUT</td>
+<td class="center">スピーカー接続</td>
+</tr>
+
+
+<tr>
+<td class="center">13</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+
+<tr>
+<td class="center">14</td>
+<td class="center">PMOD0</td>
+<td rowspan="2"> 動作モードの設定。PMOD0 を LOW、PMOD1 をHIGH にするとセーフモードになる</td>
+</tr>
+<tr>
+<td class="center">15</td>
+<td class="center">PMOD1</td>
+</tr>
+
+<tr>
+<td class="center">16</td>
+<td class="center"><span class="overline">SS</span></td>
+<td rowspan="4"class="center" > <b>SPI 接続用ピン</b> </td>
+</tr>
+<tr>
+<td class="center">17</td>
+<td class="center">MOSI</td>
+</tr>
+<tr>
+<td class="center">18</td>
+<td class="center">MISO</td>
+</tr>
+<tr>
+<td class="center">19</td>
+<td class="center">SCK</td>
+</tr>
+
+<tr>
+<td class="center">20</td>
+<td class="center">VCC</td>
+<td class="center">5V 接続</td>
+</tr>
+
+
+<tr>
+<td class="center">21</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+<tr>
+<td class="center">22</td>
+<td class="center">GND</td>
+<td class="center">-</td>
+</tr>
+
+
+<tr>
+<td class="center">23-28</td>
+<td class="center">略</td>
+<td class="center">フリー</td>
+</tr>
+
+</table>
+
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
+</p>
+<p>
+※1 setup の中で SPI の初期設定を行う。
+</p>
+<p>
+　ビットオーダー: SPI.setBitOrder(MSBFIRST)
+<br>
+　クロック: SPI.setClockDivider(SPI_CLOCK_DIV16)
+<br>
+　通信モード: SPI.setDataMode(SPI_MODE0)
+</p>
+<p>
+　以上の設定をしたら SPI.begin() で SPI 通信を開始する。
+<br>
+　なお初期設定方法は現在は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で以上の古い関数を使う。
+</p>
+<p>
+※2 今回は接続機器が 1 台しか無いので setup の中で <span class="overline">SS</span>ピンを予め LOW にしておく。
+<br>
+なお LOW にしたら 1000 ミリ秒程度 delay を入れること。
+</p>
+<p>
+※3 文字列は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
+</p>
+<p>
+※4 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
+</p>
+</div>
 
 <br>
 <h2><a href="./page03.html">3. 入力</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 6-1 (個人PC、70分):</b> Arduino UNO で I2C 経由で加速度センサからデータを受け取りましょう。
+演習無し
 </p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>仕様は以下の通りです。
-</p>
-<div class="info">
-<b>仕様:</b>
-<p>
-(センサ側)
-</p>
-<p>
-(1) 「３軸加速度センサモジュール　ＡＤＸＬ３４５」を I2C 経由で使用する。
-</p>
-<p>
-(2) 3.3V 駆動とする。 
-</p>
-<p>
-　※ 本来は電圧レベル変換モジュールを挟まないと壊れますが、今回は短時間なので Arduino の3.3V出力へ直に接続します。
-</p>
-<p>
-(3) デバイスのアドレスは「0x53」とする ( SDO/ALT ADRESS ピン = 12 ピンを接地する)。
-</p>
-
-<p>
-(Arduino側)
-</p>
-<p>
-(4) I2Cの設定で、サンプリングモードを「+-2G を 10bit(+512 〜 -512) で検出」にする。
-</p>
-<p>
-(5) Arduino 側の ピンは SDA = A4、SCL = A5 である。
-</p>
-<p>
-(6) 500ミリ秒間隔でサンプリングし、シリアルモニタ(虫めがねボタン)に結果を表示する。
-</p>
-<p>
-(7) 結果の加速度は double 型の数値とし、「[x方向の加速度, y方向の加速度, z方向の加速度],」の形式で画面に出力する(桁数は自由)
-</p>
-<p>
-(出力例) [0.0123, -1.0004, 0.0212],
-</p>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>データシート等を見ながら回路を組んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>プログラムを書いて Arduino UNO に転送して下さい。
-今回のプログラム内で利用するＡＤＸＬ３４５のレジスタは以下の8つだけです(その他のレジスタはデータシートの25ページ目を参照して下さい)。
-</p>
-<table>
-<tr><th>レジスタ名</th><th>アドレス</th><th>サイズ</th><th>説明</th></tr>
-
-<tr>
-<td class="center">POWER_CTL</td>
-<td class="center">0x2D</td>
-<td class="center">8 bit</td>
-<td>(読み書き可) 動作モード切り替え</td>
-</tr>
-
-<tr>
-<td class="center">DATA_FORMAT</td>
-<td class="center">0x31</td>
-<td class="center">8 bit</td>
-<td>(読み書き可) 各軸の出力データの形式を設定する</td>
-</tr>
-
-<tr>
-<td class="center">DATAX0</td>
-<td class="center">0x32</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) X軸の出力データの最下位バイト</td>
-</tr>
-
-<tr>
-<td class="center">DATAX1</td>
-<td class="center">0x33</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) X軸の出力データの最上位バイト</td>
-</tr>
-
-<tr>
-<td class="center">DATAY0</td>
-<td class="center">0x34</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) Y軸の出力データの最下位バイト</td>
-</tr>
-
-<tr>
-<td class="center">DATAY1</td>
-<td class="center">0x35</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) Y軸の出力データの最上位バイト</td>
-</tr>
-
-<tr>
-<td class="center">DATAZ0</td>
-<td class="center">0x36</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) Z軸の出力データの最下位バイト</td>
-</tr>
-
-<tr>
-<td class="center">DATAZ1</td>
-<td class="center">0x37</td>
-<td class="center">8 bit</td>
-<td>(読み出し専用) Z軸の出力データの最上位バイト</td>
-</tr>
-
-</table>
-
-
-<p>
-(ＡＤＸＬ３４５のレジスタに値を書き込む方法)
-</p>
-<pre>
-Wire.beginTransmission( 0x53 ); // 0x53 はデバイスのアドレス
-Wire.write( 値を書き込むレジスタのアドレス ); 
-Wire.write( レジスタに書き込む値 );   
-Wire.endTransmission();
-</pre>
-
-<p>
-(ＡＤＸＬ３４５の複数のレジスタから値を一度で読み込む方法)
-</p>
-<pre>
-byte data[読み込むバイト数];
-
-Wire.beginTransmission(0x53); // 0x53 はデバイスのアドレス
-Wire.write( 値の読み込みを開始するレジスタのアドレス ); 
-Wire.endTransmission(); 
-     
-Wire.requestFrom( 0x53, 読み込むバイト数 ); 
-
-for( int i=0; i < 読み込むバイト数; ++i){ 
-  if( Wire.available() > 0 ){
-    data[i] = Wire.read(); 
-  }
-}
-</pre>
-
-<p>
-※1 setup の中で DATA_FORMAT レジスタに 0x00 を書き込むとサンプリングモードが「+-2G を 10bit(+512 〜 -512) で検出)」になります(詳細はデータシートの28P目参照)。
-</p>
-<p>
-※2 それ以外のレジスタ値はデフォルトのままにします。
-</p>
-<p>
-※3 setup の中で POWER_CTL レジスタに「0x08」を書き込むと測定を開始します(詳細はデータシートの27P目参照)。
-</p>
-<p>
-※4 loopの中でＡＤＸＬ３４５の DATAxx レジスタ(0x32〜0x37)の値を読み込む時は<b>「char 型ではなくて byte 型の配列を使用して下さい」</b>(そうしないと正しい値が取得できない)。
-</p>
-<p>
-※5 loopの中でサンプリング値を加速度に変換してから虫眼鏡に表示して下さい。サンプリング値が -512 の時は -2G、+512 の時は +2G です。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>動作確認して下さい。
-</p>
-<p>
-※1 加速度の検出方向はデータシートのP34に書いてあります。
-<br>
-※2 <b>次回の演習でプログラムを再利用するので、画面出力が仕様の(7)に沿っていることを確認して下さい</b>
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
 
 <script>PreNext(4,3)</script>
 </body>
