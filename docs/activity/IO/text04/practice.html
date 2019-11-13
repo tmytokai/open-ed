@@ -41,18 +41,18 @@
 
 レジスタ設定:
 
-CCP1SEL = x ・・・ Pin Selection bit  (118p, APFCON0 の bit0)
-CCPTMRS = 0x00 ・・・ デフォルト(Timer2使用)  CCP TIMERS CONTROL REGISTER (206p)
+CCP1SEL = x ・・・ Pin Selection bit, APFCON0 の 0 ビット目, 118p
+CCPTMRS = 0x00 ・・・ デフォルト(Timer2使用)  CCP TIMERS CONTROL REGISTER, 206p
 
-TxCON = 0b 0 0000 1 xx  ・・・ TIMER2/TIMER4/TIMER6 CONTROL REGISTERS (p191)
+TxCON = 0b 0 0000 1 xx  ・・・ TIMER2/TIMER4/TIMER6 CONTROL REGISTERS, p191
 
-CCPxCON = 0b 00 00 xxxx ・・・CCPX CONTROL REGISTER (p204)
+CCPxCON = 0b 00 00 xxxx ・・・CCPX CONTROL REGISTER, p204
 
 PWM周期とパルス幅の計算式:  p212
 
-PR2 ・・・ Timer2 Period Register (p30)
-CCPRxL・・・Capture/Compare/PWM Register x Low Byte (p208)
-DCxB1, DCxB0 ・・・CCPxCON の 5,4 ビット (p204)
+PR2 ・・・ Timer2 Period Register, p30
+CCPRxL・・・Capture/Compare/PWM Register x Low Byte, p208
+DCxB1, DCxB0 ・・・CCPxCON の 5,4 ビット目, p204
 
 FOSC ・・・ Frequency of Oscillator マイコンの動作周波数のこと
 TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC 
@@ -62,9 +62,12 @@ TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC
 <pre>
 (注意)  pickit4の出力は 3.3V
 
-(1)
+(課題 1)
 
 PR2 = 249
+CCPR1L = 125 = 0b01111101
+DC1B1 = 0
+DC1B0 = 0
 CCPR1L:DC1B1:DC1B0 = 0b 01111101 0 0 = 500
 
 の時の PWM周期とPWM幅の理論値を計算 → 実際にオシロスコープで確認する
@@ -72,24 +75,30 @@ CCPR1L:DC1B1:DC1B0 = 0b 01111101 0 0 = 500
 
 <pre>
 
-(2)
+(課題 2) 圧電スピーカから「ド・ミ・ソ」と鳴らす(3秒毎にチェンジ)
 
-圧電スピーカから「ド・レ・ミ」と鳴らす(3秒毎にチェンジ)
+・PWM 周期から PR2 を求める式
 
-        printf("O3C = 131 Hz\r\n");
+PWM 周期 = (PR2+1)*4*TOSC*prescale  より
+PR2 = 周期/(4*TOSC*prescale)-1 
 
-        // PWM周期 = 131 Hz = 7.63 ミリ秒
-        // パルス幅は PWM 周期の半分とする
+・パルス幅から CCPR1L:DC1B1:DC1B0 を求める式
 
-        printf("O3E = 165 Hz\r\n");
+パルス幅 = CCPR1L:DC1B1:DC1B0 * TOSC * prescale より
+CCPR1L:DC1B1:DC1B0 = 幅/(TOSC*prescale) 
 
-        // PWM周期 = 165 Hz = 6.06 ミリ秒
-        // パルス幅は PWM 周期の半分とする
+・ド(C4) = 261.63 Hz
+PWM周期 = 1/261.63 = 0.00382 秒 = 3.82 ミリ秒
+パルス幅 = PWM 周期の半分
+         
+・ミ(E4) = 329.63Hz 
+PWM周期 = 1/329.63 = 0.00303 秒 = 3.03 ミリ秒
+パルス幅 = PWM 周期の半分
 
-        printf("O3G = 196 Hz\r\n");
+・ソ(G4) = 392.00 Hz 
+PWM周期 = 1/392.00 = 0.00255 秒 = 2.55 ミリ秒
+パルス幅 = PWM 周期の半分
 
-        // PWM 周期 = 196 Hz = 5.10 ミリ秒
-        // パルス幅は PWM 周期の半分とする
 </pre>
 
 <script>PreNext(3,2)</script>
