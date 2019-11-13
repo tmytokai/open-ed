@@ -36,27 +36,33 @@
 <pre>
 (注意)  pickit4の出力は 3.3V
 
-可変抵抗をアナログ入力ピンに繋いで電圧とADCの変換値の対応を調べる
+課題: 可変抵抗をアナログ入力ピンに繋いで電圧とADCの変換値の対応を調べる
 
 0V → ?
 1V → ?
 2V → ?
 3.3V → ?
 
-ANSELx ・・・ 使用するピンを1(アナログ)にする
-TRISx ・・使用するピンを1(出力)にする
+使用するピン: RA1/AN1 (18ピン)をアナログ入力とする
 
-ADCON0 = 0b 0 xxxxx 0 1 ・・・ ADC CONTROL REGISTER 0, p119
-ADCON1 = 0b 1 000 00 00 ・・・ ADC CONTROL REGISTER 1, p120
-ADCON2 = 0b 0000 0000 ・・・ ADC CONTROL REGISTER 2, p121
+レジスタ設定:
+
+TRISx ・・使用するピンを1(出力モード)にする※ (31p) 
+ANSELx ・・・ 使用するピンを1(アナログ)にする (33p)
+※ アナログ入力だがADCを使う時は出力モードにする(138p, the I/O pin should be configured for analog by setting the associated TRIS and ANSEL bits.)
+
+ADCON0 = 0b 0 xxxxx 0 1 ・・・ A/D CONTROL REGISTER 0, p143
+ADCON1 = 0b x 000 00 00 ・・・ A/D CONTROL REGISTER 1, p144
 
 アクィジョンタイム（コンデンサの充電待ち時間）は __delay_us(20) くらい
+
+ADCの開始方法:
 
 ADCON0bits.GO_nDONE = 1; で ADC 開始
 while (ADCON0bits.GO_nDONE) continue; で終了待ち
 
-ADRESH ・・・ ADC RESULT REGISTER HIGH, p122
-ADRESL ・・・ ADC RESULT REGISTER LOW, p122
+ADRESH ・・・ ADC RESULT REGISTER HIGH, p145(ADFM = 0), p146(ADFM = 1) 
+ADRESL ・・・ ADC RESULT REGISTER LOW,  p145(ADFM = 0), p146(ADFM = 1) 
 
 </pre>
 

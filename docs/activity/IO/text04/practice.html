@@ -34,15 +34,25 @@
 <h2><a href="./page02.html">2. 出力</a></h2>
 
 <pre>
-T2CON = 0b 0 0000 1 xx  ・・・ Timer2 Control Register p153
 
-PWMxCON = 0b 1 1 0 0 0000 ・・・PWMx Control Register p213
+プレスケール: 64 倍
 
-PWM周期とPWM幅の計算式 ・・・ p210
+使用するピン: RB3/CCP1 (9 pin) を pwm 出力(CCP1)とする
 
-PWMxDCH ・・・ PWM DUTY CYCLE HIGH BITS p214
-PWMxDCL ・・・ PWM DUTY CYCLE LOW BITS p214
-PR2 ・・・ Timer2 Period Register
+レジスタ設定:
+
+CCP1SEL = x ・・・ Pin Selection bit  (118p, APFCON0 の bit0)
+CCPTMRS = 0x00 ・・・ デフォルト(Timer2使用)  CCP TIMERS CONTROL REGISTER (206p)
+
+TxCON = 0b 0 0000 1 xx  ・・・ TIMER2/TIMER4/TIMER6 CONTROL REGISTERS (p191)
+
+CCPxCON = 0b 00 00 xxxx ・・・CCPX CONTROL REGISTER (p204)
+
+PWM周期とパルス幅の計算式:  p212
+
+PR2 ・・・ Timer2 Period Register (p30)
+CCPRxL・・・Capture/Compare/PWM Register x Low Byte (p208)
+DCxB1, DCxB0 ・・・CCPxCON の 5,4 ビット (p204)
 
 FOSC ・・・ Frequency of Oscillator マイコンの動作周波数のこと
 TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC 
@@ -54,8 +64,8 @@ TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC
 
 (1)
 
-PR2 = 124
-PWMxDCH:PWMxDCL<7:6> =  0b 01111101 11 = 375
+PR2 = 249
+CCPR1L:DC1B1:DC1B0 = 0b 01111101 0 0 = 500
 
 の時の PWM周期とPWM幅の理論値を計算 → 実際にオシロスコープで確認する
 </pre>
@@ -65,9 +75,6 @@ PWMxDCH:PWMxDCL<7:6> =  0b 01111101 11 = 375
 (2)
 
 圧電スピーカから「ド・レ・ミ」と鳴らす(3秒毎にチェンジ)
-
-FOSC = 8000000
-prescale = 64
 
         printf("O3C = 131 Hz\r\n");
 
