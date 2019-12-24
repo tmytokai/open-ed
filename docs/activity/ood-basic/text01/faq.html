@@ -121,6 +121,68 @@ if( Greenfoot.isKeyDown( "right" ) ){
 
 <br>
 <h3>
+Q. 実行中にキャラクターの画像を変更したい 
+</h3>
+
+<p>
+A. コンストラクタで画像をロードしておいて、actメソッドの中で setImage で画像を変更できます。
+</p>
+
+<div class="info">
+<pre class="wrap">
+右を押したら images フォルダ内にある neko.png に画像を変更する例
+
+public class hoge extends Actor 
+{ 
+    GreenfootImage img  = null; 
+
+    public hoge() 
+    { 
+        img = new GreenfootImage( "images/neko.png" ); 
+    } 
+
+    public void act()  
+    { 
+        if( Greenfoot.isKeyDown( "right" ) ){ 
+            setImage(img); 
+        } 
+    }     
+} 
+</pre>
+</div>
+
+<br>
+<div class="info">
+<pre class="wrap">
+連想配列を使って左を押すと left.png、右を押すと images フォルダ内にある right.png に切り替える例
+
+import java.util.HashMap; 
+
+public class hoge extends Actor 
+{ 
+    HashMap&lt;String,GreenfootImage&gt; imgmap = new HashMap&lt;String,GreenfootImage&gt;(); 
+
+    public hoge() 
+    { 
+        imgmap.put("left",new GreenfootImage( "images/left.png" )); 
+        imgmap.put("right",new GreenfootImage( "images/right.png" )); 
+    } 
+
+    public void act()  
+    { 
+        if( Greenfoot.isKeyDown( "left" ) ){ 
+            setImage(imgmap.get("left")); 
+        } 
+        else if( Greenfoot.isKeyDown( "right" ) ){ 
+            setImage(imgmap.get("right")); 
+        } 
+    }     
+}
+</pre>
+</div>
+
+<br>
+<h3>
 Q. 一時停止(スリープ)したい
 </h3>
 
