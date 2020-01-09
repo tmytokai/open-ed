@@ -27,18 +27,15 @@
 <h2><a href="./page01.html">1. 例外処理とは</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 2-1 (個人、10分):</b> テキストのソース1を実行して例外処理を試してみましょう。
+<input type="checkbox"><b>演習 2-1 (個人、10分):</b> テキストの<a href="./page01.html">ソース1</a>を実行して例外処理を試してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 新規のJavaプロジェクトを作ります。プロジェクト名は「OBSC-2-1」とします。
+<span class="olradio"><input type="radio" name="p1"></span> 新規のJavaファイルを作ります。ファイル名は「OBSC_2_1.java」とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Main クラス(main メソッドはページ1の<a href="./page01.html">ソース1</a>)を作成します。
-<p>
-※ そのままではエラーがあって実行できません。良い機会ですので eclipse の「クイック・フィックス」機能を使ってそのエラーを解決してみましょう。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 実行します。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./page01.html">ソース1</a>をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>
@@ -52,9 +49,9 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 新規のJavaプロジェクトを作ります。プロジェクト名は「OBSC-2-2」とします。
+<span class="olradio"><input type="radio" name="p2"></span> 「OBSC_2_1.java」を「OBSC_2_2.java」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Main クラスを作成し、演習 2-1 の Main クラスの内容を丸ごとコピーします。
+<span class="olradio"><input type="radio" name="p2"></span> クラス名を OBSC_2_2 に変更します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> try の hoge.txt をオープンしている行の「下」に以下の 2 行を追加します。
 </p>
@@ -63,7 +60,7 @@ FileReader in2 = new FileReader( "hoge2.txt" );
 FileReader in3 = new FileReader( "hoge3.txt" ); 
 </pre>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> ここまでで一旦実行確認します。
+<span class="olradio"><input type="radio" name="p2"></span> ここまでで一旦コンパイルと実行をして結果を確認します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 実行フォルダに空の hoge.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
 <br>
@@ -79,13 +76,15 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 <h2><a href="./page02.html">2. 標準例外</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 2-3 (個人、30分):</b> ゼロ除算例外を試してみましょう。
+<input type="checkbox"><b>演習 2-3 (個人、30分):</b> 算術例外を試してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 新規のJavaプロジェクトを作ります。プロジェクト名は「OBSC-2-3」とします。
+<span class="olradio"><input type="radio" name="p3"></span> 「OBSC_2_2.java」を「OBSC_2_3.java」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Main クラスを作成し、演習 2-2 の Main クラスの内容を丸ごとコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> クラス名を OBSC_2_3 に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> hoge.txt を消します
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> try の hoge.txt をオープンしている行の「上」に、以下の処理を追加します。
 </p>
@@ -96,9 +95,9 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 </ul>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> FileNotFoundException の catch 処理の下に ArithmeticException の catch 処理を追加します。
+<span class="olradio"><input type="radio" name="p3"></span> IOException の catch 処理の下に ArithmeticException の catch 処理を追加します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 実行し、0 を入力したらゼロ除算例外、0以外を入力したら ファイル・ノットファウンド例外が起きることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルと実行をし、0 を入力したら算術例外、0 以外を入力したら入出力例外が起きることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>
@@ -110,15 +109,15 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 <h2><a href="./page03.html">3. 例外の自作</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 2-4 (個人、30分):</b> 例外を自作してみましょう。 ※ 難しい問題なので飛ばしても良いです。余裕がある人は演習を行って下さい。
+<input type="checkbox"><b>演習 2-4 (個人、30分):</b> 例外を自作してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 新規のJavaプロジェクトを作ります。プロジェクト名は「OBSC-2-4」とします。
+<span class="olradio"><input type="radio" name="p4"></span> 「MyException.java」を作成して<a href="./page03.html">ソース1</a>をコピーし、コンパイルします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> Main クラスを作成し、演習 2-3 の Main クラスの内容を丸ごとコピーします。
+<span class="olradio"><input type="radio" name="p4"></span> 「OBSC_2_3.java」を「OBSC_2_4.java」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> MyException クラスを作成してソース1をコピーします。
+<span class="olradio"><input type="radio" name="p4"></span> クラス名を OBSC_2_4 に変更します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> try の a に数字を入力している行の「下」に、以下の処理を追加します。
 </p>
@@ -131,7 +130,7 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> ArithmeticException の catch 処理の下に MyException の catch 処理を追加します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 実行し、3 を入力したら自作例外、0 を入力したらゼロ除算例外、それ以外を入力したら ファイル・ノットファウンド例外が起きることを確認して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 実行し、3 を入力したら自作例外、0 を入力したら算術例外、それ以外を入力したら 入出力例外が起きることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
 <br>

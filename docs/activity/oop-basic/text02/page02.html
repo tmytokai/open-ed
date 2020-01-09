@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前のページのソース 1 に出てきた FileNotFoundException クラスは Java に初めから備わっている例外クラスでしたが、これ以外にも Java には例外の種類に合わせて様々な例外クラスが用意されています。
+前のページのソース 1 に出てきた IOException クラスは Java に初めから備わっている例外クラスでしたが、これ以外にも Java には例外の種類に合わせて様々な例外クラスが用意されています。
 <br>
 Java に初めから備わっている例外クラス、あるいは例外処理そのものの事を<b>「標準例外」</b>と言います。
 </p>
@@ -33,8 +33,8 @@ Java に初めから備わっている例外クラス、あるいは例外処理
 
 <div class="info">
 <ul>
-<li>ファイル・ノットファウンド例外: ファイルが見つからない</li>
-<li>ゼロ除算例外: ゼロで数字を割ろうとした</li>
+<li>入出力例外: ファイル等の入出力に失敗した</li>
+<li>算術例外: ゼロで数字を割ろうとした等、演算に失敗した</li>
 <li>NULL ポインター例外: NULL ポインターにアクセスしようとした</li>
 </ul>
 </div>
@@ -45,8 +45,8 @@ Java では上の 3 つの標準例外は次の例外クラスに割当たって
 
 <div class="info">
 <ul>
-<li>ファイル・ノットファウンド例外 → FileNotFoundException</li>
-<li>ゼロ除算例外 → ArithmeticException</li>
+<li>入出力例外 → IOException</li>
+<li>算術例外 → ArithmeticException</li>
 <li>NULLポインター例外 → NullPointerException</li>
 </ul>
 </div>

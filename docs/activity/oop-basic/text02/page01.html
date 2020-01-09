@@ -78,17 +78,23 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース1:</b>
+<input type="checkbox"><b>ソース1: OBSC_2_1.java</b>
 
 <pre class="wrap">
-public static void main(String[] args) {
+import java.io.FileReader;
+import java.io.IOException;
+
+public class OBSC_2_1
+{
+  public static void main(String[] args) {
 
      try{ 
          FileReader in = new FileReader( "hoge.txt" ); 
      } 
-     catch( FileNotFoundException e ) { 
-         System.out.println( e.getMessage() ); 
-     } 
+     catch( IOException e ) { 
+         System.out.println( e ); 
+     }
+  }
 }
 </pre>
 
@@ -97,7 +103,7 @@ public static void main(String[] args) {
 <p>
 try の中で FileReader クラスのインスタンス in を作っていますが、これは C 言語で言うと File 構造体を定義して fopen() することに相当します。
 <br>
-また catchの () 内にある e は Java に初めから備わっている例外クラス(標準例外クラスと言います)の FileNotFoundException クラスのインスタンスで、e.getMessage() によってエラー内容を文字列で取得できます。
+また catchの () 内にある e は Java に初めから備わっている例外クラス(標準例外クラスと言います)の IOException クラスのインスタンスで、そのエラー内容を e をprintlnすることによって表示しています。
 <br>
 標準例外クラスについて詳しくは次のページで説明します。
 </p>
@@ -108,7 +114,7 @@ try の中で FileReader クラスのインスタンス in を作っています
 <input type="checkbox"><b>ソース1の実行結果: hoge.txt が存在しない場合</b>
 
 <pre class="wrap">
-hoge.txt (No such file or directory) 
+java.io.FileNotFoundException: hoge.txt (そのようなファイルやディレクトリはありません)
 </pre>
 
 </div>

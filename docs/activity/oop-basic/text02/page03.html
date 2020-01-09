@@ -56,13 +56,13 @@ public class MyException extends RuntimeException {
          if( 何か問題があったら ) throw new MyException();
      } 
      catch( MyException e ) { 
-         System.out.println( e.getMessage() ); 
+         System.out.println( e ); 
      } 
 </pre>
 </div>
 
 <p>
-これを実行して何か問題が生じたら「自作した例外です」と表示されます。
+これを実行して何か問題が生じたら「MyException: 自作した例外です」と表示されます。
 </p>
 
 <script>PreNext(3,3)</script>
