@@ -87,12 +87,102 @@ Q. 画像の大きさを変更したい
 </h3>
 
 <p>
-A. getImage().scale メソッドで幅と高さを変更できます。
-</p>
+A. 一回だけで良いなら getImage().scale メソッドで幅と高さを変更できます
 
 <div class="info">
 <pre class="wrap">
 getImage().scale( 120, 30 );
+</pre>
+</div>
+
+<p>
+ただし、次の様に act メソッドの中で繰り返し getImage().scale を呼び出すと画像が崩れて変になります。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b>失敗例: 画像が崩れる</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+import java.util.HashMap; 
+
+public class hoge extends Actor 
+{ 
+    private int width=50;
+    private int height= 50;
+
+    public hoge(){
+        getImage().scale( width,height );
+    }
+    
+    public void act() 
+    {
+        getImage().scale( width++,height++ );
+    } 
+}
+</pre>
+</div>
+
+<p>
+そこでコンストラクタで画像のバックアップを取ってから、次の様に幅と高さを変更します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b>成功例</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
+    private GreenfootImage img_bkup = null;
+    private int width=50;
+    private int height= 50;
+
+    public hoge(){
+        img_bkup = new GreenfootImage( getImage() );
+        getImage().scale( width,height );
+    }
+    
+    public void act() 
+    {
+        GreenfootImage img = new GreenfootImage(img_bkup);
+        img.scale( width++,height++ );
+        setImage(img);
+    }
+}
+</pre>
+</div>
+
+<p>
+なお次の様に setImage メソッドを呼んでから getImage().scale を呼ぶと当たり判定が変になるので気をつけて下さい → <a href="https://www.greenfoot.org/topics/56022/0">理由</a>
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b>失敗例: 当たり判定が変になる</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
+    private GreenfootImage img_bkup = null;
+    private int width=50;
+    private int height= 50;
+
+    public hoge(){
+        img_bkup = new GreenfootImage( getImage() );
+        getImage().scale( width,height );
+    }
+    
+    public void act() 
+    {
+        GreenfootImage img = new GreenfootImage(img_bkup);
+        setImage(img);
+        getImage().scale( width++,height++ );
+    }
+}
 </pre>
 </div>
 
@@ -116,8 +206,57 @@ if( Greenfoot.isKeyDown( "left" ) ){
 if( Greenfoot.isKeyDown( "right" ) ){
    setLocation( x+1,y );
 }
+if( Greenfoot.isKeyDown( "up" ) ){
+   setLocation( x,y-1 );
+}
+if( Greenfoot.isKeyDown( "down" ) ){
+   setLocation( x,y+1 );
+}
 </pre>
 </div>
+
+<p>
+ちなみに、左右移動時に画像の向きを反転させたい時はフラグを一つ用意して次の様にします。
+</p>
+
+<div class="info">
+<pre class="wrap">
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
+    private boolean movingleft = true; // 画像が右向きの場合は false をセット
+    
+    public void act() 
+    {
+        int x = getX();
+        int y = getY();
+        if( Greenfoot.isKeyDown( "left" ) ){
+            if( ! movingleft ){
+                movingleft = true;
+                getImage().mirrorHorizontally();
+            }
+            setLocation( x-1,y );
+        }
+        if( Greenfoot.isKeyDown( "right" ) ){
+            if( movingleft ){
+                movingleft = false;
+                getImage().mirrorHorizontally();
+            }
+            setLocation( x+1,y );
+        }
+        if( Greenfoot.isKeyDown( "up" ) ){
+            setLocation( x,y-1 );
+        }
+        if( Greenfoot.isKeyDown( "down" ) ){
+            setLocation( x,y+1 );
+        }
+    }   
+}
+</pre>
+</div>
+
 
 <br>
 <h3>
@@ -130,11 +269,13 @@ A. コンストラクタで画像をロードしておいて、actメソッド�
 
 <div class="info">
 <pre class="wrap">
-右を押したら images フォルダ内にある neko.png に画像を変更する例
+<b>右を押したら images フォルダ内にある neko.png に画像を変更する例</b>
+
+この例ではクラス名を hoge としているので適宜変更する
 
 public class hoge extends Actor 
 { 
-    GreenfootImage img  = null; 
+    private GreenfootImage img  = null; 
 
     public hoge() 
     { 
@@ -151,16 +292,21 @@ public class hoge extends Actor
 </pre>
 </div>
 
-<br>
+<p>
+ちなみに、連想配列を使うと複数の画像が簡単に切り替えられます
+</p>
+
 <div class="info">
 <pre class="wrap">
-連想配列を使って左を押すと left.png、右を押すと images フォルダ内にある right.png に切り替える例
+<b>連想配列を使って左を押すと left.png、右を押すと images フォルダ内にある right.png に切り替える例</b>
+
+この例ではクラス名を hoge としているので適宜変更する
 
 import java.util.HashMap; 
 
 public class hoge extends Actor 
 { 
-    HashMap&lt;String,GreenfootImage&gt; imgmap = new HashMap&lt;String,GreenfootImage&gt;(); 
+    private HashMap&lt;String,GreenfootImage&gt; imgmap = new HashMap&lt;String,GreenfootImage&gt;(); 
 
     public hoge() 
     { 
@@ -227,25 +373,17 @@ public void act()
 
 <br>
 <h3>
-Q. 画像ファイルを読み込んでワールドクラスの背景に描画したい
+Q. プロジェクトフォルダ内にある画像ファイルを読み込んでワールドクラスの背景に描画したい
 </h3>
 
 <p>
-A. GreenfootImage クラスのコンストラクタでプロジェクトフォルダ内にあるファイル名を指定すると画像インスタンスを作成できます。
-<br>
-さらに World.getBackgournd メソッドでワールドクラスの背景画像インスタンスを取得できるので、GreenfootImage.drawImage メソッドを使って画像インスタンスを描画できます。
-</p>
-
-<p>
-
-</p>
-
-<p>
-例えば以下の例では、左キーを押したら images フォルダ内にある img1.png を座標(100,100)に、 img2.png を座標(200,200)に描画します。
+A. GreenfootImage クラスを使って画像を読み込んでから getBackground().drawImage メソッドを使って画像を描画できます。
 </p>
 
 <div class="info">
 <pre class="wrap">
+<b>左キーを押したら images フォルダ内にある img1.png を座標(100,100)に、 img2.png を座標(200,200)に描画する例</b>
+
 public class MyWorld extends World
 {
     public MyWorld()
@@ -282,9 +420,9 @@ A.  <a href="../../oop-element/text02/page02.html">カプセル化</a>の観点�
 
 
 <div class="info">
-<p>MyWorld でカウンタの本体を定義</a>
-
 <pre class="wrap">
+<b>MyWorld でカウンタの本体を定義</b>
+
 public class MyWorld extends World
 {
     static public int counter = 0;  // カウンタ本体
@@ -308,9 +446,9 @@ public class MyWorld extends World
 
 <br>
 <div class="info">
-<p>MyWorld2 でも MyWorldのカウンタを利用出来る</a>
-
 <pre class="wrap">
+<b>MyWorld2 でも MyWorldのカウンタを利用出来る</b>
+
 public class MyWorld2 extends World
 {
     public MyWorld2()
@@ -320,7 +458,7 @@ public class MyWorld2 extends World
     
     public void act()
     {
-        // MyWorldのカウンタを利用
+        // MyWorld で定義されているカウンタを利用
         MyWorld.counter++;  
         showText( "counter = " + MyWorld.counter, 100, 50 );
     }
@@ -339,29 +477,37 @@ A. フィールドにフラグをひとつ用意すれば出来ます。
 </p>
 
 <div class="info">
-<p>スペースを押すと TAMA が高速に連射される失敗例</a>
-
 <pre class="wrap">
-public void act() 
+<b>失敗例: スペースを押すと TAMA が高速大量に連射される</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
+    public void act() 
     {
         if( Greenfoot.isKeyDown( "space" ) ){
             getWorld().addObject( new TAMA(), getX(), getY() );
         }
     }    
+}
 </pre>
 </div>
 
 <br>
 <div class="info">
-<p>ブール型フラグを用意して一度スペースを離さないと次の TAMA が出ない様にした例</a>
-
 <pre class="wrap">
+<b>成功例 1: ブール型フラグを用意して一度スペースを離さないと次の TAMA が出ない様にする</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
     private boolean flag_tama = false;
 
     public void act() 
     {
         if( Greenfoot.isKeyDown( "space" ) ){
-            
             if( flag_tama == false ){
                 getWorld().addObject( new TAMA(), getX(), getY() );
                 flag_tama = true;
@@ -369,31 +515,52 @@ public void act()
         }  
         else flag_tama = false;
     }  
+}
 </pre>
 </div>
 
 <br>
 <div class="info">
-<p>int型フラグを用意してスペース押しっぱなしでも TAMA が発射される間隔を空ける様にした例</a>
-
 <pre class="wrap">
+<b>成功例 2: int型フラグを用意してスペース押しっぱなしでも TAMA が発射される間隔を空ける様にする</b>
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public class hoge extends Actor 
+{ 
     private int flag_tama = 0;
 
     public void act() 
     {
         if( flag_tama > 0 ) flag_tama--;
         if( Greenfoot.isKeyDown( "space" ) ){
-            
-            
             if( flag_tama == 0 ){
                 getWorld().addObject( new TAMA(), getX(), getY() );
-                flag_tama = 50;
+                flag_tama = 50;  // 数字を変えると発射間隔が変わる
             }
         }
     }    
+}
 </pre>
 </div>
 
+
+<br>
+<h3>
+Q. キャラを実行する順番を変えたい、キャラを描画する順番を変更したい
+</h3>
+
+<p>
+A. ワールドクラスの中(例えばコンストラクタ内)で setActOrder メソッドを呼ぶと、実行する(＝描画する)クラスの順番を変更出来ます。なお、同じクラス内のキャラの実行順は変更できません。
+</p>
+
+<div class="info">
+<pre class="wrap">
+以下の例では JIRO クラス → HANAKO クラス → TARO クラスの順に実行され、JIRO は HANAKO の下、HANDKO は TARO の下に描画される
+
+setActOrder(JIRO.class, HANAKO.class, TARO.class);
+</pre>
+</div>
 
 
 </body>

@@ -45,7 +45,7 @@ public void World.removeObject( オブジェクト )
 <div class="info">
 <input type="checkbox"><b>ソース 1: あるオブジェクトが TARO オブジェクトにぶつかったら TARO オブジェクトを削除</b>
 <pre class="wrap">
-Actor actor = getOneObjectAtOffset( 0, 0, TARO.class );
+Actor actor = getOneIntersectingObject( TARO.class );
 if( actor != null ){
     getWorld().removeObject( actor ); // getWorld() は World オブジェクトの getter
 }       
