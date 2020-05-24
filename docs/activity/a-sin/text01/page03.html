@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 角周波数、周波数、周期</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログサイン波</a></li>
+<li>学習項目: [1] 時間領域アナログサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<div class="info">
+<input type="checkbox"><b>復習: 時間領域アナログサイン波の角周波数</b>
+<p>　</p>
+\[
+f(t) = a \cdot \sin( w \cdot t + \phi )
+\]
+または
+\[
+f(t) = a \cdot \cos( w \cdot t + \phi )
+\]
+
+<p>
+$w$ ・・・角周波数、実数の <u>定数</u>、範囲は $w \geq 0$、単位は [rad/秒]
+</p>
+
+</div> 
+
+<p>
+この角周波数 $w$ の値の範囲はマイナスでも良いのですが、マイナスの角周波数はイメージし辛いと思うので、今の所は $w \geq 0$ とします。
+</p>
+
+<p>
+※ マイナスの角周波数は時間領域複素正弦波のアクティビティで出てきますので、その時に改めてマイナスの角周波数の意味について説明します。
+</p>
+
+<p>
+この $w$ の値を変えるとグラフでは横方向の伸縮が変わります。
+<br>
+具体的には
+</p>
+
+<p>
+<b>$w$ が大きくなるにつれてグラフは横方向に縮みます</b>
+</p>
+
+<p>
+逆に
+<p>
+<b>$w$ が小さくなるにつれてグラフは横方向に伸びます</b>
+</p>
+
+<p>
+さて上のサイン波の定義では角周波数 $w$ [rad/秒]を使っていますが、もしかしたら周波数という用語の方が馴染み深いかもしれません。
+<br>
+また、周期という言葉も聞いたことがあると思います。
+</p>
+
+<p>
+実は「角周波数」「周波数」「周期」は簡単に相互変換出来るのですが、変換式を示す前に「周波数」「周期」の意味をまとめておきます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>時間領域アナログサイン波の周波数</b>
+<p>
+周波数(frequency) $f$ ・・・ 波が 1 秒間に何回振動するかを表す実数の<u>定数</u>、範囲は $f \geq 0$、単位は [Hz] (ヘルツ)
+</p>
+<p>
+例えば周波数が $f = 2$ Hz だとしたら 1 秒間に 2 回サイン波が振動することを意味している
+</p>
+<p>
+※ 関数(function) $f(t)$ の $f$ と同じ記号なので混同しないようにしましょう
+</p>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>時間領域アナログサイン波の周期</b>
+<p>
+周期 $\textrm{T}$ ・・・波が 1 回振動するのに何秒かかるかを表す実数の<u>定数</u>、範囲は $\textrm{T} \geq 0$、単位は[秒]
+</p>
+
+<p>
+例えば周期 $0.5$ 秒 だとしたら 0.5 秒で 1 回サイン波が振動することを意味している
+</p>
+</div>
+
+
+<p>
+では「角周波数」「周波数」「周期」の相互変換式を以下に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>公式：角周波数、周波数、周期の相互変換式</b>
+<p>　</p>
+\[
+w = 2\pi \cdot f = 2 \pi \cdot \frac{1}{\textrm{T}}
+\]
+
+\[
+f = \frac{1}{\textrm{T}} = \frac{w}{2\pi} 
+\]
+
+\[
+\textrm{T} = \frac{1}{f} = \frac{2\pi}{w} 
+\]
+
+</div>
+
+<p>
+「$w$ が大きくなるにつれてグラフは横方向に縮みます」と言いましたが、角周波数 $w$ [rad/秒]が大きくなるという事は周期 $\textrm{T}$ [秒] が短くなるからです。
+<br>
+逆に角周波数 $w$ [rad/秒]が小さくなると周期 $\textrm{T}$ [秒] が長くなるので、グラフは横方向に伸びます。
+</p>
+
+<p>
+さてこの様に $w$ 、 $f$ 、 $2\pi$ は簡単に相互変換できますので、次のように角周波数 $w$ [rad/秒]の代わりに周波数 $f$ [hz] を使って時間領域アナログサイン波を定義しても構いません。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周波数 $f$ [Hz]を用いた場合の時間領域アナログサイン波の定義</b>
+<p>　</p>
+\[
+f(t) = a \cdot \sin( 2\pi \cdot f \cdot t + \phi )
+\]
+
+\[
+f(t) = a \cdot \cos( 2\pi \cdot f \cdot t + \phi )
+\]
+</div>
+
+<br>
+<script>PreNext(3,7)</script>
+</body>
+</html>
