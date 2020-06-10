@@ -89,19 +89,22 @@ public class ORANGE extends FRUIT{  // ※ extends FRUIT は FRUIT を継承す�
 </div>
 
 <p>
-さて継承によって作ったサブクラスは、ソース 4 の様に普通のクラスと同様にインスタンスを作って利用できます。
+さて継承によって作ったサブクラスは、ソース 4 の様に普通のクラスと同様に new を使ってインスタンスを作り利用できます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 4 : main メソッド</b>
+<input type="checkbox"><b>ソース 4 : Main クラスと main メソッド</b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-	APPLE apple = new APPLE();
-	ORANGE orange = new ORANGE();
+	public static void main(String[] args) {
 
-	apple.eat();
-	orange.eat();
+		APPLE apple = new APPLE();
+		ORANGE orange = new ORANGE();
+
+		apple.eat();
+		orange.eat();
+	}
 }
 </pre>
 </div>
