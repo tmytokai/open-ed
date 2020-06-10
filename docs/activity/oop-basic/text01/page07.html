@@ -70,19 +70,22 @@ public class OLtest {
 </p>
 
 <p>
-ではこの OLtest クラスを次の main メソッドから使ってみましょう。
+ではこの OLtest クラスを次の Main クラス内の main メソッドから使ってみましょう。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース2:</b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-   OLtest ol = new OLtest();
-   ol.show();
-   ol.show( "ほげ" );
-   ol.show( 123 );
-   ol.show( 123, 456 );
+    public static void main(String[] args) {
+
+       OLtest ol = new OLtest();
+       ol.show();
+       ol.show( "ほげ" );
+       ol.show( 123 );
+       ol.show( 123, 456 );
+    }
 }
 </pre>
 </div>
