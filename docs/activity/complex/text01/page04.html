@@ -49,21 +49,34 @@ $\theta$ を任意の実数とした時、
 \begin{align*}
 \cos \theta &= \frac{ \textrm{e}^{\{j\cdot \theta \}} + \textrm{e}^{\{-j\cdot \theta \}}}{2} \\
 \\
-\sin \theta &= \frac{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}}}{2\cdot j} \\
-&= \frac{\textrm{e}^{\{-j\cdot \pi/2\}}}{2} \left \{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}} \right \} 
+\sin \theta &= \frac{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}}}{2\cdot j} 
 \end{align*}
 </div>
 
 <p>
-ここで $\sin$ の方の 2 行目の変形は
+どちらの定義も同じくらい良く使われるの覚えておくと良いでしょう。
+</p>
+
+<p>
+なお
+</p>
 
 \[
 1/j = j/j^2 = -j = \textrm{e}^{\{-j\cdot \pi/2\}}
 \]
 
 <p>
-の関係を利用して求めました。どちらの定義も同じくらい良く使われるので両方覚えておくと良いでしょう。
+の関係があるので、定義その2の sin の式は次のように変形できます。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>定義: オイラー公式 その2( sin 変形版)</b>
+
+\begin{align*}
+\sin \theta &= \frac{\textrm{e}^{\{-j\cdot \pi/2\}}}{2} \left \{ \textrm{e}^{\{j\cdot \theta \}} - \textrm{e}^{\{-j\cdot \theta \}} \right \} 
+\end{align*}
+</div>
+
 
 <script>PreNext(4,6)</script>
 </body>
