@@ -60,19 +60,22 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Score.java を新規作成し、Score スーパークラスを継承した Hanako クラスを定義して下さい(クラスの中身は空のまま) 。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Main.java を新規作成し、Main クラスを定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Main クラスの中に main メソッドを定義し、その中で Taro クラスのインスタンス taro を作成して下さい(コンストラクタは引数無し)。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様に Hanako クラスのインスタンス hanako を作成して下さい(コンストラクタは引数無し)。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> taro と hanako の情報を以下のようにして表示して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
 </p>
 <div class="info">
 
 <pre class="wrap">
-System.out.println( "太郎: math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average());
-System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.english + " 平均 = " +hanako.average());
+public class Main{
+
+	public static void main(String[] args) {
+
+		Taro taro = new Taro();
+                Hanako hanako = new Hanako();
+
+                System.out.println( "太郎: math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average());
+                System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.english + " 平均 = " +hanako.average());
+	}
+}
 </pre>
 
 </div>
@@ -95,11 +98,11 @@ System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.engl
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Score スーパークラスに public String name; というフィールドを追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Taro クラスに引数無しコンストラクタ Taro() を追加し、そのコンストラクタ内で name フィールドに文字列 "太郎" を代入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Taro クラスに引数無しコンストラクタ Taro() を追加し、そのコンストラクタ内で name フィールドに文字列 "たろう" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 同様に Hanako クラスに引数無しコンストラクタ Hanako() を追加し、そのコンストラクタ内で name フィールドに文字列 "花子" を代入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 同様に Hanako クラスに引数無しコンストラクタ Hanako() を追加し、そのコンストラクタ内で name フィールドに文字列 "はなこ" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> taro と hanako の情報表示部を以下のように書き換えてして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Main クラスの表示部を以下に置き換えて下さい(名前のところをnameフィールドを使うように置き換えてます)。
 </p>
 <div class="info">
 
@@ -130,7 +133,7 @@ System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " englis
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> total() メソッドの中で math と english を合計値を return して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> taro と hanako の情報表示部を以下のように書き換えてして下さい。
+<span class="olradio"><input type="radio" name="p4"></span> Main クラスの表示部を以下に置き換えて下さい(total()メソッドを呼び出すように置き換えてます)。 
 </p>
 <div class="info">
 

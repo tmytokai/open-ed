@@ -31,15 +31,13 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「OELM-1-4」を丸ごとコピーし、名前を「OELM-2-1」とします。
+<span class="olradio"><input type="radio" name="p1"></span> 演習 1-4 で作った「OELM-1-4」をフォルダごとコピーし、フォルダ名を「OELM-2-1」とします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Score スーパークラスの name, math, english のアクセス修飾子を private に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 実行します。コンパイルエラーが出ますが、無視して実行してエラーメッセージを確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルするとエラーが出ます。表示されるエラーメッセージ(〜 has private access in Score)を確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所にと「エラーメッセージ」を記入して下さい。※ 「ソースコード」は必要ありません。
+<span class="olradio"><input type="radio" name="p1"></span> 提出物はありません
 </p>
 </div>
 
@@ -49,41 +47,43 @@
 <h2><a href="./page03.html">3. getter と setter</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 2-2 (個人、15分):</b> 「setter」を使って、Taro と Hanako サブクラスに表示されているエラーマークを消しましょう。
+<input type="checkbox"><b>演習 2-2 (個人、15分):</b> 「setter」を使って、Taro と Hanako サブクラスのコンパイルエラーを消しましょう
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「OELM-2-1」を丸ごとコピーし、名前を「OELM-2-2」とします。
+<span class="olradio"><input type="radio" name="p2"></span> 演習 2-1 で作った「OELM-2-1」をフォルダごとコピーし、フォルダ名を「OELM-2-2」とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> private なフィールドにはサブクラスからもアクセス出来ないので、name の値をセットする setter を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> private なフィールドにはサブクラスからもアクセス出来ないので、name の値をセットする setter( 名前は public void set_name(String _name) ) を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro クラスのコンストラクタ Taro() の中で setter を使って name フィールドに "太郎" を代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Taro クラスのコンストラクタ Taro() の中で setter を使って name フィールドに "TARO" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様に Hanako クラスのコンストラクタ Hanako() の中で setter を使って name フィールドに "花子" を代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 同様に Hanako クラスのコンストラクタ Hanako() の中で setter を使って name フィールドに "HANAKO" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 一旦実行します。Main クラスは変更していないので当然エラーが出ますが、Taro と Hanako のエラーマークが消えた事を確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> TaroクラスとHanakoクラスをコンパイルするとエラーメッセージが表示されないことを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、代表者は eclipse のスクリーンショットを保存して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」「eclipse のスクリーンショット」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 提出物はありません
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-3 (個人、15分):</b> 「getter」を使って全てのエラーマークを消しましょう。
+<input type="checkbox"><b>演習 2-3 (個人、15分):</b> 「getter」を使って全てのコンパイルエラーを消しましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「OELM-2-2」を丸ごとコピーし、名前を「OELM-2-3」とします。
+<span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で作った「OELM-2-2」をフォルダごとコピーし、フォルダ名を「OELM-2-3」とします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> name, math, english の値を取得する getter を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p3"></span> name の値を取得する getter (名前は public String get_name() ) を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Main クラスの表示部で getter を使って各フィールド値を取得します。
+<span class="olradio"><input type="radio" name="p3"></span> math の値を取得する getter (名前は public int get_math() ) を Score クラスに追加します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> english の値を取得する getter (名前は public int get_english() ) を Score クラスに追加します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Main クラスの表示部を getter を使うように書き換えます。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 実行します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」「実行結果」を貼り付けて下さい。
 </p>
