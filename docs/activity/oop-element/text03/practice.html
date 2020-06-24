@@ -39,11 +39,11 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「OELM-2-3」を丸ごとコピーし、名前を「OELM-3-1」とします。
+<span class="olradio"><input type="radio" name="p1"></span> 「OELM-2-3」をフォルダごとコピーし、フォルダ名を「OELM-3-1」とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Main クラスの main メソッドの上に public static void show( Score s ) メソッドを追加します。
+<span class="olradio"><input type="radio" name="p1"></span> Main クラスの main メソッドの上に public static void show( Score score ) メソッドを追加します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の taro の情報表示部を show メソッド内に移動し、<a href="./page05.html">ページ5のソース 5</a>を参考にして Score クラスのインスタンス s の情報表示に変えて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の taro の情報表示部を show メソッド内に移動し、<a href="./page05.html">ページ5のソース 5</a>を参考にして Score クラスのインスタンス score の情報表示に変えて下さい(つまり taro. を score. に変える)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main メソッド内の hanako の情報表示部を消して下さい。
 <br>
@@ -51,9 +51,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 実行し、便利さ確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「Main クラスのソースコード」を記入して下さい。 ※ 他のクラスのソースは必要ありません。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
 </p>
 </div>
 
@@ -63,9 +63,9 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「OELM-3-1」を丸ごとコピーし、名前を「OELM-3-2」とします。
+<span class="olradio"><input type="radio" name="p2"></span> 「OELM-3-1」をフォルダごとコピーし、フォルダ名を「OELM-3-2」とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro クラスを丸ごとコピーして Jiro クラスを作ります。name には "次郎" をセットして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Taro クラス(Taro.java)をコピーして Jiro クラス(Jiro.java)を作ります。コンストラクタでは name に "JIRO" をセットして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> <a href="./page05.html">ページ5のソース 6</a> を参考にし、長さ 3 の Score クラスのインタンス配列 score[3] を定義して下さい。
 <br>
@@ -75,9 +75,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 実行し、便利さを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Mainクラス、Jiro クラスのソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
 </p>
 </div>
 
@@ -90,15 +90,19 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「OELM-3-2」を丸ごとコピーし、名前を「OELM-3-3」とします。
+<span class="olradio"><input type="radio" name="p3"></span> 「OELM-3-2」をフォルダごとコピーし、フォルダ名を「OELM-3-3」とします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Score クラスの total メソッドをJiro クラスの中でオーバーライドし、合計点の 2 倍を retrun して下さい。(ヒント) getter を使う必要有
+<span class="olradio"><input type="radio" name="p3"></span> Score クラスにある total メソッドを Jiro クラスでオーバーライドし、合計点の 2 倍を retrun して下さい。
+<br>
+<br>
+(ヒント) math と english は private なので getter を使って点数を取得する必要があります
+<br>
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 実行し、太郎と花子は従来通りだけど次郎の合計点だけが本来の2倍になっていることを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「Jiro クラスのソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
 </p>
 </div>
 

@@ -21,7 +21,8 @@
 
 <p>
 まず単純な例として「フィールドによるポリモーフィズム」を示します。
-<br>
+</p>
+<p>
 これは「同じクラスの同じ名前のフィールドを使ってもインスタンス毎に動作が異なる」という性質のことで、実は今まで既に演習で体験済みです。
 </p>
 
@@ -43,16 +44,19 @@ public class FRUIT {
 <div class="info">
 <input type="checkbox"><b>ソース 2 : </b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-        FRUIT apple = new FRUIT();
-        FRUIT orange = new FRUIT();
+	public static void main(String[] args) {
 
-        apple.name = "りんご";
-        orange.name = "みかん";
+	        FRUIT apple = new FRUIT();
+	        FRUIT orange = new FRUIT();
 
-        System.out.println( apple.name + "美味しい");
-        System.out.println( orange.name + "美味しい");
+	        apple.name = "りんご";
+	        orange.name = "みかん";
+
+	        System.out.println( apple.name + "美味しい");
+	        System.out.println( orange.name + "美味しい");
+	}
 }
 </pre>
 </div>

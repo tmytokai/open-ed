@@ -20,14 +20,12 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-オブジェクト指向言語では「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」ことが出来ます。
+オブジェクト指向言語では<b>「サブクラスのインスタンスをスーパークラスのインスタンスと見なして作る」</b>ことが出来ます。
 <br>
-この機能を利用するとやはり「同じクラスの同じ名前のメソッドを使ってもインスタンス毎に動作を異ならせることが可能」になります。
-<br>
-この機能はポリモーフィズムの例として色んな文献上に良く取り上げられています。
+この機能はポリモーフィズムの典型例として良く取り上げられています。
 </p>
 <p>
-と言っても良く分からないと思うので、これから具体的なコードを使って順を追って説明していきます。
+とだけ言っても良く分からないと思うので、これから具体的なコードを使って順を追って説明していきます。
 </p>
 <p>
 まず大元の FRUIT スーパークラスをソース 1 で定義します。
@@ -74,25 +72,40 @@ public class ORANGE extends FRUIT{
 </div>
 
 <p>
-次に main メソッドをソース 4 に示しますが、今まで習ってきた方法と違い<b>「apple と orange が FRUIT スーパークラスのインスタンスになっている」</b>ことに注目して下さい。
+次に main メソッドをソース 4 に示しますが、今まで習ってきた方法と違って
+</p>
+<p>
+<b>apple と orange が FRUIT スーパークラスのインスタンスになっている</b>
+</p>
+<p>
+ことに注目して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 4 : main メソッド</b>
+<input type="checkbox"><b>ソース 4 : Main クラスと main メソッド</b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-	FRUIT apple = new APPLE();   // ※ 今までは「APPLE apple = new APPLE();」 と new していた！
-	FRUIT orange = new ORANGE(); // ※ 今までは「ORANGE orange = new ORANGE();」 と new していた！
+	public static void main(String[] args) {
 
-	apple.eat();
-	orange.eat();
+		FRUIT apple = new APPLE();   // ※ 今までは「APPLE apple = new APPLE();」 と new していた！
+		FRUIT orange = new ORANGE(); // ※ 今までは「ORANGE orange = new ORANGE();」 と new していた！
+
+		apple.eat();
+		orange.eat();
+	}
 }
 </pre>
 </div>
 
 <p>
-するとapple と orange の実態はそれぞれ APPLE、ORANGE サブクラスのインスタンスなのですが、見かけ上は FRUIT スーパークラスのインスタンスになりますので、<b>同じ FRUIT クラスの同じ eat() メソッドを呼び出しているのにインスタンス apple と orange で結果が異なるようになります</b>(実行結果 1 )。
+インスタンス apple と orange の実態はそれぞれ APPLE、ORANGE サブクラスのインスタンスなのですが、見かけ上は FRUIT スーパークラスのインスタンスになりますので
+</p>
+<p>
+<b>同じ FRUIT クラスの同じ eat() メソッドを呼び出しているのにインスタンス apple と orange で結果が異なる</b>
+</p>
+<p>
+結果になります(実行結果 1 )。
 </p>
 
 <div class="info">
@@ -111,39 +124,47 @@ public static void main(String[] args) {
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 5 : メソッドの引数をスーパークラスにする</b>
+<input type="checkbox"><b>ソース 5 : メソッドの引数をスーパークラスにする例</b>
 <pre class="wrap">
-public void Hoge( FRUIT f )
-{
-        f.eat();  // ※ f の実態が APPLE なのか ORANGE なのかプログラマは気にする必要が無い！
+public class Main{
+
+	public static void Hoge( FRUIT f )
+	{
+	        f.eat();  // ※ f の実態が APPLE なのか ORANGE なのかプログラマは気にする必要が無い！
+	}
+
+	public static void main(String[] args) {
+
+		APPLE apple = new APPLE();    // ※ apple は APPLE のインスタンス！
+		ORANGE orange = new ORANGE(); // ※ orange は ORANGE のインスタンス！
+
+		Hoge( apple );
+		Hoge( orange );
+	}
 }
-
-// 呼び出し方法
-APPLE apple = new APPLE();
-ORANGE orange = new ORANGE();
-
-Hoge( apple );  // ※ apple は APPLE のインスタンス！
-Hoge( orange ); // ※ orange は ORANGE のインスタンス！
-
 </pre>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>ソース 6 : main メソッド 改</b>
+<input type="checkbox"><b>ソース 6 : スーパークラスの配列にサブクラスのインスタンスを代入する例</b>
 <pre class="wrap">
-public static void main(String[] args) {
-	        
-        FRUIT fruit[] = new FRUIT[2];
+public class Main{
 
-        fruit[0] = new APPLE();
-        fruit[1] = new ORANGE();
+	public static void main(String[] args) {
+
+	        FRUIT fruit[] = new FRUIT[2];
+
+	        fruit[0] = new APPLE(); // ※ FRUIT の配列に APPLE のインスタンスを代入！
+	        fruit[1] = new ORANGE();// ※ FRUIT の配列に ORANGE のインスタンスを代入！
         
-        for(int i=0;i &lt; 2;++i) fruit[i].eat();
+	        for(int i=0;i < 2;++i) fruit[i].eat();
+	}
 }
 </pre>
 <p>
-※ オブジェクト指向言語ではこういう状況では普通は配列 + for ループではなくて vector 等のクラス と iterator クラス又は foreach 文を組み合わせて使うことが多いです。
+※ オブジェクト指向言語では配列 + for ループではなくてベクトル型 + foreach の組み合せを使うことが多いです。
+<br>
 詳細は自分で調べて下さい。
 </p>
 </div>
