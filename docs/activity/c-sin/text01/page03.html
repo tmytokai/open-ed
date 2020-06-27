@@ -27,16 +27,7 @@
 <div class="info">
 <input type="checkbox"><b>定義： オイラー公式で時間領域アナログサイン波を時間領域複素正弦波の和に分解</b>
 
-<p>
-(サイン波として sin を使う場合)
-</p>
-
-\[
-a \cdot \sin ( w \cdot t + \phi )
-=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
-+  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
-\]
-
+<br>
 <p>
 (サイン波として cos を使う場合)
 </p>
@@ -47,16 +38,28 @@ a \cdot \cos ( w \cdot t + \phi )
 +  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
 \]
 
+<br>
 <p>
-$a$・・・アナログサイン波の振幅、実数の定数、範囲は実数全体、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+(サイン波として sin を使う場合)
+</p>
+
+\[
+a \cdot \sin ( w \cdot t + \phi )
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<br>
+<p>
+$a$・・・<u>アナログサイン波の</u>振幅、実数の定数、範囲は実数全体、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
 </p>
 
 <p>
-$w$ ・・・アナログサイン波の角周波数、実数の定数、範囲は $w \geq 0$、単位は [rad/秒]
+$w$ ・・・<u>アナログサイン波の</u>角周波数、実数の定数、範囲は $w \geq 0$、単位は [rad/秒]
 </p>
 
 <p>
-$\phi$ ・・・アナログサイン波の初期位相、ファイと呼ぶ、実数の定数、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+$\phi$ (ファイ) ・・・<u>アナログサイン波の</u>初期位相、実数の定数、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
 </p>
 
 <p>
@@ -66,16 +69,15 @@ $t$ ・・・時刻、実数の変数、単位は[秒]
 </div>
 
 <p>
-すると工学的な計算式の中で、<b>時間領域アナログサイン波を使う代わりに時間領域複素正弦波を使えるようになるので計算が楽になります</b>(これについては<a href="./page04.html">次のページ</a>で説明します)。
-<br>
-
-<p>
 なお sin 版よりも cos 版の方が少しだけ式が簡単になっていますので、特に断りの無い限り<b>今後はサイン波として cos の方を主に使って話を進めることにします</b>。
 </p>
 
 <p>
-ところで複素正弦波どうしを足したら実数のサイン波に変わるのは不思議な感じがしますが、
-よくよく見ると sin 版も cos 版も右辺の第一項目と第二項目の複素正弦波は<a href="../../complex/text01/page01.html">複素共役関係</a>にあるので、お互いを足すと虚部が消えて実部だけが残り、それがサイン波となります(図1)。
+複素正弦波どうしを足したら実数のサイン波に変わるのは不思議な感じがします。
+</p>
+
+<p>
+しかし式をよく見ると sin 版も cos 版も右辺の第一項目と第二項目の複素正弦波は<a href="../../complex/text01/page01.html">複素共役関係</a>にあるので、お互いを足すと虚部が消えて実部だけが残ることが分かります(図1を参照)。
 </p>
 
 <div class="info">
