@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>7. グラフの描き方</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログサイン波</a></li>
+<li>学習項目: [1] 時間領域アナログサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+時間領域アナログサイン波は一般的なアナログ時間領域信号と違って代表点を選ばなくても簡単に描けます。
+<br>
+今回は例として
+</p>
+\[
+f(t) = 3 \cdot \sin( \pi \cdot t - \pi/2)
+\]
+<p>
+を描いてみます。
+</p>
+
+<br>
+<h3>
+ステップ 1： 縦軸・横軸を描く
+</h3>
+
+<p>
+初めに横軸を引き、横軸の右に $t$ と記入します。
+<br>
+更に横軸の下に $t$ の値を適当な間隔で入れていきます。
+<br>
+今回の例では定義域を $-4 \leq t \leq 4$とし、間隔 $1$ で秒数を入れました。
+</p>
+
+<p>
+次に縦軸を引きます。
+<br>
+$t=0$ の所で横軸とクロスさせて下さい。
+<br>
+そこが原点になります。
+<br>
+そのあと縦軸の上に $f(t)$ と記入します。
+</p>
+
+<p>
+なお $f(t)$ の値域はサイン波の振幅 $a$ で決まり、具体的には
+</p>
+\[
+-a \leq f(t) \leq a
+\]
+<p>
+の範囲となります。
+<br>
+今回の例では $a = 3$ ですので $-3 \leq f(t) \leq 3$ が値域になります。
+<br>
+よって少し余裕を持って -4 から 4 まで間隔 1 で数字を入れていきます。
+</p>
+
+<p>
+この時点で以下の図1の状態になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 縦軸・横軸を描く</b>
+<p>
+</p>
+<img src="./img/page07-fig1.png" alt="">
+</div>
+
+
+<br>
+<h3>
+ステップ 2： 初期位相から基準位置を求めて補助線を引く
+</h3>
+
+<p>
+次に初期位相 $\phi$ [rad] をもとにしてサイン波がアップダウンを開始する基準位置を求めます。
+</p>
+
+<p>
+まず周期 $\textrm{T}$ [秒]を求めます。
+<br>
+今回は $w=\pi$ [rad/秒]ですので、<a href="./page03.html">公式より</a>周期は $\textrm{T} = 2$ [秒] になります。
+</p>
+
+<p>
+次に進み／遅れの秒数を求めます。
+<br>
+今回の例では $w = - \pi/2$ [rad/秒]ですから、<a href="./page04.html">ページ4の表2</a>より  $|\phi|/(2\pi) \cdot \textrm{T}= 1/2$ [秒] だけグラフ全体が右へ平行移動することが分かります。
+<br>
+そこで $t=1/2$ [秒]を基準位置とし、縦に補助線として点線を引きます。
+</p>
+
+<p>
+この時点で以下の図2の状態になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 初期位相から基準位置を求めて補助線を引く</b>
+<p>
+</p>
+<img src="./img/page07-fig2.png" alt="">
+</div>
+
+
+<br>
+<h3>
+ステップ 3： 残りの補助線を描き込む
+</h3>
+
+<p>
+次に基準位置から左右に周期 $\textrm{T}$ [秒]の間隔で縦に補助線を入れていきます。
+</p>
+<p>
+今回は $\textrm{T} = 2$ [秒] なので $t = -3.5,\ -1.5,\ 2.5$ の位置に補助線を引きます。
+</p>
+<p>
+また $f(t)$ の値域は $-3 \leq f(t) \leq 3$ でしたので、$f(t)=-3$ と $f(t) = 3$ の所で横に補助線を引きます。
+</p>
+
+<p>
+この時点で以下の図3の状態になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: 残りの補助線を描き込む</b>
+<p>
+</p>
+<img src="./img/page07-fig3.png" alt="">
+</div>
+
+<br>
+<h3>
+ステップ 4： サイン波を描きこんでグラフを完成させる
+</h3>
+
+<p>
+後は補助線で囲まれた四角の中にサイン波のアップダウンを滑らかに描き込んで行くだけです。
+<br>
+なお振幅 $a$ がマイナスの場合はダウン→アップの順に描きこんで下さい。
+</p>
+
+<p>
+図4が完成図です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: サイン波を描きこんでグラフを完成させる</b>
+<p>
+</p>
+<img src="./img/page07-fig4.png" alt="">
+</div>
+
+<br>
+<script>PreNext(7,7)</script>
+</body>
+</html>
