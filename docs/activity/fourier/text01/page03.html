@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 実フーリエ級数展開</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素フーリエ級数展開</a></li>
+<li>学習項目: [1] 複素フーリエ級数展開</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+前ページの<a href="./page02.html">フーリエの定理</a>から「<b>実フーリエ級数展開</b>」が導かれます。
+</p>
+
+<p>
+まずフーリエの定理の中に出てきた「<b>直流成分</b>」を式で表すと実数定数 $a_0$ になります。
+</p>
+
+<p>
+次に「基本角周波数 $w_1$ [rad/秒]の時間領域アナログサイン波」を式で表すと 
+<p>
+\[
+a_1 \cdot \cos ( w_1 \cdot t + \phi_1)
+\]
+<p>
+になります。
+<br>
+このアナログサイン波の事を「<b>基本波</b>」と呼びます。
+<br>
+なお基本波の振幅 $a_1$ と位相 $\phi_1$は実数の定数です。
+</p>
+
+<p>
+同様に「$w_1$ の正整数倍の角周波数の無限個の時間領域アナログサイン波」を式で表すと
+</p>
+\[
+a_k \cdot \cos ( k \cdot w_1 \cdot t + \phi_k)
+\]
+<p>
+になります ($k \geq 2$)。
+<br>
+このサイン波を「<b>第 $k$ 高調波</b>」と呼びます。
+<br>
+高調波の振幅 $a_k$ と位相 $\phi_k$も実数の定数です。
+</p>
+
+<p>
+フーリエの定理は $f(t)$ が<a href="./page01.html">周期性時間領域アナログ信号</a>なら、どんな信号でも直流成分、基本波、無限個の第 $k$ 高調波が足し合わされて出来ていると主張する定理ですので、これを式で表すと次のようになります。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>フーリエの定理を式で表した場合</b>
+
+\begin{align*}
+f(t) &= a_0 \ ・・・直流成分 \\
+&+ a_1 \cdot \cos ( w_1 \cdot t + \phi_1) \ ・・・基本波 \\
+&+ a_2 \cdot \cos ( 2 \cdot w_1 \cdot t + \phi_2) \ ・・・第 2 高調波 \\
+&+ a_3 \cdot \cos ( 3 \cdot w_1 \cdot t + \phi_3) \ ・・・第 3 高調波 \\
+&+ \cdots \\
+&+ a_k \cdot \cos ( k \cdot w_1 \cdot t + \phi_k) \ ・・・第 k 高調波 \\
+&+ \cdots
+\end{align*}
+
+<br>
+<p>
+$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+</p>
+
+<p>
+$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+</p>
+
+<p>
+$a_0$ ・・・ 直流成分、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+<p>
+$a_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+<p>
+$\phi_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の<u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+</p>
+
+</div>
+　
+<p>
+上の式を $\sum$ を使って級数の形にまとめたのが次の実フーリエ級数展開です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 実フーリエ級数展開</b>
+
+\begin{align*}
+f(t) = a_0 + \sum_{k=1}^{\infty}
+\left \{
+a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
+\right \}
+\end{align*}
+
+<br>
+<p>
+$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+</p>
+
+<p>
+$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+</p>
+
+<p>
+$a_0$ ・・・ 直流成分、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+<p>
+$a_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+<p>
+$\phi_k$ ・・・ 第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の<u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+</p>
+
+</div>
+
+<p>
+なお文献によっては合成公式
+<p>
+
+\[
+a\cdot\cos(x+\phi) = \alpha\cdot \cos x + \beta\cdot \sin x
+\]
+
+<p>
+を使って初期位相 $\phi_k$ を消し、sin と cos の両方を含んだ定義になっている場合もありますが(というか、そちらの方が一般的な定義です)、意味は上の定義と同じです。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>定義： 一般的な実フーリエ級数展開</b>
+
+\begin{align*}
+f(t) = a_0 + \sum_{k=1}^{\infty}
+\left \{
+\alpha_k \cdot \cos (k \cdot w_1 \cdot t )
++\beta_k \cdot \sin (k \cdot w_1 \cdot t )
+\right \}
+\end{align*}
+
+\begin{align*}
+a_0 = \frac{1}{\textrm{T}}\int^{\textrm{T}/2}_{-\textrm{T}/2} 
+f(t)
+\textrm{d}t
+\end{align*}
+
+\begin{align*}
+\alpha_k = \frac{2}{\textrm{T}}\int^{\textrm{T}/2}_{-\textrm{T}/2}
+\left \{
+f(t) \cdot \cos (k \cdot w_1 \cdot t ) 
+\right \}
+\textrm{d}t
+\end{align*}
+
+\begin{align*}
+\beta_k = \frac{2}{\textrm{T}}\int^{\textrm{T}/2}_{-\textrm{T}/2}
+\left \{
+f(t) \cdot \sin (k \cdot w_1 \cdot t ) 
+\right \}
+\textrm{d}t
+\end{align*}
+
+<p>
+$a_0$ ・・・ 直流成分、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+<p>
+$\alpha_k$ ・・・ $\cos$ 項の第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+<p>
+
+<p>
+$\beta_k$ ・・・ $\sin$ 項の第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
+</p>
+
+</div>
+
+<br>
+<script>PreNext(3,5)</script>
+</body>
+</html>

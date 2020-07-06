@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 周期性時間領域アナログ信号</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素フーリエ級数展開</a></li>
+<li>学習項目: [1] 複素フーリエ級数展開</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+複素フーリエ級数展開を学ぶ前に前提となる「<b>周期性時間領域アナログ信号</b>」について説明します。
+</p>
+
+<p>
+周期性時間領域アナログ信号とは周期 $\textrm{T}$ [秒]ごとに同じ波形を繰り返す<a href="../../a-signal/text01/page02.html">時間領域アナログ信号</a>のことで、定義は以下のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 周期性時間領域アナログ信号 </b>
+
+\[
+f(t) = f(t + n \cdot \textrm{T})
+\]
+
+<p>
+の関係を満たす時間領域アナログ信号を周期性時間領域アナログ信号という。
+</>
+
+<br>
+<p>
+$\textrm{T}$ ・・・周期、 実数の<u>定数</u>、単位は[秒]、範囲は $\textrm{T} > 0$
+</p>
+
+<p>
+$n$ ・・・任意の整数($n = 0,\pm1,\pm2,\cdots$)
+</p>
+
+<p>
+$t$ ・・・時刻、実数の<u>変数</u>、単位は[秒]
+</p>
+
+</div>
+
+<p>
+もちろん<a href="../../a-sin/">アナログサイン波</a>は周期性時間領域アナログ信号の一種になります。
+</p>
+
+<p>
+また次で定義される<b>基本周波数、基本角周波数</b>という用語も良く使われますので覚えておきましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 基本周波数 $f_1$</b>
+
+\[
+f_1 = \frac{1}{\textrm{T}}
+\]
+
+<p>
+を基本周波数という。単位は [Hz]
+</p>
+
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>定義： 基本角周波数 $w_1$</b>
+
+\[
+w_1 = 2\pi \cdot f_1 = \frac{2\pi}{\textrm{T}}
+\]
+
+<p>
+を基本角周波数という。単位は [rad/秒] 
+</p>
+
+</div>
+
+<script>PreNext(1,5)</script>
+</body>
+</html>

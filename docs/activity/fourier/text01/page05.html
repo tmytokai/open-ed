@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 実フーリエ級数展開と複素フーリエ級数展開の関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素フーリエ級数展開</a></li>
+<li>学習項目: [1] 複素フーリエ級数展開</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+それでは<a href="./page03.html">実フーリエ級数展開</a>から<a href="./page04.html">複素フーリエ級数展開</a>を導出してみます。
+</p>
+
+<p>
+まず実フーリエ級数展開の式を<a href="../../c-sin/text01/page03.html">複素正弦波とサイン波との関係式(cosの方)</a>を使って書き直すと次のような複素正弦波の和の級数になります。
+<p>
+
+\begin{align*}
+f(t) & = a_0 + \sum_{k=1}^{\infty}
+\left \{
+a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
+\right \} \\
+& = a_0 
++ \sum_{k=1}^{\infty} \left [
+\left \{ \frac{a_k}{2} \cdot \textrm{e}^{\{-j \cdot \phi_k \}} \right \} \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
++  \left \{ \frac{a_k}{2} \cdot \textrm{e}^{\{j  \cdot \phi_k \}} \right \} \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right ] \\
+& = a_0
++ \sum_{k=1}^{\infty} \left [
+\left \{ \frac{a_k}{2} \cdot \textrm{e}^{\{-j \cdot \phi_k \}} \right \} \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
++ \sum_{k=1}^{\infty} \left [
+\left \{ \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \right \} \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
+\end{align*}
+
+<p>
+ここで 
+</p>
+
+\begin{align*}
+\textrm{C}[0] &= a_0 \\
+\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k\geq 1)
+\end{align*}
+
+<p>
+と置いて代入すると次の式が得られます。
+</p>
+
+\begin{align*}
+f(t) & = 
+\textrm{C}[0]
++ \sum_{k=1}^{\infty} \left [
+\textrm{C}^{*}[k] \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
++ \sum_{k=1}^{\infty} \left [
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
+\end{align*}
+
+<p>
+さらに<a href="./page04.html">前ページ</a>で説明したように $\textrm{C}^{*}[k] = \textrm{C}[-k]$ の関係があるので
+</p>
+
+\begin{align*}
+f(t) & = 
+\textrm{C}[0]
++ \sum_{k=1}^{\infty} \left [
+\textrm{C}[-k] \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
++ \sum_{k=1}^{\infty} \left [
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
+\end{align*}
+
+<p>
+ここで $k'= -k$ と置いて
+</p>
+
+\begin{align*}
+f(t) &=
+\textrm{C}[0]
++ \sum_{k'=-\infty}^{-1} \left [
+\textrm{C}[k'] \cdot \textrm{e}^{\{j \cdot k' \cdot w_1 \cdot t \}}
+\right ] 
++ \sum_{k=1}^{\infty} \left [
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right ] 
+\end{align*}
+
+<p>
+よって $k'$ を $k$ に戻し、$\textrm{C}[0] = \textrm{C}[0] \cdot \textrm{e}^{\{j \cdot 0 \cdot w_1 \cdot t \}} $ を考慮すると複素フーリエ級数展開
+</p>
+
+\begin{align*}
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+<p>
+が求まります。
+</p>
+
+<p>
+ところで計算途中で出てきた
+</p>
+
+\begin{align*}
+\textrm{C}[0] &= a_0 \\
+\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k\geq 1)
+\end{align*}
+
+<p>
+は<a href="../../spectrum/">スペクトル解析</a>の基礎となる重要な式なので覚えておいて下さい。
+</p>
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>
