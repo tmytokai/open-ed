@@ -25,27 +25,35 @@ ax1 = plt.subplot2grid((2,2),(0,0))
 ax2 = plt.subplot2grid((2,2),(0,1))
 ax3 = plt.subplot2grid((2,2),(1,0),colspan=2)
 
-def draw_axis(ax):
+def draw_axis(ax,k):
     ax.set_xlim(xmin,xmax)
     ax.set_ylim(ymin,ymax)
     ax.spines['bottom'].set_position(('data',0))
     ax.spines['left'].set_position(('data',0))
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
-    #ax.grid()
     ax.text(xmax+0.2,-0.1,'Re[z]',fontsize=10)
     ax.text(-0.2,ymax+0.1,'Im[z]',fontsize=10)
+    ax.text(xmin,ymax,r'$z_{'+r'{0:d}'.format(k)+r'}(t)$',fontsize=20)
 
-draw_axis(ax1)
-draw_axis(ax2)
+def draw_axis2(ax,tmax):
+    ax.set_xlim(0,tmax)
+    ax.set_ylim(ymin,ymax)
+    ax.spines['bottom'].set_position(('data',0))
+    ax.spines['left'].set_position(('data',0))
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.text(tmax+0.1,-0.1,'t',fontsize=10)
+    
+draw_axis(ax1,1)
+draw_axis(ax2,2)
 
-
-def exec_plot(ax,t,fin=False):
+def exec_plot(ax,k,t,fin=False):
     global pa
     global pb
-    if(abs_z(t)!=-1000 and arg_z(t)!=-1000):
-        a = abs_z(t)*np.cos(arg_z(t))
-        b = abs_z(t)*np.sin(arg_z(t))
+    if(abs_z(k,t)!=-1000 and arg_z(k,t)!=-1000):
+        a = abs_z(k,t)*np.cos(arg_z(k,t))
+        b = abs_z(k,t)*np.sin(arg_z(k,t))
         if(t>0):
             if(fin):
                 ax.arrow(pa,pb,a-pa,b-pb,width=0.005,head_width=0.3,length_includes_head=True,color='red')
@@ -54,28 +62,33 @@ def exec_plot(ax,t,fin=False):
         pa=a
         pb=b
         if((t*10)%10==0):
-            name=r'$z({0:.0f})$'.format(t)
-            ax.plot(a,b,marker='.',markersize=15,color='black')
+            name=r'$z_{'+r'{0:d}'.format(k)+r'}'+r'({0:.0f})$'.format(t)
+            cl='black'
+            if(fin):
+                cl='blue'
+            ax.plot(a,b,marker='.',markersize=15,color=cl)
             if(t<msec):
                 ax.text(a+0.2,b+0.1,name,size=10)
             else:
-                ax.text(a+1.0,b+0.1,'= '+name,size=10)
+                ax.text(a+1.5,b+0.1,'= '+name,size=10)
 
-def abs_z(t):
+def abs_z(k,t):
     return a
 
-def arg_z(t):
+def arg_z(k,t):
+    if(k==1):
+        return -w*t-phi
     return w*t+phi
 
 ##################
 # ここから
 
-# -1000 を正しい値に修正するとz(t)の動きが表示されます
+# -1000 を正しい値に修正するとz1(t)とz2(t)の動きが表示されます
 # 円周率は np.pi です
 
-a=-1000    # 複素正弦波 z1(t) の振幅
-phi=-1000  # 複素正弦波 z1(t) の初期位相
-w=-1000    # 複素正弦波 z1(t) の角周波数
+a=-1000   # 複素正弦波 z2(t) の振幅
+phi=-1000 # 複素正弦波 z2(t) の初期位相
+w=-1000   # 複素正弦波 z2(t) の角周波数
 
 # ここまで
 ##################
@@ -84,22 +97,14 @@ if(a!=-1000 and a >0 and phi!=-1000 and w!=-1000):
     msec=np.ceil(2*np.pi/np.abs(w)).astype(np.int64)
 
 if(msec>0):
-    ax3.set_xlim(0,msec)
-    ax3.set_ylim(ymin,ymax)
-    ax3.spines['bottom'].set_position(('data',0))
-    ax3.spines['left'].set_position(('data',0))
-    ax3.spines['right'].set_visible(False)
-    ax3.spines['top'].set_visible(False)
-    ax3.text(xmax+0.1,-0.1,'t',fontsize=10)
-    ax3.text(-0.1,ymax+0.4,r'$f(t) = z_1(t)+z_2(t)$',fontsize=10)
+    draw_axis2(ax3,msec)
     t=np.linspace(0,msec,100)
+    ax3.text(-0.1,ymax+0.4,r'$f(t) = z_1(t)+z_2(t)$',fontsize=10)
     ax3.plot(t,2*a*np.cos(-w*t-phi),lw=1, color='black')
 
     for i in range(msec*20):
-        exec_plot(ax1,i/20)
-    exec_plot(ax1,msec,fin=True)
-    phi*=-1
-    w*=-1
+        exec_plot(ax1,1,i/20)
+    exec_plot(ax1,1,msec,fin=True)
     for i in range(msec*20):
-        exec_plot(ax2,i/20)
-    exec_plot(ax2,msec,fin=True)
+        exec_plot(ax2,2,i/20)
+    exec_plot(ax2,2,msec,fin=True)

@@ -30,13 +30,13 @@
 <p>
 <input type="checkbox"><b>演習 1-1 (個人、10分):</b> 表計算ソフトで周期性時間領域アナログ信号
 </p>
-\[
-f(t) = 1 
-+ 3 \cdot \cos \left( 1 \cdot \frac{\pi}{2} \cdot t + 0 \right ) 
-+ 4 \cdot \cos \left( 2 \cdot \frac{\pi}{2} \cdot t + \frac{\pi}{4} \right ) 
-+ 0
-+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{2} \cdot t - \frac{\pi}{2} \right ) 
-\]
+\begin{align*}
+f(t) &= 1 \\
+&+ 3 \cdot \cos \left( 1 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 4 \cdot \cos \left( 2 \cdot \frac{\pi}{4} \cdot t + \frac{\pi}{4} \right )  \\
+&+ 0 \cdot \cos \left( 3 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{4} \cdot t - \frac{\pi}{2} \right ) \\
+\end{align*}
 <p>
 のグラフを描き、周期と基本周波数を求めてみましょう。
 </p>
@@ -46,15 +46,18 @@ f(t) = 1
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $0 \leq t \leq 8$ 秒区間、代表点は 0.1 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 最初の列に各時刻をオートフィルを使って入力します。
+
+
+
+<span class="olradio"><input type="radio" name="p1"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 「t」と書いた右隣のセルに「f(t)」と書き、その下のセルからに各時刻における $f(t)$ の値をオートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化ありとします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフから周期 $\textrm{T}$ [秒]と基本周波数 $f_1$ [Hz]を求め、グラフタイトルに記入します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「FR-1-1」として下さい。
+<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「FR_1_1」として下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、グラフを画像ファイルとして保存して下さい。
 <br>
@@ -70,12 +73,10 @@ f(t) = 1
 <input type="checkbox"><b>演習 1-2 (チーム、15分):</b> フーリエがどういう人物であったか色々調べてみましょう。
 </p>
 <ol>
-<li>「フーリエの本名」</li>
-<li>「フーリエの生誕日と没日」</li>
-<li>「当時のフランスでの出来事」</li>
-<li>「当時のアメリカでの出来事」</li>
-<li>「当時の日本での出来事」</li>
-<li>「自分が知っているフーリエの知人の名前」</li>
+<li>「フーリエの本名・生誕日・没日」</li>
+<li>「フーリエが生きていた間に起こったフランスでの出来事」</li>
+<li>「フーリエが生きていた間に起こったアメリカでの出来事」</li>
+<li>「フーリエが生きていた間に起こった日本での出来事」</li>
 </ol>
 <p>
 をチームみんなで手分けして Web 上等で調べ、指定場所に調べた内容を書いて下さい。
@@ -87,31 +88,31 @@ f(t) = 1
 <p>
 <input type="checkbox"><b>演習 1-3 (個人、15分):</b> 演習1-1の信号
 </p>
-\[
-f(t) = 1 
-+ 3 \cdot \cos \left( 1 \cdot \frac{\pi}{2} \cdot t + 0 \right ) 
-+ 4 \cdot \cos \left( 2 \cdot \frac{\pi}{2} \cdot t + \frac{\pi}{4} \right ) 
-+ 0
-+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{2} \cdot t - \frac{\pi}{2} \right ) 
-\]
+\begin{align*}
+f(t) &= 1 \\
+&+ 3 \cdot \cos \left( 1 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 4 \cdot \cos \left( 2 \cdot \frac{\pi}{4} \cdot t + \frac{\pi}{4} \right )  \\
+&+ 0 \cdot \cos \left( 3 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{4} \cdot t - \frac{\pi}{2} \right ) \\
+\end{align*}
 <p>
 に含まれている直流成分、基本波、第2〜4高調波を表計算ソフトを使って描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「FR-1-1」をコピーし「FR-1-3」に名前を変えて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 「FR_1_1」をコピーし「FR_1_3」に名前を変えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「FR-1-3」を表計算ソフトで開きます。
+<span class="olradio"><input type="radio" name="p3"></span> 「FR_1_3」を表計算ソフトで開きます。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> $f(t)$のグラフを削除します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> $f(t)$の次の列の最初の行に時刻0における直流成分の値を入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 3列目の一番上のセルから右に向かって「基本波」「第1高調波」「第2高調波」「第3高調波」「第4高調波」と入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> その次の列に時刻0における基本波の値を入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 3列目の2行目に時刻0における基本波の値を入力します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> その次の列から同様に時刻0における第2〜4高調波の値を入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 各時刻における直流成分、基本波、第2〜4高調波をオートフィルを使ってまとめて入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 各時刻における直流成分、基本波、第2〜4高調波の値をオートフィルを使ってまとめて入力します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> $f(t)$、直流成分、基本波、第2〜4高調波を1枚のグラフで表します。グラフの種類は散布図、線のみ、平滑化ありとします。
 <br>
@@ -125,74 +126,46 @@ f(t) = 1
 
 <br>
 <h2><a href="./page04.html">4. 複素フーリエ級数展開</a></h2>
-
-<p>
-次の項目で合わせて演習します。
-</p>
-
-<br>
 <h2><a href="./page05.html">5. 実フーリエ級数展開と複素フーリエ級数展開の関係</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-4 (個人、15分):</b> 演習1-1の信号に含まれている直流成分、基本波、第2〜4高調波を 9 個の複素正弦波
+<input type="checkbox"><b>演習 1-4 (個人、15分):</b> 演習1-1の信号
+</p>
+\begin{align*}
+f(t) &= 1 \\
+&+ 3 \cdot \cos \left( 1 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 4 \cdot \cos \left( 2 \cdot \frac{\pi}{4} \cdot t + \frac{\pi}{4} \right )  \\
+&+ 0 \cdot \cos \left( 3 \cdot \frac{\pi}{4} \cdot t + 0 \right ) \\
+&+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{4} \cdot t - \frac{\pi}{2} \right ) \\
+\end{align*}
+<p>
+に含まれている直流成分、基本波、第2〜4高調波を 9 個の複素正弦波
 </p>
 \[
-\textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \quad , \quad (k=-4,-3,\cdots,3,4)
+z_k(t) = \textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \quad , \quad (k=-4,-3,\cdots,3,4)
 \]
 <p>
 に分解し、それらの複素平面上での動きを確かめてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> <a href="./FR-1-4.ods">FR-1-4.ods</a>(ods形式)又は<a href="./FR-1-4.xlsm">FR-1-4.xlsm</a>(xlsm形式)をダウンロードし、演習フォルダに移して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> Jupyter Notebook を起動し、「FR_1_4」というノートブックを作ります
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトで FR-1-4 を開いて下さい。
-</p>
-<p>
-※ マクロが実行できないという警告が出たらマクロセキュリティレベルを「中」にしてからファイルを開き直し、演習が終わってから元のレベルに戻して下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> 基本角周波数 $w_1 = 2 \pi \cdot f_1$ [rad/秒]をセットします。
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> $k = 0$ 番目のフーリエ係数 $\textrm{C}[0]$ の絶対値、偏角をセットします。
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> 同様に残りの $k = 1 \cdots 4$ 番目のフーリエ係数 $\textrm{C}[k]$ の絶対値、偏角をセットします。
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/FR_1_4.txt">テンプレート</a>をノートブックにコピーします
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 開始する前に、各複素正弦波の動きを予想して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 基本角周波数 $w_1$ [rad/秒]の値をセットします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 各複素正弦波の動きを確認したらシートを上書き保存します。
+<span class="olradio"><input type="radio" name="p4"></span> $\textrm{C}[0]$ (直流成分) の値をセットします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> フーリエ係数 $\textrm{C}[1]$、$\textrm{C}[2]$、 $\textrm{C}[3]$、 $\textrm{C}[4]$ の絶対値、偏角をセットします。 ※ $\textrm{C}[-1]$、$\textrm{C}[-2]$、 $\textrm{C}[-3]$、 $\textrm{C}[-4]$ のパラメータは自動でセットされます
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
-</p>
-</div>
-
+<span class="olradio"><input type="radio" name="p4"></span> 実行します。
 <br>
-<p>
-<input type="checkbox"><b>演習 1-5 (個人、15分):</b> 演習1-4で求めた 9 個の複素正弦波を足し合わせると演習1-1の周期性複素正弦波になることを確認しましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="./FR-1-5.ods">FR-1-5.ods</a>(ods形式)又は<a href="./FR-1-5.xlsm">FR-1-5.xlsm</a>(xlsm形式)をダウンロードし、演習フォルダに移して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 各$z_k(t)$ の動きとサイン波の形状を見て複素フーリエ級数展開が正しいことを再確認します。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 表計算ソフトで FR-1-5 を開いて下さい。
-</p>
-<p>
-※ マクロが実行できないという警告が出たらマクロセキュリティレベルを「中」にしてからファイルを開き直し、演習が終わってから元のレベルに戻して下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> 演習1-4で入力したパラメータをコピーします。
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして画像ファイルを保存して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 各複素正弦波を足し合わせて $f(t)$ を計算します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 開始する前に $f(t)$ の動きを予想して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 動きを確認したらシートを上書き保存します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、提出用のグラフを画像ファイルとして保存して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「画像ファイル」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p3"></span>  指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい。
 </p>
 </div>
 
