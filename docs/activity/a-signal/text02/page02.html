@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 時間領域アナログ信号との合成</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログ信号処理の基礎</a></li>
+<li>学習項目: [2] 時間領域アナログ信号の合成</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次に、時間領域アナログ信号 $f(t)$ に対して別の時間領域アナログ信号 $a(t)$ を足したり引いたり掛けたり割ったりすることで新しい時間領域アナログ信号 $g(t)$ を作ることを考えます。
+</p>
+
+<p>
+この合成は各時刻 $t$ 毎に $f(t)$ と $a(t)$ の値を四則演算して $g(t)$ に代入することで行われます。
+<br>
+式で書くと次のようになります。
+</p>
+
+<p>
+足し算： $g(t) = f(t) + a(t)$
+</p>
+
+<p>
+引き算： $g(t) = f(t) - a(t)$
+</p>
+
+<p>
+掛け算： $g(t) = a(t) \cdot f(t)$
+</p>
+
+<p>
+割り算(ただし $t$ の値域内で $a(t) \ne 0$ )： $g(t) = \frac{f(t)}{a(t)}$
+</p>
+
+<p>
+ちなみに前ページで扱った実定数との合成は $a(t) = \alpha$ とした場合に相当します。
+</p>
+
+<p>
+さらに、これらの演算を複数組み合わせる事も可能です。
+<br>
+例えば、時間領域アナログ信号 $b(t)$ と $c(t)$ も使って次のような $g(t)$ も作れます。
+</p>
+
+<p>
+掛け算、足し算、割り算の組み合わせ： $g(t) = \frac{a(t) \cdot f(t) + b(t)}{c(t)}$
+</p>
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>

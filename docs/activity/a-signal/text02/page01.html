@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 実定数との合成</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログ信号処理の基礎</a></li>
+<li>学習項目: [2] 時間領域アナログ信号の合成</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+任意の時間領域アナログ信号 $f(t)$ 対し、任意の実数の定数 $\alpha$ を足したり引いたり掛けたり割ったりすることで、次のように新しい時間領域アナログ信号 $g(t)$ を作ることを考えます。
+</p>
+
+<p>
+足し算： $g(t) = f(t) + \alpha$
+</p>
+
+<p>
+引き算： $g(t) = f(t) - \alpha$
+</p>
+
+<p>
+掛け算： $g(t) = \alpha \cdot f(t)$
+</p>
+
+<p>
+割り算(ただし $\alpha \ne 0$ )： $g(t) = \frac{f(t)}{\alpha}$
+</p>
+
+<p>
+これらの合成をグラフで考えると、元の $f(t)$ に対して $g(t)$ は次のように変化します (<a href="./practice.html">演習</a>で実際に確かめてみます)。
+</p>
+
+<p>
+足し算、引き算： 上下に平行移動
+</p>
+
+<p>
+掛け算、割り算： 上下に伸縮 (特に $\alpha$ がマイナスなら上下反転)
+</p>
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>
