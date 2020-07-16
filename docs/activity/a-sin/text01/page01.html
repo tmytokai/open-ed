@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 時間領域アナログサイン波</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: アナログサイン波</a></li>
+<li>学習項目: [1] 時間領域アナログサイン波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+<b>時間領域アナログサイン波</b>とは、sin 関数または cos 関数を<a href="../../a-signal">時間領域アナログ信号</a>とみなした信号で、<b>正弦波</b>、交流(AC: Alternating Current)信号、シヌソイドなどとも言います。
+</p>
+
+<p>
+時間領域アナログサイン波の定義式は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 時間領域アナログサイン波 (正弦波、交流(AC)信号、シヌソイド)</b>
+<p>　</p>
+
+\[
+f(t) = a \cdot \sin( w \cdot t + \phi )
+\]
+
+<p>
+または
+</p>
+
+\[
+f(t) = a \cdot \cos( w \cdot t + \phi )
+\]
+
+<p>
+$a$・・・振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+</p>
+
+<p>
+$w$ ・・・角周波数、実数の <u>定数</u>、範囲は $w \geq 0$、単位は [rad/秒]
+</p>
+
+<p>
+$t$ ・・・時刻、実数の <u>変数</u>、単位は [秒]
+</p>
+
+<p>
+$\phi$ ・・・初期位相、ファイと呼ぶ、実数の <u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+</p>
+
+</div>
+
+<p>
+なお $t$ は変数ですが、$a$、$w$、$\phi$は定数パラメータなので事前に値を決めておきます。
+</p>
+
+<p>
+また sin 関数の代わりに cos 関数を使った場合でもサイン波と呼びます。
+<br>
+その理由は以下の公式より、cos 関数も sin 関数も違いは初期位相だけで、数学的には同一視出来るからです。
+</p>
+
+\[
+a \cdot \cos( w \cdot t + \phi) = a \cdot \sin\{ w \cdot t + (\phi + \pi/2) \}
+\]
+
+<p>
+では時間領域アナログサイン波の例として
+</p>
+\[
+f(t) = 1 \cdot \sin( 2\pi \cdot t -\pi/2 )
+\]
+</p>
+のグラフを図 1 に示します。
+</p>
+<div class="info">
+<input type="checkbox"><b>図1: $f(t) = 1 \cdot \sin( 2\pi \cdot t -\pi/2 )$ のグラフ</b>
+<p>　</p>
+<img src="./img/page01-fig1.png" alt="">
+</div>
+
+<br>
+<script>PreNext(1,7)</script>
+</body>
+</html>
