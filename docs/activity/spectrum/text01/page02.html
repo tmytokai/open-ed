@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 振幅・位相・パワースペクトル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [1] スペクトル解析の概要</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page01.html">前ページ</a>で「解析対象となる時間領域信号の種類に応じた手法によって求められる周波数領域信号のことをスペクトルと呼ぶ」と書きましたが、具体的にはスペクトルは、アナログ信号の場合は複素角周波数 $s$ を独立変数とした複素関数 $\textrm{F}(s)$、デジタル信号の場合は複素角周波数 $z$ を独立変数とした複素関数 $\textrm{F}(z)$ で表されます。
+</p>
+<p>
+ただし、複素角周波数 $s$ や $z$ は人間にとっては理解し辛い概念ですので、何らかの手法を用いて $s$ や $z$ を単なる角周波数 $w$ [rad/秒] に変換し、$w$ を独立変数とした複素関数
+</p>
+
+\[
+\textrm{F}(w)
+\]
+
+<p>
+が実際の解析の場ではスペクトルとして用いられます。
+</p>
+
+<p>
+さて、スペクトル $\textrm{F}(w)$ は複素関数ですので次のように極形式に変形することが出来ます。
+</p>
+
+\[
+\textrm{F}(w) = |\textrm{F}(w)| \cdot \textrm{e}^{\{j\cdot \angle \ \textrm{F}(w)\}}
+\]
+
+<p>
+ここで
+</p>
+
+<p>
+・ 絶対値 $|\textrm{F}(w)|$のことを「<b>振幅スペクトル</b>」または「<b>振幅成分</b>」
+</p>
+
+<p>
+・ 偏角 $\angle \ \textrm{F}(w)$ のことを「<b>位相スペクトル</b>」または「<b>位相成分</b>」
+</p>
+
+<p>
+・ $|\textrm{F}(w)|^2$のことを「<b>パワースペクトル</b>」または「<b>(電力)スペクトル密度</b>」
+</p>
+
+<p>
+と呼びます。
+</p>
+
+<p>
+この振幅・位相スペクトルは、具体的には解析対象の信号に含まれる角周波数 $w$ [rad/秒]のサイン波の振幅の大きさと位相を表す数となります。
+</p>
+
+<p>
+ただし振幅スペクトルの値はサイン波の振幅の実際の大きさではなくて相対的な大きさを表す数となります。
+</p>
+
+<p>
+例えば  $|\textrm{F}(w_1)| = 2$ で $|\textrm{F}(w_2)| = 1$ だからといってその信号に含まれる $w_1$ [rad/秒] のサイン波の振幅が 2 で $w_2$ [rad/秒] のサイン波の振幅が 1という訳ではありません。
+<br>
+あくまで $w_1$ [rad/秒] のサイン波の振幅は $w_2$ [rad/秒] のサイン波の振幅の 2 倍だということを示しているだけです。
+</p>
+
+<script>PreNext(2,3)</script>
+</body>
+</html>

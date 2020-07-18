@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. スペクトル図</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 時間領域信号のスペクトル解析</a></li>
+<li>学習項目: [1] スペクトル解析の概要</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+スペクトル $\textrm{F}(w)$ のグラフのことを「<b>スペクトル図</b>」と呼びます。
+</p>
+
+<p>
+スペクトル $\textrm{F}(w)$ は複素関数なので、普通にスペクトル図を描くと角周波数軸、実軸、虚軸の3つの軸を持つ3次元グラフになります。
+<br>
+ただし3次元グラフは分かりにくいので、通常は振幅スペクトル(又はパワースペクトル)図と位相スペクトル図の2つのグラフに分けます。
+</p>
+
+<p>
+ここで振幅スペクトル図は、横軸を角周波数 $w$ [rad/秒]、縦軸を振幅スペクトル $|\textrm{F}(w)|$ とするグラフです。
+<br>
+例を図1に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 振幅スペクトル図の例</b>
+<p>　</p>
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<p>
+同様に位相スペクトル図は、横軸を角周波数 $w$ [rad/秒]、縦軸を位相スペクトル $\angle\textrm{F}(w)$ とするグラフです。
+<br>
+例を図2に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 位相スペクトル図の例</b>
+<p>　</p>
+<img src="./img/page03-fig2.png" alt="">
+</div>
+
+<p>
+パワースペクトル図は振幅スペクトル図を縦方向に自乗するだけなので省略します。
+</p>
+
+
+<script>PreNext(3,3)</script>
+</body>
+</html>
