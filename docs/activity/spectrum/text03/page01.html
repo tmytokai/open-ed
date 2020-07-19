@@ -21,43 +21,48 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次は<a href="../../dft/text01/page01.html">周期性時間領域ディジタル信号</a>のスペクトルを考えます。
+次に<a href="../../dft/text01/page01.html">周期性時間領域ディジタル信号</a>のスペクトル $\textrm{F}(w)$ を考えます。
 </p>
 
 <p>
-周期性時間領域ディジタル信号の場合は、<a href="../../dft/text01/page02.html">DFT 係数</a> $\textrm{C}[k]$ がスペクトルになります。
+周期性時間領域ディジタル信号の場合は、<a href="../../dft/text01/page02.html">DFT 係数</a> $\textrm{C}[k]$ を用いてスペクトルを求めます。
 </p>
 
 <p>
-ただし今回解析対象としている信号はディジタル信号なので、そのままでは基本角周波数が分からないという問題があります。
+ただし今回解析対象としている信号はディジタル信号なので、そのままでは基本角周波数 $w_1$ が分からないという問題があります。
 <br>
 そこでまずは<a href="../../d-sin/text01/page03.html">時間領域ディジタルサイン波の所</a>で学んだ方法を応用して、周期性時間領域ディジタル信号の基本角周波数を求めます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>周期性時間領域ディジタル信号の基本角周波数を求める方法</b>
+<input type="checkbox"><b>周期性時間領域ディジタル信号の基本角周波数 $w_1$ を求める方法</b>
 
 <p>
-　
+$w_1$ [rad/秒] ・・・基本角周波数
 </p>
-<ul>
-<li>$w_1$ [rad/秒] ・・・基本角周波数</li>
-<li>$f_s$ [Hz]・・・サンプリング周波数</li>
-<li>$\textrm{N}$ [点]・・・周期性時間領域ディジタル信号の周期</li>
-</ul>
+<p>
+$f_s$ [Hz]・・・サンプリング周波数
+</p>
+<p>
+$\textrm{N}$ [点]・・・周期性時間領域ディジタル信号の周期
+</p>
 
 <p>
-とすると
+としたとき、周期性時間領域ディジタル信号の基本角周波数は
 </p>
 
 \[
 w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}
 \]
 
+<p>
+となる
+</p>
+
 </div>
 
 <p>
-こうして求めた $w_1$ を用いると、周期性時間領域ディジタル信号のスペクトルは以下の通りとなります。
+こうして求めた $w_1$ を用いると、周期性時間領域ディジタル信号のスペクトルは以下の通りになります。
 </p>
 
 <div class="info">
@@ -67,8 +72,8 @@ w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}
 \textrm{F}(w)
 =
 \begin{cases}
-\textrm{C}[k] & , w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\textrm{C}[k] & , \ w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
@@ -76,14 +81,28 @@ w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}
 $w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}$ ・・・ 基本角周波数、 単位は [rad/秒]
 </p>
 
-<p>
-※  $k$ の符号が異なる DFT 係数は共役関係にあるので、今回は $w<0$ の範囲は考えないことにしています。
-</p>
-
 </div>
 
 <p>
-周期性時間領域ディジタル信号の振幅・位相・パワースペクトルも DFT 係数を使ってそれぞれ次のように表されます。
+なお、<a href="../../dft/text01/page02.html">こちら</a>では DFT係数 $\textrm{C}[k]$ を $k=0,1,2,\cdots \text{N}-1$ の N 個しか求めていませんでしたが、正確には DFT 係数は周期 $\textrm{N}$ の周波数領域ディジタル信号であり、
+</p>
+
+\[
+\textrm{C}[k] = \textrm{C}[k + n \cdot \textrm{N}] \ , \ \mbox{$n$は任意の整数}(n=0,\pm 1, \pm2, \cdots)
+\]
+
+<p>
+という性質を持っています。
+</br>
+さらに DFT係数は $k = \textrm{N}/2$ を中心として複素共役であるという性質も持っていましたので、結局のところ全ての $k$ について DFT 係数を求めなくても、最初の N/2 個ほど求めるだけで十分です(※)。
+</p>
+
+<p>
+※ 正確には N が奇数なら $k=0,1,\cdots,(\textrm{N}-1)/2$ の $(\textrm{N}-1)/2+1$ 個、 偶数なら $k=0,1,\cdots,\textrm{N}/2$ の $\textrm{N}/2+1$ 個
+</p>
+
+<p>
+なお周期性時間領域ディジタル信号の振幅・位相・パワースペクトルは DFT 係数を使ってそれぞれ次のように表されます。
 </P>
 
 <div class="info">
@@ -97,8 +116,8 @@ $w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}$ ・・・ 基本角周波数、 単�
 |\textrm{F}(w)|
 =
 \begin{cases}
-|\textrm{C}[k]| & , w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+|\textrm{C}[k]| & , \ w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots, ) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
@@ -110,8 +129,8 @@ $w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}$ ・・・ 基本角周波数、 単�
 \angle\textrm{F}(w)
 =
 \begin{cases}
-\angle\textrm{C}[k] & , w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\angle\textrm{C}[k] & , \ w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots, ) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
@@ -123,28 +142,12 @@ $w_1 = \frac{2 \pi \cdot f_s}{\textrm{N}}$ ・・・ 基本角周波数、 単�
 |\textrm{F}(w)|^2
 =
 \begin{cases}
-|\textrm{C}[k]|^2 & , w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots, \textrm{N}/2) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+|\textrm{C}[k]|^2 & , \ w = k \cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots, ) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
 </div>
-
-<p>
-以上より、<a href="../text02/page01.html">周期性時間領域アナログ信号の時</a>と同様に
-</p>
-
-<p>
-<b>
-周期性時間領域ディジタル信号の場合は直流成分($k=0$)、基本波($k =1$)、高調波($k = 2, 3, \cdots, \textrm{N}/2$) に対応する角周波数の時だけスペクトル値が定まって、それ以外の角周波数におけるスペクトル値は $0$
-</b>
-</p>
-
-<p>
-となります。
-<br>
-ただし、周期性時間領域アナログ信号の時は $k$ は無限大まで続く整数でしたが、今回は標本化定理よりナイキスト周波数 $f_s/2$ [Hz] 以上のサイン波が含まれないため、$k$ は最大で $\textrm{N}/2$ までになります。
-</p>
 
 <script>PreNext(1,3)</script>
 </body>

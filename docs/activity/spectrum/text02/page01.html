@@ -21,13 +21,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-まず始めに<a href="../../fourier/text01/page01.pdf">周期性時間領域アナログ信号</a>のスペクトルを考えます。
+まず始めに<a href="../../fourier/text01/page01.html">周期性時間領域アナログ信号</a>のスペクトル $\textrm{F}(w)$ を考えます。
 </p>
 
 <p>
-周期性時間領域アナログ信号の場合は、<a href="../../fourier/text01/page04.pdf">複素フーリエ係数</a> $\textrm{C}[k]$ がスペクトルになります。
-<br>
-ただし $k$ は整数値なので、次のように角周波数 $w$ [rad/秒]の値によってはスペクトル値が $0$ になる時があります。
+周期性時間領域アナログ信号の場合は、<a href="../../fourier/text01/page04.html">複素フーリエ係数</a> $\textrm{C}[k]$ を用いて以下のようにスペクトルが求まります。
 </p>
 
 <div class="info">
@@ -37,23 +35,31 @@
 \textrm{F}(w)
 =
 \begin{cases}
-\textrm{C}[k] & , w = k \cdot w_1 \mbox{  [rad/秒] のとき}\  (k = 0, 1, 2, \cdots) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\textrm{C}[k] & , \ w = k \cdot w_1 \mbox{  [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
 <p>
-$w_1 = 2\pi/\textrm{T}$ ・・・ 基本角周波数、 単位は [rad/秒]
-</p>
-
-<p>
-※  $k$ の符号が異なる複素フーリエ係数は共役関係にあるので、今回は $w<0$ の範囲は考えないことにしています。
+$w_1$ ・・・ 基本角周波数、 単位は [rad/秒]
 </p>
 
 </div>
 
 <p>
-また振幅・位相・パワースペクトルは複素フーリエ係数を使ってそれぞれ次のように表されます。
+以上から分かるように、
+</p>
+
+<p>
+<b>周期性時間領域アナログ信号の場合は直流成分、基本波、高調波に対応する角周波数($w=k\cdot w_1$)の所だけスペクトル値が定まって、それ以外の角周波数におけるスペクトル値は $0$</b>
+</p>
+
+<p>
+になります。
+</p>
+
+<p>
+なお振幅・位相・パワースペクトルは複素フーリエ係数を使ってそれぞれ次のように表されます。
 </P>
 
 <div class="info">
@@ -67,8 +73,8 @@ $w_1 = 2\pi/\textrm{T}$ ・・・ 基本角周波数、 単位は [rad/秒]
 |\textrm{F}(w)|
 =
 \begin{cases}
-|\textrm{C}[k]| & ,w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+|\textrm{C}[k]| & , \ w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
@@ -80,8 +86,8 @@ $w_1 = 2\pi/\textrm{T}$ ・・・ 基本角周波数、 単位は [rad/秒]
 \angle\textrm{F}(w)
 =
 \begin{cases}
-\angle\textrm{C}[k] & ,w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+\angle\textrm{C}[k] & , \ w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
@@ -93,32 +99,13 @@ $w_1 = 2\pi/\textrm{T}$ ・・・ 基本角周波数、 単位は [rad/秒]
 |\textrm{F}(w)|^2
 =
 \begin{cases}
-|\textrm{C}[k]|^2 & ,w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, 1, 2, \cdots) \\
-0 & , w \mbox{がそれ以外の値のとき。ただし} w \geq 0
+|\textrm{C}[k]|^2 & , \ w = k\cdot w_1 \mbox{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\
+0 & , \ w \mbox{がそれ以外の値のとき}
 \end{cases}
 \]
 
 </div>
 
-<p>
-以上から分かるように、
-</p>
-
-<p>
-<b>周期性時間領域アナログ信号の場合は直流成分($k=0$)、基本波($k =1$)、高調波($k = 2, 3, \cdots$) に対応する角周波数の時だけスペクトル値が定まって、それ以外の角周波数におけるスペクトル値は $0$</b>
-</p>
-
-<p>
-となります。あるいは
-</p>
-
-<p>
-<b>ある周期性時間領域アナログ信号のスペクトルが分かれば、その信号の直流成分、基本波、高調波の各パラメータ値(角周波数、振幅、位相)が分かるので元の信号を復元できる</b>
-</p>
-
-<p>
-と言うことも出来ます。
-</p>
 
 <script>PreNext(1,3)</script>
 </body>
