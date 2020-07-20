@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. コンパイルと実行</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [1] Java言語の基礎</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Java も、C言語などと同じ様にまずソースコードをコンパイルしてバイナリファイル(正確には Java バイトコードと呼びます)を作る必要があります。
+<br>
+なお一般に Java のソースコードの拡張子は「.java」で、バイナリファイルの拡張子は「.class」となります。
+</p>
+
+<p>
+さて Java のコンパイラには色々な種類がありますが、今回のアクティビティでは「javac」を使います。
+<br>
+なお Java のプログラムは「 Java 仮想マシン」と呼ばれる仮想のコンピュータ上で動かすという仕組みになっているので、javac でコンパイルして作ったバイナリファイルは「<b>そのままでは実行できません</b>」。
+<br>
+このJava仮想マシンにも色々な種類がありますが、今回のアクティビティでは「java」を使います。
+</p>
+
+<p>
+では早速ソース 1 に示した Hello World のソースコードを使って、具体的にコンパイルと実行をしてみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: Hello World</b>
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+</pre>
+</div>
+
+<p>
+ここで 2 行目の「public static void main(String[] args)」が Java 言語のメイン関数になります。
+</p>
+<p>
+※ 1 行目の「public class Main」の説明はとりあえず一旦置いておきます
+</p>
+
+<p>
+そしてメイン関数の中で文字列 "Hello World" を画面に表示しています。
+<br>
+なお Java では関数のことを「メソッド」と呼びますので、以降はメイン関数を「<b>メインメソッド</b>」と呼ぶことにします。
+</p>
+
+<p>
+ではこのソース1を以下の手順でコンパイル＆実行して下さい。
+</p>
+
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> 「Main.java」という空のテキストファイルを新規作成する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> そのファイルにソース1の内容をコピーして上書き保存する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> 「javac Main.java」 でコンパイルしてバイナリファイル「Main.class」を作る
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> 「java Main」 で実行する ※ 拡張子 .class は必要ありません
+</p>
+</div>
+</div>
+
+<br>
+<script>PreNext(1,7)</script>
+</body>
+</html>

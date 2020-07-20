@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: オブジェクト指向プログラミングの基礎</a></li>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
 <li>学習項目: [2] 例外処理</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -20,12 +20,15 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 90  分
+演習時間: 60  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. 例外処理とは</a></h2>
 
+<h2><a href="./page02.html">2. 標準例外</a></h2>
+
+<br>
 <p>
 <input type="checkbox"><b>演習 2-1 (個人、10分):</b> テキストの<a href="./page01.html">ソース1</a>を実行して例外処理を試してみましょう。
 </p>
@@ -73,8 +76,6 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 </div>
 
 <br>
-<h2><a href="./page02.html">2. 標準例外</a></h2>
-
 <p>
 <input type="checkbox"><b>演習 2-3 (個人、30分):</b> 算術例外を試してみましょう。
 </p>
@@ -105,39 +106,6 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 </p>
 </div>
 
-<br>
-<h2><a href="./page03.html">3. 例外の自作</a></h2>
-
-<p>
-<input type="checkbox"><b>演習 2-4 (個人、30分):</b> 例外を自作してみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> 「MyException.java」を作成して<a href="./page03.html">ソース1</a>をコピーし、コンパイルします。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 「OBSC_2_3.java」を「OBSC_2_4.java」にコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> クラス名を OBSC_2_4 に変更します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> try の a に数字を入力している行の「下」に、以下の処理を追加します。
-</p>
-<div class="info">
-<p>
- a が 3 だったら MyException 例外を投げる
-</p>
-</div>
-<p>
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> ArithmeticException の catch 処理の下に MyException の catch 処理を追加します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 実行し、3 を入力したら自作例外、0 を入力したら算術例外、それ以外を入力したら 入出力例外が起きることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果(3を入力した時の表示)」を記入して下さい。
-</p>
-</div>
-
-<script>PreNext(4,3)</script>
+<script>PreNext(3,2)</script>
 </body>
 </html>

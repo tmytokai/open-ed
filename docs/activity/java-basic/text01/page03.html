@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 画面表示</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [1] HelloWorld</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+文字列をコンソール画面に表示するには
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: 文字列表示</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        System.out.print( "hoge" );  // 改行なし
+        System.out.println( "fuga" );  // 改行あり
+    }
+}
+</pre>
+
+</div>
+
+<p>
+で行います。
+<br>
+print と println の違いは行の最後に改行するかどうかだけです。
+</p>
+
+<p>
+int 型や double 型などの数字が入っている変数の内容も同じように表示できます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: 数値の表示</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int a = 12;
+        double b = 3.4;
+        System.out.println( a );
+        System.out.println( b );
+    }
+}
+</pre>
+
+</div>
+
+<p>
+文字列と数字型変数の内容を + で連結して表示することも出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3: 文字列と数値の連結表示</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int a = 12;
+        System.out.println( "aの内容は" + a + "です" );
+    }
+}
+</pre>
+
+</div>
+
+<p>
+ただし、当然ですが数字型の変数と数字型の変数を + で繋ぐと2つの値が足された値が表示されますので注意して下さい。
+<br>
+例えば以下のコードを実行すると「123.4」ではなくて「15.4」が表示されます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース4: 数値型と数値型の + は普通に足し算になる</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int a = 12;
+        double b = 3.4;
+
+        System.out.println( a + b );
+    }
+}
+</pre>
+
+</div>
+
+<br>
+<script>PreNext(3,7)</script>
+</body>
+</html>
