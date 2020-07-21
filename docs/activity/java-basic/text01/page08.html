@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>8. 乱数</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [1] HelloWorld</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+乱数は Math クラスを使って取得できます。
+</p>
+
+<p>
+0から1までの実数の乱数を取得したい場合は次のように Math.random() を使います。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: 0 から 1 までの実数の乱数</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        double a = Math.random();
+        System.out.println( a );
+    }
+}
+</pre>
+
+</div>
+
+<p>
+従って A 以上 B 以下の整数の乱数を取得したい場合は次のように書きます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: A 以上 B 以下の整数の乱数</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int A = 5;
+        int B = 8;
+        int c = A + (int)(Math.random()*((B-A)+1));
+        System.out.println( c );
+    }
+}
+</pre>
+
+</div>
+
+<br>
+<script>PreNext(8,8)</script>
+</body>
+</html>

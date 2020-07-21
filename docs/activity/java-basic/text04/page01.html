@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. リスト(ArrayList) </title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [4] コレクション</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+コレクションは<a href="../text01/page07.html">配列</a>の様に要素を一つのグループにまとめた集合体(オブジェクト)のことです。
+<br>
+と書いても良く分からないと思うので、今のところは高機能な配列だと思って下さい。
+</p>
+
+<p>
+Java のコレクションには様々な種類があるのですが、今回はリストとマップの使い方を学びます。
+</p>
+
+<p>
+このページでまずリストについて実際にソースを見ながら説明します。
+<br>
+なおリストにも色々種類があるのですが、今回は最も単純な ArrayList を使います。
+</p>
+
+<p>
+まずリストの定義方法について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1: リスト(ArrayList)の定義方法</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+    	ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+    	ArrayList&lt;Double&gt; list3 = new ArrayList&lt;Double&gt;();
+    }
+}
+</pre>
+</div>
+
+<p>
+ソース 1 の 1 行目の import 分でリスト(ArrayList)を使うことを宣言しています。
+<br>
+6 行目では list1 という名前の String 型のリストを定義しています。
+<br>
+7 行目では list2 という名前の Integer 型 (注)のリストを定義しています。
+<br>
+8 行目では list3 という名前の Double 型 (注)のリストを定義しています。
+</p>
+
+<p>
+(注) Integer と Double はそれぞれ int 型と double 型の<a href="../text01/page02.html">ラッパークラス</a>です。
+<br> 
+リストやマップはプリミティブ型でなくてラッパークラスを指定する必要があります。
+</p>
+
+<p>
+この様に、配列と異って「<b>リストの場合は事前に要素数を指定する必要はありません</b>」。
+</p>
+
+<p>
+次にリストの一番後に順に要素を追加していき、最後にリストの中身を全て表示してみます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 2: リスト(ArrayList)の一番後に要素を追加して中身を全て表示</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+    	ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+    	ArrayList&lt;Double&gt; list3 = new ArrayList&lt;Double&gt;();
+
+        // 一番後に要素を追加
+    	list1.add( "Hoge" );
+    	list1.add( "Fuga" );
+    	list1.add( "Piyo" );
+
+    	list2.add( 12 );
+    	list2.add( 34 );
+    	list2.add( 56 );
+
+    	list3.add( 1.2 );
+    	list3.add( 3.4 );
+    	list3.add( 5.6 );
+
+        // リストの中身を全て表示
+        System.out.println( list1 ); 
+        System.out.println( list2 ); 
+        System.out.println( list3 ); 
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 2 の実行結果</b>
+<pre class="wrap">
+[Hoge, Fuga, Piyo]
+[12, 34, 56]
+[1.2, 3.4, 5.6]
+</pre>
+</div>
+
+<p>
+この様に、リストの一番後に要素を追加する場合は
+</p>
+
+<p>
+<b>リストの名前.add( 追加する要素 )</b>
+</p>
+
+<p>
+と書きます。
+<br>
+また全ての要素を表示する場合は普通に println を使います。
+</p>
+
+<p>
+次に、配列のようにリスト内の指定した位置の要素を取り出してみます。
+
+<div class="info">
+<input type="checkbox"> <b>ソース 3: リスト(ArrayList)内の指定した位置の要素を取り出す</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+    	ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+    	ArrayList&lt;Double&gt; list3 = new ArrayList&lt;Double&gt;();
+
+        // 一番後に要素を追加
+    	list1.add( "Hoge" );
+    	list1.add( "Fuga" );
+    	list1.add( "Piyo" );
+
+    	list2.add( 12 );
+    	list2.add( 34 );
+    	list2.add( 56 );
+
+    	list3.add( 1.2 );
+    	list3.add( 3.4 );
+    	list3.add( 5.6 );
+
+        // リスト内の指定した位置の要素を取り出す
+        String a = list1.get(0);
+        int b = list2.get(1);
+        double c = list3.get(2);
+
+        System.out.println( a );
+        System.out.println( b );
+        System.out.println( c );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 3 の実行結果</b>
+<pre class="wrap">
+Hoge
+34
+5.6
+</pre>
+</div>
+
+<p>
+この様に、リスト内の指定した位置の要素を取り出す場合は
+</p>
+
+<p>
+<b>リストの名前.get( 位置 )</b>
+</p>
+
+<p>
+と書きます。
+</p>
+
+
+<p>
+次にリストの長さの取得と、リストのクリアについて説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 4: リスト(ArrayList)の長さの取得とクリア</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+
+        // 一番後に要素を追加
+    	list1.add( "Hoge" );
+    	list1.add( "Fuga" );
+    	list1.add( "Piyo" );
+
+        // リストの長さの取得
+        System.out.println( list1.size() );
+
+        // リストの中身を全て表示
+        System.out.println( list1 );
+
+        // リストのクリア
+        list1.clear();
+
+        // もう一度リストの長さの取得
+        System.out.println( list1.size() );
+
+        // もう一度リストの中身を全て表示
+        System.out.println( list1 );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 4 の実行結果</b>
+<pre class="wrap">
+3
+[Hoge, Fuga, Piyo]
+0
+[]
+</pre>
+</div>
+
+
+<p>
+この様に、リストの長さを取得する場合は
+</p>
+
+<p>
+<b>リストの名前.size()</b>
+</p>
+
+<p>
+リストをクリアしたい場合は
+</p>
+
+<p>
+<b>リストの名前.clear()</b>
+</p>
+
+<p>
+と書きます。
+</p>
+
+<p>
+基本的なリストの使い方は以上ですが、他にも便利な機能がいくつかリストには備わっています。
+<br>
+その他の機能の使い方についてはまとめて説明したいと思います。
+</p>
+
+
+
+<div class="info">
+<input type="checkbox"> <b>ソース 5: リスト(ArrayList)の長さの取得とクリア</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+
+        // 一番後に要素を追加
+    	list1.add( "Hoge" );
+    	list1.add( "Fuga" );
+    	list1.add( "Piyo" );
+
+    	// 指定した要素の位置の取得
+    	System.out.println( list1.indexOf( "Fuga" ) ); 
+
+    	// 指定した位置に要素を挿入
+    	list1.add( 1, "foo" );
+    	System.out.println( list1 ); 
+
+    	// 指定した位置の要素の置き換え
+    	list1.set( 2, "ふが");
+    	System.out.println( list1 ); 
+
+    	// 指定した位置の要素を削除
+    	list1.remove(1);
+    	System.out.println( list1 );
+
+    	// 指定した要素を削除
+    	list1.remove( "ふが" );
+    	System.out.println( list1 );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 5 の実行結果</b>
+<pre class="wrap">
+1
+[Hoge, foo, Fuga, Piyo]
+[Hoge, foo, ふが, Piyo]
+[Hoge, ふが, Piyo]
+[Hoge, Piyo]
+</pre>
+</div>
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>
