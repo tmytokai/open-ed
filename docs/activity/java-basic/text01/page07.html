@@ -20,8 +20,47 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+Java で配列を定義する場合はソース 1 の様にします。
+<br>
+値の代入方法は C 言語と同じです。
 </p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: 配列の定義と値の代入</b>
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int[] a = new int[5]; // 長さ 5 の int 型の配列
+        double[] b = new double[5]; // 長さ 5 の double 型の配列
+
+        a[0] = 1;
+        b[1] = 1.2;
+    }
+}
+</pre>
+</div>
+
+
+<p>
+配列の定義と初期化を同時にしたい場合ははソース 2 の様にします。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: 配列の定義と値の代入</b>
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3};  // 長さ 3 の配列の初期化
+        double[] b = {1.1, 2.2, 3.3}; // 長さ 3 の配列の初期化
+
+        for(int i=0;i<3;++i){
+            System.out.println(a[i]);
+            System.out.println(b[i]);
+        }
+    }
+}
+</pre>
+</div>
 
 <br>
 <script>PreNext(7,8)</script>

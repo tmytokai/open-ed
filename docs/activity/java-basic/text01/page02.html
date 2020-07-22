@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>2. データ型</title>
+<title>2. データ型 (プリミティブ型・String型・ラッパークラス)</title>
 </head>
 <body>
 
@@ -20,8 +20,85 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+Java ではデータ型として表 1 に示した 8 種類が定義されています。
 </p>
+<p>
+Java ではこの 8 つのデータ型の事を「<b>プリミティブ型</b>」と呼んでいます。
+<br>
+このプリミティブ型を使って定義した変数は C 言語の変数と同じ様にメモリ上に生データが直に置かれます。
+</p>
+
+<b>表 1 : Java のデータ型(プリミティブ型)</b>
+<br>
+<br>
+<table>
+<tr><th>型</th><th>値</th></tr>
+<tr><td class="center">boolean</td><td class="center"> true または false</td></tr>
+<tr><td class="center">byte</td><td class="center">8ビット整数 </td></tr>
+<tr><td class="center">char</td><td class="center">1 文字(16 ビットUnicode文字) </td></tr>
+<tr><td class="center">short</td><td class="center">16ビット整数</td></tr>
+<tr><td class="center">int</td><td class="center">32ビット整数</td></tr>
+<tr><td class="center">float</td><td class="center">32ビット実数(単精度浮動小数点数)</td></tr>
+<tr><td class="center">long</td><td class="center">64ビット整数</td></tr>
+<tr><td class="center">double</td><td class="center">64ビット実数(倍精度浮動小数点数)</td></tr>
+</table>
+
+<p>
+またついでですので、String 型 (正確には String クラス)についてもここで説明します。
+<br>
+String 型は文字列を表すデータ型で、例えば次のようにして使います。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: String 型の使用例</b>
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+
+        String str1; // 定義
+        String str2 = "hoge"; // 定義と同時に初期化
+
+        str1 = "fuga"; // 代入
+
+        String str3 = str1 + str2; // 連結 ( str3 には"hogefuga"が入る )
+    }
+}
+</pre>
+</div>
+
+
+
+<p>
+ところで、プリミティブ型で定義した変数は<a href="../../oop-basic/">インスタンス</a>ではありませんので、オブジェクト指向言語である Java でそのまま利用するには不都合な場合があります(例えば<a href="../text04/page01.html">リスト</a>を使いたい時など)。
+</p>
+
+<p>
+そこでプリミティブ型を使えない場合は対応する「<b>ラッパークラス</b>」を使って変数(正確にはインスタンス)を定義します。
+<br>
+プリミティブ型とラッパークラスの対応を表 2 に示します。
+</p>
+
+<p>
+まお、今回のアクティビティでは原則としてプリミティブ型を使って変数を定義しますが、状況に応じてラッパークラスを使用する場合もあります。
+<br>
+ラッパークラスの具体的な使い方はその時に適宜説明したいと思います。
+</p>
+
+<b>表 2 : プリミティブ型とラッパークラスの対応</b>
+<br>
+<br>
+<table>
+<tr><th>プリミティブ型</th><th>ラッパークラス</th></tr>
+<tr><td class="center">boolean</td><td class="center">Boolean</td></tr>
+<tr><td class="center">byte</td><td class="center">Byte</td></tr>
+<tr><td class="center">char</td><td class="center">Character</td></tr>
+<tr><td class="center">short</td><td class="center">Short</td></tr>
+<tr><td class="center">int</td><td class="center">Integer</td></tr>
+<tr><td class="center">float</td><td class="center">Float</td></tr>
+<tr><td class="center">long</td><td class="center">Long</td></tr>
+<tr><td class="center">double</td><td class="center">Double</td></tr>
+</table>
+
 
 <br>
 <script>PreNext(2,8)</script>
