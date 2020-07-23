@@ -39,9 +39,9 @@ public class Main{
 
     	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 
-    	list.add( "Hoge" );
-    	list.add( "Fuga" );
-    	list.add( "Piyo" );
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
 
         // ここから演習
         // ? を置き換える
@@ -70,7 +70,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-2 (個人、? 分):</b> 以下のソースコードで定義されている String 型のリスト list の最後の要素("Piyo")だけを表示してみましょう。
+<input type="checkbox"><b>演習 4-2 (個人、? 分):</b> 以下のソースコードで定義されている String 型のリスト list の最後の要素("piyo")だけを表示してみましょう。
 </p>
 
 <div class="info">
@@ -82,9 +82,9 @@ public class Main{
 
     	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 
-    	list.add( "Hoge" );
-    	list.add( "Fuga" );
-    	list.add( "Piyo" );
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
 
         // ここから演習
         // ? を置き換える
@@ -113,7 +113,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-3 (個人、? 分):</b> 以下のソースコードで定義されている String 型のリスト list を最後の要素("Piyo")から最初の要素("Hoge")まで for ループを使って逆順に表示して下さい。
+<input type="checkbox"><b>演習 4-3 (個人、? 分):</b> 以下のソースコードで定義されている String 型のリスト list を最後の要素("piyo")から最初の要素("hoge")まで for ループを使って逆順に表示して下さい。
 </p>
 
 <div class="info">
@@ -125,9 +125,9 @@ public class Main{
 
     	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 
-    	list.add( "Hoge" );
-    	list.add( "Fuga" );
-    	list.add( "Piyo" );
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
 
         // ここから演習
         // ? を置き換える
@@ -156,30 +156,31 @@ public class Main{
 </p>
 </div>
 
-
 <br>
+<h2><a href="./page02.html">2. マップ(HashMap)</a></h2>
+
 <p>
-<input type="checkbox"><b>演習 4-4 (個人、? 分):</b> 以下のソースコードで定義されている String 型のリスト list にループ内でキーボードから3回文字列を読み込んで lst の先頭に追加し、それらを表示して下さい。
+<input type="checkbox"><b>演習 4-4 (個人、? 分):</b> 以下のソースコードで定義されているマップ map のキーは科目名、値は得点を表しています。"英語"と"数学"の得点の合計を求めて表示して下さい。
 </p>
 
 <div class="info">
 <pre class="wrap">
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main{
     public static void main(String[] args) {
 
-    	Scanner scan = new Scanner(System.in);
-    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+        map.put( "国語", 10 );
+        map.put( "英語", 20 );
+        map.put( "理科", 30 );
+        map.put( "数学", 40 );
 
         // ここから演習
         // ? を置き換える
-        for( int i=0; i<3; ++i ){
-                String str = ? ; // 文字列読み込み(復習)
-                ? ; // list の「先頭」に str を追加
-        }
-        System.out.println(list);
+        int goukei = ? ;
+        System.out.println( goukei ); 
     }
 }
 </pre>
@@ -202,6 +203,51 @@ public class Main{
 </div>
 
 
-<script>PreNext(3,2)</script>
+<br>
+<p>
+<input type="checkbox"><b>演習 4-5 (個人、? 分):</b> 以下のソースコードで定義されているマップ map にループ内で3回キー(文字列)と値(整数)の組を<a href="../text01/page04.html">キーボードから読み込んで</a> map に追加し、それらを表示して下さい。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+        // ここから演習
+        // ? を置き換える
+        for( int i=0; i<3; ++i ){
+                String key = ? ;// 文字列読み込み(復習)
+                Integer value = ?  ; // 整数読み込み(復習)
+                ? ; // map にキーと値を追加
+        }
+        System.out.println(map);
+    }
+}
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_4_5」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_4_5の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+<script>PreNext(4,3)</script>
 </body>
 </html>

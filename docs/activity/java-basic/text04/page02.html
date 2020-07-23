@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. マップ(HashMap)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [4] コレクション</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次に<b>マップ</b>について説明します。
+<br>
+Java のマップにも色々種類があるのですが、今回は最も単純な HashMap を使います。
+</p>
+
+<p>
+さて<a href="./page01.html">前ページ</a>で学んだリストは<a href="../text01/page07.html">配列</a>と同様に先頭から要素が順番に並んでいる構造でしたので、要素番号を指定することである要素を取得できました。
+</p>
+<p>
+一方マップは、「キー」と「値」をペアにしてひとつの要素を作ります。
+<br>
+それぞれの要素は先頭から並んで配置されるわけでなく、バラバラに配置されます(実際にはハッシュテーブルを使って高速にアクセスできます)。
+<br>
+したがって要素番号ではなく、キーを使ってある要素の値を取得します。
+</p>
+
+<p>
+ではまずマップの定義方法について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1: マップ(HashMap)の定義方法</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map1 = new HashMap&lt;String, Integer&gt;();
+    	HashMap&lt;String, Double&gt; map2 = new HashMap&lt;String, Double&gt;();
+    }
+}
+</pre>
+</div>
+
+<p>
+ソース 1 の 1 行目の import 分でリストマップ(HashMap)を使うことを宣言しています。
+<br>
+6 行目では map1 という名前の String 型をキー、 Integer 型(注)を値とするマップを定義しています。
+<br>
+7 行目では map2 という名前の String 型をキー、 Double 型(注)を値とするマップを定義しています。
+</p>
+
+<p>
+(注) Integer と Double はそれぞれ int 型と double 型の<a href="../text01/page02.html">ラッパークラス</a>です。
+<br> 
+リストやマップはプリミティブ型でなくてラッパークラスを指定する必要があります。
+</p>
+
+<p>
+次にマップに要素を追加していき、最後にマップの中身を全て表示してみます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 2: マップ(HashMap)要素を追加して中身を全て表示</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map1 = new HashMap&lt;String, Integer&gt;();
+    	HashMap&lt;String, Double&gt; map2 = new HashMap&lt;String, Double&gt;();
+
+        // 要素を追加
+        map1.put( "hoge", 123 );
+        map1.put( "fuga", 456 );
+        map1.put( "piyo", 789 );
+
+        map2.put( "函館", 1.23 );
+        map2.put( "釧路", 4.56 );
+        map2.put( "旭川", 7.89 );
+
+        // マップの中身を全て表示
+        System.out.println( map1 ); 
+        System.out.println( map2 ); 
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 2 の実行結果</b>
+<pre class="wrap">
+{hoge=123, fuga=456, piyo=789}
+{函館=1.23, 釧路=4.56, 旭川=7.89}
+</pre>
+</div>
+
+<p>
+この様に、マップに要素を追加する場合は
+</p>
+
+<p>
+<b>マップの名前.put( キー、値 )</b>
+</p>
+
+<p>
+と書きます。
+<br>
+また全ての要素を表示する場合は普通に println を使います。
+</p>
+
+<p>
+次に、指定したキーの値を取り出してみます。
+
+<div class="info">
+<input type="checkbox"> <b>ソース 3: マップ(HashMap)から指定したキーの値を取り出す</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map1 = new HashMap&lt;String, Integer&gt;();
+    	HashMap&lt;String, Double&gt; map2 = new HashMap&lt;String, Double&gt;();
+
+        // 要素を追加
+        map1.put( "hoge", 123 );
+        map1.put( "fuga", 456 );
+        map1.put( "piyo", 789 );
+
+        map2.put( "函館", 1.23 );
+        map2.put( "釧路", 4.56 );
+        map2.put( "旭川", 7.89 );
+
+        // マップから指定したキーの値を取り出す
+        int a = map1.get( "fuga" );
+        double b = map2.get( "釧路" );
+
+        System.out.println( a );
+        System.out.println( b );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 3 の実行結果</b>
+<pre class="wrap">
+456
+4.56
+</pre>
+</div>
+
+<p>
+この様に、マップから指定したキーの値を取り出す場合は
+</p>
+
+<p>
+<b>リストの名前.get( キー )</b>
+</p>
+
+<p>
+と書きます。
+</p>
+
+
+<p>
+次にマップの指定したキーの要素の削除について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 4: マップ(HashMap)の指定したキーの要素の削除</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+        // 要素を追加
+        map.put( "hoge", 123 );
+        map.put( "fuga", 456 );
+        map.put( "piyo", 789 );
+
+        // マップの中身を全て表示
+        System.out.println( map );
+
+        // 指定したキーの要素の削除
+        map.remove( "fuga" );
+
+        // マップの中身を全て表示
+        System.out.println( map );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 4 の実行結果</b>
+<pre class="wrap">
+{hoge=123, fuga=456, piyo=789}
+{hoge=123, piyo=789}
+</pre>
+</div>
+
+
+<p>
+この様に、マップから指定したキーの要素を削除する場合は
+</p>
+
+<p>
+<b>マップの名前.remove( キー )</b>
+</p>
+
+<p>
+と書きます。
+</p>
+
+<p>
+次にマップのクリアについて説明します。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>ソース 5: マップ(HashMap)のクリア</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+        // 要素を追加
+        map.put( "hoge", 123 );
+        map.put( "fuga", 456 );
+        map.put( "piyo", 789 );
+
+        // マップの中身を全て表示
+        System.out.println( map );
+
+        // マップのクリア
+        map.clear();
+
+        // マップの中身を全て表示
+        System.out.println( map );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 5 の実行結果</b>
+<pre class="wrap">
+{hoge=123, fuga=456, piyo=789}
+{}
+</pre>
+</div>
+
+
+<p>
+この様に、マップをクリアしたい場合は
+</p>
+
+<p>
+<b>マップの名前.clear()</b>
+</p>
+
+<p>
+と書きます。
+</p>
+
+
+<p>
+基本的なマップの使い方は以上ですが、他にも便利な機能がいくつかマップには備わっています。
+<br>
+その他の機能の使い方についてはまとめて説明したいと思います。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>ソース 6: マップ(HashMap)のその他の機能</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+        // マップ定義
+    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+        // 要素を追加
+        map.put( "hoge", 123 );
+        map.put( "fuga", 456 );
+        map.put( "piyo", 789 );
+
+        // 指定したキーの要素が含まれているかどうかの判定 
+        // マップの名前.containsKey( キー )
+        if( map.containsKey( "piyo" ) ) System.out.println( "piyo は含まれています" );
+        else System.out.println( "piyo は含まれていません" );
+        map.remove( "piyo" );
+        if( map.containsKey( "piyo" ) ) System.out.println( "piyo は含まれています" );
+        else System.out.println( "piyo は含まれていません" );
+
+        // 指定したキーの要素の値の置き換え 
+        // マップの名前.replace( キー、新しい値 )
+        System.out.println( map.get( "fuga" ) );
+        map.replace( "fuga", -123 );
+        System.out.println( map.get( "fuga" ) );
+
+        // マップが空かどうかの判定 
+        // マップの名前.isEmpty()
+        if( map.isEmpty() ) System.out.println( "空です" );
+        else System.out.println( "空ではありません" );
+        map.clear();
+        if( map.isEmpty() ) System.out.println( "空です" );
+        else System.out.println( "空ではありません" );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 6 の実行結果</b>
+<pre class="wrap">
+piyo は含まれています
+piyo は含まれていません
+456
+-123
+空ではありません
+空です
+</pre>
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
