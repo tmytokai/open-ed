@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. 標準例外</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [2] 例外処理</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+前のページのソース 1 に出てきた IOException クラスは Java に初めから備わっている例外クラスでしたが、これ以外にも Java には例外の種類に合わせて様々な例外クラスが用意されています。
+<br>
+Java に初めから備わっている例外クラス、あるいは例外処理そのものの事を<b>「標準例外」</b>と言います。
+</p>
+
+<p>
+なお「標準例外」は別に Java だけの機能ではなくて、オプジェクト指向プログラミング言語には大抵備わっています。
+<br>
+標準例外の種類は言語によって変わりますが、以下の標準例外は大抵の言語に備わっています(もちろん他にも沢山あります)。
+</p>
+
+<div class="info">
+<ul>
+<li>入出力例外: ファイル等の入出力に失敗した</li>
+<li>算術例外: ゼロで数字を割ろうとした等、演算に失敗した</li>
+<li>NULL ポインター例外: NULL ポインターにアクセスしようとした</li>
+</ul>
+</div>
+
+<p>
+Java では上の 3 つの標準例外は次の例外クラスに割当たっています。
+</p>
+
+<div class="info">
+<ul>
+<li>入出力例外 → IOException</li>
+<li>算術例外 → ArithmeticException</li>
+<li>NULLポインター例外 → NullPointerException</li>
+</ul>
+</div>
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>
