@@ -247,6 +247,56 @@ public class Main{
 </p>
 </div>
 
+<br>
+<h2><a href="./page03.html">3. 拡張 for 文</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 4-6 (個人、? 分):</b> 以下のソースコードで使われている通常の for 文を拡張 for 文を使うように書き換えて下さい。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+
+    	list.add( 1 );
+    	list.add( 2 );
+    	list.add( 3 );
+
+        int goukei = 0;
+
+        // ここから演習
+        // 拡張 for 文を使って合計を求める
+        for( int i = 0; i &lt; list.size(); ++i ){
+            goukei += list.get(i);
+        }
+
+        System.out.println( goukei ); 
+    }
+}
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_4_6」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_4_6」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
 
 <script>PreNext(4,3)</script>
 </body>

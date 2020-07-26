@@ -213,27 +213,27 @@ import java.util.ArrayList;
 public class Main{
     public static void main(String[] args) {
         // リスト定義
-    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 
         // 一番後に要素を追加
-    	list1.add( "hoge" );
-    	list1.add( "fuga" );
-    	list1.add( "piyo" );
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
 
         // リストの長さの取得
-        System.out.println( list1.size() );
+        System.out.println( list.size() );
 
         // リストの中身を全て表示
-        System.out.println( list1 );
+        System.out.println( list );
 
         // リストのクリア
-        list1.clear();
+        list.clear();
 
         // もう一度リストの長さの取得
-        System.out.println( list1.size() );
+        System.out.println( list.size() );
 
         // もう一度リストの中身を全て表示
-        System.out.println( list1 );
+        System.out.println( list );
     }
 }
 </pre>
@@ -287,36 +287,36 @@ import java.util.ArrayList;
 public class Main{
     public static void main(String[] args) {
         // リスト定義
-    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
+    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
 
         // 一番後に要素を追加
-    	list1.add( "hoge" );
-    	list1.add( "fuga" );
-    	list1.add( "piyo" );
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
 
     	// 指定した要素の位置の取得
         // リストの名前.indexOf( 値 );
-    	System.out.println( list1.indexOf( "fuga" ) ); 
+    	System.out.println( list.indexOf( "fuga" ) ); 
 
     	// 指定した位置に要素を挿入
         // リストの名前.add( 位置、 値 )
-    	list1.add( 1, "foo" );
-    	System.out.println( list1 ); 
+    	list.add( 1, "foo" );
+    	System.out.println( list ); 
 
     	// 指定した位置の要素の置き換え
         // リストの名前.set( 位置、 新しい値 )
-    	list1.set( 2, "ふが");
-    	System.out.println( list1 ); 
+    	list.set( 2, "ふが");
+    	System.out.println( list ); 
 
     	// 指定した位置の要素を削除
         // リストの名前.remove( 位置 )
-    	list1.remove(1);
-    	System.out.println( list1 );
+    	list.remove(1);
+    	System.out.println( list );
 
     	// 指定した要素を削除
         // リストの名前.remove( 値 )
-    	list1.remove( "ふが" );
-    	System.out.println( list1 );
+    	list.remove( "ふが" );
+    	System.out.println( list );
     }
 }
 </pre>

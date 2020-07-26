@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. 拡張 for 文</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [4] コレクション</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page01.html">リスト</a>を使って繰り返し処理する場合は、ただの for 文を使うよりも「<b>拡張 for 文</b>」を使う方が便利です。
+<br>
+ちなみに<a href="./page02.html">マップ</a>でも拡張 for 文は使えますが、マップの場合は<a href="../text05/page03.html">forEach 文</a>を使う方が便利です。
+</p>
+
+<p>
+さてリストにおける拡張 for 文の文法は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>リストにおける拡張 for 文の文法</b>
+<pre class="wrap">
+
+for( 型名 変数 : リスト名 )
+  繰り返し内容
+}
+</pre>
+</div>
+
+<p>
+この拡張 for 文は次の様に使います。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1: 拡張 for 文の使用例</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+        // リスト定義
+    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+
+        // 一番後に要素を追加
+    	list.add( "hoge" );
+    	list.add( "fuga" );
+    	list.add( "piyo" );
+
+        // 拡張 for 文
+        for( String str : list ){
+            System.out.println( str );
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+実行すると for 内で定義した String 型変数 str に list の要素が先頭から順番に入って表示されます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1 の実行結果</b>
+<pre class="wrap">
+hoge
+fuga
+piyo
+</pre>
+</div>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
