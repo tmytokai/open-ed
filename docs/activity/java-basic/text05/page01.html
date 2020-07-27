@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. 関数型インターフェース</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [5] 関数型インターフェースとラムダ式</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Java の「<b>関数型インターフェース</b>」とは抽象メソッドが1つだけの抽象クラスのことで、これを使って定義した変数には関数をオブジェクト化した<b>関数オブジェクト</b>を代入出来るので大変便利です。
+<br>
+例えばイベントハンドラの定義などで良く使われますので、イベント駆動型プログラミングでは必須の機能となっています。
+</p>
+
+<p>
+と言っても良く分からないと思うので、ソースコードを見ながら具体的に使い方を説明します。
+<br>
+なおこの関数型インターフェースには様々な種類がありますが、今回は Runnable と Function インターフェースについて説明します。
+</p>
+<p>
+まず前提として、
+</p>
+<p>
+・ Runnable インターフェースを使って定義した変数には引数を持たない void 型の関数(正確には関数オブジェクト)を代入できます。
+</p>
+<p>
+・ Function インターフェースを使って定義した変数には引数が1つで戻り値を持つ関数(正確には関数オブジェクト)を代入できます。
+</p>
+<p>
+例えば、Runnable インターフェースの変数 runnable と、引数が Integer 型、戻り値が String 型である Function インターフェースの変数 function はソース 1 のようにして定義します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: Runnable と Function インターフェースを使った変数の定義例</b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+    }
+}
+</pre>
+</div>
+
+<p>
+Runnable インターフェースを使いたい時は java.lang.Runnable を、Funtion　インターフェースを使いたい時は  java.util.function.Function をインポートします。
+</p>
+
+<p>
+この様にして作った runnable や function には、次のソース 2 の様にして関数を代入できます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: 関数(関数オブジェクト)の代入</b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void myrun(){
+        System.out.println("hoge");
+    }
+
+    public static String myfunction( Integer a ){
+        return "piyo="+a;
+    }
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+
+        runnable = Main::myrun;
+        function = Main::myfunction;
+    }
+}
+</pre>
+</div>
+
+<p>
+上の例では runnable と function にそれぞれ myrun 関数と myfunction 関数を代入しています。
+<br>
+この runnable と function を経由して、次のソース 3 の様に myrun 関数と myfunction 関数を呼び出す事が出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3: 代入した関数を呼び出す</b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void myrun(){
+        System.out.println("hoge");
+    }
+
+    public static String myfunction( Integer a ){
+        return "piyo="+a;
+    }
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+
+        runnable = Main::myrun;
+        function = Main::myfunction;
+
+        runnable.run();
+
+        String str = function.apply( 123 );
+        System.out.println( str );
+    }
+}
+</pre>
+</div>
+
+<p>
+runnable に代入した関数を呼び出す時は .run() を使います。
+<br>
+また function に代入した関数を呼び出す時は .apply( 値 ) を使います。
+<br>
+したがって上のソース3の結果は以下のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3の実行結果</b>
+<pre class="wrap">
+hoge
+piyo=123
+</pre>
+</div>
+
+<p>
+なお、代入する関数はコードの途中で切り替えることも可能です。
+<br>
+例えば次のソース4の様なコードを書くことも出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース4: 代入する関数を切り替える</b>
+<pre class="wrap">
+import java.lang.Runnable;
+ 
+public class Main{
+
+    public static void myrun1(){
+        System.out.println("hoge");
+    }
+
+    public static void myrun2(){
+        System.out.println("fuga");
+    }
+
+    public static void myrun3(){
+        System.out.println("piyo");
+    }
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+
+        runnable = Main::myrun1;
+        runnable.run();
+
+        runnable = Main::myrun2;
+        runnable.run();
+
+        runnable = Main::myrun3;
+        runnable.run();
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース4の実行結果</b>
+<pre class="wrap">
+hoge
+fuga
+piyo
+</pre>
+</div>
+
+
+
+<br>
+<script>PreNext(1,3)</script>
+</body>
+</html>
