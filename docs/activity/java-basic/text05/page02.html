@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. ラムダ式</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [5] 関数型インターフェースとラムダ式</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page01.html">前ページ</a>で関数型インターフェースを使うと関数(のオブジェクト)を代入して使えるので便利と書きましたが、いちいち関数を別の場所に用意するのが面倒な時があります。
+<br>
+ここで説明する「<b>ラムダ式</b>」を使うと関数内で行う処理を関数型インターフェースに直接代入できるのでとても便利です。
+</p>
+
+<p>
+と言ってもやはり良く分からないと思うので、ソースコードを見ながら具体的に使い方を説明します。
+</p>
+
+<p>
+ラムダ式を考える前に、まず「ラムダ式を使わない」サンプルをソース1に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: ラムダ式を使わないサンプル</b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void myrun1(){
+        System.out.println("hoge");
+    }
+
+    public static void myrun2(){
+        System.out.println("fuga");
+    }
+
+    public static String myfunction1( Integer a ){
+        return "piyo="+a;
+    }
+
+    public static String myfunction2( Integer a ){
+        return "foo="+a;
+    }
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+
+        runnable = Main::myrun1;
+        function = Main::myfunction1;
+
+        runnable.run();
+        System.out.println( function.apply( 123 ) );
+
+        // 関数を切り替える
+        runnable = Main::myrun2;
+        function = Main::myfunction2;
+
+        runnable.run();
+        System.out.println( function.apply( 456 ) );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース1の実行結果</b>
+<pre class="wrap">
+hoge
+piyo=123
+fuga
+foo=456
+</pre>
+</div>
+
+
+<p>
+このサンプルを「ラムダ式を使った」サンプルに修正します。
+</p>
+
+<p>
+まずラムダ式の書式は次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ラムダ式の書式</b>
+<pre class="wrap">
+(引数) -&gt; {処理内容};
+</pre>
+</div>
+
+<p>
+なお、<b>引数の型やラムダ式の戻り値の型を指定する必要はありません</b>。
+<br>
+この機能を「<b>型推論</b>」と呼びます。
+</p>
+
+<p>
+このラムダ式を使ってソース1を書き直すと、次のソース2の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: ラムダ式を使ったサンプル</b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+
+        // ラムダ式を関数型インターフェースに代入
+        runnable = () -&gt; { System.out.println("hoge"); };
+        function = (a) -&gt; { return "piyo="+a; };
+
+        runnable.run();
+        System.out.println( function.apply( 123 ) );
+
+        // ラムダ式を切り替える
+        runnable = () -&gt; { System.out.println("fuga"); };
+        function = (a) -&gt; { return "foo="+a; };
+
+        runnable.run();
+        System.out.println( function.apply( 456 ) );
+    }
+}
+</pre>
+</div>
+
+<p>
+実行結果は同じなので省略します。
+<br>
+ソース1とソース2を見比べると、ラムダ式を使った方が関数が少ないのでスッキリしています。
+</p>
+
+<p>
+さらに、処理内容が 1 行だけの場合は、中括弧や return を省略することが可能です。
+<br>
+ソース 2 のラムダ式を省略して書いたのが次のソース3です。
+<br>
+
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3: ラムダ式を使ったサンプル (省略版) </b>
+<pre class="wrap">
+import java.lang.Runnable;
+import java.util.function.Function;
+ 
+public class Main{
+
+    public static void main(String[] args) {
+
+        Runnable runnable;
+        Function&lt; Integer, String &gt; function;
+
+        // ラムダ式を関数型インターフェースに代入
+        runnable = () -&gt; System.out.println("hoge");
+        function = (a) -&gt; "piyo="+a;
+
+        runnable.run();
+        System.out.println( function.apply( 123 ) );
+
+        // ラムダ式を切り替える
+        runnable = () -&gt; System.out.println("fuga");
+        function = (a) -&gt; "foo="+a;
+
+        runnable.run();
+        System.out.println( function.apply( 456 ) );
+    }
+}
+</pre>
+</div>
+
+<p>
+実行結果は同じなので省略します。
+<br>
+ソース2とソース3を見比べると更にスッキリしたことが分かります。
+</p>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
