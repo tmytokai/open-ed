@@ -34,13 +34,15 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 新規のJavaファイルを作ります。ファイル名は「OBSC_2_1.java」とします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_2_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_2_1」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="./page01.html">ソース1</a>をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行します。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをしてください。 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
@@ -52,24 +54,24 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「OBSC_2_1.java」を「OBSC_2_2.java」にコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> クラス名を OBSC_2_2 に変更します。
+<span class="olradio"><input type="radio" name="p2"></span> 演習 2-1 で作った「JAVABSC-2-1」をフォルダごとコピーし、フォルダ名を「JAVABSC-2-2」とします。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> try の hoge.txt をオープンしている行の「下」に以下の 2 行を追加します。
 </p>
+<div class="info">
 <pre class="wrap">
-FileReader in2 = new FileReader( "hoge2.txt" ); 
-FileReader in3 = new FileReader( "hoge3.txt" ); 
+FileReader in2 = new FileReader( "fuga.txt" ); 
+FileReader in3 = new FileReader( "piyo.txt" ); 
 </pre>
+</div>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> ここまでで一旦コンパイルと実行をして結果を確認します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 実行フォルダに空の hoge.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
+<span class="olradio"><input type="radio" name="p2"></span> 「JAVABSC-2-2」フォルダに空の hoge.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様に実行フォルダに空の hoge2.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
+<span class="olradio"><input type="radio" name="p2"></span> 同様に「JAVABSC-2-2」フォルダに空の fuga.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをしてください。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
@@ -81,17 +83,15 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「OBSC_2_2.java」を「OBSC_2_3.java」にコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で作った「JAVABSC-2-2」をフォルダごとコピーし、フォルダ名を「JAVABSC-2-3」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> クラス名を OBSC_2_3 に変更します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> hoge.txt を消します
+<span class="olradio"><input type="radio" name="p3"></span> 「JAVABSC-2-3」フォルダ内の hoge.txt を消します
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> try の hoge.txt をオープンしている行の「上」に、以下の処理を追加します。
 </p>
 <div class="info">
 <ul>
-<li> int 型変数 a に<a href="../../java-HW/text01/page02.html">キーボードから数字を代入する</a>
+<li> int 型変数 a に<a href="../text01/page04.html">キーボードから整数を代入する</a>
 <li> 1/a の計算結果を画面に表示する
 </ul>
 </div>
@@ -100,9 +100,9 @@ FileReader in3 = new FileReader( "hoge3.txt" );
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> コンパイルと実行をし、0 を入力したら算術例外、0 以外を入力したら入出力例外が起きることを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、提出用のソースコードを選んで下さい。
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをしてください。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」と「実行結果(0を入力した時の表示)」を記入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 

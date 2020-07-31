@@ -20,16 +20,14 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-例外とは実行時エラーの事です。
-<br>
-また例外処理とは、ある処理を実行中に何らかのエラーが生じたらその処理を中断してエラー処理を行う機能です。
+<b>例外</b>とは実行時に生じるエラーの事で、ある処理を実行中に例外が生じたらその処理を中断してエラー処理を行う機能のことを「<b>例外処理</b>」と呼びます。
 </p>
 <p>
-この例外処理の典型的な書き方は以下の通りです。
+例外処理の書式は以下の通りです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>典型的な例外処理の書き方:</b>
+<input type="checkbox"><b>例外処理の書式:</b>
 
 <pre class="wrap">
    try
@@ -56,35 +54,42 @@
 <p>
 まず「try」のカッコ内に例外が起きる可能性のある処理部を書きます。
 </p>
+
 <p>
 次に例外が起きた時のエラー処理部を「catch」のカッコ内に書きます。
 <br>
-もし try の中にある処理で例外が生じたらその処理の実行を中止し、catchの中にジャンプしてエラー処理を実行します(エラー処理が終わってもtry の中には戻りません)。
+もし try の中にある処理で例外が生じたらその処理の実行を中止し、catchの中にジャンプしてエラー処理を実行します(エラー処理が終わっても try の中には戻りません)。
 <br>
 また上の例の様に catch を例外の種類ごとに複数並べることで、種類別にエラー処理することが出来ます。
 </p>
+
 <p>
 この様に例外が起きてcatchの中に処理が移ることを<b>「例外が投げられた」</b>と言います。
 </p>
+
 <p>
-さて、例外処理のメリットは「処理部」と「エラー処理部」を分けて書けることにあります。
+この例外処理のメリットは「処理部」と「エラー処理部」を分けて書けることにあります。
 <br>
 一般的にエラー処理部は煩雑で見づらい事が多いので、取り敢えずエラー処理は後回しにして処理部だけ書くことで、すっきりと見やすいソースコードになります。
 </p>
 <p>
-もう少し具体的な例外処理の例を見てみましょう。
+もう少し具体的に例外処理の例を見てみましょう。
 <br>
-次のソース 1 は Java でファイルオープン時に指定したファイル( 今回は hoge.txt )が存在しない時に投げられる例外処理の例です。
+次のソース 1 はファイルオープン時に指定したファイル(今回は hoge.txt )が存在しない時に投げられる例外処理です。
+</p>
+
+<p>
+※ ファイルの<a href="../text03/page01.html">書き込み</a>と<a href="../text03/page01.html">読み込み</a>については次の学習項目で詳しく扱います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース1: OBSC_2_1.java</b>
+<input type="checkbox"><b>ソース1: ファイルオープンに失敗した時の例外処理 </b>
 
 <pre class="wrap">
 import java.io.FileReader;
 import java.io.IOException;
 
-public class OBSC_2_1
+public class Main
 {
   public static void main(String[] args) {
 
@@ -101,24 +106,28 @@ public class OBSC_2_1
 </div>
 
 <p>
-try の中で FileReader クラスのインスタンス in を作っていますが、これは C 言語で言うと File 構造体を定義して fopen() することに相当します。
-<br>
-また catchの () 内にある e は Java に初めから備わっている例外クラス(標準例外クラスと言います)の IOException クラスのインスタンスで、そのエラー内容を e をprintlnすることによって表示しています。
-<br>
-標準例外クラスについて詳しくは次のページで説明します。
-</p>
+try の中で FileReader クラスを使ってファイルをオープンしていますが、もしファイル(今回は hoge.txt )が無ければ IOException という名前の例外が生じます。
 <p>
-もしファイル(今回は hoge.txt )が存在しない時は catch 内に処理が移って次のように表示されます。
+
 </p>
+※ IOException については<a href="./page02.html">次のページ</a>で説明します
+</p>
+
+<p>
+IOException 例外が生じると catch 内に処理が移って、エラーに関する情報が変数 e に入ります。
+<br>
+その e を println すると画面上には次のように表示されます。
+</p>
+
 <div class="info">
-<input type="checkbox"><b>ソース1の実行結果: hoge.txt が存在しない場合</b>
+<input type="checkbox"><b>ソース1の実行結果 (hoge.txt が存在しない場合) : </b>
 
 <pre class="wrap">
 java.io.FileNotFoundException: hoge.txt (そのようなファイルやディレクトリはありません)
 </pre>
-
 </div>
 
+<br>
 <script>PreNext(1,2)</script>
 </body>
 </html>

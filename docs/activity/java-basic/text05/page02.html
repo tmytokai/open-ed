@@ -150,13 +150,15 @@ public class Main{
 <p>
 実行結果は同じなので省略します。
 <br>
-ソース1とソース2を見比べると、ラムダ式を使った方が関数が少ないのでスッキリしています。
+ソース1とソース2を見比べると、ラムダ式を使った方が余計な関数がないのでスッキリしています。
 </p>
 
 <p>
 さらに、処理内容が 1 行だけの場合は、中括弧や return を省略することが可能です。
 <br>
-ソース 2 のラムダ式を省略して書いたのが次のソース3です。
+また、引数が1つだけの場合は、()も省略できます。
+<br>
+例えばソース 2 のラムダ式を省略して書いたのが次のソース3です。
 <br>
 
 </p>
@@ -176,14 +178,14 @@ public class Main{
 
         // ラムダ式を関数型インターフェースに代入
         runnable = () -&gt; System.out.println("hoge");
-        function = (a) -&gt; "piyo="+a;
+        function = a -&gt; "piyo="+a;
 
         runnable.run();
         System.out.println( function.apply( 123 ) );
 
         // ラムダ式を切り替える
         runnable = () -&gt; System.out.println("fuga");
-        function = (a) -&gt; "foo="+a;
+        function = a -&gt; "foo="+a;
 
         runnable.run();
         System.out.println( function.apply( 456 ) );
@@ -197,6 +199,41 @@ public class Main{
 <br>
 ソース2とソース3を見比べると更にスッキリしたことが分かります。
 </p>
+
+<p>
+なお、次のソース 4 の様に
+</p>
+
+<p>
+<b>ラムダ式の内部でローカル変数を使うとコンパイルエラーが出る</b>
+</p>
+
+<p>
+ので気をつけて下さい。
+</p>
+
+<p>
+※ final を付ければローカル変数の参照は可能です。また<a href="../../oop-basic/text01/page02.html">フィールド</a>にはアクセス可能)です
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>ソース4: ラムダ式内でローカル変数を使うとコンパイルエラーが起きる</b>
+<pre class="wrap">
+import java.lang.Runnable;
+ 
+public class Main{
+
+    public static void main(String[] args) {
+
+        int a = 0;
+
+        Runnable runnable;
+        runnable = () -> a = 1;  // コンパイルエラー
+    }
+}
+</pre>
+</div>
 
 <br>
 <script>PreNext(2,3)</script>

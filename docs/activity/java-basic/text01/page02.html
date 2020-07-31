@@ -44,13 +44,13 @@ Java ではこの 8 つのデータ型の事を「<b>プリミティブ型</b>�
 </table>
 
 <p>
-またついでですので、String 型 (正確には String クラス)についてもここで説明します。
+ついでですので、String 型 (正確には String クラス)についてもここで説明します。
 <br>
 String 型は文字列を表すデータ型で、例えば次のようにして使います。
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>ソース1: String 型の使用例</b>
+<input type="checkbox"> <b>ソース1: String 型(String クラス)の使用例</b>
 <pre class="wrap">
 public class Main{
     public static void main(String[] args) {
@@ -61,6 +61,14 @@ public class Main{
         str1 = "fuga"; // 代入
 
         String str3 = str1 + str2; // 連結 ( str3 には"hogefuga"が入る )
+
+        // 比較演算子も使える
+        if( str1 != "hoge" ){
+            System.out.println( "X" );
+        }
+        if( str2 == "hoge" ){
+            System.out.println( "O" );
+        }
     }
 }
 </pre>
@@ -73,13 +81,13 @@ public class Main{
 </p>
 
 <p>
-そこでプリミティブ型を使えない場合は対応する「<b>ラッパークラス</b>」を使って変数(正確にはインスタンス)を定義します。
+そこでプリミティブ型を使えない状況では対応する「<b>ラッパークラス</b>」を使って変数を定義します。
 <br>
 プリミティブ型とラッパークラスの対応を表 2 に示します。
 </p>
 
 <p>
-まお、今回のアクティビティでは原則としてプリミティブ型を使って変数を定義しますが、状況に応じてラッパークラスを使用する場合もあります。
+まお、今回のアクティビティでは基本的にはプリミティブ型を使って変数を定義しますが、状況に応じてラッパークラスを使用する場合もあります。
 <br>
 ラッパークラスの具体的な使い方はその時に適宜説明したいと思います。
 </p>
