@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. 0以上の整数</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 浮動小数点数</a></li>
+<li>学習項目: [1] 10進数から2進数への基数変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+まず 0 以上の 10 進数の整数を 2 進数に基数変換する方法について説明します。
+<br>
+これは次のようにして行うことができます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>0 以上の 10 進数の整数を 2 進数に変換</b>
+
+<p>
+A を 0 以上の 10 進数の整数とする
+</p>
+
+<ol>
+<li> A を 2 で割る。この時の商を $q_0$、余りを $r_0$ とする
+<li> $q_0$ を 2 で割る。この時の商を $q_1$、余りを $r_1$ とする
+<li> $q_1$ を 2 で割る。この時の商を $q_2$、余りを $r_2$ とする
+<li> 商が 0 になるまで以上を繰り返す。最後の商を $q_{n-1}$、余りを $r_{n-1}$ とする
+<li> 余りを $r_{n-1}$ を先頭に $r_0$ まで逆順に並べる
+<li> 0b を先頭に付ける ※ 2 進数を意味する接頭語
+<li> n ビットの 2 進数 0b $r_{n-1}r_{n-2}\cdots r_1r_0$ が得られる
+</ol>
+
+</div>
+
+<p>
+次は逆に 2 進数を 10 進数の整数に基数変換します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>2 進数を 0 以上の 10 進数の整数に変換</b>
+
+<p>
+n ビットの 2 進数が 0b $r_{n-1}r_{n-2}\cdots r_1r_0$ で与えられる時、
+</p>
+
+<p>
+A = $r_{n-1}\cdot2^{n-1} + r_{n-2}\cdot2^{n-2} + \cdots r_1\cdot2^1 + r_0\cdot2^0$
+<p>
+
+<p>
+と 10 進数が得られる
+</p>
+
+</div>
+
+
+<p>
+では例として 10 進数 123 を 2 進数に変換してみます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>例: 123 を 2 進数に変換</b>
+
+<p>
+A = 123 なので
+</p>
+
+<ol>
+<li> 123 を 2 で割る。商は $q_0$ = 61、余りは $r_0$ = 1
+<li> $q_0$ = 61 を 2 で割る。商は $q_1$ = 30、余りは $r_1$ = 1
+<li> $q_1$ = 30 を 2 で割る。商は $q_2$ = 15、余りは $r_2$ = 0
+<li> $q_2$ = 15 を 2 で割る。商は $q_3$ = 7、余りは $r_3$ = 1
+<li> $q_3$ = 7 を 2 で割る。商は $q_4$ = 3、余りは $r_4$ = 1
+<li> $q_4$ = 3 を 2 で割る。商は $q_5$ = 1、余りは $r_5$ = 1
+<li> $q_5$ = 1 を 2 で割る。商は $q_6$ = 0、余りは $r_6$ = 1
+<li> 商が 0 になったので計算終了
+<li> 余りを $r_{n-1}$ を先頭に $r_0$ まで逆順に並べる
+<li> 0b を先頭に付ける
+<li> 7ビットの 2 進数 0b1111011 が得られる
+</ol>
+
+</div>
+
+<p>
+逆に 0b1111011 を 10 進数の 0 以上の整数に変換してみます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>例: 0b1111011 を 10 進数の 0 以上の整数に変換</b>
+
+<p>
+A = $1\cdot 2^{6} + 1\cdot 2^{5} + 1\cdot 2^{4} + 1\cdot 2^{3} + 0\cdot 2^{2} + 1\cdot 2^{1} + 1\cdot 2^{0}$
+</p>
+<p>
+　= 64 + 32 + 16 + 8 + 0 + 2 + 1 = 123
+<p>
+
+</div>
+
+
+
+<br>
+<script>PreNext(1,3)</script>
+</body>
+</html>
