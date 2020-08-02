@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. 負の整数(2の補数)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 浮動小数点数</a></li>
+<li>学習項目: [1] 10進数から2進数への基数変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は 10 進数の負の整数を 2 進数に基数変換する方法について説明します。
+<br>
+この方法はいくつかありますが、今回はもっともポピュラーな「<b>2の補数</b>」を用いて基数変換する方法について学びます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>2の補数表現を用いて 10 進数の負の整数を 2 進数に変換</b>
+
+<p>
+A を 10 進数の負の整数とする
+</p>
+
+<ol>
+<li> <a href="./page01.html">前ページ</a>を参考に A の絶対値 |A| を 2 進数に変換する
+<li> 精度( n ビット) を決める ※ (1)で求めた2進数のビット数以上の数字にすること
+<li> (1) で求めた 2 進数の先頭に 0 を追加して全体で n ビットの長さにする
+<li> 0 と 1 をひっくり返す
+<li> 1 を足す
+</ol>
+
+</div>
+
+<p>
+逆にある 2 進数が 2 の補数表現のとき、10 進数の整数に基数変換します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>2 の補数表現である 2 進数を 10 進数の整数に変換</b>
+
+<p>
+<b>先頭ビットが 0 の場合:</b>
+</p>
+
+<p>
+0 以上の整数なので、<a href="./page01.html">前ページ</a>と同様にして 10 進数に変換する
+</p>
+
+<p>
+<b>先頭ビットが 1 の場合:</b>
+</p>
+
+<p>
+負の整数なので、1を引き、0 と 1 をひっくり返してから <a href="./page01.html">前ページ</a>と同様にして正の 10 進数に変換してからマイナス符号を付ける
+</p>
+
+</div>
+
+
+<p>
+では例として 10 進数 -123 を 2 進数に変換してみます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>例: -123 を 2 の補数表現を使って 2 進数に変換</b>
+
+<p>
+
+</p>
+
+<ol>
+<li> |A| = 123 の 2 進数は<a href="./page01.html">前ページ</a>より 7ビットの 2 進数 0b1111011
+<li> 精度を n = 8 ビットとすると、先頭に 0 を一つ付け加えて 0b01111011
+<li> 1 と 0 をひっくり返すと 0b10000100
+<li> 1 を足して 8 ビットの 2 進数 0b10000101 が得られる
+</ol>
+
+</div>
+
+<p>
+逆に 0b10000101 を 10 進数の負の整数に変換してみます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>例: 0b10000101 を 10 進数の負の整数に変換</b>
+
+<p>
+
+</p>
+
+<ol>
+<li> 先頭ビットが 1 なので負の整数である
+<li> 1 を引くと 0b10000100
+<li> 1 と 0 をひっくり返すと 0b01111011
+<li> 10進数に変換する。<a href="./page01.html">前ページ</a>より正の整数 123 
+<li> マイナス符号を付けて -123 が得られる
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
