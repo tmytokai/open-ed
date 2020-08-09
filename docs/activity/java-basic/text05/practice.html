@@ -35,13 +35,19 @@
 <div class="info">
 <pre class="wrap">
 
-(1) Integer 型変数 a を引数に持ち、文字を返す関数 
+(1) Integer 型変数 a を引数に持ち、文字列 "hoge=" + (a-5) を返す関数 
 
 public static String hoge( Integer a )
 
-をメインメソッドの中に追加し、文字列 "hoge=" + (a-5) を返す
+を追加する
 
-(2) System.out.println( str ); の行の下で関数オブジェクト function に関数 hoge を再代入し、 2 を apply した時の結果を表示する
+(2) メインメソッドの System.out.println( str ); の行の下で関数オブジェクト function に関数 hoge を再代入し、 321 を apply した時の結果を表示する
+
+結果:
+
+hoge
+piyo=123
+hoge=316
 </pre>
 </div>
 
@@ -70,7 +76,17 @@ public static String hoge( Integer a )
 
 <div class="info">
 <pre class="wrap">
-System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略しないで書いたバージョン)」を function に再代入して、 2 を apply した時の結果を表示する
+(1) System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略しないで書いたバージョン)」を function に再代入する
+
+(2) 789 を apply した時の結果を表示する
+
+結果:
+
+hoge
+piyo=123
+fuga
+foo=456
+hoge=784
 </pre>
 </div>
 
@@ -97,7 +113,17 @@ System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に
 
 <div class="info">
 <pre class="wrap">
-System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略版)」を function に再代入して、 2 を apply した時の結果を表示する
+(1) System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略版)」を function に再代入する
+
+(2) 789 を apply した時の結果を表示する
+
+結果:
+
+hoge
+piyo=123
+fuga
+foo=456
+hoge=784
 </pre>
 </div>
 
@@ -130,7 +156,7 @@ import java.util.ArrayList;
 
 public class Main{
 
-    // ラムダ式の内部ではローカル変数の値を書き換えられないので static int にしています
+    // (注意) Javaの仕様上、ラムダ式の内部ではローカル変数の値を書き換えられないので static int にしています
     static int goukei = 0;
 
     public static void main(String[] args) {
@@ -150,6 +176,11 @@ public class Main{
         System.out.println( goukei ); 
     }
 }
+
+結果:
+
+6
+
 </pre>
 </div>
 
@@ -173,6 +204,16 @@ public class Main{
 <br>
 <p>
 <input type="checkbox"><b>演習 5-5 (個人、10分):</b> <a href="./page03.html">ソース 2</a>を修正して、キーが "fuga" 「でない」時にその値だけを表示するようにしましょう。
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+123
+789
+
+</pre>
+</div>
 
 <div class="olradio"> 
 <p>

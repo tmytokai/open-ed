@@ -32,6 +32,15 @@
 <p>
 <input type="checkbox"><b>演習 2-1 (個人、10分):</b> テキストの<a href="./page01.html">ソース1</a>を実行して例外処理を試してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
+</pre>
+</div>
+
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_2_1」を新規作成し、その中に移動します 
@@ -52,6 +61,17 @@
 <p>
 <input type="checkbox"><b>演習 2-2 (個人、20分):</b> try の中を複数行にし、エラーが起きるとその時点で処理が中断されて catch にジャンプすることを確認しましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+※ hoge.txt と fuga.txt を追加した後
+
+例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
+</pre>
+</div>
+
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 演習 2-1 で作った「JAVABSC_2_1」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_2」とします。 
@@ -81,6 +101,20 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <p>
 <input type="checkbox"><b>演習 2-3 (個人、30分):</b> 算術例外を試してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+0を入力すると
+例外発生: java.lang.ArithmeticException: / by zero
+
+1を入力すると
+例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
+</pre>
+</div>
+
+
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で作った「JAVABSC_2_2」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_3」とします。 
