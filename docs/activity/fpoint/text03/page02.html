@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 特殊な値</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 浮動小数点数</a></li>
+<li>学習項目: [3] 浮動小数点数</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+IEEE754 による浮動小数点数では、ゼロなどの特殊な値は以下の表1のように決められています。
+</p>
+
+<p>
+<b>表 1 : IEEE754 の特殊な値</b>
+</p>
+<table>
+<tr> <th>値</th> <th>符号部</th> <th>指数部</th> <th>仮数部</th> </tr>
+
+<tr> <td class="center">+0</td> <td class="center">0</td> <td class="center">全て 0 </td> <td class="center"> 全て 0</td> </tr>
+<tr> <td class="center">-0</td> <td class="center">1</td> <td class="center">全て 0 </td> <td class="center"> 全て 0</td> </tr>
+
+<tr> <td class="center">+Infinity (+無限大)</td> <td class="center">0</td> <td class="center">全て 1 </td> <td class="center"> 全て 0</td> </tr>
+<tr> <td class="center">-Infinity (-無限大)</td> <td class="center">1</td> <td class="center">全て 1 </td> <td class="center"> 全て 0</td> </tr>
+
+<tr> <td class="center">NaN (Not A Number: 数でない)</td> <td class="center">0と1どちらでも可</td> <td class="center">全て 1 </td> <td class="center">0 以外</td> </tr>
+
+</table>
+
+<p>
++-Infinity は、例えばゼロ以外の数字をゼロで割ろうとすると演算結果として出てきます。
+<br>
+また NaN は、例えばゼロをゼロで割ろうとしたり、虚数(-1のルート)を求めようとしたりすると演算結果として出てきます。
+<br>
+演算の途中で一度 Infinity や NaN が現れるとそれ以降の演算結果は全て Infinity や NaN になりますのでなかなか厄介な存在です。
+</p>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
