@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 浮動小数点数</a></li>
+<li>学習項目: [3] 浮動小数点数</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: ?  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. 浮動小数点数(IEEE754)</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-1 (個人、10分):</b> 10 進数の 5.375 を単精度(32ビット)の浮動小数点数形式の 2 進数に変換してみましょう。 
+</p>
+
+<div class="info">
+
+<p>
+A = 5.375 なので
+</p>
+
+
+<ol>
+<li>「符号部」を求める。A はプラスの値なので 符号部は 0b (?)
+<li> |5.375| = (?) を<a href="../text02/page01.html">固定小数点数形式の2進数</a>に変換すると 0b (?)
+<li> 小数点を (?) に (?) 回移動して整数部を 1 桁だけにすると 0b (?)
+<br>
+左に (?) 回移動したので E = (?)
+<li>「指数部」を求める。単精度なので E+(?) = (?) を 2 進数に変換すると 0b (?)
+<br>
+表1で示したビット数(8ビット)と比べると、 (?)
+<br>
+よって指数部は (?)
+<li>「仮数部」を求める。(3)で求めた小数の先頭 1 ビットと小数点(つまり 1. )を取り除いて M = 0b (?)
+<br>
+表1で示したビット数(23ビット) よりも M の方が短い( (?) ビット)ので、末尾を (?) 個の 0で埋める
+<br>
+よって仮数部は 0b (?)
+<li> 符号部、指数部、仮数部の順につなげて 0b を先頭に付けると 5.375 の単精度浮動小数点数は
+<br>
+0b (?)_(?)_(?)
+<br>
+※ 分かりやすいように各部の間にアンダーバーを入れてます
+</ol>
+
+</div>
+
+
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 上の穴埋め問題を指定場所にコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 問題を解いて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-2 (個人、? 分):</b> 演習 3-1 で得られた 2 進数を 10 進数に変換してみましょう。
+</p>
+
+<div class="info">
+
+<p>
+符号部 = 0 (?)
+<br>
+指数部 = 0b (?)
+<br>
+仮数部 = 0b (?)
+</p>
+
+<ol>
+<li> 指数部の 2 進数を<a href="../text01/page01.html">10進数の整数に変換</a>すると (?)
+<lI> 単精度なので、(1)で求めた値から (?) を引いて (?)
+<li> 仮数部の先頭に「1.」を追加して固定小数点数に変換すると 0b (?) ※ 見づらいので末尾の0は省略
+<li> (3)で求めた固定小数点数の小数点の位置を (2) で求めた数だけ (?) に移動すると 0b (?)
+<li> (5)で求めた<a href="../text02/page01.html">固定小数点数を10進数に戻す</a>と (?)
+<li> 符号部が 0b (?) なので (?) を付けて +5.375
+</ol>
+
+</div>
+
+
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 上の穴埋め問題を指定場所にコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 問題を解いて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-3 (個人、? 分):</b> 演習 3-1 で得られた 2 進数を 16 進数に変換してみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に解答して下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.html">2. 特殊な値</a></h2>
+
+
+<p>
+<input type="checkbox"><b>演習 3-4 (個人、? 分):</b> サンプルプログラムを使って、演習3-1の値(5.375)や特殊な値が実際にコンピュータ内でどのように浮動小数点数(単精度)で表されているのか確認してみましょう
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/FP_3_4.txt">サンプルコード</a>をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルと実行をして結果を確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「結果」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page03.html">3. 丸め誤差と桁落ち</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 3-5 (個人、? 分):</b>  <a href="./page03.html">テキスト</a>のソース 1 が上手く動くように修正しましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「FP_3_5」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「FP_3_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="./page03.html">ソース 1</a>をコピーして、解答します。e は適当な数字で結構です。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+
+
+<script>PreNext(4,3)</script>
+</body>
+</html>
