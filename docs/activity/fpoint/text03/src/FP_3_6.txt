@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <math.h>
+
+void show_binary(float *v)
+{
+    unsigned int *pv = (unsigned int*)v;
+    printf("10進数 %16.14f\n",*v);
+    printf("16進数 0x%x\n",*pv);
+    for(int i=31; i >= 0; --i){
+        if(i==31) printf("符号部 0b ");
+        if(i==30) printf("\n指数部 0b "); 
+        if(i==22) printf("\n仮数部 0b "); 
+        putchar( '0'+ ( ( (*pv)&(1<<i) ) > 0 ) );
+    }
+    printf("\n\n");
+}
+
+int main()
+{
+    double A = 10.0000001;
+    double B = 10.0000000;
+
+    float a = (float)sin(A); 
+    float b = (float)sin(B); 
+    float c = a-b;
+
+    printf("単精度で sin(10.0000001)\n");
+    show_binary(&a);
+    printf("単精度で sin(10)\n");
+    show_binary(&b);
+    printf("単精度で sin(10.0000001)-sin(10)\n");
+    show_binary(&c);
+
+    // 上までの結果を確認したらコメントアウトを解除
+    /*    
+    // 近い値を引き算をすると桁落ち → 掛け算や割り算を使うように式を変形すると上手く行く場合が多い
+    // 今回は「和積公式」が使えそう？
+    float d = (float)(sin( ? ));
+    float e = (float)(cos( ? )); 
+    float f = 2.0*d*e; 
+    printf("改善結果\n");
+    show_binary(&f);
+    */
+
+    printf("(参考値) 倍精度を使って計算すると sin(10.0000001)-sin(10) = %16.14f\n\n", sin(A)-sin(B));
+    
+    return 0;
+}

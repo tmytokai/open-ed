@@ -64,9 +64,9 @@
 <tr> <th>形式</th> <th>全体</th> <th>符号部</th> <th>指数部</th> <th>仮数部</th> </tr>
 
 <tr> <td class="center">半精度</td> <td class="center">16 ビット</td> <td class="center">1 ビット</td> <td class="center">5 ビット</td> <td class="center">10 ビット</td> </tr>
-<tr> <td class="center">単精度</td> <td class="center">32 ビット</td> <td class="center">1 ビット</td> <td class="center">8 ビット</td> <td class="center">23 ビット</td> </tr>
-<tr> <td class="center">倍精度</td> <td class="center">64 ビット</td> <td class="center">1 ビット</td> <td class="center">11 ビット</td> <td class="center">52 ビット</td> </tr>
-<tr> <td class="center">倍々精度</td> <td class="center">128 ビット</td> <td class="center">1 ビット</td> <td class="center">15 ビット</td> <td class="center">112 ビット</td> </tr>
+<tr> <td class="center">単精度(float)</td> <td class="center">32 ビット</td> <td class="center">1 ビット</td> <td class="center">8 ビット</td> <td class="center">23 ビット</td> </tr>
+<tr> <td class="center">倍精度(double)</td> <td class="center">64 ビット</td> <td class="center">1 ビット</td> <td class="center">11 ビット</td> <td class="center">52 ビット</td> </tr>
+<tr> <td class="center">倍々精度/4倍精度</td> <td class="center">128 ビット</td> <td class="center">1 ビット</td> <td class="center">15 ビット</td> <td class="center">112 ビット</td> </tr>
 
 </table>
 
@@ -197,7 +197,7 @@ A = -12.625 なので
 <li> 指数部の2進数を<a href="../text01/page01.html">10進数の整数に変換</a>すると 130
 <lI> 単精度なので、(1)で求めた値から 127 を引いて 3
 <li> 仮数部の先頭に「1.」を追加して固定小数点数に変換すると 0b 1.100101 ※ 見づらいので末尾の0は省略
-<li> (3)で求めた固定小数点数の小数点の位置を (2) で求めた数だけ右に移動すると 0b 1100.101
+<li> (3)で求めた固定小数点数の小数点の位置を右に 3 回移動すると 0b 1100.101
 <li> (5)で求めた<a href="../text02/page01.html">固定小数点数を10進数に戻す</a>と 12.625
 <li> 符号部が 0b 1 なのでマイナスを付けて -12.625
 </ol>
