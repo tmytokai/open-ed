@@ -117,7 +117,7 @@ public class Main{
 </div>
 
 <p>
-なお、インヘリタンスによるポリモーフィズムを応用すると、次のソース 5 の様にクラス別にメソッドを分けなくてもスーパークラスの引数としてメソッド呼び出しをしたり、ソース 6 の様にスーパークラスのインスタンス配列と for ループを使って異なるサブクラスの複数のインスタンスを一元管理したり出来るようになります。
+なお、インヘリタンスによるポリモーフィズムを応用すると、次のソース 5 の様にクラス別にメソッドを分けなくてもスーパークラスの引数としてメソッド呼び出しをしたり、ソース 6 の様にスーパークラスの<a href="../../java-basic/text04/page01.html">リスト</a>と<a href="../../java-basic/text05/page03.html">forEach</a> を使って異なるサブクラスの複数のインスタンスを一元管理したり出来るようになります。
 </p>
 <p>
 これらのテクニックは非常に良く使われますので覚えておくと良いでしょう。
@@ -142,31 +142,39 @@ public class Main{
 		Hoge( orange );
 	}
 }
+
+結果:
+
+りんご美味しい
+みかん美味しい
 </pre>
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>ソース 6 : スーパークラスの配列にサブクラスのインスタンスを代入する例</b>
+<input type="checkbox"><b>ソース 6 : スーパークラスのリストにサブクラスのインスタンスを追加する例</b>
 <pre class="wrap">
+import java.util.ArrayList;
+
 public class Main{
 
 	public static void main(String[] args) {
 
-	        FRUIT fruit[] = new FRUIT[2];
+	        ArrayList&lt;FRUIT&gt; list = new ArrayList&lt;FRUIT&gt;();
 
-	        fruit[0] = new APPLE(); // ※ FRUIT の配列に APPLE のインスタンスを代入！
-	        fruit[1] = new ORANGE();// ※ FRUIT の配列に ORANGE のインスタンスを代入！
+	        list.add(new APPLE()); // ※ FRUIT のリストに APPLE のインスタンスを追加！
+	        list.add(new ORANGE());// ※ FRUIT のリストに ORANGE のインスタンスを追加！
         
-	        for(int i=0;i < 2;++i) fruit[i].eat();
+	        list.forEach( i -> i.eat() );
 	}
 }
+
+
+結果:
+
+りんご美味しい
+みかん美味しい
 </pre>
-<p>
-※ オブジェクト指向言語では配列 + for ループではなくてベクトル型 + foreach の組み合せを使うことが多いです。
-<br>
-詳細は自分で調べて下さい。
-</p>
 </div>
 
 <br>

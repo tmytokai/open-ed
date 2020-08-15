@@ -37,74 +37,168 @@
 <p>
 <input type="checkbox"><b>演習 3-1 (個人、15分):</b> インヘリタンスによるポリモーフィズムの便利さを確認してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = TARO math = 28 english = 46 平均 = 37.0 合計 = 74
+name = HANAKO math = 14 english = 21 平均 = 17.5 合計 = 35
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「OELM-2-3」をフォルダごとコピーし、フォルダ名を「OELM-3-1」とします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「OELM_2_3」をフォルダ「OELM_3_1」に丸ごとコピーし、その中に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Main クラスの main メソッドの上に public static void show( Score score ) メソッドを追加します。
+<span class="olradio"><input type="radio" name="p1"></span> Main.java を開き、Main クラスの main メソッドの上に public static void show( Score score ) メソッドを追加します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の taro の情報表示部を show メソッド内に移動し、<a href="./page05.html">ページ5のソース 5</a>を参考にして Score クラスのインスタンス score の情報表示に変えて下さい(つまり taro. を score. に変える)。
+<span class="olradio"><input type="radio" name="p1"></span> main メソッド内の taro の情報表示部を show メソッド内に移動し、インスタンス score の情報を表示するように変えて下さい(つまり taro. を score. に変える)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main メソッド内の hanako の情報表示部を消して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main メソッド内から show メソッドを呼び出して、taro と hanako の情報を表示して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 実行し、便利さ確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-2 (個人、15分):</b> サブクラスを 3 つに増やし、インヘリタンスによるポリモーフィズムとインスタンス配列を組み合わせると便利な事を確認してみましょう。
+<input type="checkbox"><b>演習 3-2 (個人、15分):</b> サブクラスを 3 つに増やし、インヘリタンスによるポリモーフィズムとインスタンスのリストを組み合わせると便利な事を確認してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = TARO math = 76 english = 95 平均 = 85.5 合計 = 171
+name = HANAKO math = 55 english = 37 平均 = 46.0 合計 = 92
+name = JIRO math = 13 english = 60 平均 = 36.5 合計 = 73
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「OELM-3-1」をフォルダごとコピーし、フォルダ名を「OELM-3-2」とします。
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_3_1」をフォルダ「OELM_3_2」に丸ごとコピーし、その中に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro クラス(Taro.java)をコピーして Jiro クラス(Jiro.java)を作ります。コンストラクタでは name に "JIRO" をセットして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Taro.java を Jiro.java にコピーして Jiro クラスを作ります。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="./page05.html">ページ5のソース 6</a> を参考にし、長さ 3 の Score クラスのインタンス配列 score[3] を定義して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Jiro のコンストラクタで name に "JIRO" をセットして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様にソース 6 を参考にし、score[0] に Taro クラス、score[1] に Hanako クラス、 score[2] に Jiro クラスのインスタンスを new して代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Main.java を開き、<a href="./page05.html">ページ5のソース 6</a> を参考に Main クラスで Score クラスのリスト list を定義して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様にソース 6 を参考にし、for ループ内で show メソッドを呼び出し、各score[i] の情報を表示して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> list に Taro、Hanako、Jiro クラスのインスタンスを new して追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 実行し、便利さを確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> forEach 文で show メソッドを呼び出し、各インスタンスの情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行します。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Main、Jiro クラスのソースコード」と「実行結果」を記入して下さい。 
 </p>
 </div>
 
+<br>
+<p>
+<input type="checkbox"><b>(旧) 演習 3-2 (個人、15分):</b> サブクラスを 3 つに増やし、インヘリタンスの配列によるポリモーフィズムとインスタンスのリストを組み合わせると便利な事を確認してみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = TARO math = 76 english = 95 平均 = 85.5 合計 = 171
+name = HANAKO math = 55 english = 37 平均 = 46.0 合計 = 92
+name = JIRO math = 13 english = 60 平均 = 36.5 合計 = 73
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_3_1」をフォルダ「OELM_3_2」に丸ごとコピーし、その中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Taro.java を Jiro.java にコピーして Jiro クラスを作ります。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Jiro のコンストラクタで name に "JIRO" をセットして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Main.java を開き、Main クラスで長さ 3 の Score クラスのインタンス配列 score を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> score[0] に Taro クラス、score[1] に Hanako クラス、 score[2] に Jiro クラスのインスタンスを new して代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> for ループ内で show メソッドを呼び出し、各score[i] の情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Main、Jiro クラスのソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 <br>
 <h2><a href="./page06.html">6. オーバーライドによるポリモーフィズム</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 3-3 (個人、10分):</b> オーバーライドを使って、次郎の合計点が本来の2倍になるようにしてみましょう。
+<input type="checkbox"><b>演習 3-3 (個人、10分):</b> オーバーライドを使って、次の仕様を満たすプログラムを作成しましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+
+仕様:  JIRO の合計点を本来の2倍にする
+
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = TARO math = 3 english = 8 平均 = 5.5 合計 = 11
+name = HANAKO math = 41 english = 12 平均 = 26.5 合計 = 53
+name = JIRO math = 39 english = 61 平均 = 50.0 合計 = 200
+
+※ TARO と HANAKO は普通に合計されていますが、JIRO の合計点だけが本来の2倍になっています
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 「OELM-3-2」をフォルダごとコピーし、フォルダ名を「OELM-3-3」とします。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「OELM_3_2」をフォルダ「OELM_3_3」に丸ごとコピーし、その中に移動します。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Score クラスにある total メソッドを Jiro クラスでオーバーライドし、合計点の 2 倍を retrun して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Jiro.java を開き、Score クラスで定義されている total メソッドを Jiro クラスでオーバーライドし、合計点の 2 倍を return するように書き換えて下さい。
 <br>
 <br>
 (ヒント) math と english は private なので getter を使って点数を取得する必要があります
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 実行し、太郎と花子は従来通りだけど次郎の合計点だけが本来の2倍になっていることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行します。 
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「Jiro クラスのソースコード」「実行結果」を記入して下さい。
 </p>
 </div>
+
 
 
 <script>PreNext(7,6)</script>
