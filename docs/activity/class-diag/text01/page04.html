@@ -28,7 +28,7 @@
 </p>
 
 <p>
-「集約」をクラス図で表す場合はマスター側のクラスに中抜きのダイヤマークを付けます。
+「集約」をクラス図で表す場合はホスト側のクラスに中抜きのダイヤマークを付けます。
 </p>
 
 
@@ -65,7 +65,7 @@
 <p>
 の場合は「ORANGE は MyWorld を持っている」という解釈は(SFとかならともかく)変なので、普通は「MyWorld は ORANGE を持っている」と解釈されます。
 <br>
-従って次のように「集約」を使って明確に MyWorld がマスターであることを示せます。
+従って次のように「集約」を使って明確に MyWorld がホストであることを示せます。
 </p>
 
 <div class="info">
@@ -78,7 +78,7 @@
 <p>
 さてこれで MyWorld と ORANGE の主従関係が明らかになりましたので、MyWorld のコードは次のように書くことが出来ます。
 <br>
-「集約」のコーディング方法には色々なやり方があるのですが、以下の例のようにマスター側クラスのフィールドとしてスレーブ側クラスのインスタンスを定義するのが「集約」の例として一番分かりやすいと思います。
+「集約」のコーディング方法には色々なやり方があるのですが、以下の例のようにホスト側クラスのフィールドとして所有される側のクラスのインスタンスを定義するのが「集約」の例として一番分かりやすいと思います。
 </p>
 
 <div class="info">
@@ -88,7 +88,14 @@ public class MyWorld{
 
     private ORANGE orange0,orange1,orange2,orange3;
 
-    public MyWorld() // コンストラクタ
+    // getter
+    public ORANGE get_orange0(){ return orange0; }
+    public ORANGE get_orange1(){ return orange1; }
+    public ORANGE get_orange2(){ return orange2; }
+    public ORANGE get_orange3(){ return orange3; }
+
+    // コンストラクタ
+    public MyWorld() 
     {
          orange0 = new ORANGE(0);
          orange1 = new ORANGE(1);
@@ -103,10 +110,21 @@ public class MyWorld{
 </div>
 
 <p>
+なおフィールドを追加したので、ソース 1 のクラス図は次のように変わります。
+
+<div class="info">
+<input type="checkbox"><b>図4: ソース 1 のクラス図</b>
+<p>
+</p>
+<img src="./img/page04-fig4.png" alt="">
+</div>
+
+<p>
 なお、中抜きダイヤマークが多いとクラス図が見辛くなるので、<b>主従関係が明らかな場合は中抜きダイヤマークを省略することも多いです</b>。
 <br>
 どの状況ならダイヤマークを入れるべきかという具体的な決まりは特にありませんので、自分でやり易いやり方を見つけたり、所属するチームのやり方に従って下さい。 
 </p>
+
 
 <br>
 <script>PreNext(4,5)</script>
