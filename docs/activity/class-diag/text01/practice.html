@@ -117,6 +117,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		MyWorld myworld = new MyWorld();
+		// ※  (この行は演習1-6で使います)
 		myworld.get_orange0().show();
 		myworld.get_orange1().show();
 		myworld.get_orange2().show();
@@ -130,150 +131,18 @@ public class Main{
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。
 <br>
+<div class="info">
+<pre class="wrap">
+結果:
+
+みかん No.0美味い
+みかん No.1美味い
+みかん No.2美味い
+みかん No.3美味い
+</pre>
+</div>
+<br>
 <span class="olradio"><input type="radio" name="p5"></span> 指定場所に「FRUIT、ORANGE、MyWorld、Mainクラスのソースコード」と「実行結果」を記入して下さい。
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-6 (個人、20 分):</b> 演習1-5で作成した「CDIAG_1_5」において、 <a href="../../oop-element/text02/page02.html">カプセル化</a>を徹底するにはなるべく getter を定義したくないので、getter を取り除いてみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> 「CDIAG_1_5」をフォルダごとコピーし、フォルダ名を「CDIAG_1_6」とします。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> MyWorld.java を開き、orange0〜3 の getter を削除し、代わりに次の public な act メソッドを MyWorld クラスに追加します。
-</p>
-<div class="info">
-<pre class="wrap">
-public void act()
-{
-    orange0.show();
-    orange1.show();
-    orange2.show();
-    orange3.show();
-}
-</pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> Main.java を以下に置き換えて下さい。
-</p>
-<div class="info">
-<pre class="wrap">
-public class Main{
-
-	public static void main(String[] args) {
-		MyWorld myworld = new MyWorld();
-		// ※  (この行は演習1-10で使います)
-		myworld.act();
-	}
-}
-</pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。 
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「FRUIT、ORANGE、MyWorld、Mainクラスのソースコード」と「実行結果」を記入して下さい。 
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-7 (個人、10 分):</b> プロジェクト「CDIAG-1-6」に APPLE クラスも追加してみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p7"></span> プロジェクト「CDIAG-1-6」を丸ごとコピーし、名前を「CDIAG-1-7」とします。 
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> 以下の APPLE クラスをプロジェクトに追加します。
-</p>
-<div class="info">
-<pre class="wrap">
-public class APPLE extends FRUIT{
-
-	public APPLE( int no ) // コンストラクタ
-	{
-		set_name( "りんご No." + no );
-	}
-}
-</pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p7"></span> MyWorld のコンストラクタで長さ 4 の FRUIT 配列を new し、fruit[0] と fruit[1] に ORANGE のインスタンス( No は 0 と 1 )、fruit[2] と fruit[3] に APPLE のインスタンス( No は 0 と 1 ) を new して代入します。
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> 実行します。
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをし、提出用のソースコード(APPLE, MyWorld)を選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
-</p>
-</div>
-
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-8 (個人、10 分):</b> クラス図を見て新規クラスを追加してみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p8"></span> プロジェクト「CDIAG-1-7」を丸ごとコピーし、名前を「CDIAG-1-8」とします。 
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> 以下の HUMAN クラスをプロジェクトに追加します。name は String 型で中身は空で結構です。walk、eat メソッドは void 型で、メソッド内で適当な文字列を表示させて下さい(ただし name を含むこと)。
-</p>
-<div class="info">
-<input type="checkbox"><b>図1: HUMAN クラス図</b>
-<p>
-</p>
-<img src="./img/practice-fig1.png" alt="">
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p8"></span> HUMAN を継承した TARO クラスと HANAKO クラスもプロジェクトに追加して下さい。またコンストラクタで name をセットして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> MyWorld のフィールドに HUMAN 配列 human[] を追加し、MyWorldの コンストラクタで長さ 2 の HUMAN 配列 を new し、human[0] に TARO、 human[1] に HANAKO のインスタンスを new して代入します。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> MyWorld の act メソッドを以下のように修正します。
-</p>
-<div class="info">
-<pre class="wrap">
-public void act()
-{
-    for(int i = 0; i &lt; 2; ++i ){
-          human[i].walk();
-          human[i].eat();
-    }
-    for(int i = 0; i &lt; 4; ++i ) fruit[i].show();
-}
-</pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p8"></span> 実行します。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをし、提出用のソースコード(HUMAN, TARO, HANAKO, MyWorld)を選んで下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
-</p>
-</div>
-
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-9 (個人、15 分):</b> プロジェクト「CDIAG-1-8」のクラス図を描いてみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p9"></span> 「CDIAG-1-4」をコピーして「CDIAG-1-9」に名前を変えて下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> 「CDIAG-1-9」を開いて下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> プロジェクト「CDIAG-1-8」のクラス図を描いて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> 上書き保存して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> チーム内で答え合わせをし、代表者は提出用に画像ファイルとして保存して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p9"></span> 代表者は指定場所に「画像ファイル」を貼り付けて下さい。
 </p>
 </div>
 
@@ -281,19 +150,19 @@ public void act()
 <h2><a href="./page05.html">5. オブジェクト図</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-10 (個人、15 分):</b> プロジェクト「CDIAG-1-8」のオブジェクト図を描いてみましょう。
+<input type="checkbox"><b>演習 1-6 (個人、15 分):</b> 「CDIAG_1_5」のオブジェクト図を描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p10"></span> Libreoffice Draw 等のドローツールを起動します。
+<span class="olradio"><input type="radio" name="p6"></span> 任意のドローツールを起動します。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> プロジェクト「CDIAG-1-8」を実行し、main メソッドの※の行まで来た時点におけるオブジェクト図を描いて下さい。
+<span class="olradio"><input type="radio" name="p6"></span> 「CDIAG_1_5」を実行した際に、main メソッドの※の行まで来た時点におけるオブジェクト図を描いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 「CDIAG-1-10」の名前で保存して下さい。
+<span class="olradio"><input type="radio" name="p6"></span> 「CDIAG_1_6」の名前で保存して下さい拡張子はドローツールによります)。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをし、代表者は提出用に画像ファイルとして保存して下さい。 
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 代表者は指定場所に「画像ファイル」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「画像ファイル」を貼り付けて下さい。 
 </p>
 </div>
 
