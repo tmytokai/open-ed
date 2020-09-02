@@ -48,13 +48,16 @@
 <div class="info">
 <input type="checkbox"> <b>ソース1:</b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-	Score sc = new Score();  // (1)
-	sc.math = 80; // (2)
-	sc.english = 70; // (3)
+	public static void main(String[] args) {
 
-	System.out.println( "math = " + sc.math+ " english = " + sc.english );
+		Score sc = new Score();  // (1)
+		sc.math = 80; // (2)
+		sc.english = 70; // (3)
+
+		System.out.println( "math = " + sc.math+ " english = " + sc.english );
+	}
 }
 </pre>
 </div>

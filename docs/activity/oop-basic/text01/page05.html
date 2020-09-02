@@ -155,23 +155,25 @@ set_math メソッドの引数は int 型の s で、メソッド内部で math 
 <div class="info">
 <input type="checkbox"> <b>ソース 4:</b>
 <pre class="wrap">
-public static void main(String[] args) {
-	Score sc_taro = new Score();
-	sc_taro.math = 5;
-	sc_taro.english = 3;
+public class Main{
 
-	Score sc_hanako = new Score();
-	sc_hanako.math = 80;
-	sc_hanako.english = 70;
+	public static void main(String[] args) {
+		Score sc_taro = new Score();
+		sc_taro.math = 5;
+		sc_taro.english = 3;
 
+		Score sc_hanako = new Score();
+		sc_hanako.math = 80;
+		sc_hanako.english = 70;
 	
-	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
-	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+		System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
+		System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
 	
-	sc_taro.set_math(20); // (1)
+		sc_taro.set_math(20); // (1)
 
-	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());	
-	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+		System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());	
+		System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+	}
 }
 </pre>
 </div>
