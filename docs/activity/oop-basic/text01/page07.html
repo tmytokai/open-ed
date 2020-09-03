@@ -138,13 +138,16 @@ public class OLtest {
 <div class="info">
 <input type="checkbox"><b>ソース4: 引数に合わせていちいちメソッド名を変える必要が出てくる</b>
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-   OLtest ol = new OLtest();
-   ol.show1();
-   ol.show2( "ほげ" );
-   ol.show3( 123 );
-   ol.show4( 123, 456 );
+   public static void main(String[] args) {
+
+      OLtest ol = new OLtest();
+      ol.show1();
+      ol.show2( "ほげ" );
+      ol.show3( 123 );
+      ol.show4( 123, 456 );
+   }
 }
 </pre>
 </div>

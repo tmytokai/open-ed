@@ -73,18 +73,21 @@ public class Score {
 <input type="checkbox"><b>ソース2:</b>
 
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-	Score sc_taro = new Score();
-	sc_taro.math = 5;
-	sc_taro.english = 3;
+	public static void main(String[] args) {
+
+		Score sc_taro = new Score();
+		sc_taro.math = 5;
+		sc_taro.english = 3;
 	
-	Score sc_hanako = new Score();
-	sc_hanako.math = 80;
-	sc_hanako.english = 70;
+		Score sc_hanako = new Score();
+		sc_hanako.math = 80;
+		sc_hanako.english = 70;
 		
-	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
-	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+		System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
+		System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+	}
 }
 </pre>
 </div>
@@ -148,13 +151,16 @@ public class Score {
 <input type="checkbox"><b>ソース4:</b>
 
 <pre class="wrap">
-public static void main(String[] args) {
+public class Main{
 
-	Score sc_taro = new Score( 5, 3 ); // (1)
-	Score sc_hanako = new Score( 80, 70 ); // (2)
+	public static void main(String[] args) {
+
+		Score sc_taro = new Score( 5, 3 ); // (1)
+		Score sc_hanako = new Score( 80, 70 ); // (2)
 		
-	System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
-	System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+		System.out.println( "太郎: math = " + sc_taro.math+ " english = " + sc_taro.english + " 平均 = " +sc_taro.average());
+		System.out.println( "花子: math = " + sc_hanako.math+ " english = " + sc_hanako.english + " 平均 = " +sc_hanako.average());
+	}
 }
 </pre>
 </div>
