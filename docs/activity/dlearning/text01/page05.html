@@ -20,40 +20,63 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Python の関数オブジェクト(def)を利用してオペレーション(以下 OP)を自作することができます。
-</p>
-
-<p>
-以下は (x+y)*z の演算を行う hoge という名の OP を作成する例です。
-<br>
-内部で<a href="./page04.html#add">足し算 OP</a> と<a href="./page04.html#mul">掛け算 OP</a> を使用しています。
+Python の関数オブジェクト定義を利用してオペレーションを自作することができます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>OP の自作例:</b>
+<input type="checkbox"><b>自作オペレーションの作り方: </b>
+
+<p>
+書式:
+</p>
 
 <pre class="wrap">
-#coding: UTF-8
+@tf.function
+def オペレーション名(引数)
+  (演算)
+  return 戻り値
+</pre>
+
+</div>
+
+
+<p>
+例えば、以下の例では (x+y)*z の演算を行う myOP(x,y,z) というオペレーションを作成しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>オペレーションの自作例:</b>
+
+<pre class="wrap">
 import tensorflow as tf
-sess = tf.Session()
 
-#自作 OP   (x+y)*z
-def hoge(x, y, z):
-  op_add = tf.add( x, y )
-  op_mul = tf.multiply( op_add, z )
-  return op_mul
+#自作オペレーション : myOP(x,y,z) = (x+y)*z
+@tf.function
+def myOP(x, y, z):
+  tmp1 = tf.math.add( x, y )
+  tmp2 = tf.math.multiply( tmp1, z )
+  return tmp2
 
-op_hoge = hoge( 1, 2, 3 )
-result = sess.run( op_hoge )
-print( result )
+# (注)
+# @tf.function
+# def myOP(x, y, z):
+#   return tf.math.multiply( tf.math.add( x, y ), z )
+# 
+# と書いても良いが、分かりにくいので tmp1、tmp2 という一時的なテンソルを使っている
+
+A = tf.constant( [1,2], dtype=tf.float32 )
+B = tf.constant( [3,4], dtype=tf.float32 )
+C = tf.constant( [5,6], dtype=tf.float32 )
+D = myOP(A,B,C)
+print( D.numpy() )
 
 # 表示結果
-# 9
+# [20. 36.]
 </pre>
 
 <br>
 <p>
-hoge 内部のデータフロー・グラフ
+myOP 内部のデータフロー・グラフ
 </p>
 
 <img src="./img/page05-fig1.png" alt="">

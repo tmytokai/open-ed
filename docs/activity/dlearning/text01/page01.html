@@ -26,7 +26,7 @@ TensorFlow(テンソルフロー)は Google が開発してオープンソース
 </p>
 
 <p>
-TensorFlow は具体的には高速で数値演算や行列演算を行うための演算ライブラリであり Python や C++ から利用することが出来ます。
+TensorFlow は具体的には高速で数値演算や行列演算を行うための演算ライブラリであり Python などのプログラミング言語から利用することが出来ます。
 <br>
 その高速演算能力をディープラーニングに生かして画像・音声の認識や検索、翻訳などで利用されています。
 </p>
@@ -34,43 +34,25 @@ TensorFlow は具体的には高速で数値演算や行列演算を行うため
 <p>
 TensorFlow に関して詳しい事は自分で調べてもらうことにして、早速 TensorFlow でハローワールドを動かしてみましょう。
 <br>
-なお今回のアクティビティではプログラミング言語として python を使います。
-<br>
-想定する python と TensorFlow のバージョンは以下のとおりです
+以下のソース 1 を実行すると 123 という数字が表示されます。
 </p>
 
 <p>
-pythonのバージョン: 3.6 以上
-<br>
-TensorFlowのバージョン: 1.5 以上
+なお今回のアクティビティで使用する TensorFlow のバージョンは 2 以上とします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>TensorFlow のハローワールド:</b>
-
-<p>
-python を起動して以下のコードを実行するとTensorFlowのバージョンと 123 が表示される。
-</p>
+<input type="checkbox"><b>ソース 1: TensorFlow のハローワールド</b>
 
 <pre class="wrap">
-#coding: UTF-8
-import sys
 import tensorflow as tf
 
-print(sys.version_info) # pythonのバージョン表示
-print(tf.__version__)  # TensorFlowのバージョン表示
+A = tf.constant( 123, dtype=tf.float32 )
 
-sess = tf.Session() # セッション作成
-
-op_const = tf.constant( 123 )
-
-result = sess.run( op_const )
-print( result )
+print( A.numpy() )
 
 # 表示結果
-# (pythonのバージョン)
-# (TensorFlowのバージョン)
-# 123
+# 123.0
 </pre>
 </div>
 
