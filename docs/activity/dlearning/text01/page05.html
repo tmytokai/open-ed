@@ -41,7 +41,7 @@ def オペレーション名(引数)
 
 
 <p>
-例えば、以下の例では (x+y)*z の演算を行う myOP(x,y,z) というオペレーションを作成しています。
+例えば、以下の例では (a+b)*c の演算を行う myOP(a,b,c) というオペレーションを作成しています。
 </p>
 
 <div class="info">
@@ -50,19 +50,18 @@ def オペレーション名(引数)
 <pre class="wrap">
 import tensorflow as tf
 
-#自作オペレーション : myOP(x,y,z) = (x+y)*z
+#自作オペレーション : myOP(a,b,c) = (a+b)*c
 @tf.function
-def myOP(x, y, z):
-  tmp1 = tf.math.add( x, y )
-  tmp2 = tf.math.multiply( tmp1, z )
-  return tmp2
+def myOP(a, b, c):
+  tmp = tf.math.add( a, b )
+  return tf.math.multiply( tmp, c )
 
 # (注)
 # @tf.function
-# def myOP(x, y, z):
-#   return tf.math.multiply( tf.math.add( x, y ), z )
+# def myOP(a, b, c):
+#   return tf.math.multiply( tf.math.add( a, b ), c )
 # 
-# と書いても良いが、分かりにくいので tmp1、tmp2 という一時的なテンソルを使っている
+# と書いても良いが、分かりにくいので tmp という一時的な使い捨てテンソルを使っている
 
 A = tf.constant( [1,2], dtype=tf.float32 )
 B = tf.constant( [3,4], dtype=tf.float32 )
