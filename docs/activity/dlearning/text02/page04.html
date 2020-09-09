@@ -395,7 +395,6 @@ opt = tf.keras.optimizers.SGD( learning_rate=r ) # SGD クラスのインスタ�
 for i in range(epoch):
     opt.minimize(lambda: loss(), [x,y])
     
-    print('反復回数='+str(step.numpy()))
     print('損失='+str(loss().numpy()))
     print('x='+str(x.numpy()))
     print('y='+str(y.numpy()))
