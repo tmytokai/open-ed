@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. ディープラーニングの実行</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [2] ディープラーニングの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h3>
+1. ディープラーニングの概要
+</h3>
+
+<p>
+<a href="./page03.html">前ページ</a>で 3 層ニューラルネットワークを作りましたが、隠れ層と出力層の重みやバイアス w_h、b_h、w_o、b_o は乱数で初期化していますので、このままでは入力信号 data を入力しても全く意味の無い出力信号 y_o が出力されます。
+<br>
+したがって何らかの入力信号を与えた時に理想的な出力がされるようにニューラルネットワークを学習させる(＝重みやバイアスを適切な値を変化させる)必要があります
+<br>
+ここでは「<a href="https://ja.wikipedia.org/wiki/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92">機械学習(マシンラーニング)</a>」の一種である「<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0">ディープラーニング</a>」を使ってニューラルネットワークを学習させてみましょう。
+</p>
+
+<p>
+改めて書くと、ディープラーニングの定義は
+</p>
+<p>
+「<b>教師信号が与えられた時に理想的な信号が出力されるようにニューラルネットワークの重みやバイアスなどのパラメータ値を決める機械学習手法</b>」
+</p>
+
+<p>
+です。
+</p>
+
+<p>
+ここで「<b>教師信号</b>」とは文字通りニューラルネットワークを教育するための教師役信号のことです。
+<br>
+また、ある教師信号を与えたときの理想的な出力信号のことを「<b>ラベル</b>」と呼びます。
+</p>
+
+<p>
+※ 教師信号が無い機械学習(<a href="https://ja.wikipedia.org/wiki/%E6%95%99%E5%B8%AB%E3%81%AA%E3%81%97%E5%AD%A6%E7%BF%92">教師なし学習</a>と言います)もありますが今回は取り扱いません。
+</p>
+
+<p>
+このディープラーニングを実行すると、教師信号をニューラルネットワークに入れて出てきた出力信号とラベルの値が近くなるように重みとバイアスの値が更新されます。
+<br>
+ただし人間と同様に一回で学習するのは無理なので何回も学習を繰り返す必要があります。
+</p>
+
+<br>
+<h3>
+2. 教師信号
+</h3>
+
+<p>
+教師信号は<a href="./page03.html">前ページ</a>で考えた入力信号 data のように行列で表されます。
+<br>
+ただし学習を行うためには教師信号とラベルの組(データセット)を複数用意する必要があります。
+</p>
+
+<p>
+そこで教師信号全体の名前を teacher とし、データセットが No.1 から No.L まで L 組あることにすると、今考えている 3 層ニューラルネットワークの入力層のパーセプトロンの個数は N 個でしたので、 teacher は LxN 行列
+</p>
+
+\[
+{\rm teacher} = 
+\begin{bmatrix}
+t_{11} & \cdots & t_{1N} \\
+\vdots & \ddots & \vdots \\
+t_{L1} & \cdots & t_{LN} \\
+\end{bmatrix}
+\]
+
+<p>
+となります。
+<br>
+teacher の j 行目がデータセット No.j に相当します。
+</p>
+
+<p>
+よって TensorFlow では教師信号は図 1 の様に L x N 行列の<a href="../text01/page04.html#const">定数テンソル</a>で定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 教師信号</b>
+
+<p>
+teacher : 教師信号、 L x N 行列 (<a href="../text01/page04.html#const">定数テンソル</a>)、j 行目がデータセット No.j に相当
+</p>
+
+<img src="./img/page04-fig1.png" alt="">
+</div>
+
+<br>
+<h3>
+3. ラベル
+</h3>
+
+<p>
+次はラベルについて考えます。
+</p>
+
+<p>
+今考えている 3 層ニューラルネットワークの出力層のパーセプトロンの個数は M 個で、データセットの組は No.1 から No.L までの L 個としましたので、 ラベル全体の名前を label とすると、label は LxM 行列
+</p>
+
+\[
+{\rm label} = 
+\begin{bmatrix}
+l_{11} & \cdots & l_{1M} \\
+\vdots & \ddots & \vdots \\
+l_{L1} & \cdots & l_{LM} \\
+\end{bmatrix}
+\]
+
+<p>
+ で表すことができます。
+</p>
+
+<p>
+さて、このラベルの値をどのようにセットするかは取り扱う問題によって決まるのですが、今回は「多クラス分類問題」について考えてみたいと思います。
+</p>
+
+<p>
+例えばニューラルネットワークに入力された画像を「猫」と「犬」と「鳥」の 3 クラス(M = 3)に分類したい場合を考えてみましょう。
+<br>
+この場合、データセット No.i における教師信号が猫(クラス No.1)の画像だったら $l_{i1} = 1$ 、犬の画像(クラス No.2)だったら $l_{i2} = 1$ 、鳥の画像(クラス No.3)だったら $l_{i3} = 1$ 、それ以外は 0 の値を label にセットします。
+<br>
+つまり
+</p>
+
+<p>
+猫ラベル(クラス No.1)・・・ $\{1,0,0\}$
+<br>
+犬ラベル(クラス No.2)・・・ $\{0,1,0\}$
+<br>
+鳥ラベル(クラス No.3)・・・ $\{0,0,1\}$
+</p>
+
+<p>
+とします。
+<br>
+この様にあるクラスに属する場合は 1、それ以外は 0 とする様にきめたラベルのことを<a href="https://ja.wikipedia.org/wiki/One-hot">one-hotベクトル</a>形式と呼びます。
+</p>
+
+<p>
+よって TensorFlow ではラベルは図 2 の様に L x M 行列の<a href="../text01/page04.html#const">定数テンソル</a>で定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: ラベル</b>
+
+<p>
+label : ラベル、 L x M 行列 (<a href="../text01/page04.html#const">定数テンソル</a>)、j 行目がデータセット No.j に相当
+</p>
+
+<img src="./img/page04-fig2.png" alt="">
+
+</div>
+
+<br>
+<h3>
+4. 多クラス分類問題におけるニューラルネットワークの出力の意味
+</h3>
+
+<p>
+上で挙げた多クラス分類問題を扱う時、ニューラルネットワークの出力はどういう意味を持つのでしょうか？
+<br>
+それを考えるため、まず教師信号 teachar をニューラルネットワークに入れて出てきた出力信号を LxM 行列
+</p>
+
+\[
+{\rm predict} = 
+\begin{bmatrix}
+p_{11} & \cdots & p_{1M} \\
+\vdots & \ddots & \vdots \\
+p_{L1} & \cdots & p_{LM} \\
+\end{bmatrix}
+\]
+
+<p>
+とします。
+</p>
+
+<p>
+ここで今回は出力層のパーセプトロンの活性化関数を<a href="../text01/page04.html#softmax">softmax 関数</a>としたため
+</p>
+
+<p>
+\[
+0 \leq p_{ij} \leq 1 \ ,\  \sum_{j=1}^M p_{ij} = 1
+\]
+</p>
+
+<p>
+という関係が成り立っています。
+</pr>
+
+<p>
+つまり、多クラス分類問題を考える場合、
+</p>
+
+<p>
+<b>
+「ニューラルネットワークの出力 $p_{ij}$ はデータセット No.i の教師信号がクラス No.j に属する予想確率」
+</b>
+</p>
+
+<p>
+を表します。
+</p>
+
+<br>
+<h3>
+5. 損失関数とカテゴリカル・クロスエントロピー
+</h3>
+
+<p>
+教師信号とラベルのデータセットを用意したら、次は教師信号をニューラルネットワークに入れて出てきた出力信号とラベルの値が「そっくり」になるように重みとバイアスをディープラーニングを使って更新します。
+</p>
+
+<p>
+ただし何らかの指標が無いと「そっくり度」がわかりませんので、まずその指標を決めなければいけません。
+<br>
+この指標の事を「<b>損失関数</b>(loss function)」と呼びます。
+
+</p>
+
+<p>
+この損失関数は色々ありますが今回は多クラス分類問題でよく使われている「<b>カテゴリカル・クロスエントロピー</b>(categorical cross entropy)」を利用したいと思います。
+</p>
+
+<p>
+カテゴリカル・クロスエントロピーは上で定義したラベル label と予想確率 predict それぞれの要素 $l_{ij}$ と $p_{ij}$ を使って次の様に定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: カテゴリカル・クロスエントロピーの定義</b>
+
+<p>
+\[
+{\rm entropy} = -\sum_{i=1}^L \sum_{j=1}^M l_{ij}\log p_{ij}
+\]
+</p>
+
+</div>
+
+<p>
+さて、このカテゴリカル・クロスエントロピーの値 entropy は
+</p>
+
+<ol>
+<li><b>出力とラベルが似てない → entropy は大</b></li>
+<li><b>出力とラベルが似ている → entropy は小</b></li>
+</ol>
+
+<p>
+というとても良い性質を持っていますので、entropy が可能な限り小さくなる様に重みとバイアスの値を更新すれば良い事が分かります。
+</p>
+
+<p>
+ところでカテゴリカル・クロスエントロピーは<a href="../text01/page04.html#redsum">総和演算</a> を使って次のような行列演算で求める事が出来ます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>カテゴリカル・クロスエントロピーの行列演算</b>
+<p>
+entropy = - reduce_sum( log(predict)*label )
+</p>
+</div>
+
+<p>
+よってカテゴリカル・クロスエントロピーの演算部をデータフロー・グラフ化すると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: カテゴリカル・クロスエントロピーのデータフロー・グラフ(演算部のみ抜粋)</b>
+
+<p>
+<br>
+予測確率 predict に<a href="../text01/page04.html#log">log</a> を通し、ラベル label と<a href="../text01/page04.html#mul">掛け合わる</a>、さらに<a href="../text01/page04.html#redsum">総和演算</a>をして -1 倍して entropy に出力する
+</p>
+
+<img src="./img/page04-fig3.png" alt="">
+</div>
+
+<p>
+predict を求めている部分も含めると、全体では次のようなデータフロー・グラフとなります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: カテゴリカル・クロスエントロピーのデータフロー・グラフ(全体)</b>
+
+<p>　</p>
+
+<img src="./img/page04-fig4.png" alt="">
+</div>
+
+
+
+<br>
+<h3>
+6. SGD によるディープラーニング : tf.keras.optimizers.SGD
+</h3>
+
+<p>
+では全ての準備が整ったのでいよいよディープラーニングを実行して重みとバイアスを更新します。
+<br>
+ディープラーニングの方式には色々あるのですが今回は「<a href="https://ja.wikipedia.org/wiki/%E7%A2%BA%E7%8E%87%E7%9A%84%E5%8B%BE%E9%85%8D%E9%99%8D%E4%B8%8B%E6%B3%95">SGD</a>(Stochastic Gradient Descent: 確率的勾配降下法)」を用います。
+</p>
+
+<p>
+SGD を実行するためは非常に難しい数学の知識が必要なのですが、幸いなことに TensorFlow ではクラスとして既に用意されているので誰でも簡単に利用できます。
+
+<div class="info">
+<input type="checkbox"><b>SGD(確率的勾配降下法) クラス </b>
+
+<p>
+tf.keras.optimizers.SGD( learning_rate=学習率 )
+</p>
+
+<p>
+メソッド:
+<br>
+minimize( lambda: 損失関数, [学習対象の変数のリスト] )・・・学習を1回実施する、戻り値は実施済み学習回数
+</p>
+
+</div>
+
+<p>
+ここで学習率は学習の精度と速度を表しています。
+<br>
+学習率の値が大きいほどニューラルネットワークは適当に学習しますが速く学習が進みます。
+<br>
+逆に値が小さいとニューラルネットワークはきちんと学習しますが遅く学習が進みます。
+</p>
+
+<p>
+ただ学習率をいくらにしようとも 1 回では学習は終わりませんので、損失関数の値が十分小さくなるまで何回も minimize メソッドによる学習を繰り返す必要があります。
+<br>
+この反復回数の事を「<b>エポック数</b>(epoch)」と呼びます。
+</p>
+
+<p>
+※ エポック数の他に「<b>バッチサイズ</b>」という重要な学習パラメータがありますが、今回は説明を省略します
+</p>
+
+<p>
+例えば以下のソース 1 はSGD を用いた学習例です。
+<br>
+この例では学習対象である変数 x と y の初期値をそれぞれ 1 と-0.5 、学習率を 0.2、エポック数を 5、損失関数を ${\rm loss}() = x^2+y^2$ としたとき、loss() が最小になる x と y の値(つまり (x,y)=(0,0)) を SGD を使って求めています。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: SGD による学習例</b>
+
+<pre class="wrap">
+import tensorflow as tf
+
+# 学習対象の変数
+x = tf.Variable([[1]], dtype=tf.float32)
+y = tf.Variable([[-0.5]], dtype=tf.float32)
+
+#学習率
+r = 0.2
+
+#エポック数
+epoch = 5 
+
+#損失関数
+@tf.function
+def loss():
+    return x**2 + y**2
+
+print('損失='+str(loss().numpy()))
+print('x='+str(x.numpy()))
+print('y='+str(y.numpy()))
+print('')
+
+opt = tf.keras.optimizers.SGD( learning_rate=r ) # SGD クラスのインスタンス
+for i in range(epoch):
+    opt.minimize(lambda: loss(), [x,y])
+    
+    print('反復回数='+str(step.numpy()))
+    print('損失='+str(loss().numpy()))
+    print('x='+str(x.numpy()))
+    print('y='+str(y.numpy()))
+    print('')
+</pre>
+</div>
+
+<p>
+結果は以下のようになります。
+<br>
+学習が繰り返されるたびに損失関数の値が小さくなり、 (x,y) の値が (0,0) に近づいていることが分かります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 の結果</b>
+
+<pre class="wrap">
+損失=[[1.25]]
+x=[[1.]]
+y=[[-0.5]]
+
+反復回数=1
+損失=[[0.45000002]]
+x=[[0.6]]
+y=[[-0.3]]
+
+反復回数=2
+損失=[[0.162]]
+x=[[0.36]]
+y=[[-0.17999999]]
+
+反復回数=3
+損失=[[0.05832]]
+x=[[0.216]]
+y=[[-0.108]]
+
+反復回数=4
+損失=[[0.0209952]]
+x=[[0.1296]]
+y=[[-0.06479999]]
+
+反復回数=5
+損失=[[0.00755827]]
+x=[[0.07776]]
+y=[[-0.03887999]]
+</pre>
+</div>
+
+<p>
+それで、今回考えている 3 層ニューラルネットワークの場合は、損失関数としてカテゴリカル・クロスエントロピー、学習対象の変数は重みとバイアス(w_h、b_h、w_o、b_o の4つ) ですので、結局のところ次のように書けばディープラーニングが実行されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2: SGD による 3 層ニューラルネットワークのディープラーニング</b>
+
+<pre class="wrap">
+opt = tf.keras.optimizers.SGD( learning_rate=r ) # SGD クラスのインスタンス
+for i in range(epoch):
+    opt.minimize(lambda: loss(), [w_h,b_h,w_o,b_o])
+
+※1 r : 学習率
+※2 epoch : エポック数
+※3 loss() : カテゴリカル・クロスエントロピーを計算している損失関数
+</pre>
+</div>
+
+
+
+<br>
+<script>PreNext(4,5)</script>
+</body>
+</html>

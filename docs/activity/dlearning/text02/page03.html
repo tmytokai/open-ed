@@ -34,11 +34,25 @@
 </p>
 
 <p>
-入力層は N 個のパーセプトロンで出来ていて、N 個の信号が入力されます。
+入力信号全体の名前を data とすると、今考えている 3 層ニューラルネットワークの入力層のパーセプトロンの個数は N 個でしたので、 data は 1xN 行列
+</p>
+
+
+\[
+{\rm data} = 
+\begin{bmatrix}
+d_{1}, & \cdots &, d_{N} \\
+\end{bmatrix}
+\]
+
+<p>
+で表すことができます。
 <br>
-ただ信号はただの数値の羅列ですので、入力信号は結局のところ 1 x N 行列の<a href="../text01/page04.html#const">定数テンソル</a> (※)になります(図1)。
-<br>
-今回は data という名前のテンソルとします。
+data の i 列目の値が入力層のパーセプトロン No.i に入力される信号になります。
+</p>
+
+<p>
+よって TensorFlow では入力信号は図 1 の様に 1 x N 行列の<a href="../text01/page04.html#const">定数テンソル</a>で定義されます。
 </p>
 
 <div class="info">
@@ -112,91 +126,107 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page04.html#const">定�
 <img src="./img/page03-fig4.png" alt="">
 
 <p>
-$w_{ij}^{\textrm h}$ ・・・ 入力層のパーセプトロン No.$i$ の出力信号から、隠れ層のパーセプトロン No.$j$ への入力に掛けられる重み
+$w_{ij}^{\rm h}$ ・・・ 入力層のパーセプトロン No.$i$ の出力信号から、隠れ層のパーセプトロン No.$j$ への入力に掛けられる重み
 </p>
 <p>
-$b_{j}^{\textrm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイアス
+$b_{j}^{\rm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイアス
 </p>
 
 </div>
 
 <p>
 隠れ層は K 個のパーセプトロンで出来ていて、それぞれのパーセプトロンは入力層からの出力信号を受取ります。
+<br>
 その際に重みが入力に掛けられ、更にバイアスが足されます。そして最後に活性化関数 $f()$ に通して出力されます。
 </p>
 
 <p>
-$x_i$ を入力層のパーセプトロン No.$i$ からの出力信号とし、活性化関数 $f()$ を全てのパーセプトロンで共通とすると、隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\textrm h}$ は以下の式で表されます。
+さて入力層はニューラルネットワークへの入力信号をそのままスルーしてただけですので、入力層からの出力信号全体は 1xN 行列
+
+\[
+{\rm data} = 
+\begin{bmatrix}
+d_{1}, & \cdots &, d_{N} \\
+\end{bmatrix}
+\]
+
+<p>
+で表されます。
+</p>
+
+<p>
+よって出力層のパーセプトロン No.$i$ から出力される信号は $d_i$ となりますので、隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\rm h}$ は以下の式で表されます。
 </p>
 
 <p>
 \[
-y_j^{\textrm h} = f \left ( \sum_{i=1}^{N} \{w_{ij}^{\textrm h}\cdot x_i\} + b_j^{\textrm h}  \right ) \ , \ (j=1,2,\cdots,K)
+y_j^{\rm h} = f \left ( \sum_{i=1}^{N} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{\rm h}  \right ) \ , \ (j=1,2,\cdots,K)
 \]
 </p>
 
 <p>
-さて入力層のパーセプトロンは N 個、隠れ層のパーセプトロンは K 個ありますので、それらの出力を行列で表すと次のようになります。
+次にこの式を行列の形に書き直します。
 </p>
 
 <p>
-入力層の出力:
+まず隠れ層の出力信号全体を表す行列を y_h とすると、y_h は 1xK 行列
+</p>
+
 \[
-X = [x_1, x_2, \cdots, x_N]
+{\rm y\_h} = [y_1^{\rm h}, \cdots, y_K^{\rm h}]
 \]
+
+<p>
+隠れ層の重み全体を表す行列を w_h とすると、w_h は NxK 行列
 </p>
 
 <p>
-隠れ層の出力:
 \[
-Y^{\textrm h} = [y_1^{\textrm h}, y_2^{\textrm h}, \cdots, y_K^{\textrm h}]
-\]
-</p>
-
-<p>
-また重み $w_{ij}^{\textrm h}$ は N x K 行列、バイアス $b_{j}^{\textrm h}$ は 1 x K 行列で表すことができます。
-</p>
-
-<p>
-重み:
-\[
-W^{\textrm h} = 
-\left [
-\begin{array}{ccc}
-w_{11}^{\textrm h} & \cdots & w_{1K}^{\textrm h} \\
+{\rm w\_h} = 
+\begin{bmatrix}
+w_{11}^{\rm h}, & \cdots &, w_{1K}^{\rm h} \\
 \vdots & \ddots & \vdots \\
-w_{N1}^{\textrm h} & \cdots & w_{NK}^{\textrm h}
-\end{array}
-\right ]
+w_{N1}^{\rm h}, & \cdots &, w_{NK}^{\rm h}
+\end{bmatrix}
 \]
 </p>
 
 <p>
-バイアス:
+隠れ層のバイアス全体を表す行列を b_h とすると、b_h は 1xK 行列
+</p>
+
 \[
-B^{\textrm h} = 
-[b_1^{\textrm h}, b_2^{\textrm h}, \cdots, b_K^{\textrm h}]
+{\rm b\_h} = 
+[b_1^{\rm h}, \cdots, b_K^{\rm h}]
 \]
+
+<p>
+で表されます。
 </p>
 
 <p>
-以上の行列を使うと、隠れ層の出力 $Y^{\textrm h}$ は以下の行列演算で求められます。なお $X\cdot W^{\textrm h}$ は $X$ と $W^{\textrm h}$ の行列積、$f()$ は行列の全て要素に対して活性化関数の演算を行う事を意味します。
+また活性化関数 $f()$ の選び方には色々な流儀がありますが、今回は<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>を使いたいと思います。
 </p>
 
 <p>
-\[
-Y = f \left ( X\cdot W^{\textrm h} + B^{\textrm h} \right )
-\]
+よって隠れ層の出力信号は以下の行列演算で求められます。
+<br>
+なお ・ は行列積で、sigmoid() は行列の全ての要素に対してシグモイド関数の演算を行う事を意味します。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>隠れ層の出力信号の行列演算</b>
+   <p>
+y_h = sigmoid( data・w_h + b_h )
+</p>
+</div>
 
 <p>
 ではこの行列演算を元に隠れ層を<a href="../text01/page03.html">データフロー・グラフ</a>化してみましょう。
 </p>
 
 <p>
-まず重みとバイアスは後でディープラーニングを実行した際に値が変化しますので、定数テンソルではなく<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図5)。
-<br>
-今回はそれぞれ w_h と b_h という名前のテンソルとします(h は hidden の意味)。
+まず重みとバイアスは<a href="./page04.html">次のページ</a>でディープラーニングを実行する際に値が変化しますので、定数テンソルではなく<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図5)。
 </p>
 
 
@@ -219,11 +249,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page04.html#va
 </div>
 
 <p>
-次に隠れ層を<a href="../text01/page03.html">データフロー・グラフ</a>化します。
-<br>
-活性化関数 $f()$ の選び方には色々な流儀がありますが、今回は<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>を使いたいと思います。
-<br>
-すると隠れ層は図 6 のようなデータフロー・グラフになります。
+すると隠れ層は上で挙げた行列演算の式より図 6 のようなデータフロー・グラフになります。
 </p>
 
 <div class="info">
@@ -237,6 +263,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page04.html#va
 <img src="./img/page03-fig6.png" alt="">
 </div>
 
+<br>
 <h3>
 4. 出力層
 </h3>
@@ -282,7 +309,7 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 <p>
 そこで出力層の重みとバイアスも<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図8)。
 <br>
-今回はそれぞれ w_o と b_o という名前のテンソルとします(o は output の意味)。
+今回はそれぞれ w_o と b_o という名前とします。
 </p>
 
 <div class="info">
@@ -330,6 +357,8 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 
 <div class="info">
 <input type="checkbox"><b>図10: 3層ニューラルネットワーク全体のデータフロー・グラフ</b>
+
+<p>　</p>
 
 <img src="./img/page03-fig10.png" alt="">
 </div>
