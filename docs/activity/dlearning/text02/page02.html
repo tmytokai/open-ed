@@ -46,8 +46,8 @@
 <input type="checkbox"><b>定義: パーセプトロンの式:</b>
 
 \begin{align*}
-y &= f \left ( \sum_{i=1}^{n} \{w_i\cdot x_i\} + b  \right )  \\
-&= f \left ( w_1\cdot x_1 + \cdots + w_n\cdot x_n + b  \right ) 
+y &= f \left ( \sum_{i=0}^{n-1} \{w_i\cdot x_i\} + b  \right )  \\
+&= f \left ( w_0\cdot x_0 + \cdots + w_{(n-1)}\cdot x_{(n-1)} + b  \right ) 
 \end{align*}
 
 <p>
@@ -57,7 +57,7 @@ $y$ : 出力信号
 $f()$ : 活性化関数
 </p>
 <p>
-$x_i$ : $i$ 番目の入力信号、 $(i=1,2,\cdots,n)$
+$x_i$ : $i$ 番目の入力信号、 $(i=0,1,\cdots,n-1)$
 </p>
 <p>
 $w_i$ : 変数、$i$ 番目の入力信号に掛けられる<b>重み</b>(weight)と呼ぶ
@@ -69,19 +69,19 @@ $b$ : 変数、<b>バイアス</b>(bias)と呼ぶ
 </div>
 
 <p>
-活性化関数 $f()$ の選び方には色々な流儀があるのですが、この学習項目ではディープラーニングで良く使われている「<a href="https://en.wikipedia.org/wiki/Sigmoid_function">シグモイド関数</a>」と「<a href="https://en.wikipedia.org/wiki/Softmax_function">SoftMax関数</a>」を用いたいと思います。
+活性化関数 $f()$ の選び方には色々な流儀があるのですが、今回はディープラーニングで良く使われている「<a href="https://en.wikipedia.org/wiki/Sigmoid_function">シグモイド関数</a>」と「<a href="https://en.wikipedia.org/wiki/Softmax_function">SoftMax関数</a>」を用いたいと思います。
 </p>
 
 <p>
 なおパーセプトロンは以下の様なグラフで表すことが出来ます。
 <br>
-ただしこのグラフは Tensorflow の<a href="../text01/page03.html">データフロー・グラフ</a>とは異なる一般的なグラフです。
+ただしこのグラフは TensorFlow の<a href="../text01/page03.html">データフロー・グラフ</a>とは異なる一般的なグラフです。
 <br>
 つまりこの図の○はオペレーションではなくて活性化関数 $f()$ を表しています。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1. パーセプトロンのグラフ:</b>
+<input type="checkbox"><b>図1. パーセプトロンのグラフ</b>
 
 <p>
 ※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
@@ -105,12 +105,12 @@ $b$ : 変数、<b>バイアス</b>(bias)と呼ぶ
 </p>
 
 <p>
-なお各層は 2 層以上の多層構造になったり、再帰構造になったりすることもありますが、この学習項目では話を簡単にするため、特に断りが無い限りネットワークに再帰構造を含まない「<b>フィードフォワードニューラルネットワーク</b>(Feed Forward Neural Network: FFNN)」だけを考えることにします(図 2)。
+なお各層は 2 層以上の多層構造になったり、再帰構造になったりすることもありますが、今回は話を簡単にするため、特に断りが無い限りネットワークに再帰構造を含まない「<b>フィードフォワードニューラルネットワーク</b>(Feed Forward Neural Network: FFNN)」だけを考えることにします(図 2)。
 </p>
 
 
 <div class="info">
-<input type="checkbox"><b>図2. フィードフォワードニューラルネットワーク(Feed Forward Neural Network: FFNN)のグラフ:</b>
+<input type="checkbox"><b>図2. フィードフォワードニューラルネットワーク(Feed Forward Neural Network: FFNN)のグラフ</b>
 
 
 <p>
@@ -121,7 +121,7 @@ $b$ : 変数、<b>バイアス</b>(bias)と呼ぶ
 </div>
 
 <p>
-ただしあまり隠れ層の層数を増やすとディープラーニングに必要な時間が膨大になりますので、この学習項目では中間層が 1 層だけで出来ている 3 層ニューラルネットワークを扱いたいと思います(図3)。
+ただしあまり隠れ層の層数を増やすとディープラーニングに必要な時間が膨大になりますので、今回は中間層が 1 層だけで出来ている 3 層ニューラルネットワークを扱いたいと思います(図3)。
 </p>
 
 <p>
@@ -130,7 +130,7 @@ $b$ : 変数、<b>バイアス</b>(bias)と呼ぶ
 
 
 <div class="info">
-<input type="checkbox"><b>図3. 3層ニューラルネットワークのグラフ:</b>
+<input type="checkbox"><b>図3. 3層ニューラルネットワークのグラフ</b>
 
 <p>
 ※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
@@ -138,7 +138,7 @@ $b$ : 変数、<b>バイアス</b>(bias)と呼ぶ
 
 
 <p>
-入力層が N 個、隠れ層(1層)が K 個、出力層が M 個のパーセプトロンで出来ているフィードフォワードニューラルネットワーク
+入力層が N 個、隠れ層が K 個、出力層が M 個のパーセプトロンで出来ているフィードフォワードニューラルネットワーク
 </p>
 
 <img src="./img/page02-fig3.png" alt="">

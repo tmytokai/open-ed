@@ -41,7 +41,7 @@
 \[
 {\rm data} = 
 \begin{bmatrix}
-d_{1}, & \cdots &, d_{N} \\
+d_{0}\ , & \cdots &, d_{(N-1)} \\
 \end{bmatrix}
 \]
 
@@ -146,12 +146,12 @@ $b_{j}^{\rm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイア
 \[
 {\rm data} = 
 \begin{bmatrix}
-d_{1}, & \cdots &, d_{N} \\
+d_{0}\ , & \cdots &,\  d_{(N-1)} \\
 \end{bmatrix}
 \]
 
 <p>
-で表されます。
+となります。
 </p>
 
 <p>
@@ -160,7 +160,7 @@ d_{1}, & \cdots &, d_{N} \\
 
 <p>
 \[
-y_j^{\rm h} = f \left ( \sum_{i=1}^{N} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{\rm h}  \right ) \ , \ (j=1,2,\cdots,K)
+y_j^{\rm h} = f \left ( \sum_{i=0}^{\rm N-1} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{\rm h}  \right ) \ , \ (j=0,1,\cdots,{\rm K-1})
 \]
 </p>
 
@@ -173,7 +173,7 @@ y_j^{\rm h} = f \left ( \sum_{i=1}^{N} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{\rm h}
 </p>
 
 \[
-{\rm y\_h} = [y_1^{\rm h}, \cdots, y_K^{\rm h}]
+{\rm y\_h} = [y_0^{\rm h}\ , \cdots,\  y_{\rm K-1}^{\rm h}]
 \]
 
 <p>
@@ -184,9 +184,9 @@ y_j^{\rm h} = f \left ( \sum_{i=1}^{N} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{\rm h}
 \[
 {\rm w\_h} = 
 \begin{bmatrix}
-w_{11}^{\rm h}, & \cdots &, w_{1K}^{\rm h} \\
+w_{00}^{\rm h}\ , & \cdots &,\  w_{\rm 0(K-1)}^{\rm h} \\
 \vdots & \ddots & \vdots \\
-w_{N1}^{\rm h}, & \cdots &, w_{NK}^{\rm h}
+w_{\rm (N-1)1}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
 \end{bmatrix}
 \]
 </p>
@@ -197,7 +197,7 @@ w_{N1}^{\rm h}, & \cdots &, w_{NK}^{\rm h}
 
 \[
 {\rm b\_h} = 
-[b_1^{\rm h}, \cdots, b_K^{\rm h}]
+[b_0^{\rm h}\ , \cdots,\  b_{\rm K-1}^{\rm h}]
 \]
 
 <p>

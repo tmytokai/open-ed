@@ -198,13 +198,22 @@ print( A.numpy() )
 #  [ 0.  0.]]
 
 # 3 x 2 行列を作って、要素全てを平均 0、標準偏差 0.1 の正規乱数で初期化
-A = tf.Variable( tf.random.normal( [3, 2], mean=0.0, stddev=0.1 ) )
+A = tf.Variable( tf.random.normal( [3, 2], mean=0.0, stddev=0.1, dtype=tf.float32 ) )
 print( A.numpy() )
 
 # 表示結果 ※ 乱数なので毎回変わる
 # [[-0.0252009071 -0.0138573265]
 #  [-0.0525492802 -0.00620838907]
 #  [0.00722313905 -0.0197176021]]
+
+# 3 x 2 行列を作って、要素全てを -1 〜 3 までの範囲の一様乱数で初期化
+A = tf.Variable( tf.random.uniform( [3, 2], minval=-1, maxval=3, dtype=tf.float32 ) )
+print( A.numpy() )
+
+# 表示結果 ※ 乱数なので毎回変わる
+# [[-0.6053071  2.604982 ]
+#  [ 2.2764373  1.8386497]
+#  [ 2.4975042 -0.6781211]]
 
 <img src="./img/page04-fig2.png" alt="">
 </pre>
