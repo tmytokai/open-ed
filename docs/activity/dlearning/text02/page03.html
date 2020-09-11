@@ -205,7 +205,11 @@ w_{\rm (N-1)1}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
 </p>
 
 <p>
-また活性化関数 $f()$ の選び方には色々な流儀がありますが、今回は<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>を使いたいと思います。
+また活性化関数 $f()$ には色々な種類がありますが、今回は<a href="../text01/page04.html#log">シグモイド(sigmoid)関数</a>を使いたいと思います。
+</p>
+
+<p>
+※ 活性化関数としては他にも <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a> (Rectified linear Unit) 等が良く使われています
 </p>
 
 <p>
@@ -333,7 +337,7 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 <p>
 出力層のデータフロー・グラフは図 9 となります。
 <br>
-活性化関数 $f()$ の選び方には色々な流儀がありますが、今回のアクティビティでは<a href="../text01/page04.html#softmax">softmax 関数</a>を使います。
+なお<a href="./page04.html">次のページ</a>で詳しく説明しますが、今回は「多クラス分類問題」を扱う予定なので、活性化関数 $f()$ として <a href="../text01/page04.html#softmax">softmax 関数</a>を使います。
 </p>
 
 <div class="info">
@@ -358,7 +362,7 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 <div class="info">
 <input type="checkbox"><b>図10: 3層ニューラルネットワーク全体のデータフロー・グラフ</b>
 
-<p>　</p>
+<p>入力信号 data をネットワークに入力すると y_o が出力される</p>
 
 <img src="./img/page03-fig10.png" alt="">
 </div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 未知入力信号の分類</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [2] ディープラーニングの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+3 層ニューラルネットワークのディープラーニングが済んたらいよいよラベルの無い未知の入力信号に対してクラス分類をしてみます。
+</p>
+
+<p>
+と言っても、<a href="./page03.html">3ページ目</a>で定義した 1xN 行列 data に未知信号の値を代入し、data を学習済みのニューラルネットワークに入力して出てきた 1xM 行列 y_o を求め、 y_o が一番大きくなる要素番号を data が属するクラスとして判別するだけです。
+</p>
+
+<p>
+例えば<a href="./page04.html">前ページ</a>の例で出した
+</p>
+
+<p>
+猫ラベル(クラス No.0)・・・ [1,0,0]
+<br>
+犬ラベル(クラス No.1)・・・ [0,1,0]
+<br>
+鳥ラベル(クラス No.2)・・・ [0,0,1]
+</p>
+
+<p>
+を使って考えてみます。
+</p>
+
+<p>
+y_o が [ 0.8, 0.1, 0.1] だとしたら猫である確率が高いので入力した data は猫と判別します。
+</p>
+
+<p>
+また y_o が [ 0.1, 0.1, 0.8] だとしたら入力した data は鳥と判別します。
+</p>
+
+<p>
+もし y_o が [ 0.5, 0.5, 0.0] の様に同じ確率のクラスが2つ出てきた場合は、判別不能とします。
+</p>
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>
