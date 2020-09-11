@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
+<li>学習項目: [2] ディープラーニングの基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 70  分
+</p>
+m
+<br>
+<h2><a href="./page01.html">1. ディープラーニングとは</a></h2>
+<h2><a href="./page02.html">2. ニューラルネットワーク</a></h2>
+<h2><a href="./page03.html">3. 3層ニューラルネットワークのデータフロー・グラフ化</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> TensorFlow を使って 3 層ニューラルネットワークを作ってみましょう。
+<br>
+ニューラルネットワークの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 入力層が N = 3 個、隠れ層が K = 5 個、出力層が M = 2 個のパーセプトロンで出来ている
+</p>
+<p>
+(2) 入力信号 data には適当な値をセットする
+</p>
+<p>
+(3) 隠れ層と出力層の重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する
+</p>
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook で「DL_2_1」というノートブックを作ります
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/DL_2_1.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソース」と「実行結果」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.html">4. ディープラーニングの実行</a></h2>
+<h2><a href="./page05.html">5. 未知入力信号の分類</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-2 (個人PC、20分):</b> 画像の分類問題に対してディープラーニングを実行してみましょう。
+<br>
+ニューラルネットワークとディープラーニングの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 入力層が N = 9 個、隠れ層が K = 5 個、出力層が M = 2 個のパーセプトロンで出来ている
+</p>
+<p>
+<p>
+(2) 学習率は r = 0.01、エポック数は E = 100、訓練データセットのサイズは L = 4、バッチサイズは B = 4 とする ※ L=B なのでバッチ学習になる
+</p>
+<p>
+(3) 教師信号 teachar は以下の 3x3, 1 bit画像データ 4 つから作成する(黒が 0 、白が 1)
+</p>
+
+<p>
+画像 0 :
+<br>
+<img src="./img/practic-fig1.png">
+</p>
+
+<p>
+画像 1 :
+<br>
+<img src="./img/practic-fig2.png">
+</p>
+
+<p>
+画像 2 :
+<br>
+<img src="./img/practic-fig3.png">
+</p>
+
+<p>
+画像 3 :
+<br>
+<img src="./img/practic-fig4.png">
+</p>
+
+<p>
+(3) 画像 0 と 1 はクラス 0、画像 3 と 4 はクラス 1 に属する
+</p>
+
+<p>
+(4) 重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する
+</p>
+
+<p>
+(5) 検証データセットとテストデータセットは使用しない
+</p>
+
+<p>
+(6) 学習後に以下の未知画像を分類する
+</p>
+
+<p>
+未知画像:
+<br>
+<img src="./img/practic-fig5.png">
+</p>
+
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> Jupyter Notebook で「DL_2_2」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/DL_2_2.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> DL_2_1 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソース」と「未知画像の予測確率」を貼り付け、と「未知画像はクラス0と1どちらに属する可能性が高いか」書いて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-3:</b> (削除)
+
+<script>PreNext(6,5)</script>
+</body>
+</html>

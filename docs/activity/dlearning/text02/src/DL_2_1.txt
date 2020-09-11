@@ -1,0 +1,35 @@
+import tensorflow as tf
+
+# パーセプトロンの数
+N = ?  # 入力層
+K = ?  # 隠れ層
+M = ?  # 出力層
+
+# 入力信号
+data = ?
+
+# 隠れ層の重みとバイアス
+w_h = ?
+b_h = ?
+
+# 出力層の重みとバイアス
+w_o = ?
+b_o = ?
+
+# 3層ニューラルネットワークのオペレーション定義
+@tf.function
+def FFNN3(data):
+    # 隠れ層
+    tmp = ?  # 行列積 data・w_h
+    tmp = ?  # b_h を足す
+    y_h = ?  # シグモイド関数に通す
+    # 出力層
+    tmp = ?  # 行列積 y_h・w_o
+    tmp = ?  # b_o を足す
+    y_o = ?  # softmax 関数に通す
+    return y_o
+
+print('入力')
+print( data.numpy() )
+print('\n出力')
+print( FFNN3(data).numpy())
