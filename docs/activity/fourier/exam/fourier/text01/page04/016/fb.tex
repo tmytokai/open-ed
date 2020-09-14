@@ -1,0 +1,56 @@
+\noindent \textbf{【出題意図】}
+
+\bigskip
+\noindent 複素フーリエ級数展開の式から複素フーリエ係数 $\textrm{C}[k]$ を求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\medskip
+\noindent ・複素フーリエ級数展開の定義
+
+\begin{align*}
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+\medskip
+\noindent $f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+
+\medskip
+\noindent $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+
+\medskip
+\noindent $\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数
+
+\begin{align*}
+\textrm{C}[k] = \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
+\ ,\  (k = 0, \pm 1, \pm 2, \cdots)
+\end{align*}
+
+\bigskip
+\noindent ・ $\textrm{C}[k]$ と $\textrm{C}[-k]$ は複素共役関係、つまり
+
+\begin{align*}
+\textrm{C}[k] = \textrm{C}^{*}[-k]
+\end{align*}
+
+\begin{align*}
+\textrm{C}^{*}[k] = \textrm{C}[-k]
+\end{align*}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\bigskip
+\noindent フーリエ級数展開の定義式からそのまま答えが求まる。
