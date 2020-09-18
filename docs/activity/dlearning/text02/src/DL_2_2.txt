@@ -117,7 +117,7 @@ def loss(teacher,label):
     # 隠れ層
     tmp = ? # 行列積 teacher・w_h  ※ data じゃなくて teacher なのに注意
     tmp = ? # b_h を足す
-    y_h = ? # シグモイド関数に通す
+    y_h = ? # 双曲線正接(tanh)関数に通す
     # 出力層
     tmp = ? # 行列積 y_h・w_o
     tmp = ? # b_o を足す

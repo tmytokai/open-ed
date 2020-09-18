@@ -448,7 +448,7 @@ print( C.numpy() )
 </h3>
 
 <p>
-log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid</a> などの f(x) で表される演算系オペレーションはそのまま名前通りの演算を行います。
+log(x)、exp(x)、sin(x)、cos(x)、<a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%B0%E3%83%A2%E3%82%A4%E3%83%89%E9%96%A2%E6%95%B0">sigmoid(x)</a>、<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">tanh(x)</a> などの f(x) で表される演算系オペレーションはそのまま名前通りの演算を行います。
 </p>
 
 <div class="info">
@@ -468,7 +468,7 @@ log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function"
 </p>
 
 <p>
-※ ベクトルや行列が入力された場合 f(x) によって出力されるテンソルの形式が変わります。log(x)やsigmoid(x)などは要素毎に演算されます
+※ ベクトルや行列が入力された場合 f(x) によって出力されるテンソルの形式が変わります。log(x)、sigmoid(x)、tanh(x)などは要素毎に演算されます
 </p>
 
 </div>
@@ -476,7 +476,7 @@ log、exp、sin、cos、<a href="https://en.wikipedia.org/wiki/Sigmoid_function"
 <p>
 具体的なコード例はデータフローグラフは次の通りです。
 <br>
-今回は自然対数と<a href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid(x)</a>を例として挙げています。
+今回は log(x)、<a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%B0%E3%83%A2%E3%82%A4%E3%83%89%E9%96%A2%E6%95%B0">sigmoid(x)</a>、<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">tanh(x)</a>を例として挙げています。
 </p>
 
 <div class="info">
@@ -500,6 +500,13 @@ print( B.numpy() )
 
 # 表示結果 ※ベクトルや行列の場合は要素毎に演算される
 # [ 0.7310586 0.88079703 0.95257413]
+
+# tanh(x) の例
+C = tf.math.tanh( A )
+print( C.numpy() )
+
+# 表示結果 ※ベクトルや行列の場合は要素毎に演算される
+# [0.7615942 0.9640276 0.9950548]
 </pre>
 
 <br>
