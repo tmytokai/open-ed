@@ -562,6 +562,30 @@ setActOrder(JIRO.class, HANAKO.class, TARO.class);
 </pre>
 </div>
 
+<br>
+<h3>
+Q. 音を鳴らしたい
+</h3>
+
+<p>
+A. sounds フォルダの中に音声ファイルを入れてから Greenfoot.playSound メソッドを使います。
+<br>
+音声ファイルの形式は wav や MP3(※) 等です ※ greenfoot のバージョンが古いと MP3を再生出来ない場合があります
+</p>
+
+<div class="info">
+<pre class="wrap">
+space を押したら test.wav を鳴らす例
+
+public void act()
+{
+    if( Greenfoot.isKeyDown( "space" ) ){
+            Greenfoot.playSound("test.wav");
+    }
+}
+</pre>
+</div>
+
 
 </body>
 </html>
