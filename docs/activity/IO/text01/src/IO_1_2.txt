@@ -1,0 +1,14 @@
+void main(void){
+
+    init();
+
+    while(1){
+        RA0 = ? ;
+        __delay_ms( ? );
+
+        RA0 = ? ;
+        __delay_ms( ? ); 
+    }
+
+   return;
+}

@@ -24,77 +24,308 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. GPIOとは</a></h2>
+<p>
+今回の演習環境は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>演習環境:</b>
+</p>
+<ul>
+<li>PIC : PIC16F1827-I/P (18ピン)</li>
+<li>PICの設定: <font color="red">3.3V 駆動</font>、FOSC = 4 Mhz</li>
+<li>IDE: MPLAB X IDE</li>
+<li>コンパイラ: XC8</li>
+<li>プログラマ: MPLAB PICkit4</li>
+</ul>
+</div>
 
 <br>
+<h2><a href="./page01.html">1. GPIOとは</a></h2>
+
 <p>
-演習なし
+<input type="checkbox"><b>演習 1-1 (個人PC、30分):</b> PIC にプログラムの書き込みをしてみましょう。
 </p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> IDE を起動して新規プロジェクトを作成します。デバイスは「Mid-Range 8-bit MCUs → PIC16F1827」、コンパイラは「XC8」、プロジェクト名は「IO_1_1」、エンコーディングは「UTF-8」、それ以外はデフォルト設定のままにしてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「IO_1_1」としてください(拡張子 .c は自動で付きます)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> IO_1_1.c を開き、ファイルの中身を<a href="./src/IO_1_1.txt">テンプレート</a>の内容に置き換えてください。
+</p>
+<p>
+この演習で気をつける必要がある設定は以下の2つです。
+<br>
+これ以外の設定についてはコード内のコメント、もしくはデータシートを参考にしてください
+</p>
+<div class="info">
+<pre class="wrap">
+<b>設定 1:</b>
+
+OSCCON  ※ 8bit レジスタ
+
+(解説)
+オシレータ(発振回路)の設定で、FOSC(Frequency of Oscillator)を 4 Mhz にセットしています
+今回は FOSC = 4 MHz (SPLLEN=0, IRCF=0b1101) としています
+詳しくはデータシート 67p を参照してください
+
+
+<b>設定 2:</b>
+
+_XTAL_FREQ  ※ マクロ
+
+(解説)
+__delay_ms 関数を使う場合は define する必要があります
+OSCCONの設定と合わせてください(今回は 4 Mhz)
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルボタンを押してエラーが無いことを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 今回は PICkit から電源を供給します。プロジェクトのプロパティを開き、「PICkit4 → Power」選び、「Power target 〜」をチェックし、<font color="red">「Voltage Level」を 3.3</font> にしてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
+</p>
+<p>
+この時点では PIC のピン配置設定と回路接続方法は以下の通りなっていますので、以下の設定に従って回路を作成して下さい。
+<br>
+ピン配置について詳しくはデータシートの 5p 、PICKit の詳細については PICKit のマニュアルを参照して下さい。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS → GND ← PICkit の 3: GND
+6: RB0
+7: RB1
+8: RB2
+9: RB3
+
+10: RB4
+11: RB5
+12: ICSPCLK → PICkit の 5: PGC
+13: ICSPDAT → PICkit の 4: PGD
+14: VDD → 3.3V ← PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0
+18: RA1
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に書き込みできる事を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「正常書き込み完了時のメッセージ」をコピーして記入して下さい。 
+</p>
+</div>
 
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
-<br>
 <p>
-<input type="checkbox"><b>演習 1-1 (個人PC、30分):</b> Arduino UNO の GPIO を使って LED を光らせてみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span>仕様は以下の通りです。
+<input type="checkbox"><b>演習 1-2 (個人PC、30分):</b> GPIO を使って LED を光らせてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
-<b>仕様:</b>
 <p>
-LEDが 100 ミリ秒光る → 100 ミリ秒消える → 100 ミリ秒光る ・・・を繰り返す。
+<b>仕様:</b>
 </p>
+<ol>
+<li>RA0 (17ピン) に LED を接続する</li>
+<li>LEDが 100 ミリ秒光る → 100 ミリ秒消える → 100 ミリ秒光る ・・・を繰り返す</li>
+</ol>
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_1_1」を「IO_1_2」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_1_1 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「IO_1_1.c」を「IO_1_2.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (もし開いていたら IO_1_1.c を閉じて) IO_1_2.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_1_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+この演習で気をつける必要がある設定は以下の2つです。
+<br>
+今回はポートA、B全てがデジタル出力モードにセットされています。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>設定 1:</b>
+
+TRISA  ※ 8bit レジスタ
+TRISB  ※ 8bit レジスタ
+
+(解説)
+
+ポート A,B の入出力設定です
+0 にすると入力モード、1 にすると出力モードになります
+詳しくはデータシート 120p(ポートA)と126p(ポートB) を参照してください
+
+
+<b>設定 2:</b>
+
+ANSELA  ※ 8bit レジスタ
+ANSELB  ※ 8bit レジスタ
+
+(解説)
+
+ポート A,b のアナログ設定です
+0 にするとデジタル入出力モード、1 にするとアナログ入力モードになります
+詳しくはデータシート 122p(ポートA)と128p(ポートB) を参照してください
+</pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>仕様に従って回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>回路を組んだらファシリテータの確認を受けて下さい。
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS → GND ← PICkit の 3: GND
+6: RB0
+7: RB1
+8: RB2
+9: RB3
+
+10: RB4
+11: RB5
+12: ICSPCLK → PICkit の 5: PGC
+13: ICSPDAT → PICkit の 4: PGD
+14: VDD → 3.3V ← PICkit の 2: VDD
+15: RA6
+16: RA7
+(*)17: RA0 (出力) → LED → 抵抗 → GND
+18: RA1
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>プログラムを書いて Arduino UNO に転送して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span>ソースコードをドキュメントにコピーして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」を記入して下さい。 
 </p>
 </div>
 
 <br>
 <h2><a href="./page03.html">3. 入力</a></h2>
 
-
-<br>
 <p>
-<input type="checkbox"><b>演習 1-2 (個人PC、30分):</b> Arduino UNO の GPIO を使ってスイッチ入力をしてみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
+<input type="checkbox"><b>演習 1-3 (個人PC、30分):</b> GPIO を使ってデジタル入力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
+<p>
 <b>仕様:</b>
+</p>
+<ol>
+<li>RB0 (6ピン) にタクトスイッチを接続する</li>
+<li> タクトスイッチを押してない時は LED が光ってる</li>
+<li> タクトスイッチを押すと LED が消える</li>
+</ol>
+</div>
+<div class="olradio">
 <p>
-(1) Arduino UNO の内蔵プルアップ回路(INPUT_PULLUP)を利用する。
+<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「IO_1_2」を「IO_1_3」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_1_2 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「IO_1_2.c」を「IO_1_3.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> (もし開いていたら IO_1_2.c を閉じて) IO_1_3.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> プログラムを作成します。
 </p>
 <p>
-(2) タクトスイッチを押している間は 100 ミリ秒毎にシリアルモニタ(虫めがねボタン)に適当な文字列を表示する。
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_1_3.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
 </p>
 <p>
-(3) タクトスイッチを押していない時は文字列を表示しない。
+この演習で気をつける必要がある設定は以下の2つです。
+<br>
+今回は RB0 をデジタル入力モードにセットします。
 </p>
+<div class="info">
+<pre class="wrap">
+<b>設定 1:</b>
+
+WPUB  ※ 8bit レジスタ
+
+(解説)
+
+ポートBの(弱)プルアップ抵抗の設定です
+詳しくはデータシート 126p を参照してください
+
+
+<b>設定 2:</b>
+
+OPTION_REGbits.nWPUEN  ※ 8bit レジスタ OPTION_REG の bit 7
+
+(解説)
+
+PICの内部(弱)プルアップ抵抗機能を ON にする設定です
+ローアクティブなので 0 をセットすると ON になりす
+内部プルアップ抵抗機能を使いたい場合は忘れず ON にしてください
+詳しくはデータシート 175p を参照してください
+</pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様に従って回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS → GND ← PICkit の 3: GND
+(*)6: RB0 (入力) → スイッチ → GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+8: RB2
+9: RB3
+
+10: RB4
+11: RB5
+12: ICSPCLK → PICkit の 5: PGC
+13: ICSPDAT → PICkit の 4: PGD
+14: VDD → 3.3V ← PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) → LED → 抵抗 → GND
+18: RA1
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」を記入して下さい。 
 </p>
 </div>
 
