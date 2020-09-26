@@ -587,5 +587,46 @@ public void act()
 </div>
 
 
+<br>
+<h3>
+Q. reset ボタンを押して停止状態の時はタイトルロゴを表示しておき、run ボタンを押してゲームが始まったらタイトルロゴを消したい
+</h3>
+
+<p>
+A. タイトルロゴを Actor クラスのサブクラスとして作っておき、 World のフィールドで定義します。
+<br>
+それから World のコンストラクタで addObject() して表示しておき、run を押したら act() の中で一回だけ removeObject() を呼び出して消します。
+<br>
+例えば下の様にします。
+</p>
+
+<div class="info">
+<pre class="wrap">
+public class MyWorld extends World
+{
+    public Actor titlelogo = null;
+
+    public MyWorld()
+    {    
+         super(600, 400, 1); 
+         
+         titlelogo = new TitleLogo();
+         addObject(titlelogo,100,100);
+    }
+    
+    public void act()
+    {
+        if(titlelogo != null){
+            removeObject(titlelogo);
+            titlelogo = null;
+        }
+    }
+}
+
+</pre>
+</div>
+
+
+
 </body>
 </html>
