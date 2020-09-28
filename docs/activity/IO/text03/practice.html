@@ -20,50 +20,188 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 40  分
+演習時間: 30  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. ADC とは</a></h2>
-
-<p>
-演習なし
-</p>
-
-<br>
 <h2><a href="./page02.html">2. 入力</a></h2>
 
-<pre>
-(注意)  pickit4の出力は 3.3V
+<p>
+<input type="checkbox"><b>演習 3-1 (個人PC、30分):</b> AD変換を使ってみましょう。プログラムの仕様は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li>AN1(= RA1, 18ピン) をアナログ入力モードにする</li>
+<li>AN1(18ピン) に可変抵抗を接続する</li>
+<li>1000ミリ秒ごとにAD変換を繰り返す</li>
+</ol>
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_2_2」を「IO_3_1」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_2_2 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「IO_2_2.c」を「IO_3_1.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (もし開いていたら IO_2_2.c を閉じて) IO_3_1.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_3_1.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+この演習で気をつける必要がある設定は以下の通りです。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>設定 1:</b>
 
-(課題) 可変抵抗をアナログ入力ピンに繋いで電圧とADCの変換値の対応を調べる
+TRISA  ※ 8bit レジスタ
+TRISB  ※ 8bit レジスタ
 
-0V → ?
-1V → ?
-2V → ?
-3.3V → ?
+(解説)
 
-使用するピン: RA1/AN1 (18ピン)をアナログ入力とする
+ポート A,B の入出力設定です
+0 にすると入力モード、1 にすると出力モードになります
+詳しくはデータシート 120p(ポートA)と126p(ポートB) を参照してください
 
-レジスタ設定:
 
-TRISx ・・使用するピンを1(入力モード)にする, 31p
-ANSELx ・・・ 使用するピンを1(アナログ)にする, 33p
+<b>設定 2:</b>
 
-ADCON0 = 0b 0 xxxxx 0 1 ・・・ A/D CONTROL REGISTER 0, p143
-ADCON1 = 0b x 000 00 00 ・・・ A/D CONTROL REGISTER 1, p144
+ANSELA  ※ 8bit レジスタ
+ANSELB  ※ 8bit レジスタ
 
-アクィジョンタイム（コンデンサの充電待ち時間）は __delay_us(20) くらい
+(解説)
 
-ADCの開始方法:
+ポート A,b のアナログ設定です
+0 にするとデジタル入出力モード、1 にするとアナログ入力モードになります
+詳しくはデータシート 122p(ポートA)と128p(ポートB) を参照してください
 
-ADCON0bits.GO_nDONE = 1; で ADC 開始
-while (ADCON0bits.GO_nDONE) continue; で終了待ち
 
-ADRESH ・・・ ADC RESULT REGISTER HIGH, p145(ADFM = 0), p146(ADFM = 1) 
-ADRESL ・・・ ADC RESULT REGISTER LOW,  p145(ADFM = 0), p146(ADFM = 1) 
+<b>設定 3:</b>
 
+ADCON0bits.ADON  ※ 8bit レジスタ ADCON0 の bit 0
+
+(解説)
+
+1 を入れるとAD変換機能をONにします
+詳しくはデータシート 143p を参照してください
+
+
+<b>設定 4:</b>
+
+ADCON1bits.ADFM ※ 8bit レジスタ ADCON1 の bit 7
+
+(解説)
+
+結果の出力形式を右詰めにするか左詰めにするかの設定です
+1が右詰め、0が左詰めです
+今回は右詰めにします
+詳しくはデータシート 140p の図15-3と 144p を参照してください
+   
+
+<b>設定 5:</b>
+
+ADCON0bits.CHS ※ 8bit レジスタ ADCON0 の bit 6〜2
+
+(解説)
+
+入力するチャンネル(ポート)の設定です
+ANx の x を指定します (xの範囲は0〜11)
+1827はAD変換モジュールを1つしか持ってないので同時に1チャンネルしかAD変換できません
+そのため複数チャンネルでAD変換を行いたい場合はチャンネルを切り替えながら使います
+詳しくはデータシート 143p を参照してください
+    
+チャンネルをセットしたらアクイジョンタイムを入れて準備完了まで少し待ちます
+今回は適当に 20 マイクロ秒としますが、時間を真面目に計算したい場合は 147p の計算式を参照してください
+
+
+<b>設定 6:</b>
+
+ADCON0bits.GO_nDONE ※ 8bit レジスタ ADCON0 の bit 1
+
+(解説)
+
+AD変換を開始します
+1 を入れると変換を始めて、変換が終わると 0 に戻ります
+詳しくはデータシート 143p を参照してください
+
+AD変換の結果は 10bit の値として ADRESH と ADRESL に入ります
+10bitなので 0〜3.3V の入力が 0〜1023 の整数値に変換されます
+なお今回は ADCON1bit.ADFM = 1 としてるので出力形式は右詰めになります
+詳しくはデータシート 140p の図15-3 を参照してください
 </pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+PIC
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
+9: RB3
+
+10: RB4
+11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx (黄)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) -- LED -- 抵抗 -- GND
+(*)18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
+
+
+可変抵抗(上記以外のピン)
+
+(*)左側ピン: 3.3V
+(*)右側ピン: GND
+
+
+ADM3202(上記以外のピン) ※ コンデンサ等は接続済です。抜かないように気をつけて下さい
+
+15: GND -- GND
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」を記入し、テスターで測定して以下の「AD変換対応表」を完成させて下さい。 
+</p>
+
+<table>
+<tr><th>入力電圧</th><th>AD変換結果</th></tr>
+<tr><td class="center">0V</td><td class="center"> ? </td></tr>
+<tr><td class="center">1V</td><td class="center"> ? </td></tr>
+<tr><td class="center">2V</td><td class="center"> ? </td></tr>
+<tr><td class="center">3.3V</td><td class="center"> ? </td></tr>
+</table>
+
+</div>
+
 
 <script>PreNext(3,2)</script>
 </body>
