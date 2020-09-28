@@ -1,0 +1,15 @@
+void main(void){
+
+    init();
+    init_input();
+    init_uart();
+    
+    while(1){
+
+       int c = getch();
+       if( c == 'a' ) RA0 = ?;
+       if( c == 'b' ) RA0 = ?;
+    }
+
+   return;
+}

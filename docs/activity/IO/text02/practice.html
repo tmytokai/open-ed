@@ -25,115 +25,186 @@
 
 <br>
 <h2><a href="./page01.html">1. UART/ RS-232Cとは</a></h2>
+<h2><a href="./page02.html">2. 出力</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> Arduino UNO の Tx ピンと PC 側の Rx ピンを繋いで Arduino UNO から PC へ文字列を送ってみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> PIC から PC へデータを送ってみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
+<p>
 <b>仕様:</b>
-<p>
-(1) 電圧レベル変換ICとして ADM3202AN を使う。
 </p>
-<p>
-(2) データシートでは3.3V駆動になっているが<b>今回は 5V 駆動とする</b>。
-</p>
-<p>
-(3) T1in と T1out を使う。
-</p>
-<p>
-(4) PCにはシリアルポートが無いのでUSB-シリアル変換ケーブルを使う。
-</p>
-<p>
-(5) PC 側の通信アプリとして screen を使う。
-</p>
-<p>
-(6) 通信速度は 9600 bps とする。
-</p>
-<p>
-(7) 100ミリ秒毎に Arduino UNO 側から PC 側へ数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)。
-</p>
+<ol>
+<li> 11 ピン を Tx とする</li>
+<li> 通信速度は 115200 ボーとする</li>
+<li> 電圧レベル変換回路として ADM3202AN を使用する</li>
+<li> PIC から PC 側に 1000ミリ秒毎に数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)</li>
+</ol>
 </div>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> ADM3202AN のデータシートや Web 等で回路図を調べて回路を組んで下さい。
-</p>
-<p>
-　(注意) ジャンパーケーブルが多いと見づらいので
-<br>
-　・1ピン(C1+) - 3ピン(C1-)
-<br>
-　・4ピン(C2+) - 5ピン(C2-)
-<br>
-　・16ピン(Vcc) - 2ピン(V+)
-<br>
-　はコンデンサの足で直結して下さい(ショートさせない様に気を付ける)。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
-</p>
-<p>
-※ screen の起動方法: $ screen /dev/ttyUSB0 9600
-<br>
-※ screen の終了方法: Ctrl 押しながら a を押した後に k 押し、終了するか聞かれたら y 
-<br>
-※ 途中で screen の反応が無くなったらUSB-シリアル変換ケーブルを挿し直す
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 2-2 (個人PC、30分):</b> Arduino UNO の Rx ピンと PC 側の Tx ピンを繋いで PC から Arduino UNO を制御してみましょう。
-</p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p3"></span>仕様は以下の通りです。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_1_3」を「IO_2_1」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_1_3 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「IO_1_3.c」を「IO_2_1.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (もし開いていたら IO_1_3.c を閉じて) IO_2_1.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_2_1.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+なお、ハードウェアでシリアル通信を制御するために複雑な設定や手順が必要となります。
+<br>
+従って今回は設定や手順については扱いませんが、もし詳しく知りたければテンプレート内のコメントを参照して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
 </p>
 <div class="info">
-<b>仕様:</b>
-<p>
-(1) 回路や通信設定は演習 2-1 とほぼ同じだが、今回は R1in と R1out を使う(T1in と T1outからケーブルを付け替える)。
-</p>
-<p>
-(2) Arduino UNO の内蔵 LED (GPIO 13 番ピン) を使用する。
-</p>
-<p>
-(3) PC から 'a' が送られたら内蔵 LED を点灯する。
-</p>
-<p>
-(4) PC から 'b' が送られたら内蔵 LED を消灯する。
-</p>
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+PIC
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+8: RB2
+9: RB3
+
+10: RB4
+(*)11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx(黄)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) -- LED -- 抵抗 -- GND
+18: RA1
+
+
+ADM3202(上記以外のピン) ※ コンデンサ等は接続済です。抜かないように気をつけて下さい。
+
+(*) 15: GND -- GND
+</pre>
 </div>
 <p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>仕様に従って回路を修正して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> PC にUSB-シリアル変換器を接続し、適当な端末ソフトを起動してください(速度は 115200 ボー)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span>プログラムを書いて Arduino UNO に転送して下さい。
-</p>
-<p>
-※ Arduino UNO 側の RX ピンのジャンパケーブルを外さないとエラーが出る
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>動作したらファシリテータの確認を受けて下さい。
-<p>
-※ ちなみに USB-シリアル変換ケーブルにGND線を繋がなくても動作する
-</p>
-<span class="olradio"><input type="radio" name="p3"></span>ソースコードをドキュメントにコピーして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」を記入して下さい。 
 </p>
 </div>
 
-<script>PreNext(2,1)</script>
+
+<br>
+<h2><a href="./page03.html">3. 入力</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-2 (個人PC、30分):</b> PC から PIC へデータを送ってみましょう。プログラムの仕様は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li> 8 ピン を Rx とする</li>
+<li> 通信速度は 115200 ボーとする</li>
+<li> 電圧レベル変換回路として ADM3202AN を使用する</li>
+<li> PC から 'a' が送られたら LED を点灯する</li>
+<li> PC から 'b' が送られたら LED を消灯する</li>
+</ol>
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_2_1」を「IO_2_2」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_2_1 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「IO_2_1.c」を「IO_2_2.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (もし開いていたら IO_2_1.c を閉じて) IO_2_2.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_2_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+なお、ハードウェアでシリアル通信を制御するために複雑な設定や手順が必要となります。
+<br>
+従って今回は設定や手順については扱いませんが、もし詳しく知りたければテンプレート内のコメントを参照して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+PIC
+
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+(*)8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
+9: RB3
+
+10: RB4
+11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx(黄)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) -- LED -- 抵抗 -- GND
+18: RA1
+
+ADM3202(上記以外のピン) ※ コンデンサ等は接続済です。抜かないように気をつけて下さい
+
+15: GND -- GND
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> PC にUSB-シリアル変換器を接続し、適当な端末ソフトを起動してください(速度は 115200 ボー)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」を記入して下さい。 
+</p>
+</div>
+
+
+<br>
+<script>PreNext(4,3)</script>
 </body>
 </html>

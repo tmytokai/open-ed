@@ -55,7 +55,7 @@
 <span class="olradio"><input type="radio" name="p1"></span> IO_1_1.c を開き、ファイルの中身を<a href="./src/IO_1_1.txt">テンプレート</a>の内容に置き換えてください。
 </p>
 <p>
-この演習で気をつける必要がある設定は以下の2つです。
+この演習で気をつける必要がある設定は以下の通りです。
 <br>
 これ以外の設定についてはコード内のコメント、もしくはデータシートを参考にしてください
 </p>
@@ -99,8 +99,8 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS → GND ← PICkit の 3: GND
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
 6: RB0
 7: RB1
 8: RB2
@@ -108,9 +108,9 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 
 10: RB4
 11: RB5
-12: ICSPCLK → PICkit の 5: PGC
-13: ICSPDAT → PICkit の 4: PGD
-14: VDD → 3.3V ← PICkit の 2: VDD
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
 17: RA0
@@ -135,6 +135,7 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 <b>仕様:</b>
 </p>
 <ol>
+<li>RA0 (17ピン) をデジタル出力モードにする</li>
 <li>RA0 (17ピン) に LED を接続する</li>
 <li>LEDが 100 ミリ秒光る → 100 ミリ秒消える → 100 ミリ秒光る ・・・を繰り返す</li>
 </ol>
@@ -157,9 +158,7 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 それから<a href="./src/IO_1_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
 </p>
 <p>
-この演習で気をつける必要がある設定は以下の2つです。
-<br>
-今回はポートA、B全てがデジタル出力モードにセットされています。
+この演習で気をつける必要がある設定は以下の通りです。
 </p>
 <div class="info">
 <pre class="wrap">
@@ -202,8 +201,8 @@ ANSELB  ※ 8bit レジスタ
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS → GND ← PICkit の 3: GND
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
 6: RB0
 7: RB1
 8: RB2
@@ -211,12 +210,12 @@ ANSELB  ※ 8bit レジスタ
 
 10: RB4
 11: RB5
-12: ICSPCLK → PICkit の 5: PGC
-13: ICSPDAT → PICkit の 4: PGD
-14: VDD → 3.3V ← PICkit の 2: VDD
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-(*)17: RA0 (出力) → LED → 抵抗 → GND
+(*)17: RA0 (出力) -- LED -- 抵抗 -- GND
 18: RA1
 </pre>
 </div>
@@ -238,7 +237,8 @@ ANSELB  ※ 8bit レジスタ
 <b>仕様:</b>
 </p>
 <ol>
-<li>RB0 (6ピン) にタクトスイッチを接続する</li>
+<li> RB0 (6ピン) をデジタル入力モードにセットする</li>
+<li> RB0 (6ピン) にタクトスイッチを接続する</li>
 <li> タクトスイッチを押してない時は LED が光ってる</li>
 <li> タクトスイッチを押すと LED が消える</li>
 </ol>
@@ -261,9 +261,7 @@ ANSELB  ※ 8bit レジスタ
 それから<a href="./src/IO_1_3.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
 </p>
 <p>
-この演習で気をつける必要がある設定は以下の2つです。
-<br>
-今回は RB0 をデジタル入力モードにセットします。
+この演習で気をつける必要がある設定は以下の通りです。
 </p>
 <div class="info">
 <pre class="wrap">
@@ -274,7 +272,11 @@ WPUB  ※ 8bit レジスタ
 (解説)
 
 ポートBの(弱)プルアップ抵抗の設定です
-詳しくはデータシート 126p を参照してください
+詳しくはデータシート 127p を参照してください
+
+(補足)
+
+ポートAは RA5 だけ(弱)プルアップを有効にできます(121p参照)
 
 
 <b>設定 2:</b>
@@ -304,21 +306,21 @@ PICの内部(弱)プルアップ抵抗機能を ON にする設定です
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP → PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS → GND ← PICkit の 3: GND
-(*)6: RB0 (入力) → スイッチ → GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+(*)6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
 7: RB1
 8: RB2
 9: RB3
 
 10: RB4
 11: RB5
-12: ICSPCLK → PICkit の 5: PGC
-13: ICSPDAT → PICkit の 4: PGD
-14: VDD → 3.3V ← PICkit の 2: VDD
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-17: RA0 (出力) → LED → 抵抗 → GND
+17: RA0 (出力) -- LED -- 抵抗 -- GND
 18: RA1
 </pre>
 </div>
