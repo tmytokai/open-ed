@@ -96,7 +96,7 @@ int main()
 
     // x[i] を fs = 22050 [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
     // i の範囲は 0 <= i < N となる
-    const int N = 5 * fs; // 10 [秒] * fs [Hz]
+    const int N = 5 * fs; // 5 [秒] * fs [Hz]
 
     // FIR フィルタ長
     const int L = ? ;
