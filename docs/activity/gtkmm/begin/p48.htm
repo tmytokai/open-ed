@@ -1,0 +1,123 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+カラーボタン
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/3/3
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ラジオボタン
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::ColorButtonにより色の選択を行う。
+<p>
+カラーボタンは文字の代わりに色を表示するボタンで、クリックすると
+色選択ダイアログが開いて選択した色が表示される。選択した色を取得したい場合は
+Gtk::ColorButton::get_color()を使用する。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+colorbutton.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ColorButton m_colorbt;
+
+public:
+    MainWin();
+
+private:
+    void on_color_set();
+};
+
+
+MainWin::MainWin()
+{
+    m_colorbt.set_color( Gdk::Color( "red" ) );
+    m_colorbt.signal_color_set().connect( sigc::mem_fun( *this, &MainWin::on_color_set ) );
+
+    add( m_colorbt );
+    show_all_children();
+}
+
+
+void MainWin::on_color_set()
+{
+    std::cout &lt;&lt; "on_color_set"
+              &lt;&lt; " R= " &lt;&lt; m_colorbt.get_color().get_red()
+              &lt;&lt; " G= " &lt;&lt; m_colorbt.get_color().get_green()
+              &lt;&lt; " B= " &lt;&lt; m_colorbt.get_color().get_blue() &lt;&lt; std::endl;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ colorbutton.cpp -o colorbutton `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p48.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

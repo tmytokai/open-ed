@@ -1,0 +1,112 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Boxでウィジットを並べる
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" width="200px" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/6/18
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+
+<h2 class="title">
+Boxでウィジットを横に並べる
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::HBoxを使ってGtk::Labelを横に並べて表示する。
+<p>
+今回はHBoxを使ったが、代わりにGtk::VBoxを使うと縦に並べる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+box1.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MyBox : public Gtk::Window
+{
+    Gtk::Label m_label,m_label2;
+    Gtk::HBox m_hbox;
+
+public:
+    MyBox();
+    virtual ~MyBox(){}
+};
+
+MyBox::MyBox()
+{
+    m_label.set_text( "Hello World" );
+    m_label2.set_text( "Bye World" );
+
+    m_hbox.pack_start( m_label );
+    m_hbox.pack_start( m_label2 );
+
+    add( m_hbox );
+    show_all_children();
+    resize( 200, 100 );
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MyBox mb;
+    Gtk::Main::run( mb );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ box1.cpp -o box1 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p3.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

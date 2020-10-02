@@ -1,0 +1,192 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+文字を書く
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/8/18
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+文字を書く
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::DrawingAreaに文字を書く。
+<p>
+パラグラフクラスである Pango::Layout を使用する。はじめに
+Gtk::Widget::create_pango_layout() を使って Pango::Layoutのインスタンスを
+作成し、フォントや描画する文字を設定してから get_window()->draw_layout() によりパラグラフを描画する。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+layout.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+enum
+{
+    C_WHITE = 0,
+    C_RED,
+    C_BLACK,
+    C_NUM
+};
+
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+    Gdk::Color m_col[ C_NUM ];
+    Glib::RefPtr&lt; Pango::Layout &gt; m_layout;
+    
+public:
+    MyDrawArea();
+
+protected:
+    virtual void on_realize();
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    // カラーマップの登録
+    m_col[ C_WHITE ] = Gdk::Color( "white" );
+    m_col[ C_RED ] = Gdk::Color( "red" );
+    m_col[ C_BLACK ] = Gdk::Color( "black" );
+
+    Glib::RefPtr&lt; Gdk::Colormap &gt; colmap = get_default_colormap();
+    for( int i = 0; i &lt; C_NUM; ++i ) colmap-&gt;alloc_color( m_col[ i ] );
+
+    // pango layout作成
+    m_layout = create_pango_layout( "" );
+}
+
+
+void MyDrawArea::on_realize()
+{
+    // 元のon_realize()のコールを忘れないこと
+    Gtk::DrawingArea::on_realize(); 
+
+    // Gdk::Window からGCを作る
+    m_gc = Gdk::GC::create( get_window() );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    int width = get_width();
+    int height =get_height();
+    int x, y = 10;
+
+    // 背景の塗りつぶし
+    get_window()-&gt;set_background( m_col[ C_BLACK ] );
+    get_window()-&gt;clear();
+
+    // フォント指定
+    m_layout-&gt;set_font_description( Pango::FontDescription( "Serif 20" ) );
+
+    // 表示する文字をセット
+    m_layout-&gt;set_text("あいうえお");
+
+    // 中央揃え
+    x = ( width - m_layout-&gt;get_pixel_ink_extents().get_width() ) / 2;
+    
+    // 描画
+    get_window()-&gt;draw_layout( m_gc, x, y, m_layout , m_col[ C_WHITE],  m_col[ C_RED ] );
+
+    // 次のパラグラフのy座標
+    y += m_layout-&gt;get_pixel_ink_extents().get_height() + 10;
+    
+    // フォント指定
+    m_layout-&gt;set_font_description( Pango::FontDescription( "Monospace 24" ) );
+
+    // 表示する文字をセット
+    m_layout-&gt;set_text("かきくけこ");
+
+    // 中央揃え
+    x = ( width - m_layout-&gt;get_pixel_ink_extents().get_width() ) / 2;
+
+    // 描画
+    get_window()-&gt;draw_layout( m_gc, x, y, m_layout,  m_col[ C_RED ], m_col[ C_WHITE] );
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ layout.cpp -o layout `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p6.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

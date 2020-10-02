@@ -1,0 +1,240 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="style.css" type="text/css" />
+<Title>
+gtkmm 入門
+</Title>
+</head>
+<body>
+
+<h2>gtkmm 入門</h2>
+
+<p>
+  最終更新: 2009/12/12 <font color="red">※ かなり古い内容ですので参考程度としてお使い下さい</font>
+</p>
+<hr>
+<br>
+Fedoraで使用することを前提としているためパッケージ名が異なる場合があります。
+その場合は pkg-config に渡すパッケージ名を変更してください。
+<br>
+<ul>
+<li><a href="#basic">基礎</a>
+<li><a href="#thread">スレッド</a>
+<li><a href="#image">描画</a>
+<li><a href="#apli">応用</a>
+<li><a href="#etc">その他</a>
+</ul>
+
+<br>
+<br>
+外部リンク
+<ul>
+<li><a href="http://library.gnome.org/devel/gtkmm/">GNOME ドキュメントライブラリ の gtkmm の項</a>
+<li><a href="http://gtk.org/">gtk+</a>
+<li><a href="http://www.gtkmm.org/">gtkmm</a>
+<li><a href="http://cairographics.org/cairomm/">cairomm</a>
+<li><a href="http://libsigc.sourceforge.net/">libsigc++</a>
+</ul>
+
+<hr>
+<a name="basic" />
+<h2>基礎</h2>
+
+基本
+<ul>
+<li><a href="./begin/p1.htm">インストール</a>
+<li><a href="./begin/p2.htm">「Hello World」と表示する</a>
+<li><a href="./begin/p7.htm">ツールチップの表示</a>
+<li><a href="./begin/p13.htm">ポップアップウィンドウ</a>
+<li><a href="./begin/p23.htm">ウィジットの背景色変更</a>
+<li><a href="./begin/p35.htm">アイコンのセット</a>
+<li><a href="./begin/p36.htm">アイコンリストのセット</a>
+<li><a href="./begin/p37.htm">インラインアイコンの作成とセット</a>
+<li><a href="./begin/p45.htm">カーソルの形を変える</a>
+</ul>
+
+イベントとシグナル
+<ul>
+<li><a href="./begin/p21.htm">シグナルとシグナルハンドラ</a>
+<li><a href="./begin/p22.htm">イベントボックスの使い方</a>
+<li><a href="./begin/p42.htm">自作シグナル</a>
+</ul>
+
+マウスのイベント
+<ul>
+<li><a href="./begin/p17.htm">マウスクリックイベントの検出</a>
+<li><a href="./begin/p34.htm">ダブル、トリプルクリックイベントの検出</a>
+<li><a href="./begin/p46.htm">ホイール回転の検出</a>
+</ul>
+
+コンテナ
+<ul>
+<li><a href="./begin/p3.htm">Boxでウィジットを並べる</a>
+<li><a href="./begin/p11.htm">Gtk::ScrolledWindowによるスクロール処理</a>
+<li><a href="./begin/p26.htm">Gtk::Frameによるグループ化</a>
+<li><a href="./begin/p51.htm">Gtk::Tableによる格子状ウィジット配置</a>
+</ul>
+
+タブページ(Gtk::Notebook)
+<ul>
+<li><a href="./begin/p8.htm">タブページの作り方</a>
+<li><a href="./begin/p41.htm">タブにアイコンを埋め込む</a>
+<li><a href="./app/p5.htm">Gtk::Notebookのタブにツールチップを付ける</a>
+</ul>
+
+
+ボタン
+<ul>
+<li><a href="./begin/p5.htm">ボタンとスロット関数</a>
+<li><a href="./begin/p9.htm">チェックボタンとトグルボタン</a>
+<li><a href="./begin/p12.htm">ラジオボタン</a>
+<li><a href="./begin/p44.htm">スピンボタン</a>
+<li><a href="./begin/p48.htm">カラーボタン</a>
+</ul>
+
+
+リストビュー、ツリービュー
+<ul>
+<li><a href="./begin/p27.htm">リストビュー</a>
+<li><a href="./begin/p28.htm">リストビューその2</a>
+<li><a href="./begin/p29.htm">ツリービュー</a>
+<li><a href="./begin/p30.htm">複雑なツリーを作る</a>
+<li><a href="./begin/p31.htm">ツリーの内容を表示する</a>
+<li><a href="./begin/p32.htm">選択した行の後に新しい行を追加する</a>
+<li><a href="./begin/p33.htm">選択した行を削除する</a>
+<li><a href="./begin/p39.htm">リストビューに画像を表示する</a>
+<li><a href="./begin/p40.htm">リストビューにアイコンとテキストを同時表示する</a>
+<li><a href="./begin/p49.htm">リストビューの特定列の背景色を変更</a>
+<li><a href="./begin/p50.htm">リストビューの特定行、特定列の背景色を変更</a>
+</ul>
+
+テキスト入力
+<ul>
+<li><a href="./begin/p6.htm">Gtk::Entryでテキストボックス入力</a>
+<li><a href="./begin/p10.htm">Gtk::TextViewによるテキスト入力</a>
+<li><a href="./begin/p47.htm">Gtk::TextViewでカーソルのある位置を取得</a>
+<li><a href="./begin/p55.htm">Gtk::TextViewでカーソルのある位置の画面上での座標を取得</a>
+</ul>
+
+その他のウィジット
+<ul>
+<li><a href="./begin/p14.htm">プログレスパーとタイムアウト</a>
+<li><a href="./begin/p24.htm">コンボボックス</a>
+<li><a href="./begin/p52.htm">Gtk::Scaleによるスライドバー</a>
+</ul>
+
+タイマー
+<ul>
+<li><a href="./begin/p14.htm">プログレスパーとタイムアウト</a>
+</ul>
+
+メニュー、ショートカットキー
+<ul>
+<li><a href="./begin/p18.htm">ポップアップメニュー</a>
+<li><a href="./begin/p19.htm">メニューバー</a>
+<li><a href="./begin/p20.htm">ストックアイテムとショートカットキー</a>
+<li><a href="./begin/p38.htm">手動でメニューバーを作る</a>
+<li><a href="./begin/p53.htm">ポップアップメニューの位置を指定する</a>
+</ul>
+
+ダイアログ
+<ul>
+<li><a href="./begin/p4.htm">メッセージダイアログ</a>
+<li><a href="./begin/p15.htm">ファイル選択ダイアログ</a>
+<li><a href="./begin/p16.htm">フォント選択ダイアログ</a>
+<li><a href="./begin/p25.htm">色選択ダイアログ</a>
+<li><a href="./begin/p54.htm">自作ダイアログ</a>
+</ul>
+
+ドラッグアンドドロップ
+<ul>
+<li><a href="./begin/p43.htm">ドラッグアンドドロップ</a>
+</ul>
+
+<br>
+<br>
+<hr>
+<a name="thread" />
+<h2>スレッド</h2>
+
+<ul>
+<li><a href="./thread/p1.htm">スレッド</a>
+<li><a href="./thread/p2.htm">Mutex</a>
+<li><a href="./thread/p3.htm">ディスパッチャ</a>
+</ul>
+
+<br>
+<br>
+<hr>
+<a name="image" />
+<h2>描画</h2>
+
+基本
+<ul>
+<li><a href="./img/p5.htm">線を引く</a>
+<li><a href="./img/p11.htm">線を引く(Xlib編)</a>
+<li><a href="./img/p15.htm">線を引く(cairomm編)</a>
+<li><a href="./img/p7.htm">多角形を描く</a>
+</ul>
+
+文字
+<ul>
+<li><a href="./img/p6.htm">文字を書く</a>
+<li><a href="./img/p12.htm">文字を書く(Xlib編)</a>
+<li><a href="./img/p13.htm">文字を書く(Xft編)</a>
+<li><a href="./img/p16.htm">文字を書く(cairomm編)</a>
+<li><a href="./img/p18.htm">使用可能なフォントの一覧取得</a>
+</ul>
+
+画像
+<ul>
+<li><a href="./img/p1.htm">ファイルから画像を読み込んで表示</a>
+<li><a href="./img/p4.htm">ファイルから画像を読み込んで表示(Gtk::DrawingArea編)</a>
+<li><a href="./img/p17.htm">ファイルから画像を読み込んで表示(cairomm編)</a>
+<li><a href="./img/p2.htm">画像の拡大縮小</a>
+<li><a href="./img/p3.htm">画像データへの直接アクセス</a>
+<li><a href="./img/p19.htm">Gdk::PixbufLoaderによる画像の読み込み</a>
+<li><a href="./img/p20.htm">画像のアルファ合成(cairomm)</a>
+</ul>
+
+応用
+<ul>
+<li><a href="./img/p14.htm">Gtk::DrawingAreaをGtk::ScrolledWindowの中に貼り付ける</a>
+<li><a href="./img/p8.htm">簡単な描画ツールを作成１</a>
+<li><a href="./img/p9.htm">簡単な描画ツールを作成２(オフスクリーン使用)</a>
+<li><a href="./img/p10.htm">簡単な描画ツールを作成３(画像保存)</a>
+</ul>
+
+<br>
+<br>
+<hr>
+<a name="apli" />
+<h2>応用</h2>
+
+<ul>
+<li><a href="./app/p1.htm">Boxにスペーサを入れる</a>
+<li><a href="./app/p2.htm">sigc::ptr_fun()とsigc::mem_fun()</a>
+<li><a href="./app/p3.htm">Gtk::ScrolledWindow と Gtk::EventBox の順番</a>
+<li><a href="./app/p4.htm">Gtk::manageによるdeleteの自動化</a>
+<li><a href="./app/p6.htm">リアルタイムなキーボード状態の取得</a>
+<li><a href="./app/p7.htm">リアルタイムなマウス状態の取得</a>
+</ul>
+
+<br>
+<br>
+<hr>
+<a name="etc" />
+<h2>その他</h2>
+
+<ul>
+<li><a href="./etc/p1.htm">静的ライブラリのリンク時にundefined referenceエラーが出る(gcc)</a>
+<li><a href="./etc/p2.htm">VC++でfor内で定義した変数のスコープが変(vc++)</a>
+<li><a href="./etc/p3.htm">ncursesでUTF-8表示</a>
+<li><a href="./etc/p4.htm">pthread_createしたらjoinを忘れない</a>
+<li><a href="./etc/gettext.txt">(メモ書き) gettextで国際化</a>
+</ul>
+
+
+</body>
+</html>

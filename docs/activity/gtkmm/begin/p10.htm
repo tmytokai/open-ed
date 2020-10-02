@@ -1,0 +1,116 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::TextViewによるテキスト入力
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/8/2
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::TextViewによるテキスト入力
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+１行のテキストボックスはGtk::Entryによって出来たが、複数行のテキストエディタはGtk::TextViewを使用する。
+<p>
+文字列をセットするときはget_buffer()によりバッファ(Gtk::TextBuffer)のポインタを取得して
+Gtk::TextBuffer::set_text()を使う。文字列を取得するときも同様にしてGtk::TextBuffer::get_text()を使う。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+textview.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::TextView m_textview;
+
+public:
+    MainWin();
+    virtual ~MainWin();
+};
+
+MainWin::MainWin()
+{
+    m_textview.get_buffer()-&gt;set_text( "test" );
+    
+    add( m_textview );
+    show_all_children();
+}
+
+MainWin::~MainWin()
+{
+    Gtk::MessageDialog( m_textview.get_buffer()-&gt;get_text() ).run();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ textview.cpp -o textview `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p10.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

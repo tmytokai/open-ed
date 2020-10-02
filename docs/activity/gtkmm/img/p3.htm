@@ -1,0 +1,140 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+画像データへの直接アクセス
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/7/4
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+画像データへの直接アクセス
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gdk::Pixbuf::get_pixels()関数を使ってピクセルデータに直接アクセスする。
+<p>
+この関数はguint8型のポインタを返し、Gdk::Pixbuf::get_n_channels()の
+戻り値が4の時はR,G,B,アルファ値の順にデータが格納されている。
+また1行分のサイズはGdk::Pixbuf::get_rowstride()によって
+取得できる。従って
+
+<pre class="prog">
+guint8* data = m_pixbuf-&gt;get_pixels();
+int channels = m_pixbuf-&gt;get_n_channels();
+int stride = m_pixbuf-&gt;get_rowstride();
+</pre>
+
+とすると(x,y)座標のG成分には data[ y * stride + x * channels + 1 ] によって
+アクセスできる。
+<P>
+次の例は読み込んだ画像の画素値を反転させるものである。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+pixbuf2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Image m_img;
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    m_pixbuf = Gdk::Pixbuf::create_from_file( "./test.png" );
+
+    guint8* data = m_pixbuf-&gt;get_pixels();
+    int channels = m_pixbuf-&gt;get_n_channels();
+    int width = m_pixbuf-&gt;get_width();
+    int height = m_pixbuf-&gt;get_height();
+    int stride = m_pixbuf-&gt;get_rowstride();
+
+    // 反転画像
+    for( int row = 0; row &lt; height ; ++row ){
+        for( int col = 0; col &lt; width ; ++col ){        
+
+            int offset = row * stride + col * channels;
+            data[ offset ] = -1 - data[ offset ];       // R
+            data[ offset+1 ] = -1 - data[ offset+1 ];   // G
+            data[ offset+2 ] = -1 - data[ offset+2 ];   // B
+        }
+    }
+
+    m_img.set( m_pixbuf );
+
+    add( m_img );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ pixbuf2.cpp -o pixbuf2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p3.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

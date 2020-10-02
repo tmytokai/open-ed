@@ -1,0 +1,211 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+メニューバー
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/10/15
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+メニューバー
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+メニューバーを表示する。
+<p>
+基本的にはポップアップメニューと同様にアクションをアクショングループに登録してUIマネージャでレイアウトしてから
+メニューバーをパックすれば良い。なおメニューバーのアクションとポップアップメニューのアクションはわざわざ別々に
+作らなくても共通に使うことが出来るのに注意すること。以下のサンプルではメニューバーの表示だけではなく
+クライアント領域をクリックしたときにポップアップメニューも表示するようにしてある。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+menubar.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::VBox m_box;
+
+    Glib::RefPtr&lt; Gtk::ActionGroup &gt; m_actiongroup;
+    Glib::RefPtr&lt; Gtk::UIManager &gt; m_uimanager;
+
+public:
+    MainWin();
+
+private:
+    void on_menu_test1();
+    void on_menu_test2();
+    
+protected:
+    virtual bool on_button_press_event( GdkEventButton* event );
+};
+
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+
+    // アクショングループの作成とアクション登録
+    m_actiongroup = Gtk::ActionGroup::create();
+
+    // メニューのラベル
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuTitle1", "メニュー1" ) );
+    m_actiongroup-&gt;add( Gtk::Action::create( "SubMenu", "サブメニュー" ) );
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuTitle2", "メニュー2" ) );
+
+    // ポップアップメニュのラベル
+    m_actiongroup-&gt;add( Gtk::Action::create( "PopupMenuTitle", "ポップアップメニュー" ) );
+
+    // 共通アクション
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu1", "テスト1" ), sigc::mem_fun( *this, &MainWin::on_menu_test1 ) );    
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu2", "テスト2" ), sigc::mem_fun( *this, &MainWin::on_menu_test2 ) );    
+
+    // UIマネージャの作成とアクショングループ挿入
+    m_uimanager = Gtk::UIManager::create();
+    m_uimanager-&gt;insert_action_group( m_actiongroup );
+
+    // メニューのレイアウト
+    try
+    {
+        Glib::ustring ui_info = 
+            "&lt;ui&gt;"
+
+            // メニュー
+            "&lt;menubar name='MenuBar'&gt;"
+            "   &lt;menu action='MenuTitle1'&gt;"
+            "      &lt;menu action='SubMenu'&gt;"
+            "        &lt;menuitem action='TestMenu1'/&gt;"
+            "        &lt;menuitem action='TestMenu2'/&gt;"
+            "     &lt;/menu&gt;"
+            "     &lt;separator/&gt;"
+            "     &lt;menuitem action='TestMenu2'/&gt;"
+            "  &lt;/menu&gt;"
+            "   &lt;menu action='MenuTitle2'&gt;"
+            "      &lt;menuitem action='TestMenu1'/&gt;"
+            "      &lt;menuitem action='TestMenu2'/&gt;"
+            "  &lt;/menu&gt;"
+            "&lt;/menubar&gt;"
+
+            // ポップアップメニュー
+            "&lt;popup name='PopupMenu' &gt;"
+            "  &lt;menuitem action='PopupMenuTitle'/&gt;"
+            "  &lt;menuitem action='TestMenu1'/&gt;"
+            "  &lt;menuitem action='TestMenu2'/&gt;"
+            "&lt;/popup&gt;"
+
+            "&lt;/ui&gt;";
+
+        m_uimanager-&gt;add_ui_from_string(ui_info);
+    }
+    catch(const Glib::Error& err )
+    {
+        std::cout &lt;&lt; err.what() &lt;&lt; std::endl;
+    }
+
+    // メニューのパック
+    resize( 300, 300 );
+    add( m_box );
+    Gtk::Widget* menubar = m_uimanager-&gt;get_widget( "/MenuBar" );
+    m_box.pack_start( *menubar, Gtk::PACK_SHRINK );
+    show_all_children();
+}
+
+
+
+// マウスクリック
+bool MainWin::on_button_press_event( GdkEventButton* event )
+{
+    Gtk::Menu* popupmenu = dynamic_cast&lt; Gtk::Menu* &gt;( m_uimanager-&gt;get_widget( "/PopupMenu" ) );
+    popupmenu-&gt;popup( event-&gt;button, event-&gt;time );
+
+    return true;
+}
+
+
+// シグナルハンドラ
+void MainWin::on_menu_test1()
+{
+    std::cout &lt;&lt; "test1\n";
+}
+
+
+// シグナルハンドラ
+void MainWin::on_menu_test2()
+{
+    std::cout &lt;&lt; "test2\n";
+}
+
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ menubar.cpp -o menubar `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p19.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

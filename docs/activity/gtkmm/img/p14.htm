@@ -1,0 +1,179 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::DrawingAreaをGtk::ScrolledWindowの中に貼り付ける
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2007/3/28
+<br> 
+<br> 
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::DrawingAreaをGtk::ScrolledWindowの中に貼り付ける
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::DrawingAreaをGtk::ScrolledWindowの中に貼り付ける。
+<p>
+特別な事をしなくても自動でスクロール処理されるが、
+「Gtk::DrawingAreaをGtk::ScrolledWindowにaddする前に
+Gtk::DrawingArea::set_size_request()で描画領域のサイズを指定しておかないと
+スクロールバーが表示されない」ので注意すること。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+scroll2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf1;
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf2;
+    Glib::RefPtr&lt; Pango::Layout &gt; m_layout;
+    
+public:
+
+    MyDrawArea();
+
+protected:
+
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    // 予めGtk::DrawingAreaのサイズを指定しておかないと Gtk::ScrolledWindow に
+    // 貼りつけてもスクロールバーが出てこないので注意
+    set_size_request( 500, 500 );
+
+    // 画像のロード
+    try {
+        m_pixbuf1 = Gdk::Pixbuf::create_from_file( "./test.png" );
+        m_pixbuf2 = m_pixbuf1-&gt;scale_simple( 50, 50, Gdk::INTERP_NEAREST );
+    }
+    catch(...)
+    {
+      Glib::exception_handlers_invoke();
+      exit(1);
+    }
+
+    // pango layout作成
+    m_layout = create_pango_layout( "" );
+    m_layout-&gt;set_font_description( Pango::FontDescription( "Serif 20" ) );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    if( ! m_gc ) m_gc = Gdk::GC::create( get_window() );
+
+    // 背景の塗りつぶし
+    get_window()-&gt;set_background( Gdk::Color( "black" ) );
+    get_window()-&gt;clear();
+
+    // Gdk::Drawable::draw_layoutで文字描画
+    m_layout-&gt;set_text("あいうえお");
+    get_window()-&gt;draw_layout( m_gc, 50, 50, m_layout , Gdk::Color( "white" ), Gdk::Color( "black" ) );
+
+    // Gdk::Drawable::draw_pixbuf()でpixbufを描画
+    get_window()-&gt;draw_pixbuf( m_gc, m_pixbuf1, 0, 0,
+                               50, 100, m_pixbuf1-&gt;get_width(), m_pixbuf1-&gt;get_height(),
+                               Gdk::RGB_DITHER_NONE, 0, 0 );
+
+    get_window()-&gt;draw_pixbuf( m_gc, m_pixbuf2, 0, 0,
+                               250, 40, m_pixbuf2-&gt;get_width(), m_pixbuf2-&gt;get_height(),
+                               Gdk::RGB_DITHER_NONE, 0, 0 );
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+    Gtk::ScrolledWindow m_scr;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+{
+    // スクロールバー自動表示設定
+    m_scr.set_policy( Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC );
+
+    // DrawingAreaを貼り付けて表示
+    m_scr.add( m_drawarea );
+    add( m_scr );
+    resize( 300, 300 );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ scroll2.cpp -o scroll2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p14.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

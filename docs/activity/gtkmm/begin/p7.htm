@@ -1,0 +1,115 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ツールチップの表示
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/7/9
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ツールチップの表示
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ボタンなどの上にマウスを乗せると表示されるツールチップはGtk::Tooltipsによって実現できる。
+<p>
+Gtk::Tooltipsset_tip()によってツールチップの文字列と表示するwidgetを結びつける。
+なおGtk::Tooltipsは一つ作るだけで良い。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+tooltip.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Button m_button1, m_button2;
+    Gtk::HBox m_hbox;
+    Gtk::Tooltips m_tooltip;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+    : m_button1( "button1" ),
+      m_button2( "button2" )
+{
+    m_hbox.pack_start( m_button1 );
+    m_hbox.pack_start( m_button2 );
+
+    m_tooltip.set_tip( m_button1, "button1" );
+    m_tooltip.set_tip( m_button2, "button2" );
+
+    add( m_hbox );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ tooltip.cpp -o tooltip `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+
+<center>
+<img src="./images/p7.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

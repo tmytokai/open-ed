@@ -1,0 +1,118 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ボタンとスロット関数
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" width="200px" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/6/21
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+ボタンとスロット関数
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ボタン(Gtk::Button)を張り付けてクリックイベントを処理する。
+<p>
+ボタンをクリックするとsignal_clickedシグナルが発されるので
+そのシグナルとスロット関数(シグナルハンドラ)をconnect()関数を用いて結びつける
+ことによってクリックイベントを処理できる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+bt.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Button m_bt;
+
+public:
+    MainWin();
+
+private:
+    void on_bt_clicked();
+};
+
+MainWin::MainWin()
+    :m_bt( "クリック" )
+{
+    // シグナルとスロットをコネクト
+    m_bt.signal_clicked().connect( 
+                sigc::mem_fun( *this, &MainWin::on_bt_clicked ) );
+    add( m_bt );
+    show_all_children();
+}
+
+// スロット関数
+void MainWin::on_bt_clicked()
+{
+    Gtk::MessageDialog diag( *this, "文字" );
+    diag.run();
+}    
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ bt.cpp -o bt `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p5.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

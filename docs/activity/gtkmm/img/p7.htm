@@ -1,0 +1,172 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+多角形を描く
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/8/19
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+多角形を描く
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::DrawingAreaに多角形を表示する。
+<p>
+基本的には線を引くときと同様にon_expose_event()の中で
+get_window()-&gt;draw_polygon()によって描画できるが、
+引数としてGdk::Pointを使った頂点のリストを渡す必要がある。
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+layout.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;list&gt;
+
+enum
+{
+    C_WHITE = 0,
+    C_BLACK,
+    C_NUM
+};
+
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+    Gdk::Color m_col[ C_NUM ];
+    
+public:
+    MyDrawArea();
+
+protected:
+    virtual void on_realize();
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    // カラーマップの登録
+    m_col[ C_WHITE ] = Gdk::Color( "white" );
+    m_col[ C_BLACK ] = Gdk::Color( "black" );
+
+    Glib::RefPtr&lt; Gdk::Colormap &gt; colmap = get_default_colormap();
+    for( int i = 0; i &lt; C_NUM; ++i ) colmap-&gt;alloc_color( m_col[ i ] );
+}
+
+
+void MyDrawArea::on_realize()
+{
+    // 元のon_realize()のコールを忘れないこと
+    Gtk::DrawingArea::on_realize(); 
+
+    // Gdk::Window からGCを作る
+    m_gc = Gdk::GC::create( get_window() );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    int width = get_width();
+    int height =get_height();
+
+    // 背景の塗りつぶし
+    get_window()-&gt;set_background( m_col[ C_BLACK ] );
+    get_window()-&gt;clear();
+
+    std::list&lt; Gdk::Point &gt; list_points;
+    Gdk::Point point;
+
+    for( int i = 0; i &lt; 20; ++i ){
+        point.set_x( rand() % width );
+        point.set_y( rand() % height );
+        list_points.push_back( point );
+    }
+
+    // 多角形
+    m_gc-&gt;set_foreground( m_col[ C_WHITE ] );
+    get_window()-&gt;draw_polygon( m_gc, true, list_points );
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ poly.cpp -o poly `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p7.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

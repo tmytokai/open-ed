@@ -1,0 +1,140 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+画像のアルファ合成
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2008/4/30
+<br>
+バージョン: gtkmm-2.4 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">画像のアルファ合成</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+cairommを使って2つの画像のアルファ合成をおこなう。
+<p>
+基本的には<a href="./p17.htm">ファイルから画像を読み込んで表示</a>と同様に行うが、
+2つ目の画像を描画するときCairo::Context::paint()の代わりに
+Cairo::Context::paint_with_alpha()を使用する。
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+cairoimg2.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf;
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf2;
+
+public:
+    MyDrawArea();
+
+protected:
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+
+MyDrawArea::MyDrawArea()
+{
+    // 画像読み込み
+    try {
+        m_pixbuf = Gdk::Pixbuf::create_from_file( "./test.jpg" );
+        m_pixbuf2 = Gdk::Pixbuf::create_from_file( "./test2.jpg" );
+    }
+    catch(...)
+    {
+      Glib::exception_handlers_invoke();
+      exit(1);
+    }
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    const double alpha = 0.5;  // ブレンド比率
+
+    int width =  get_width();
+    int height = get_height();
+
+    Cairo::RefPtr&lt; Cairo::Context &gt; cairoctx = get_window()-&gt;create_cairo_context();
+
+    Gdk::Cairo::set_source_pixbuf( cairoctx, m_pixbuf-&gt;scale_simple( width, height, Gdk::INTERP_NEAREST ), 0, 0 );
+    cairoctx-&gt;paint();
+
+    Gdk::Cairo::set_source_pixbuf( cairoctx, m_pixbuf2-&gt;scale_simple( width, height, Gdk::INTERP_NEAREST ), 0, 0 );
+    cairoctx-&gt;paint_with_alpha( alpha );
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+<br><br>
+<pre class="prog">
+g++ cairoimg2.cpp -o cairoimg2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<br>
+<center>
+<img src="./images/p20.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

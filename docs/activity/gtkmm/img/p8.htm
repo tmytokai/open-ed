@@ -1,0 +1,191 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+簡単な描画ツールを作成１
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/8/29
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+簡単な描画ツールを作成１
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+簡単な描画ツールを作成する。
+<p>
+
+ウィンドウの中でマウスをドラッグすると線を引く。
+マウスのクリックとドラッグのイベントを取得するために
+on_button_press_event()とon_motion_notify_event()をオーバロードし、さらに
+<p>
+add_events( Gdk::BUTTON_PRESS_MASK | Gdk::POINTER_MOTION_MASK )
+<p>
+と監視するイベントをadd_events()で追加する。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+drawpic.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+
+    // ポインタの以前の座標
+    int m_pre_x;
+    int m_pre_y;
+    
+public:
+    MyDrawArea();
+
+private:
+    void draw_line( int x1, int y1, int x2, int y2 );
+    
+protected:
+    virtual void on_realize();
+    bool on_expose_event( GdkEventExpose* event );
+    virtual bool on_button_press_event( GdkEventButton* event );
+    virtual bool on_motion_notify_event( GdkEventMotion* event );
+};
+
+MyDrawArea::MyDrawArea()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK | Gdk::POINTER_MOTION_MASK );
+}
+
+void MyDrawArea::on_realize()
+{
+    // 元のon_realize()へのコールを忘れないこと
+    Gtk::DrawingArea::on_realize(); 
+
+    m_gc = Gdk::GC::create( get_window() );
+}
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    // 背景を白く塗りつぶし
+    int width = get_width();
+    int height = get_height();
+    m_gc-&gt;set_rgb_fg_color( Gdk::Color( "white" ) );
+    get_window()-&gt;draw_rectangle( m_gc, true, 0, 0, width, height );
+
+    return true;
+}
+
+// 線を引く
+void MyDrawArea::draw_line( int x1, int y1, int x2, int y2 )
+{
+    m_gc-&gt;set_rgb_fg_color( Gdk::Color( "red" ) );
+    m_gc-&gt;set_line_attributes( 4, Gdk::LINE_SOLID, Gdk::CAP_ROUND, Gdk::JOIN_ROUND );
+    get_window()-&gt;draw_line( m_gc, x1, y1, x2, y2 );
+}
+
+// マウスクリック
+bool MyDrawArea::on_button_press_event( GdkEventButton* event )
+{
+    m_pre_x = (int)event-&gt;x;
+    m_pre_y = (int)event-&gt;y;
+    draw_line( m_pre_x, m_pre_y, m_pre_x, m_pre_y );
+
+    return true;
+}
+
+// マウスをドラッグした
+bool MyDrawArea::on_motion_notify_event( GdkEventMotion* event )
+{
+    if( event-&gt;state == Gdk::BUTTON1_MASK ){
+
+        int x2 = (int)event-&gt;x;
+        int y2 = (int)event-&gt;y;
+
+        draw_line( m_pre_x, m_pre_y, x2, y2 );
+
+        m_pre_x = x2;
+        m_pre_y = y2;
+    }
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        resize( 400, 400 );
+
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ drawpic.cpp -o drawpic `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p8.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

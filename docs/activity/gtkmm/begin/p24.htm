@@ -1,0 +1,118 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+コンボボックス
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/11/14
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+コンボボックス
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::Combo によってコンボボックスを作成する
+<p>
+セットしたい文字列を std::list< Glib::ustring > によりリスト型で順次指定し、set_popdown_strings()によりセットする。
+<P>
+選択中の文字列を取得したい場合はget_entry()->get_text()によりおこなう。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+combo.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Combo m_combo;
+
+public:
+    MainWin();
+    virtual ~MainWin();
+};
+
+MainWin::MainWin()
+{
+    std::list&lt; Glib::ustring &gt; list_ustr;
+    list_ustr.push_back( "行1" );
+    list_ustr.push_back( "行2" );
+    list_ustr.push_back( "行3" );
+    m_combo.set_popdown_strings( list_ustr );    
+
+    add( m_combo );
+    show_all_children();
+}
+
+MainWin::~MainWin()
+{
+    Gtk::MessageDialog diag( *this, m_combo.get_entry()->get_text() );
+    diag.run();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ combo.cpp -o combo `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p24.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

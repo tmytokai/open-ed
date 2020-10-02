@@ -1,0 +1,133 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リアルタイムなキーボード状態の取得
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/8/9
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リアルタイムなキーボード状態の取得
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+現在のキーボード状態をイベントを使わずに取得する。
+<p>
+アクションゲームなどでキーイベントを使わないで現在のキーボード状態を取得したい
+場合があるが、gtkにはそのような関数は用意されていない(と思う)。
+そこであまり好ましくない方法であるがxlibのXQueryKeymap()関数を使用する。
+Display のポインタは次のようにして取得できる。
+<P>
+Display* disp = GDK_WINDOW_XDISPLAY( Glib::unwrap( get_window() ) );
+<P>
+あとはXQueryKeymap()とXKeysymToKeycode()の組み合わせでボタン状態を取得できる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+xqkey.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+#include &lt;gdk/gdkx.h&gt;  // GDK_WINDOW_XDISPLAY
+
+#define XK_LATIN1
+#define XK_MISCELLANY
+#include &lt;X11/keysymdef.h&gt; // XK_*
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin(){ add_events( Gdk::BUTTON_PRESS_MASK ); }
+
+protected:
+    virtual bool on_button_press_event( GdkEventButton* ev );
+};
+
+
+bool MainWin::on_button_press_event( GdkEventButton* ev )
+{
+    bool press_a = false;
+
+    // キーボード状態取得
+    char keys[ 32 ]; 
+    Display* disp = GDK_WINDOW_XDISPLAY( Glib::unwrap( get_window() ) );
+    XQueryKeymap( disp, keys );
+    for( int i = 0; i &lt; 32; ++i ){
+        for( unsigned char i2 = 0; i2 &lt; 8  ; ++i2 ){
+            if( keys[ i ] & ( 1 &lt;&lt; i2 ) ){
+                KeyCode code = i*8 + i2;
+                if( XKeysymToKeycode( disp, XK_a ) == code ) press_a = true;
+            }
+        }
+    }
+
+    if( press_a ){
+        Gtk::MessageDialog diag( *this, "press a" );
+        diag.run();
+    }
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ xqkey.cpp -o xqkey `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+"a"キーを押しながらクリックするとダイアログが表示される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

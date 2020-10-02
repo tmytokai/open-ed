@@ -1,0 +1,146 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+sigc::ptr_fun()とsigc::mem_fun()
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/6/22
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+sigc::ptr_fun()とsigc::mem_fun()
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+sigc::ptr_fun()とsigc::mem_fun()の違いについて述べる。
+<p>
+これまでは単にシグナルとスロット関数をコネクトするとだけ書いていたが、正しくはコネクトするのは
+スロット関数ではなくスロットオブジェクトである。従って、connectするときに
+
+<pre class="prog">
+signal_foo.connect( &on_foo );
+</pre>
+
+の様に直接スロット関数のアドレスを指定するとエラーが出る。
+<p>
+スロット関数(又はシグナルハンドラ)からスロットオブジェクトを作るには sigc::mem_fun()
+又は sigc::ptr_fun() を使用する。なお正確にはこれらの関数はsigc::pointer_functorsオブジェクト
+を作るものであるが、スロットオブジェクトと一対一で対応しているので同一視することにする。
+これらの違いは次の通りである。
+<P>
+・ sigc::ptr_fun() → グローバル関数をシグナルハンドラにする
+<P>
+・ sigc::mem_fun() → あるオブジェクト(もちろん*thisでも可)のメンバ関数をシグナルハンドラにする
+<P>
+従ってsigc::mem_fun()にはオブジェクトとメンバ関数のアドレスの2つの引数が必要とされる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+sig1.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// グローバルなシグナルハンドラ
+void on_clicked_global(){ Gtk::MessageDialog( "グローバルなシグナルハンドラ" ).run(); }
+
+// あるクラスのメンバ関数としてのシグナルハンドラ
+class ClickClass
+{
+public:
+    void on_clicked(){ Gtk::MessageDialog( "他のオブジェクト内のシグナルハンドラ" ).run(); }
+};
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Button m_bt, m_bt2;
+    Gtk::VBox m_vbox;
+    ClickClass m_click;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+    : m_bt( "グローバル" ), m_bt2( "他のオブジェクト" )
+{
+    m_vbox.pack_start( m_bt );
+    m_vbox.pack_start( m_bt2 );
+
+    // グローバルなシグナルハンドラとコネクト
+    m_bt.signal_clicked().connect( sigc::ptr_fun( &on_clicked_global ) );
+
+    // 他のオブジェクト内のシグナルハンドラとコネクト
+    m_bt2.signal_clicked().connect( sigc::mem_fun( m_click, &ClickClass::on_clicked ) );
+
+    add( m_vbox );
+    show_all_children();
+    resize( 200, 100 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ sig1.cpp -o sig1 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p2.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

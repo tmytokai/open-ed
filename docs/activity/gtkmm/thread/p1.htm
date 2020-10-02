@@ -1,0 +1,111 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+スレッド
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2006/1/5
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+スレッド
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+スレッドを実行する
+<P>
+スレッドはGlib::Thread::create()を使用して作ることが出来るが、スレッドを作成する前に
+一度だけ Glib::thread_init()を実行する必要がある。
+<P>
+スレッドの停止待ちにはGlib::Thread::join()を使う。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+thread.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+// gettid
+#include &lt;sys/types.h&gt;
+#include &lt;linux/unistd.h&gt;
+_syscall0(pid_t,gettid)
+
+void slot_thread()
+{
+    std::cout &lt;&lt; "thread tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+    sleep( 2 );
+    std::cout &lt;&lt; "thread stop(" &lt;&lt; gettid() &lt;&lt; ")" &lt;&lt; std::endl;
+}
+
+int main()
+{
+    // スレッドシステムの初期化
+    Glib::thread_init();
+
+    std::cout &lt;&lt; "main tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+
+    Glib::Thread* thread = Glib::Thread::create( sigc::ptr_fun( &slot_thread ), true );
+    thread-&gt;join();
+
+    std::cout &lt;&lt; "main stop(" &lt;&lt; gettid() &lt;&lt; ")" &lt;&lt; std::endl;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。今回はスレッドを
+使用しているので pkg-config --libs gthread-2.0 の指定も必要である。
+
+<br><br>
+<pre class="prog">
+g++ thread.cpp -o thread `pkg-config gtkmm-2.4 --cflags --libs` `pkg-config --libs gthread-2.0`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<pre>
+main tid = 27743
+thread tid = 27744
+thread stop(27744)
+main stop(27743)
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

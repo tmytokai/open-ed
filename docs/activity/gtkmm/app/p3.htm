@@ -1,0 +1,138 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::ScrolledWindow と Gtk::EventBox の順番
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/7/6
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+Gtk::ScrolledWindow と Gtk::EventBox の順番
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::Image などの "no window" ウィジットでイベントを取得するにはGtk::EventBoxに貼る(add)必要が
+あるが、さらに Gtk::ScrolledWindow と組み合わせるときにウィジットを貼る順番を間違えると一部の
+イベントが正常に取得できないことがある。
+<p>
+例えばGtk::Image -> Gtk::EventBox -> Gtk::ScrolledWindow の順に貼っても、
+Gtk::Image -> Gtk::ScrolledWindow -> Gtk::EventBox の順に貼っても表示は同じであるが、
+後者の場合はマウスのボタンを押しながらのmotion_notifyイベントを取得できない。
+<p>
+従って正しくイベントを取得するには "no window" ウィジット -> Gtk::EventBox -> Gtk::ScrolledWindow の
+順に貼る必要がある。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+eventscr.cpp (わざとマウスボタンを押しながらのmotion_notifyイベントを取得出来ないようにしてある)
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Image m_img;
+    Gtk::ScrolledWindow m_scr;
+    Gtk::EventBox m_event;
+
+public:
+    MainWin();
+
+private:
+    bool slot_motion_notify_event( GdkEventMotion* event ){ std::cout &lt;&lt; "motion\n"; }
+};
+
+
+MainWin::MainWin() : m_img( "./test.png" )
+{
+    m_event.add_events( Gdk::POINTER_MOTION_MASK );
+    m_event.signal_motion_notify_event()
+           .connect( sigc::mem_fun( *this, &MainWin::slot_motion_notify_event ) );
+
+    m_scr.add( m_img );
+    m_event.add( m_scr );
+    add( m_event );
+
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ eventscr.cpp -o eventscr `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+上のコードではマウスボタンを押さないときにマウスを動かすと "motion" という文字が表示されるが、
+マウスボタンを押しながらマウスを動かすと何も表示されない。そこでMainWin()を次のように変更する。
+
+<pre class="prog">
+MainWin::MainWin() : m_img( "./test.png" )
+{
+    m_event.add_events( Gdk::POINTER_MOTION_MASK );
+    m_event.signal_motion_notify_event()
+           .connect( sigc::mem_fun( *this, &MainWin::slot_motion_notify_event ) );
+
+    m_event.add( m_img );
+    m_scr.add( m_event );
+    add( m_scr );
+    
+    show_all_children();
+}
+</pre>
+Widgetをaddする順番に注意。今度はマウスボタンを押しながらマウスを動かしたときでも"motion"と表示される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

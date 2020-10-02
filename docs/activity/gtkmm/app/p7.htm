@@ -1,0 +1,122 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リアルタイムなマウス状態の取得
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/10/22
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リアルタイムなマウス状態の取得
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+現在のマウス状態をイベントを使わずに取得する。
+<p>
+<a href="./p6.htm">XQueryKeymap()</a>関数と同様にして、マウスの現在の位置や
+ボタンの状態はXQueryPointer()関数により取得できる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+xqpointer.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;gdk/gdkx.h&gt;
+#include &lt;iostream&gt;
+
+void show_pointer( Glib::RefPtr&lt;Gdk::Window&gt; win )
+{
+    int x_r, y_r;
+    int x_w, y_w;
+    Window root;
+    Window child;
+    unsigned int buttons;
+    XQueryPointer( GDK_WINDOW_XDISPLAY( Glib::unwrap( win ) ),
+                   GDK_WINDOW_XWINDOW( Glib::unwrap( win ) ),
+                   &root, &child,
+                   &x_r, &y_r, &x_w, &y_w, &buttons );
+
+    std::cout &lt;&lt; "x_r = " &lt;&lt; x_r &lt;&lt; " y_r= " &lt;&lt; y_r
+              &lt;&lt; "x_w = " &lt;&lt; x_w &lt;&lt; " y_w= " &lt;&lt; y_w
+              &lt;&lt; " button = " &lt;&lt; buttons; 
+
+    if( buttons & Button1Mask ) std::cout &lt;&lt; " b1";
+    if( buttons & Button2Mask ) std::cout &lt;&lt; " b2";
+    if( buttons & Button3Mask ) std::cout &lt;&lt; " b3";
+    if( buttons & ShiftMask ) std::cout &lt;&lt; " shift";
+    if( buttons & ControlMask ) std::cout &lt;&lt; " ctrl";
+
+    std::cout &lt;&lt; std::endl;
+}
+
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin(){ add_events( Gdk::BUTTON_PRESS_MASK ); }
+
+protected:
+    virtual bool on_button_press_event( GdkEventButton* ev ){ show_pointer( get_window() ); }
+};
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ xqpointer.cpp -o xqpointer `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+ウィンドウをクリックすると現在の座標やボタン状態が表示される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

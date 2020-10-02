@@ -1,0 +1,138 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リストビューの特定列の背景色を変更
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/3/27
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リストビューの特定列の背景色を変更
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+リストビューの特定列の背景色を変更する。
+<p>
+まず Gtk::TreeView が Gtk::TreeModel の列を描画するために使うレンダラクラス( Gtk::CellRenderer )
+を取得する。i 行目のレンダラは Gtk::TreeView::get_column_cell_renderer( i ) で取得できるので、あとは
+Gtk::CellRenderer::property_cell_background_gdkプロパティに背景色を指定するだけでよい。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+listview4.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    Gtk::TreeModelColumn&lt; int &gt; m_col_num;
+    Gtk::TreeModelColumn&lt; Glib::ustring &gt; m_col_name;
+    Gtk::TreeModel::ColumnRecord m_record;
+    Glib::RefPtr&lt; Gtk::ListStore &gt; m_liststore;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    // モデルとビューを作成
+    m_record.add( m_col_num );
+    m_record.add( m_col_name );
+    m_liststore = Gtk::ListStore::create( m_record );
+    m_treeview.set_model( m_liststore );
+
+    // ビューに表示する列を指定
+    m_treeview.append_column( "番号", m_col_num );
+    m_treeview.append_column( "名前", m_col_name );
+
+    // セルの背景色を指定
+    Gtk::CellRenderer* render = m_treeview.get_column_cell_renderer( 1 );
+    if( render ) render-&gt;property_cell_background_gdk() = Gdk::Color( "red" );
+
+    // モデルに行を追加
+    Gtk::TreeModel::Row row;
+    for( int i = 0; i &lt; 10; ++i ){
+        row = *( m_liststore-&gt;append() );
+        row[ m_col_num ] = i;
+        row[ m_col_name ] = "ほげ";
+    }
+
+    m_scrwin.add( m_treeview );
+    add( m_scrwin );
+    show_all_children();
+    resize( 200,200 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ listview5.cpp -o listview5 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p49.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

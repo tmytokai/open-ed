@@ -1,0 +1,141 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::manageによるdeleteの自動化
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/7/8
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::manageによるdeleteの自動化
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::manageによるwidgetのdeleteの自動化について説明する。
+<p>
+widgetをnewで作成したときは通常のポインタと同様にdeleteでメモリを明示的に解放する必要が
+あるが、Gtk::manageによってdelete処理を自動化し、delete忘れによるメモリリークの危険を無くすことが出来る。
+具体的にはnewしたwidgetをGtk::manageを使って親コンテナの管理下に置くことによって、
+親コンテナが解放されたときに管理下にある子widgetも同時に削除されるようになる。
+したがって特に理由が無い限りはwidgetをnewする際はGtk::manageを使用しておくのが安全である。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+manage.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+#include &lt;iostream&gt;
+
+class MyButton : public Gtk::Button
+{
+public:
+    virtual ~MyButton(){
+        std::cout &lt;&lt; "~MyButton\n";
+    }
+};
+
+class MainWin : public Gtk::Window
+{
+
+    MyButton* m_button;
+
+public:
+    MainWin(){
+        m_button = Gtk::manage( new MyButton() );
+        m_button-&gt;add_label( "manage" );
+
+        add( *m_button );
+        show_all_children();
+    }
+
+    virtual ~MainWin(){
+        std::cout &lt;&lt; "~MainWin\n";
+    }
+};
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ manage.cpp -o manage `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+上を実行してウィンドウを閉じた場合、
+
+<pre class="prog">
+$ ./manage 
+~MainWin
+~MyButton
+</pre>
+
+子widgetが削除されていることが分かる。一方 new の部分を
+
+<pre class="prog">
+m_button = new MyButton();
+</pre>
+
+と変更して実行すると
+
+<pre class="prog">
+$ ./manage 
+~MainWin
+</pre>
+
+となり子widgetが削除されていないことが分かる。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

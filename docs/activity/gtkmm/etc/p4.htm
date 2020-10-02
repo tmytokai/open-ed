@@ -1,0 +1,186 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+pthread_createしたらjoinを忘れない
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2006/1/10
+<br>
+バージョン: 
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソースと実行結果</a> <br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+pthread_createしたらjoinを忘れない
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+pthread_createで作ったスレッドはdetachしない限りはjoinしないとスタックなどのリソースが
+解放されない。従ってjoinするのを忘れるとメモリリークを起こす。
+<p>
+pthread_createでスレッドを作ったらdetachするか必ずjoinすること
+
+
+<a name="src" />
+<h2 class="sec">ソースと実行結果</h2>
+<br>
+はじめにjoinを使用した場合の仮想メモリの状態をみる。この場合のソースは次の通り
+<p>
+pthread.c
+<br>
+コンパイルの方法は gcc -o pthread -pthread pthread.c
+<br>
+<pre class="prog">
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;pthread.h&gt;
+
+void* thread_main( void* args )
+{
+    fprintf( stderr, "start thread\n" );
+    fprintf( stderr, "end thread\n" );
+    return NULL;
+}
+
+int main()
+{
+    int i;
+    char command[256];
+    sprintf( command, "grep VmSize /proc/%d/status", getpid() );
+
+    fprintf( stderr, "実行前\n" );
+    system( command );
+
+    for( i=0; i&lt;3; ++i ){
+
+        fprintf( stderr, "実行\n" );
+        pthread_t thread;
+        pthread_create( &thread, NULL, thread_main, (void *)NULL );
+
+        pthread_join( thread, NULL );
+
+        system( command );
+    }
+
+    fprintf( stderr, "end mainthread\n" );
+
+    return 0;
+}
+</pre>
+
+<p>
+実行結果は
+<p>
+
+<pre class="prog">
+実行前
+VmSize:     1556 kB
+実行
+start thread
+end thread
+VmSize:    11932 kB
+実行
+start thread
+end thread
+VmSize:    11932 kB
+実行
+start thread
+end thread
+VmSize:    11932 kB
+end mainthread
+</pre>
+
+<p>
+よって仮想メモリがきちんと解放されていることが分かる。
+一方、
+
+<pre class="prog">
+pthread_join( thread, NULL );
+</pre>
+
+を
+
+<pre class="prog">
+sleep( 2 )
+</pre>
+
+に変更してjoinしなかった場合の結果は
+
+<pre class="prog">
+実行前
+VmSize:     2380 kB
+実行
+start thread
+end thread
+VmSize:    12756 kB
+実行
+start thread
+end thread
+VmSize:    23000 kB
+実行
+start thread
+end thread
+VmSize:    33244 kB
+end mainthread
+</pre>
+
+となり仮想メモリが解放されずメモリリークが生じていることが分かる。また
+
+<pre class="prog">
+pthread_detach( thread );
+sleep( 2 );
+</pre>
+
+とスレッドをdetachした場合の結果は
+
+<pre class="prog">
+実行前
+VmSize:     1744 kB
+実行
+start thread
+end thread
+VmSize:    12120 kB
+実行
+start thread
+end thread
+VmSize:    12120 kB
+実行
+start thread
+end thread
+VmSize:    12120 kB
+end mainthread
+</pre>
+
+となり仮想メモリが解放されていることが分かる。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

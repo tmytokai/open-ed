@@ -1,0 +1,190 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+静的ライブラリのリンク時にundefined referenceエラーが出る(gcc)
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/6/26
+<br>
+バージョン: gcc4.0
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+静的ライブラリのリンク時にundefined referenceエラーが出る(gcc)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+gccでリンク時にundefined referenceエラーが出る場合がある。
+通常はオブジェクトやライブラリの指定忘れが原因であるが、
+静的ライブラリをリンクする順番に間違いがあって出る場合もある
+(自分でMakefileを書く場合にこのミスをすることが多い)
+<p>
+リンクの順番には依存性があり、あるオブジェクトが静的
+ライブラリ内の関数を呼び出すときには呼び出される側の
+ライブラリは「後で」リンクする必要がある。
+<P>
+例えば foo.o が静的ライブラリ　libfoo.a 内の関数を使用している、つまり
+
+<pre class="prog">
+foo.o　→　libfoo.a
+</pre>
+
+
+という依存関係があるとき、
+
+<pre class="prog">
+g++ -o foo libfoo.a foo.o
+</pre>
+
+とするとundefined referenceエラーが出る。従って
+
+<pre class="prog">
+g++ -o foo foo.o libfoo.a
+</pre>
+
+と先にfoo.oを書かなくてはいけない。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+
+libtest.h
+<pre class="prog">
+
+class LibTest
+{
+  public:
+    void func();
+};
+
+</pre>
+
+
+libtest.cpp
+<pre class="prog">
+
+#include "libtest.h"
+#include &lt;iostream&gt;
+
+void LibTest::func()
+{
+    std::cout &lt;&lt; "ok\n";
+}
+
+</pre>
+
+
+main.cpp
+<pre class="prog">
+
+#include "libtest.h"
+
+int main()
+{
+    LibTest libtest;
+    libtest.func();
+    return 0;
+}
+
+</pre>
+
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+次のようなMakefileを書く。ここでOBJSの順番に気を付けること
+(わざとリンクエラーが出るようにしてある)
+<br>
+<br>
+Makefile
+<pre class="prog">
+
+OBJS = libtest.a main.o
+
+linktest : $(OBJS)
+	g++ -o linktest $(OBJS)
+
+libtest.a : libtest.o
+	ar r $@ $&lt;
+	ranlib $@
+
+.cpp.o : 
+	g++ -c $&lt; -g -O2 
+
+all : linktest
+
+clean:
+	rm -rf *.o *.a linktest
+
+</pre>
+
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+
+<pre class="prog">
+$ make
+g++ -c libtest.cpp -g -O2
+ar r libtest.a libtest.o
+ar: libtest.a を作成します
+ranlib libtest.a
+g++ -c main.cpp -g -O2
+g++ -o linktest libtest.a main.o
+main.o(.text+0x11): In function `main':
+/home/tokai/src/linktest/main.cpp:6: undefined reference to `LibTest::func()'
+collect2: ld はステータス 1 で終了しました
+</pre>
+
+このようにリンクエラーが出る。ここでOBJSの順番を
+
+<pre class="prog">
+OBJS = main.o libtest.a
+</pre>
+
+と変更すると正常にリンクされる。
+
+<pre class="prog">
+$ make
+g++ -c main.cpp -g -O2
+g++ -c libtest.cpp -g -O2
+ar r libtest.a libtest.o
+ar: libtest.a を作成します
+ranlib libtest.a
+g++ -o linktest main.o libtest.a
+$ ./linktest
+ok
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

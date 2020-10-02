@@ -1,0 +1,208 @@
+・(メモ書き) gettextで国際化  2007/11/5
+
+「mytest」というパッケージを作成する ( Fedora7 使用 )
+
+
+(1) ディレクトリを作成し必要なファイルを揃える
+
+mkdir mytest
+cd mytest
+touch NEWS README AUTHORS ChangeLog
+mkdir src
+
+
+(2) ソースコード作成 
+
+src/mytest.cpp : 
+----------------------------------------------------------------------
+#include <iostream>
+
+int main()
+{
+    std::cout << "test desu\n";
+
+    return 0;
+}
+----------------------------------------------------------------------
+
+
+(3) configure.in, Makefile.am 作成
+
+./configure.in :
+----------------------------------------------------------------------
+AC_INIT(configure.in)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE( mytest, 0.1 )
+AC_PROG_CXX
+AC_OUTPUT(Makefile src/Makefile )
+----------------------------------------------------------------------
+
+
+./Makefile.am :
+----------------------------------------------------------------------
+SUBDIRS = src
+----------------------------------------------------------------------
+
+
+src/Makefile.am :
+----------------------------------------------------------------------
+bin_PROGRAMS = mytest
+mytest_SOURCES = mytest.cpp
+----------------------------------------------------------------------
+
+
+(4) ここまでで、とりあえずコンパイル出来るか試してみる
+
+なお ./configureの --prefix はディストリビューションによって変えること
+
+autoreconf -i
+./configure --prefix=/usr ( Fedoraの場合 )
+make
+src/mytest
+
+
+(5) 国際化準備
+
+gettextが入っていないときは入っていないときは yum install gettext-devel でインストール
+
+gettextize --copy --force --intl --no-changelog
+
+途中で何か聞かれたらenterを押す。すると po, intl ディレクトリができて configure.inが
+
+--- configure.in.old    2007-11-05 11:32:03.000000000 +0900
++++ configure.in        2007-11-05 11:31:11.000000000 +0900
+@@ -2,4 +2,4 @@
+ AC_CONFIG_HEADER(config.h)
+ AM_INIT_AUTOMAKE( mytest, 0.1 )
+ AC_PROG_CXX
+-AC_OUTPUT(Makefile src/Makefile )
++AC_OUTPUT(Makefile src/Makefile  intl/Makefile po/Makefile.in)
+
+と変わる。さらにgettextを使用するため、AM_GNU_GETTEXTマクロとlocaleディレクトリの指定を
+追加して次のようにconfigure.inを変更する。ALL_LINGUAS="ja" から AC_SUBST(LOCALEDIR)
+までが追加した行である。
+
+./configure.in :
+----------------------------------------------------------------------
+AC_INIT(configure.in)
+AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE( mytest, 0.1 )
+AC_PROG_CXX
+
+ALL_LINGUAS="ja"
+AM_GNU_GETTEXT
+LOCALEDIR='${prefix}/share/locale'
+AC_SUBST(LOCALEDIR)
+
+AC_OUTPUT(Makefile src/Makefile  intl/Makefile po/Makefile.in)
+----------------------------------------------------------------------
+
+また./Makefile.amは
+----------------------------------------------------------------------
+SUBDIRS = intl po src
+
+ACLOCAL_AMFLAGS = -I m4
+
+EXTRA_DIST = m4/ChangeLog
+----------------------------------------------------------------------
+
+に変わっているが、これはそのままにする。また src/Makefie.amに locale 指定の設定を追加して
+次のようにする。
+
+src/Makefile.am :
+----------------------------------------------------------------------
+bin_PROGRAMS = mytest
+mytest_SOURCES = mytest.cpp
+AM_CPPFLAGS = -DLOCALEDIR=\""$(LOCALEDIR)"\"
+----------------------------------------------------------------------
+
+
+(6) 国際化する文字列の指定
+
+po ディレクトリに移動して
+
+POTFILES.in に
+
+src/mytest.cpp
+
+を追加し
+
+cp Makevars.template Makevars
+
+を実行する。次にソースコードを次のように変更する
+
+src/test.cpp:
+----------------------------------------------------------------------
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include <iostream>
+
+#define _(STR) gettext(STR)
+
+int main()
+{
+    setlocale(LC_ALL, "");
+    bindtextdomain(PACKAGE, LOCALEDIR);
+    textdomain(PACKAGE);
+
+    std::cout << _("test desu\n");
+
+    return 0;
+}
+----------------------------------------------------------------------
+
+あとは
+
+autoreconf -i
+./configure --prefix=/usr ( Fedoraの場合 )
+cd po
+make mytest.pot
+
+とすると mytest.pot ができるので、cp mytest.pot ja.po して ja.po を編集する
+例えば次のようにする。
+
+po/ja.po :
+----------------------------------------------------------------------
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-11-05 11:46+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/mytest.cpp:15
+msgid "test desu\n"
+msgstr "テストです\n"
+----------------------------------------------------------------------
+
+
+(6) 日本語が表示されるか確かめる
+
+make ja.gmo
+cd ..
+
+su
+cp ja.gmo /usr/share/locale/ja/LC_MESSAGES/mytest.mo
+exit
+
+make
+src/mytest
+
+として日本語が出ていればOK。また、ソースコードを変更したら
+
+cd po
+make update-po
+
+としてja.poを更新する。
+
+#, fuzzy
+
+がついている部分が未翻訳部分なのでそこを探して翻訳したら、$, fuzzy の行を消して
+make ja.gmo を実行。

@@ -1,0 +1,170 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+文字を書く(Xft編)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/12/16
+<br> 
+<br> 
+2006/12/1 色設定の所が間違っていたので修正
+<br>
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+文字を書く(Xft編)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Xftを使ってGtk::DrawingAreaに文字を書く
+<p>
+<a href="./p12.htm">前回</a>と同様に on_expose_event()の中で描画すればよい。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+xdrawstr2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+#include &lt;gdk/gdkx.h&gt;  // GDK_GC_XGC 用
+#include &lt;X11/Xft/Xft.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+    
+public:
+    MyDrawArea();
+
+protected:
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    // ダブルバッファリング無効
+    set_double_buffered( false );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    if( ! m_gc  ) m_gc = Gdk::GC::create( get_window() );
+    int width = get_width();
+    int height = get_height();
+
+    GC gc = GDK_GC_XGC( Glib::unwrap( m_gc ) );
+    Window win = GDK_DRAWABLE_XID( Glib::unwrap( get_window() ) );
+    Display* dpy = GDK_DISPLAY_XDISPLAY( Glib::unwrap( get_window()-&gt;get_display() ) );
+    Colormap colmap = GDK_COLORMAP_XCOLORMAP( Glib::unwrap( get_default_colormap() ) );
+
+    // 背景の塗りつぶし
+    unsigned long fgcolor = BlackPixel( dpy, 0 );
+    XSetForeground( dpy, gc, fgcolor );
+    XFillRectangle( dpy, win, gc, 0, 0, width, height );
+
+    int scr = DefaultScreen( dpy );
+    XftDraw *xftdraw = XftDrawCreate( dpy, win, DefaultVisual( dpy, scr ), colmap );
+    if( xftdraw ){
+
+        // フォント作成
+        XftFont* font = XftFontOpenName( dpy, scr, "Kochi Gothic-24:style=Regular" );
+
+        // 色設定
+        XftColor xftcolor;
+        XftColorAllocName( dpy, DefaultVisual( dpy, scr ), colmap, "red", &xftcolor );
+
+        char* msg = "あいうえお" ;
+        XftDrawStringUtf8( xftdraw, &xftcolor, font,  20, 100, (FcChar8*)msg, strlen(msg) );
+
+        XftFontClose( dpy, font );
+        XftDrawDestroy(xftdraw);
+    }
+
+    return true;
+}
+
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+
+int main( int argc, char *argv[] )
+{
+    // 無くても良いが一応
+    setlocale( LC_ALL, "" );
+
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ xdrawstr2.cpp -o xdrawstr2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p13.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

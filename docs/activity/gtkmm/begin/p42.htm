@@ -1,0 +1,169 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+自作シグナル
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/8/4
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+自作シグナル
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+シグナルを自作してコネクトする。
+<p>
+テンプレートを使用してシグナルクラスを作成するのだが、
+<br><br>
+typedef sigc::signal&lt; 戻り値, 第一引数, 第二引数, .... &gt; シグナル名;
+<br><br>
+の様にtypedefしておくと便利である。
+あとはメンバ変数として作成したシグナルを定義し、それをコネクトするだけでよい。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+sig3.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+// 自作シグナルのtypedef
+typedef sigc::signal&lt; bool, int &gt; SIG_MY_CLICK;
+
+class MyButton : public Gtk::Button
+{
+    int m_number;
+    SIG_MY_CLICK m_sig_my_click;
+
+public:
+
+    MyButton( const Glib::ustring& label, int number )
+        : Gtk::Button( label ),  m_number( number ){}
+
+    SIG_MY_CLICK sig_my_click(){ return m_sig_my_click; }
+
+protected:
+
+    virtual void on_clicked(){
+
+        Gtk::Button::on_clicked();
+
+        // 自作シグナルのemit
+        if( m_sig_my_click.emit( m_number ) ) Gtk::MessageDialog( "push button1" ).run();
+    }
+};
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::HBox m_hbox;
+    MyButton m_b1, m_b2, m_b3;
+
+public:
+    MainWin();
+
+private:
+
+    // 自作シグナル用のハンドラ
+    bool on_my_click( int number );
+};
+
+
+MainWin::MainWin() :
+    m_b1( "button1", 1 ),
+    m_b2( "button2", 2 ),
+    m_b3( "button3", 3 )
+{
+    // 自作シグナルとハンドラのコネクト
+    m_b1.sig_my_click().connect( sigc::mem_fun( *this, &MainWin::on_my_click ) );
+    m_b2.sig_my_click().connect( sigc::mem_fun( *this, &MainWin::on_my_click ) );
+    m_b3.sig_my_click().connect( sigc::mem_fun( *this, &MainWin::on_my_click ) );
+
+    m_hbox.pack_start( m_b1 );
+    m_hbox.pack_start( m_b2 );
+    m_hbox.pack_start( m_b3 );
+
+    add( m_hbox );
+    show_all_children();
+}
+
+
+// 自作シグナル用のハンドラ
+bool MainWin::on_my_click( int number )
+{
+    std::cout &lt;&lt; "click " &lt;&lt; number &lt;&lt; std::endl;
+
+    if( number == 1 ) return true;
+    return false;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ sig3.cpp -o sig3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+
+<center>
+<img src="./images/p42.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

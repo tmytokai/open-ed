@@ -1,0 +1,169 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ポップアップメニューの位置を指定する
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2008/2/4
+<br>
+バージョン: gtkmm24以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ポップアップメニューの位置を指定する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ポップアップメニューの位置を指定する。
+<p>
+Gtk::Menu::popup()によってポップアップメニューを表示すると通常はマウスポインタの下に
+メニューを表示するが、好きな位置に表示したい場合はGtk::Menu::popup()の引数に
+スロット関数を指定してその関数の中で座標を指定する。例えば
+<p>
+void slot_position_calc( int& x, int& y, bool& push_in );
+<p>
+という関数を用意しておくとポップアップメニューが表示される直前に関数が
+呼び出されるので、その時にx,y,push_inに値をセットしておく。ここでx,yは座標であり、
+push_inがtrueの時はメニューが画面内に収まるように座標が自動調整される。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+pmenu2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Glib::RefPtr&lt; Gtk::ActionGroup &gt; m_actiongroup;
+    Glib::RefPtr&lt; Gtk::UIManager &gt; m_uimanager;
+
+public:
+    MainWin();
+
+private:
+    void on_popupmenu_test();
+    void slot_position_calc(int& x, int& y, bool& push_in);
+
+protected:
+    virtual bool on_button_press_event( GdkEventButton* event );
+};
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+
+    // アクショングループの作成とアクション登録
+    m_actiongroup = Gtk::ActionGroup::create();
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuTitle", "メニュー" ) );
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu", "テスト"), sigc::mem_fun( *this, &MainWin::on_popupmenu_test ) );    
+
+    // UIマネージャの作成とアクショングループ挿入
+    m_uimanager = Gtk::UIManager::create();
+    m_uimanager-&gt;insert_action_group( m_actiongroup );
+
+    // ポップアップメニューのレイアウト
+    Glib::ustring ui_info = 
+        "&lt;ui&gt;"
+ 
+        "&lt;popup name='PopupMenu' &gt;"
+        "&lt;menuitem action='MenuTitle'/&gt;"
+        "&lt;menuitem action='TestMenu'/&gt;"
+        "&lt;/popup&gt;"
+ 
+        "&lt;/ui&gt;";
+ 
+    m_uimanager-&gt;add_ui_from_string(ui_info);
+}
+
+
+// マウスクリック
+bool MainWin::on_button_press_event( GdkEventButton* event )
+{
+    Gtk::Menu* popupmenu = dynamic_cast&lt; Gtk::Menu* &gt;( m_uimanager-&gt;get_widget( "/PopupMenu" ) );
+    popupmenu-&gt;popup( sigc::mem_fun( *this, &MainWin::slot_position_calc ), event-&gt;button, event-&gt;time );
+
+    return true;
+}
+
+
+// シグナルハンドラ
+void MainWin::on_popupmenu_test()
+{
+    std::cout &lt;&lt; "ok\n";
+}
+
+
+// ポップアップメニューの位置決め用関数
+void MainWin::slot_position_calc( int& x, int& y, bool& push_in )
+{
+    get_window()-&gt;get_root_origin( x, y );
+    push_in = false;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ pmenu2.cpp -o pmenu2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p53.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

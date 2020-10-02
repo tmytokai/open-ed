@@ -1,0 +1,158 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::TextViewでカーソルのある位置の画面上での座標を取得
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2009/12/12
+<br>
+バージョン: gtkmm2.10以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::TextViewでカーソルのある位置の画面上での座標を取得
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+Gtk::TextView::get_iter_location()
+によってカーソルのバッファ内での座標が得られるが、スクロール状態にある場合は
+画面上の座標とずれてくるので、Gtk::TextView::buffer_to_window_coords()
+を用いてウィンドウ内座標に変換する必要がある。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+textview3.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Window m_popup;
+    Gtk::Label m_label;
+
+    Gtk::Label m_label2;
+    Gtk::VBox m_vbox;
+
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TextView m_textview;
+
+public:
+    MainWin();
+    virtual ~MainWin(){}
+
+private:
+    void on_buf_changed();
+};
+
+
+MainWin::MainWin()
+    : m_popup( Gtk::WINDOW_POPUP )
+{
+    m_label.set_text( "popup" );
+    m_popup.add( m_label );
+    m_popup.show_all();
+
+    // バッファ更新シグナル
+    m_textview.get_buffer()-&gt;signal_changed().connect( sigc::mem_fun( *this, &MainWin::on_buf_changed ) );
+
+    m_label2.set_text( "テスト" );
+    m_scrwin.add( m_textview );
+
+    m_vbox.pack_start( m_label2 );
+    m_vbox.pack_start( m_scrwin );
+
+    add( m_vbox );
+    show_all_children();
+
+    resize( 300,100 );
+}
+
+
+void MainWin::on_buf_changed()
+{
+    std::cout &lt;&lt; "---------------------\n" &lt;&lt; m_textview.get_buffer()-&gt;get_text() &lt;&lt; std::endl
+              &lt;&lt; "何行目   = " &lt;&lt; m_textview.get_buffer()-&gt;get_insert()-&gt;get_iter().get_line() &lt;&lt; std::endl
+              &lt;&lt; "何文字目 = " &lt;&lt; m_textview.get_buffer()-&gt;get_insert()-&gt;get_iter().get_line_offset() &lt;&lt; std::endl;
+
+    // TextView の左上の画面に対する座標
+    int rx, ry;
+    m_textview.get_window( Gtk::TEXT_WINDOW_TEXT )-&gt;get_origin( rx, ry );
+    std::cout &lt;&lt; "rx=" &lt;&lt; rx &lt;&lt; " ry = " &lt;&lt; ry &lt;&lt; std::endl;
+
+    // バッファ内でのカーソル座標
+    // スクロール状態は無視
+    Gdk::Rectangle rect;
+    m_textview.get_iter_location( m_textview.get_buffer()-&gt;get_insert()-&gt;get_iter(), rect );
+    std::cout &lt;&lt; "x=" &lt;&lt; rect.get_x() &lt;&lt; " y = " &lt;&lt; rect.get_y() &lt;&lt; std::endl;
+
+    // ウィンドウ内でのカーソル座標
+    // スクロール状態の時は TextView の左上からの座標
+    int wx,wy;
+    m_textview.buffer_to_window_coords( Gtk::TEXT_WINDOW_TEXT, rect.get_x(), rect.get_y(), wx, wy );
+    std::cout &lt;&lt; "wx=" &lt;&lt; wx &lt;&lt; " wy = " &lt;&lt; wy &lt;&lt; std::endl;
+
+    m_popup.move( rx+wx, ry+wy );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ textview3.cpp -o textview3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+文字を入力するとカーソルの位置にポップアップが表示される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

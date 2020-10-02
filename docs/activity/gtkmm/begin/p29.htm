@@ -1,0 +1,161 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ツリービュー
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/11/29
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ツリービュー
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ツリービューはリストビューで使ったモデル( Gtk::ListStore )の代わりに Gtk::TreeStroe を使用する。
+ビューとしてはリストビューと同じGtk::TreeViewを使用する。
+<P>
+基本的にはリストビューと同じようにして作成することが出来るが、ある行のサブディレクトリに
+行を追加する場合は親となる行を指定する必要がある。
+具体的には Gtk::TreeModel::Row parent_row を親行としたとき、Gtk::TreeStore::append( parent_row.children() ) として行を追加する。
+より複雑なツリー構造の作成については次回説明する。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+treeview.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// 派生レコードクラス
+class MyRecord : public Gtk::TreeModel::ColumnRecord
+{
+
+public:
+    Gtk::TreeModelColumn&lt; Glib::ustring &gt; m_col_name;
+
+    MyRecord(){
+        // レコード( Gtk::TreeModel::ColumnRecord )に列( Gtk::TreeModelColumn )を登録
+        add( m_col_name );
+    }
+};
+
+/////////////////////
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    MyRecord m_record;
+    Glib::RefPtr&lt; Gtk::TreeStore &gt; m_treestore;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    // レコードを用いてモデル( Gtk::TreeStore )作成。m_treestoreは Glib::Refptr なのでdeleteする必要はない
+    m_treestore = Gtk::TreeStore::create( m_record );
+
+    // モデルをビュー( Gtk::TreeView )にセット
+    m_treeview.set_model( m_treestore );
+
+    // ビューに表示する列を指定
+    m_treeview.append_column( "名前", m_record.m_col_name );
+
+    // モデルに行を追加するとビューの表示も同時に更新される
+    Gtk::TreeModel::Row row;
+
+    // ルートにappend
+    row = *( m_treestore-&gt;append() );
+    row[ m_record.m_col_name ] = "ほげ";
+
+    // サブディレクトリ
+    row = *( m_treestore-&gt;append( row.children() ) );
+    row[ m_record.m_col_name ] = "サブ";
+
+    // サブディレクトリのサブディレクトリ
+    row = *( m_treestore-&gt;append( row.children() ) );
+    row[ m_record.m_col_name ] = "サブサブ";
+
+    // 再びルートにappend
+    row = *( m_treestore-&gt;append() );
+    row[ m_record.m_col_name ] = "ほげ";
+
+    // widgetのパック
+    m_scrwin.add( m_treeview );
+    add( m_scrwin );
+    show_all_children();
+    resize( 200,200 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ treeview.cpp -o treeview `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p29.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

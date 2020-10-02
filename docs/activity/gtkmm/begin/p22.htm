@@ -1,0 +1,127 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+イベントボックスの使い方
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/10/20
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+イベントボックスの使い方
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+イベントボックスを使って非Xウィジットにイベントを設定する。
+<p>
+Gtk::Label, Gtk::ScrolledWindow などのウィジットは親ウィジットに直接描画される
+非Xウィジットであり、そのままではマウスのボタンを押したなどのイベントを受け取ることが出来ない。
+そこでGtk::EventBox にそれらを貼り付けて Gtk::EventBox  にイベントを代理して受け取ってもらう。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+eventbox.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Label m_label;
+    Gtk::EventBox m_event;
+
+public:
+    MainWin();
+
+private:
+    virtual bool on_button_press( GdkEventButton* event );
+};
+
+
+MainWin::MainWin()
+    : m_label( "label" )
+{
+    resize( 400, 300 );
+
+    // プレスイベントの設定、及びシグナルとシグナルハンドラのコネクト
+    m_event.set_events( Gdk::BUTTON_PRESS_MASK );
+    m_event.signal_button_press_event().connect( sigc::mem_fun( *this, &MainWin::on_button_press ) );
+    m_event.add( m_label );
+
+    add( m_event );
+    show_all_children();
+}
+
+// シグナルハンドラ
+bool MainWin::on_button_press( GdkEventButton* event )
+{
+    std::cout &lt;&lt; "press\n";
+
+    return true;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ eventbox.cpp -o eventbox `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+マウスボタンをクリックすると"press"という文字列が表示される。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

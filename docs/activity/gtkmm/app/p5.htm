@@ -1,0 +1,137 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::Notebookのタブにツールチップを付ける
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/7/11
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::Notebookのタブにツールチップを付ける
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::Notebookのタブにマウスを乗せたときにツールチップを表示させる
+<p>
+Gtk::Notebook::get_tab_label()を使えば良い感じがするが、Gtk::Labelは
+"no window" ウィジットであるためそのままtooltipsにset_tip()しても
+ツールチップは表示されない。従ってGtk::LabelをGtk::EventBoxに埋め込んだ
+ウィジットをタブのラベルとする必要がある。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+notebook2
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// ラベルを埋め込んだEventBox
+class TabLabel : public Gtk::EventBox
+{
+    Gtk::Label m_label;
+
+public:
+    TabLabel::TabLabel( const Glib::ustring& label )
+        : m_label( label )
+    {
+        add( m_label );
+        show_all_children();
+    }
+};
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Label m_label1, m_label2;
+    TabLabel m_tab1, m_tab2;
+    Gtk::Notebook m_notebook;
+    Gtk::Tooltips m_tooltip;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+    : m_label1( "label1" ),
+      m_label2( "label2" ),
+      m_tab1( "page1" ),
+      m_tab2( "page2" )
+{
+    resize( 400, 300 );
+
+    m_notebook.append_page( m_label1, m_tab1 );
+    m_notebook.append_page( m_label2, m_tab2 );
+
+    m_tooltip.set_tip( m_tab1, "page1" );
+    m_tooltip.set_tip( m_tab2, "page2" );
+
+    add( m_notebook );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ notebook2.cpp -o notebook2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p5.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

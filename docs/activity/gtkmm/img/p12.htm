@@ -1,0 +1,167 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+文字を書く(Xlib編)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/12/16
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+文字を書く(Xlib編)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Xlibを使ってGtk::DrawingAreaに文字を書く
+<p>
+<a href="./p11.htm">前回</a>と同様に on_expose_event()の中で フォントを作成してから
+XmbDrawString()を使って描画するだけでよい。なおXlibで UTF-8の文字列を表示するには
+実行時に setlocale() を呼ぶ必要があるが、gtkmmはどこかで setlocale() を呼んでいるらしく
+特に明示する必要はない。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+xdrawstr.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+#include &lt;gdk/gdkx.h&gt;  // GDK_GC_XGC 用
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+    
+public:
+    MyDrawArea();
+
+protected:
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    // ダブルバッファリング無効
+    set_double_buffered( false );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    if( ! m_gc  ) m_gc = Gdk::GC::create( get_window() );
+    int width = get_width();
+    int height = get_height();
+
+    GC gc = GDK_GC_XGC( Glib::unwrap( m_gc ) );
+    Window win = GDK_DRAWABLE_XID( Glib::unwrap( get_window() ) );
+    Display* dpy = GDK_DISPLAY_XDISPLAY( Glib::unwrap( get_window()-&gt;get_display() ) );
+    Colormap colmap = GDK_COLORMAP_XCOLORMAP( Glib::unwrap( get_default_colormap() ) );
+    XColor colscr, colexact;
+
+    // 背景の塗りつぶし
+    unsigned long fgcolor = BlackPixel( dpy, 0 );
+    XSetForeground( dpy, gc, fgcolor );
+    XFillRectangle( dpy, win, gc, 0, 0, width, height );
+
+    char**  mis_list;
+    int     mis_count;
+    char*   def_str;
+    XFontSet fs = XCreateFontSet( dpy, "-*-fixed-medium-r-normal--24-*-*-*", &mis_list, &mis_count, &def_str );
+
+    if( fs != NULL ){
+        XAllocNamedColor( dpy, colmap, "green", &colscr, &colexact );
+        fgcolor = colscr.pixel;
+        XSetForeground( dpy, gc, fgcolor );
+
+        char* msg = "あいうえお" ;
+        XmbDrawString( dpy, win, fs, gc, 40, 50, msg, strlen( msg ) );
+
+        XFreeFontSet( dpy, fs );
+    }
+
+    return true;
+}
+
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+
+int main( int argc, char *argv[] )
+{
+    // 無くても良いが一応
+    setlocale( LC_ALL, "" );
+
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ xdrawstr.cpp -o xdrawstr `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p12.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

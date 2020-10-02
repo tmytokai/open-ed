@@ -1,0 +1,133 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ncursesでUTF-8表示
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/11/15
+<br>
+バージョン: ncurses-5.4
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+ncursesでUTF-8表示
+</h2>
+UTF-8対応版なら先頭でsetlocale()しておくだけで普通に表示できる。
+ただし(Fedora Coreの場合は)リンク時に「 -lncurses ではなくて -lncursesw をリンクすること」。
+<br><br>
+UTF-8非対応版の場合は面倒でもmbstowcs()でワイド文字に直してから addwstr()
+を使う必要がある。
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+hjklで移動、qで終了
+<br><br>
+UTF-8対応版
+<pre class="prog">
+
+#include &lt;ncurses.h&gt; // -lncurses ではなくて -lncursesw をリンクすること
+#include &lt;locale.h&gt; // setlocale()
+
+int main()
+{
+    setlocale( LC_ALL, "" );
+
+    initscr();
+    int x = 0;
+    int y = 0;
+    for(;;){
+        clear();
+        move( y, x );
+        addstr( "UTF-8対応" );
+        refresh();
+        switch( getch() ){
+            case 'q' : goto EXIT_FOR;
+            case 'k': --y; break;
+            case 'j': ++y; break;
+            case 'l': ++x; break;
+            case 'h': --x; break;
+        }
+    }
+
+EXIT_FOR:
+    endwin();
+    return 0;
+}
+
+
+</pre>
+
+UTF-8非対応版
+<pre class="prog">
+#include &lt;ncursesw/ncurses.h&gt; // addwstr(), -lncursesw
+#include &lt;stdlib.h&gt;  //  mbstowcs()
+#include &lt;locale.h&gt; // setlocale()
+
+#define MAX_STR 256
+
+void addutf8str( const char* str )
+{
+    wchar_t dst[ MAX_STR ];
+    if( mbstowcs( dst, str, MAX_STR ) ) addwstr( dst );
+}
+
+int main()
+{
+    setlocale( LC_ALL, "" );
+
+    initscr();
+    int x = 0;
+    int y = 0;
+    for(;;){
+        clear();
+        move( y, x );
+        addutf8str( "UTF-8非対応" );
+        refresh();
+        switch( getch() ){
+            case 'q' : goto EXIT_FOR;
+            case 'k': --y; break;
+            case 'j': ++y; break;
+            case 'l': ++x; break;
+            case 'h': --x; break;
+        }
+    }
+
+EXIT_FOR:
+    endwin();
+    return 0;
+}
+</pre>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

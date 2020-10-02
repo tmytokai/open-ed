@@ -1,0 +1,122 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+アイコンリストのセット
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+
+更新日: 2006/2/12
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+アイコンリストのセット
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+様々なサイズのアイコンをウィンドウにセットする。
+<P>
+Gtk::Window::set_default_icon_from_file()でアイコンをセットすると
+アイコンのサイズによって潰れた表示になったりギザギザした表示になったりする。
+そこで様々なサイズのアイコンをまとめてGtk::Window::set_default_icon_list()
+でセットすることによって表示サイズに応じて使用するアイコンを切替える。
+<P>
+推奨サイズは16x16,32x32,48x48(出来れば64x64,128x128も)である。
+<P>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+icon2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+    virtual ~MainWin(){}
+};
+
+
+MainWin::MainWin()
+{
+    resize( 100, 100 );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+
+    // デフォルトのアイコンをセット
+    try{
+        std::vector&lt; Glib::RefPtr&lt; Gdk::Pixbuf &gt; &gt; iconlist;
+        iconlist.push_back( Gdk::Pixbuf::create_from_file( "./gnome-terminal24.png" ) );
+        iconlist.push_back( Gdk::Pixbuf::create_from_file( "./gnome-main-menu48.png" ) );
+        Gtk::Window::set_default_icon_list( iconlist );
+    }
+    catch(...)
+    {
+        Glib::exception_handlers_invoke();
+        exit(1);
+    }
+
+    MainWin hw;
+    Gtk::Main::run( hw );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ icon2.cpp -o icon2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+アイコンのサイズに応じて違うアイコンが表示される
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

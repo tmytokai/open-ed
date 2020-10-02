@@ -1,0 +1,119 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+アイコンのセット
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+
+更新日: 2006/2/12
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+アイコンのセット
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ウィンドウにアイコンをセットする
+<P>
+ウィンドウのフレームやツールバーに表示するアイコンは
+Gtk::Window::set_default_icon_from_file()で指定する。
+<P>
+Gtk::Window::set_default_icon_from_file()はstaticな関数であり、
+最初に一度実行するだけで良い。
+<P>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+icon.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+    virtual ~MainWin(){}
+};
+
+
+MainWin::MainWin()
+{
+    resize( 100, 100 );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+
+    // デフォルトのアイコンをセット
+    try{
+        Gtk::Window::set_default_icon_from_file( "./gnome-main-menu48.png" );
+    }
+    catch(...)
+    {
+        Glib::exception_handlers_invoke();
+        exit(1);
+    }
+
+    MainWin hw;
+    Gtk::Main::run( hw );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ icon.cpp -o icon `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p35.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

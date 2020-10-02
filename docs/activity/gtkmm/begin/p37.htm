@@ -1,0 +1,127 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+インラインアイコンの作成とセット
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+
+更新日: 2006/2/14
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+インラインアイコンの作成とセット
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+外部ファイルではなくプログラムに埋め込んだインラインデータからアイコン画像を作ってウィンドウにセットする
+<P>
+Gdk::Pixbuf::create_from_inline() を使ってインラインデータから画像(Gdk::PixBuf)を作る。
+後は画像をアイコンリストに登録してGtk::Window::set_default_icon_list()を呼ぶだけである。
+<P>
+インラインデータはコマンドラインから gdk-pixbuf-csource コマンドによって作成する。
+例えば hoge.png を inline_icon[] という変数名で inline_icon.h にcスタイルで保存するには
+<P>
+gdk-pixbuf-csource --raw --name=inline_icon hoge.png  > inline_icon.h
+<P>
+とコマンドラインに打ち込む。
+<P>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+icon3.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include "inline_icon.h"
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+    virtual ~MainWin(){}
+};
+
+
+MainWin::MainWin()
+{
+    resize( 100, 100 );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+
+    // デフォルトのアイコンをセット
+    try{
+        std::vector&lt; Glib::RefPtr&lt; Gdk::Pixbuf &gt; &gt; iconlist;
+        iconlist.push_back( Gdk::Pixbuf::create_from_inline( sizeof( inline_icon ), inline_icon ) );
+        Gtk::Window::set_default_icon_list( iconlist );
+    }
+    catch(...)
+    {
+        Glib::exception_handlers_invoke();
+        exit(1);
+    }
+
+    MainWin hw;
+    Gtk::Main::run( hw );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ icon3.cpp -o icon3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p35.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

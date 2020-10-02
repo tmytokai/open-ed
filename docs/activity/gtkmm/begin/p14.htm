@@ -1,0 +1,123 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+プログレスパーとタイムアウト
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/8/28
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+プログレスパーとタイムアウト
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+プログレスパーとタイムアウトを組み合わせてラーメンタイマーを作る
+<p>
+プログレスバーの値はset_fraction()でセットできる。範囲は0から1.0である。
+<P>
+タイムアウトはGlib::signal_timeout()シグナルにスロットをコネクトすることにより
+指定した時間(ミリ秒)ごとにスロットが呼び出される。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+progbar.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ProgressBar m_progbar;
+    double m_val;
+
+public:
+    MainWin();
+
+private:
+    bool on_timeout();
+};
+
+
+MainWin::MainWin()
+    : m_val( 0 )
+{
+    add( m_progbar );
+    show_all_children();
+
+    // 1000 msecごとに on_timeout()を呼び出す
+    Glib::signal_timeout().connect( sigc::mem_fun( *this, &MainWin::on_timeout ), 1000 );
+}
+
+
+bool MainWin::on_timeout()
+{
+    m_val += 0.05;
+    m_progbar.set_fraction( m_val );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ progbar.cpp -o progbar `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p14.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

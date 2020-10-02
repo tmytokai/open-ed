@@ -1,0 +1,364 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ドラッグアンドドロップ
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/9/11
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ドラッグアンドドロップ
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ドラッグアンドドロップについて説明する。
+<br>
+<br>
+あるWidgetをドラッグ可能にするには Gtk::Widget::drag_source_set()、
+ドラッグ可能にするには Gtk::Widget::drag_dest_set() を用いる。
+ここで、drag_source_set()とdrag_dest_set() の第一パラメータに送受信するデータのMIMEタイプを
+リストとして指定する必要があるが、ドラッグ開始側とドロップ側で共通のMIMEタイプを
+指定しなければデータが送受信されないので気をつけること。
+<br>
+<br>
+次にシグナル処理について説明する。ドラッグアンドドロップはドラッグ側とドロップ側の2つの
+Widget間でデータをやりとりするためシグナル処理がかなり複雑になる。ここでドラッグ側とドロップ側
+でコネクトしなければならないシグナルを整理して示すと
+<br>
+<br>
+・ドラッグ開始側
+<pre class="prog">
+Gtk::Widget::signal_drag_begin()
+Gtk::Widget::signal_drag_data_get()
+Gtk::Widget::signal_drag_data_delete()
+Gtk::Widget::signal_drag_end()
+</pre>
+<br>
+・ドロップ側
+<pre class="prog">
+Gtk::Widget::signal_drag_motion()
+Gtk::Widget::signal_drag_data_received()
+Gtk::Widget::signal_drag_drop()
+</pre>
+<br>
+となり、これらのシグナルがemitされる順番を時系列で書くと次のようになる。
+<pre class="prog">
+
+ドラッグ開始 
+
+→ ドラッグ開始側がsignal_drag_begin()をemit
+
+→ ドラッグするとドロップ側がsignal_drag_motion()を連続でemit
+
+→ マウスボタンを放す
+
+→ ドラッグ開始側がsignal_drag_data_get()をemitするので
+    slot関数の中でデータをセットする
+
+→ ドロップ側がsignal_drag_data_received()をemitするので
+    slot関数の中でデータ受信し、終わったらGdk::DragContext::drag_finish()を呼ぶ。
+
+→ もしドロップ側がGdk::DragContext::drag_finish()でデータ削除を指定したら
+   ドラッグ側はsignal_drag_data_delete()をemit
+
+→ ドロップ側がsignal_drag_drop()をemit
+
+→ ドラッグ側がsiglal__drag_end()をemit
+
+→ 終了
+</pre>
+
+<br>
+その他、詳しくは下のサンプルソース内のコメントを参考にすること。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+sig3.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;list&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::HBox m_hbox;
+    Gtk::Button m_label_src;
+    Gtk::Button m_label_dest1;
+    Gtk::Button m_label_dest2;
+
+public:
+    MainWin();
+
+
+protected:
+
+    // drag開始側のWidgetにコネクトするslot
+    void slot_drag_begin( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context );
+    void slot_drag_data_get( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, 
+                             Gtk::SelectionData& selection, guint info, guint time );
+    void slot_drag_data_delete( const Glib::RefPtr&lt; Gdk::DragContext &gt;&  context );
+    void slot_drag_end( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context );
+
+
+    // drop側のWidgetにコネクトするslot
+    bool slot_drag_motion( const Glib::RefPtr&lt; Gdk::DragContext &gt;&, int, int, guint );
+    void slot_drag_data_received( const Glib::RefPtr&lt;Gdk::DragContext&gt;& context, int x, int y, 
+                                  const Gtk::SelectionData& selection, guint info, guint time );
+    bool slot_drag_drop( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, int x, int y, guint time );
+
+};
+
+
+MainWin::MainWin()
+    :m_label_src( "From" ), m_label_dest1( "Dest1" ), m_label_dest2( "Dest2" )
+{
+    m_hbox.pack_start( m_label_dest1 );
+    m_hbox.pack_start( m_label_src );
+    m_hbox.pack_start( m_label_dest2 );
+    add( m_hbox );
+
+    //////////////////////////////////////
+
+    // drag可能にする
+
+    // 送信可能なデータの種類(ターゲット)のリストを作成してセット
+    // srcとdestのターゲットには同じ物が最低1つ含まれていること(全て異なるとDnD不可)
+    std::list&lt; Gtk::TargetEntry &gt; list_target_src;
+    list_target_src.push_back( Gtk::TargetEntry( "text/dest1" ) ); 
+    list_target_src.push_back( Gtk::TargetEntry( "text/dest2" ) ); 
+    m_label_src.drag_source_set( list_target_src, Gdk::BUTTON1_MASK, Gdk::ACTION_COPY );
+
+    // drag開始側のシグナル設定
+    m_label_src.signal_drag_begin().connect( sigc::mem_fun( *this, &MainWin::slot_drag_begin ) );
+    m_label_src.signal_drag_data_get().connect( sigc::mem_fun( *this, &MainWin::slot_drag_data_get ) );
+    m_label_src.signal_drag_data_delete().connect( sigc::mem_fun( *this, 
+                                                                  &MainWin::slot_drag_data_delete ) );
+    m_label_src.signal_drag_end().connect( sigc::mem_fun( *this, &MainWin::slot_drag_end ) );
+
+    //////////////////////////////////////
+
+    // drop可能にする
+
+    // dest1側
+
+    // 受信可能なデータの種類(ターゲット)のリストを作成してセット
+    // srcとdestのターゲットには同じ物が最低1つ含まれていること(全て異なるとDnD不可)
+    std::list&lt; Gtk::TargetEntry &gt; list_target_dest1;
+    list_target_dest1.push_back( Gtk::TargetEntry( "text/dest1" ) ); 
+    m_label_dest1.drag_dest_set( list_target_dest1, Gtk::DEST_DEFAULT_ALL, Gdk::ACTION_COPY );
+
+    // drop側のシグナル設定
+    m_label_dest1.signal_drag_motion().connect( sigc::mem_fun( *this, &MainWin::slot_drag_motion ) );
+    m_label_dest1.signal_drag_data_received().connect( sigc::mem_fun(*this, 
+                                                       &MainWin::slot_drag_data_received ) );
+    m_label_dest1.signal_drag_drop().connect( sigc::mem_fun( *this, &MainWin::slot_drag_drop ) );
+
+    // dest2側
+
+    // 受信可能なデータの種類(ターゲット)のリストを作成してセット
+    // srcとdestのターゲットには同じ物が最低1つ含まれていること(全て異なるとDnD不可)
+    std::list&lt; Gtk::TargetEntry &gt; list_target_dest2;
+    list_target_dest2.push_back( Gtk::TargetEntry( "text/dest2" ) ); 
+    m_label_dest2.drag_dest_set( list_target_dest2, Gtk::DEST_DEFAULT_ALL, Gdk::ACTION_COPY );
+
+    // drop側のシグナル設定
+    m_label_dest2.signal_drag_motion().connect( sigc::mem_fun( *this, &MainWin::slot_drag_motion ) );
+    m_label_dest2.signal_drag_data_received().connect( sigc::mem_fun(*this, 
+                                                       &MainWin::slot_drag_data_received ) );
+    m_label_dest2.signal_drag_drop().connect( sigc::mem_fun( *this, &MainWin::slot_drag_drop ) );
+
+    //////////////////////////////////////
+
+    resize( 100, 100 );
+    show_all_children();
+}
+
+
+void MainWin::slot_drag_begin( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context )
+{
+    std::cout &lt;&lt; "src : ドラッグ開始(slot_drag_begin)\n";
+}
+
+
+
+bool MainWin::slot_drag_motion( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, 
+                                int x, int y, guint time )
+{
+    std::cout &lt;&lt; "dst : ドラッグ中(slot_drag_motion) x = " &lt;&lt; x &lt;&lt; " y = " &lt;&lt; y &lt;&lt; std::endl;
+
+    return true;
+}
+
+
+void MainWin::slot_drag_data_get( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, 
+                                  Gtk::SelectionData& selection, guint info, guint time )
+{
+    std::cout &lt;&lt; "src : データ送信(slot_drag_data_get)\n";
+
+    // drop先から要求されたデータの種類(ターゲット)
+    std::cout &lt;&lt; "  target = " &lt;&lt; selection.get_target() &lt;&lt; std::endl;
+
+    // ターゲット別に送信データをセット
+    std::string type;
+    std::string data;
+    if( selection.get_target() == "text/dest1" ){
+        type = "type/dest1";
+        data = "dest1にドロップ";
+    }
+    else if( selection.get_target() == "text/dest2" ){
+        type = "type/dest2";
+        data = "dest2にドロップ";
+    }
+
+    // 送信
+    selection.set( type, data );
+}
+
+
+void MainWin::slot_drag_data_received( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, int x, int y, 
+                                       const Gtk::SelectionData& selection, guint info, guint time )
+{
+    std::cout &lt;&lt; "dst : データ受信(slot_drag_data_received)\n";
+
+    // drag開始側が送信してきたターゲット
+    std::cout &lt;&lt; "  target = " &lt;&lt; selection.get_target() &lt;&lt; std::endl;
+
+    // データのタイプ
+    std::cout &lt;&lt; "  type = " &lt;&lt; selection.get_data_type() &lt;&lt; std::endl;
+
+    // データ(文字列)を表示
+    std::cout &lt;&lt; "  data = " &lt;&lt; selection.get_data_as_string() &lt;&lt; std::endl;
+
+    // 処理が終わったことをdragを開始したWidgetに知らせる
+    context-&gt;drag_finish( true, // 受信成功
+                          true, // データ削除 (drag開始側のwidgetはsignal_drag_data_delete()をemitする)
+                          time );
+}
+
+
+void MainWin::slot_drag_data_delete( const Glib::RefPtr&lt; Gdk::DragContext &gt;&  context )
+{
+    std::cout &lt;&lt; "src : 削除(slot_drag_data_delete)\n";
+}
+
+
+
+bool MainWin::slot_drag_drop( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context, int x, int y, guint time )
+{
+    std::cout &lt;&lt; "dst : ドロップ完了(slot_drag_drop) x = " &lt;&lt; x &lt;&lt; " y = " &lt;&lt; y &lt;&lt; std::endl;
+
+    return true;
+}
+
+
+
+void MainWin::slot_drag_end( const Glib::RefPtr&lt; Gdk::DragContext &gt;& context )
+{
+    std::cout &lt;&lt; "src : ドラッグ完了(slot_drag_end)\n";
+}
+
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ drag.cpp -o drag `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+・dest1にドロップした結果
+<pre class="prog">
+src : ドラッグ開始(slot_drag_begin)
+dst : ドラッグ中(slot_drag_motion) x = 47 y = 28
+dst : ドラッグ中(slot_drag_motion) x = 46 y = 28
+dst : ドラッグ中(slot_drag_motion) x = 45 y = 28
+src : データ送信(slot_drag_data_get)
+  target = text/dest1
+dst : データ受信(slot_drag_data_received)
+  target = text/dest1
+  type = type/dest1
+  data = dest1にドロップ
+src : 削除(slot_drag_data_delete)
+dst : ドロップ完了(slot_drag_drop) x = 36 y = 26
+src : ドラッグ完了(slot_drag_end)
+</pre>
+
+<br>
+・dest2にドロップした結果
+<pre class="prog">
+src : ドラッグ開始(slot_drag_begin)
+dst : ドラッグ中(slot_drag_motion) x = 1 y = 64
+dst : ドラッグ中(slot_drag_motion) x = 2 y = 64
+dst : ドラッグ中(slot_drag_motion) x = 3 y = 64
+src : データ送信(slot_drag_data_get)
+  target = text/dest2
+dst : データ受信(slot_drag_data_received)
+  target = text/dest2
+  type = type/dest2
+  data = dest2にドロップ
+src : 削除(slot_drag_data_delete)
+dst : ドロップ完了(slot_drag_drop) x = 3 y = 64
+src : ドラッグ完了(slot_drag_end)
+</pre>
+
+<br>
+dest1とdest2では扱うMIMEタイプが異なるので、ドラッグ開始側が
+異なるデータを送っているのに注意すること。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

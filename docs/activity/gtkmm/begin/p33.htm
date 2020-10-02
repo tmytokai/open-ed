@@ -1,0 +1,96 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+選択した行を削除する
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/1/16
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+選択した行を削除する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+<a href="./p32.htm">前回</a>と同様に行のイテレータを取得してからGtk::TreeStore::erase()を呼び出すと
+削除される。ただし親の行を消すとツリーの子や孫の行も全て消えるので注意すること。
+
+<P>
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+<a href="./p30.htm">前々々回</a>使用した treeview2.cppの void MainWin::on_bt_clicked() を下のものに置き換える。
+
+<br>
+<br>
+treeview5.cpp
+<pre class="prog">
+
+// スロット関数
+void MainWin::on_bt_clicked()
+{
+    Glib::RefPtr&lt; Gtk::TreeSelection &gt; selection = m_treeview.get_selection();
+    Gtk::TreeModel::iterator it = selection-&gt;get_selected();
+    if( it ){
+        Gtk::TreeModel::Row row = *it;
+        std::cout &lt;&lt; "delete " &lt;&lt; row[ m_record.m_col_name ] &lt;&lt; std::endl;
+        m_treestore-&gt;erase( row );
+    }
+} 
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ treeview5.cpp -o treeview5 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+任意の行をクリックしてから上部の「push」ボタンを押すと選択した行が削除される。
+<P>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

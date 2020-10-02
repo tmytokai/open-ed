@@ -1,0 +1,108 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+画像の拡大縮小
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/6/26
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+画像の拡大縮小
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gdk::Pixbufを使用して画像の拡大縮小表示をする。
+<p>
+staticな関数であるGdk::Pixbuf::create_from_file()を使用してファイルから
+画像データを読み込みGdk::Pixbufを作る。それを拡大縮小してからGtk::Image::set()を
+使ってGtk::Imageに貼り付ける。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+pixbuf.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Image m_img;
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+{
+    m_pixbuf = Gdk::Pixbuf::create_from_file( "./test.png" );
+    m_img.set( m_pixbuf-&gt;scale_simple( m_pixbuf-&gt;get_width()/2,
+               m_pixbuf-&gt;get_height()/4, Gdk::INTERP_NEAREST ) );
+
+    add( m_img );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ pixbuf.cpp -o pixbuf `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p2.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

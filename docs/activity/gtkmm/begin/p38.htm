@@ -1,0 +1,160 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+手動でメニューバーを作る
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/4/27
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+手動でメニューバーを作る
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+メニューバーを手動で作成して表示する。
+<p>
+UIマネージャ経由でメニューを作る方が楽であるが、状況に応じてメニュー項目を変えたい場合は手動で作成した方が柔軟性があって良い。
+<P>
+はじめにGtk::MenuBarを作成し、大項目( Gtk::MenuItem )を挿入する。次に表示させるメニュー( Gtk::Menu ) を作成して
+大項目に挿入する。さらにメニューに表示させる項目( Gtk::MenuItem )をメニューに挿入する。若干ややこしいが
+まとめるとGtk::MenuBar、Gtk::MenuItem、Gtk::Menu は次のような親子関係になる
+<P>
+Gtk::MenuBar ←( append )- Gtk::MenuItem ←( set_submenu )- Gtk::Menu ←( append )- Gtk::MenuItem ←( set_submenu )- Gtk::Menu ・・・
+<P>
+なお下の例ではGtk::MenuItemを直接作るのではなくてアクショングループからアクションを取得して create_menu_item()により
+Gtk::MenuItemを作成している。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+menubar.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::VBox m_box;
+    Glib::RefPtr&lt; Gtk::ActionGroup &gt; m_actiongroup;
+
+public:
+    MainWin();
+
+private:
+    void on_menu_test1(){ std::cout &lt;&lt; "test1\n"; }
+    void on_menu_test2() { std::cout &lt;&lt; "test2\n"; }
+};
+
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+
+    // アクショングループの作成とアクション登録
+    m_actiongroup = Gtk::ActionGroup::create();
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu1", Gtk::Stock::QUIT ),
+                        sigc::mem_fun( *this, &MainWin::on_menu_test1 ) );    
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu2", "テスト2" ),
+                        Gtk::AccelKey( 'a', Gdk::CONTROL_MASK ), 
+                        sigc::mem_fun( *this, &MainWin::on_menu_test2 ) );    
+
+    // メニューバー作成とパッキング
+    Gtk::MenuBar* menubar = Gtk::manage( new Gtk::MenuBar() );
+    m_box.pack_start( *menubar, Gtk::PACK_SHRINK );
+    add( m_box );
+
+    // メニュー項目を作成してバーに挿入
+    Gtk::MenuItem* menuitem = Gtk::manage( new Gtk::MenuItem( "メニュー1" ) );
+    menubar-&gt;append( *menuitem );
+
+    // サブメニューを作成してメニュー項目に挿入
+    Gtk::Menu* submenu = Gtk::manage( new Gtk::Menu() );
+    menuitem-&gt;set_submenu( *submenu );
+
+    // サブメニューの中の項目作成
+    // アクセルグループをセットしないと assertion が出る
+    Glib::RefPtr&lt; Gtk::Action &gt; action;
+    ( action = m_actiongroup-&gt;get_action( "TestMenu1" ) )-&gt;set_accel_group( get_accel_group() ); 
+    submenu-&gt;append( *Gtk::manage( action-&gt;create_menu_item() ) );
+
+    ( action = m_actiongroup-&gt;get_action( "TestMenu2" ) )-&gt;set_accel_group( get_accel_group() ); 
+    submenu-&gt;append( *Gtk::manage( action-&gt;create_menu_item() ) );
+
+    // 別のメニュー項目作成
+    menuitem = Gtk::manage( new Gtk::MenuItem( "メニュー2" ) );
+    menubar-&gt;append( *menuitem );
+
+    resize( 300, 300 );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ menubar2.cpp -o menubar2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p38.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

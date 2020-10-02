@@ -1,0 +1,125 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ホイール回転の検出
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/2/21
+<br>
+バージョン: gtkmm24 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+マウスのホイール回転を検出する。
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+ホイールの回転は Gtk::Widget::on_scroll_event() で検出できる。
+上下左右の方向は GdkEventScroll構造体の direction により得られる。
+またshiftやctrlを押しているかどうかは state により得られる。
+<br>
+なお Gtk::Window のデフォルトでは SCROLL イベントは off になっているので
+add_events( Gdk::SCROLL_MASK )する必要がある。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+wheel.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+
+protected:
+    virtual bool on_scroll_event( GdkEventScroll *event );
+};
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::SCROLL_MASK );
+}
+
+// ホイールの回転
+bool MainWin::on_scroll_event( GdkEventScroll *event )
+{
+    std::cout &lt;&lt; "wheel event\n"
+              &lt;&lt; "time = " &lt;&lt; event-&gt;time &lt;&lt; std::endl
+              &lt;&lt; "x = " &lt;&lt; event-&gt;x &lt;&lt; std::endl
+              &lt;&lt; "y = " &lt;&lt; event-&gt;y &lt;&lt; std::endl
+              &lt;&lt; "state = " &lt;&lt; event-&gt;state &lt;&lt; std::endl
+              &lt;&lt; "direction = ";
+
+    switch( event-&gt;direction ){
+        case GDK_SCROLL_UP: std::cout &lt;&lt; "up"; break;
+        case GDK_SCROLL_DOWN: std::cout &lt;&lt; "down"; break;
+        case GDK_SCROLL_LEFT: std::cout &lt;&lt; "left"; break;
+        case GDK_SCROLL_RIGHT: std::cout &lt;&lt; "right"; break;
+    }
+
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+
+    return true;
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ wheel.cpp -o wheel `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+ウィンドウ上でホイールを回転させるとすると端末に方向が表示される。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

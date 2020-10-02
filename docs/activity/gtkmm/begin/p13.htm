@@ -1,0 +1,130 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ポップアップウィンドウ
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/8/26
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ポップアップウィンドウ
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ポップアップウィンドウを表示する。
+<p>
+Gtk::Windowのコンストラクタにタイプとして Gtk::WINDOW_POPUP を渡すことによって
+ポップアップウィンドウになる。下の例ではメインウィンドウの上でポインタを
+動かすとポップアップに現在座標を表示させる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+popup.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;sstream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Window m_popup;
+    Gtk::Label m_label;
+
+public:
+    MainWin();
+
+protected:
+    virtual bool on_motion_notify_event( GdkEventMotion* event );
+
+};
+
+
+MainWin::MainWin()
+    : m_popup( Gtk::WINDOW_POPUP )
+{
+    // モーションイベント追加
+    add_events( Gdk::POINTER_MOTION_MASK );
+
+    m_popup.add( m_label );
+    m_popup.show_all();
+}
+
+
+bool MainWin::on_motion_notify_event( GdkEventMotion* event )
+{
+    std::stringstream ss;
+    ss &lt;&lt; event-&gt;x &lt;&lt; " - " &lt;&lt; event-&gt;y;
+    m_label.set_text( ss.str() );
+
+    m_popup.show();
+    m_popup.move( (int)event-&gt;x_root, (int)event-&gt;y_root + 50 );
+    
+    return Gtk::Window::on_motion_notify_event( event );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ popup.cpp -o popup `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p13.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

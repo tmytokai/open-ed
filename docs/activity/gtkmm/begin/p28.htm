@@ -1,0 +1,150 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リストビューその2
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/11/25
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リストビューその2
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+リストビューでモデル( Gtk::ListStore )を作成する際に列クラス( Gtk::TreeModelColumn )とレコード( Gtk::TreeModel::ColumnRecord )
+を必要としたが、列の数が多い場合に全ての列をメンバ変数として書くと見づらいコードとなる。そこで
+gtkmmのリファレンスにも書いてあるように Gtk::TreeModel::ColumnRecord を派生させてレコードクラスを作成し、
+その中で列をadd()すると見やすいコードとなる。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+listview2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// 派生レコードクラス
+class MyRecord : public Gtk::TreeModel::ColumnRecord
+{
+
+public:
+    Gtk::TreeModelColumn&lt; int &gt; m_col_num;
+    Gtk::TreeModelColumn&lt; Glib::ustring &gt; m_col_name;
+
+    MyRecord(){
+
+        // レコード( Gtk::TreeModel::ColumnRecord )に列( Gtk::TreeModelColumn )を登録
+        add( m_col_num );
+        add( m_col_name );
+    }
+};
+
+/////////////////////
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    MyRecord m_record;
+    Glib::RefPtr&lt; Gtk::ListStore &gt; m_liststore;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    // レコードを用いてモデル( Gtk::ListStore )作成。m_liststoreは Glib::Refptr なのでdeleteする必要はない
+    m_liststore = Gtk::ListStore::create( m_record );
+
+    // モデルをビュー( Gtk::TreeView )にセット
+    m_treeview.set_model( m_liststore );
+
+    // ビューに表示する列を指定
+    m_treeview.append_column( "番号", m_record.m_col_num );
+    m_treeview.append_column( "名前", m_record.m_col_name );
+
+    // モデルに行を追加するとビューの表示も同時に更新される
+    Gtk::TreeModel::Row row;
+    for( int i = 0; i &lt; 10; ++i ){
+        row = *( m_liststore-&gt;append() );
+        row[ m_record.m_col_num ] = i;
+        row[ m_record.m_col_name ] = "ほげ";
+    }
+
+    // widgetのパック
+    m_scrwin.add( m_treeview );
+    add( m_scrwin );
+    show_all_children();
+    resize( 200,200 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ listview2.cpp -o listview2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p27.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

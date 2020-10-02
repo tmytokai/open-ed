@@ -1,0 +1,152 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+線を引く(cairomm編)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2007/8/1
+<br>
+バージョン: 
+<br>
+gtkmm-2.10
+<br>
+cairomm-1.2
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+線を引く(cairomm編)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+cairommを使ってGtk::DrawingAreaに線を引く
+<p>
+cairommも通常と同じようにon_expose_event()の中で描画する。
+<br>
+<br>
+線を引くには　Cairo::Contextを  get_window()-&gt;create_cairo_context() で作成してから
+Gdk::Cairo::set_source_color()で色を指定し、
+Cairo::Context::move_to(), Cairo::Context::line_to()でパスを引いてから Cairo::Context::stroke()で描画する。
+<br>
+<br>
+四角形で塗りつぶすにはCairo::Context::rectangle()で四角形のパスを引いてからCairo::Context::fill()
+で現在の色で塗りつぶす。下の例では Gdk::Cairo::set_source_color()の代わりに
+Cairo::Context::set_source_rgba()を使って半透明色の設定をしている。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+drawline3.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+public:
+    MyDrawArea(){}
+
+protected:
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    int width = get_width();
+    int height =get_height();
+
+    Cairo::RefPtr&lt; Cairo::Context &gt; cairoctx = get_window()-&gt;create_cairo_context();
+
+    // 背景の塗りつぶし
+    Gdk::Cairo::set_source_color( cairoctx, Gdk::Color( "black" ) ); 
+    cairoctx-&gt;paint();
+
+    // 線を引く
+    Gdk::Cairo::set_source_color( cairoctx, Gdk::Color( "white" ) ); 
+    cairoctx-&gt;set_line_width( 1 );
+
+    cairoctx-&gt;move_to( 0, 0 );
+    cairoctx-&gt;line_to( width, height );
+    cairoctx-&gt;line_to( width/2, 0 );
+    cairoctx-&gt;stroke();
+
+    // alphaを指定して半透明の四角形で塗りつぶす
+    Gdk::Color cl = Gdk::Color( "red" );
+    cairoctx-&gt;set_source_rgba( cl.get_red_p(), cl.get_green_p(), cl.get_blue_p(), 0.5 );
+    cairoctx-&gt;rectangle( width/4, height/4, width/2, height/2 );
+    cairoctx-&gt;fill();
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ drawline3.cpp -o drawline3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p15.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

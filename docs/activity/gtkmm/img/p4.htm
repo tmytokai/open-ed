@@ -1,0 +1,155 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ファイルから画像を読み込んで表示(Gtk::DrawingArea編)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/7/5
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ファイルから画像を読み込んで表示(Gtk::DrawingArea編)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::DrawingAreaを使ってファイルから画像を読み込んでそれを表示させる。
+<p>
+Gtk::DrawingAreaから派生クラスを作り、Gtk::Widget::on_realize()と
+Gtk::Widget::on_expose_event()をオーバロードする必要がある。on_realize()内で
+グラフィックコンテキスト(GC)を作成し、on_expose_event()でファイルを読み込んだ
+Gdk::PixbufをGdk::Drawable::draw_pixbuf()を使って描画する。
+<P>
+なお、Gtk::WindowとGdk::Windowは混同しやすいので気を付けること。
+Gtk::WindowはWidgetであり、Gdk::Windowは描画領域である。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+darea.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+    Glib::RefPtr&lt; Gdk::GC &gt; m_gc;
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; m_pixbuf;
+    
+public:
+    MyDrawArea();
+
+protected:
+    virtual void on_realize();
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+MyDrawArea::MyDrawArea()
+{
+    try {
+        m_pixbuf = Gdk::Pixbuf::create_from_file( "./test.png" );
+    }
+    catch(...)
+    {
+      Glib::exception_handlers_invoke();
+      exit(1);
+    }
+}
+
+
+void MyDrawArea::on_realize()
+{
+    // 元のon_realize()のコールを忘れないこと
+    Gtk::DrawingArea::on_realize(); 
+
+    // Gdk::Window からGCを作る
+    m_gc = Gdk::GC::create( get_window() );
+}
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    int width = m_pixbuf-&gt;get_width();
+    int height = m_pixbuf-&gt;get_height();
+
+    // Gdk::Drawable::draw_pixbuf()でpixbufを描画
+    get_window()-&gt;draw_pixbuf( m_gc, m_pixbuf, 0, 0, 0, 0 ,
+                         width, height, Gdk::RGB_DITHER_NONE, 0, 0 );
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ darea.cpp -o darea `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p1.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

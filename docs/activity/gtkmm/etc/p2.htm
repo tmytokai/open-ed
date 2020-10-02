@@ -1,0 +1,91 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+VC++でfor内で定義した変数のスコープが変(vc++)
+</Title>
+</head>
+<body>
+
+
+<table class="main" >
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/11/10
+<br>
+バージョン: vc++6, vc++7
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+VC++でfor内で定義した変数のスコープが変(vc++)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+VC++8では直っているらしいが、6と7のVC++はfor内で定義した変数のスコープが
+標準とは異なる。例えばVC++では
+
+
+<pre class="prog">
+
+#include &lt;iostream&gt;
+
+int main()
+{
+    for( int i = 0; i < 20; ++i );
+    std::cout &lt;&lt; i &lt;&lt; std::endl;
+    return 0;
+}
+</pre>
+
+というコードでもコンパイルが通ってしまう。これを防ぐためには先頭に
+
+<pre class="prog">
+#define for if(0);else for
+</pre>
+
+というマクロを入れて無理矢理スコープを指定するか、コンパイルオプションに6なら /Zaか
+7なら /Zc:forScope をつける。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+scope.cpp
+<pre class="prog">
+
+#include &lt;iostream&gt;
+
+#ifdef WIN32
+#define for if(0);else for
+#endif
+
+int main()
+{
+    for( int i = 0; i < 20; ++i );
+    std::cout &lt;&lt; i &lt;&lt; std::endl;
+    return 0;
+}
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

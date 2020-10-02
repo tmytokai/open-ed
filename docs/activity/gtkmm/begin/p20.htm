@@ -1,0 +1,176 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ストックアイテムとショートカットキー
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/10/15
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ストックアイテムとショートカットキー
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ストックアイテムを使ってアクションを登録しショートカットキーの機能も実装する。
+<p>
+閉じる、コピー、削除などの基本的なアクションはストックアイテム( Gtk::Stock )としてデフォルトで
+用意されている。これらのストックアイテムにはアイコンが割り当てられており、更に add_accel_group() に
+よってアクセレータを登録するとショートカットキーの使用も可能になる。下の例では Quit と Copy アイテムを使用しており、
+Ctrl+q, Ctrl+c を押すとそれぞれに対応したシグナルハンドラが呼ばれる。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+shortcut.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::VBox m_box;
+
+    Glib::RefPtr&lt; Gtk::ActionGroup &gt; m_actiongroup;
+    Glib::RefPtr&lt; Gtk::UIManager &gt; m_uimanager;
+
+public:
+    MainWin();
+
+private:
+    void on_menu_quit();
+    void on_menu_copy();
+};
+
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+
+    // アクショングループの作成とアクション登録
+    m_actiongroup = Gtk::ActionGroup::create();
+
+    // メニューのラベル
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuTitle", "メニュー" ) );
+
+    // アクション
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuQuit", Gtk::Stock::QUIT ), sigc::mem_fun( *this, &MainWin::on_menu_quit ) );    
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuCopy", Gtk::Stock::COPY ), sigc::mem_fun( *this, &MainWin::on_menu_copy ) );    
+
+    // UIマネージャの作成とアクショングループ挿入
+    m_uimanager = Gtk::UIManager::create();
+    m_uimanager-&gt;insert_action_group( m_actiongroup );
+
+    // ショートカットキー(アクセレータ)登録
+    add_accel_group( m_uimanager-&gt;get_accel_group() );
+
+    // メニューのレイアウト
+    try
+    {
+        Glib::ustring ui_info = 
+            "&lt;ui&gt;"
+            "&lt;menubar name='MenuBar'&gt;"
+            "   &lt;menu action='MenuTitle'&gt;"
+            "      &lt;menuitem action='MenuQuit'/&gt;"
+            "      &lt;menuitem action='MenuCopy'/&gt;"
+            "  &lt;/menu&gt;"
+            "&lt;/menubar&gt;"
+            "&lt;/ui&gt;";
+
+        m_uimanager-&gt;add_ui_from_string(ui_info);
+    }
+    catch(const Glib::Error& err )
+    {
+        std::cout &lt;&lt; err.what() &lt;&lt; std::endl;
+    }
+
+    // メニューのパック
+    resize( 300, 300 );
+    add( m_box );
+    Gtk::Widget* menubar = m_uimanager-&gt;get_widget( "/MenuBar" );
+    m_box.pack_start( *menubar, Gtk::PACK_SHRINK );
+    show_all_children();
+}
+
+
+// シグナルハンドラ
+void MainWin::on_menu_quit()
+{
+    std::cout &lt;&lt; "quit\n";
+}
+
+
+// シグナルハンドラ
+void MainWin::on_menu_copy()
+{
+    std::cout &lt;&lt; "copy\n";
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ shortcut.cpp -o shortcut `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p20.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

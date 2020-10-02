@@ -1,0 +1,137 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+チェックボタンとトグルボタン
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/7/15
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+チェックボタンとトグルボタン
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::CheckButton と Gtk::ToggleButton によりチェックボタンとトグルボタンを作る。
+<p>
+チェック状態はget_active()メンバ関数によって調べることが出来る。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+check.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::CheckButton m_chk;
+    Gtk::ToggleButton m_tgl;
+    Gtk::Button m_bt;
+
+    Gtk::VBox m_vbox;
+
+public:
+    MainWin();
+
+private:
+    void on_bt_clicked();
+};
+
+MainWin::MainWin()
+    :m_chk( "チェック" ),
+     m_tgl( "トグル" ),
+     m_bt( "状態表示" )
+{
+    // シグナルとスロットをコネクト
+    m_bt.signal_clicked().connect( 
+                sigc::mem_fun( *this, &MainWin::on_bt_clicked ) );
+
+    m_vbox.pack_start( m_chk );
+    m_vbox.pack_start( m_tgl );
+    m_vbox.pack_start( m_bt );
+    add( m_vbox );
+    show_all_children();
+}
+
+// スロット関数
+void MainWin::on_bt_clicked()
+{
+    Glib::ustring msg;
+
+    if( m_chk.get_active() ) msg += "チェック\n";
+    if( m_tgl.get_active() ) msg += "トグル";
+    
+    Gtk::MessageDialog diag( *this, msg );
+    diag.run();
+}    
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ check.cpp -o check `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+
+状態表示ボタンを押すと現在のチェックボタンやトグルボタンの状態が表示される
+
+<P>
+<center>
+<img src="./images/p9.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

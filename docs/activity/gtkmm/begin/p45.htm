@@ -1,0 +1,140 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+カーソルの形を変える
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/11/17
+<br>
+バージョン: gtkmm24 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+カーソルの形を変える
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+カーソルの形を変更するにはGdk::Window::set_cursor()でカーソル( Gdk::Cursor )を指定する。
+カーソルのタイプは enum Gdk::CursorType で定義されている。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+setcursor.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Button m_button1, m_button2, m_button3;;
+    Gtk::Label m_label;
+    Gtk::HBox m_hbox;
+    Gtk::VBox m_vbox;
+
+public:
+    MainWin();
+
+private:
+    void on_bt1_clicked();
+    void on_bt2_clicked();
+    void on_bt3_clicked();
+};
+
+MainWin::MainWin() :
+    m_label( "カーソル変更テスト" ),
+    m_button1( "カーソル1" ),
+    m_button2( "カーソル2" ),
+    m_button3( "元に戻す" )
+{
+    m_hbox.pack_start( m_button1, Gtk::PACK_SHRINK );
+    m_hbox.pack_start( m_button2, Gtk::PACK_SHRINK );
+    m_hbox.pack_start( m_button3, Gtk::PACK_SHRINK );
+
+    m_vbox.pack_start( m_label );
+    m_vbox.pack_start( m_hbox, Gtk::PACK_SHRINK );
+
+    m_button1.signal_clicked().connect( sigc::mem_fun( *this, &MainWin::on_bt1_clicked ) );    
+    m_button2.signal_clicked().connect( sigc::mem_fun( *this, &MainWin::on_bt2_clicked ) );    
+    m_button3.signal_clicked().connect( sigc::mem_fun( *this, &MainWin::on_bt3_clicked ) );    
+
+    add( m_vbox );
+    show_all_children();
+    resize( 200, 200 );
+}
+
+
+void MainWin::on_bt1_clicked()
+{
+    get_window()-&gt;set_cursor( Gdk::Cursor( Gdk::HAND1 ) );
+}
+
+void MainWin::on_bt2_clicked()
+{
+    get_window()-&gt;set_cursor( Gdk::Cursor( Gdk::WATCH   ) );
+}
+
+void MainWin::on_bt3_clicked()
+{
+    // 元に戻すときは引数無しでset_cursor()を呼ぶ
+    get_window()-&gt;set_cursor();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ setcursor.cpp -o setcursor `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+ボタンを押すとカーソルの形が変わる。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

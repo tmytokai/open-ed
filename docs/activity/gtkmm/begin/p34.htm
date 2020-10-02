@@ -1,0 +1,168 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ダブル、トリプルクリックイベントの検出
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/1/24
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ダブル、トリプルクリックイベントの検出
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ダブル、トリプルクリックイベントを検出する。
+<p>
+検出自体はGtk::Window::on_button_press_event()に渡されるGdkEventButton構造体の
+typeメンバーを見れば良いが、on_button_press_event()(及びon_button_release_event() )が
+呼び出される順番に注意する必要がある。例えばトリプルクリックする場合は次の順番で
+GdkEventButton::typeに値が入って呼び出される。よってトリプルクリックする場合でも必ず
+シングル、ダブルクリックしたことが検知されるので注意する必要がある。
+<p> 
+(1) GDK_BUTTON_PRESS
+<p>
+(2) GDK_BUTTON_RELEASE
+<p>
+(3) GDK_BUTTON_PRESS
+<p>
+(4) GDK_2BUTTON_PRESS
+<p>
+(5) GDK_BUTTON_RELEASE
+<p>
+(6) GDK_BUTTON_PRESS
+<p>
+(7) GDK_3BUTTON_PRESS
+<p>
+(8) GDK_BUTTON_RELEASE
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+mclick2
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+
+protected:
+    virtual bool on_button_press_event( GdkEventButton* event );
+    virtual bool on_button_release_event( GdkEventButton* event );
+};
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+    add_events( Gdk::BUTTON_RELEASE_MASK );
+}
+
+// マウスクリック
+bool MainWin::on_button_press_event( GdkEventButton* event )
+{
+    switch( event-&gt;type ){
+
+        case GDK_BUTTON_PRESS:  std::cout &lt;&lt; "シングルクリック\n"; break;
+
+        case GDK_2BUTTON_PRESS:  std::cout &lt;&lt; "ダブルクリック\n"; break;
+
+        case GDK_3BUTTON_PRESS:  std::cout &lt;&lt; "トリプルクリック\n"; break;
+    }
+
+    return true;
+}
+
+
+// マウスリリース
+bool MainWin::on_button_release_event( GdkEventButton* event )
+{
+    switch( event-&gt;type ){
+
+        case GDK_BUTTON_RELEASE:  std::cout &lt;&lt; "リリース\n"; break;
+    }
+
+    return true;
+}
+
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ mclick2.cpp -o mclick2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+トリプルクリックをすると次のように表示される
+
+<pre class="prog">
+シングルクリック
+リリース
+シングルクリック
+ダブルクリック
+リリース
+シングルクリック
+トリプルクリック
+リリース
+</pr>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

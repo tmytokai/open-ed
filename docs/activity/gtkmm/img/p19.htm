@@ -1,0 +1,125 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gdk::PixbufLoaderによる画像の読み込み
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2008/2/4
+<br>
+バージョン: gtkmm-2.4 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gdk::PixbufLoaderによる画像の読み込み
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gdk::PixbufLoaderを用いて画像ファイルを読み込む。
+<p>
+通常はGdk::Pixbuf::create_from_file()を用いて画像ファイルを読み込むことが
+出来るが、ファイルサイズが大きい画像を別スレッドで読み込みたい時や、画像の幅や高さだけを
+知りたい時などにはGdk::PixbufLoaderを使用すると便利である。
+<p>
+Gdk::PixbufLoader::write()でデータを入力し、Gdk::PixbufLoader::close()で終了する。
+その後Gdk::PixbufLoader::get_pixbuf()でGdk::PixBufを取得できる。また画像の幅や高さ
+を取得したらGdk::PixbufLoader::signal_size_prepared()がemitされる。
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+ploader.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+void on_size_prepared( int w, int h ){
+    std::cout &lt;&lt; "on_size_prepared width = " &lt;&lt; w &lt;&lt; " height = " &lt;&lt; h &lt;&lt; std::endl;
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+
+    Glib::RefPtr&lt; Gdk::PixbufLoader &gt; loader = Gdk::PixbufLoader::create();
+    loader-&gt;signal_size_prepared().connect( sigc::ptr_fun( &on_size_prepared ) );
+
+    FILE* f = fopen( "./test.png", "rb" );
+    if( f ){
+
+        const size_t bufsize = 4096;
+        size_t rsize;
+        guint8 data[ bufsize ];
+        while( ( rsize = fread( data, 1, bufsize, f ) ) ){
+            std::cout &lt;&lt; "read " &lt;&lt; rsize &lt;&lt; " byte\n";
+            loader-&gt;write( data, rsize );
+        }
+        loader-&gt;close();
+
+        Glib::RefPtr&lt; Gdk::Pixbuf &gt; pixbuf = loader-&gt;get_pixbuf();
+
+        std::cout &lt;&lt; "width = " &lt;&lt; pixbuf-&gt;get_width() &lt;&lt; " height = " &lt;&lt; pixbuf-&gt;get_height() &lt;&lt; std::endl;
+
+        fclose( f );
+    }
+
+    return 0;
+}
+</pre>
+<br><br>
+<pre class="prog">
+g++ ploader.cpp -o ploader `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<br>
+<pre>
+$ ./ploader 
+read 4096 byte
+on_size_prepared width = 320 height = 240
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 4096 byte
+read 2724 byte
+width = 320 height = 240
+</pre>
+この様に、ファイルを全て読み込まなくても幅と高さを取得できていることが分かる。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

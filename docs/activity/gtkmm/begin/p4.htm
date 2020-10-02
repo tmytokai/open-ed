@@ -1,0 +1,119 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+メッセージボックス表示
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" width="200px" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/6/20
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top" >
+<div class="main">
+
+<h2 class="title">
+メッセージボックス表示
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::MessageDialogを使ってメッセージボックスを表示する。
+<p>
+押すボタンによって表示されるメッセージが変わる。
+なおGtk::MessageDialogはGtk::Windowを継承しているので
+set_title()によってタイトルを変更できる。
+<a name="src" />
+<h2 class="sec">ソース</h2>
+msg.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Label m_label;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+{
+  Gtk::MessageDialog diag( *this, "文字", false,
+                           Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL);
+  diag.set_title( "タイトル" );
+
+  switch( diag.run() ){
+
+  case Gtk::RESPONSE_OK:
+      m_label.set_text( "Ok" );
+      break;
+
+  case Gtk::RESPONSE_CANCEL:
+      m_label.set_text( "Cancel" );
+      break;
+  }
+
+  add( m_label );
+  show_all_children();
+  resize( 100, 100 );  
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ msg.cpp -o msg `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<center>
+<img src="./images/p4.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

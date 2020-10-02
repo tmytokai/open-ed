@@ -1,0 +1,154 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ポップアップメニュー
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/10/15
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ポップアップメニュー
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ウィンドウのクライアント領域をクリックしたときにポップアップメニューを表示する。
+<p>
+ポップアップメニューの各メニュー項目はシグナルとシグナルハンドラを介して実行される。すなわちユーザが
+ポップアップメニューからあるメニュー項目を選択するとシグナルが発せられて対応したシグナルハンドラが呼び出される。
+<P>
+具体的にはアクショングループ( Gtk::ActionGroup ) に各メニュー項目のアクション( Gtk::Action )を登録し、UIマネージャ(  Gtk::UIManager )にアクショングループを挿入し
+メニューのレイアウトをおこない、Gtk::Menu::popup()によってポップアップメニューを表示する。
+
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+pmenu.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Glib::RefPtr&lt; Gtk::ActionGroup &gt; m_actiongroup;
+    Glib::RefPtr&lt; Gtk::UIManager &gt; m_uimanager;
+
+public:
+    MainWin();
+
+private:
+    void on_popupmenu_test();
+    
+protected:
+    virtual bool on_button_press_event( GdkEventButton* event );
+};
+
+MainWin::MainWin()
+{
+    // OFFになってるイベントを追加
+    add_events( Gdk::BUTTON_PRESS_MASK );
+
+    // アクショングループの作成とアクション登録
+    m_actiongroup = Gtk::ActionGroup::create();
+    m_actiongroup-&gt;add( Gtk::Action::create( "MenuTitle", "メニュー" ) );
+    m_actiongroup-&gt;add( Gtk::Action::create( "TestMenu", "テスト"), sigc::mem_fun( *this, &MainWin::on_popupmenu_test ) );    
+
+    // UIマネージャの作成とアクショングループ挿入
+    m_uimanager = Gtk::UIManager::create();
+    m_uimanager-&gt;insert_action_group( m_actiongroup );
+
+    // ポップアップメニューのレイアウト
+    Glib::ustring ui_info = 
+        "&lt;ui&gt;"
+        "&lt;popup name='PopupMenu' &gt;"
+        "&lt;menuitem action='MenuTitle'/&gt;"
+        "&lt;menuitem action='TestMenu'/&gt;"
+        "&lt;/popup&gt;"
+        "&lt;/ui&gt;";
+    m_uimanager-&gt;add_ui_from_string(ui_info);
+}
+
+
+// マウスクリック
+bool MainWin::on_button_press_event( GdkEventButton* event )
+{
+    Gtk::Menu* popupmenu = dynamic_cast&lt; Gtk::Menu* &gt;( m_uimanager-&gt;get_widget( "/PopupMenu" ) );
+    popupmenu-&gt;popup( event-&gt;button, event-&gt;time );
+
+    return true;
+}
+
+
+// シグナルハンドラ
+void MainWin::on_popupmenu_test()
+{
+    std::cout &lt;&lt; "ok\n";
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ pmenu.cpp -o pmenu `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p18.png">
+</center>
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

@@ -1,0 +1,119 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::ScrolledWindowによるスクロール処理
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/8/4
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::ScrolledWindowによるスクロール処理
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::ScrolledWindowを使うと簡単にスクロール処理を行うことが出来る。
+<p>
+Gtk::ScrolledWindowはGtk::ContainerのサブクラスであるのでGtk::Container::add()を使って
+ウィジットを内部に貼り付けることが出来る。set_policy()に Gtk::POLICY_AUTOMATICを
+指定すると内部のウィジットのサイズに応じて自動でスクロールバーを表示する。
+<P>
+なお、ボタン追加の所で出てくるGtk::manage()に関しては<a href="../app/p4.htm">こちら</a>を
+参照すること。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+scroll.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scr;
+    Gtk::VBox m_vbox;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+{
+    // ボタン追加
+    for( int i = 0; i < 10; ++i ){
+        m_vbox.pack_start( *Gtk::manage( new Gtk::Button( "test" ) ) );
+    }
+        
+    // スクロールバー自動表示設定
+    m_scr.set_policy( Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC );
+
+    m_scr.add( m_vbox );
+    add( m_scr );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ scroll.cpp -o scroll `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p11.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

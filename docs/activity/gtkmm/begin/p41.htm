@@ -1,0 +1,139 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+タブページの作り方
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/8/2
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+タブにアイコンを埋め込む
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+タブにアイコンを埋め込む。
+<p>
+HBoxを派生させて Gtk::Image と Gtk::Label を pack したタブを
+作成し、Gtk::Notebook::append_page() を使ってタブをセットする。
+ストックアイコンを Gtk::Image にセットするには Gtk::Image::set()を使う。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+notebook3.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// アイコンとラベルを埋め込んだHBox
+class IconLabel : public Gtk::HBox
+{
+    Gtk::Label m_label;
+    Gtk::Image m_img;
+
+public:
+    IconLabel::IconLabel( const Glib::ustring& label )
+        : m_label( label )
+    {
+        // アイコンのセット
+        m_img.set( Gtk::Stock::YES, Gtk::ICON_SIZE_MENU );
+
+        pack_start( m_img );
+        pack_start( m_label );
+        show_all_children();
+    }
+};
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Label m_label1, m_label2;
+    IconLabel m_tab1, m_tab2;
+    Gtk::Notebook m_notebook;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+    : m_label1( "label1" ),
+      m_label2( "label2" ),
+      m_tab1( "page1" ),
+      m_tab2( "page2" )
+{
+    resize( 400, 300 );
+
+    m_notebook.append_page( m_label1, m_tab1 );
+    m_notebook.append_page( m_label2, m_tab2 );
+
+    add( m_notebook );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ notebook3.cpp -o notebook3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+
+<center>
+<img src="./images/p41.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

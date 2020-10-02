@@ -1,0 +1,101 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+使用可能なフォントの一覧取得
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2007/8/7
+<br>
+バージョン: gtkmm-2.4 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+使用可能なフォントの一覧取得
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+使用可能なフォントファミリーとフォントフェイスを取得する。
+<p>
+そのためにはまず Gtk::Widget::get_pango_context() で Pango::Context を取得し、
+Pango::Context::list_families()でファミリーのリストを取得する。さらに
+Pango::FontFamily::list_faces()でフェイスのリストを取得する。
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+getfonts.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+typedef Glib::RefPtr&lt; Pango::FontFamily &gt; FFAM;
+typedef Glib::RefPtr&lt; Pango::FontFace &gt; FFACE;
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    Gtk::Window window;
+
+    std::list&lt; FFAM &gt; families =  window.get_pango_context()-&gt;list_families();
+    std::list&lt; FFAM &gt;::iterator it;
+    for( it = families.begin(); it != families.end(); ++it ){
+
+        std::cout &lt;&lt; "family name = " &lt;&lt; (*it)-&gt;get_name() &lt;&lt; "\nfaces = ";
+
+        std::list&lt; FFACE &gt; faces = (*it)-&gt;list_faces();
+        std::list&lt; FFACE &gt;::iterator it2;
+        for( it2 = faces.begin(); it2 != faces.end(); ++it2 ){
+            std::cout &lt;&lt; (*it2)-&gt;get_name() &lt;&lt; ", ";
+        }
+        std::cout &lt;&lt; "\n\n";
+    }
+
+    return 0;
+}
+</pre>
+<br><br>
+<pre class="prog">
+g++ getfonts.cpp -o getfonts `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<br>
+family name = Monospace
+<br>
+faces = Regular, Bold, Italic, Bold Italic,
+<br><br>
+のようにフォントファミリーとフェイスが表示される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

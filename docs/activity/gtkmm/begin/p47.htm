@@ -1,0 +1,132 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::TextViewでカーソルのある位置を取得
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/2/25
+<br>
+バージョン: gtkmm24 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+TextView内のカーソルの位置(何行、何文字目)を取得する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+TextBuffer内の文字は Gtk::TextBuffer::iterator オブジェクトによって表されるので、カーソル位置を
+得るにはカーソル位置のiteratorを取得する必要がある。ただしカーソル位置はiteratorではなくて
+Gtk::TextBuffer::Markオブジェクトで与えられているので、Gtk::TextBuffer::Mark::get_iter()
+によってカーソル位置の iteratorを取得する。具体的には次のようにする。
+<br>
+<br>
+Gtk::TextView m_textview;
+<br>
+m_textview.get_buffer()->get_insert()->get_iter();
+<br>
+<br>
+あとは Gtk::TextBuffer::iterator::get_line()とGtk::TextBuffer::iterator::get_line_offset() で
+カーソルの位置を取得できる。ここでget_line_offset()はバイトではなくてユニコード文字として
+カウントされるのに注意する。つまり日本語の文字の場合は3文字ではなくて1文字でカウントされる。
+またget_line()とget_line_offset()は0から始まることに注意する。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+textview2.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::TextView m_textview;
+
+public:
+    MainWin();
+    virtual ~MainWin();
+
+private:
+    void on_buf_changed();
+};
+
+MainWin::MainWin()
+{
+    // バッファ更新シグナル
+    m_textview.get_buffer()->signal_changed().connect( sigc::mem_fun( *this, &MainWin::on_buf_changed ) );
+
+    add( m_textview );
+    show_all_children();
+
+    resize( 600,600 );
+}
+
+MainWin::~MainWin()
+{}
+
+
+void MainWin::on_buf_changed()
+{
+    std::cout &lt;&lt; "---------------------\n" &lt;&lt; m_textview.get_buffer()->get_text() &lt;&lt; std::endl
+              &lt;&lt; "何行目   = " &lt;&lt; m_textview.get_buffer()->get_insert()->get_iter().get_line() &lt;&lt; std::endl
+              &lt;&lt; "何文字目 = " &lt;&lt; m_textview.get_buffer()->get_insert()->get_iter().get_line_offset() &lt;&lt; std::endl;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ textview2.cpp -o textview2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+文字を入力するとコンソールにカーソルの現在位置が表示される。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

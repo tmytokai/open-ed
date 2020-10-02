@@ -1,0 +1,116 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::Scaleによるスライドバー
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/12/9
+<br>
+バージョン: gtkmm24 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::Scaleによるスライドバー
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::HScaleまたはGtk::VScaleによってスライドバーを作成する。
+<p>
+基本的には SpinButtonと同様に
+<br>
+<br>
+・Gtk::Scale::set_range() で範囲をセット
+<br>
+・Gtk::Scale::set_increments() で変化量をセット
+<br>
+・Gtk::Scale::set_value() で初期値をセット
+<br>
+<br>
+するだけで良い。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+scale.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::HScale m_hscale;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    m_hscale.set_range( 1, 5 );
+    m_hscale.set_increments( 1, 1 );
+    m_hscale.set_value( 2 );
+
+    add( m_hscale );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ scale.cpp -o scale `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p52.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

@@ -1,0 +1,123 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ツリーの内容を表示する
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/12/8
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ツリーの内容を表示する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+<P>
+ある行のある列の中身は値をセットしたときと同様にして、行(Gtk::TreeModel::Row row)を
+取得してから row[ m_record.m_col_name ] により取得できる。
+<P>
+また複数行のイテレータ( Gtk::TreeModel::iterator )は Gtk::TreeModel::children().begin() または 
+Gtk::TreeModel::Row::children().begin() によって取得できる。前者はルートの直下にある行のイテレータを
+後者はある行のサブディレクトリにある行のイテレータを取得する。
+よってイテレータをデレファレンスすることによって Gtk::TreeModel::Row を順次取得できる。
+下の例では再帰的にツリーを捜査することによりツリーの全ての行の内容を表示している。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+<a href="./p30.htm">前回</a>使用した treeview2.cppの void MainWin::on_bt_clicked() を下のものに置き換え、
+メソッド void MainWin::show_children( Gtk::TreeModel::Children children ) を追加する。
+
+<br>
+<br>
+treeview3.cpp
+<pre class="prog">
+
+//
+// childern の中身を表示
+//
+void MainWin::show_children( Gtk::TreeModel::Children children )
+{
+    Gtk::TreeModel::iterator it = children.begin();
+    for( ; it != children.end(); ++it )
+    {
+        Gtk::TreeModel::Row row = *it;
+        std::cout &lt;&lt; row[ m_record.m_col_name ] &lt;&lt; std::endl;
+        show_children( row.children() ); // サブディレクトリの中を再帰表示
+    }
+}
+
+// ボタンを押すと呼ばれる
+void MainWin::on_bt_clicked()
+{
+    show_children( m_treestore-&gt;children() );
+} 
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ treeview3.cpp -o treeview3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+ボタンを押すとツリーの内容が表示される
+<P>
+<pre class="prog">
+ルート1
+サブ1
+サブ2
+サブサブ1
+サブサブ2
+サブサブ3
+サブ3
+サブサブ4
+サブサブ5
+ルート2
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

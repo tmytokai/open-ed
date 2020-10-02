@@ -1,0 +1,119 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+フォント選択ダイアログ
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/9/26
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+フォント選択ダイアログ
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::FontSelectionDialogを使ってフォント選択ダイアログを表示する。
+<p>
+基本的にはGtk::MessageDialogと同様にすれば良い。フォント名はGtk::FontSelectionDialog::get_font_name() で取得する
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+fontdiag.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Label m_label;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    Gtk::FontSelectionDialog diag;
+    diag.set_title( "フォント選択" );
+
+    switch( diag.run() ){
+
+        case Gtk::RESPONSE_OK:
+            m_label.set_text( diag.get_font_name() );
+            break;
+
+        case Gtk::RESPONSE_CANCEL:
+            m_label.set_text( "Cancel" );
+            break;
+    }
+
+    add( m_label );
+    show_all_children();
+    resize( 200, 100 );  
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ fontdiag.cpp -o fontdiag `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+実行するとフォント選択ダイアログが表示され、選択したフォントがラベルに表示される。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

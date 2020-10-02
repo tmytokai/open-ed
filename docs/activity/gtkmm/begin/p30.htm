@@ -1,0 +1,220 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+複雑なツリーを作る
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/12/1
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+複雑なツリーを作る
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+より複雑なツリー構造の作成方法について説明する
+<p>
+前回説明した通り、ある行のサブディレクトリに行を追加する場合は親となる行を指定する必要があった。
+具体的には Gtk::TreeModel::Row parent_row を親行としたとき Gtk::TreeStore::append( parent_row.children() ) とする。
+なおGtk::TreeModel::Row( または Gtk::TreeRow ) は Gtk::TreeIter のサブクラスであり行をあらわすクラスである。
+また Gtk::TreeModel::Row::children() の戻り値の Gtk::TreeModel::Children( または Gtk::TreeNodeChildren )
+もGtk::TreeIter のサブクラスであり複数の行のコンテナクラスである。
+<p>
+さらに同じサブディレクトリに違う行を追加する場合はもう一度 Gtk::TreeStore::append( parent_row.children() )
+と指定して子行の最後に新しい行をappendする方法もあるが、 Gtk::TreeStore::insert_after()を使ってある行の
+後ろに行を挿入する方法もある。具体的には Gtk::TreeModel::Row pre_row を直前の行みなしたとき、
+Gtk::TreeStore::insert_after( pre_row ) とする。
+<P>
+まとめるとサブディレクトリに行を追加する方法には主に
+<P>
+(1) Gtk::TreeStore::append( parent_row.children() )
+<p>
+(2) Gtk::TreeStore::insert_after( pre_row )  又は Gtk::TreeStore::insert( pre_row )
+<P>
+のどちらかを使用する。
+<P>
+また、ある行の親行の次の行に行を追加したい場合は、
+<P>
+Gtk::TreeModel::Row parent_row = *( row.parent() );
+<P>
+で親行を取得してから Gtk::TreeStore::insert_after( parent_row ) とする。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+
+void MainWin::on_bt_clicked()は今回は使わない
+<br>
+<br>
+treeview2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// 派生レコードクラス
+class MyRecord : public Gtk::TreeModel::ColumnRecord
+{
+
+public:
+    Gtk::TreeModelColumn&lt; Glib::ustring &gt; m_col_name;
+
+    MyRecord(){
+        // レコード( Gtk::TreeModel::ColumnRecord )に列( Gtk::TreeModelColumn )を登録
+        add( m_col_name );
+    }
+};
+
+/////////////////////
+
+class MainWin : public Gtk::Window
+{
+    Gtk::VBox m_vbox;
+    Gtk::Button m_bt;
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    MyRecord m_record;
+    Glib::RefPtr&lt; Gtk::TreeStore &gt; m_treestore;
+
+public:
+    MainWin();
+
+private:
+    void on_bt_clicked();
+};
+
+
+MainWin::MainWin()
+    : m_bt( "push" )
+{
+    // レコードを用いてモデル( Gtk::TreeStore )作成。m_treestoreは Glib::Refptr なのでdeleteする必要はない
+    m_treestore = Gtk::TreeStore::create( m_record );
+
+    // モデルをビュー( Gtk::TreeView )にセット
+    m_treeview.set_model( m_treestore );
+
+    // ビューに表示する列を指定
+    m_treeview.append_column( "名前", m_record.m_col_name );
+
+    // モデルに行を追加するとビューの表示も同時に更新される
+    Gtk::TreeModel::Row row;
+
+    // ルートにappend
+    row = *( m_treestore-&gt;append() );
+    row[ m_record.m_col_name ] = "ルート1";
+
+    // サブディレクトリに追加( append( parent_row.children() ) 使用 )
+    Gtk::TreeModel::Row parent_row = row;
+    row = *( m_treestore-&gt;append( parent_row.children() ) );
+    row[ m_record.m_col_name ] = "サブ1";
+
+    row = *( m_treestore-&gt;append( parent_row.children() ) );
+    row[ m_record.m_col_name ] = "サブ2";
+
+    // サブディレクトリのサブディレクトリに追加( insert_after( pre_row ) 使用 )
+    row = *( m_treestore-&gt;append( row.children() ) );
+    row[ m_record.m_col_name ] = "サブサブ1";
+
+    row = *( m_treestore-&gt;insert_after( row ) );
+    row[ m_record.m_col_name ] = "サブサブ2";
+
+    row = *( m_treestore-&gt;insert_after( row ) );
+    row[ m_record.m_col_name ] = "サブサブ3";
+
+    // 一個あがって追加
+    row = *( row.parent() );
+    row = *( m_treestore-&gt;insert_after( row ) );
+    row[ m_record.m_col_name ] = "サブ3";
+
+    // またサブディレクトリのサブディレクトリに追加
+    row = *( m_treestore-&gt;append( row.children() ) );
+    row[ m_record.m_col_name ] = "サブサブ4";
+
+    row = *( m_treestore-&gt;insert_after( row ) );
+    row[ m_record.m_col_name ] = "サブサブ5";
+
+    // 再びルートにappend
+    row = *( m_treestore-&gt;append() );
+    row[ m_record.m_col_name ] = "ルート2";
+
+    // widgetのパック
+    m_scrwin.add( m_treeview );
+    m_bt.signal_clicked().connect( sigc::mem_fun( *this, &MainWin::on_bt_clicked ) );    
+    m_vbox.pack_start( m_bt, Gtk::PACK_SHRINK );
+    m_vbox.pack_start( m_scrwin );
+    add( m_vbox );
+    show_all_children();
+    resize( 200,300 );
+}
+
+
+// スロット関数
+// 今回は使わない( 次回で使う )
+void MainWin::on_bt_clicked()
+{} 
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ treeview2.cpp -o treeview2 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p30.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

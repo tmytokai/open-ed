@@ -1,0 +1,121 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+色選択ダイアログ
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/11/15
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+色選択ダイアログ
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::ColorSelectionDialog により色選択ダイアログを表示する。
+<p>
+基本的にはGtk::MessageDialogと同様にすれば良い。
+初期の色はget_colorsel()->set_current_color()でセットし、
+選択した色はget_colorsel()->get_current_color()で取得する。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+colordiag.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    resize( 200, 100 );  
+
+    Gtk::ColorSelectionDialog diag( "色選択" );
+
+    // 初期の色セット
+    Gdk::Color col;
+    col.set_rgb( 65535, 65535, 0 );
+    diag.get_colorsel()-&gt;set_current_color( col );
+
+    switch( diag.run() ){
+
+        case Gtk::RESPONSE_OK:
+            // 背景色変更
+            modify_bg( Gtk::STATE_NORMAL, diag.get_colorsel()-&gt;get_current_color() );
+            break;
+
+        case Gtk::RESPONSE_CANCEL:
+            break;
+    }
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ colordiag.cpp -o colordiag `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+実行すると色選択ダイアログが表示され、選択した色でウィジットが塗りつぶされる。
+
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

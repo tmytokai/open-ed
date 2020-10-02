@@ -1,0 +1,103 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+簡単な描画ツールを作成３(画像保存)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2005/8/31
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+簡単な描画ツールを作成３(画像保存)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+<a href="./p9.htm">前回</a>のツールは閉じると画像が破棄されていたので
+画像をファイルに保存出来るようにする。
+<p>
+
+前回作ったツールの画像データはGdk::Pixmap、すなわちXサーバ側が保持しているため、
+そのままではファイルに保存することは出来ない。そこでGdk::Pixbuf経由で
+アプリケーション側のメモリに画像データをコピーし、Gdk::Pixbuf::save()でファイルに保存する。
+<P>
+
+<a href="./p9.htm">前回</a>との違いはデストラクタで画像を保存するようにしたこと
+だけである。従って今回はデストラクタのコードだけを載せることにする。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+drawpic3.cpp(デストラクタのみ)
+<pre class="prog">
+
+MyDrawArea::~MyDrawArea()
+{
+    Glib::RefPtr&lt; Gdk::Pixbuf &gt; pixbuf;
+    int w, h;
+    m_pixmap-&gt;get_size( w, h );
+
+    try{
+        // pixmap -&gt; pixbuf にデータコピー
+        // Glib::RefPtr&lt; Gdk::Drawable &gt;にキャストしないとコンパイルエラーが出る
+        pixbuf = Gdk::Pixbuf::create( Glib::RefPtr&lt; Gdk::Drawable &gt;::cast_dynamic( m_pixmap ), m_pixmap-&gt;get_colormap() , 0, 0, 0, 0, w, h );
+
+        // 保存
+        pixbuf-&gt;save( "drawpic3.png", "png" );
+    }
+    catch( const Glib::Error&  e ){
+        std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;
+    }
+}
+
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ drawpic3.cpp -o drawpic3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+drawpic3.png というPNG形式の画像ファイルに画像が保存される。
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

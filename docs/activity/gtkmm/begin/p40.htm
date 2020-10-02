@@ -1,0 +1,171 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リストビューにアイコンとテキストを同時表示する
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/5/6
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リストビューにアイコンとテキストを同時表示する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+リストビューにアイコンとテキストを一つの列に同時表示する場合は手動で
+ビューの列クラス(Gtk::TreeViewColumn)を作ってTreeViewに登録し、
+さらにpixbufとテキストのレンダリングクラス(Gtk::CellRendererPixbuf, Gtk::CellRendererText)を
+作って作成したGtk::TreeViewColumnにパックする必要がある。さらにモデルの列を
+Gtk::TreeViewColumn::add_attribute()を使ってレンダリングクラスにマップする。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+listview4.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// 派生レコードクラス
+class MyRecord : public Gtk::TreeModel::ColumnRecord
+{
+
+public:
+    Gtk::TreeModelColumn&lt; Glib::RefPtr&lt; Gdk::Pixbuf &gt; &gt;  m_col_image;
+    Gtk::TreeModelColumn&lt; Glib::ustring &gt; m_col_name;
+
+    MyRecord(){
+
+        // レコード( Gtk::TreeModel::ColumnRecord )に列( Gtk::TreeModelColumn )を登録
+        add( m_col_image );
+        add( m_col_name );
+    }
+};
+
+
+/////////////////////
+
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    MyRecord m_record;
+    Glib::RefPtr&lt; Gtk::ListStore &gt; m_liststore;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    // レコードを用いてモデル( Gtk::ListStore )作成
+    m_liststore = Gtk::ListStore::create( m_record );
+
+    // モデルをビュー( Gtk::TreeView )にセット
+    m_treeview.set_model( m_liststore );
+
+    // ビューの列クラス(Gtk::TreeViewColumn)を作ってTreeViewに登録
+    Gtk::TreeViewColumn* viewcol = Gtk::manage( new Gtk::TreeViewColumn( "アイコン+名前" ) );
+    m_treeview.append_column( *viewcol );
+
+    // pixbufのレンダリングクラス(Gtk::CellRendererPixbuf)を作って
+    // ビューの列クラス(Gtk::TreeViewColumn)にパック
+    Gtk::CellRendererPixbuf* ren_pixbuf = Gtk::manage( new Gtk::CellRendererPixbuf() );
+    viewcol-&gt;pack_start( *ren_pixbuf, false );
+    // pixbufの実体が登録されているモデルの列を指定。0 はモデルの0列目(m_col_image)の意味
+    viewcol-&gt;add_attribute( *ren_pixbuf, "pixbuf", 0 ); 
+
+    // テキストレンダリングクラス(Gtk::CellRendererText)を作って
+    // ビューの列クラス(Gtk::TreeViewColumn)にパック
+    Gtk::CellRendererText* ren_text = Gtk::manage( new Gtk::CellRendererText() );
+    viewcol-&gt;pack_start( *ren_text, true );
+    // テキストの実体が登録されているモデルの列を指定。1 はモデルの1列目(m_col_text)の意味
+    viewcol-&gt;add_attribute( *ren_text, "text", 1 ); 
+
+    // モデルに行を追加するとビューの表示も同時に更新される
+    Gtk::TreeModel::Row row;
+
+    row = *( m_liststore-&gt;append() );
+    // Gtk::Widget::render_icon()を使ってストックアイコンをレンダリングする
+    row[ m_record.m_col_image ] = Gtk::Widget::render_icon( Gtk::Stock::YES, Gtk::ICON_SIZE_MENU );
+    row[ m_record.m_col_name ] = "ほげ";
+
+    row = *( m_liststore-&gt;append() );
+    row[ m_record.m_col_image ] = Gtk::Widget::render_icon( Gtk::Stock::NO, Gtk::ICON_SIZE_MENU );
+    row[ m_record.m_col_name ] = "あああ";
+
+    // widgetのパック
+    m_scrwin.add( m_treeview );
+    add( m_scrwin );
+    show_all_children();
+    resize( 200,200 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ listview4.cpp -o listview4 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p40.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

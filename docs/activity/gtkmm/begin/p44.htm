@@ -1,0 +1,172 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+スピンボタン
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/11/2
+<br>
+バージョン: gtkmm24 以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+スピンボタン
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Gtk::SpinButtonによってスピンボタンを作成する。
+<p>
+基本的には
+<br>
+<br>
+・SpinButton::set_range() で範囲をセット
+<br>
+・SpinButton::set_increments() で変化量をセット
+<br>
+・SpinButton::set_value() で初期値をセット
+<br>
+<br>
+するだけで良いが、gtkmmのバージョンが2.4の場合は
+上下の矢印ボタンを押しても値が変化しないというバグ(?)がある。
+よってgtkmm2.4の場合は SpinButton::on_spinbutton_digits_changed() を
+オーバロードして自前で値をセットする必要がある。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+spin.cpp ( gtkmm2.5 以降 )
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::SpinButton m_spin;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    m_spin.set_range( 1, 5 );
+    m_spin.set_increments( 1, 1 );
+    m_spin.set_value( 2 );
+
+    add( m_spin );
+    show_all_children();
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+spin.cpp ( gtkmm2.4 用)
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+#include &lt;sstream&gt;
+
+class MySpinButton : public Gtk::SpinButton
+{
+public:
+    MySpinButton() : Gtk::SpinButton(){}
+
+protected:
+
+    // gtkmm2.4の場合は値が変わったら自前でテキストをセットする
+    // 必要がある( gtkmm2.4 のバグ? )
+    virtual void on_spinbutton_digits_changed()
+    {
+        std::stringstream ss;
+        ss &lt;&lt; (int)get_value();
+        set_text( ss.str() );
+    }
+};
+
+
+class MainWin : public Gtk::Window
+{
+    MySpinButton m_spin;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    m_spin.set_range( 1, 5 );
+    m_spin.set_increments( 1, 1 );
+    m_spin.set_value( 2 );
+
+    add( m_spin );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ spin.cpp -o spin `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p44.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

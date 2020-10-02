@@ -1,0 +1,161 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Mutex
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2006/2/2
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Mutex
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+Mutexを使う
+<P>
+Glib::Muntexによって排他処理を行えるが、「Glib::thread_init()を呼ぶ前にGlib::Muntexを作ると例外が出る」。
+従ってメンバ変数やグローバル変数でMuntexを作りたいときは代わりにGlib::StaticMutexを使う。
+<P>
+なおロックする際はGlib::Mutex::Lockを使うとアンロックし忘れを予防できるので便利である。
+<P>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+thread2.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+// gettid
+#include &lt;sys/types.h&gt;
+#include &lt;linux/unistd.h&gt;
+_syscall0(pid_t,gettid)
+
+// Glib::thread_init() する前は Glib::Mutex を作れないので
+// 代わりに Glib::StaticMutex を作る
+Glib::StaticMutex MyMutex = GLIBMM_STATIC_MUTEX_INIT;
+
+void slot_thread()
+{
+    Glib::Mutex::Lock lock( MyMutex );
+
+    for( int i = 0; i &lt; 4 ; ++i ){
+        std::cout &lt;&lt; "thread tid = " &lt;&lt; gettid() % 10 &lt;&lt; std::endl;
+        sleep( 1 );
+    }
+    std::cout &lt;&lt; "thread stop(" &lt;&lt; gettid() %10 &lt;&lt; ")" &lt;&lt; std::endl;
+}
+
+int main()
+{
+    // スレッドシステムの初期化
+    Glib::thread_init();
+
+    std::cout &lt;&lt; "main tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+
+    Glib::Thread* thread = Glib::Thread::create( sigc::ptr_fun( &slot_thread ), true );
+    Glib::Thread* thread2 = Glib::Thread::create( sigc::ptr_fun( &slot_thread ), true );
+    Glib::Thread* thread3 = Glib::Thread::create( sigc::ptr_fun( &slot_thread ), true );
+
+    thread-&gt;join();
+    thread2-&gt;join();
+    thread3-&gt;join();
+
+    std::cout &lt;&lt; "main stop(" &lt;&lt; gettid() &lt;&lt; ")" &lt;&lt; std::endl;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。今回はスレッドを
+使用しているので pkg-config --libs gthread-2.0 の指定も必要である。
+
+<br><br>
+<pre class="prog">
+g++ thread2.cpp -o thread2 `pkg-config gtkmm-2.4 --cflags --libs` `pkg-config --libs gthread-2.0`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+mutexを有効にした場合は
+
+<pre>
+main tid = 16874
+thread tid = 5
+thread tid = 5
+thread tid = 5
+thread tid = 5
+thread stop(5)
+thread tid = 6
+thread tid = 6
+thread tid = 6
+thread tid = 6
+thread stop(6)
+thread tid = 7
+thread tid = 7
+thread tid = 7
+thread tid = 7
+thread stop(7)
+main stop(16874)
+</pre>
+
+一方、Glib::Mutex::Lock lock( MyMutex );の行を消してmutexを無効にした場合は
+
+<pre>
+main tid = 16789
+thread tid = 0
+thread tid = 1
+thread tid = 2
+thread tid = 0
+thread tid = 1
+thread tid = 2
+thread tid = 0
+thread tid = 1
+thread tid = 2
+thread tid = 0
+thread tid = 1
+thread tid = 2
+thread stop(0)
+thread stop(1)
+thread stop(2)
+main stop(16789)
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

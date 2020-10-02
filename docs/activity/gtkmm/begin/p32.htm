@@ -1,0 +1,104 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+選択した行の後に新しい行を追加する
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/12/13
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+選択した行の後に新しい行を追加する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+挿入自体はGtk::TreeStore::insert_after()で出来るが、選択した行を取得するには
+<p>
+(1) Gtk::TreeView::get_selection()で Gtk::TreeSelection を取得して
+<br>
+(2) Gtk::TreeSelection::get_selected() により選択した行のイテレータを取得し
+<br>
+(3) イテレータをデレファレンス
+<p>
+して取得する必要がある。
+
+
+<P>
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+<a href="./p30.htm">前々回</a>使用した treeview2.cppの void MainWin::on_bt_clicked() を下のものに置き換える。
+
+<br>
+<br>
+treeview4.cpp
+<pre class="prog">
+
+// スロット関数
+void MainWin::on_bt_clicked()
+{
+    Glib::RefPtr&lt; Gtk::TreeSelection &gt; selection = m_treeview.get_selection();
+    Gtk::TreeModel::iterator it = selection-&gt;get_selected();
+    if( it ){
+        Gtk::TreeModel::Row row = *it;
+        std::cout &lt;&lt; "insert after " &lt;&lt; row[ m_record.m_col_name ] &lt;&lt; std::endl;
+        row = *( m_treestore-&gt;insert_after( row ) );
+        row[ m_record.m_col_name ] = "新行";
+    }
+} 
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ treeview4.cpp -o treeview4 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+任意の行をクリックしてから上部の「push」ボタンを押すと選択した行の後ろに新しい行が追加される。
+<P>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

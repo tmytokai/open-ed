@@ -1,0 +1,157 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+リストビューに画像を表示する
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2006/5/6
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+リストビューに画像を表示する
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+リストビューに画像を表示する場合は列クラス( Gtk::TreeModelColumn )の特性を
+Glib::RefPtr&lt;Gdk::Pixbuf &gt; にするだけでよい。今回はストックアイコンを
+Gtk::Widget::render_icon()を使ってレンダリングして使用している。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+listview3.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+// 派生レコードクラス
+class MyRecord : public Gtk::TreeModel::ColumnRecord
+{
+
+public:
+    Gtk::TreeModelColumn&lt; int &gt; m_col_num;
+    Gtk::TreeModelColumn&lt; Glib::RefPtr&lt;Gdk::Pixbuf &gt; &gt;  m_col_image;
+
+    MyRecord(){
+
+        // レコード( Gtk::TreeModel::ColumnRecord )に列( Gtk::TreeModelColumn )を登録
+        add( m_col_num );
+        add( m_col_image );
+    }
+};
+
+/////////////////////
+
+class MainWin : public Gtk::Window
+{
+    Gtk::ScrolledWindow m_scrwin;
+    Gtk::TreeView m_treeview;
+
+    MyRecord m_record;
+    Glib::RefPtr&lt; Gtk::ListStore &gt; m_liststore;
+
+public:
+    MainWin();
+};
+
+
+MainWin::MainWin()
+{
+    // レコードを用いてモデル( Gtk::ListStore )作成
+    m_liststore = Gtk::ListStore::create( m_record );
+
+    // モデルをビュー( Gtk::TreeView )にセット
+    m_treeview.set_model( m_liststore );
+
+    // ビューに表示する列を指定
+    m_treeview.append_column( "番号", m_record.m_col_num );
+    m_treeview.append_column( "画像", m_record.m_col_image );
+
+    // モデルに行を追加するとビューの表示も同時に更新される
+    Gtk::TreeModel::Row row;
+
+    row = *( m_liststore-&gt;append() );
+    row[ m_record.m_col_num ] = 0;
+    // Gtk::Widget::render_icon()を使ってストックアイコンをレンダリングする
+    row[ m_record.m_col_image ] = Gtk::Widget::render_icon( Gtk::Stock::YES, Gtk::ICON_SIZE_MENU );
+
+    row = *( m_liststore-&gt;append() );
+    row[ m_record.m_col_num ] = 1;
+    row[ m_record.m_col_image ] = Gtk::Widget::render_icon( Gtk::Stock::NO, Gtk::ICON_SIZE_MENU );
+
+    row = *( m_liststore-&gt;append() );
+    row[ m_record.m_col_num ] = 2;
+    row[ m_record.m_col_image ] = Gtk::Widget::render_icon( Gtk::Stock::OPEN, Gtk::ICON_SIZE_MENU );
+
+    // widgetのパック
+    m_scrwin.add( m_treeview );
+    add( m_scrwin );
+    show_all_children();
+    resize( 200,200 );
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ listview3.cpp -o listview3 `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p39.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

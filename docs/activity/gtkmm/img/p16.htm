@@ -1,0 +1,176 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+文字を書く(cairomm編)
+</Title>
+</head>
+<body>
+
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+更新日: 2007/8/1
+<br>
+バージョン: 
+<br>
+gtkmm-2.10
+<br>
+cairomm-1.2
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+文字を書く(cairomm編)
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+cairommを使って文字を描画する。
+<p>
+cairommでも通常と同じようにon_expose_event()の中で描画する。
+<br><br>
+初めに Cairo::Context::select_font_face()でフォントを指定してから
+Cairo::Context::set_font_size()でサイズを指定する。ただしset_font_size()
+で指定する数字はポイントではなくピクセルなので get_pango_context()-&gt;get_resolution()
+でDPIを取得してから「ピクセル = ポイント数 * DPI/72」という式で得られた数字を
+指定する必要がある。
+<br><br>
+あとは Cairo::Context::move_to()で描画位置に移動して Cairo::Context::show_text()で
+描画する。文字列の幅や高さ、余白などを得たいときは Cairo::Context::get_text_extents()を使用する。
+
+<p>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+cairotext.cpp
+<pre class="prog">
+#include &lt;gtkmm.h&gt;
+
+class MyDrawArea : public Gtk::DrawingArea
+{
+public:
+    MyDrawArea(){}
+
+protected:
+    virtual bool on_expose_event( GdkEventExpose* e );
+};
+
+
+bool MyDrawArea::on_expose_event( GdkEventExpose* event )
+{
+    int width = get_width();
+    int height =get_height();
+    double y = 10;
+
+    Cairo::RefPtr&lt; Cairo::Context &gt; cairoctx = get_window()-&gt;create_cairo_context();
+
+    // 解像度取得
+    double resolution = get_pango_context()-&gt;get_resolution();
+
+    // 背景の塗りつぶし
+    Gdk::Cairo::set_source_color( cairoctx, Gdk::Color( "black" ) ); 
+    cairoctx-&gt;paint();
+
+    Glib::ustring text = "あいうえお";
+
+    // フォント指定
+    cairoctx-&gt;select_font_face( "Serif", Cairo::FONT_SLANT_NORMAL, Cairo::FONT_WEIGHT_NORMAL );
+    cairoctx-&gt;set_font_size( 20 * resolution / 72 );  // pixel = pt * DPI/72
+
+    // 色指定
+    Gdk::Cairo::set_source_color( cairoctx, Gdk::Color( "white" ) ); 
+
+    // extents取得
+    Cairo::TextExtents txext;
+    cairoctx-&gt;get_text_extents( text, txext );
+
+    // 描画(センタリング)
+    cairoctx-&gt;move_to( width/2 - txext.width/2 - txext.x_bearing, y - txext.y_bearing );
+    cairoctx-&gt;show_text( text );
+
+    // 次の文字列のy座標
+    y += txext.height + 10;
+
+    text = "かきくけこ";
+
+    // フォント指定
+    cairoctx-&gt;select_font_face( "Monospace", Cairo::FONT_SLANT_NORMAL, Cairo::FONT_WEIGHT_NORMAL );
+    cairoctx-&gt;set_font_size( 24 * resolution / 72 );
+    
+    // 色指定
+    Gdk::Cairo::set_source_color( cairoctx, Gdk::Color( "red" ) ); 
+
+    // extents取得
+    cairoctx-&gt;get_text_extents( text, txext );
+
+    // 描画(センタリング)
+    cairoctx-&gt;move_to( width/2 - txext.width/2 - txext.x_bearing, y - txext.y_bearing );
+    cairoctx-&gt;show_text( text );
+
+    return true;
+}
+
+
+class MainWin : public Gtk::Window
+{
+    MyDrawArea m_drawarea;
+
+public:
+
+    MainWin(){
+        add( m_drawarea );
+        show_all_children();
+    }
+};
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ cairotext.cpp -o cairotext `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+<center>
+<img src="./images/p16.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

@@ -1,0 +1,118 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ウィジットの背景色変更
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2005/10/28
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ウィジットの背景色変更
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ウィジットの背景色を変更する。
+<p>
+背景色は Gtk::Widget::modify_bg() によって変更する。modify_bg()の第一引数はウィジットの状態であり、
+<br>
+<br>
+STATE_NORMAL : 通常
+<br>
+STATE_ACTIVE : アクティブ
+<br>
+STATE_PRELIGHT : マウスがウィジットの上にある
+<br>
+STATE_SELECTED : ボタンなどの場合に選択した
+<br>
+STATE_INSENSITIVE : ウィジットの状態変更不可
+<br>
+<br>
+の5つの状態がある。第二引数は Gdk::Color であり色を指定する。前景色なども同様に modify_fg() 
+などで変更できる。
+<P>
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+backc.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+{
+    // 黄色をセット
+    Gdk::Color col;
+    col.set_rgb( 65535, 65535, 0 );
+
+    // 背景色変更
+    modify_bg( Gtk::STATE_NORMAL, col );
+}
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ backc.cpp -o backc `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+起動すると黄色のウィンドウが開く
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

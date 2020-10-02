@@ -1,0 +1,160 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+ディスパッチャ
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu">
+<h2 class="menu">内容</h2>
+
+更新日: 2006/2/11
+<br>
+バージョン: gtkmm24
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+</div>
+
+</td>
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+ディスパッチャ
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+
+ディスパッチャを使う
+<P>
+GUIプログラミングでは子スレッドが完了したことをメインスレッドに知らせたり、子スレッド内ではなく
+メインスレッド内で関数を実行させたいときがあるが、これには Glib::Dispatcher を使う。
+<P>
+Glib::Dispatcher::connect()でスロット関数とコネクトして Glib::Dispatcher::emit()で
+メインスレッド内でコネクトした関数を実行する。
+<P>
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+disp.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+#include &lt;iostream&gt;
+
+// gettid
+#include &lt;sys/types.h&gt;
+#include &lt;linux/unistd.h&gt;
+_syscall0(pid_t,gettid)
+
+class MainWin : public Gtk::Window
+{
+    Glib::Dispatcher m_dispatch;
+
+public:
+    MainWin();
+    virtual ~MainWin(){}
+
+private:
+    void slot_thread();
+    void slot_dispatch();
+};
+
+MainWin::MainWin()
+{
+    resize( 100, 100 );
+    show_all_children();
+
+    std::cout &lt;&lt; "main tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+
+    // ディスパッチャとスロットのコネクト
+    m_dispatch.connect( sigc::mem_fun( *this, &MainWin::slot_dispatch ) );
+
+    // スレッド起動
+    Glib::Thread* thread = Glib::Thread::create( sigc::mem_fun( *this, &MainWin::slot_thread ), false );
+}
+
+
+// スレッド
+void MainWin::slot_thread()
+{
+    std::cout &lt;&lt; "slot_thread tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+    sleep( 2 );
+    std::cout &lt;&lt; "slot_thread stop(" &lt;&lt; gettid() &lt;&lt; ")" &lt;&lt; std::endl;
+
+    // 直接 slot_dispatch()を呼び出した場合
+    slot_dispatch();
+
+    // ディスパッチしてslot_dispatch()を呼び出した場合
+    // slot_dispatch()はメインスレッドの中で実行される
+    m_dispatch.emit();
+}
+
+
+void MainWin::slot_dispatch()
+{
+    std::cout &lt;&lt; "slot_dispatch tid = " &lt;&lt; gettid() &lt;&lt; std::endl;
+}
+
+
+int main( int argc, char *argv[] )
+{
+    // スレッドシステムの初期化
+    Glib::thread_init();
+
+    Gtk::Main kit( argc, argv );
+    MainWin hw;
+    Gtk::Main::run( hw );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。今回はスレッドを
+使用しているので pkg-config --libs gthread-2.0 の指定も必要である。
+
+<br><br>
+<pre class="prog">
+g++ disp.cpp -o disp `pkg-config gtkmm-2.4 --cflags --libs` `pkg-config --libs gthread-2.0`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+slot_dispatch()のtidに注目する。同じ関数でも異なるスレッドで実行されている
+ことがわかる。
+
+<pre>
+main tid = 11982
+slot_thread tid = 11983
+slot_thread stop(11983)
+slot_dispatch tid = 11983
+slot_dispatch tid = 11982
+</pre>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>

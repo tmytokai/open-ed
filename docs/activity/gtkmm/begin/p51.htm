@@ -1,0 +1,141 @@
+<Html>
+<Head>
+<Meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<Title>
+Gtk::Tableによる格子状ウィジット配置
+</Title>
+</head>
+<body>
+
+<table class="main">
+<tr>
+<td valign="top" >
+
+<div class="menu" >
+<h2 class="menu">内容</h2>
+更新日: 2007/8/21
+<br>
+バージョン: gtkmm-2.4以降
+<br>
+<br>
+■ <a href="#about">概要</a> <br>
+■ <a href="#src">ソース</a> <br>
+■ <a href="#com">コンパイル</a><br>
+■ <a href="#result">結果</a><br>
+<br>
+<div Align="right">
+<a href="../index.html">TOP</a>
+</div>
+
+</div>
+</td>
+
+<td valign="top"  >
+<div class="main">
+
+<h2 class="title">
+Gtk::Tableによる格子状ウィジット配置
+</h2>
+
+<a name="inst" />
+<h2 class="sec">概要</h2>
+Gtk::Tableを使ってウィジットを格子状に配置する。
+<p>
+始めにGtk::Table::resize()で格子のサイズを設定し、Gtk::Table:::attach()で
+ウィジットを配置する。Gtk::Table:::attach()の引数には順に、ウィジット、格子の左端の頂点番号、
+右端の頂点番号、上端の頂点番号、下端の頂点番号を指定する。例えば Gtk::Table::resize( 2, 2 ) として
+<br>
+<br>
+<table border="1">
+<tr><td>0</td><td>1</td></tr>
+<tr><td>2</td><td>3</td></tr>
+<table>
+<br>
+<br>
+の様な格子を作り、格子0にウィジットw1を配置したいときは、格子0の左端の頂点番号は0で右端は1、上端は0、下端は1なので
+<br>
+<br>
+Gtk::Table:::attach( w1, 0, 1, 0, 1 )
+<br>
+<br>
+とする。同様に格子1にウィジットw2を配置したいときは
+<br>
+<br>
+Gtk::Table:::attach( w2, 1, 2, 0, 1 )
+<br>
+<br>
+とする。さらに格子2と3をまたがった範囲にウィジットw3を配置したい場合は
+格子2の左端の頂点番号は0で右端は1、上端は1、下端は2、かつ格子3の左端の頂点番号は1で右端は2、上端は1、下端は2なので
+<br>
+<br>
+Gtk::Table:::attach( w3, 0, 2, 1, 2 )
+<br>
+<br>
+とする。
+
+<a name="src" />
+<h2 class="sec">ソース</h2>
+
+table.cpp
+<pre class="prog">
+
+#include &lt;gtkmm.h&gt;
+
+class MainWin : public Gtk::Window
+{
+    Gtk::Table m_table;
+    Gtk::Button m_bt1, m_bt2, m_bt3, m_bt4;
+
+public:
+    MainWin();
+};
+
+MainWin::MainWin()
+    : m_bt1( "ボタン1" ), m_bt2( "ボタン2" ), m_bt3( "ボタン3" ), m_bt4( "ボタン3" )
+{
+    m_table.resize( 3, 2 );
+    m_table.attach( m_bt1, 0, 1, 0, 1 );
+    m_table.attach( m_bt2, 1, 2, 0, 1 );
+    m_table.attach( m_bt3, 0, 2, 1, 2 );
+    m_table.attach( m_bt4, 2, 3, 0, 2 );
+
+    add( m_table );
+    show_all_children();
+}
+
+
+int main( int argc, char *argv[] )
+{
+    Gtk::Main kit( argc, argv );
+    MainWin mainwin;
+    Gtk::Main::run( mainwin );
+
+    return 0;
+}
+
+</pre>
+
+<a name="com" />
+<h2 class="sec">コンパイル</h2>
+
+必要なコンパイルオプションは pkg-config を使って取得する。
+
+<br><br>
+<pre class="prog">
+g++ table.cpp -o table `pkg-config gtkmm-2.4 --cflags --libs`
+</pre>
+
+<a name="result" />
+<h2 class="sec" >結果</h2>
+
+<P>
+<center>
+<img src="./images/p51.png">
+</center>
+
+</div></td></tr></table>
+
+
+</Body>
+</Html>
