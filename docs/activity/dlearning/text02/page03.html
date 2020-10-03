@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. 3層ニューラルネットワークのデータフロー・グラフ化</title>
+<title>3. TensorFlowによる3層ニューラルネットワークの構築</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
-<li>学習項目: [2] ディープラーニングの基本</li>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [2] TensorFlow を用いた MLP の学習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークのグラフを TensorFlow の<a href="../text01/page03.html">データフロー・グラフ</a>に変換してみましょう。
+では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークを、<a href="../text01/page03.html">データフロー・グラフ</a>を使って TensorFlow で構築してみましょう。
 </p>
 
 <br>
@@ -34,21 +34,21 @@
 </p>
 
 <p>
-入力信号全体の名前を data とすると、今考えている 3 層ニューラルネットワークの入力層のパーセプトロンの個数は N 個でしたので、 data は 1xN 行列
+入力信号全体の名前を data とすると、今考えている 3 層ニューラルネットワークの入力層のパーセプトロンの個数は N 個でしたので、 data は実数の 1xN 行列
 </p>
 
 
 \[
 {\rm data} = 
 \begin{bmatrix}
-d_{0}\ , & \cdots &, d_{(N-1)} \\
+d_{0}\ , & \cdots &, d_{N-1} \\
 \end{bmatrix}
 \]
 
 <p>
 で表すことができます。
 <br>
-data の i 列目の値が入力層のパーセプトロン No.i に入力される信号になります。
+data の i 列目の値 $d_i$ が入力層のパーセプトロン No.i に入力される信号になります。
 </p>
 
 <p>
@@ -146,7 +146,7 @@ $b_{j}^{\rm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイア
 \[
 {\rm data} = 
 \begin{bmatrix}
-d_{0}\ , & \cdots &,\  d_{(N-1)} \\
+d_{0}\ , & \cdots &,\  d_{N-1} \\
 \end{bmatrix}
 \]
 
@@ -155,7 +155,7 @@ d_{0}\ , & \cdots &,\  d_{(N-1)} \\
 </p>
 
 <p>
-よって出力層のパーセプトロン No.$i$ から出力される信号は $d_i$ となりますので、隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\rm h}$ は以下の式で表されます。
+よって出力層のパーセプトロン No.$i$ から出力される信号もそのまま $d_i$ となりますので、隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\rm h}$ は以下の式で表されます。
 </p>
 
 <p>
@@ -211,7 +211,7 @@ w_{\rm (N-1)1}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
 <p>
 よって隠れ層の出力信号は以下の行列演算で求められます。
 <br>
-なお ・ は行列積で、tanh(x) は行列の全ての要素に対して演算を行う事を意味します。
+ここで ・ は行列積で、tanh(x) は行列の全ての要素に対して演算を行います。
 </p>
 
 <div class="info">
@@ -226,7 +226,7 @@ y_h = tanh( data・w_h + b_h )
 </p>
 
 <p>
-まず重みとバイアスは<a href="./page04.html">次のページ</a>でディープラーニングを実行する際に値が変化しますので、定数テンソルではなく<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図5)。
+まず重み w_h とバイアス b_h は<a href="./page04.html">次のページ</a>でディープラーニングを実行する際に値が変化しますので、定数テンソルではなく<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図5)。
 </p>
 
 
@@ -307,9 +307,7 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 </p>
 
 <p>
-そこで出力層の重みとバイアスも<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図8)。
-<br>
-今回はそれぞれ w_o と b_o という名前とします。
+そこで出力層の重みとバイアス全体の行列ををそれぞれ w_o と b_o という名前にすると、これらも<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図8)。
 </p>
 
 <div class="info">
@@ -331,9 +329,9 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 </div>
 
 <p>
-出力層のデータフロー・グラフは図 9 となります。
+すると出力層のデータフロー・グラフは図 9 となります。
 <br>
-なお<a href="./page04.html">次のページ</a>で詳しく説明しますが、今回は「多クラス分類問題」を扱う予定なので、活性化関数 $f()$ として <a href="../text01/page04.html#softmax">softmax 関数</a>を使います。
+なお<a href="./page04.html">次のページ</a>で詳しく説明しますが、今回は「多クラス分類問題」を扱う予定なので活性化関数 $f()$ として <a href="../text01/page04.html#softmax">softmax 関数</a>を使っています。
 </p>
 
 <div class="info">
@@ -353,12 +351,18 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 
 <p>
 以上の各層のデータフロー・グラフを組み合わせると、3層ニューラルネットワーク全体では次のようなデータフロー・グラフとなります。
+<br>
+後はこのデータフローを元に TensorFlow で 3層ニューラルネットワークを構築するだけです。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図10: 3層ニューラルネットワーク全体のデータフロー・グラフ</b>
 
-<p>入力信号 data をネットワークに入力すると y_o が出力される</p>
+<p>　</p>
+<ul>
+<li>入力信号 data をネットワークに入力すると y_o が出力される</li>
+<li>赤枠は変数を意味する</li>
+</ul>
 
 <img src="./img/page03-fig10.png" alt="">
 </div>

@@ -13,7 +13,7 @@ r = ?
 #エポック数
 E = ?
 
-#訓練データセットのサイズ
+#学習データセットのサイズ
 L = ?
 
 #バッチサイズ
@@ -55,11 +55,11 @@ images = np.array(
     ]
 )
    
-# 画像 0〜3 から教師信号を作成
-teacher = tf.constant(images[:4].reshape(L,N), dtype=tf.float32)
+# 画像データから学習用入力を作成
+data_training = tf.constant(images[:4].reshape(L,N), dtype=tf.float32)
 
-# ラベル
-label = tf.constant(
+# 学習用ラベル
+label_training = tf.constant(
     [ 
         #画像 0,1 はクラス 0
         [?,?],
@@ -72,7 +72,7 @@ label = tf.constant(
     , dtype=tf.float32
 )
 
-# 未知画像から未知信号を作成
+# 未知画像から未知入力信号を作成
 data = tf.constant(images[4].reshape(1,N), dtype=tf.float32)
 
 # 画像表示
@@ -85,17 +85,17 @@ print('未知画像')
 plt.imshow(images[4],cmap='gray')
 plt.show()
 
-print('教師信号')
-print( teacher.numpy() )
-print('\nラベル')
-print( label.numpy() )
+print('学習用入力信号')
+print( data_training.numpy() )
+print('\n学習用ラベル')
+print( label_training.numpy() )
 print('\n未知入力信号')
 print( data.numpy() )
 print('')
 
 print('学習率='+str(r))
 print('エポック数='+str(E))
-print('訓練データセットサイズ='+str(L))
+print('学習データセットサイズ='+str(L))
 print('バッチサイズ='+str(B))
 
 # 隠れ層の重みとバイアス
@@ -113,9 +113,9 @@ print('バッチサイズ='+str(B))
 # 損失関数
 # 上の FFNN3(data) とテキストを参考にする
 @tf.function
-def loss(teacher,label):
+def loss(data_batch_k,label_batch_k):
     # 隠れ層
-    tmp = ? # 行列積 teacher・w_h  ※ data じゃなくて teacher なのに注意
+    tmp = ? # 行列積 data_batch_k・w_h
     tmp = ? # b_h を足す
     y_h = ? # 双曲線正接(tanh)関数に通す
     # 出力層
@@ -123,9 +123,9 @@ def loss(teacher,label):
     tmp = ? # b_o を足す
     predict = ? # softmax 関数に通す
     # カテゴリカル・クロスエントロピー
-    tmp = ?  # predict を log 関数に通す
-    tmp = ?  # label と掛け合わせる
-    entropy = ? # 総和演算をして -1をかける ※ -1かけるのを忘れない
+    tmp = ? # predict を log 関数に通す
+    tmp = ? # label_batch_k と掛け合わせる
+    entropy = ? # 総和演算をして -1をかける
     return entropy
 
 # 評価関数
@@ -133,12 +133,12 @@ def loss(teacher,label):
 ?
 
 # 学習前の状態
-ls = loss(teacher,label).numpy()
-predict = FFNN3(teacher)
-acc = categorical_accuracy(predict,label)
+ls = loss(data_training,label_training).numpy()
+predict = FFNN3(data_training)
+acc = categorical_accuracy(predict,label_training)
 print('\n学習前')
-print('訓練データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
-print('画像0〜3の予測確率')
+print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print('画像0〜3の予測値')
 print(predict.numpy())
 print('')
     
@@ -147,12 +147,12 @@ print('')
 ?
 
 # 学習後の状態
-ls = loss(teacher,label).numpy()
-predict = FFNN3(teacher)
-acc = categorical_accuracy(predict,label)
+ls = loss(data_training,label_training).numpy()
+predict = FFNN3(data_training)
+acc = categorical_accuracy(predict,label_training)
 print('\n\n学習後')
-print('訓練データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
-print('画像0〜3の予測確率')
+print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print('画像0〜3の予測値')
 print(predict.numpy())
-print('未知画像の予測確率')
+print('未知画像の予測値')
 print(FFNN3(data).numpy())

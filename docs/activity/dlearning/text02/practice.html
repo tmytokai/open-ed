@@ -11,8 +11,8 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: TensorFlow によるディープラーニング</a></li>
-<li>学習項目: [2] ディープラーニングの基本</li>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [2] TensorFlow を用いた MLP の学習</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -25,8 +25,8 @@
 
 <br>
 <h2><a href="./page01.html">1. ディープラーニングとは</a></h2>
-<h2><a href="./page02.html">2. 3層ニューラルネットワーク</a></h2>
-<h2><a href="./page03.html">3. 3層ニューラルネットワークのデータフロー・グラフ化</a></h2>
+<h2><a href="./page02.html">2. 多層パーセプトロン(MLP)とは</a></h2>
+<h2><a href="./page03.html">3. TensorFlowによる3層ニューラルネットワークの構築</a></h2>
 
 <br>
 <p>
@@ -41,10 +41,13 @@
 (1) 入力層が N = 3 個、隠れ層が K = 5 個、出力層が M = 2 個のパーセプトロンで出来ている
 </p>
 <p>
-(2) 入力信号 data には適当な値をセットする
+(2) 入力信号 data (1 x N 行列の<a href="../text01/page04.html#const">定数テンソル</a>)には適当な値をセットする
 </p>
 <p>
-(3) 隠れ層と出力層の重みとバイアスは平均 0、標準偏差 0.1 の正規乱数で初期化する
+(3) 隠れ層の重み(N x K 行列の(<a href="../text01/page04.html#var">変数テンソル</a>)とバイアス(1 x K 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)は平均 0、標準偏差 0.1 の正規乱数で初期化する
+</p>
+<p>
+(4) 出力層の重み(K x M 行列の(<a href="../text01/page04.html#var">変数テンソル</a>)とバイアス(1 x M 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)も平均 0、標準偏差 0.1 の正規乱数で初期化する
 </p>
 </div>
 
@@ -63,7 +66,7 @@
 </div>
 
 <br>
-<h2><a href="./page04.html">4. ディープラーニングの実行</a></h2>
+<h2><a href="./page04.html">4. TensorFlowによるディープラーニングの実行</a></h2>
 <h2><a href="./page05.html">5. 未知入力信号の分類</a></h2>
 
 <br>
@@ -79,7 +82,7 @@
 (1) 入力層が N = 9 個、隠れ層が K = 5 個、出力層が M = 2 個のパーセプトロンで出来ている
 </p>
 <p>
-(2) 学習率は r = 0.001、エポック数は E = 100、訓練データセットのサイズは L = 4、バッチサイズは B = 4 とする 
+(2) 学習率は r = 0.001、エポック数は E = 1000、訓練データセットのサイズは L = 4、バッチサイズは B = 4 とする 
 </p>
 <p>
 ※ L=B なのでバッチ学習になります
@@ -154,8 +157,53 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-3:</b> (削除)
+<input type="checkbox"><b>演習 2-3 (個人PC、20分):</b> データセットとして <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> (手書き数字画像のデータセット) を使用してディープラーニングを実行してみましょう。
+<br>
+ニューラルネットワークとディープラーニングの仕様は以下の通りです。
+</p>
 
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 隠れ層が K = 32 個のパーセプトロンで出来ている ※ N と M は学習データセットから計算
+</p>
+<p>
+(2) 学習率は r = 0.001、エポック数は E = 10、バッチサイズは B = 128 とする ※ L は学習データセットから計算
+</p>
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Jupyter Notebook で「DL_2_3」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/DL_2_3.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> DL_2_2 を参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-4 (個人PC、20分):</b> 同様にデータセットとして<a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>(カラー画像のデータセット) を使用してディープラーニングを実行してみましょう。
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 「DL_2_3」を「DL_2_4」にコピーします
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> データセットの読み込み部を<a href="./src/DL_2_4.txt">テンプレートスクリプト</a>の内容に置き換えます
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
 <script>PreNext(6,5)</script>
 </body>
 </html>
