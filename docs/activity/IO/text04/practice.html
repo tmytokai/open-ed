@@ -20,86 +20,287 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-演習時間: 40  分
+演習時間: 30  分
 </p>
 
 <br>
 <h2><a href="./page01.html">1. PWM とは</a></h2>
-
-<p>
-演習なし
-</p>
-
-<br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
-<pre>
+<p>
+<input type="checkbox"><b>演習 4-1 (個人PC、30分):</b> PWM を使ってみましょう。プログラムの仕様は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li>CCP1 から PWM を出力する(※)</li>
+<li>CCP1 のピンは 9 pin とする</li>
+<li>CCP1 のタイマーとして Timer2 を使う</li>
+<li>prescale は x64 とする</li>
+<li>スイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
+<li>スイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
+</ol>
 
-プレスケール: 64 倍
+<p>
+※ 1827は CCP(Capture/Compare/PWM)モジュールを4つ(CCP1、CCP2、CCP3、CCP4) 積んでいます
+<br>
+またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
+</p>
 
-使用するピン: RB3/CCP1 (9 pin) を pwm 出力(CCP1)とする
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_3_1」を「IO_4_1」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_3_1 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「IO_3_1.c」を「IO_4_1.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (もし開いていたら IO_3_1.c を閉じて) IO_4_1.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_4_1.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+この演習で気をつける必要がある設定は以下の通りです。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>設定 1:</b>
 
-レジスタ設定:
+APFCON0bits.CCP1SEL ※ 8bit レジスタ APFCON0 の bit 0
 
-CCP1SEL = x ・・・ Pin Selection bit, APFCON0 の 0 ビット目, 118p
-CCPTMRS = 0x00 ・・・ デフォルト(Timer2使用)  CCP TIMERS CONTROL REGISTER, 206p
+(解説)
 
-TxCON = 0b 0 0000 1 xx  ・・・ TIMER2/TIMER4/TIMER6 CONTROL REGISTERS, p191
+0 をセットするとRB3(9 pin) を CCP1 の出力とします
+1 をセットするとRB0(6 pin) を CCP1 の出力とします
+今回は RB3(9 pin) から出力します
+詳しくはデータシート 118p を参照してください
 
-CCPxCON = 0b 00 00 xxxx ・・・CCPX CONTROL REGISTER, p204
 
-PWM周期とパルス幅の計算式:  p212
+<b>設定 2:</b>
 
-PR2 ・・・ Timer2 Period Register, p30
-CCPRxL・・・Capture/Compare/PWM Register x Low Byte, p208
-DCxB1, DCxB0 ・・・CCPxCON の 5,4 ビット目, p204
+CCP1CONbits.CCP1M ※ 8bit レジスタ CCP1CON の bit 3〜0
 
-FOSC ・・・ Frequency of Oscillator マイコンの動作周波数のこと
-TOSC ・・・ Time taken per OSCillation つまり = 1/FOSC 
+(解説)
 
+CCP1 の動作モードを設定します
+0b1100 をセットすると PWM 出力モードになります
+詳しくはデータシート 204p を参照してください
+
+
+<b>設定 3:</b>
+
+CCPTMRSbits.C1TSEL ※ 8bit レジスタ CCPTMRS の bit 1〜0
+
+(解説)
+
+CCP1 のタイマーをセットします
+0b00 = Timer2、0b01 = Timer4、0b10 = Timer6
+今回は Timer2 を使います
+詳しくはデータシート 206p を参照してください
+   
+
+<b>設定 4:</b>
+
+T2CONbits.T2CKPS ※ 8bit レジスタ T2CONbits の bit 1〜0
+
+(解説)
+
+Timer2 の prescale を設定します
+0b00 = x1、0b01 = x4、0b10 = x16、0b11 = x64
+PWM 周期やパルス幅の計算で使います
+今回は x64 にします
+詳しくはデータシート 191p を参照してください
+
+
+<b>設定 5:</b>
+
+T2CONbits.TMR2ON ※ 8bit レジスタ T2CON の bit 2
+
+(解説)
+
+1 をセットすると Timer2 が ON になり PWM 出力が始まります
+詳しくはデータシート 191p を参照してください
+
+
+<b>PWM周期、パルス幅の計算方法:</b>
+
+今回は CCP1 + Timer2 の組み合わせなので 
+PWM 周期と パルス 幅は FOSC、prescale、PR2、CCPR1L、DC1B1、DC1B0 を使って以下のように決まります
+PR2、CCPR1L は 8bit レジスタ、DC1B1、DC1B0 は 8bit レジスタ CCP1CON の bit 5〜4 です
+詳しい計算式は 212p を参照して下さい
+
+TOSC = 1/FOSC
+PWM 周期 = TOSC * (4* prescale) * (PR2+1) 秒
+パルス幅 = TOSC * prescale * (CCPR1L:DC1B1:DC1B0) 秒
 </pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
 
-<pre>
-(注意)  pickit4の出力は 3.3V
+PIC
 
-(課題 1)
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
+(*)9: CCP1 (PWM) -- オシロスコープ
 
-PR2 = 249
-CCPR1L = 125 = 0b01111101
-DC1B1 = 0
-DC1B0 = 0
-CCPR1L:DC1B1:DC1B0 = 0b 01111101 0 0 = 500
+10: RB4
+11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx (黄)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) -- LED -- 抵抗 -- GND
+18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
 
-の時の PWM周期とPWM幅の理論値を計算 → 実際にオシロスコープで確認する
+
+可変抵抗(上記以外のピン)
+
+左側ピン: 3.3V
+右側ピン: GND
 </pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」を記入してください。
+</p>
 
-<pre>
+</div>
 
-(課題 2) 圧電スピーカから「ド・ミ・ソ」と鳴らす(3秒毎にチェンジ)
+<br>
+<p>
+<input type="checkbox"><b>演習 4-2 (個人PC、30分):</b> PWM を使って音を鳴らしてみましょう。プログラムの仕様は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li>CCP4(3 pin) から PWM を出力する</li>
+<li>CCP4 のタイマーとして Timer4 を使う</li>
+<li>prescale は x64 とする</li>
+<li>スイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
+<li>スイッチを押している特はオクターブ3のソ(196 Hz) の音を出す</li>
+</ol>
 
-・PWM 周期から PR2 を求める式
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_4_1」を「IO_4_2」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_4_1 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「IO_4_1.c」を「IO_4_2.c」に名前を変えます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (もし開いていたら IO_4_1.c を閉じて) IO_4_2.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> プログラムを作成します。
+</p>
+<p>
+まず古いmain関数を消します。
+<br>
+それから<a href="./src/IO_4_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+</p>
+<p>
+この演習で気をつける必要がある設定は以下の通りです。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>レジスタ設定:</b>
 
-PWM 周期 = (PR2+1)*4*TOSC*prescale  より
-PR2 = 周期/(4*TOSC*prescale)-1 
+演習4-1で CCP1 を CCP4、Timer2 を Timer4 に読み替えるだけで同様にして設定できます。
+ただし CCP4 の出力は RA4(3 pin) 固定です 
 
-・パルス幅から CCPR1L:DC1B1:DC1B0 を求める式
+<b>PWM周期、パルス幅の計算方法:</b>
 
-パルス幅 = CCPR1L:DC1B1:DC1B0 * TOSC * prescale より
-CCPR1L:DC1B1:DC1B0 = 幅/(TOSC*prescale) 
+こちらも演習4-1で CCP1 を CCP4、Timer2 を Timer4 に読み替えるだけで同様にして計算できます。
 
-・ド(C4) = 261.63 Hz
-PWM周期 = 1/261.63 = 0.00382 秒 = 3.82 ミリ秒
-パルス幅 = PWM 周期の半分
-         
-・ミ(E4) = 329.63Hz 
-PWM周期 = 1/329.63 = 0.00303 秒 = 3.03 ミリ秒
-パルス幅 = PWM 周期の半分
+<b>音階とPWM周期、パルス幅の関係:</b>
 
-・ソ(G4) = 392.00 Hz 
-PWM周期 = 1/392.00 = 0.00255 秒 = 2.55 ミリ秒
-パルス幅 = PWM 周期の半分
+・オクターブ3のド(131 Hz)
 
+131 Hzは周期で言うと 1/131 = 0.0076 秒 = 7.6 ミリ秒なので、PWM 周期を 7.6 ミリ秒にします。
+パルス幅は(適当に決めて良いけど)今回は PWM 周期の半分の 3.8 ミリ秒にします。
+
+・オクターブ3のソ(196 Hz)
+
+196 Hzは周期で言うと 1/196 = 0.0051 秒 = 5.1 ミリ秒なので、PWM 周期を 5.1 ミリ秒にします。
+パルス幅は(適当に決めて良いけど)今回は PWM 周期の半分の 2.6 ミリ秒にします。
 </pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+PIC
+
+1: RA2
+2: RA3
+(*)3: CCP4 (PWM) -- スピーカ ※ 接続済
+4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+5: VSS -- GND -- PICkit の 3: GND
+6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+7: RB1
+8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
+9: CCP1 (PWM) -- オシロスコープ
+
+10: RB4
+11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx (黄)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V -- PICkit の 2: VDD
+15: RA6
+16: RA7
+17: RA0 (出力) -- LED -- 抵抗 -- GND
+18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
+
+
+可変抵抗(上記以外のピン)
+
+左側ピン: 3.3V
+右側ピン: GND
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」を記入してください。
+</p>
+
+</div>
+
 
 <script>PreNext(3,2)</script>
 </body>

@@ -1,0 +1,68 @@
+// PWM4 (CCP4) 初期化
+void init_pwm4()
+{
+    // CCP4 の出力は RA4(3 pin) 固定です
+
+    // CCP4 の動作モードを設定します
+    // 0b1100 をセットすると PWM 出力モードになります
+    // 詳しくはデータシート 204p を参照してください
+    CCP4CONbits.CCP4M = 0b? ;
+
+    // CCP4 のタイマーをセットします
+    // 0b00 = Timer2、0b01 = Timer4、0b10 = Timer6
+    // 今回は Timer4 を使います
+    // 詳しくはデータシート 206p を参照してください
+    CCPTMRSbits.C4TSEL = 0b? ;
+
+    // Timer4 の prescale を設定します
+    // 0b00 = x1、0b01 = x4、0b10 = x16、0b11 = x64
+    // PWM 周期やパルス幅の計算で使います
+    // 今回は x64 にします
+    // 詳しくはデータシート 191p を参照してください
+    T4CONbits.T4CKPS = 0b? ;
+
+    // 1 をセットすると Timer4 が ON になり PWM 出力が始まります
+    // 詳しくはデータシート 191p を参照してください
+    T4CONbits.TMR4ON = ? ;
+}
+
+void main(void){
+
+    init();
+    init_input();
+    init_uart();
+    init_pwm4();  // CCP4(3 pin) から PWM 出力、Timer4 使用、prescale = x64
+
+    while(1){
+
+       // 今回は CCP4 + Timer4 の組み合わせなので 
+       // PWM 周期と パルス 幅は FOSC、prescale、PR4、CCPR4L、DC4B1、DC4B0 を使って以下のように決まります
+       // PR4、CCPR4L は 8bit レジスタ、DC4B1、DC4B0 は 8bit レジスタ CCP4CON の bit 5〜4 です
+       // 詳しい計算式は 212p を参照して下さい
+       //
+       // TOSC = 1/FOSC
+       // PWM 周期 = TOSC * (4* prescale) * (PR4+1) 秒
+       // パルス幅 = TOSC * prescale * (CCPR4L:DC4B1:DC4B0) 秒
+
+       if( RB0 == 1 ){
+
+          printf("O3C = 131 Hz\r\n");
+
+          PR4 = ? ;
+          CCPR4L = 0b? ;
+          CCP4CONbits.DC4B1 = ? ;
+          CCP4CONbits.DC4B0 = ? ;
+        }
+	else{
+
+          printf("O3G = 196 Hz\r\n");
+
+          PR4 = ? ;
+          CCPR4L = 0b? ;
+          CCP4CONbits.DC4B1 = ?;
+          CCP4CONbits.DC4B0 = ?;
+        }
+    }
+
+   return;
+}

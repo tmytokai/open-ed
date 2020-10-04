@@ -1,0 +1,75 @@
+// 1827は CCP(Capture/Compare/PWM)モジュールを4つ(CCP1、CCP2、CCP3、CCP4) 積んでいます
+// またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
+
+// PWM1 (CCP1) 初期化
+void init_pwm1()
+{
+    // 0 をセットするとRB3(9 pin) を CCP1 の出力とします
+    // 1 をセットするとRB0(6 pin) を CCP1 の出力とします
+    // 今回は RB3(9 pin) から出力します
+    // 詳しくはデータシート 118p を参照してください
+    APFCON0bits.CCP1SEL = ? ; 
+
+    // CCP1 の動作モードを設定します
+    // 0b1100 をセットすると PWM 出力モードになります
+    // 詳しくはデータシート 204p を参照してください
+    CCP1CONbits.CCP1M = 0b?;
+
+    // CCP1 のタイマーをセットします
+    // 0b00 = Timer2、0b01 = Timer4、0b10 = Timer6
+    // 今回は Timer2 を使います
+    // 詳しくはデータシート 206p を参照してください
+    CCPTMRSbits.C1TSEL = 0b?;
+
+    // Timer2 の prescale を設定します
+    // 0b00 = x1、0b01 = x4、0b10 = x16、0b11 = x64
+    // PWM 周期やパルス幅の計算で使います
+    // 今回は x64 にします
+    // 詳しくはデータシート 191p を参照してください
+    T2CONbits.T2CKPS = 0b?;
+
+    // 1 をセットすると Timer2 が ON になり PWM 出力が始まります
+    // 詳しくはデータシート 191p を参照してください
+    T2CONbits.TMR2ON = ?;
+}
+
+void main(void){
+
+    init();
+    init_input();
+    init_uart();
+    init_pwm1(); // CCP1(9 pin) から PWM 出力、Timer2 使用、prescale = x64
+  
+    while(1){
+
+       // 今回は CCP1 + Timer2 の組み合わせなので 
+       // PWM 周期と パルス 幅は FOSC、prescale、PR2、CCPR1L、DC1B1、DC1B0 を使って以下のように決まります
+       // PR2、CCPR1L は 8bit レジスタ、DC1B1、DC1B0 は 8bit レジスタ CCP1CON の bit 5〜4 です
+       // 詳しい計算式は 212p を参照して下さい
+       //
+       // TOSC = 1/FOSC
+       // PWM 周期 = TOSC * (4* prescale) * (PR2+1) 秒
+       // パルス幅 = TOSC * prescale * (CCPR1L:DC1B1:DC1B0) 秒
+
+       if( RB0 == 1 ){
+
+          printf("period = 16 msec, width = 8 msec\r\n");
+
+          PR2 = ? ;
+          CCPR1L = 0b?;
+          CCP1CONbits.DC1B1 = ?;
+          CCP1CONbits.DC1B0 = ?;
+       }
+        else{
+
+          printf("period = 8 msec, width = 6 msec\r\n");
+
+          PR2 = ? ;
+          CCPR1L = 0b?;
+          CCP1CONbits.DC1B1 = ?;
+          CCP1CONbits.DC1B0 = ?;
+       }
+    }
+
+   return;
+}
