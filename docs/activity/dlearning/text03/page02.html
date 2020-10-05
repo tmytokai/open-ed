@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. KerasによるMLPの構築</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [3] Keras を用いた MLP の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+さて今回は MLP として3層ニューラルネットワークを考えていました(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. 3層ニューラルネットワーク(再掲)</b>
+
+<p>
+入力層が N 個、隠れ層が K 個、出力層が M 個のパーセプトロンで出来ている
+</p>
+
+<img src="../text02/img/page02-fig3.png" alt="">
+
+</div>
+
+<br>
+
+<p>
+この3層ニューラルネットワークを Keras を用いて構築する例が次のソース 1 です。
+<br>
+生の TensorFlow を使った時と異なり、とてもシンプルに 3 層ニューラルネットワークが構築可能です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: Keras で3層ニューラルネットワークを構築する例</b>
+
+<pre class="wrap">
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+# パーセプトロンの数
+N = 3  # 入力層
+K = 5  # 隠れ層
+M = 2  # 出力層
+
+# 入力信号
+data = tf.constant( [[1, 2, 3]], dtype=tf.float32 )
+
+# 3層ニューラルネットワークの構築
+model = Sequential()
+model.add( Dense(K, activation='tanh',input_dim=N) )
+model.add( Dense(M, activation='softmax') )
+
+# 出力
+y = model.predict(data)
+
+# モデルの概要表示
+model.summary()
+
+print('入力')
+print( data.numpy() )
+print('\n出力')
+print( y )
+</pre>
+</div>
+
+<p>
+では各行の意味について順を追って説明していきたいと思います。
+</p>
+
+<p>
+まず最初の
+</p>
+
+<div class="info">
+<pre class="wrap">
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+</pre>
+</div>
+
+<p>
+でこれから使う Sequential クラスと Dense クラスの import を行っています。
+</p>
+
+<p>
+パーセプトロンの数や入力信号の定義部分は飛ばし、次の
+</p>
+
+<div class="info">
+<pre class="wrap">
+model = Sequential()
+</pre>
+</div>
+
+<p>
+の行では Sequential クラスのインスタンスである model を作成しています。
+<br>
+この様にニューラルネットワークの構造(モデル)として Sequential モデルを選ぶと add メソッドを使って各層を順々に積み重ねることが出来るようになります。
+<br>
+例えば次の
+</p>
+
+<div class="info">
+<pre class="wrap">
+model.add( Dense(K, activation='tanh',input_dim=N) )
+</pre>
+</div>
+
+<p>
+の行では add メソッドを使って model に隠れ層のインスタンスを追加しています。
+<br>
+ここで Dense は「全結合層」を意味するクラスであり、引数の K はパーセプトロンの数、activation='tanh' は活性化関数として双曲線正接(tanh)を使う事、input_dim=N は入力信号の次元として N を指定する事を意味します。
+</p>
+
+<p>
+さらに続けて、次の
+</p>
+
+<div class="info">
+<pre class="wrap">
+model.add( Dense(M, activation='softmax') )
+</pre>
+</div>
+
+<p>
+の行でも add メソッドを使って model に出力層のインスタンスを追加しています。
+<br>
+ただし出力層のパーセプトロン数として M、活性化関数として softmax 関数を指定しています。
+<br>
+なお最初に add する層以降では input_dim を指定する必要はありません(自動計算してくれるので)。
+</p>
+
+<p>
+これで3層ニューラルネットワークが出来たので、次の行の
+</p>
+
+<div class="info">
+<pre class="wrap">
+y = model.predict(data)
+</pre>
+</div>
+
+<p>
+の様に predict メソッドを使って入力信号 data に対する出力 y が求められます。
+</p>
+
+<p>
+また、次の
+</p>
+
+<div class="info">
+<pre class="wrap">
+model.summary()
+</pre>
+</div>
+
+<p>
+の行ではモデルの概要を表示しています(図2)。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<input type="checkbox"><b>図2. リスト1で構築したニューラルネットワークの概要</b>
+
+Model: "sequential_10"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_20 (Dense)             (None, 5)                 20        
+_________________________________________________________________
+dense_21 (Dense)             (None, 2)                 12        
+=================================================================
+Total params: 32
+Trainable params: 32
+Non-trainable params: 0
+</pre>
+</div>
+
+<p>
+この概要を見ると、確かに K=5 の隠れ層と M=2 の出力層からなる3層ニューラルネットワークになっている事が分かります(上から下に向かって信号が流れます)。
+</p>
+
+<p>
+なお Param の行にある数字は各層のパラメータの個数です。
+<br>
+図1より、隠れ層の重みの数は N*K 個でバイアスの数は K 個なので、隠れ層のパラメータ数は N*K+K = 3*5+5 = 20 個となります。
+<br>
+同様に、出力層の重みの数は K*M 個でバイアスの数は M 個なので、出力層のパラメータ数は K*M+M = 5*2+2 = 12 個となります。
+<br>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
