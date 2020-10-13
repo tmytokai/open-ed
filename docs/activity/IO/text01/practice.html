@@ -50,9 +50,17 @@
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> IDE を起動して新規プロジェクトを作成します。デバイスは「Mid-Range 8-bit MCUs → PIC16F1827」、コンパイラは「XC8」、プロジェクト名は「IO_1_1」、エンコーディングは「UTF-8」、それ以外はデフォルト設定のままにしてください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「IO_1_1」としてください(拡張子 .c は自動で付きます)。
+<span class="olradio"><input type="radio" name="p1"></span> Header Files フォルダにヘッダファイルを追加します。ファイル名は 「setting.h」としてください(拡張子 .h は自動で付きます)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> IO_1_1.c を開き、ファイルの中身を<a href="./src/IO_1_1.txt">テンプレート</a>の内容に置き換えてください。
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、ファイルの中身を<a href="./src/setting.txt">テンプレート</a>の内容に置き換えてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「init.c」としてください(拡張子 .c は自動で付きます)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> init.c を開き、ファイルの中身を<a href="./src/init.txt">テンプレート</a>の内容に置き換えてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「main.c」としてください(拡張子 .c は自動で付きます)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_1.txt">テンプレート</a>の内容に置き換えてください。
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -90,6 +98,8 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 <p>
 この時点では PIC のピン配置設定と回路接続方法は以下の通りなっていますので、以下の設定に従って回路を作成して下さい。
 <br>
+(*) が接続箇所です。 
+<br>
 ピン配置について詳しくはデータシートの 5p 、PICKit の詳細については PICKit のマニュアルを参照して下さい。
 </p>
 <div class="info">
@@ -99,8 +109,8 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS -- GND -- PICkit の 3: GND
+(*) 4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+(*) 5: VSS -- GND -- PICkit の 3: GND
 6: RB0
 7: RB1
 8: RB2
@@ -108,9 +118,9 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 
 10: RB4
 11: RB5
-12: ICSPCLK -- PICkit の 5: PGC
-13: ICSPDAT -- PICkit の 4: PGD
-14: VDD -- 3.3V -- PICkit の 2: VDD
+(*) 12: ICSPCLK -- PICkit の 5: PGC
+(*) 13: ICSPDAT -- PICkit の 4: PGD
+(*) 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
 17: RA0
@@ -146,16 +156,11 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_1_1 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「IO_1_1.c」を「IO_1_2.c」に名前を変えます。
+<span class="olradio"><input type="radio" name="p2"></span> 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし開いていたら IO_1_1.c を閉じて) IO_1_2.c を開きます。
+<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_2.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> プログラムを作成します。
-</p>
-<p>
-まず古いmain関数を消します。
-<br>
-それから<a href="./src/IO_1_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+<span class="olradio"><input type="radio" name="p2"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -170,7 +175,7 @@ TRISB  ※ 8bit レジスタ
 (解説)
 
 ポート A,B の入出力設定です
-0 にすると入力モード、1 にすると出力モードになります
+0 にすると出力モード、1 にすると入力モードになります
 詳しくはデータシート 120p(ポートA)と126p(ポートB) を参照してください
 
 
@@ -183,6 +188,7 @@ ANSELB  ※ 8bit レジスタ
 
 ポート A,b のアナログ設定です
 0 にするとデジタル入出力モード、1 にするとアナログ入力モードになります
+アナログ入力モードにする場合は対応する TRISx も入力モードにして下さい
 詳しくはデータシート 122p(ポートA)と128p(ポートB) を参照してください
 </pre>
 </div>
@@ -222,7 +228,7 @@ ANSELB  ※ 8bit レジスタ
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」を記入して下さい。 
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main.c」を記入して下さい。 
 </p>
 </div>
 
@@ -249,16 +255,15 @@ ANSELB  ※ 8bit レジスタ
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_1_2 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「IO_1_2.c」を「IO_1_3.c」に名前を変えます。
+<span class="olradio"><input type="radio" name="p3"></span> 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> (もし開いていたら IO_1_2.c を閉じて) IO_1_3.c を開きます。
+<span class="olradio"><input type="radio" name="p3"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「input.c」としてください(拡張子 .c は自動で付きます)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> プログラムを作成します。
-</p>
-<p>
-まず古いmain関数を消します。
+<span class="olradio"><input type="radio" name="p3"></span> input.c を開き、ファイルの中身を<a href="./src/input.txt">テンプレート</a>の内容に置き換えてください。
 <br>
-それから<a href="./src/IO_1_3.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+<span class="olradio"><input type="radio" name="p3"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  穴埋め問題になっていますので？のところを正しい内容に修正してください。
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -267,16 +272,14 @@ ANSELB  ※ 8bit レジスタ
 <pre class="wrap">
 <b>設定 1:</b>
 
+WPUA  ※ 8bit レジスタ
 WPUB  ※ 8bit レジスタ
 
 (解説)
 
-ポートBの(弱)プルアップ抵抗の設定です
-詳しくはデータシート 127p を参照してください
-
-(補足)
-
-ポートAは RA5 だけ(弱)プルアップを有効にできます(121p参照)
+ポート A,B の(弱)プルアップ抵抗の設定です
+ポートAは RA5 だけプルアップ可能です
+詳しくはデータシート 121p(ポートA)と127p(ポートB) を参照してください
 
 
 <b>設定 2:</b>
@@ -285,8 +288,8 @@ OPTION_REGbits.nWPUEN  ※ 8bit レジスタ OPTION_REG の bit 7
 
 (解説)
 
-PICの内部(弱)プルアップ抵抗機能を ON にする設定です
-ローアクティブなので 0 をセットすると ON になりす
+PICの内部プルアップ抵抗機能を ON にする設定です
+0 をセットすると ON になります
 内部プルアップ抵抗機能を使いたい場合は忘れず ON にしてください
 詳しくはデータシート 175p を参照してください
 </pre>
@@ -327,7 +330,7 @@ PICの内部(弱)プルアップ抵抗機能を ON にする設定です
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」を記入して下さい。 
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「input.c」と「main.c」を記入して下さい。 
 </p>
 </div>
 

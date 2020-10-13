@@ -1,3 +1,5 @@
+#include "setting.h"
+
 void main(void){
 
     init();

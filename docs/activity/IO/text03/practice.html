@@ -46,16 +46,15 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_2_2 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「IO_2_2.c」を「IO_3_1.c」に名前を変えます。
+<span class="olradio"><input type="radio" name="p1"></span> 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (もし開いていたら IO_2_2.c を閉じて) IO_3_1.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「adc.c」としてください(拡張子 .c は自動で付きます)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プログラムを作成します。
-</p>
-<p>
-まず古いmain関数を消します。
+<span class="olradio"><input type="radio" name="p1"></span> adc.c を開き、ファイルの中身を<a href="./src/adc.txt">テンプレート</a>の内容に置き換えてください。
 <br>
-それから<a href="./src/IO_3_1.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_3_1.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -69,8 +68,8 @@ TRISB  ※ 8bit レジスタ
 
 (解説)
 
-ポート A,B の入出力設定です
-0 にすると入力モード、1 にすると出力モードになります
+ポート A,B の入出力設定を上書きします
+0 にすると出力モード、1 にすると入力モードになります
 詳しくはデータシート 120p(ポートA)と126p(ポートB) を参照してください
 
 
@@ -81,8 +80,9 @@ ANSELB  ※ 8bit レジスタ
 
 (解説)
 
-ポート A,b のアナログ設定です
+ポート A,B のアナログ入力を上書きします
 0 にするとデジタル入出力モード、1 にするとアナログ入力モードになります
+アナログ入力モードにする場合は対応する TRISx も入力モードにして下さい
 詳しくはデータシート 122p(ポートA)と128p(ポートB) を参照してください
 
 
@@ -105,7 +105,7 @@ ADCON1bits.ADFM ※ 8bit レジスタ ADCON1 の bit 7
 結果の出力形式を右詰めにするか左詰めにするかの設定です
 1が右詰め、0が左詰めです
 今回は右詰めにします
-詳しくはデータシート 140p の図15-3と 144p を参照してください
+詳しくはデータシート 140p の図 15-3と 144p を参照してください
    
 
 <b>設定 5:</b>
@@ -135,9 +135,9 @@ AD変換を開始します
 詳しくはデータシート 143p を参照してください
 
 AD変換の結果は 10bit の値として ADRESH と ADRESL に入ります
-10bitなので 0〜3.3V の入力が 0〜1023 の整数値に変換されます
+10bitなので 0 V 〜 動作電圧 V の入力が 0〜1023 の整数値に変換されます
 なお今回は ADCON1bit.ADFM = 1 としてるので出力形式は右詰めになります
-詳しくはデータシート 140p の図15-3 を参照してください
+詳しくはデータシート 140p の図 15-3 を参照してください
 </pre>
 </div>
 <p>
@@ -184,7 +184,7 @@ PIC
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」を記入し、テスターで測定して以下の「AD変換対応表」を完成させて下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「adc.c」と「main.c」を記入し、テスターで測定して以下の「AD変換対応表」を完成させて下さい。 
 </p>
 
 <table>

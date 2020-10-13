@@ -34,20 +34,21 @@
 <p>
 <b>仕様:</b>
 </p>
+<p>
+1827は CCP(Capture/Compare/PWM)モジュールを4つ(CCP1、CCP2、CCP3、CCP4) 積んでいます
+<br>
+またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
+<br>
+なお CCP1 と CCP2 は設定で出力ピンの位置を変更できます
+</p>
 <ol>
-<li>CCP1 から PWM を出力する(※)</li>
-<li>CCP1 のピンは 9 pin とする</li>
-<li>CCP1 のタイマーとして Timer2 を使う</li>
-<li>prescale は x64 とする</li>
+<li>CCP1 を使用する</li>
+<li>CCP1 の出力ピンは 9 pin とする</li>
+<li>CCP1 に接続するタイマーとして Timer2 を使う</li>
+<li> Timer2 の prescale は x64 とする</li>
 <li>スイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
 <li>スイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
 </ol>
-
-<p>
-※ 1827は CCP(Capture/Compare/PWM)モジュールを4つ(CCP1、CCP2、CCP3、CCP4) 積んでいます
-<br>
-またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
-</p>
 
 </div>
 <div class="olradio">
@@ -56,16 +57,17 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_3_1 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「IO_3_1.c」を「IO_4_1.c」に名前を変えます。
+<span class="olradio"><input type="radio" name="p1"></span> 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (もし開いていたら IO_3_1.c を閉じて) IO_4_1.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「pwm.c」としてください(拡張子 .c は自動で付きます)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プログラムを作成します。
-</p>
-<p>
-まず古いmain関数を消します。
+<span class="olradio"><input type="radio" name="p1"></span> pwm.c を開き、ファイルの中身を<a href="./src/pwm.txt">テンプレート</a>の内容に置き換えてください。
 <br>
-それから<a href="./src/IO_4_1.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+<span class="olradio"><input type="radio" name="p1"></span> CCP1 を使うので、CCP1の初期化関数( void init_ccp1() )のコメントアウトを解除して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_4_1.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください)
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -80,7 +82,6 @@ APFCON0bits.CCP1SEL ※ 8bit レジスタ APFCON0 の bit 0
 
 0 をセットするとRB3(9 pin) を CCP1 の出力とします
 1 をセットするとRB0(6 pin) を CCP1 の出力とします
-今回は RB3(9 pin) から出力します
 詳しくはデータシート 118p を参照してください
 
 
@@ -90,7 +91,7 @@ CCP1CONbits.CCP1M ※ 8bit レジスタ CCP1CON の bit 3〜0
 
 (解説)
 
-CCP1 の動作モードを設定します
+動作モードを設定します
 0b1100 をセットすると PWM 出力モードになります
 詳しくはデータシート 204p を参照してください
 
@@ -101,32 +102,30 @@ CCPTMRSbits.C1TSEL ※ 8bit レジスタ CCPTMRS の bit 1〜0
 
 (解説)
 
-CCP1 のタイマーをセットします
+タイマーを接続します
 0b00 = Timer2、0b01 = Timer4、0b10 = Timer6
-今回は Timer2 を使います
 詳しくはデータシート 206p を参照してください
    
 
 <b>設定 4:</b>
 
-T2CONbits.T2CKPS ※ 8bit レジスタ T2CONbits の bit 1〜0
+T?CONbits.T?CKPS ※ ? は接続したタイマーの番号(2, 4, 6 のどれか)
 
 (解説)
 
-Timer2 の prescale を設定します
+タイマーの prescale を設定します
 0b00 = x1、0b01 = x4、0b10 = x16、0b11 = x64
 PWM 周期やパルス幅の計算で使います
-今回は x64 にします
 詳しくはデータシート 191p を参照してください
 
 
 <b>設定 5:</b>
 
-T2CONbits.TMR2ON ※ 8bit レジスタ T2CON の bit 2
+T?CONbits.TMR?ON ※ ? は接続したタイマーの番号(2, 4, 6 のどれか)
 
 (解説)
 
-1 をセットすると Timer2 が ON になり PWM 出力が始まります
+1 をセットするとタイマーが ON になり PWM 出力が始まります
 詳しくはデータシート 191p を参照してください
 
 
@@ -134,7 +133,10 @@ T2CONbits.TMR2ON ※ 8bit レジスタ T2CON の bit 2
 
 今回は CCP1 + Timer2 の組み合わせなので 
 PWM 周期と パルス 幅は FOSC、prescale、PR2、CCPR1L、DC1B1、DC1B0 を使って以下のように決まります
-PR2、CCPR1L は 8bit レジスタ、DC1B1、DC1B0 は 8bit レジスタ CCP1CON の bit 5〜4 です
+
+PR2 は Timer2 の設定用の 8bit レジスタです
+CCPR1L は CCP1 の設定用の 8bit レジスタです
+DC1B1、DC1B0 は CCP1 の設定用の 8bit レジスタ CCP1CON の bit 5〜4 です
 詳しい計算式は 212p を参照して下さい
 
 TOSC = 1/FOSC
@@ -186,7 +188,7 @@ PIC
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」を記入してください。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「pwm.c」と「main.c」を記入してください。
 </p>
 
 </div>
@@ -200,9 +202,10 @@ PIC
 <b>仕様:</b>
 </p>
 <ol>
-<li>CCP4(3 pin) から PWM を出力する</li>
-<li>CCP4 のタイマーとして Timer4 を使う</li>
-<li>prescale は x64 とする</li>
+<li>CCP4 を使用する</li>
+<li>CCP4 の出力品は 3 pin とする(固定)</li>
+<li>CCP4 に接続するタイマーとして Timer4 を使う</li>
+<li>Timer4 の prescale は x64 とする</li>
 <li>スイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
 <li>スイッチを押している特はオクターブ3のソ(196 Hz) の音を出す</li>
 </ol>
@@ -214,16 +217,13 @@ PIC
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_4_1 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「IO_4_1.c」を「IO_4_2.c」に名前を変えます。
+<span class="olradio"><input type="radio" name="p2"></span> 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし開いていたら IO_4_1.c を閉じて) IO_4_2.c を開きます。
+<span class="olradio"><input type="radio" name="p2"></span> pwm.c を開き、CCP4 を使うので、CCP4の初期化関数( void init_ccp4() )のコメントアウトを解除して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> プログラムを作成します。
-</p>
-<p>
-まず古いmain関数を消します。
+<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_4_2.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-それから<a href="./src/IO_4_2.txt">テンプレート</a>の内容をファイルの末尾にコピーしてください (穴埋め問題になっていますので？のところを正しい内容に修正してください)
+<span class="olradio"><input type="radio" name="p2"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
 </p>
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
@@ -268,7 +268,7 @@ PIC
 
 1: RA2
 2: RA3
-(*)3: CCP4 (PWM) -- スピーカ ※ 接続済
+(*)3: CCP4 (PWM) -- アンプ
 4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
 5: VSS -- GND -- PICkit の 3: GND
 6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
@@ -296,7 +296,7 @@ PIC
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」を記入してください。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「pwm.c」と「main.c」を記入してください。
 </p>
 
 </div>
