@@ -1,9 +1,9 @@
+#include "config.h"
 #include "setting.h"
 
 void main(void) {
 
     init();
-    init_input();
 
     while(1){
         if( RB0 == ? ) RA0 = 0;

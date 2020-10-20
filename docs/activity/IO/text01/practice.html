@@ -48,20 +48,9 @@
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> IDE を起動して新規プロジェクトを作成します。デバイスは「Mid-Range 8-bit MCUs → PIC16F1827」、コンパイラは「XC8」、プロジェクト名は「IO_1_1」、エンコーディングは「UTF-8」、それ以外はデフォルト設定のままにしてください。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/template_v2.zip">テンプレートプロジェクト</a>をダウンロードして展開してください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Header Files フォルダにヘッダファイルを追加します。ファイル名は 「setting.h」としてください(拡張子 .h は自動で付きます)。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、ファイルの中身を<a href="./src/setting.txt">テンプレート</a>の内容に置き換えてください。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「init.c」としてください(拡張子 .c は自動で付きます)。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> init.c を開き、ファイルの中身を<a href="./src/init.txt">テンプレート</a>の内容に置き換えてください。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「main.c」としてください(拡張子 .c は自動で付きます)。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_1.txt">テンプレート</a>の内容に置き換えてください。
-</p>
+<span class="olradio"><input type="radio" name="p1"></span> IDE を起動してテンプレートプロジェクトを開いて下さい。
 <p>
 この演習で気をつける必要がある設定は以下の通りです。
 <br>
@@ -69,7 +58,7 @@
 </p>
 <div class="info">
 <pre class="wrap">
-<b>設定 1:</b>
+<b>init.c 内</b>
 
 OSCCON  ※ 8bit レジスタ
 
@@ -79,7 +68,7 @@ OSCCON  ※ 8bit レジスタ
 詳しくはデータシート 67p を参照してください
 
 
-<b>設定 2:</b>
+<b>setting.h 内</b>
 
 _XTAL_FREQ  ※ マクロ
 
@@ -152,11 +141,13 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_1_1」を「IO_1_2」にコピーします。
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートプロジェクトを「IO_1_2」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_1_1 を閉じます。
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートプロジェクトを閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_2.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -167,6 +158,8 @@ OSCCONの設定と合わせてください(今回は 4 Mhz)
 </p>
 <div class="info">
 <pre class="wrap">
+<b>init.c 内</b>
+
 <b>設定 1:</b>
 
 TRISA  ※ 8bit レジスタ
@@ -221,7 +214,7 @@ ANSELB  ※ 8bit レジスタ
 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-(*)17: RA0 (出力) -- LED -- 抵抗 -- GND
+(*)17: RA0 (出力) -- LED -- 抵抗(330Ω) -- GND
 18: RA1
 </pre>
 </div>
@@ -255,13 +248,15 @@ ANSELB  ※ 8bit レジスタ
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_1_2 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p3"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「input.c」としてください(拡張子 .c は自動で付きます)。
+<span class="olradio"><input type="radio" name="p3"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> input.c を開き、ファイルの中身を<a href="./src/input.txt">テンプレート</a>の内容に置き換えてください。
+<span class="olradio"><input type="radio" name="p3"></span> setting.h を開き、「//#define USE_INPUT」のコメントアウトを解除します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> input.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span>  穴埋め問題になっていますので？のところを正しい内容に修正してください。
 </p>
@@ -270,6 +265,8 @@ ANSELB  ※ 8bit レジスタ
 </p>
 <div class="info">
 <pre class="wrap">
+<b>input.c 内</b>
+
 <b>設定 1:</b>
 
 WPUA  ※ 8bit レジスタ
@@ -323,7 +320,7 @@ PICの内部プルアップ抵抗機能を ON にする設定です
 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗 -- GND
+17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
 18: RA1
 </pre>
 </div>

@@ -1,14 +1,13 @@
+#include "config.h"
 #include "setting.h"
 
 void main(void){
 
     init();
-    init_uart();
-    init_adc();
   
     while(1){
-      int result = adc( ? );
-      printf("ADC = %d\r\n",result);
+      int adc1 = adc( ? );
+      printf("ADC = %d\r\n",adc1);
       __delay_ms(1000);
     }
     

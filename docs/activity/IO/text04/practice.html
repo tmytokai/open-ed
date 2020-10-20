@@ -57,13 +57,15 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_3_1 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「pwm.c」としてください(拡張子 .c は自動で付きます)。
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> pwm.c を開き、ファイルの中身を<a href="./src/pwm.txt">テンプレート</a>の内容に置き換えてください。
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、「//#define #define USE_CCP1」のコメントアウトを解除します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> CCP1 を使うので、CCP1の初期化関数( void init_ccp1() )のコメントアウトを解除して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> ccp.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> CCP1 を使うので、CCP1の初期化関数( void init_ccp1() )を見ます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_4_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -74,6 +76,8 @@
 </p>
 <div class="info">
 <pre class="wrap">
+<b>ccp.c の void init_ccp1() 内</b>
+
 <b>設定 1:</b>
 
 APFCON0bits.CCP1SEL ※ 8bit レジスタ APFCON0 の bit 0
@@ -129,7 +133,7 @@ T?CONbits.TMR?ON ※ ? は接続したタイマーの番号(2, 4, 6 のどれか
 詳しくはデータシート 191p を参照してください
 
 
-<b>PWM周期、パルス幅の計算方法:</b>
+<b>PWM周期、パルス幅の計算方法</b>
 
 今回は CCP1 + Timer2 の組み合わせなので 
 PWM 周期と パルス 幅は FOSC、prescale、PR2、CCPR1L、DC1B1、DC1B0 を使って以下のように決まります
@@ -175,7 +179,7 @@ PIC
 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗 -- GND
+17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
 18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
 
 
@@ -188,7 +192,7 @@ PIC
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「pwm.c」と「main.c」を記入してください。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ccp.c」と「main.c」を記入してください。
 </p>
 
 </div>
@@ -217,9 +221,11 @@ PIC
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_4_1 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> pwm.c を開き、CCP4 を使うので、CCP4の初期化関数( void init_ccp4() )のコメントアウトを解除して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> CCP4 を使うので、CCP4の初期化関数( void init_ccp4() )を見ます。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_4_2.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -230,14 +236,16 @@ PIC
 </p>
 <div class="info">
 <pre class="wrap">
-<b>レジスタ設定:</b>
+<b>レジスタ設定</b>
 
 演習4-1で CCP1 を CCP4、Timer2 を Timer4 に読み替えるだけで同様にして設定できます。
 ただし CCP4 の出力は RA4(3 pin) 固定です 
 
-<b>PWM周期、パルス幅の計算方法:</b>
+
+<b>PWM周期、パルス幅の計算方法</b>
 
 こちらも演習4-1で CCP1 を CCP4、Timer2 を Timer4 に読み替えるだけで同様にして計算できます。
+
 
 <b>音階とPWM周期、パルス幅の関係:</b>
 
@@ -268,7 +276,7 @@ PIC
 
 1: RA2
 2: RA3
-(*)3: CCP4 (PWM) -- アンプ
+(*)3: CCP4 (PWM) -- 圧電スピーカ -- GND
 4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
 5: VSS -- GND -- PICkit の 3: GND
 6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
@@ -283,7 +291,7 @@ PIC
 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗 -- GND
+17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
 18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
 
 
@@ -296,7 +304,7 @@ PIC
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「pwm.c」と「main.c」を記入してください。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ccp.c」と「main.c」を記入してください。
 </p>
 
 </div>

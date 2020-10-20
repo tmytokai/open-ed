@@ -1,13 +1,14 @@
+#include "config.h"
 #include "setting.h"
 
 void main(void){
 
     init();
-    init_uart();
-    init_ccp1(); // CCP1(9 pin) から PWM 出力、Timer2 使用、prescale = x64
   
     while(1){
 
+       // CCP1(9 pin) から PWM 出力、Timer2 使用、prescale = x64
+       //
        // 今回は CCP1 + Timer2 の組み合わせなので 
        // PWM 周期と パルス 幅は FOSC、prescale、PR2、CCPR1L、DC1B1、DC1B0 を使って以下のように決まります
        // PR2 は Timer2 の設定用の 8bit レジスタです

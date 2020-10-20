@@ -46,11 +46,13 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_2_2 を閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Soucre Files フォルダにソースファイルを追加します。ファイル名は 「adc.c」としてください(拡張子 .c は自動で付きます)。
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> adc.c を開き、ファイルの中身を<a href="./src/adc.txt">テンプレート</a>の内容に置き換えてください。
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、「//#define USE_ADC」のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> adc.c を開きます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_3_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -61,6 +63,8 @@
 </p>
 <div class="info">
 <pre class="wrap">
+<b>adc.c 内</b>
+
 <b>設定 1:</b>
 
 TRISA  ※ 8bit レジスタ
@@ -134,6 +138,9 @@ AD変換を開始します
 1 を入れると変換を始めて、変換が終わると 0 に戻ります
 詳しくはデータシート 143p を参照してください
 
+
+<b>AD変換の結果:</b>
+
 AD変換の結果は 10bit の値として ADRESH と ADRESL に入ります
 10bitなので 0 V 〜 動作電圧 V の入力が 0〜1023 の整数値に変換されます
 なお今回は ADCON1bit.ADFM = 1 としてるので出力形式は右詰めになります
@@ -171,7 +178,7 @@ PIC
 14: VDD -- 3.3V -- PICkit の 2: VDD
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗 -- GND
+17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
 (*)18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
 
 
