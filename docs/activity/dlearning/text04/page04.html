@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. Kerasによる畳み込み演算</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [4] Keras を用いた CNN の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Keras では Conv2D クラスが畳み込み層を意味するクラスになります。
+<br>
+では早速、Conv2D クラスを使って<a href="./page03.html">前ページ</a>の例を演算してみましょう(ソース1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: Keras の Conv2D クラスで畳み込み演算をする例</b>
+
+<pre class="wrap">
+import tensorflow as tf
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.initializers import Constant
+from tensorflow.keras.layers import Conv2D
+
+rows = 4 # 入力画像の高さ
+cols = 4 # 入力画像の幅
+Cin = 2  # 入力画像のチャンネル数
+Cout = 2 # 出力画像のチャンネル数
+
+# 入力画像の 0 番目のチャンネル
+data_0 = np.array(
+    [
+        [ 1, 2, 3, 0 ],
+        [ 2, 0, 1, 2 ],
+        [ 0, 1, 2, 0 ],
+        [ 0, 0, 3, 1 ]
+    ]
+)
+
+# 入力画像の 1 番目のチャンネル
+data_1 = np.array(
+    [
+        [ 0, 2, 1, 3 ],
+        [ 1, 1, 0, 1 ],
+        [ 2, 2, 3, 2 ],
+        [ 3, 1, 0, 0 ]
+    ]
+)
+
+# 入力画像の 0 番目のチャンネルと出力画像の 0 番目のチャンネルに対するカーネル
+kernel_0_0 = np.array(
+    [ 
+        [ 0, 1, 0 ],
+        [ 2, 0, 3 ],
+        [ 0, 4, 0 ]
+    ]
+)
+
+# 入力画像の 0 番目のチャンネルと出力画像の 1 番目のチャンネルに対するカーネル
+kernel_0_1 = np.array(
+    [ 
+        [ 2, 0, 1 ],
+        [ 0, 1, 0 ],
+        [ 1, 0, 3 ]
+    ]
+)
+
+# 入力画像の 1 番目のチャンネルと出力画像の 0 番目のチャンネルに対するカーネル
+kernel_1_0 = np.array(
+    [ 
+        [ 0, 0, 0 ],
+        [ 0, 1, 0 ],
+        [ 0, 0, 0 ]
+    ]
+)
+
+# 入力画像の 1 番目のチャンネルと出力画像の 1 番目のチャンネルに対するカーネル
+kernel_1_1 = np.array(
+    [ 
+        [ 1, 0, 0 ],
+        [ 0, 2, 3 ],
+        [ 2, 0, 0 ]
+    ]
+)
+
+# 出力画像の 0 番目のチャンネルに対するバイアス
+b_0 = 1
+
+# 出力画像の 1 番目のチャンネルに対するバイアス
+b_1 = -1
+
+# 入力画像全体: shape = (データ番号, rows, cols, Cin) の 4 階テンソル
+data = tf.constant( [ np.stack( [data_0,data_1], -1) ], dtype=tf.float32 )
+
+# カーネル全体: shape = (3, 3, Cin * Cout) の 3 階テンソル 
+kernel = np.stack( [kernel_0_0,kernel_0_1,kernel_1_0,kernel_1_1], -1)
+
+# バイアス全体 :  shape = (Cout) のベクトル
+b = [b_0, b_1]
+
+# モデル作成
+model = Sequential();
+model.add( Conv2D( Cout, (3,3), input_shape=(rows,cols,Cin), kernel_initializer=Constant(kernel), bias_initializer=Constant(b) ) )
+model.summary()
+
+# 畳み込み演算
+y = model.predict( data )
+
+print('')
+np.set_printoptions(precision=0, suppress=True)
+for i in range(Cin):
+    print('data_'+str(i)+'=')
+    print( data[0,:,:,i].numpy())
+    print('')
+
+for i in range(Cin):
+    for i2 in range(Cout):
+        print('kernel_'+str(i)+'_'+str(i2)+' = ')
+        print(kernel[:,:,Cin*i+i2])
+        print('')
+
+for i in range(Cout):
+    print('b_'+str(i)+' = '+str(b[i]))
+    print('')
+
+for i in range(Cout):
+    print('y_'+str(i)+'=')
+    print(y[0,:,:,i])
+    print('')
+</pre>
+</div>
+
+<p>
+基本的には<a href="../text03/page02.html">MLP</a>と同様にしてモデルを作成し、predict メソッドで出力を求めます。
+</p>
+
+<p>
+さてソース1中の
+</p>
+
+<div class="info">
+<pre class="wrap">
+model.add( Conv2D( Cout, (3,3), input_shape=(rows,cols,Cin), kernel_initializer=Constant(kernel), bias_initializer=Constant(b) ) )
+</pre>
+</div>
+
+<p>
+の行で add メソッドを使って model に Conv2D のインスタンスを追加しています。
+<br>
+ここで Conv2D の最初の引数 Cout は出力画像のチャンネル数、2番目の (3,3) はカーネルのサイズ、3番目の input_shape=(rows,cols,Cin) は入力画像のサイズとチャンネル数を表しています。
+<br>
+また残りのkernel_initializer=Constant(kernel) と bias_initializer=Constant(b) でカーネルとバイアスをセットしています。
+</p>
+
+<p>
+では上のソースの実行結果を以下に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1の実行結果</b>
+
+<pre class="wrap">
+Model: "sequential_6"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_6 (Conv2D)            (None, 2, 2, 2)           38        
+=================================================================
+Total params: 38
+Trainable params: 38
+Non-trainable params: 0
+_________________________________________________________________
+
+data_0=
+[[1. 2. 3. 0.]
+ [2. 0. 1. 2.]
+ [0. 1. 2. 0.]
+ [0. 0. 3. 1.]]
+
+data_1=
+[[0. 2. 1. 3.]
+ [1. 1. 0. 1.]
+ [2. 2. 3. 2.]
+ [3. 1. 0. 0.]]
+
+kernel_0_0 = 
+[[0 1 0]
+ [2 0 3]
+ [0 4 0]]
+
+kernel_0_1 = 
+[[2 0 1]
+ [0 1 0]
+ [1 0 3]]
+
+kernel_1_0 = 
+[[0 0 0]
+ [0 1 0]
+ [0 0 0]]
+
+kernel_1_1 = 
+[[1 0 0]
+ [0 2 3]
+ [2 0 0]]
+
+b_0 = 1
+
+b_1 = -1
+
+y_0=
+[[15. 18.]
+ [ 9. 19.]]
+
+y_1=
+[[16. 14.]
+ [34. 21.]]
+</pre>
+</div>
+
+<p>
+ところでモデル概要を見るとパラメータの個数が Total param : 38 個となっています。
+<br>
+カーネル1つに含まれるパラメータ数は 9 個、カーネルは計 4 個、バイアスは計 2 個より、9*4+2=38 なので確かに合っています。
+</p>
+
+<script>PreNext(4,6)</script>
+</body>
+</html>

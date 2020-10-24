@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 多チャンネル画像の畳み込み演算</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [4] Keras を用いた CNN の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page02.html">前ページ</a>で行った畳み込み演算はモノラル画像に対する演算でしたが、実際には多チャンネル画像の畳み込み演算が CNN では使われています。
+</p>
+
+<p>
+※ 多チャンネル画像とは何かイメージがつかないかもしれませんが、例えば RGB画像は典型的な 3 チャンネル画像です(Rチャンネル、Gチャンネル、Bチャンネルの3つ)。
+</p>
+
+</div>
+
+<p>
+まず入力画像のチャンネル数を Cin とすると、入力画像の m 番目のチャンネルは以下の行列 data_mで表されます。
+<br>
+なお画像サイズ( rows x cols )は全てのチャンネルで同一とします。
+</p>
+
+<p>
+\[
+{\rm data\_m} = 
+\begin{bmatrix}
+d_{00}^m\ , & \cdots &,\  d_{\rm 0(cols-1)}^m \\
+\vdots & \ddots & \vdots \\
+d_{\rm (rows-1)0}^m\ , & \cdots &,\  d_{\rm (rows-1)(cols-1)}^m
+\end{bmatrix}
+\ , \ (m=0,1,\cdots,{\rm Cin}-1)
+\] 
+</p>
+
+<p>
+次に出力画像のチャンネル数を Cout とすると、出力画像の n 番目のチャンネルは以下の行列 y_nで表されます。
+</p>
+
+<p>
+\[
+{\rm y\_n} = 
+\begin{bmatrix}
+y_{00}^n\ , & \cdots &,\  y_{\rm 0(cols-3)}^n \\
+\vdots & \ddots & \vdots \\
+y_{\rm (rows-3)0}^n \ , & \cdots &,\  y_{\rm (rows-3)(cols-3)}^n
+\end{bmatrix}
+\ , \ (n=0,1,\cdots,{\rm Cout}-1)
+\]
+</p>
+
+
+<p>
+カーネルは入力画像と出力画像のチャンネルに対応した数だけ用意します。
+<br>
+入力画像の m 番目のチャンネルと出力画像の n 番目のチャンネルに対するカーネルを以下の行列 kernel_m_n とします。
+</p>
+
+<p>
+\[
+{\rm kernel\_m\_n} = 
+\begin{bmatrix}
+k_{00}^{mn}, & k_{01}^{mn} &, k_{02}^{mn} \\
+k_{10}^{mn}, & k_{11}^{mn} &, k_{12}^{mn} \\
+k_{20}^{mn}, & k_{21}^{mn} &, k_{22}^{mn} \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+またバイアスは出力画像のチャンネルごとに用意します。
+<br>
+出力画像の n 番目のチャンネルに対するバイアスを b_n とします。
+</p>
+
+
+
+<p>
+すると多チャンネル画像に対する畳み込み演算は以下の様に定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 多チャンネル画像に対する画像の畳み込み演算( 3x3 カーネル、バイアスあり)</b>
+
+<p>
+\[
+y_{ij}^n = \sum_{m=0}^{\rm Cin-1}\sum_{k=0}^{2}\sum_{l=0}^{2} k_{kl}^{mn} \cdot d_{(i+k)(j+l)}^m + b_n \\
+(n=0,1,\cdots,{\rm Cout}-1) \ ,\ (i=0,1,\cdots,{\rm rows}-3) \ ,\  (j=0,1,\cdots, {\rm cols}-3)
+\]
+</p>
+
+</div>
+
+<p>
+やはり定義式だけ見せても良く分からないと思いますので具体例を示します。
+</p>
+
+<p>
+まず入力画像は Cin = 2 チャンネルとし、各チャンネルは以下の 4x4 行列とします。
+</p>
+<p>
+\[
+{\rm data\_0} = 
+\begin{bmatrix}
+1, & 2, & 3, & 0 \\
+2, & 0, & 1, & 2 \\
+0, & 1, & 2, & 0 \\
+0, & 0, & 3, & 1 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+\[
+{\rm data\_1} = 
+\begin{bmatrix}
+0, & 2, & 1, & 3 \\
+1, & 1, & 0, & 1 \\
+2, & 2, & 3, & 2 \\
+3, & 1, & 0, & 0 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+出力画像も Cout = 2 チャンネルとします。
+</p>
+<p>
+\[
+y\_0 = 
+\begin{bmatrix}
+y_{00}^0, & y_{01}^0 \\
+y_{10}^0, & y_{11}^0 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+\[
+y\_1 = 
+\begin{bmatrix}
+y_{00}^1, & y_{01}^1 \\
+y_{10}^1, & y_{11}^1 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+カーネルは以下の 4 つとします(値は適当に決めています)。
+</p>
+<p>
+\[
+{\rm kernel\_0\_0} =
+\begin{bmatrix}
+0, & 1 &, 0 \\
+2, & 0 &, 3 \\
+0, & 4 &, 0 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+\[
+{\rm kernel\_0\_1} =
+\begin{bmatrix}
+2, & 0 &, 1 \\
+0, & 1 &, 0 \\
+1, & 0 &, 3 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+\[
+{\rm kernel\_1\_0} =
+\begin{bmatrix}
+0, & 0 &, 0 \\
+0, & 1 &, 0 \\
+0, & 0 &, 0 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+\[
+{\rm kernel\_1\_1} =
+\begin{bmatrix}
+1, & 0 &, 0 \\
+0, & 2 &, 3 \\
+2, & 0 &, 0 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+バイアスは次のようにします。
+</p>
+<p>
+\[
+b\_0 = 1
+\]
+\[
+b\_1 = -1
+\]
+</p>
+
+<p>
+この時、出力画像のチャンネル 0 の左上座標の画素値 $y_{00}^0$は定義式より次の様に計算されます。
+</p>
+
+
+\begin{align*}
+y_{00}^0 &= \sum_{m=0}^{1}\sum_{k=0}^{2}\sum_{l=0}^{2} k_{kl}^{m0} \cdot d_{(i+k)(j+l)}^m + b_0 \\
+\\
+&= k_{00}^{00}\cdot d_{00}^0 + k_{01}^{00}\cdot d_{01}^0 + k_{02}^{00}\cdot d_{02}^0 \\
+&\ + k_{10}^{00}\cdot d_{10}^0 + k_{11}^{00}\cdot d_{11}^0 + k_{12}^{00}\cdot d_{12}^0 \\
+&\ + k_{20}^{00}\cdot d_{20}^0 + k_{21}^{00}\cdot d_{21}^0 + k_{22}^{00}\cdot d_{22}^0  \\
+
+&\ + k_{00}^{10}\cdot d_{00}^1 + k_{01}^{10}\cdot d_{01}^1 + k_{02}^{10}\cdot d_{02}^1 \\
+&\ + k_{10}^{10}\cdot d_{10}^1 + k_{11}^{10}\cdot d_{11}^1 + k_{12}^{10}\cdot d_{12}^1 \\
+&\ + k_{20}^{10}\cdot d_{20}^1 + k_{21}^{10}\cdot d_{21}^1 + k_{22}^{10}\cdot d_{22}^1  \\
+
+&\ + b\_0 \\
+\\
+&=   0\cdot 1 + 1\cdot 2 + 0\cdot 3 \\
+&\ + 2\cdot 2 + 0\cdot 0 + 3\cdot 1 \\
+&\ + 0\cdot 0 + 4\cdot 1 + 0\cdot 2 \\
+
+&\ + 0\cdot 0 + 0\cdot 2 + 0\cdot 1 \\
+&\ + 0\cdot 1 + 1\cdot 1 + 0\cdot 0 \\
+&\ + 0\cdot 2 + 0\cdot 2 + 0\cdot 3 \\
+
+&\ + 1 \\
+\\
+&=   0 + 2 + 0 + 4 + 0 + 3 + 0 + 4 + 0  \\
+&\ + 0 + 0 + 0 + 0 + 1 + 0 + 0 + 0 + 0  \\
+&\ + 1 \\
+\\
+&= 15
+\end{align*}
+
+<p>
+目がチカチカしてきたので、以上で行った演算をまた図で示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1. $y_{00}^0$を求めるための畳み込み演算</b>
+
+<p>
+data_0 と data_1 の黄色の部分の画素に対して畳み込み演算を行い、$y_{00}^0$ (赤い部分)の画素値を求めている
+</p>
+
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<p>
+後は同様にして残りの画素値も計算出来ますが、参考までに $y_{11}^1$ を求めている図を以下に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. $y_{11}^1$を求めるための畳み込み演算</b>
+
+<p>
+data_0 と data_1 の黄色の部分の画素に対して畳み込み演算を行い、$y_{11}^1$ (赤い部分)の画素値を求めている
+</p>
+
+<img src="./img/page03-fig2.png" alt="">
+</div>
+
+<p>
+出力画像は最終的に次の様に求まります。
+</p>
+<p>
+\[
+y\_0 = 
+\begin{bmatrix}
+15, & 18 \\
+9, & 19 \\
+\end{bmatrix}
+\]
+\[
+y\_1 = 
+\begin{bmatrix}
+16, & 14 \\
+34, & 21 \\
+\end{bmatrix}
+\]
+</p>
+
+
+<br>
+<script>PreNext(3,6)</script>
+</body>
+</html>
