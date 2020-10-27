@@ -48,7 +48,7 @@
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/template_v2.zip">テンプレートプロジェクト</a>をダウンロードして展開してください。
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/template_v3.zip">テンプレートプロジェクト</a>をダウンロードして展開してください。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> IDE を起動してテンプレートプロジェクトを開いて下さい。
 <p>
@@ -267,28 +267,16 @@ ANSELB  ※ 8bit レジスタ
 <pre class="wrap">
 <b>input.c 内</b>
 
-<b>設定 1:</b>
-
 WPUA  ※ 8bit レジスタ
 WPUB  ※ 8bit レジスタ
 
 (解説)
 
-ポート A,B の(弱)プルアップ抵抗の設定です
-ポートAは RA5 だけプルアップ可能です
+ポート A,B の内部プルアップ抵抗の設定です
+ 1 をセットすると有効になります
+なおポートAは RA5 だけプルアップ可能です
 詳しくはデータシート 121p(ポートA)と127p(ポートB) を参照してください
 
-
-<b>設定 2:</b>
-
-OPTION_REGbits.nWPUEN  ※ 8bit レジスタ OPTION_REG の bit 7
-
-(解説)
-
-PICの内部プルアップ抵抗機能を ON にする設定です
-0 をセットすると ON になります
-内部プルアップ抵抗機能を使いたい場合は忘れず ON にしてください
-詳しくはデータシート 175p を参照してください
 </pre>
 </div>
 <p>
