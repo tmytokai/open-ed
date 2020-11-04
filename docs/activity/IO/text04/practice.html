@@ -207,7 +207,7 @@ PIC
 </p>
 <ol>
 <li>CCP4 を使用する</li>
-<li>CCP4 の出力品は 3 pin とする(固定)</li>
+<li>CCP4 の出力ピンは 3 pin とする(固定)</li>
 <li>CCP4 に接続するタイマーとして Timer4 を使う</li>
 <li>Timer4 の prescale は x64 とする</li>
 <li>スイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
@@ -224,6 +224,10 @@ PIC
 <span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> setting.h を開き、「//#define #define USE_CCP4」のコメントアウトを解除します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> ccp.c を開きます。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> CCP4 を使うので、CCP4の初期化関数( void init_ccp4() )を見ます。
 <br>
