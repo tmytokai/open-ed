@@ -1,0 +1,60 @@
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, AveragePooling2D, Flatten
+
+#---------------------------
+# データセット読み込み
+
+from tensorflow.keras.datasets import cifar10
+
+# (images_training, classno_training) は訓練に用いるデータセットで計 50,000 組
+# (images_test, classno_test) はテストに用いるデータセットで計 10,000 組
+# images〜 は 32x32,24bit カラー画像 (画素値 0〜255)
+# classno〜 はそれぞれの画像が属するクラス番号 (10クラス)
+
+(images_training, classno_training), (images_test, classno_test) = cifar10.load_data()
+classnames=['airplane  ','automobile','bird      ','cat       ','deer      ','dog       ','frog      ','horse     ','ship      ','truck     ']
+#---------------------------
+
+images_training = images_training / 255.0  # 0〜1の範囲に正規化
+images_test = images_test / 255.0  # 0〜1の範囲に正規化
+
+# パーセプトロンの数
+M = np.max(classno_training)+1  # 出力層はクラス数から計算
+
+#学習率
+r = ?
+
+#エポック数
+E = ?
+
+#学習データセットのサイズ
+L = images_training.shape[0]
+
+#バッチサイズ
+B = ?
+
+# 学習データセットを演習用のフォーマットに変換
+data_training = images_training # 画像データをそのまま入力する
+label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
+
+# 今回は検証データセットは使わない
+
+# テストデータセットを演習用のフォーマットに変換
+data_test = images_test # 画像データをそのまま入力する
+label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
+
+print('学習率='+str(r))
+print('エポック数='+str(E))
+print('学習データセットサイズ='+str(L))
+print('バッチサイズ='+str(B))
+
+# CNNの構築
+# テキストを参考にする
+?
+
+# 学習設定以下はMLPの時と全く同じ内容なので、DL_3_3からコピーする
+# ただし fit 関数の verbose を 1 にする (動いてるかどうか分からないので)
+?

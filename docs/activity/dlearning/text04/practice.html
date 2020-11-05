@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [4] Keras を用いた CNN の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 70  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. 畳み込みニューラルネットワーク(CNN) とは</a></h2>
+<h2><a href="./page02.html">2. 画像の畳み込み演算</a></h2>
+<h2><a href="./page03.html">3. 多チャンネル画像の畳み込み演算</a></h2>
+<h2><a href="./page04.html">4. Kerasによる畳み込み演算</a></h2>
+<h2><a href="./page05.html">5. KerasによるCNNの構築</a></h2>
+<h2><a href="./page06.html">6. KerasによるCNNの学習</a></h2>
+
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 4-1 (個人PC、40分):</b> データセットとして<a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>(カラー画像のデータセット) を使用し、CNNを使ってディープラーニングを実行してみましょう。
+<br>
+CNN とディープラーニングの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) いわゆる「<a href="https://en.wikipedia.org/wiki/LeNet">LeNet-5</a>」を作る
+</p>
+<p>
+第1層: 畳み込み層、Cout = 6、kernel_size = 5、 rows = 32、 cols = 32、Cin = 3、activation='tanh'
+<br>
+第2層: プーリング層(平均値)、pool_size = 2
+<br>
+第3層: 畳み込み層、Cout = 16、kernel_size = 5、 activation='tanh'
+<br>
+第4層: プーリング層(平均値)、pool_size = 2
+<br>
+第5層: 平坦化層
+<br>
+第6層: 全結合層、 K = 120、 activation='tanh'
+<br>
+第7層: 全結合層、 K = 84、 activation='tanh'
+<br>
+出力層: 全結合層、 M = 10、 activation='softmax'
+</p>
+<p>
+(2) 学習率は r = 0.001、エポック数は E = 100、バッチサイズは B = 512 とする
+</p>
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook で「DL_4_1」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/DL_4_1.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> DL_3_3 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 4-2 (個人PC、120分):</b> DL_4_1 のテストデータセットの正解率を改善してみましょう
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 「DL_4_1」を「DL_4_2」にコピーします
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> テストデータセットの正解率が70％を超えるようにCNNの構造を変更してください
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+
+
+<br>
+<br>
+<script>PreNext(7,6)</script>
+</body>
+</html>

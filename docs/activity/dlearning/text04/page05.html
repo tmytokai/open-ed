@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. KerasによるCNNの構築</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [4] Keras を用いた CNN の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+CNN は基本的には MLP と同じくフィードフォワード型のニューラルネットワークですのでモデルとしてSequential モデルを使います。
+<br>
+つまり、はじめに
+</p>
+
+<div class="info">
+<pre class="wrap">
+model = Sequential()
+</pre>
+</div>
+
+<p>
+を指定し、その後 add メソッドを使って各層を順々に積み重ねて作成します。
+</p>
+
+<p>
+さて CNN では以下の層がよく使われています。
+</p>
+
+<h3>
+1. 畳み込み層
+</h3>
+
+<p>
+<a href="./page04.html">前ページ</a>で説明した「畳み込み層」を意味するクラスで、CNNの中心となる層です。
+</p>
+
+<div class="info">
+<pre class="wrap">
+※要  from tensorflow.keras.layers import Conv2D
+
+Conv2D( Cout, ( kernel_size, kernel_size ), input_shape=( rows, cols, Cin ),  activation='活性化関数' )
+</pre>
+</div>
+
+<p>
+改めて説明すると、引数 Cout は出力画像のチャンネル数、kernel_size はカーネルのサイズ、input_shape=(rows,cols,Cin) は入力画像のサイズとチャンネル数を表しています。
+<br>
+なお最初に add する層以降では input_shape を指定する必要はありません(自動計算してくれます)。
+</p>
+
+<p>
+また最後の activation では活性化関数を指定します。
+<br>
+活性化関数としては 'tanh' (＝ 双曲線正接)や 'relu' (＝ ReLU)などがよく使われています。
+</p>
+
+</p>
+
+<h3>
+2. プーリング層
+</h3>
+
+<p>
+入力画像を指定した大きさの窓で分割し、各窓の代表値を用いた縮小画像を出力する層です。
+<br>
+代表値の選び方として最大値を使う方法と平均値を使う方法があり、
+</p>
+
+<div class="info">
+<pre class="wrap">
+※要 from tensorflow.keras.layers import MaxPooling2D, AveragePooling2D
+
+(最大値)  MaxPooling2D( (pool_size, pool_size) )
+
+(平均値)  AveragePooling2D( (pool_size, pool_size) )
+</pre>
+</div>
+
+<p>
+というクラスがそれぞれの層に相当します。
+<br>
+なお引数 pool_size は窓のサイズで、入力した画像が 1/pool_size 倍になって出力されます。
+</p>
+
+<h3>
+3. 平坦化層
+</h3>
+
+<div class="info">
+<pre class="wrap">
+※要 from tensorflow.keras.layers import Flatten
+
+Flatten()
+</pre>
+</div>
+
+<p>
+は平坦化、つまり入力画像を1次元配列に変換して出力する層です。
+<br>
+全結合層 (Dense)などに接続する前に使わます。
+</p>
+
+<script>PreNext(5,6)</script>
+</body>
+</html>

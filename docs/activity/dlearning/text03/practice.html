@@ -48,7 +48,58 @@
 <h2><a href="./page03.html">3. KerasによるMLPの学習</a></h2>
 
 <br>
+<p>
+<input type="checkbox"><b>演習 3-2 (個人PC、20分):</b> データセットとして <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> (手書き数字画像のデータセット) を使用してディープラーニングを実行してみましょう。
 <br>
-<script>PreNext(6,5)</script>
+ニューラルネットワークとディープラーニングの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 隠れ層が K = 32 個のパーセプトロンで出来ている ※ N と M は学習データセットから計算
+</p>
+<p>
+(2) 学習率は r = 0.001、エポック数は E = 10、バッチサイズは B = 128 とする ※ L は学習データセットから計算
+</p>
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> Jupyter Notebook で「DL_3_2」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/DL_3_2.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> DL_3_1 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-3 (個人PC、20分):</b> 同様にデータセットとして<a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>(カラー画像のデータセット) を使用してディープラーニングを実行してみましょう。
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 「DL_3_2」を「DL_3_3」にコピーします
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> データセットの読み込み部を<a href="../text02/src/DL_2_4.txt">テンプレートスクリプト</a>の内容に置き換えます
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+</p>
+</div>
+
+
+
+<br>
+<br>
+<script>PreNext(4,3)</script>
 </body>
 </html>
