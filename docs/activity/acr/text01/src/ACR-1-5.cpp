@@ -15,10 +15,10 @@ void IDFT( const double* A, const double* B, double* f, const int N )
     ?
 }
 
-// ©ŒÈ‘ŠŠÖ R[n]
+// è‡ªå·±ç›¸é–¢ R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // ‰‰K 1-1 ‚Ì“à—e‚ğƒRƒs[‚·‚é
+    // æ¼”ç¿’ 1-1 ã®å†…å®¹ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 }
 
 int main()
@@ -31,25 +31,25 @@ int main()
     double R[N];
 
     for(int i=0;i < N; ++i ){
-        // ‰‰K 1-4 ‚Å“ü—Í‚µ‚½®‚ğƒRƒs[‚·‚é
+        // æ¼”ç¿’ 1-4 ã§å…¥åŠ›ã—ãŸå¼ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
         f[i] = ? ;
     }
 
-    // M†‚ğDFT
+    // ä¿¡å·ã‚’DFT
     DFT(f,A,B,N);
 
-    // ƒpƒ[ƒXƒyƒNƒgƒ‹‚ğ‹‚ß‚é
+    // ãƒ‘ãƒ¯ãƒ¼ã‚¹ãƒšã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
     for( int k = 0; k < N; ++k ){
         P[k] = ? ;
     }
 
-    // ƒpƒ[ƒXƒyƒNƒgƒ‹‚ğIDFT
-    memset( B, 0, sizeof(double)*N ); // ‹•”¬•ª B[k] ‚ğƒ[ƒƒNƒŠƒA‚µ‚ÄÄ—˜—p‚·‚é
+    // ãƒ‘ãƒ¯ãƒ¼ã‚¹ãƒšã‚¯ãƒˆãƒ«ã‚’IDFT
+    memset( B, 0, sizeof(double)*N ); // è™šæ•°æˆåˆ† B[k] ã‚’ã‚¼ãƒ­ã‚¯ãƒªã‚¢ã—ã¦å†åˆ©ç”¨ã™ã‚‹
     IDFT(P,B,R,N);
 
     FILE* file = fopen( "ACR-1-5-P.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <N ; ++i ){
@@ -59,7 +59,7 @@ int main()
 
     file = fopen( "ACR-1-5-R.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <N ; ++i ){

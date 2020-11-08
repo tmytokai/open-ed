@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ³‹K—” N( mu, sigma^2)‚Ìo—Í
-// mu : •½‹Ï
-// sigma : •W€•Î· = ã•ªU
+// æ­£è¦ä¹±æ•° N( mu, sigma^2)ã®å‡ºåŠ›
+// mu : å¹³å‡
+// sigma : æ¨™æº–åå·® = âˆšåˆ†æ•£
 double nrand( double mu, double sigma )
 {
-    // Box-Muller –@‚ğg—p
+    // Box-Muller æ³•ã‚’ä½¿ç”¨
     double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
     return mu + sigma*x;
 }
 
-// ©ŒÈ‘ŠŠÖ R[n]
+// è‡ªå·±ç›¸é–¢ R[n]
 double ACR( const int n, const double* f, const int N )
 {
     double out = 0;
@@ -41,7 +41,7 @@ int main()
 
     FILE* file = fopen( "ACR-1-1-f.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
@@ -51,7 +51,7 @@ int main()
 
     file = fopen( "ACR-1-1-R.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){

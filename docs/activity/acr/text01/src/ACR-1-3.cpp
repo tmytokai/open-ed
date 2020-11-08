@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ˆê—l—” U(a,b)‚Ìo—Í
+// ä¸€æ§˜ä¹±æ•° U(a,b)ã®å‡ºåŠ›
 double urand( double a, double b )
 {
     return a + (b-a)*(double)rand()/RAND_MAX;
 }
 
-// ©ŒÈ‘ŠŠÖ R[n]
+// è‡ªå·±ç›¸é–¢ R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // ‰‰K 1-1 ‚Ì“à—e‚ğƒRƒs[‚·‚é
+    // æ¼”ç¿’ 1-1 ã®å†…å®¹ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 }
 
 int main()
@@ -31,7 +31,7 @@ int main()
 
     FILE* file = fopen( "ACR-1-3-f.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
@@ -41,7 +41,7 @@ int main()
 
     file = fopen( "ACR-1-3-R.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
