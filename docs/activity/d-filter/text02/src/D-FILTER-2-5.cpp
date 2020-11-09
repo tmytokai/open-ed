@@ -7,39 +7,39 @@
 #define M_PI 3.1415926535
 #endif
 
-// •W€“I‚È WAVE ƒwƒbƒ_ ( 44 byte )
+// æ¨™æº–çš„ãª WAVE ãƒ˜ãƒƒãƒ€ ( 44 byte )
 typedef struct
 {
     char riff[ 4 ];             // = "RIFF"
-    unsigned int total_size;    // ‘S‘ÌƒTƒCƒY
+    unsigned int total_size;    // å…¨ä½“ã‚µã‚¤ã‚º
     char fmt[ 8 ];              // "WAVEfmt "
-    unsigned int fmt_size;      // fmt ƒ`ƒƒƒ“ƒNƒTƒCƒY
-    unsigned short  format;     // ƒtƒH[ƒ}ƒbƒg‚Ìí—Ş
-    unsigned short  channel;    // ƒ`ƒƒƒ“ƒlƒ‹
-    unsigned int   rate;        // ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg
+    unsigned int fmt_size;      // fmt ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
+    unsigned short  format;     // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ç¨®é¡
+    unsigned short  channel;    // ãƒãƒ£ãƒ³ãƒãƒ«
+    unsigned int   rate;        // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆ
     unsigned int   avgbyte;     // rate * block
     unsigned short  block;      // channels * bit / 8
-    unsigned short  bit;        // ƒrƒbƒg”
+    unsigned short  bit;        // ãƒ“ãƒƒãƒˆæ•°
     char data[ 4 ];             // = "data"
-    unsigned int data_size;     // data ƒ`ƒƒƒ“ƒNƒTƒCƒY
+    unsigned int data_size;     // data ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
 } WAVEFORMAT;
 
 int main()
 {
     FILE * fin = fopen( "trumpet_22k_mono.wav", "rb" );
     if( !fin ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
 
     WAVEFORMAT wavefmt;
     size_t ret = fread( &wavefmt, 1, sizeof( WAVEFORMAT ) - 8, fin );
     if( ret != sizeof( WAVEFORMAT ) -8 ){
-       fprintf( stderr, "ƒwƒbƒ_‚ª‰ó‚ê‚Ä‚¢‚Ü‚·\n" );
+       fprintf( stderr, "ãƒ˜ãƒƒãƒ€ãŒå£Šã‚Œã¦ã„ã¾ã™\n" );
        exit(EXIT_FAILURE);
     }
 
-    // data ‚Ü‚ÅƒXƒLƒbƒv
+    // data ã¾ã§ã‚¹ã‚­ãƒƒãƒ—
     size_t pos = sizeof( WAVEFORMAT ) - 8;
     while( pos < 200 && ( wavefmt.data[0] != 'd' || wavefmt.data[1] != 'a' ) ){
         fseek( fin, pos++, SEEK_SET );
@@ -49,19 +49,19 @@ int main()
     wavefmt.fmt_size = 16;
 
     if( wavefmt.data[ 0 ] != 'd' || wavefmt.data[ 1 ] != 'a' ){
-        fprintf( stderr, "ƒwƒbƒ_‚ª‰ó‚ê‚Ä‚¢‚Ü‚·\n" );
+        fprintf( stderr, "ãƒ˜ãƒƒãƒ€ãŒå£Šã‚Œã¦ã„ã¾ã™\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.channel != 1 ){
-        fprintf( stderr, "ƒXƒeƒŒƒI‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ã‚¹ãƒ†ãƒ¬ã‚ªéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.bit != 16 ){
-        fprintf( stderr, "8bit‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "8bitéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.rate != 22050 ){
-        fprintf( stderr, "ƒTƒ“ƒvƒŠƒ“ƒOü”g”‚ª 22050 Hz‚Å‚ ‚è‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•°ãŒ 22050 Hzã§ã‚ã‚Šã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
 
@@ -89,49 +89,48 @@ int main()
     memset( y, 0, lng * sizeof(double) );
 
     //----------------------------------------------
-    // ‚±‚±‚©‚çŒŠ–„‚ßŠJn
+    // ã“ã“ã‹ã‚‰ç©´åŸ‹ã‚é–‹å§‹
 
-    // ƒTƒ“ƒvƒŠƒ“ƒOü”g” [Hz]
-    const double fs = 22050;  
+    // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•° [Hz]
+    const double fs = ? ;
 
-    // x[i] ‚ğ fs = 22050 [Hz] ‚Å 5 •bŠÔƒTƒ“ƒvƒŠƒ“ƒO‚µ‚½‰¹º‚ÌƒfƒBƒWƒ^ƒ‹M†‚Æ‚·‚é
-    // i ‚Ì”ÍˆÍ‚Í 0 <= i < N ‚Æ‚È‚é
-    const int N = 5 * fs; // 10 [•b] * fs [Hz]
+    // x[i] ã‚’ fs [Hz] ã§ 5 ç§’é–“ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã—ãŸéŸ³å£°ã®ãƒ‡ã‚£ã‚¸ã‚¿ãƒ«ä¿¡å·ã¨ã™ã‚‹
+    // i ã®ç¯„å›²ã¯ 0 <= i < N ã¨ãªã‚‹
+    const int N = 5 * fs; // 10 [ç§’] * fs [Hz]
 
-    // ƒJƒbƒgƒIƒtü”g” [Hz]
+    // ã‚«ãƒƒãƒˆã‚ªãƒ•å‘¨æ³¢æ•° [Hz]
     const double fc = ? ;
 
-    // ³‹K‰»ƒJƒbƒgƒIƒtü”g”
+    // æ­£è¦åŒ–ã‚«ãƒƒãƒˆã‚ªãƒ•å‘¨æ³¢æ•°
     const double Alpha = ? ;
 
-    // FIR ƒtƒBƒ‹ƒ^’·
+    // FIR ãƒ•ã‚£ãƒ«ã‚¿é•·
     const int L = ? ;
 
-    // ƒCƒ“ƒpƒ‹ƒX‰“š
+    // ã‚¤ãƒ³ãƒ‘ãƒ«ã‚¹å¿œç­”
     double h[L];
 
-    // FIR ƒ[ƒpƒXƒtƒBƒ‹ƒ^‚ÌƒCƒ“ƒpƒ‹ƒX‰“š‚ÌŒvZ
-    // ‰~ü—¦‚Í M_PI ‚ğg—p‚·‚é
+    // FIR ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ã®ã‚¤ãƒ³ãƒ‘ãƒ«ã‚¹å¿œç­”ã®è¨ˆç®—
+    // å††å‘¨ç‡ã¯ M_PI ã‚’ä½¿ç”¨ã™ã‚‹
     const int C = (L-1)/2;
     h[C] = ? ;
     for( int i = 1; i <= ? ; ++i ){
         h[C-i] = h[C+i] = ? ;
     }
 
-    // FIR ƒtƒBƒ‹ƒ^
-    // o—ÍM†‚Í y[i]
-    // i-n ‚ª•‰‚Ìê‡‚Í x[i-n] = 0 ‚ÆŠù‚É‚È‚Á‚Ä‚¢‚é‚Ì‚ÅAê‡•ª‚¯‚¹‚¸‚É‚»‚Ì‚Ü‚Üg‚Á‚Ä OK
+    // FIR ãƒ•ã‚£ãƒ«ã‚¿
+    // å‡ºåŠ›ä¿¡å·ã¯ y[i]
+    // i-n ãŒè² ã®å ´åˆã¯ x[i-n] = 0 ã¨æ—¢ã«ãªã£ã¦ã„ã‚‹ã®ã§ã€å ´åˆåˆ†ã‘ã›ãšã«ãã®ã¾ã¾ä½¿ã£ã¦ OK
     for( int i = 0; i < N; ++i ){
-        y[i] = ?;
-        for( int n = 0; n < ? ; ++n ) y[i] += ? ;
+        ?
     }
 
-    // ‚±‚±‚Ü‚Å
+    // ã“ã“ã¾ã§
     //----------------------------------------------
 
     FILE* fout = fopen( "D-FILTER-2-5.wav", "wb" );
     if( !fout ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
     for( int i = 0; i < lng; ++i ) buf[i] = (short)(y[i]*0.8);

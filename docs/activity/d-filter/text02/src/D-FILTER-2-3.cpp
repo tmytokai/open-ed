@@ -2,21 +2,21 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ü”g”“Á«(U•“Á«)‚ÌŒvZ
+// å‘¨æ³¢æ•°ç‰¹æ€§(æŒ¯å¹…ç‰¹æ€§)ã®è¨ˆç®—
 double H( const double w )
 {
-    // ƒTƒ“ƒvƒŠƒ“ƒOü”g” [Hz]
-    const double fs = 22050;  
+    // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•° [Hz]
+    const double fs = ? ;  
 
-    // FIR ƒtƒBƒ‹ƒ^’·
+    // FIR ãƒ•ã‚£ãƒ«ã‚¿é•·
     const int L = ? ;
 
     const int C = ? ;
 
-    // ƒTƒ“ƒvƒŠƒ“ƒOŠÔŠu(•b)
+    // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°é–“éš”(ç§’)
     const double tau = ?;
 
-    // out ‚ÍŠÖ”‚Ìo—Í
+    // out ã¯é–¢æ•°ã®å‡ºåŠ›
     double out = ?;
     for( int i = 1; i <=C; ++i ){
         out += ?;
@@ -28,7 +28,6 @@ double H( const double w )
 int main()
 {
     const double fs = 22050;
-
     const int N = 200;
     const double wmax = M_PI*fs;
     FILE* f = fopen( "D-FILTER-2-3.csv", "wb");

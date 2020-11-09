@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ü”g”“Á«(U•“Á«)‚ÌŒvZ
+// å‘¨æ³¢æ•°ç‰¹æ€§(æŒ¯å¹…ç‰¹æ€§)ã®è¨ˆç®—
 double H( const double w, const double* h, const int L, const int C, const double fs )
 {
-    // ƒTƒ“ƒvƒŠƒ“ƒOŠÔŠu(•b)
+    // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°é–“éš”(ç§’)
     double tau = ?;
 
-    // out ‚ÍŠÖ”‚Ìo—Í
+    // out ã¯é–¢æ•°ã®å‡ºåŠ›
     double out = ?;
     for( int i = 1; i <=C; ++i ){
         out += ?;
@@ -19,23 +19,23 @@ double H( const double w, const double* h, const int L, const int C, const doubl
 
 int main()
 {
-    // ƒTƒ“ƒvƒŠƒ“ƒOü”g” [Hz]
-    const double fs = 22050;  
+    // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•° [Hz]
+    const double fs = ? ;
 
-    // ƒJƒbƒgƒIƒtü”g” [Hz]
+    // ã‚«ãƒƒãƒˆã‚ªãƒ•å‘¨æ³¢æ•° [Hz]
     const double fc = ? ;
 
-    // ³‹K‰»ƒJƒbƒgƒIƒtü”g”
+    // æ­£è¦åŒ–ã‚«ãƒƒãƒˆã‚ªãƒ•å‘¨æ³¢æ•°
     const double Alpha = ? ;
 
-    // FIR ƒtƒBƒ‹ƒ^’·
+    // FIR ãƒ•ã‚£ãƒ«ã‚¿é•·
     const int L = ? ;
 
-    // ƒCƒ“ƒpƒ‹ƒX‰“š
+    // ã‚¤ãƒ³ãƒ‘ãƒ«ã‚¹å¿œç­”
     double h[L];
 
-    // FIR ƒ[ƒpƒXƒtƒBƒ‹ƒ^‚ÌƒCƒ“ƒpƒ‹ƒX‰“š‚ÌŒvZ
-    // ‰~ü—¦‚Í M_PI ‚ğg—p‚·‚é
+    // FIR ãƒ­ãƒ¼ãƒ‘ã‚¹ãƒ•ã‚£ãƒ«ã‚¿ã®ã‚¤ãƒ³ãƒ‘ãƒ«ã‚¹å¿œç­”ã®è¨ˆç®—
+    // å††å‘¨ç‡ã¯ M_PI ã‚’ä½¿ç”¨ã™ã‚‹
     const int C = (L-1)/2;
     h[C] = ? ;
     for( int i = 1; i <= ? ; ++i ){
