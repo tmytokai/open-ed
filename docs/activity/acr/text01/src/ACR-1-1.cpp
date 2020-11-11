@@ -4,10 +4,11 @@
 
 // 正規乱数 N( mu, sigma^2)の出力
 // mu : 平均
-// sigma : 標準偏差 = √分散
-double nrand( double mu, double sigma )
+// sigma2 : 分散
+double nrand( double mu, double sigma2 )
 {
     // Box-Muller 法を使用
+    double sigma = sqrt(sigma2);
     double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
     return mu + sigma*x;
 }
