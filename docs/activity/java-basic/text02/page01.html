@@ -97,7 +97,7 @@ public class Main
          FileReader in = new FileReader( "hoge.txt" ); 
      } 
      catch( IOException e ) { 
-         System.out.println( "例外発生: "+e ); 
+         System.out.println( "入出力例外発生: "+e );
      }
   }
 }
@@ -107,9 +107,9 @@ public class Main
 
 <p>
 try の中で FileReader クラスを使ってファイルをオープンしていますが、もしファイル(今回は hoge.txt )が無ければ IOException という名前の例外が生じます。
-<p>
-
 </p>
+
+<p>
 ※ IOException については<a href="./page02.html">次のページ</a>で説明します
 </p>
 
@@ -123,7 +123,7 @@ IOException 例外が生じると catch 内に処理が移って、エラーに�
 <input type="checkbox"><b>ソース1の実行結果 (hoge.txt が存在しない場合) : </b>
 
 <pre class="wrap">
-例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
+入出力例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
 </pre>
 </div>
 

@@ -37,7 +37,7 @@
 <pre class="wrap">
 結果:
 
-例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
+入出力例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
 </pre>
 </div>
 
@@ -68,7 +68,7 @@
 
 ※ hoge.txt と fuga.txt を追加した後
 
-例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
+入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
 </pre>
 </div>
 
@@ -107,10 +107,10 @@ FileReader in3 = new FileReader( "piyo.txt" );
 結果:
 
 0を入力すると
-例外発生: java.lang.ArithmeticException: / by zero
+算術例外発生: java.lang.ArithmeticException: / by zero
 
 1を入力すると
-例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
+入出力例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
 </pre>
 </div>
 
@@ -130,7 +130,7 @@ FileReader in3 = new FileReader( "piyo.txt" );
 </ul>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> IOException の catch 処理の下に ArithmeticException の catch 処理を追加します。
+<span class="olradio"><input type="radio" name="p3"></span> IOException の catch 処理の下に <b>ArithmeticException</b> の catch 処理を追加します。なお println の中身は「<b>"算術例外発生: "+e</b>」として下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> コンパイルと実行をし、0 を入力したら算術例外、0 以外を入力したら入出力例外が起きることを確認して下さい。
 <br>
