@@ -39,7 +39,7 @@
 <br>
 またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
 <br>
-なお CCP1 と CCP2 は設定で出力ピンの位置を変更できます
+なお CCP1 と CCP2 は設定で PWM 出力ピンの位置を変更できます
 </p>
 <ol>
 <li>CCP1 を使用する</li>
@@ -84,8 +84,8 @@ APFCON0bits.CCP1SEL ※ 8bit レジスタ APFCON0 の bit 0
 
 (解説)
 
-0 をセットするとRB3(9 pin) を CCP1 の出力とします
-1 をセットするとRB0(6 pin) を CCP1 の出力とします
+0 をセットするとRB3(9 pin) を CCP1 の PWM 出力とします
+1 をセットするとRB0(6 pin) を CCP1 の PWM 出力とします
 詳しくはデータシート 118p を参照してください
 
 
