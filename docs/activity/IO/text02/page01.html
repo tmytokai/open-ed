@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>1. UART/RS-232C とは</title>
+<title>1. UART とは</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [2] UART/RS-232C</li>
+<li>学習項目: [2] UART(シリアル通信)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,19 +20,19 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-「<b>UART</b>(Universal Asynchronous Receiver/Transmitter)」や「<b>RS-232C</b>(Recommended Standard 232C)」はシリアル通信を行うための代表的なインターフェースです(※)。
+「<b>UART</b>(Universal Asynchronous Receiver/Transmitter)」はシリアル通信を行うためのインターフェースですが(※)、「シリアル通信」と同じ意味で使われることが多いです。
 <br>
 UART は非同期式ですが、同期式にした「<b>USART</b>(Universal Synchronous Asynchronous Receiver/Transmitter)」も良く使われています。
 </p>
 
 <p>
-※ 厳密に言えば UART はシリアル通信をおこなう「回路(デバイス)」で、RS-232C はシリアルポートの「規格」です。
+※ 厳密に言えば UART はシリアル通信をおこなうための「回路(デバイス)」です。
 </p>
 
 <p>
-UART/RS-232C は以下の様に接続します。
+UART は以下の様に接続します。
 <br>
-UART/RS-232C を使うと基本的には「Rxピン」と「Txピン」の 2 ピンさえあれば 2 つの機器間でデータをやり取り出来ます(※)。
+UART を使うと基本的には「Rxピン」と「Txピン」の 2 ピンさえあれば 2 つの機器間でシリアル通信によりデータをやり取り出来ます(※)。
 </p>
 
 <p>
@@ -40,7 +40,7 @@ UART/RS-232C を使うと基本的には「Rxピン」と「Txピン」の 2 ピ
 </p>
 
 <div class="info">
-<input type="checkbox"><b>UART/RS-232Cの接続方法:</b>
+<input type="checkbox"><b>UARTの接続方法:</b>
 
 <p>
 Rx : レシーブド・イクスチェンジ ・・・データを受信する

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>2. 出力</title>
+<title>2. RS-232C</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [2] UART/RS-232C</li>
+<li>学習項目: [2] UART(シリアル通信)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,21 +20,23 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ある機器から別の機器に UART/RS-232C を使ってデータを出力したい場合は、送信側機器の Tx ピンと受信側機器の Rx ピンを線 1 本で繋ぐだけで可能です。
+「<b>RS-232C</b>(Recommended Standard 232C)」もシリアル通信を行うためのインターフェースで、こちらも「シリアル通信」と同じ意味で使われることも多いです。
+</p>
+
+<p>
+RS-232C も UART と同様にある機器と別の機器間でデータを送受信したい場合は、送信側機器の Tx ピンと受信側機器の Rx ピンを相互に繋ぐだけで可能です。
 </p>
 
 <p>
 ただし UART と RS-232C は入出力の電圧レベルが異なるため、回路内に UART と RS-232C が混在している場合は電圧レベルに注意する必要があります。
 <br>
 具体的には、UARTは 0V 〜 3.3V/5V ですが、RS-232C の電圧レベルは -15V 〜 +15V になります。
-</p>
-
-<p>
+<br>
 さらに細かい事をいうと信号論理も逆になっていて、UART は 0V がfalse(0)、3.3V/5V がtrue(1)ですが、RS-232Cは＋がfalse(0)、−がtrue(1)になっています。
 </p>
 
 <p>
-従って UART と RS-232C の間に電圧レベル変換回路を入れないと通信出来ないばかりか、機器や回路が壊れる事もあるので注意して下さい。
+従って UART と RS-232C を接続する場合は間に電圧レベル変換回路を入れないと通信出来ないばかりか、機器や回路が壊れる事もあるので注意して下さい。
 </p>
 
 <br>

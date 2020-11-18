@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [2] UART/RS-232C</li>
+<li>学習項目: [2] UART(シリアル通信)</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,22 +24,25 @@
 </p>
 
 <br>
-<h2><a href="./page01.html">1. UART/ RS-232Cとは</a></h2>
-<h2><a href="./page02.html">2. 出力</a></h2>
+<h2><a href="./page01.html">1. UART とは</a></h2>
+<h2><a href="./page02.html">2. RS-232C</a></h2>
+<h2><a href="./page03.html">3. SPP</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> PIC から PC へデータを送ってみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> UART を使って PIC と Bluetooth モジュール間を接続し、さらに SPP を使って PC と PIC 間を接続し、PC から PIC を制御してみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
 <b>仕様:</b>
 </p>
 <ol>
-<li> 11 ピン を Tx とする</li>
-<li> 通信速度は 115200 ボーとする</li>
-<li> 電圧レベル変換回路として ADM3202AN を使用する</li>
-<li> PIC から PC 側に 1000ミリ秒毎に数字がカウントアップしてが送られる( 0, 1, 2, ・・・みたいに)</li>
+<li> Bluetooth モジュールとして RN-42 を使用する </li>
+<li> PIC の 8 ピン を Rx、11 ピン を Tx とする</li>
+<li> PIC と RN-42 間の UART によるシリアル通信速度は 115200 bps とする</li>
+<li> PIC と PC 間の SPP によるシリアル通信速度も 115200 bps とする</li>
+<li> PC から PIC に文字 'a' が送られたら LED を点灯して文字列 "ON" をPC側に送信する</li>
+<li> PC から PIC に文字 'b' が送られたら LED を消灯して文字列 "OFF" をPC側に送信する</li>
 </ol>
 </div>
 <div class="olradio">
@@ -52,18 +55,10 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、「//#define USE_UART」のコメントアウトを解除します。
-<br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_2_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
-</p>
-<p>
-なお、ハードウェアでシリアル通信を制御するために複雑な設定や手順が必要となります。
 <br>
-従って今回は設定や手順については扱いませんが、もし詳しく知りたければテンプレート(uart.c)内のコメントを参照して下さい。
-</p>
-<p>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
 <p>
@@ -84,11 +79,11 @@ PIC
 5: VSS -- GND -- PICkit の 3: GND
 6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
 7: RB1
-8: RB2
+(*)8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: RB3
 
 10: RB4
-(*)11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx(黄)
+(*)11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
 12: ICSPCLK -- PICkit の 5: PGC
 13: ICSPDAT -- PICkit の 4: PGD
 14: VDD -- 3.3V -- PICkit の 2: VDD
@@ -99,88 +94,13 @@ PIC
 </pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> PC にUSB-シリアル変換器を接続し、適当な端末ソフトを起動してください(速度は 115200 ボー)。
+<span class="olradio"><input type="radio" name="p1"></span> PC と Bluetooth モジュールをペアリングし、SPP による仮想シリアルポートを PC 上に作成して下さい(方法は PC で使ってる OS による)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 適当な端末ソフトを起動して仮想シリアルポートを開いてください(通信速度 115200 bps、データビット 8 bit、パリティ無し、ストップビット 1 bit、フロー制御無し)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main.c」を記入して下さい。 
-</p>
-</div>
-
-
-<br>
-<h2><a href="./page03.html">3. 入力</a></h2>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 2-2 (個人PC、30分):</b> PC から PIC へデータを送ってみましょう。プログラムの仕様は以下の通りです。
-</p>
-<div class="info">
-<p>
-<b>仕様:</b>
-</p>
-<ol>
-<li> 8 ピン を Rx とする</li>
-<li> 通信速度は 115200 ボーとする</li>
-<li> 電圧レベル変換回路として ADM3202AN を使用する</li>
-<li> PC から 'a' が送られたら LED を点灯する</li>
-<li> PC から 'b' が送られたら LED を消灯する</li>
-</ol>
-</div>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_2_1」を「IO_2_2」にコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_2_1 を閉じます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_2_2.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 回路を作成します。
-</p>
-<p>
-以下の設定に従って回路を作成して下さい。
-<br>
-(*) が前の演習からの変更箇所です。
-</p>
-<div class="info">
-<pre class="wrap">
-<b>ピン配置設定・回路接続方法:</b>
-
-PIC
-
-1: RA2
-2: RA3
-3: RA4
-4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS -- GND -- PICkit の 3: GND
-6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
-7: RB1
-(*)8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
-9: RB3
-
-10: RB4
-11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx(黄)
-12: ICSPCLK -- PICkit の 5: PGC
-13: ICSPDAT -- PICkit の 4: PGD
-14: VDD -- 3.3V -- PICkit の 2: VDD
-15: RA6
-16: RA7
-17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
-18: RA1
-</pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> PC にUSB-シリアル変換器を接続し、適当な端末ソフトを起動してください(速度は 115200 ボー)。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main.c」を記入して下さい。 
 </p>
 </div>
 
