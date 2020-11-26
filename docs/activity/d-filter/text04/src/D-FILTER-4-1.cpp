@@ -2,39 +2,40 @@
 #include <stdlib.h>
 #include <math.h>
 
-// ³‹K—” N( mu, sigma^2)‚Ìo—Í
-// mu : •½‹Ï
-// sigma : •W€•Î· = ã•ªU
-double nrand( double mu, double sigma )
+// æ­£è¦ä¹±æ•° N( mu, sigma^2)ã®å‡ºåŠ›
+// mu : å¹³å‡
+// sigma2 : åˆ†æ•£
+double nrand( double mu, double sigma2 )
 {
-    // Box-Muller –@‚ğg—p
+    // Box-Muller æ³•ã‚’ä½¿ç”¨
+    double sigma = sqrt(sigma2);
     double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
     return mu + sigma*x;
 }
 
-// ©ŒÈ‘ŠŠÖ R[n]
+// è‡ªå·±ç›¸é–¢ R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // ©ŒÈ‘ŠŠÖ‚Ì‰‰K‚Åì¬‚µ‚½ ACR ŠÖ”‚Ì’†g‚ğƒRƒs[‚·‚é
+    // è‡ªå·±ç›¸é–¢ã®æ¼”ç¿’ã§ä½œæˆã—ãŸ ACR é–¢æ•°ã®ä¸­èº«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 }
 
 int main()
 {
-    const int L = 4; // üŒ`—\‘ªŸ”
+    const int L = 4; // ç·šå½¢äºˆæ¸¬æ¬¡æ•°
     const int N = 50000;
     const int Nout = 100;
     double X[N+L]={0};
-    double *x = X+L; // M†’l
-    double R[L+1]; // ©ŒÈ‘ŠŠÖŠÖ”
-    double P[L+1]; // PARCOR(ƒp[ƒR[ƒ‹)ŒW”
-    double a[L+1]; // LPC ŒW”
+    double *x = X+L; // ä¿¡å·å€¤
+    double R[L+1]; // è‡ªå·±ç›¸é–¢é–¢æ•°
+    double P[L+1]; // PARCOR(ãƒ‘ãƒ¼ã‚³ãƒ¼ãƒ«)ä¿‚æ•°
+    double a[L+1]; // LPC ä¿‚æ•°
     double a2[L+1];
 
     for(int i=0;i < N; ++i ){
         x[i] = ? ;
     }
 
-    // ƒŒƒrƒ“ƒ\ƒ“Eƒ_[ƒrƒ“(Levinson-Durbin)EƒAƒ‹ƒSƒŠƒYƒ€
+    // ãƒ¬ãƒ“ãƒ³ã‚½ãƒ³ãƒ»ãƒ€ãƒ¼ãƒ“ãƒ³(Levinson-Durbin)ãƒ»ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
     for(int n=0; n <= L; ++n ){
         R[n] = ACR( n, x, N );
     }
@@ -55,19 +56,19 @@ int main()
         }
     }
 
-    printf("LPCŒW”\n");
+    printf("LPCä¿‚æ•°\n");
     for( int n = 1; n <= L; ++n ){
         printf( "a[%d] = %lf\n", n, a[n] );
     }
 
-    printf("PARCORŒW”\n");
+    printf("PARCORä¿‚æ•°\n");
     for( int n = 1; n <= L; ++n ){
         printf( "P[%d] = %lf\n", n, P[n] );
     }
 
     FILE* file = fopen( "DFILTER-4-1-x.csv", "wb");
     if( file == NULL ){
-        printf( "ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ");
+        printf( "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){

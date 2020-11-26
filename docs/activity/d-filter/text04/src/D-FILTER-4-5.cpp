@@ -5,43 +5,43 @@
 
 
 ///////////////////////////
-// ‚±‚±‚©‚ç
+// ã“ã“ã‹ã‚‰
 
-const int L = 100; // üŒ`—\‘ªŸ”
-const int OCTAVE = 4; // ƒIƒNƒ^[ƒu
+const int L = 100; // ç·šå½¢äºˆæ¸¬æ¬¡æ•°
+const int OCTAVE = 3; // ã‚ªã‚¯ã‚¿ãƒ¼ãƒ–
 const double VOICEGAIN[] = {
-    1.0, // "ƒA"‚Ì‰¹—Ê
-    1.0, // "ƒC"‚Ì‰¹—Ê
-    1.0, // "ƒE"‚Ì‰¹—Ê
-    1.0, // "ƒG"‚Ì‰¹—Ê
-    1.0  // "ƒI"‚Ì‰¹—Ê
+    1.0, // "ã‚¢"ã®éŸ³é‡
+    1.0, // "ã‚¤"ã®éŸ³é‡
+    1.0, // "ã‚¦"ã®éŸ³é‡
+    1.0, // "ã‚¨"ã®éŸ³é‡
+    1.0  // "ã‚ª"ã®éŸ³é‡
 };
 
-// ©ŒÈ‘ŠŠÖ R[n]
+// è‡ªå·±ç›¸é–¢ R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // ©ŒÈ‘ŠŠÖ‚Ì‰‰K‚Åì¬‚µ‚½ ACR ŠÖ”‚Ì’†g‚ğƒRƒs[‚·‚é
+    // è‡ªå·±ç›¸é–¢ã®æ¼”ç¿’ã§ä½œæˆã—ãŸ ACR é–¢æ•°ã®ä¸­èº«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 
 }
 
-// ƒŒƒrƒ“ƒ\ƒ“Eƒ_[ƒrƒ“EƒAƒ‹ƒSƒŠƒYƒ€
+// ãƒ¬ãƒ“ãƒ³ã‚½ãƒ³ãƒ»ãƒ€ãƒ¼ãƒ“ãƒ³ãƒ»ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
 void LevinsonDurbin(
-    double *a,// LPC ŒW”
-    double *P, // PARCOR(ƒp[ƒR[ƒ‹)ŒW”
-    const double* x, // “ü—Í
+    double *a,// LPC ä¿‚æ•°
+    double *P, // PARCOR(ãƒ‘ãƒ¼ã‚³ãƒ¼ãƒ«)ä¿‚æ•°
+    const double* x, // å…¥åŠ›
     const int N )
 {
-    double R[L+1]; // ©ŒÈ‘ŠŠÖŠÖ”
+    double R[L+1]; // è‡ªå·±ç›¸é–¢é–¢æ•°
     double a2[L+1];
 
-    // ‰‰K 4-1 ‚ÌƒŒƒrƒ“ƒ\ƒ“Eƒ_[ƒrƒ“EƒAƒ‹ƒSƒŠƒYƒ€‚ğƒRƒs[‚·‚é
+    // æ¼”ç¿’ 4-1 ã®ãƒ¬ãƒ“ãƒ³ã‚½ãƒ³ãƒ»ãƒ€ãƒ¼ãƒ“ãƒ³ãƒ»ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
 
 }
 
-// AR ƒ‚ƒfƒ‹
-void AR( double *x, // AR ƒ‚ƒfƒ‹o—Í
-         const double *a, // LPC ŒW”
-         const double *err, // “ü—Í (üŒ`—\‘ªŒë·)
+// AR ãƒ¢ãƒ‡ãƒ«
+void AR( double *x, // AR ãƒ¢ãƒ‡ãƒ«å‡ºåŠ›
+         const double *a, // LPC ä¿‚æ•°
+         const double *err, // å…¥åŠ› (ç·šå½¢äºˆæ¸¬èª¤å·®)
          const int N )
 {
     for(int i=0;i < N; ++i ){
@@ -49,11 +49,12 @@ void AR( double *x, // AR ƒ‚ƒfƒ‹o—Í
         for( int n = 1; n <= L; ++n ){
             x[i] += ? ;
         }
+        x[i] *= ? ;
         x[i] += ? ;
     }
 }
 
-// ‚±‚±‚Ü‚Å
+// ã“ã“ã¾ã§
 ///////////////////////////
 
 enum
@@ -86,7 +87,7 @@ struct NOTE
     int scale;
 };
 
-// o—Í‰¹º‚Ì“à—e‚ğ•Ï‚¦‚½‚¢‚ÍˆÈ‰º‚ğC³‚·‚é
+// å‡ºåŠ›éŸ³å£°ã®å†…å®¹ã‚’å¤‰ãˆãŸã„æ™‚ã¯ä»¥ä¸‹ã‚’ä¿®æ­£ã™ã‚‹
 const NOTE notes[] =
 {
     {VOICE_A, SCALE_C},
@@ -129,15 +130,15 @@ const NOTE notes[] =
     {VOICE_A, SCALE_D},
 };
 
-const double STARTPOS = 1.0;  // wave ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İŠJnˆÊ’u (•b)
-const double DURATION = 0.5;  // wave ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İƒTƒCƒY (•b)
-const int MAXHZ = 8000; // wave ƒtƒ@ƒCƒ‹‚ÉŠÜ‚Ü‚ê‚éÅ‘åü”g” (Hz)
+const double STARTPOS = 1.0;  // wave ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿é–‹å§‹ä½ç½® (ç§’)
+const double DURATION = 0.5;  // wave ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã‚µã‚¤ã‚º (ç§’)
+const int MAXHZ = 8000; // wave ãƒ•ã‚¡ã‚¤ãƒ«ã«å«ã¾ã‚Œã‚‹æœ€å¤§å‘¨æ³¢æ•° (Hz)
 
-const int MAXL = 256; // üŒ`—\‘ªŸ”‚ÌÅ‘å’l
-const double NOTELNG = 0.5; // 1 ‰¹‚Ì’·‚³(•b)
-const double ERRAMP = 100.0; // “ü—Í(üŒ`—\‘ªŒë·)‚ÌƒCƒ“ƒpƒ‹M†‚Ì‘å‚«‚³
-const double GAIN = 1.0; // o—Í‚ÌƒQƒCƒ“
-const double ERRGAIN = 50.0; // üŒ`—\‘ªŒë·‚ÌƒQƒCƒ“
+const int MAXL = 256; // ç·šå½¢äºˆæ¸¬æ¬¡æ•°ã®æœ€å¤§å€¤
+const double NOTELNG = 0.5; // 1 éŸ³ã®é•·ã•(ç§’)
+const double ERRAMP = 100.0; // å…¥åŠ›(ç·šå½¢äºˆæ¸¬èª¤å·®)ã®ã‚¤ãƒ³ãƒ‘ãƒ«ä¿¡å·ã®å¤§ãã•
+const double GAIN = 1.0; // å‡ºåŠ›ã®ã‚²ã‚¤ãƒ³
+const double ERRGAIN = 50.0; // ç·šå½¢äºˆæ¸¬èª¤å·®ã®ã‚²ã‚¤ãƒ³
 const double scale_freq[]={ 261.6, 293.7, 329.6, 349.2, 392.0, 440.0, 493.9 };
 
 struct VOICE
@@ -149,56 +150,56 @@ struct VOICE
     double *P;
 };
 
-// •W€ WAVE ƒwƒbƒ_ ( 44 byte )
+// æ¨™æº– WAVE ãƒ˜ãƒƒãƒ€ ( 44 byte )
 struct WAVEFORMAT
 {
     char riff[ 4 ];             // = "RIFF"
-    unsigned int total_size;    // ‘S‘ÌƒTƒCƒY
+    unsigned int total_size;    // å…¨ä½“ã‚µã‚¤ã‚º
     char fmt[ 8 ];              // "WAVEfmt "
-    unsigned int fmt_size;      // fmt ƒ`ƒƒƒ“ƒNƒTƒCƒY
-    unsigned short  format;     // ƒtƒH[ƒ}ƒbƒg‚Ìí—Ş
-    unsigned short  channel;    // ƒ`ƒƒƒ“ƒlƒ‹
-    unsigned int   rate;        // ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg
+    unsigned int fmt_size;      // fmt ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
+    unsigned short  format;     // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ç¨®é¡
+    unsigned short  channel;    // ãƒãƒ£ãƒ³ãƒãƒ«
+    unsigned int   rate;        // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆ
     unsigned int   avgbyte;     // rate * block
     unsigned short  block;      // channels * bit / 8
-    unsigned short  bit;        // ƒrƒbƒg”
+    unsigned short  bit;        // ãƒ“ãƒƒãƒˆæ•°
     char data[ 4 ];             // = "data"
-    unsigned int data_size;     // data ƒ`ƒƒƒ“ƒNƒTƒCƒY
+    unsigned int data_size;     // data ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
 };
 
 short* read_wav( const char* file, WAVEFORMAT *wavefmt )
 {
     FILE * fin = fopen( file, "rb" );
     if( !fin ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒtƒH[ƒ}ƒbƒgæ“¾
+    // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå–å¾—
     size_t ret = fread( wavefmt, 1, sizeof( WAVEFORMAT ) - 8, fin );
 
     if( ret != sizeof( WAVEFORMAT ) -8 ){
-       fprintf( stderr, "ƒwƒbƒ_‚ª‰ó‚ê‚Ä‚¢‚Ü‚·\n" );
+       fprintf( stderr, "ãƒ˜ãƒƒãƒ€ãŒå£Šã‚Œã¦ã„ã¾ã™\n" );
        exit(EXIT_FAILURE);
     }
     if( wavefmt->riff[ 0 ] != 'R' || wavefmt->riff[ 1 ] != 'I' ){
-        fprintf( stderr, "Wave ƒtƒ@ƒCƒ‹‚Å‚Í‚ ‚è‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "Wave ãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt->channel != 1 ){
-        fprintf( stderr, "ƒXƒeƒŒƒI‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ã‚¹ãƒ†ãƒ¬ã‚ªéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt->rate < MAXHZ*2 ){
-        fprintf( stderr, "ƒTƒ“ƒvƒŠƒ“ƒOü”g”‚ª’á‚¢‚Å‚·\n" );
+        fprintf( stderr, "ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•°ãŒä½ã„ã§ã™\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt->bit != 16 ){
-        fprintf( stderr, "8bit‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "8bitéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
 
-    // data ‚Ü‚ÅƒXƒLƒbƒv
+    // data ã¾ã§ã‚¹ã‚­ãƒƒãƒ—
     size_t pos = sizeof( WAVEFORMAT ) - 8;
     while( pos < 200 && ( wavefmt->data[0] != 'd' || wavefmt->data[1] != 'a' ) ){
         fseek( fin, pos++, SEEK_SET );
@@ -206,30 +207,30 @@ short* read_wav( const char* file, WAVEFORMAT *wavefmt )
     }
 
     if( wavefmt->data[ 0 ] != 'd' || wavefmt->data[ 1 ] != 'a' ){
-        fprintf( stderr, "ƒf[ƒ^‚ª‚ ‚è‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚Šã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒf[ƒ^ƒTƒCƒY‚ğæ“¾
+    // ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’å–å¾—
     ret = fread( &wavefmt->data_size, 1, sizeof( unsigned int ), fin );
 
     const double duration = (double)wavefmt->data_size / wavefmt->avgbyte;
     if( duration < STARTPOS + DURATION ){
-        fprintf( stderr, "˜^‰¹ŠÔ‚ª’Z‚¢‚Å‚·\n" );
+        fprintf( stderr, "éŒ²éŸ³æ™‚é–“ãŒçŸ­ã„ã§ã™\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒtƒH[ƒ}ƒbƒgÄİ’è
+    // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå†è¨­å®š
     wavefmt->fmt_size = 16;
     wavefmt->data_size = (unsigned int)( DURATION * wavefmt->avgbyte );
     wavefmt->total_size = sizeof( WAVEFORMAT ) + wavefmt->data_size - 8;
 
-    // STARTPOS •b‚©‚ç DURATION •bŠÔ‚Ìƒf[ƒ^“Ç‚İ‚İ
+    // STARTPOS ç§’ã‹ã‚‰ DURATION ç§’é–“ã®ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
     short* buf = ( short* )calloc( 1, wavefmt->data_size );
     fseek( fin, (unsigned int)(STARTPOS * wavefmt->avgbyte), SEEK_CUR );
     ret = fread( buf, 1, wavefmt->data_size, fin );
     if( ret != wavefmt->data_size ){
-       fprintf( stderr, "ƒf[ƒ^‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½\n" );
+       fprintf( stderr, "ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
        exit(EXIT_FAILURE);
     }
 
@@ -242,7 +243,7 @@ void save_wav( const char* file, const WAVEFORMAT* wavefmt, const short* buf )
 {
     FILE* fout = fopen( file, "wb" );
     if( !fout ){
-        fprintf( stderr, "%s ‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n", file );
+        fprintf( stderr, "%s ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n", file );
         exit(EXIT_FAILURE);
     }
     fwrite( wavefmt, 1, sizeof( WAVEFORMAT ), fout );
@@ -253,7 +254,7 @@ void save_wav( const char* file, const WAVEFORMAT* wavefmt, const short* buf )
 
 int main()
 {
-    // ƒeƒ“ƒvƒŒ[ƒg‰¹º“Ç‚İ‚İ
+    // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆéŸ³å£°èª­ã¿è¾¼ã¿
     VOICE voice[] ={
         { "a.wav", NULL, NULL, NULL, NULL },
         { "i.wav", NULL, NULL, NULL, NULL },
@@ -297,7 +298,7 @@ int main()
     double* x2 = ( double* )calloc( 1, (N2+MAXL)*sizeof(double) ) + MAXL;
     short* buf2 = ( short* )calloc( 1, wavefmt2.data_size );
 
-    // LPC ŒW”
+    // LPC ä¿‚æ•°
     for( int i = 0; i < voice_size; ++i ){
         LevinsonDurbin( voice[i].a, voice[i].P, voice[i].x, N );
     }
@@ -314,18 +315,19 @@ int main()
         pre_s = s;
         if( s != SCALE_R ){
 
-            // —\‘ªŒë·
-            const double f = scale_freq[ notes[ n ].scale ] / pow(2,(4-OCTAVE));
-            const int T = (int)( f_s/ f );
+            // äºˆæ¸¬èª¤å·® err[i] ã®è¨ˆç®—
+            // å‘¨æœŸ T ã®ãƒ‘ãƒ«ã‚¹éŸ³ã¨ã™ã‚‹
+            const double f = scale_freq[ notes[ n ].scale ] / pow(2,(4-OCTAVE)); // å‘¨æ³¢æ•°
+            const int T = (int)( f_s/ f ); // å‘¨æœŸ
             fprintf( stderr, "%02d: v = %c, f = %5.1lf Hz, T = %d\n", n, *voice[v].file, f, T );
             for( int i2 = 0 ; i2 < duration; ++i, ++i2 ){
                 if( i % T == 0 ) err[ duration*n + i2 ] = ERRAMP;
             }
 
-            // ©ŒÈ‰ñ‹A
+            // è‡ªå·±å›å¸°
             AR( x2 + duration*n, voice[v].a, err + duration*n, duration );
 
-            // ƒQƒCƒ“’²®
+            // ã‚²ã‚¤ãƒ³èª¿æ•´
             for( int i2 = 0 ; i2 < duration; ++i2 ){
                 x2[ duration*n + i2 ] *= VOICEGAIN[v];
             }
