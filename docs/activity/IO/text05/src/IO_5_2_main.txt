@@ -1,0 +1,44 @@
+#include "config.h"
+#include "setting.h"
+
+int count = 0;
+int period = 0;
+
+void main(void) {
+
+    init();
+
+    // タイマーの割り込み周期(クロック)の計算方法
+    //
+    // タイマーがカウントアップする間隔を τ 秒とすると
+    // 
+    // τ = 1 / タイマークロック * prescale [秒]
+    //
+    // なので、a 秒間隔で割り込みをかけたい場合は
+    //
+    // period = a/τ = a * タイマークロック / prescale [クロック]
+    //
+    // と計算します ※ 16bitの範囲(65535)を超えないように注意
+    //
+    // 今回はタイマークロック = FOSC/4 = 1 MHz、prescale = x8 なので
+    //
+    // period = a * 1000000 / 8
+    //
+    period = ? ;
+    
+    // Timer1 のカウンターに値をセットし、割り込みフラグをリセットします
+    //
+    // TMR1 が 65535 から 0 に戻る時に割り込みがかかるので、TMR1 には
+    // 65536 - period の値を代入すれば丁度 preiod クロック経過後
+    // に割り込みが発生します
+    TMR1 = (unsigned short)( 65536 - ? );
+    
+    PIR1bits.TMR1IF = 0; // 一応割り込みフラグクリア
+    
+    while(1){
+        printf("count=%d\r\n", ? );
+        __delay_ms(1000);
+    }
+
+    return;
+}

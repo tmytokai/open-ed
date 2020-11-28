@@ -1,0 +1,16 @@
+#include "config.h"
+#include "setting.h"
+
+int count = 0;
+
+void main(void) {
+
+    init();
+
+    while(1){
+        printf("count=%d\r\n", ? );
+        __delay_ms(1000);
+    }
+
+    return;
+}
