@@ -26,53 +26,25 @@
 <br>
 <h2><a href="./page01.html">1. SPI とは</a></h2>
 
-<br>
+
 <p>
-<input type="checkbox"><b>演習 5-1 (個人PC、70分):</b> Arduino UNO から SPI 経由で音声合成LSIにデータを送信し、任意の音声を出力をしてみましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
+<input type="checkbox"><b>演習 6-1 (個人PC、30分):</b> SPI 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
-<b>仕様:</b>
 <p>
-(LSI側)
-</p>
-<p>
-(1) 「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する。
-</p>
-<p>
-(2) 5V 駆動とする。
-</p>
-<p>
-(3) オーディオ出力(AOUT)に圧電スピーカーを直結する。
-</p>
-<p>
-(4) 通信モード(SMOD0,SMOD1)は「SPI (MODE0)」、動作モード(PMOD0,PMOD1)は「セーフモード」とする。
-</p>
-<p>
-(Arduino側)
-</p>
-<p>
-(5) SPI の設定はビットオーダー「MSBFIRST」、クロック「SPI_CLOCK_DIV16 (= 1 MHz ※)」、通信モード「SPI_MODE0」とする。
-</p>
-<p>
-※ Arduino UNO のシステムクロックは 16 MHz なので 16 で割る(DIVide 16MHz by 16 = 1MHz)と丁度1MHzになる
-</p>
-<p>
-(6) Arduino 側の <span class="overline">SS</span> ピンはデフォルトの 10 ピンとする( digitalWrite 関数で "SS" と指定出来る)。
-その他 MOSI = 11、MISO = 12、SCK = 13。
-</p>
-<p>
-(6) 適当な音声( 1 秒程度)を出力する。
-</p>
-<p>
-(7) 100ミリ秒間隔を空けて音声出力を繰り返す。
-</p>
+<b>仕様 : </b>
+
+<ol>
+<li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する</li>
+<li> PIC 側をマスターとする</li>
+<li> SPI のモードは「MODE0」、ビットオーダーは「MSBFIRST」、クロックは「1 MHz」とする</li>
+<li> 文字列は 1 文字ずつ送る ※ 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意</li>
+</ol>
+
 </div>
+
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>以下のピン配置に従って回路を組んで下さい。
+<b>ATP3011 のピン配置 : </b>
 </p>
 
 <table>
@@ -87,7 +59,7 @@
 <tr>
 <td class="center">4</td>
 <td class="center">SMOD0</td>
-<td rowspan="2"> 通信モードの設定<br>SMOD0=0,SMOD=0 → SPI(MODE0)<br>SMOD0=0,SMOD=1 → I2C</td>
+<td rowspan="2"> 通信モードの設定<br>SMOD0=0、SMOD=0 → SPI(MODE0)<br>SMOD0=0、SMOD=1 → I2C</td>
 </tr>
 <tr>
 <td class="center">5</td>
@@ -137,7 +109,7 @@
 <tr>
 <td class="center">14</td>
 <td class="center">PMOD0</td>
-<td rowspan="2"> 動作モードの設定<br> PMOD0=0,PMOD1=1 → セーフモード</td>
+<td rowspan="2"> 動作モードの設定<br> PMOD0=0、PMOD1=1 → セーフモード</td>
 </tr>
 <tr>
 <td class="center">15</td>
@@ -200,45 +172,63 @@
 
 </table>
 
+<div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_3」を「IO_6_1」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
-</p>
-<p>
-※1 setup の中で SPI の初期設定を行う。
-</p>
-<p>
-　ビットオーダー: SPI.setBitOrder(MSBFIRST)
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_3 を閉じます。
 <br>
-　クロック: SPI.setClockDivider(SPI_CLOCK_DIV16)
+<span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-　通信モード: SPI.setDataMode(SPI_MODE0)
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、SPI(USE_MSSP1_SPI) のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_spi.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_6_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
 <p>
-　以上の設定をしたら SPI.begin() で SPI 通信を開始する。
+以下の設定に従って回路を作成して下さい。
 <br>
-　なお初期設定方法は現在は beginTransaction + SPISettings を使用することが推奨されているが、今回はバージョンの都合で以上の古い関数を使う。
+(*) が前の演習からの変更箇所です。
 </p>
-<p>
-※2 今回は接続機器が 1 台しか無いので setup の中で <span class="overline">SS</span>ピンを予め LOW にしておく。
-<br>
-なお LOW にしたら 1000 ミリ秒程度 delay を入れること。
-</p>
-<p>
-※3 文字列は 1 文字ずつ送り、その都度 1 ミリ秒 delay を入れること。
-</p>
-<p>
-※4 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
-</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+1: RA2
+2: RA3
+3: CCP4 (PWM) -- 圧電スピーカ
+4: MCLR/VPP -- PICkit の 1: NMCLR
+5: VSS -- GND
+6: RB0/INT (GPIO入力/INT割り込み) -- スイッチ
+(*)7: SDI1 -- ATP3011 の 18 : SDO
+8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
+9: CCP1 (PWM) -- オシロスコープ
+
+(*)10: SCK1 -- ATP3011 の 19 : SCK
+11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V
+(*)15: SDO1 -- ATP3011 の 17 : SDI
+(*)16: CS -- ATP3011 の 16 : CS
+17: RA0 (GPIO出力) -- LED
+18: AN1 (ADC) -- 可変抵抗の中央ピン
+</pre>
 </div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「mssp_spi.c」と「main.c」を記入してください。
+</p>
 
 <script>PreNext(2,1)</script>
 </body>

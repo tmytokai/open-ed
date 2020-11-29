@@ -50,104 +50,16 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、「//#define USE_ADC」のコメントアウトを解除します。 
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> adc.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、ADC機能(USE_ADC) のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Modules/adc.c を開きます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_3_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
-</p>
-<p>
-この演習で気をつける必要がある設定は以下の通りです。
-</p>
-<div class="info">
-<pre class="wrap">
-<b>adc.c 内</b>
-
-<b>設定 1:</b>
-
-TRISA  ※ 8bit レジスタ
-TRISB  ※ 8bit レジスタ
-
-(解説)
-
-ポート A,B の入出力設定を上書きします
-0 にすると出力モード、1 にすると入力モードになります
-詳しくはデータシート 120p(ポートA)と126p(ポートB) を参照してください
-
-
-<b>設定 2:</b>
-
-ANSELA  ※ 8bit レジスタ
-ANSELB  ※ 8bit レジスタ
-
-(解説)
-
-ポート A,B のアナログ入力を上書きします
-0 にするとデジタル入出力モード、1 にするとアナログ入力モードになります
-アナログ入力モードにする場合は対応する TRISx も入力モードにして下さい
-詳しくはデータシート 122p(ポートA)と128p(ポートB) を参照してください
-
-
-<b>設定 3:</b>
-
-ADCON0bits.ADON  ※ 8bit レジスタ ADCON0 の bit 0
-
-(解説)
-
-1 を入れるとAD変換機能をONにします
-詳しくはデータシート 143p を参照してください
-
-
-<b>設定 4:</b>
-
-ADCON1bits.ADFM ※ 8bit レジスタ ADCON1 の bit 7
-
-(解説)
-
-結果の出力形式を右詰めにするか左詰めにするかの設定です
-1が右詰め、0が左詰めです
-今回は右詰めにします
-詳しくはデータシート 140p の図 15-3と 144p を参照してください
-   
-
-<b>設定 5:</b>
-
-ADCON0bits.CHS ※ 8bit レジスタ ADCON0 の bit 6〜2
-
-(解説)
-
-入力するチャンネル(ポート)の設定です
-ANx の x を指定します (xの範囲は0〜11)
-1827はAD変換モジュールを1つしか持ってないので同時に1チャンネルしかAD変換できません
-そのため複数チャンネルでAD変換を行いたい場合はチャンネルを切り替えながら使います
-詳しくはデータシート 143p を参照してください
-    
-チャンネルをセットしたらアクイジョンタイムを入れて準備完了まで少し待ちます
-今回は適当に 20 マイクロ秒としますが、時間を真面目に計算したい場合は 147p の計算式を参照してください
-
-
-<b>設定 6:</b>
-
-ADCON0bits.GO_nDONE ※ 8bit レジスタ ADCON0 の bit 1
-
-(解説)
-
-AD変換を開始します
-1 を入れると変換を始めて、変換が終わると 0 に戻ります
-詳しくはデータシート 143p を参照してください
-
-
-<b>AD変換の結果:</b>
-
-AD変換の結果は 10bit の値として ADRESH と ADRESL に入ります
-10bitなので 0 V 〜 動作電圧 V の入力が 0〜1023 の整数値に変換されます
-なお今回は ADCON1bit.ADFM = 1 としてるので出力形式は右詰めになります
-詳しくはデータシート 140p の図 15-3 を参照してください
-</pre>
-</div>
-<p>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<br>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
 <p>
@@ -159,33 +71,25 @@ AD変換の結果は 10bit の値として ADRESH と ADRESL に入ります
 <pre class="wrap">
 <b>ピン配置設定・回路接続方法:</b>
 
-PIC
-
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
-5: VSS -- GND -- PICkit の 3: GND
-6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+4: MCLR/VPP -- PICkit の 1: NMCLR
+5: VSS -- GND
+6: RB0 (GPIO入力) -- スイッチ
 7: RB1
-8: Rx (UART) -- ADM3202 の 12: R1OUT -- ADM3202 の 13: R1IN -- RS-232C の Tx(白)
+8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: RB3
 
 10: RB4
-11: Tx (UART) -- ADM3202 の 11: T1IN -- ADM3202 の 14: T1OUT -- RS-232C の Rx (黄)
+11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
 12: ICSPCLK -- PICkit の 5: PGC
 13: ICSPDAT -- PICkit の 4: PGD
-14: VDD -- 3.3V -- PICkit の 2: VDD
+14: VDD -- 3.3V
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
-(*)18: AN1 (ADC) -- 可変抵抗の真中ピン -- GND
-
-
-可変抵抗(上記以外のピン)
-
-(*)左側ピン: 3.3V
-(*)右側ピン: GND
+17: RA0 (GPIO出力) -- LED
+(*)18: AN1 (ADC) -- 可変抵抗の中央ピン
 </pre>
 </div>
 <p>

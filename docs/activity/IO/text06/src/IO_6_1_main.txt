@@ -1,0 +1,32 @@
+#include "config.h"
+#include "setting.h"
+
+void main(void){
+    
+    init();
+
+    RA7 = ? ; // ローアクティブなので CS = 1 にしてATP3011を非アクティブにする
+    __delay_ms(100);
+
+    RA7 = ? ; // CS = 0 にしてATP3011をアクティブにする
+    __delay_ms(1000); // ATP3011の初期化待ち
+
+    while(1){
+        
+       int c = getch();
+       if( c != EOF && c != '\n'){
+           
+           if( c == '@') c = 0xff; // '@' を押したらダミーデータ(0xFF)を送る
+           printf("%c(0x%x) -> ",c,c);
+           
+           // 1文字送信
+           mssp1_spi_putch((char)c);
+           
+           // 1文字受信
+           int ret = mssp1_spi_getch();
+           printf("%c\r\n",ret);
+       }
+    }
+
+   return;
+}

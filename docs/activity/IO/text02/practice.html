@@ -30,7 +30,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> UART を使って PIC と Bluetooth モジュール間を接続し、さらに SPP を使って PC と PIC 間を接続し、PC から PIC を制御してみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 2-1 (個人PC、30分):</b> UART を使って PIC と Bluetooth モジュール(RN-42)間を接続し、さらに SPP を使って Bluetooth モジュールと PC 間を接続し、PC から PIC を制御してみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -40,7 +40,7 @@
 <li> Bluetooth モジュールとして RN-42 を使用する </li>
 <li> PIC の 8 ピン を Rx、11 ピン を Tx とする</li>
 <li> PIC と RN-42 間の UART によるシリアル通信速度は 115200 bps とする</li>
-<li> PIC と PC 間の SPP によるシリアル通信速度も 115200 bps とする</li>
+<li> RN-42 と PC 間の SPP によるシリアル通信速度も 115200 bps とする</li>
 <li> PC から PIC に文字 'a' が送られたら LED を点灯して文字列 "ON" をPC側に送信する</li>
 <li> PC から PIC に文字 'b' が送られたら LED を消灯して文字列 "OFF" をPC側に送信する</li>
 </ol>
@@ -55,9 +55,13 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART) のコメントアウトを解除します。 
+<br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_2_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので？のところを正しい内容に修正してください。
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
@@ -75,9 +79,9 @@ PIC
 1: RA2
 2: RA3
 3: RA4
-4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-6: RB0 (入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無 
+6: RB0 (GPIO入力) -- スイッチ
 7: RB1
 (*)8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: RB3
@@ -89,12 +93,12 @@ PIC
 14: VDD -- 3.3V
 15: RA6
 16: RA7
-17: RA0 (出力) -- LED -- 抵抗(330Ω)  -- GND
+17: RA0 (GPIO出力) -- LED
 18: RA1
 </pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> PC と Bluetooth モジュールをペアリングし、SPP による仮想シリアルポートを PC 上に作成して下さい(方法は PC で使ってる OS による)。
+<span class="olradio"><input type="radio" name="p1"></span> PC と RN-42 をペアリングし、SPP による仮想シリアルポートを PC 上に作成して下さい(方法は PC で使ってる OS による)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 適当な端末ソフトを起動して仮想シリアルポートを開いてください(通信速度 115200 bps、データビット 8 bit、パリティ無し、ストップビット 1 bit、フロー制御無し)。
 <br>
