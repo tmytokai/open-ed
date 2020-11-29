@@ -1,0 +1,61 @@
+#include "config.h"
+#include "setting.h"
+
+int period = 0;
+int width = 0;
+
+void main(void){
+
+    init();
+    
+    // 周期 period と幅 width (クロック)の計算方法
+    //
+    // タイマーがカウントアップする間隔を τ 秒とすると
+    // 
+    // τ = 1 / タイマークロック * prescale [秒]
+    //
+    // なので、周期や幅を a 秒としたい場合は
+    //
+    //  a/τ = a * タイマークロック / prescale [クロック]
+    //
+    // と計算します ※ 16bitの範囲(65535)を超えないように注意
+    //
+    // 今回はタイマークロック = FOSC/4 = 1 MHz、prescale = x8 なので
+    //
+    // a * 1000000 / 8
+    //
+    period = ? ;
+    width = ? ;
+    
+    // Timer1 のカウンターとCCPR1に初期値をセットします
+    // タイマー割り込みが起きてから width クロック後にコンペア割り込みをかけます
+    // タイマー割り込みが起きた時に PWM 出力を High、コンペア割り込みが起きた時に Low にします
+    TMR1 = (unsigned short)( 65536 - ? );
+    CCPR1 = (unsigned short)( 65536 - ? + ? );
+    
+    // 一応割り込みフラグをクリアしておきます
+    PIR1bits.TMR1IF = 0; 
+    PIR1bits.CCP1IF = 0 ;
+
+    while(1){
+        if( RB0 == 1 ){
+
+          printf("period = 16 msec, width = 8 msec\r\n");
+          
+          period = ? ;
+          width = ? ;
+
+       }
+        else{
+
+          printf("period = 8 msec, width = 6 msec\r\n");
+          
+          period = ? ;
+          width = ? ;
+       }
+        
+        __delay_ms(100);
+    }
+
+   return;
+}

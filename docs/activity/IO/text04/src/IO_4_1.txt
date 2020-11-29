@@ -38,6 +38,8 @@ void main(void){
           CCP1CONbits.DC1B1 = ? ;
           CCP1CONbits.DC1B0 = ? ;
        }
+
+       __delay_ms(100);
     }
 
    return;
