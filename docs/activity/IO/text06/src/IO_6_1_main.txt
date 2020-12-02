@@ -16,8 +16,16 @@ void main(void){
        int c = getch();
        if( c != EOF && c != '\n'){
            
-           if( c == '@') c = 0xff; // '@' を押したらダミーデータ(0xFF)を送る
-           printf("%c(0x%x) -> ",c,c);
+           if( c == '@'){ // '@' を押したらダミーデータ(0xFF)を送る
+               c = 0xff;
+               printf("dummy(%x) : ",c);
+           }
+           else if( c == '\r' ){
+               printf("enter(%x) : ",c);
+           }
+           else{
+               printf("%c(%x) : ",c,c);
+           }
            
            // 1文字送信
            mssp1_spi_putch((char)c);

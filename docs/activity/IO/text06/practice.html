@@ -38,7 +38,6 @@
 <li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する</li>
 <li> PIC 側をマスターとする</li>
 <li> SPI のモードは「MODE0」、ビットオーダーは「MSBFIRST」、クロックは「1 MHz」とする</li>
-<li> 文字列は 1 文字ずつ送る ※ 文字列の最後に '.'(ドット) と '\r' を送らないと音が出ないので注意</li>
 </ol>
 
 </div>
@@ -51,9 +50,21 @@
 <tr><th>ピン</th><th>名称</th><th>説明</th></tr>
 
 <tr>
-<td class="center">1-3</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center">1</td>
+<td class="center"><span class="overline">RESET</span></td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">2</td>
+<td class="center">Rx</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">3</td>
+<td class="center">Tx</td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
@@ -68,52 +79,73 @@
 
 <tr>
 <td class="center">6</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center"><span class="overline">SLEEP</span></td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
 <td class="center">7</td>
 <td class="center">VCC</td>
-<td class="center">5V 接続</td>
+<td class="center">3.3V に接続</td>
 </tr>
 
 
 <tr>
 <td class="center">8</td>
 <td class="center">GND</td>
-<td class="center">-</td>
+<td class="center">GND に接続</td>
 </tr>
 
 
 <tr>
-<td class="center">9-11</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center">9</td>
+<td class="center">I.C</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">10</td>
+<td class="center">I.C</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">11</td>
+<td class="center"><span class="overline">TEST</span></td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
 <td class="center">12</td>
 <td class="center">AOUT</td>
-<td class="center">スピーカー接続</td>
+<td class="center">スピーカー(アンプ)に接続</td>
 </tr>
 
 
 <tr>
 <td class="center">13</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center"><span class="overline">PLAY</span></td>
+<td class="center">未接続</td>
 </tr>
 
 
 <tr>
 <td class="center">14</td>
 <td class="center">PMOD0</td>
-<td rowspan="2"> 動作モードの設定<br> PMOD0=0、PMOD1=1 → セーフモード</td>
+<td > 動作モードの設定<br> PMOD0=0、PMOD1=1 → セーフモード</td>
 </tr>
+
+</table>
+
+<br>
+<table>
+
+<tr><th>ピン</th><th>名称</th><th>説明</th></tr>
+
 <tr>
 <td class="center">15</td>
 <td class="center">PMOD1</td>
+<td > 動作モードの設定<br> 詳しくは PMOD0 参照</td>
 </tr>
 
 <tr>
@@ -137,27 +169,45 @@
 <tr>
 <td class="center">20</td>
 <td class="center">VCC</td>
-<td class="center">5V 接続</td>
+<td class="center">3.3V に接続</td>
 </tr>
 
 
 <tr>
 <td class="center">21</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center">I.C</td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
 <td class="center">22</td>
 <td class="center">GND</td>
-<td class="center">-</td>
+<td class="center">GNDに接続</td>
 </tr>
 
 
 <tr>
-<td class="center">23-26</td>
-<td class="center">略</td>
-<td class="center">フリー</td>
+<td class="center">23</td>
+<td class="center">PC0</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">24</td>
+<td class="center">PC1</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">25</td>
+<td class="center">PC2</td>
+<td class="center">未接続</td>
+</tr>
+
+<tr>
+<td class="center">26</td>
+<td class="center">PC3</td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
@@ -174,9 +224,9 @@
 
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_3」を「IO_6_1」にコピーします。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_2」(もし演習5-3を実施していたら IO_5_3)を「IO_6_1」にコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_3 を閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_2 (または IO_5_3) を閉じます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -189,6 +239,8 @@
 <span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_spi.c を開きます。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_6_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_6_1_isr.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
@@ -226,7 +278,31 @@
 </div>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
-<br>
+</p>
+<div class="info">
+<pre class="wrap">
+動作例:
+
+起動したら「@ → @ → h → o → g → e → .(ドット) → エンター → @ → @」の順に入力すると「ほげ」と発声する
+
+dummy(ff) : >
+dummy(ff) : >
+h(68) : >
+o(6f) : >
+g(67) : >
+e(65) : >
+.(2e) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : >
+
+※1 hoge の代わりに違うローマ字を入力してもOKだが、最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+
+※2 もしアンプからノイズが発生したらPICの電源をOFFにする
+
+</pre>
+</div>
+</p>
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「mssp_spi.c」と「main.c」を記入してください。
 </p>
 
