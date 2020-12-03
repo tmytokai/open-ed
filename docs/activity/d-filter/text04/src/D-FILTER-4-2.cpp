@@ -49,12 +49,12 @@ int main()
         hatx[i] *= ? ;
     }
 
-    printf("LPC係数\n");
+    printf("LPC係数の推定値\n");
     for( int n = 1; n <= L; ++n ){
         printf( "a[%d] = %lf\n", n, a[n] );
     }
 
-    FILE* file = fopen( "DFILTER-4-2-hatx.csv", "wb");
+    FILE* file = fopen( "D-FILTER-4-2-hatx.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);

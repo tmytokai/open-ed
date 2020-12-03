@@ -31,16 +31,24 @@
 <h2><a href="./page04.html">4. レビンソン・ダービン・アルゴリズム</a></h2>
 <br>
 <p>
-<input type="checkbox"><b>演習4-1 (個人、? 分):</b> ディジタル信号
+<input type="checkbox"><b>演習4-1 (個人、? 分):</b> 4次ARモデル( a[1] = 0.1、a[2] = 0.3、a[3] = 0.2、a[4] = 0.15 )
 </p>
 
 \[
-x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4] + \textrm{Normal}(0,1)
-\ , \ (i=0,1,\cdots, \textrm{N})
+x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4] + err[i]
+\ , \ (i=0,1,\cdots, \textrm{N}-1)
 \]
 
 <p>
-に対し、レビンソン・ダービン・アルゴリズムを使って LPC 係数を求めてみましょう。なお Normal(0,1) は平均 0、分散 1 の正規乱数で、L = 4、N = 50000 とします。
+から出力されたディジタル信号 x[i] に対してレビンソン・ダービン・アルゴリズムを適用し、各 LPC 係数を推定してみましょう。
+<br>
+信号の長さは N = 50000 とします。
+<br>
+また x[-1] = x[-2] = x[-3] = x[-4] = 0 とします。
+<br>
+また $err[i]$ は平均 0、分散 1 の独立な正規乱数とします。
+<br>
+
 </p>
 <div class="olradio"> 
 <p>
@@ -48,23 +56,25 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると L 個の LPC 係数とPARCOR係数が画面上に表示されます。また 1 つのCSVファイル(DFILTER-4-1-x.csv)が出力されます。DFILTER-4-1-x.csv は x[i] の先頭 100 データです。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると L 個の LPC 係数の推定値とPARCOR係数が画面上に表示されます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> DFILTER-4-1-x.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に x[i] と入力します。
+<span class="olradio"><input type="radio" name="p1"></span> さらに 1 つのCSVファイル(D-FILTER-4-1-x.csv)が出力されます。D-FILTER-4-1-x.csv は x[i] の先頭 100 データです。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> D-FILTER-4-1-x.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に x[i] と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DFILTER-4-1-x」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-4-1-x」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「LPC係数の値」「PARCOR係数の値」「x[i] のグラフ」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「LPC係数の推定値」「PARCOR係数の値」「x[i] のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習4-2 (個人、? 分):</b> 演習 4-1 で求めた LPC 係数を使って $x[i]$ の線形予測値 $\hat{x}[i]$ を求めてみましょう
+<input type="checkbox"><b>演習4-2 (個人、? 分):</b> 真の LPC 係数の代わりに演習 4-1 で求めた LPC 係数の推定値を使った時の線形予測値 $\hat{x}[i]$ を求めてみましょう
 </p>
 <div class="olradio"> 
 <p>
@@ -72,13 +82,15 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行すると L 個の LPC 係数が画面上に表示されます。また 1 つのCSVファイル(DFILTER-4-2-hatx.csv)が出力されます。DFILTER-4-2-hatx.csv は $\hat{x}[i]$ の先頭 100 データです。
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行すると L 個の LPC 係数の推定値が画面上に表示されます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> DFILTER-4-2-hatx.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に hatx[i] と入力します。
+<span class="olradio"><input type="radio" name="p2"></span> さらに 1 つのCSVファイル(D-FILTER-4-2-hatx.csv)が出力されます。D-FILTER-4-2-hatx.csv は $\hat{x}[i]$ の先頭 100 データです。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> D-FILTER-4-2-hatx.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に hatx[i] と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DFILTER-4-2-hatx」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-4-2-hatx」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -88,7 +100,7 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 
 <br>
 <p>
-<input type="checkbox"><b>演習4-3 (個人、? 分):</b> 演習 4-1 で求めた LPC 係数を使って $x[i]$ の線形予測誤差 $err[i]$ を求めてみましょう
+<input type="checkbox"><b>演習4-3 (個人、? 分):</b> 真の LPC 係数の代わりに演習 4-1 で求めた LPC 係数の推定値を使った時の線形予測誤差 $err[i]$ (の推定値)を求めてみましょう
 </p>
 <div class="olradio"> 
 <p>
@@ -96,13 +108,15 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行すると L 個の LPC 係数が画面上に表示されます。また 1 つのCSVファイル(DFILTER-4-3-err.csv)が出力されます。DFILTER-4-3-err.csv は $err[i]$ の先頭 100 データです。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行すると L 個の LPC 係数の推定値が画面上に表示されます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> DFILTER-4-3-err.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に err[i] と入力します。
+<span class="olradio"><input type="radio" name="p3"></span> さらに 1 つのCSVファイル(D-FILTER-4-3-err.csv)が出力されます。D-FILTER-4-3-err.csv は $err[i]$ の先頭 100 データです。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> D-FILTER-4-3-err.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に err[i] と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「なし」とします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DFILTER-4-3-errx」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-4-3-errx」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -113,7 +127,7 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 
 <br>
 <p>
-<input type="checkbox"><b>演習4-4 (個人、? 分):</b> 自分の声の線形予測値 $\hat{x}[i]$ と線形予測誤差 $err[i]$ を求めてみましょう。L = 100 とします。 
+<input type="checkbox"><b>演習4-4 (個人、? 分):</b> 自分の声の LPC 係数の推定値を求め、さらにその推定値を使った時の線形予測値 $\hat{x}[i]$ と線形予測誤差 $err[i]$ を求めてみましょう。なお L = 100 とします。 
 </p>
 <div class="olradio">
 <p>
@@ -133,11 +147,13 @@ x[i] = -0.1 \cdot x[i-1] -0.3 \cdot x[i-2] -0.2 \cdot x[i-3] - 0.15 \cdot x[i-4]
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると1 秒地点から 0.5 秒分の音声を切り出した「 D-FILTER-4-4-out.wav 」、その線形予測値 「 D-FILTER-4-4-hatx.wav 」、及び線形予測誤差「D-FILTER-4-4-err.wav」が出来ます。
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると1 秒地点から 0.5 秒分の音声を切り出した「 D-FILTER-4-4-out.wav 」、およびLPC係数の推定値を使った時の線形予測値 「 D-FILTER-4-4-hatx.wav 」、線形予測誤差「D-FILTER-4-4-err.wav」が出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 線形予測誤差「D-FILTER-4-4-err.wav」のスペクトログラム画像を表示してください。 
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 また出力された各 Wave ファイルを聴き比べて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「ソースコード(※ 「ここから」〜「ここまで」の部分だけ)」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「ソースコード(※ 「ここから」〜「ここまで」の部分だけ)」と「D-FILTER-4-4-err.wavのスペクトログラム画像」を貼り付けて下さい。  
 </div>
 
 <br>

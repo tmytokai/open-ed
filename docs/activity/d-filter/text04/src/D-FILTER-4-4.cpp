@@ -36,7 +36,7 @@ void HATX( double *hatx, // 線形予測値
            const double *x, // 入力
            const int N )
 {
-    // 演習 4-2 で予測値を求めている部分をコピーする
+    // 演習 4-2 で予測値を求めている部分をコピーし、Nout を N に修正する
 
 }
 
@@ -46,7 +46,7 @@ void ERR( double *err, // 線形予測誤差
            const double *x, // 入力
            const int N )
 {
-    // 演習 4-3 で予測誤差を求めている部分をコピーする
+    // 演習 4-3 で予測誤差を求めている部分をコピーし、Nout を N に修正する
 
 }
 
@@ -190,7 +190,7 @@ int main()
     save_wav( "D-FILTER-4-4-out.wav", &wavefmt, buf );
 
     for( int i = 0; i < N; ++i ) buf[i] = (short)hatx[i];
-    save_wav( "D-FILTER-4-4-hat.wav", &wavefmt, buf );
+    save_wav( "D-FILTER-4-4-hatx.wav", &wavefmt, buf );
 
     for( int i = 0; i < N; ++i ) buf[i] = (short)(err[i]*ERRGAIN);
     save_wav( "D-FILTER-4-4-err.wav", &wavefmt, buf );
