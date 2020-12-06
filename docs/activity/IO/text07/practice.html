@@ -26,13 +26,90 @@
 <br>
 <h2><a href="./page01.html">1. I2C とは</a></h2>
 
+
+<p>
+<input type="checkbox"><b>演習 7-1 (個人PC、30分):</b> I2C 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
+</p>
+<div class="info">
+<p>
+<b>仕様 : </b>
+
+<ol>
+<li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を I2C 経由で使用する</li>
+<li> ATP3011 のピン配置は<a href="../text06/practice.html">こちら</a>を参照</li>
+<li> PIC 側をマスターとする</li>
+<li> I2Cのクロックは「100 KHz」とする</li>
+<li> 5000ミリ秒おきに適当な言葉を発声する
+</ol>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_6_2」を「IO_7_1」にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_6_2 を閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> I2C(USE_MSSP1_I2C) のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_i2c.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_7_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
+</p>
+<p>
+以下の設定に従って回路を作成して下さい。
+<br>
+(*) が前の演習からの変更箇所です。
+</p>
+<div class="info">
+<pre class="wrap">
+<b>ピン配置設定・回路接続方法:</b>
+
+1: RA2
+2: RA3
+3: CCP4 (PWM) -- 圧電スピーカ
+4: MCLR/VPP -- PICkit の 1: NMCLR
+5: VSS -- GND
+6: RB0/INT (GPIO入力/INT割り込み) -- スイッチ
+(*)7: SDA1 (I2C) -- ATP3011 の 27 : SDA  ※要プルアップ抵抗
+8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
+9: CCP1 (PWM) -- オシロスコープ
+
+(*)10: SCL1 (I2C) -- ATP3011 の 28 : SCL ※要プルアップ抵抗
+11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V
+(*)15: RA6 ※ SPIで使っていたジャンパケーブルを外す
+(*)16: RA7 ※ SPIで使っていたジャンパケーブルを外す
+17: RA0 (GPIO出力) -- LED
+18: AN1 (ADC) -- 可変抵抗の中央ピン
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「mssp_i2c.c」と「main.c」を記入してください。
+</p>
+
+
 <br>
 <p>
-<input type="checkbox"><b>演習 6-1 (個人PC、70分):</b> Arduino UNO で I2C 経由で加速度センサからデータを受け取りましょう。
+<input type="checkbox"><b>演習 6-2 (個人PC、70分):</b> Arduino UNO で I2C 経由で加速度センサからデータを受け取りましょう。
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>仕様は以下の通りです。
+<span class="olradio"><input type="radio" name="p2"></span>仕様は以下の通りです。
 </p>
 <div class="info">
 <b>仕様:</b>
@@ -72,11 +149,11 @@
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>データシート等を見ながら回路を組んで下さい。
+<span class="olradio"><input type="radio" name="p2"></span>データシート等を見ながら回路を組んで下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>回路を組んだらファシリテータの確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span>回路を組んだらファシリテータの確認を受けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>プログラムを書いて Arduino UNO に転送して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>プログラムを書いて Arduino UNO に転送して下さい。
 今回のプログラム内で利用するＡＤＸＬ３４５のレジスタは以下の8つだけです(その他のレジスタはデータシートの25ページ目を参照して下さい)。
 </p>
 <table>
@@ -186,7 +263,7 @@ for( int i=0; i < 読み込むバイト数; ++i){
 ※5 loopの中でサンプリング値を加速度に変換してから虫眼鏡に表示して下さい。サンプリング値が -512 の時は -2G、+512 の時は +2G です。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>動作確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span>動作確認して下さい。
 </p>
 <p>
 ※1 加速度の検出方向はデータシートのP34に書いてあります。
@@ -194,9 +271,9 @@ for( int i=0; i < 読み込むバイト数; ++i){
 ※2 <b>次回の演習でプログラムを再利用するので、画面出力が仕様の(7)に沿っていることを確認して下さい</b>
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span>動作したらファシリテータの確認を受けて下さい。
+<span class="olradio"><input type="radio" name="p2"></span>動作したらファシリテータの確認を受けて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>ソースコードをドキュメントにコピーして下さい。
+<span class="olradio"><input type="radio" name="p2"></span>ソースコードをドキュメントにコピーして下さい。
 </p>
 </div>
 

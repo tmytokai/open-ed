@@ -4,6 +4,7 @@
 void main(void){
     
     init();
+    mssp1_spi_setmode(3); // SPIモード3
 
     RA7 = ? ; // ローアクティブなので CS = 1 にしてATP3011を非アクティブにする
     __delay_ms(100);
