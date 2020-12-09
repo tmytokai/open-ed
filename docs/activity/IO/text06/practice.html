@@ -37,7 +37,7 @@
 <ol>
 <li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する</li>
 <li> PIC 側をマスターとする</li>
-<li> SPI のモードは「MODE3」、ビットオーダーは「MSBFIRST」、クロックは「1 MHz」とする</li>
+<li> SPI のモードは「MODE0」、ビットオーダーは「MSBFIRST」、クロックは「1 MHz」とする</li>
 </ol>
 
 </div>
@@ -70,7 +70,7 @@
 <tr>
 <td class="center">4</td>
 <td class="center">SMOD0</td>
-<td rowspan="2"> 通信モードの設定<br>SMOD0=0、SMOD1=0 → SPI(MODE0)<br>SMOD0=1、SMOD1=0 → SPI(MODE3)<br>SMOD0=0、SMOD1=1 → I2C</td>
+<td rowspan="2"> 通信モードの設定<br>SMOD0=0、SMOD1=0 → SPI(MODE0)<br>SMOD0=0、SMOD1=1 → I2C</td>
 </tr>
 <tr>
 <td class="center">5</td>
@@ -281,10 +281,15 @@
 </p>
 <div class="info">
 <pre class="wrap">
-動作例:
+起動したら「@を数回入力 → # → V → エンター → @を数回入力」の順に入力するとバージョンが表示される
 
-起動したら「@ → @ → h → o → g → e → .(ドット) → エンター → @ → @」の順に入力すると「ほげ」と発声する
+また「@を数回入力 → # → J → エンター」の順に入力するとチャイムが鳴る
 
+さらに「@を数回入力 → h → o → g → e → .(ドット) → エンター」の順に入力すると「ほげ」と発声する
+
+※ hoge の代わりに違うローマ字を入力してもOKだが、最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+
+(表示例)
 dummy(ff) : >
 dummy(ff) : >
 h(68) : >
@@ -295,11 +300,6 @@ e(65) : >
 enter(d) : >
 dummy(ff) : *
 dummy(ff) : >
-
-※1 hoge の代わりに違うローマ字を入力してもOKだが、最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
-
-※2 もしアンプからノイズが発生したらPICの電源をOFFにする
-
 </pre>
 </div>
 <p>
