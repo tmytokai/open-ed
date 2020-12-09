@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. LSTMとは</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [5] Keras を用いた LSTM の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<div class="info">
+<input type="checkbox"><b>図1. LSTM ブロック</b>
+
+<p>　</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+<p>
+$\sigma$ ・・・ シグモイド関数
+</p>
+<br>
+<p>
+$w_x$ ・・・ 入力部において入力信号に掛けられる重み
+</p>
+<p>
+$w_y$ ・・・ 入力部において再帰入力信号に掛けられる重み
+</p>
+<p>
+$b$  ・・・ 入力部のバイアス
+</p>
+
+<br>
+<p>
+$w_x^{\textrm in}$ ・・・ 入力ゲートにおいて入力信号に掛けられる重み
+</p>
+<p>
+$w_y^{\textrm in}$ ・・・ 入力ゲートにおいて再帰入力信号に掛けられる重み
+</p>
+<p>
+$b^{\textrm in}$  ・・・ 入力ゲートのバイアス
+</p>
+
+<br>
+<p>
+$w_x^{\textrm fg}$ ・・・ 忘却ゲートにおいて入力信号に掛けられる重み
+</p>
+<p>
+$w_y^{\textrm fg}$ ・・・ 忘却ゲートにおいて再帰入力信号に掛けられる重み
+</p>
+<p>
+$b^{\textrm fg}$  ・・・ 忘却ゲートのバイアス
+</p>
+
+<br>
+<p>
+$w_x^{\textrm out}$ ・・・ 出力ゲートにおいて入力信号に掛けられる重み
+</p>
+<p>
+$w_y^{\textrm out}$ ・・・ 出力ゲートにおいて再帰入力信号に掛けられる重み
+</p>
+<p>
+$b^{\textrm out}$  ・・・ 出力ゲートのバイアス
+</p>
+
+
+</div>
+
+<br>
+
+<script>PreNext(1,3)</script>
+</body>
+</html>
