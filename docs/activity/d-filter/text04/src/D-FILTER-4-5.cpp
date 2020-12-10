@@ -4,11 +4,23 @@
 #include <math.h>
 
 
+// 正規乱数 N( mu, sigma^2)の出力
+// mu : 平均
+// sigma2 : 分散
+double nrand( double mu, double sigma2 )
+{
+    // Box-Muller 法を使用
+    double sigma = sqrt(sigma2);
+    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
+    return mu + sigma*x;
+}
+
 ///////////////////////////
 // ここから
 
 const int L = 100; // 線形予測次数
 const int OCTAVE = 3; // オクターブ
+const double GAIN = 1.0; // 出力全体の音量
 const double VOICEGAIN[] = {
     1.0, // "ア"の音量
     1.0, // "イ"の音量
@@ -136,9 +148,9 @@ const int MAXHZ = 8000; // wave ファイルに含まれる最大周波数 (Hz)
 
 const int MAXL = 256; // 線形予測次数の最大値
 const double NOTELNG = 0.5; // 1 音の長さ(秒)
-const double ERRAMP = 100.0; // 入力(線形予測誤差)のインパル信号の大きさ
-const double GAIN = 1.0; // 出力のゲイン
-const double ERRGAIN = 50.0; // 線形予測誤差のゲイン
+const double PULSEAMP = 10.0; // 線形予測誤差のパルス信号の大きさ
+const double PULSEWIDTH = 100.0; // 線形予測誤差のハルス信号の幅
+const double ERRSIGMA2 = PULSEAMP/2.0; // 線形予測誤差のホワイトノイズの分散
 const double scale_freq[]={ 261.6, 293.7, 329.6, 349.2, 392.0, 440.0, 493.9 };
 
 struct VOICE
@@ -315,13 +327,17 @@ int main()
         pre_s = s;
         if( s != SCALE_R ){
 
-            // 予測誤差 err[i] の計算
-            // 周期 T のパルス音とする
+            // 予測誤差 err[i] の作成
+            // 周期 T のパルス音(三角波)とする
             const double f = scale_freq[ notes[ n ].scale ] / pow(2,(4-OCTAVE)); // 周波数
             const int T = (int)( f_s/ f ); // 周期
             fprintf( stderr, "%02d: v = %c, f = %5.1lf Hz, T = %d\n", n, *voice[v].file, f, T );
             for( int i2 = 0 ; i2 < duration; ++i, ++i2 ){
-                if( i % T == 0 ) err[ duration*n + i2 ] = ERRAMP;
+                if( i % T == 0 ){
+                    // 三角波作成
+                    for( int i3 = 0 ; i3 < PULSEWIDTH; ++i3 ) err[ duration*n + i2 + i3 ] = (double)PULSEAMP*i3/PULSEWIDTH;
+                }
+                err[ duration*n + i2 ] += nrand(0,ERRSIGMA2);
             }
 
             // 自己回帰
@@ -340,7 +356,7 @@ int main()
     for( int i = 0; i < N2; ++i ) buf2[i] = (short)(x2[i]*GAIN);
     save_wav( "D-FILTER-4-5-ar.wav", &wavefmt2, buf2 );
 
-    for( int i = 0; i < N2; ++i ) buf2[i] = (short)(err[i]*ERRGAIN);
+    for( int i = 0; i < N2; ++i ) buf2[i] = (short)(err[i]*GAIN);
     save_wav( "D-FILTER-4-5-err.wav", &wavefmt2, buf2 );
 
     for( int i = 0; i < voice_size; ++i ){
