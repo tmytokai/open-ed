@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. KerasによるLSTMの学習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [5] Keras を用いた LSTM の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+
+<div class="info">
+<input type="checkbox"><b>ソース 1:  Keras によるディープラーニングの実行(最小二乗誤差の場合)</b>
+
+<pre class="wrap">
+# 学習設定
+loss = tf.keras.losses.MeanSquaredError()
+opt = tf.keras.optimizers.Adam( learning_rate=r )
+model.compile(loss=loss, optimizer=opt)
+    
+# ディープラーニング実行
+# 学習中の経過を表示したい場合は verbose=1 にする
+model.fit(data_training, label_training, epochs=E, batch_size=B,  verbose=0)
+
+※1 r : 学習率
+※2 data_training, label_training : 学習用入力信号全体とラベル全体、
+※3 E : エポック数
+※4 B : バッチサイズ
+</pre>
+</div>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>

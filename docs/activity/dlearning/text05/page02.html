@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. KerasによるLSTMの構築</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [5] Keras を用いた LSTM の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<div class="info">
+<input type="checkbox"><b>ソース 1: Keras で LSTM を構築する例</b>
+
+<pre class="wrap">
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,LSTM
+import numpy as np
+import matplotlib.pyplot as plt
+
+# パーセプトロン/LSTMブロックの数
+N = 1   # 入力層
+K = 2   # 隠れ層
+M = 1   # 出力層
+
+# 信号長
+L = 10
+
+# 入力信号
+x = np.random.uniform(low=-1, high=1, size=L)
+data  = x.reshape(1,L,1)
+
+# LSTMの構築
+model = Sequential()  
+model.add( LSTM( K, batch_input_shape=(None,L,N), return_sequences=False))  
+model.add( Dense(M, activation='linear') ) 
+
+# 出力
+y = model.predict(data)
+
+# モデルの概要表示
+model.summary()
+
+print('入力')
+plt.plot(x)
+plt.show()
+print('\n出力')
+print(y)
+</pre>
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>

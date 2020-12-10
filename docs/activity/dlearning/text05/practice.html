@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: TensorFlow/Keras によるディープラーニング</a></li>
+<li>学習項目: [5] Keras を用いた LSTM の学習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+演習時間: 70  分
+</p>
+
+<br>
+<h2><a href="./page01.html">1. LSTM とは</a></h2>
+<h2><a href="./page02.html">2. KerasによるLSTMの構築</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 5-1 (個人PC、30分):</b> Keras を使ってLSTMを作ってみましょう。
+</p>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook で「DL_5_1」というノートブックを作ります
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テキストの<a href="./page02.html">ソース 1</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソース」と「実行結果」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<h2><a href="./page03.html">3. KerasによるLSTMの学習</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 5-2 (個人PC、20分):</b> LSTMを用いてサイン波の予測をしてみましょう。
+<br>
+LSTMとディープラーニングの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 隠れ層が K = 12 個のLSTMブロックで出来ている ※ N と M は 1
+</p>
+<p>
+(2) 学習率は r = 0.001、エポック数は E = 50、バッチサイズは B = 32 とする
+</p>
+<p>
+(3) 信号長は L = 25 とする
+</p>
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> Jupyter Notebook で「DL_5_2」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/DL_5_2.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> DL_5_1 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソース」と「学習前のグラフ」、「学習後のグラフ」を貼り付けて下さい。
+</p>
+</div>
+
+
+<br>
+<br>
+<script>PreNext(4,3)</script>
+</body>
+</html>
