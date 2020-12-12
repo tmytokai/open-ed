@@ -75,7 +75,7 @@
 ※ gitignore と呼ばれるファイルで、中に名前が書いてあるファイルは git の管理外に置かれます。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動して以下のコマンドを実行して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore をリポジトリに追加して下さい。
 </p>
 <pre class="wrap">
 mv dot.gitignore .gitignore
@@ -111,7 +111,7 @@ git push
 <br>
 また、シナリオの保存先として演習 2-2 で作成したローカルリポジトリを指定します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Aさんは「World」のサブクラスとして「MyWorld」を作って下さい。キャンパスの大きさ、背景画像等は後で変更出来ますので今の所任意で構いません。
+<span class="olradio"><input type="radio" name="p3"></span> Aさんは「World」のサブクラスとして「MyWorld」を作って下さい。キャンパスの大きさ、背景画像等の設定は後で変更出来ますので今の所は任意の設定で構いません。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 一度 Run して下さい。
 <br>
@@ -143,7 +143,7 @@ git pull --no-edit
 を実行してローカルリポジトリを最新状態に更新して下さい。
 </p>
 <p>
-(注意) --no-edit オプションを付けないと端末の画面が切り替わってコミットのメッセージを求められる場合があります。
+(注意) pull する際に --no-edit オプションを付け忘れると端末の画面が切り替わってコミットのメッセージを求められる場合があります。
 <br>
 その場合は「適当にコメントを入力する → ESC 押す → :wq と入力する → Enter 押す」の手順でコミットメッセージを入力して下さい。
 <br>
@@ -158,11 +158,11 @@ git pull --no-edit
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> 全員 greenfoot でシナリオを開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 全員 Actor のサブクラスとして適当なキャラを作って下さい(必要無ければ後で消しても良いので名前、画像は適当で結構です。ソースの中身も空で結構です)。
+<span class="olradio"><input type="radio" name="p4"></span> 全員 Actor のサブクラスとして適当なキャラを作って下さい。名前、画像は適当で構いませんが、打ち合わせて他の人と同じ名前にならないようにして下さい。ソースの中身は空で構いません。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 前の作業が終わった人は一度 Run して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 一度 Run して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 前の作業が終わった人は「<b>Greenfootを閉じてから(※)</b>」
+<span class="olradio"><input type="radio" name="p4"></span> 「<b>Greenfootを閉じてから(※)</b>」
 </p>
 <p>
 ※ 一度greenhootを閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されないためです
@@ -185,12 +185,12 @@ git pull --no-edit
 を実行して下さい。
 </p>
 <p>
-(注意1) --no-edit オプションを付けないと端末の画面が切り替わってコミットのメッセージを求められる場合があります。
+(注意1) pull する際に --no-edit オプションを付け忘れると端末の画面が切り替わってコミットのメッセージを求められる場合があります。
 <br>
 その場合は「適当にコメントを入力する → ESC 押す → :wq と入力する → Enter 押す」の手順でコミットメッセージを入力して下さい。
 </p>
 <p>
-(注意2) もし画面に
+(注意2) pull した際に、もし端末に
 </p>
 <p>
 CONFLICT (content): Merge conflict in project.greenfoot
@@ -201,7 +201,7 @@ CONFLICT (content): Merge conflict in project.greenfoot
 すると Greenfoot が自動的に設定ファイルを修復します。
 </p>
 <p>
-またキャラ画像の指定が外れている場合があります。
+(注意3) pull した際に、キャラ画像の指定が外れている場合があります。
 <br>
 その場合は右クリック → Setimage から画像を指定し直します。
 </p>
@@ -263,18 +263,13 @@ git pull --no-edit
 を実行して下さい。
 </p>
 <p>
-(注意) --no-edit オプションを付けないと端末の画面が切り替わってコミットのメッセージを求められる場合があります。
-<br>
-その場合は「適当にコメントを入力する → ESC 押す → :wq と入力する → Enter 押す」の手順でコミットメッセージを入力して下さい。
-</p>
-<p>
-すると最初にpull/push した以外の人の画面には
+すると最初にpull/push した人以外の端末に
 </p>
 <p>
 CONFLICT (content): Merge conflict in (衝突ファイル名)
 </p>
 <p>
-と表示されますので、衝突を修正します。
+と表示されますので、衝突したファイルを修正します。
 </p>
 <p>
 設定ファイル(project.greenfoot)に衝突が起きた場合は演習 2-4 の手順に従って設定ファイルを自動修復します。
@@ -534,7 +529,7 @@ git commit -m "(適当なコメント)"
 <p>
 <input type="checkbox">スプリントバックログが全て Done 状態になっている(※)
 <br>
-<input type="checkbox">今回のスプリントで実施するプロダクトバックログが全て Done 状態になっている(※)
+<input type="checkbox">今回のスプリントで実施する予定だったプロダクトバックログが全て Done 状態になっている(※)
 <br>
 <input type="checkbox">リモートリポジトリにあるプロジェクトにはビルドエラーが起きない
 <br>
@@ -583,7 +578,7 @@ git commit -m "(適当なコメント)"
 <span class="olradio"><input type="radio" name="p19"></span> 代表者はアンケートフォームを作成します。
 </p>
 <p>
-タイトルは「レビュー(班番号)班-(スプリント番号)」とします。(例) 1班、スプリント1なら 「レビュー3班-1」
+タイトルは「レビュー(班番号)班-(スプリント番号)」とします。(例) 1班、スプリント1なら 「レビュー1班-1」
 </p>
 <p>
 アンケート項目は以下の通りです。項目の説明文は任意とします。
@@ -597,7 +592,7 @@ git commit -m "(適当なコメント)"
 <br>
 <span class="olradio"><input type="radio" name="p19"></span> 共有ボタンを押して共有アドレスをコピーし、スプリントフォルダ内にリンクを作成して下さい。リンク名は「レビュー(班番号)班-(スプリント番号).url」とします。(例) 1班、スプリント1なら 「レビュー1班-1.url」
 <br>
-<span class="olradio"><input type="radio" name="p19"></span> クロスレビューを行います。各自は指定されたチームのゲームをダウンロードして3分ほどプレイし、アンケート項目に答えてください。
+<span class="olradio"><input type="radio" name="p19"></span> クロスレビューを行います。各自は指定されたチームのゲームをダウンロードしてプレイし、アンケート項目に答えてください。
 <br>
 <span class="olradio"><input type="radio" name="p19"></span> 他チーム全員のレビューが終わったら回答の受け入れを終了し、結果(xlsx形式)をダウンロードしてスプリントフォルダにアップして下さい。ファイル名は「レビュー(班番号)班-(スプリント番号).xlsx」とします。(例) 1班、スプリント1なら 「レビュー1班-1.xlsx」
 </p>
