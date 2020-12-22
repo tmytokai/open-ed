@@ -20,8 +20,44 @@
 
 <h2><script>GetTitle()</script></h2>
 
+
+<p>
+<a href="https://ja.wikipedia.org/wiki/%E9%95%B7%E3%83%BB%E7%9F%AD%E6%9C%9F%E8%A8%98%E6%86%B6">LSTM (Long Short Term Memory: 長・短期記憶)</a>とは<a href="https://ja.wikipedia.org/wiki/%E5%9B%9E%E5%B8%B0%E5%9E%8B%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF">RNN (Recurrent Neural Network: 回帰型ニューラルネットワーク)</a>の一種ですので、最初に RNN について説明します。
+<br>
+なお今回は話を簡単にするために 3 層 RNN だけを考えます。
+</p>
+
+<h3>1. RNN </h3>
+
+<p>
+まずニューラルネットワークの入力層への入力信号として、以下の様な長さ L の N 個の<a href="../../d-signal/text01/page02.html">時間領域ディジタル信号</a>(シーケンス)を考えます(※)。
+</p>
+
+<p>
+※ これまで学んできた<a href="../text02/page02.html">MLP</a>や<a href="../text04/page01.html">CNN</a>には時間の概念が無いことに注意して下さい。
+</p>
+
+\[
+\left \{
+\begin{align*}
+& x_0[i] , (i=0,1,\cdots,\textrm{L}-1) \\
+& x_1[i] , (i=0,2,\cdots,\textrm{L}-1) \\
+& \cdots \\
+& x_{(\textrm{N}-1)}[i], (i=0,1,\cdots,\textrm{L}-1)
+\end{align*}
+\right .
+\]
+
+<p>
+ここで<a href="../../acr/index.html">自己相関関数</a>のアクティビティで学んだように、時間領域ディジタル信号において、ある時刻に入力されたデータはそれ以前に入力されたデータと強い相関を持っていることが多いので、入力済みデータをフィードバックして再利用することでニューラルネットワークのパラメータを減らすことを考えます。
+</p>
+
+<p>
+この様にして考えられたのが RNN で、そのネットワーク構成を図 1 に示します。
+</p>
+
 <div class="info">
-<input type="checkbox"><b>図1. LSTM ブロック(1入力、1再帰入力の場合)</b>
+<input type="checkbox"><b>図1. (3層) RNN </b>
 
 <p>　</p>
 
@@ -30,15 +66,75 @@
 <p>
 $z^{-1}$ ・・・ 1時刻遅延素子
 </p>
+
+</div>
+
+<p>
+この様に RNN は<a href="../text02/page02.html">MLP</a>の隠れ層の出力を入力側にフィードバックさせている構成となっています。
+<br>
+つまり各時刻 $i$ において $x_0[i], \cdots, x_{(\textrm{N}-1)}[i]$ 及び隠れ層からの K 個の フィードバック入力 $h_0[i-1], \cdots, h_{(\textrm{k}-1)}[i-1]$ が隠れ層に入力され、出力層から M 個の出力信号 $y_0[i] \cdots y_{(\textrm{M}-1)}[i]$ が出力されます。
+</p>
+
+<h3>2. LSTMとは</h3>
+
+<p>
+ところが RNN には隠れ層への入力($x_0[i], \cdots, x_{(\textrm{N}-1)}[i]$ 及び $h_0[i-1], \cdots, h_{(\textrm{k}-1)}[i-1]$)にかけられる重みの学習が不安定であるという問題があります(※)
+</p>
+
+<p>
+※ 詳しくは<a href="https://medium.com/datadriveninvestor/how-do-lstm-networks-solve-the-problem-of-vanishing-gradient
+s-a6784971a577">こちらサイト</a>の説明が分かりやすいです。
+</p>
+
+<p>
+そこで RNN を改良した LSTM が開発されました。
+<br>
+LSTM のネットワーク構成を図 2 に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. (3層) LSTM </b>
+
+<p>　</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+<p>
+$z^{-1}$ ・・・ 1時刻遅延素子
+</p>
+
+</div>
+
+<p>
+RNN との違いは隠れ層のユニットとしてパーセプトロンの代わりに「<b>LSTMブロック</b>」を使っているところだけです。
+<br>
+この LSTM ブロックの中身は図 3 の様になっています。
+<br>
+なおこの図では分かりやすいように1入力・1フィードバック入力としていますが、多入力・多フィードバック入力の場合も同様に考えられます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3. LSTM ブロック(1入力・1フィードバック入力の場合)</b>
+
+<p>　</p>
+
+<img src="./img/page01-fig3.png" alt="">
+
+<p>
+$z^{-1}$ ・・・ 1時刻遅延素子
+</p>
 <p>
 $\sigma$ ・・・ シグモイド関数
+</p>
+</p>
+CEC ・・・ Constant Error Carousel : 定誤差カルーセル
 </p>
 <br>
 <p>
 $w_x$ ・・・ 入力部において入力信号に掛けられる重み
 </p>
 <p>
-$w_y$ ・・・ 入力部において再帰入力信号に掛けられる重み
+$w_h$ ・・・ 入力部においてフィードバック入力信号に掛けられる重み
 </p>
 <p>
 $b$  ・・・ 入力部のバイアス
@@ -49,7 +145,7 @@ $b$  ・・・ 入力部のバイアス
 $w_x^{\textrm in}$ ・・・ 入力ゲートにおいて入力信号に掛けられる重み
 </p>
 <p>
-$w_y^{\textrm in}$ ・・・ 入力ゲートにおいて再帰入力信号に掛けられる重み
+$w_h^{\textrm in}$ ・・・ 入力ゲートにおいてフィードバック入力信号に掛けられる重み
 </p>
 <p>
 $b^{\textrm in}$  ・・・ 入力ゲートのバイアス
@@ -60,7 +156,7 @@ $b^{\textrm in}$  ・・・ 入力ゲートのバイアス
 $w_x^{\textrm fg}$ ・・・ 忘却ゲートにおいて入力信号に掛けられる重み
 </p>
 <p>
-$w_y^{\textrm fg}$ ・・・ 忘却ゲートにおいて再帰入力信号に掛けられる重み
+$w_h^{\textrm fg}$ ・・・ 忘却ゲートにおいてフィードバック入力信号に掛けられる重み
 </p>
 <p>
 $b^{\textrm fg}$  ・・・ 忘却ゲートのバイアス
@@ -71,28 +167,42 @@ $b^{\textrm fg}$  ・・・ 忘却ゲートのバイアス
 $w_x^{\textrm out}$ ・・・ 出力ゲートにおいて入力信号に掛けられる重み
 </p>
 <p>
-$w_y^{\textrm out}$ ・・・ 出力ゲートにおいて再帰入力信号に掛けられる重み
+$w_h^{\textrm out}$ ・・・ 出力ゲートにおいてフィードバック入力信号に掛けられる重み
 </p>
 <p>
 $b^{\textrm out}$  ・・・ 出力ゲートのバイアス
 </p>
 
-
 </div>
 
+
+<p>
+LSTM の肝となるのが「<b>CEC</b>」と呼ばれる内部ユニットです。
 <br>
+RNNの学習が不安定な原因は「過去に入力したデータの情報がフィードバックを繰り返すことによって消滅していくこと」なので、CECを導入することによって過去のデータの情報をユニットの内部で長期的に記憶し、短期的な情報であるフィードバック入力と足し合わせることにしました(※)。
+</p>
 
-<div class="info">
-<input type="checkbox"><b>図2. (3層) LSTM </b>
+<p>
+※ これが LSTM(長・短期記憶) の語源となっています。
+</p>
 
-<p>　</p>
+<p>
+ただこのままだと入力信号の傾向が代わっても古い記録を CEC は記憶し続けてしまうので、「<b>忘却ゲート</b>」を導入し、もし入力信号の傾向が代わったら CEC をリセットすることにしました。
+<br>
+また、ついでにと言っては何ですが「<b>入力ゲート</b>」と「<b>出力ゲート</b>」も導入し、入力信号の傾向が代わったら入力や出力を行わないように改良を加えました。
+</p>
 
-<img src="./img/page01-fig2.png" alt="">
+<p>
+この様に、LSTM ではCECと3つのゲートを導入することで安定して重みの学習を行えるようになりました(※)
+</p>
 
-</div>
+<p>
+※ これについても<a href="https://medium.com/datadriveninvestor/how-do-lstm-networks-solve-the-problem-of-vanishing-gradient
+s-a6784971a577">こちらサイト</a>の説明が分かりやすいです。
+</p>
+
 
 <br>
-
 <script>PreNext(1,3)</script>
 </body>
 </html>

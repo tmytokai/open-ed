@@ -1,0 +1,89 @@
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,LSTM
+from tensorflow.keras.optimizers import Adam
+import numpy as np
+import matplotlib.pyplot as plt
+
+# パーセプトロン/LSTMブロックの数
+N = ?    # 入力層
+K = ?    # 隠れ層
+M = ?    # 出力層
+
+# 学習率
+r = ?
+
+# エポック数
+E = ?
+
+# バッチサイズ
+B = ?
+
+# 信号長
+L = ?
+
+# 元の信号(サイン波 + 一様乱数)
+Td = 100  # サイン波の周期
+i = np.arange(Td*2) # 2回振動させる
+x = np.sin(2*np.pi/Td*i) + np.random.uniform(low=-0.1, high=0.1, size=Td*2)
+plt.figure(figsize=(8, 8), dpi=50)
+plt.ylim(-1.2,1.2)
+plt.plot(range(0, len(x)), x)
+plt.show()
+
+# 元の信号から学習データセットを作成
+# まず時刻 0 において x[0]〜x[L-1] を入力信号とし、x[L]をそのラベルとする
+# 次に時刻 1 において x[1]〜x[L] を入力信号とし、x[L+1]をそのラベルとする
+# これを繰り返してデータセットを作る
+data_training=[]
+label_training=[]
+for i in range(len(x)-L):
+    data_training.append(x[i:i+L])
+    label_training.append(x[i+L])
+data_training  = np.array(data_training).reshape(len(data_training),L,N)
+label_training = np.array(label_training).reshape(len(label_training),M)
+
+# データ表示関数
+def show_data(data,label,i):
+    print('Data No.'+str(i))
+    plt.figure(figsize=(1, 10), dpi=50)
+    plt.xlim(-1,L+1)
+    plt.ylim(-1.2,1.2)
+    plt.plot(range(L),data[i])
+    plt.plot(L,label[i],marker='.',markersize=20, color='red')
+    plt.show()
+
+# とりあえず例として No.0 と No.12 のデータを表示
+show_data(data_training,label_training,0)
+show_data(data_training,label_training,12)
+
+# 今回は検証データセットとテストデータセットは使わない
+
+# LSTMの構築
+?
+
+# 学習設定
+?
+
+model.summary()
+
+# 結果の表示関数
+def show_result(x,predict):
+    plt.figure(figsize=(8, 8), dpi=50)
+    plt.ylim(-1.2,1.2)
+    plt.plot(range(0, len(x)), x)
+    plt.plot(range(L-1, len(predict)+L-1), predict, color="r")
+    plt.show()
+    
+# 学習前の状態
+print('\n学習前')
+predict = model.predict(data_training)
+show_result(x,predict)
+
+# ディープラーニング実行
+?
+
+# 学習後の状態
+print('\n\n学習後')
+predict = model.predict(data_training)
+show_result(x,predict)

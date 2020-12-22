@@ -19,7 +19,17 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+Keras を用いるとLSTMの学習も簡単に実行出来ます(ソース 1)。 
+</p>
 
+<p>
+なお今回は出力層の活性化関数として softmax ではなくて linear を指定していますので、損失関数としては<a href="../../dlearning/text03/page03.html">これまで使ってきた</a>カテゴリカル・クロスエントロピーではなくて「<b>最小二乗誤差</b>」を使っています。
+</p>
+
+<p>
+また正解率を計算することも出来ないので、評価関数の指定は省略しています。
+</p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 1:  Keras によるディープラーニングの実行(最小二乗誤差の場合)</b>
@@ -40,6 +50,33 @@ model.fit(data_training, label_training, epochs=E, batch_size=B,  verbose=0)
 ※4 B : バッチサイズ
 </pre>
 </div>
+
+<p>
+では各行の意味について順を追って説明していきたいと思います。
+</p>
+
+<div class="info">
+<pre class="wrap">
+# 学習設定
+loss = tf.keras.losses.MeanSquaredError()
+opt = tf.keras.optimizers.Adam( learning_rate=r )
+model.compile(loss=loss, optimizer=opt)
+</pre>
+</div>
+
+<p>
+で学習の各種設定をしています。
+<br>
+具体的には、最初の行(loss = 〜)では損失関数として「最小二乗誤差」を指定しています。
+<br>
+2行目(opt = 〜)では最適化アルゴリズムとして「Adam」を指定しています。
+<br>
+そして最後の行(model.compile〜)でモデルのコンパイルをします。 
+</p>
+
+<p>
+モデルをコンパイルしたら、あとはいつもの様に fit 関数で学習を開始します。
+</p>
 
 <br>
 <script>PreNext(3,3)</script>
