@@ -1,0 +1,78 @@
+#include "config.h"
+#include "setting.h"
+
+void main(void) {
+
+    init();
+
+    __delay_ms(1000); // デバイス初期化待ち
+
+    // ADXL345 のサンプリングモードを「+-2G を 10bit(+512 〜 -512)」にします
+    // DATA_FORMATレジスタについて詳しくはデータシート 28p を参照してください
+    mssp1_i2c_start();
+    mssp1_i2c_putch(( 0x? << 1) + ? ); // ADXL345のI2Cアドレス(0x53, 7bit) + write指示(0)
+    mssp1_i2c_putch( 0x? ); // DATA_FORMAT レジスタのアドレス(0x31)を指定
+    mssp1_i2c_putch(0b? ); // Range に 0b00 をセット (その他は0)
+    mssp1_i2c_stop();
+
+    __delay_ms(50);
+
+    // ADXL345 のサンプリングを開始します
+    // POWER_CTLレジスタについて詳しくはデータシート 27p を参照してください
+    mssp1_i2c_start();
+    mssp1_i2c_putch(( 0x? << 1) + 0); // ADXL345のI2Cアドレス(0x53, 7bit) + write指示(0)
+    mssp1_i2c_putch( 0x? ); // POWER_CTL レジスタのアドレス(0x2D)を指定
+    mssp1_i2c_putch( 0b? ); // Measure に 0b1 をセット (その他は0)
+    mssp1_i2c_stop();
+
+    __delay_ms(50);
+
+    while (1) {
+
+        int Xhigh = 0, Xlow = 0;
+        int Yhigh = 0, Ylow = 0;
+        int Zhigh = 0, Zlow = 0;
+        int X, Y, Z;
+
+        // 加速度読み込み
+        mssp1_i2c_start();
+        mssp1_i2c_putch(( 0x? << 1) + ? ); // ADXL345のI2Cアドレス(0x53, 7bit) + write指示(0)
+        mssp1_i2c_putch( 0x? ); // DATAX0 レジスタのアドレス(0x32)
+        mssp1_i2c_stop();
+        // 一旦stopを送ってreadモードに切り替える
+        mssp1_i2c_start();
+        mssp1_i2c_putch(( 0x? << 1) + ? ); // ADXL345のI2Cアドレス(0x53, 7bit) + read指示(1)
+        Xhigh = mssp1_i2c_getch(0); // ACK を送信して受信続行 (NACKを送るまで連続読み込み)
+        Xlow = mssp1_i2c_getch(0);
+        Yhigh = mssp1_i2c_getch(0);
+        Ylow = mssp1_i2c_getch(0);
+        Zhigh = mssp1_i2c_getch(0);
+        Zlow = mssp1_i2c_getch(1); // NACK を送信して受信終了
+        mssp1_i2c_stop();
+
+        __delay_ms(50);
+
+        X = Xlow * ? + Xhigh;
+        Y = Ylow * ? + Yhigh;
+        Z = Zlow * ? + Zhigh;
+        printf("%d, %d, %d\r\n", X, Y, Z);
+
+        if (X <= -200) {
+            
+            // ATP3011から「ほげ」と発音
+            mssp1_i2c_start();
+            mssp1_i2c_putch(( 0x? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
+            mssp1_i2c_putch('h');
+            mssp1_i2c_putch('o');
+            mssp1_i2c_putch('g');
+            mssp1_i2c_putch('e');
+            mssp1_i2c_putch('.');
+            mssp1_i2c_putch('\r');
+            mssp1_i2c_stop();
+        }
+
+        __delay_ms(1000);
+    }
+
+    return;
+}

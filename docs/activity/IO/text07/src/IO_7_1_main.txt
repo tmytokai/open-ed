@@ -10,7 +10,7 @@ void main(void){
     while(1) {
       
         mssp1_i2c_start();
-        mssp1_i2c_putch( ( ? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
+        mssp1_i2c_putch( ( 0x? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
         mssp1_i2c_putch('h'); // 好きな言葉に置き換える
         mssp1_i2c_putch('o');
         mssp1_i2c_putch('g');
