@@ -10,57 +10,57 @@ const double STARTPOS = 1.0;
 const double DURATION = 0.5;
 const int MAXHZ = 8000;
 
-// •W€“I‚È WAVE ƒwƒbƒ_ ( 44 byte )
+// æ¨™æº–çš„ãª WAVE ãƒ˜ãƒƒãƒ€ ( 44 byte )
 typedef struct
 {
     char riff[ 4 ];             // = "RIFF"
-    unsigned int total_size;    // ‘S‘ÌƒTƒCƒY
+    unsigned int total_size;    // å…¨ä½“ã‚µã‚¤ã‚º
     char fmt[ 8 ];              // "WAVEfmt "
-    unsigned int fmt_size;      // fmt ƒ`ƒƒƒ“ƒNƒTƒCƒY
-    unsigned short  format;     // ƒtƒH[ƒ}ƒbƒg‚Ìí—Ş
-    unsigned short  channel;    // ƒ`ƒƒƒ“ƒlƒ‹
-    unsigned int   rate;        // ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg
+    unsigned int fmt_size;      // fmt ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
+    unsigned short  format;     // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ç¨®é¡
+    unsigned short  channel;    // ãƒãƒ£ãƒ³ãƒãƒ«
+    unsigned int   rate;        // ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ãƒ¬ãƒ¼ãƒˆ
     unsigned int   avgbyte;     // rate * block
     unsigned short  block;      // channels * bit / 8
-    unsigned short  bit;        // ƒrƒbƒg”
+    unsigned short  bit;        // ãƒ“ãƒƒãƒˆæ•°
     char data[ 4 ];             // = "data"
-    unsigned int data_size;     // data ƒ`ƒƒƒ“ƒNƒTƒCƒY
+    unsigned int data_size;     // data ãƒãƒ£ãƒ³ã‚¯ã‚µã‚¤ã‚º
 } WAVEFORMAT;
 
 int main()
 {
     FILE * fin = fopen( "SPEC-3-1.wav", "rb" );
     if( !fin ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒtƒH[ƒ}ƒbƒgæ“¾
+    // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå–å¾—
     WAVEFORMAT wavefmt;
     size_t ret = fread( &wavefmt, 1, sizeof( WAVEFORMAT ) - 8, fin );
 
     if( ret != sizeof( WAVEFORMAT ) -8 ){
-       fprintf( stderr, "ƒwƒbƒ_‚ª‰ó‚ê‚Ä‚¢‚Ü‚·\n" );
+       fprintf( stderr, "ãƒ˜ãƒƒãƒ€ãŒå£Šã‚Œã¦ã„ã¾ã™\n" );
        exit(EXIT_FAILURE);
     }
     if( wavefmt.riff[ 0 ] != 'R' || wavefmt.riff[ 1 ] != 'I' ){
-        fprintf( stderr, "Wave ƒtƒ@ƒCƒ‹‚Å‚Í‚ ‚è‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "Wave ãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.channel != 1 ){
-        fprintf( stderr, "ƒXƒeƒŒƒI‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ã‚¹ãƒ†ãƒ¬ã‚ªéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.rate < MAXHZ*2 ){
-        fprintf( stderr, "ƒTƒ“ƒvƒŠƒ“ƒOü”g”‚ª’á‚¢‚Å‚·\n" );
+        fprintf( stderr, "ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°å‘¨æ³¢æ•°ãŒä½ã„ã§ã™\n" );
         exit(EXIT_FAILURE);
     }
     if( wavefmt.bit != 16 ){
-        fprintf( stderr, "8bit‰¹º‚Íg—p‚Å‚«‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "8bitéŸ³å£°ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
 
-    // data ‚Ü‚ÅƒXƒLƒbƒv
+    // data ã¾ã§ã‚¹ã‚­ãƒƒãƒ—
     size_t pos = sizeof( WAVEFORMAT ) - 8;
     while( pos < 200 && ( wavefmt.data[0] != 'd' || wavefmt.data[1] != 'a' ) ){
         fseek( fin, pos++, SEEK_SET );
@@ -68,35 +68,35 @@ int main()
     }
 
     if( wavefmt.data[ 0 ] != 'd' || wavefmt.data[ 1 ] != 'a' ){
-        fprintf( stderr, "ƒf[ƒ^‚ª‚ ‚è‚Ü‚¹‚ñ\n" );
+        fprintf( stderr, "ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚Šã¾ã›ã‚“\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒf[ƒ^ƒTƒCƒY‚ğæ“¾
+    // ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’å–å¾—
     ret = fread( &wavefmt.data_size, 1, sizeof( unsigned int ), fin );
 
     if( (double)wavefmt.data_size / wavefmt.avgbyte < STARTPOS + DURATION ){
-        fprintf( stderr, "˜^‰¹ŠÔ‚ª’Z‚¢‚Å‚·\n" );
+        fprintf( stderr, "éŒ²éŸ³æ™‚é–“ãŒçŸ­ã„ã§ã™\n" );
         exit(EXIT_FAILURE);
     }
 
-    // ƒtƒH[ƒ}ƒbƒgÄİ’è
+    // ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå†è¨­å®š
     wavefmt.fmt_size = 16;
     wavefmt.data_size = (unsigned int)( DURATION * wavefmt.avgbyte );
     wavefmt.total_size = sizeof( WAVEFORMAT ) + wavefmt.data_size - 8;
 
-    // ƒf[ƒ^“Ç‚İ‚İ
+    // ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
     short* buf = ( short* )malloc( wavefmt.data_size );
     fseek( fin, (unsigned int)(STARTPOS * wavefmt.avgbyte), SEEK_CUR );
     ret = fread( buf, 1, wavefmt.data_size, fin );
     if( ret != wavefmt.data_size ){
-       fprintf( stderr, "ƒf[ƒ^‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½\n" );
+       fprintf( stderr, "ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
        exit(EXIT_FAILURE);
     }
 
     fclose( fin );
 
-    // ‰‰K‚Åg‚¤ƒf[ƒ^‚â”z—ñ‚ğì¬
+    // æ¼”ç¿’ã§ä½¿ã†ãƒ‡ãƒ¼ã‚¿ã‚„é…åˆ—ã‚’ä½œæˆ
     const int f_s = wavefmt.rate;
     fprintf( stderr,"f_s = %d\n", wavefmt.rate );
 
@@ -112,22 +112,22 @@ int main()
     double *argC = (double*)calloc( 1, N * sizeof(double) );
 
     //----------------------------------------------
-    // ‚±‚±‚©‚ç‰‰KŠJn
+    // ã“ã“ã‹ã‚‰æ¼”ç¿’é–‹å§‹
 
-    // SPEC-3-1.wav ‚Ì 1.0 •b“_‚©‚ç 0.5 •bŠÔ‚¾‚¯‰¹ºM†‚ğØ‚èo‚µ‚Ä
-    // ’·‚³ N ‚ÌƒfƒBƒWƒ^ƒ‹M† f[0] ` f[N-1] ‚ğì¬Ï
+    // SPEC-3-1.wav ã® 1.0 ç§’æ™‚ç‚¹ã‹ã‚‰ 0.5 ç§’é–“ã ã‘éŸ³å£°ä¿¡å·ã‚’åˆ‡ã‚Šå‡ºã—ã¦
+    // é•·ã• N ã®ãƒ‡ã‚£ã‚¸ã‚¿ãƒ«ä¿¡å· f[0] ã€œ f[N-1] ã‚’ä½œæˆæ¸ˆ
 
-    // –{—ˆ‚È‚ç‚ÎlŠÔ‚Ìº‚ÍüŠú«M†‚Å‚Í‚È‚¢‚ªA¡‰ñ‚ÍüŠú N ‚ÌüŠú«M†‚Æ‚İ‚È‚µ‚Ä DFT ‚·‚é
-    // DFT-1-3.cpp ‚ğŠJ‚«AAABAabsCAargC ‚ÌŒvZ•”‚ğƒRƒs[‚·‚é
-    // ‚È‚¨ A[N]AB[N]AabsC[N]AargC[N] ‚Íã‚Ì•û‚Å’è‹`Ï‚È‚Ì‚Å’è‹`•”‚ğÁ‚·
+    // æœ¬æ¥ãªã‚‰ã°äººé–“ã®å£°ã¯å‘¨æœŸæ€§ä¿¡å·ã§ã¯ãªã„ãŒã€ä»Šå›ã¯å‘¨æœŸ N ã®å‘¨æœŸæ€§ä¿¡å·ã¨ã¿ãªã—ã¦ DFT ã™ã‚‹
+    // DFT-1-3.cpp ã‚’é–‹ãã€Aã€Bã€absCã€argC ã®è¨ˆç®—éƒ¨ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+    // ãªãŠ A[N]ã€B[N]ã€absC[N]ã€argC[N] ã¯ä¸Šã®æ–¹ã§å®šç¾©æ¸ˆãªã®ã§å®šç¾©éƒ¨ã‚’æ¶ˆã™
 
 
-    // ‚±‚±‚Ü‚Å
+    // ã“ã“ã¾ã§
     //----------------------------------------------
 
     FILE *csv = fopen( "SPEC-3-1.csv", "w" );
     if( !csv ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
     for( int k = 0; k < MAXHZ * N / f_s; ++k ){
@@ -137,7 +137,7 @@ int main()
 
     FILE* fout = fopen( "SPEC-3-1-out.wav", "wb" );
     if( !fout ){
-        fprintf( stderr, "ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½\n" );
+        fprintf( stderr, "ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ\n" );
         exit(EXIT_FAILURE);
     }
     fwrite( &wavefmt, 1, sizeof( WAVEFORMAT ), fout );
