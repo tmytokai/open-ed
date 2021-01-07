@@ -1,0 +1,108 @@
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,LSTM
+from tensorflow.keras.optimizers import Adam
+import wave
+import numpy as np
+
+#---------------------------
+# データセット読み込み
+
+# Waveファイル読み込み関数
+def read_wavedata(classname):
+    print('read: '+classname+'.wav')
+    wavein = wave.open(classname+'.wav','r')
+    print(wavein.getparams())
+    rate = wavein.getframerate()
+    data = wavein.readframes(wavein.getnframes())
+    wavein.close()
+    return np.frombuffer(data, dtype=np.int16),rate
+
+# Waveファイルを読み込んで学習データセットを作成
+classnames=['a','i','u','e','o']
+wavedata_training=[]
+classno_training=[]
+wavedata_test=[]
+classno_test=[]
+for i in range(len(classnames)):
+    x,rate = read_wavedata(classnames[i]) 
+    # 500 msec 時点から 5 msec おきに 10 msec だけ信号を100個取り出して学習データとする
+    for j in range(100):       
+        start_pos = int( (500+5*j)*rate/1000 )
+        end_pos = start_pos + int( 10*rate/1000)
+        wavedata_training.append(x[start_pos:end_pos] )
+        classno_training.append(i)
+    # 502.5 msec 時点から 5 msec おきに 10 msec だけ信号を20個取り出して学習データとする
+    for j in range(20):
+        start_pos = int( (502.5+5*j)*rate/1000 )
+        end_pos = start_pos + int( 10*rate/1000 )
+        wavedata_test.append(x[start_pos:end_pos] )
+        classno_test.append(i)
+#---------------------------
+
+# パーセプトロンおよび LSTM ブロックの数
+N = ?1    # 入力層
+K = ?  # 隠れ層
+M = ?    # 出力層
+
+# 学習率
+r = ?
+
+# エポック数
+E = ?
+
+# 信号長(サンプリング周波数によって変わる)
+L = len(wavedata_training[0])
+
+# 学習データセットのサイズ
+LL = len(wavedata_training)
+
+# バッチサイズ
+B = ?
+
+# 学習データセットを演習用のフォーマットに変換
+data_training  = tf.constant( np.array(wavedata_training).reshape(LL,L,N), dtype=tf.float32)
+label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
+
+# 今回は検証データセットは使わない
+
+# テストデータセットを演習用のフォーマットに変換
+data_test  = tf.constant( np.array(wavedata_test).reshape(len(wavedata_test),L,N), dtype=tf.float32)
+label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
+
+print('N='+str(N))
+print('K='+str(K))
+print('M='+str(M))
+print('信号長='+str(L))
+print('学習率='+str(r))
+print('エポック数='+str(E))
+print('学習データセットサイズ='+str(LL))
+print('バッチサイズ='+str(B))
+
+# LSTMの構築
+?
+
+# 学習設定
+?
+
+# モデルの概要表示
+model.summary()
+
+# 学習前の状態
+ls, acc = model.evaluate(data_training, label_training, verbose=0)
+print('\n学習前')
+print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print('')
+
+# ディープラーニング実行
+?
+
+# 学習後の状態
+ls, acc = model.evaluate(data_training, label_training, verbose=0)
+ls_test, acc_test = model.evaluate(data_test, label_test, verbose=0)
+print('\n\n学習後')
+print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+
+predict_test = model.predict(data_test[0:10])
+print('テストデータセット : 損失={:0.2f}, 正解率={:0.2f}'.format(ls_test,acc_test))
+print('')

@@ -60,13 +60,16 @@ LSTMとディープラーニングの仕様は以下の通りです。
 (1) 隠れ層が K = 12 個のLSTMブロックで出来ている ※ N (入力)と M (出力) は 1
 </p>
 <p>
-(2) 信号長は L = 25 とする
+(2) 入力信号はサイン波に一様乱数を加えたものとする
 </p>
 <p>
-(3) 学習率は r = 0.001、エポック数は E = 50、バッチサイズは B = 32 とする
+(3) 信号長は L = 25 とする
 </p>
 <p>
-(4) 入力信号はサイン波に一様乱数を加えたものとする
+(4) 学習率は r = 0.001、エポック数は E = 50、バッチサイズは B = 32 とする
+</p>
+<p>
+(5) 出力層の活性化関数は「linear」、損失関数は「MeanSquaredError」とする。評価関数は無しとする
 </p>
 </pre>
 
@@ -83,6 +86,53 @@ LSTMとディープラーニングの仕様は以下の通りです。
 <span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソース」と「学習前のグラフ」、「学習後のグラフ」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 5-3 (個人PC、20分):</b> LSTMを用いて音声認識をしてみましょう。
+<br>
+LSTMとディープラーニングの仕様は以下の通りです。
+</p>
+
+<div class="info">
+<b>仕様:</b>
+<p>
+(1) 隠れ層が K = 150 個のLSTMブロックで出来ている ※ N (入力) は 1
+</p>
+<p>
+(2) 自分の「あ」「い」「う」「え」「お」という声を録音したwaveファイルを入力として与えて音声認識をおこなう。よって出力層の数は M=5 となる。
+<br>
+ファイル名はそれぞれ「a.wav」「i.wav」「u.wav」「e.wav」「o.wav」とする。フォーマットはモノラルチャンネル、量子化ビット数 16bit、サンプリング周波数 44100Hz(以上)、録音時間2秒以上とする
+</p>
+<p>
+(3) 各 wave ファイルの 500 msec 時点から 5 msec おきに 10 msec だけ信号を100個取り出して学習データとする。つまり学習データセットサイズは 100 * 5 = 500 個となる。なお信号長 L はサンプリング周波数によって変わる
+</p>
+<p>
+(4)  同様に各 wave ファイルの 502.5 msec 時点から 5 msec おきに 10 msec だけ信号を20個取り出して学習データとする。つまりテストデータセットサイズは 20 * 5 = 100 個となる
+</p>
+<p>
+(5) 学習率は r = 0.001、エポック数は E = 100、バッチサイズは B = 64 とする
+</p>
+<p>
+(6) 出力層の活性化関数は「softmax」、損失関数は「CategoricalCrossentropy」、評価関数は「CategoricalAccuracy」とする
+</p>
+</pre>
+
+</div>
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Jupyter Notebook で「DL_5_3」というノートブックを作ります 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/DL_5_3.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> DL_5_2 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」と「学習前の状態」、「学習後の状態」を貼り付けて下さい。
 </p>
 </div>
 
