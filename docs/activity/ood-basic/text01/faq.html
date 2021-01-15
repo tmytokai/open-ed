@@ -35,6 +35,23 @@ getWorld().removeObject( this );
 
 <br>
 <h3>
+Q. ワールドの端まで来たら自分自身を削除したい
+</h3>
+
+<p>
+A.  isAtEdge メソッドを使うと自分が所属するワールドの端にいるかどうか分かります。
+</p>
+
+<div class="info">
+<pre class="wrap">
+if( isAtEdge() ){
+    getWorld().removeObject( this );
+}
+</pre>
+</div>
+
+<br>
+<h3>
 Q. act メソッドの中で自分自身の座標を取得したい
 </h3>
 
@@ -564,7 +581,7 @@ setActOrder(JIRO.class, HANAKO.class, TARO.class);
 
 <br>
 <h3>
-Q. 音を鳴らしたい
+Q. 効果音を鳴らしたい
 </h3>
 
 <p>
@@ -583,6 +600,127 @@ public void act()
             Greenfoot.playSound("test.wav");
     }
 }
+</pre>
+</div>
+
+<br>
+<h3>
+Q. ゲームを開始したらBGMを再生し、ゲームを停止したら BGM を停止したい
+</h3>
+
+<p>
+A. まず sounds フォルダの中に音声ファイルを入れます。
+<br>
+音声ファイルの形式は wav や MP3(※) 等です ※ greenfoot のバージョンが古いと MP3を再生出来ない場合があります
+<br>
+<br>
+それからコンストラクタの中で GreenfootSound クラスからそのファイルを読み込み、started メソッドで playLoop メソッドを、 stopped メソッドで stop メソッドを呼び出します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b>test.mp3 を BGM として再生する例</b>
+
+public class MyWorld extends World
+{
+    GreenfootSound bgm = null;
+
+    public MyWorld()
+    {    
+        super(600, 400, 1);
+        bgm = new GreenfootSound( "test.mp3" );
+    }
+    
+    public void started()
+    {
+        bgm.playLoop();
+    }
+    
+    public void stopped()
+    {
+        bgm.stop();
+    }
+}
+
+
+</pre>
+</div>
+
+<br>
+<h3>
+Q. ワールドを複数用意しておき、違うワールドに切り替えたら鳴らしている BGM も切り替えたい
+</h3>
+
+<p>
+A. 上のFAQの内容にしたがって BGM を鳴らしますが、それに加えてワールドを切り替えるときに明示的に started メソッドと stopeed メソッドを呼び出します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b> MyWorld と MyWorld2 があって、Hoge というキャラクタが space キーを押すとワールドとBGM(test.mp3 → test2.mp3)を切り替える例</b>
+
+<b>・ MyWorld  クラス </b>
+
+public class MyWorld extends World
+{
+    GreenfootSound bgm = null;
+
+    public MyWorld()
+    {    
+        super(600, 400, 1);
+        bgm = new GreenfootSound( "test.mp3" );
+    }
+    
+    public void started()
+    {
+        bgm.playLoop();
+    }
+    
+    public void stopped()
+    {
+        bgm.stop();
+    }
+}
+
+<b>・ MyWorld2  クラス </b>
+
+public class MyWorld2 extends World
+{
+    GreenfootSound bgm = null;
+
+    public MyWorld2()
+    {    
+        super(600, 400, 1);
+        bgm = new GreenfootSound( "test2.mp3" );
+    }
+    
+    public void started()
+    {
+        bgm.playLoop();
+    }
+    
+    public void stopped()
+    {
+        bgm.stop();
+    }
+}
+
+<b>・ Hoge  クラス </b>
+
+public class Hoge extends Actor
+{
+    public void act() 
+    {
+        if( Greenfoot.isKeyDown( "space" ) ){
+            getWorld().stopped();
+
+            World world = new MyWorld2();
+            Greenfoot.setWorld( world );
+            world.started();
+        }
+    }    
+}
+
 </pre>
 </div>
 
