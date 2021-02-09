@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. finally</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [2] 例外処理</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+JavaやC#など、オブジェクト指向言語の中には「<b>finally</b>」処理を行える言語もあります。
+<br>
+finally 処理とは、例外処理が起きようが起きまいが最後に必ず実行する処理のことで、tryやcatchと合わせて「try-catch-finally 構文」と呼ばれることもあります。
+</p>
+
+<p>
+さて try-catch-finally 構文は以下のような書式になります。
+<br>
+<a href="./page01.html">1ページ目</a>に示した例外処理書式との違いは最後に「finally」が付いている点だけです。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>try-catch-finally 構文の書式:</b>
+
+<pre class="wrap">
+   try
+   {
+   　 例外1〜Nが起きる可能性のある処理部
+   }
+   catch(例外その1){
+   {
+      例外1のエラー処理部
+   }
+   catch(例外その2){
+   {
+      例外2のエラー処理部   
+   }
+   ・・・
+   catch(例外そのN){
+   {
+      例外Nのエラー処理部
+   }
+   finally(){
+      最後に必ず実行する処理部
+   }
+
+</pre>
+
+</div>
+
+<p>
+finally にはいろいろな使い道がありますが、特にリソースの開放など後始末をしたい時によく使われます。
+<br>
+例えばメソッド内で複数のファイルをオープンする時、もし途中でファイルオープンに失敗したら既に開いているファイルについてはクローズしたいという状況を考えましょう。
+</p>
+
+<p>
+まず finally を使わない場合のソースと実行例を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース1: finally を使わない例 </b>
+
+<pre class="wrap">
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main
+{
+
+  public static void test(){
+
+     FileReader in1 = null;
+     FileReader in2 = null;
+
+     try{ 
+         // ファイルのオープン処理
+         in1 = new FileReader( "hoge.txt" ); 
+         in2 = new FileReader( "fuga.txt" ); 
+
+         // ファイルのクローズ処理
+         if( in1 != null ){
+             System.out.println( "hoge.txt を閉じます" );
+             in1.close();
+         }
+         if( in2 != null ){
+             System.out.println( "fuba.txt を閉じます" );
+             in2.close();
+         }
+     } 
+     catch( IOException e ) { 
+         System.out.println( e );
+         return;
+     }
+  }
+
+  public static void main(String[] args) {
+    test();
+  }
+
+}
+
+実行結果:
+
+※ hoge.txt はあるけど fuga.txt は無いという状況で実行
+
+java.io.FileNotFoundException: fuga.txt (そのようなファイルやディレクトリはありません)
+
+</pre>
+
+</div>
+
+<p>
+上の例では fuga.txt をオープンしようとすると例外が発生して catch 内に飛んでしまうため既に開いている hoge.txt はクローズされていません。
+<br>
+ではファイルのオープン処理とクローズ処理を分離して書いたらどうなるでしょうか？
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース2: ファイルのオープン処理とクローズ処理を分離した場合 </b>
+
+<pre class="wrap">
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main
+{
+
+  public static void test(){
+
+     FileReader in1 = null;
+     FileReader in2 = null;
+
+     try{ 
+         // ファイルのオープン処理
+         in1 = new FileReader( "hoge.txt" ); 
+         in2 = new FileReader( "fuga.txt" ); 
+     } 
+     catch( IOException e ) { 
+         System.out.println( e );
+         return;
+     }
+
+     try{
+         // ファイルのクローズ処理
+         if( in1 != null ){
+             System.out.println( "hoge.txt を閉じます" );
+             in1.close();
+         }
+         if( in2 != null ){
+             System.out.println( "fuba.txt を閉じます" );
+             in2.close();
+         }
+     }
+     catch( IOException e ) { 
+         System.out.println( e );
+         return;
+     }
+  }
+
+  public static void main(String[] args) {
+    test();
+  }
+
+}
+
+実行結果:
+
+※ hoge.txt はあるけど fuga.txt は無いという状況で実行
+
+java.io.FileNotFoundException: fuga.txt (そのようなファイルやディレクトリはありません)
+
+</pre>
+
+</div>
+
+<p>
+この場合も hoge.txt はクローズされていません。
+<br>
+何故かというと fuga.txt のオープンに失敗すると最初の catch文の中で return してメソッドから抜けてしまっているからです。
+</p>
+
+<p>
+そこでファイルのクローズ処理を finally 内に移動してみます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース3: finally 内にファイルのクローズ処理を移動した場合 </b>
+
+<pre class="wrap">
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main
+{
+
+  public static void test(){
+
+     FileReader in1 = null;
+     FileReader in2 = null;
+
+     try{ 
+         // ファイルのオーブン処理
+         in1 = new FileReader( "hoge.txt" ); 
+         in2 = new FileReader( "fuga.txt" ); 
+     } 
+     catch( IOException e ) { 
+         System.out.println( e );
+         return;
+     }
+     finally{
+
+       try{
+           // ファイルのクローズ処理を分離
+           if( in1 != null ){
+               System.out.println( "hoge.txt を閉じます" );
+               in1.close();
+           }
+           if( in2 != null ){
+               System.out.println( "fuba.txt を閉じます" );
+               in2.close();
+           }
+       }
+       catch( IOException e ) { 
+           System.out.println( e );
+           return;
+       }
+    }
+  }
+
+  public static void main(String[] args) {
+    test();
+  }
+
+}
+
+実行結果:
+
+※ hoge.txt はあるけど fuga.txt は無いという状況で実行
+
+java.io.FileNotFoundException: fuga.txt (そのようなファイルやディレクトリはありません)
+hoge.txt を閉じます
+
+</pre>
+
+</div>
+
+<p>
+finally の中にさらに try-catch があるため若干見づらいソースコードになっていますが、メソッドを抜ける前にちゃんと hoge.txt がクローズされるようになりました。
+</p>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
