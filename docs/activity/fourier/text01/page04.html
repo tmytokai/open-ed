@@ -110,6 +110,81 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 求めれば $k=-1,-2,\cdots$ に対応する複素フーリエ係数は求める必要がありません。
 </p>
 
+<p>
+また、$f(t)$ が偶関数の場合は $f(t) = f(-t)$ が成り立つので、
+</p>
+
+
+\begin{align*}
+\textrm{C}[k] 
+&= \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\
+&= \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{0} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
++
+\frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\
+&= \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(-t) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
++
+\frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\
+(f(t) = f(-t) より) &= \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot 
+\left [
+\textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
++\textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right ]
+\right \{
+\textrm{dt} \\
+(オイラー公式より) &= \frac{2}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \cos(k \cdot w_1 \cdot t)
+\right \}
+\textrm{dt} \\
+
+\end{align*}
+
+<p>
+と、虚数成分が消えてただの実積分になり、しかも 
+</p>
+
+
+\begin{align*}
+\textrm{C}[-k] 
+&= \frac{2}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \cos(-k \cdot w_1 \cdot t)
+\right \}
+\textrm{dt} \\
+&= \frac{2}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \cos(k \cdot w_1 \cdot t)
+\right \}
+\textrm{dt} \\
+&= \textrm{C}[k] 
+\end{align*}
+
+<p>
+ですので、$\textrm{C}[k]$は複素数ではなく<b>実数の定数、かつ偶関数になります</b>。
+</p>
+
 <br>
 <h2>参考資料: 周期性角周波数領域アナログ信号の複素フーリエ級数展開と逆離散フーリエ変換</h2>
 
@@ -178,6 +253,22 @@ $ \textrm{T} = 2\pi/\textrm{W}$
 </p>
 
 </div>
+
+<p>
+なお上でおこなった説明と同様に、もし $f(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
+</p>
+
+\begin{align*}
+\textrm{C}[i] = \frac{2}{\textrm{W}} \int_{-\textrm{W}/2}^{\textrm{W}/2} 
+\left \{
+f(w) \cdot \cos (i \cdot \textrm{T} \cdot w )
+\right \}
+\textrm{d}w
+\end{align*}
+
+<p>
+となり、 $\textrm{C}[i]$ は実数の定数かつ偶関数になります。
+</p>
 
 <br>
 <script>PreNext(4,5)</script>

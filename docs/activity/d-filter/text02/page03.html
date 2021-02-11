@@ -49,19 +49,16 @@
 = \sum_{i=-\infty}^{\infty} \{ h[i] \cdot z^{-i} \}
 \end{align*}
 
-<p>
-・$\sum$ の範囲が $-\infty$ から $\infty$ まであることに注意
-</p>
-<p>
-・今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼ぶが、$\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを<b>両側Z変換</b>と呼ぶ
-<br>
-
-</p>
-
 </div>
 
 <p>
-この伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page11.html">周波数特性</a> $\textrm{H}(w)$ を求めます。
+なお上の式で $\sum$ の範囲が $-\infty$ から $\infty$ までとなっている注意してください。
+<br>
+今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼びますが、上の式のように $\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを<b>両側Z変換</b>と呼びます。
+</p>
+
+<p>
+さて、この伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性</a> $\textrm{H}(w)$ を求めます。
 <br>
 ここで $\tau$ [秒] は<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>です。
 </p>
@@ -80,7 +77,7 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 </div>
 
 <p>
-ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので、周波数特性$\textrm{H}(w)$ の位相特性は 0 で、振幅特性が偶関数かつ周期 $w_s$ [rad/秒] で周期的であると仮定します。
+ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので、思い切って周波数特性$\textrm{H}(w)$ の位相特性は常に 0 [rad] で、振幅特性が偶関数かつ周期 $w_s$ [rad/秒] で周期的であると仮定します。
 <br>
 ここで $w_s$ [rad/秒] は<a href="../../d-signal/text02/page01.html">サンプリング角周波数</a>です。
 </p>
@@ -90,7 +87,7 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数と仮定する: </b>
+<input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数であると仮定する: </b>
 
 <p>
 　
@@ -101,16 +98,18 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 </div>
 
 <p>
-よってインパルス応答は $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により求められます。
+次にインパルス応答 $h[i]$ を $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により求めます。
+<br>
+ここで $\textrm{H}(w)$ は虚数成分を含まない実関数でかつ偶関数であると仮定したので、インパルス応答 $h[i]$ も実数かつ偶関数となり、以下の式で求められます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>非因果的なディジタルフィルタのインパルス応答: </b>
 
 \begin{align*}
-h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}} 
+h[i] = \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}} 
 \left \{
-\textrm{H}(w) \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+\textrm{H}(w) \cdot \cos ( i \cdot w \cdot \tau )
 \right \}
 \textrm{dw}
 \ ,\  (i = 0, \pm 1, \pm 2, \cdots)
@@ -119,19 +118,7 @@ h[i] = \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}}
 </div>
 
 <p>
-なお、$\textrm{H}(w)$ は偶関数と仮定したので
-</p>
-
-\begin{align*}
-h[-i] = h[i]
-\end{align*}
-
-<p>
-が成り立ちます。つまり $h[i]$ も偶関数になります。
-</p>
-
-<p>
-また当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
+当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
 <br>
 今回は手始めとしてローパスフィルタを設計してみましょう。
 </p>
@@ -160,22 +147,17 @@ $w_c$ ・・・ カットオフ角周波数、$w_c \leq w_s/2$、単位は[rad/�
 </p>
 
 \begin{align*}
-h[i] &= \frac{1}{w_s} \int_{-\frac{w_s}{2}}^{\frac{w_s}{2}} 
+h[i] &= \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}} 
 \left \{
-\textrm{H}(w) \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+\textrm{H}(w) \cdot \cos (i \cdot w \cdot \tau )
 \right \}
 \textrm{dw} \\
-&= \frac{1}{w_s} \int_{-w_c}^{w_c} 
+&= \frac{2}{w_s} \int_{0}^{w_c} 
 \left \{
-1 \cdot \textrm{e}^{\{ j \cdot i \cdot w \cdot \tau \}} 
+1 \cdot \cos ( i \cdot w \cdot \tau )
 \right \}
 \textrm{dw} \\
-&= \frac{1}{w_s} \cdot \frac{1}{ j \cdot i \cdot \tau}
-\left \{
-\textrm{e}^{\{ j \cdot i \cdot w_c \cdot \tau \}} 
--\textrm{e}^{\{ -j \cdot i \cdot w_c \cdot \tau \}} 
-\right \} \\
-(オイラー公式より) &= \frac{1}{w_s} \cdot \frac{2}{ i \cdot \tau} \cdot \sin ( i \cdot w_c \cdot \tau ) \\
+&= \frac{2}{w_s} \cdot \frac{1}{ i \cdot \tau} \cdot \sin ( i \cdot w_c \cdot \tau ) \\
 (\tau = 2\pi/w_s より) &= \frac{1}{\pi \cdot i } \cdot \sin \left [ \pi \cdot i \cdot \frac{w_c}{(w_s/2)} \right ] \\
 (\alpha = \frac{w_c}{(w_s/2)} とおいて) &= \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }
 \end{align*}
@@ -264,7 +246,7 @@ $\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
 \end{align*}
 
 <p>
-を求めたあと $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page11.html">周波数特性を求めます</a>。
+を求めたあと $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性を求めます</a>。
 </p>
 
 \begin{align*}
@@ -444,9 +426,23 @@ h[\textrm{C}]
 </div>
 
 <p>
-つまりFIRローパスフィルタの位相特性は $\angle \textrm{H}(w) = - w \cdot \textrm{C} \cdot \tau$ [rad] となるのですが、これは $w$ [rad/秒] に対して傾き $-\textrm{C} \cdot \tau$の直線を表していますので、FIRローパスフィルタの位相特性の事を「<b>直線位相特性</b>」と呼びます。
+つまりFIRローパスフィルタの位相特性は
+</p>
+
+\begin{align*}
+\angle \textrm{H}(w) = - w \cdot \textrm{C} \cdot \tau
+\end{align*}
+
+<p>
+となるのですが、これは $w$ [rad/秒] に対して傾き $-\textrm{C} \cdot \tau$の直線を表していますので、FIRローパスフィルタの位相特性の事を「<b>直線位相特性</b>」と呼びます。
 <br>
 逆に、FIRローパスフィルタは直線位相特性を持っているので、どんな角周波数のサイン波を入力しても必ず $\textrm{C}$ 時刻だけ遅れて出てくるとも言えます。
+</p>
+
+<p>
+ちなみにこの周波数特性の式は $h[i]$が $\textrm{C}$ を中心に偶関数となっていればどんな $h[i]$ に対しても成り立ちます。
+<br>
+例えば<a href="./page02.html">前ページ</a>で扱った移動平均フィルタの場合は $h[i] = 1/\textrm{L}$ でしたので、これを周波数特性の式に代入することで移動平均フィルタの周波数特性が求まります。
 </p>
 
 <br>
