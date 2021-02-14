@@ -21,7 +21,19 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+ここでは Z 変換が時間領域ディジタル信号 $f[i]$ に対するラプラス変換であることを説明します。
+</p>
+
+<p>
+さてサンプリング元のアナログ信号を $f(t)$ とすると、<a href="../../d-signal/text02/page01.html">サンプリング</a>のアクティビティで説明した様に、$\tau$ [秒]をサンプリング間隔とした時、
+<p>
+
+\begin{align*}
+f[i] = f( i \cdot \tau )
+\end{align*}
+
+<p>
+で表されます(図1)。
 </p>
 
 <div class="info">
@@ -35,8 +47,64 @@
 </div>
 
 <p>
-　
+ここで簡単に考えるため、ある時刻 $i$ における $f[i]$ だけをラプラス変換することを考えます。
+<br>
+つまり
 </p>
+
+\begin{align*}
+f'(t) =
+\begin{cases}
+f( i\cdot \tau ) & (t = i\cdot \tau) \\
+\\
+0 & (それ以外)
+\end{cases}
+\end{align*}
+
+<p>
+というアナログ信号 $f'(t)$ をラプラス変換します。
+</p>
+
+<p>
+ところが深く考えないで $f'(t)$ をラプラス変換してみると、積分の幅が0になるため上手く行きません。
+<br>
+実際に計算してみると、$s = \sigma + j \cdot w$ を S 平面上の任意の複素数としたとき
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= \int_0^\infty f'(t) \cdot \textrm{e}^{-st} dt \\
+&= \int_{i \cdot \tau}^{i \cdot \tau} f(i\cdot\tau) \cdot \textrm{e}^{-st} dt \\
+&= f[i] \cdot \int_{i \cdot \tau}^{i \cdot \tau} \textrm{e}^{-st} dt \\
+& = 0
+\end{align*}
+
+<p>
+になります。
+<br>
+ 
+<p>
+そこで図2の様な窓関数 $g(t)$ を用意し、図3の範囲で $f(t)$ を切り出すことにします。
+<br>
+つまり $\epsilon$ を微小な正の実数としたとき、
+</p>
+
+\begin{align*}
+f'(t) =
+\begin{cases}
+\frac{1}{ 2\epsilon }\cdot f(t) \cdot g(t-i\cdot\tau)  & ( i\cdot \tau - \epsilon \leq t \leq i\cdot \tau + \epsilon ) \\
+\\
+0 & (それ以外)
+\end{cases}
+\end{align*}
+
+<p>
+というアナログ信号 $f'(t)$ に対してラプラス変換することにします。
+<br>
+ちなみに $2\epsilon$ で割っている理由は $\epsilon$ が非常に小さい時に積分値が 0 に近づくことを防ぐためです。
+</p>
+
+
 
 <div class="info">
 <input type="checkbox"><b>図2:  窓関数 </b>
@@ -53,7 +121,7 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図3:  窓関数で積分範囲を切り出す </b>
+<input type="checkbox"><b>図3:  窓関数で元のアナログ信号を切り出す </b>
 
 <p>
 　
@@ -62,6 +130,75 @@
 <img src="./img/page07-fig3.png" alt="">
 </div>
 
+<p>
+すると、今度は
+</p>
+
+\begin{align*}
+\textrm{F}(s)
+&= \int_0^\infty f'(t) \cdot \textrm{e}^{-st} dt \\
+&= \frac{1}{2\epsilon} \int_{i \cdot \tau - \epsilon}^{i \cdot \tau + \epsilon} f(t) \cdot \textrm{e}^{-st} dt \\
+\end{align*}
+
+<p>
+になります。
+</p>
+
+<p>
+ここで、本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると、<a href-"https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
+<br>
+ 
+\begin{align*}
+\textrm{F}(s) 
+&= f(\xi) \cdot \textrm{e}^{-s \xi}
+\end{align*}
+
+<p>
+を満たす $\xi$ が
+</p>
+
+\begin{align*}
+i\cdot \tau - \epsilon \leq \xi \leq i\cdot \tau + \epsilon
+\end{align*}
+
+<p>
+の範囲に必ず存在します。
+</p>
+
+<p>
+あとは $\epsilon \rightarrow 0 $ とすることで、
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= f[i] \cdot \textrm{e}^{-s \cdot i \cdot \tau} \\
+&= f[i] \cdot \textrm{e}^{- (s \tau) \cdot i}
+\end{align*}
+
+<p>
+が得られます。
+</p>
+
+<p>
+これを全てのディジタル時刻 $i$ について考えて足し合わせることで、結局ディジタル信号 $f[i]$ のラプラス変換は次のように表すことができます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ディジタル信号 $f[i]$ のラプラス変換 </b>
+
+<p>
+$\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面上の任意の複素数としたとき、
+</p>
+
+\begin{align*}
+\textrm{F}(s) = \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- (s \tau) \cdot i} \}
+\end{align*}
+
+</div>
+
+<p>
+以下準備中
+</p>
 
 <script>PreNext(7,9)</script>
 </body>
