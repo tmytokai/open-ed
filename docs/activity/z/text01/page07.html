@@ -25,11 +25,11 @@
 </p>
 
 <p>
-さてサンプリング元のアナログ信号を $f(t)$ とすると、<a href="../../d-signal/text02/page01.html">サンプリング</a>のアクティビティで説明した様に、$\tau$ [秒]をサンプリング間隔とした時、
+サンプリング元のアナログ信号を $f(t)$ とすると、<a href="../../d-signal/text02/page01.html">サンプリング</a>のアクティビティで説明した様に、$\tau$ [秒]をサンプリング間隔とした時、
 <p>
 
 \begin{align*}
-f[i] = f( i \cdot \tau )
+f[i] = f( \tau \cdot i )
 \end{align*}
 
 <p>
@@ -47,7 +47,7 @@ f[i] = f( i \cdot \tau )
 </div>
 
 <p>
-ここで簡単に考えるため、ある時刻 $i$ における $f[i]$ だけをラプラス変換することを考えます。
+まず、ある時刻 $i$ における $f[i]$ だけをラプラス変換することを考えます。
 <br>
 つまり
 </p>
@@ -55,9 +55,9 @@ f[i] = f( i \cdot \tau )
 \begin{align*}
 f'(t) =
 \begin{cases}
-f( i\cdot \tau ) & (t = i\cdot \tau) \\
+f[i] = f( \tau \cdot i ) &, (t = \tau \cdot i) \\
 \\
-0 & (それ以外)
+0 &, (それ以外)
 \end{cases}
 \end{align*}
 
@@ -66,45 +66,26 @@ f( i\cdot \tau ) & (t = i\cdot \tau) \\
 </p>
 
 <p>
-ところが深く考えないで $f'(t)$ をラプラス変換してみると、積分の幅が0になるため上手く行きません。
-<br>
-実際に計算してみると、$s = \sigma + j \cdot w$ を S 平面上の任意の複素数としたとき
+ところがこれを実際に計算してみると、積分の幅が0になるため
 </p>
 
 \begin{align*}
 \textrm{F}(s) 
 &= \int_0^\infty f'(t) \cdot \textrm{e}^{-st} dt \\
-&= \int_{i \cdot \tau}^{i \cdot \tau} f(i\cdot\tau) \cdot \textrm{e}^{-st} dt \\
-&= f[i] \cdot \int_{i \cdot \tau}^{i \cdot \tau} \textrm{e}^{-st} dt \\
+&= \int_{\tau \cdot i}^{\tau \cdot i} f[i] \cdot \textrm{e}^{-st} dt \\
+&= f[i] \cdot \int_{\tau \cdot i}^{\tau \cdot i} \textrm{e}^{-st} dt \\
 & = 0
 \end{align*}
 
 <p>
-になります。
+と、積分値が 0 になってしまいます。
+<br>
+ここで $s = \sigma + j \cdot w$ は S 平面上の任意の複素数です。
 <br>
  
 <p>
-そこで図2の様な窓関数 $g(t)$ を用意し、図3の範囲で $f(t)$ を切り出すことにします。
-<br>
-つまり $\epsilon$ を微小な正の実数としたとき、
+そこで$\epsilon$ を微小な正の実数としたとき、図2の様な窓関数 $g(t)$ を用意して図3の様に $f(t)$ を幅 $2\epsilon$ で切り出すことにします。
 </p>
-
-\begin{align*}
-f'(t) =
-\begin{cases}
-\frac{1}{ 2\epsilon }\cdot f(t) \cdot g(t-i\cdot\tau)  & ( i\cdot \tau - \epsilon \leq t \leq i\cdot \tau + \epsilon ) \\
-\\
-0 & (それ以外)
-\end{cases}
-\end{align*}
-
-<p>
-というアナログ信号 $f'(t)$ に対してラプラス変換することにします。
-<br>
-ちなみに $2\epsilon$ で割っている理由は $\epsilon$ が非常に小さい時に積分値が 0 に近づくことを防ぐためです。
-</p>
-
-
 
 <div class="info">
 <input type="checkbox"><b>図2:  窓関数 </b>
@@ -121,7 +102,7 @@ f'(t) =
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図3:  窓関数で元のアナログ信号を切り出す </b>
+<input type="checkbox"><b>図3:  窓関数 $g(t)$ で元のアナログ信号を切り出す </b>
 
 <p>
 　
@@ -131,13 +112,32 @@ f'(t) =
 </div>
 
 <p>
+つまり今回は
+</p>
+
+\begin{align*}
+f'(t) =
+\begin{cases}
+\frac{1}{ 2\epsilon }\cdot f(t) \cdot g(t-\tau \cdot i)  &, ( \tau \cdot i - \epsilon \leq t \leq \tau \cdot i + \epsilon ) \\
+\\
+0 &, (それ以外)
+\end{cases}
+\end{align*}
+
+<p>
+というアナログ信号 $f'(t)$ に対してラプラス変換することにします。
+<br>
+ちなみに $\epsilon$ が非常に小さい時に積分値が 0 に近づくことを防ぐため、全体を $2\epsilon$ で割って正規化しています。
+</p>
+
+<p>
 すると、今度は
 </p>
 
 \begin{align*}
 \textrm{F}(s)
 &= \int_0^\infty f'(t) \cdot \textrm{e}^{-st} dt \\
-&= \frac{1}{2\epsilon} \int_{i \cdot \tau - \epsilon}^{i \cdot \tau + \epsilon} f(t) \cdot \textrm{e}^{-st} dt \\
+&= \frac{1}{2\epsilon} \int_{\tau \cdot i - \epsilon}^{\tau \cdot i + \epsilon} f(t) \cdot \textrm{e}^{-st} dt \\
 \end{align*}
 
 <p>
@@ -145,7 +145,7 @@ f'(t) =
 </p>
 
 <p>
-ここで、本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると、<a href-"https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
+ここで(本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると)、<a href="https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
 <br>
  
 \begin{align*}
@@ -158,7 +158,7 @@ f'(t) =
 </p>
 
 \begin{align*}
-i\cdot \tau - \epsilon \leq \xi \leq i\cdot \tau + \epsilon
+\tau \cdot i - \epsilon \leq \xi \leq \tau \cdot i + \epsilon
 \end{align*}
 
 <p>
@@ -166,13 +166,13 @@ i\cdot \tau - \epsilon \leq \xi \leq i\cdot \tau + \epsilon
 </p>
 
 <p>
-あとは $\epsilon \rightarrow 0 $ とすることで、
+あとは $\epsilon \rightarrow 0 $ とすることで $\xi \rightarrow \tau \cdot i $ となりますので、
 </p>
 
 \begin{align*}
 \textrm{F}(s) 
-&= f[i] \cdot \textrm{e}^{-s \cdot i \cdot \tau} \\
-&= f[i] \cdot \textrm{e}^{- (s \tau) \cdot i}
+&= f( \tau \cdot i ) \cdot \textrm{e}^{-s \cdot \tau \cdot i} \\
+&= f[i] \cdot \textrm{e}^{-s \cdot \tau \cdot i}
 \end{align*}
 
 <p>
@@ -191,10 +191,75 @@ $\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面�
 </p>
 
 \begin{align*}
-\textrm{F}(s) = \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- (s \tau) \cdot i} \}
+\textrm{F}(s) = \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- s \cdot \tau \cdot i} \}
 \end{align*}
 
 </div>
+
+<p>
+ところで $w_s$ をサンプリング角周波数とすると、<a href="../../d-signal/text02/page02.html">標本化定理</a>より、
+</p>
+
+<p>
+「<b>$\textrm{F}(s)$ は S 平面上で $w$ に関し周期 $w_s$ で周期的</b>」
+</p>
+
+</p>
+になりますので、$-w_s/2 \leq w \leq w_s/2$ の範囲に帯域を制限して考えることが出来ます(図4)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: $\textrm{F}(s)$ は S 平面上で $w$ に関し周期 $w_s$ で周期的 </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page07-fig4.png" alt="">
+</div>
+
+<p>
+この事を式を使って具体的に示します。
+</p>
+
+<p>
+まず上に示した $f[i]$ のラプラス変換式の右辺に $s = \sigma + j \cdot w$ を代入し
+</p>
+
+\begin{align*}
+\textrm{F}(s) &= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- ( \sigma + j \cdot w) \cdot \tau \cdot i} \} \\
+&= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot w \cdot \tau \cdot i} \}
+\end{align*}
+
+
+<p>
+さらに、 $\tau = 2\pi/w_s$ を最後の項に代入すると
+</p>
+
+\begin{align*}
+\textrm{F}(s)
+&= \sum_{i=0}^\infty 
+\left \{ 
+f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
+\right \}
+\end{align*}
+
+
+<p>
+という式が出てきます。
+<br>
+ここで最後の項は $k$ を任意の整数とすると
+</p>
+
+\begin{align*}
+\textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
+= 
+\textrm{e}^{- j \cdot 2 \pi \cdot \frac{w + k \cdot w_s}{w_s} \cdot i} 
+\end{align*}
+
+<p>
+が成り立ちますので、$\textrm{F}(s)$ は $w$ に関して周期 $w_s$ で周期的になります。
+</p>
 
 <p>
 以下準備中
