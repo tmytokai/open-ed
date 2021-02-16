@@ -21,11 +21,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは Z 変換が時間領域ディジタル信号 $f[i]$ に対するラプラス変換であることを説明します。
+このページでは Z 変換が時間領域ディジタル信号 $f[i]$ に対するラプラス変換であることを説明します。
 </p>
 
 <p>
-サンプリング元のアナログ信号を $f(t)$ とすると、<a href="../../d-signal/text02/page01.html">サンプリング</a>のアクティビティで説明した様に、$\tau$ [秒]をサンプリング間隔とした時、
+サンプリング元のアナログ信号を $f(t)$ とし、$\tau$ [秒]をサンプリング間隔とすると、<a href="../../d-signal/text02/page01.html">サンプリング</a>のアクティビティで説明した様に、
 <p>
 
 \begin{align*}
@@ -78,13 +78,13 @@ f[i] = f( \tau \cdot i ) &, (t = \tau \cdot i) \\
 \end{align*}
 
 <p>
-と、積分値が 0 になってしまいます。
+という様に積分結果が 0 になってしまいます。
 <br>
-ここで $s = \sigma + j \cdot w$ は S 平面上の任意の複素数です。
+なお $s = \sigma + j \cdot w$ は S 平面上の任意の点です。
 <br>
  
 <p>
-そこで$\epsilon$ を微小な正の実数としたとき、図2の様な窓関数 $g(t)$ を用意して図3の様に $f(t)$ を幅 $2\epsilon$ で切り出すことにします。
+そこで$\epsilon$ を微小な正の実数としたとき、図2の様な窓関数 $g(t)$ を使って図3の様に $f(t)$ を幅 $2\epsilon$ で切り出すことにします。
 </p>
 
 <div class="info">
@@ -105,7 +105,7 @@ f[i] = f( \tau \cdot i ) &, (t = \tau \cdot i) \\
 <input type="checkbox"><b>図3:  窓関数 $g(t)$ で元のアナログ信号を切り出す </b>
 
 <p>
-　
+$g(t)$ を平行移動した $g(t-\tau\cdot i)$ を $f(t)$ にかける
 </p>
 
 <img src="./img/page07-fig3.png" alt="">
@@ -118,7 +118,7 @@ f[i] = f( \tau \cdot i ) &, (t = \tau \cdot i) \\
 \begin{align*}
 f'(t) =
 \begin{cases}
-\frac{1}{ 2\epsilon }\cdot f(t) \cdot g(t-\tau \cdot i)  &, ( \tau \cdot i - \epsilon \leq t \leq \tau \cdot i + \epsilon ) \\
+\frac{1}{ 2\epsilon }\cdot f(t) &, ( \tau \cdot i - \epsilon \leq t \leq \tau \cdot i + \epsilon ) \\
 \\
 0 &, (それ以外)
 \end{cases}
@@ -127,7 +127,7 @@ f'(t) =
 <p>
 というアナログ信号 $f'(t)$ に対してラプラス変換することにします。
 <br>
-ちなみに $\epsilon$ が非常に小さい時に積分値が 0 に近づくことを防ぐため、全体を $2\epsilon$ で割って正規化しています。
+ちなみに $f(t)$ を $2\epsilon$ で割って正規化しています( そうしないと $\epsilon$ が非常に小さい時に積分結果がほぼ 0 になってしまうので)。
 </p>
 
 <p>
@@ -180,14 +180,14 @@ f'(t) =
 </p>
 
 <p>
-これを全てのディジタル時刻 $i$ について考えて足し合わせることで、結局ディジタル信号 $f[i]$ のラプラス変換は次のように表すことができます。
+これを全てのディジタル時刻 $i$ について足し合わせることで、ディジタル信号 $f[i]$ のラプラス変換は次のようになります。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ディジタル信号 $f[i]$ のラプラス変換 </b>
 
 <p>
-$\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面上の任意の複素数としたとき、
+$\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面上の任意の点としたとき、
 </p>
 
 \begin{align*}
@@ -197,14 +197,63 @@ $\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面�
 </div>
 
 <p>
-ところで $w_s$ をサンプリング角周波数とすると、<a href="../../d-signal/text02/page02.html">標本化定理</a>より、
+ところで上の式に $s = \sigma + j \cdot w$ を代入し
+</p>
+
+\begin{align*}
+\textrm{F}(\sigma + j \cdot w) 
+&= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- ( \sigma + j \cdot w) \cdot \tau \cdot i} \} \\
+&= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot w \cdot \tau \cdot i} \}
+\end{align*}
+
+
+<p>
+さらに$w_s$ をサンプリング角周波数としたとき、 $\tau = 2\pi/w_s$ を最後の項に代入すると
+</p>
+
+\begin{align*}
+\textrm{F}(\sigma + j \cdot w)
+&= \sum_{i=0}^\infty 
+\left \{ 
+f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
+\right \}
+\end{align*}
+
+
+<p>
+という式が出てきます。
+<br>
+ここで $k$ を任意の整数とすると
+</p>
+
+\begin{align*}
+\textrm{F}(\sigma + j \cdot (w + k \cdot w_s )
+&= \sum_{i=0}^\infty 
+\left \{ 
+f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w + k \cdot w_s}{w_s} \cdot i} 
+\right \} \\
+&= \sum_{i=0}^\infty 
+\left \{ 
+f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot k \cdot i} 
+\right \} \\
+&= \sum_{i=0}^\infty 
+\left \{ 
+f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
+\right \} \\
+& = \textrm{F}(\sigma + j \cdot w)
+\end{align*}
+
+<p>
+が成り立ちます。
+<br>
+つまり
 </p>
 
 <p>
 「<b>$\textrm{F}(s)$ は S 平面上で $w$ に関し周期 $w_s$ で周期的</b>」
 </p>
 
-</p>
+<p>
 になりますので、$-w_s/2 \leq w \leq w_s/2$ の範囲に帯域を制限して考えることが出来ます(図4)。
 </p>
 
@@ -218,52 +267,51 @@ $\tau$ [秒]をサンプリング間隔、$s = \sigma + j \cdot w$ を S 平面�
 <img src="./img/page07-fig4.png" alt="">
 </div>
 
-<p>
-この事を式を使って具体的に示します。
-</p>
 
 <p>
-まず上に示した $f[i]$ のラプラス変換式の右辺に $s = \sigma + j \cdot w$ を代入し
+さてここで
 </p>
 
 \begin{align*}
-\textrm{F}(s) &= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- ( \sigma + j \cdot w) \cdot \tau \cdot i} \} \\
-&= \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot w \cdot \tau \cdot i} \}
+z &= \textrm{e}^{ s \cdot \tau } \\
+&= \textrm{e}^{ \sigma \cdot \tau } \cdot \textrm{e}^{ j \cdot w \cdot \tau }
 \end{align*}
 
-
 <p>
-さらに、 $\tau = 2\pi/w_s$ を最後の項に代入すると
-</p>
-
-\begin{align*}
-\textrm{F}(s)
-&= \sum_{i=0}^\infty 
-\left \{ 
-f[i] \cdot \textrm{e}^{- \sigma \cdot \tau \cdot i} \cdot \textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
-\right \}
-\end{align*}
-
-
-<p>
-という式が出てきます。
+という座標変換を考えます。
 <br>
-ここで最後の項は $k$ を任意の整数とすると
+この座標変換によって作られる平面のことを「</a>Z 平面</a>」と呼びます。
+</p>
+
+<p>
+ここで $z$ は絶対値が $|z| = \textrm{e}^{ \sigma \cdot \tau }$、偏角が $\angle z = w \cdot \tau$ の<a href="../../complex/text01/page03.html">極形式</a>になっています。
+<br>
+また $\tau = 2\pi/w_s$ より偏角の範囲は $-\pi \leq w \cdot \tau \leq \pi$ となりますので、S平面上の点 $s$ と Z 平面上の点 $z$ は 1 対 1 で対応しています(図5)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図5: S平面とZ平面の関係 </b>
+
+<p>
+座標変換 $z = \textrm{e}^{ s \cdot \tau }$ によって S 平面と Z 平面上の点は 1 対 1 で対応づけられる
+</p>
+
+<img src="./img/page07-fig5.png" alt="">
+</div>
+
+<p>
+あとはラプラス変換 $\textrm{F}(s)$ に $z = \textrm{e}^{ s \cdot \tau }$ を代入すれば、Z平面上の複素関数
 </p>
 
 \begin{align*}
-\textrm{e}^{- j \cdot 2 \pi \cdot \frac{w}{w_s} \cdot i} 
-= 
-\textrm{e}^{- j \cdot 2 \pi \cdot \frac{w + k \cdot w_s}{w_s} \cdot i} 
+\textrm{F}(z) = \sum_{i=0}^\infty \{ f[i] \cdot z^{-i} \}
 \end{align*}
 
 <p>
-が成り立ちますので、$\textrm{F}(s)$ は $w$ に関して周期 $w_s$ で周期的になります。
+つまり Z 変換が得られます。
 </p>
 
-<p>
-以下準備中
-</p>
+
 
 <script>PreNext(7,9)</script>
 </body>
