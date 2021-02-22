@@ -309,9 +309,42 @@ z &= \textrm{e}^{ s \cdot \tau } \\
 
 <p>
 つまり Z 変換が得られます。
+<br>
+逆に言えば、$\textrm{F}(z)$ に $z = \textrm{e}^{ s \cdot \tau }$ を代入するとラプラス変換 $\textrm{F}(s)$ になります。
 </p>
 
+<p>
+ところで、 $\textrm{e}^{-s \cdot \tau \cdot i}$ の逆ラプラス変換は $\delta(t - \tau \cdot i)$ ですので、
+</p>
 
+\begin{align*}
+\textrm{F}(s) = \sum_{i=0}^\infty \{ f[i] \cdot \textrm{e}^{- s \cdot \tau \cdot i} \}
+\end{align*}
+
+<p>
+を逆ラプラス変換すると
+</p>
+
+\begin{align*}
+\mathcal{L}^{-1}\{ \textrm{F}(s) \} &= \sum_{i=0}^\infty \{ f[i] \cdot \delta(t - \tau \cdot i) \} \\
+&= \sum_{i=0}^\infty \{ f(t) \cdot \delta(t - \tau \cdot i) \}
+\end{align*}
+
+<p>
+になります。
+<br>
+つまり Z 変換は理論的には
+</p>
+
+<p>
+「アナログ信号 $f(t)$ に対しサンプリング間隔 $\tau$ 秒おきにインパルス信号(デルタ関数)をかけた信号をラプラス変換して得られる」
+</p>
+
+<p>
+とも言えます。
+<br>
+ちなみにサンプリング間隔 $\tau$ 秒おきにインパルス信号を並べた信号のことを「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼び、信号処理では理想的なサンプラーモデルとして何か計算する時に良く使われています。
+</p>
 
 <script>PreNext(7,9)</script>
 </body>
