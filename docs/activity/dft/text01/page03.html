@@ -44,7 +44,7 @@ DFTの演算中には複素数が含まれていますので、プログラミ�
 \begin{align*}
 \textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
-f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i ) 
+f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
 \ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
 \textrm{B}[k] &= -\frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
@@ -62,10 +62,10 @@ f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
 </p>
 <p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
 </p>
 <p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
 </div>
 
 <p>
@@ -106,7 +106,7 @@ $\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
 f[i] = \sum_{k=0}^{\textrm{N}-1}
 \left \{
 \textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-- 
+-
 \textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
 \ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1)
@@ -119,16 +119,113 @@ f[i] = \sum_{k=0}^{\textrm{N}-1}
 $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
 </p>
 <p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
 </p>
 <p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個 
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
 </div>
 
 <p>
 この場合は外側が $i$、内側が $k$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ から $f[i]$ を復元できます。
 </p>
 
+
+<br>
+<h3>
+(参考) 周期性時間領域ディジタル信号が複素信号の場合
+</h3>
+
+<br>
+<p>
+$f[i]$が複素信号、つまり
+</p>
+
+\[
+f[i] = a[i] + j \cdot b[i]
+\]
+
+<p>
+の場合のDFTは次のようになります
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素信号の DFT</b>
+
+\begin{align*}
+\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+a[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+b[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
+\textrm{B}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+-a[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+b[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+\end{align*}
+
+<p>
+ここで
+</p>
+
+<p>
+$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
+</p>
+<p>
+$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
+</div>
+
+<p>
+IDFTは次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素信号の IDFT</b>
+
+\begin{align*}
+a[i] &= \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+-
+\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1) \\
+b[i] &= \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+\textrm{B}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1) \\
+\end{align*}
+
+<p>
+ここで
+</p>
+<p>
+$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
+</p>
+<p>
+$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
+</div>
+
+<br>
 <script>PreNext(3,5)</script>
 </body>
 </html>
