@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>11. 安定性</title>
 </head>
 <body>
@@ -20,9 +21,30 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+ここでは「安定しているフィルタ」について学びます。
 </p>
 
+<p>
+<a href="./page04.html">4ページ目</a>で学んだように、任意の入力 $x[i]$ に対してインパルス応答 $h[i]$ を畳み込んだ信号がフィルタ出力 $y[i]$ になりますので、ずばり言ってしまうと「インパルス応答$h[i]$が収束するフィルタ」が安定しているフィルタとなります。
+</p>
+
+<p>
+※ 正確には<a href="https://ja.wikipedia.org/wiki/%E6%9C%89%E7%95%8C%E5%85%A5%E5%8A%9B%E6%9C%89%E7%95%8C%E5%87%BA%E5%8A%9B%E5%AE%89%E5%AE%9A%E6%80%A7">有界入力有界出力(BIBO)安定</a>と言います。
+
+<p>
+それでインパルス応答 $h[i]$ をZ変換したものが伝達関数 $\textrm{H}(z)$ ですので、 <a href="../../z/text01/page09.html">Z 変換の所</a>で学んだ様に、$h[i]$ が収束する条件は以下の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ディジタルフィルタが安定である条件: </b>
+
+<p>
+伝達関数 $\textrm{H}(z)$ の極が全て Z 平面上の単位円の内側にあること
+</p>
+
+</div>
+
+<br>
 <script>PreNext(11,12)</script>
 </body>
 </html>
