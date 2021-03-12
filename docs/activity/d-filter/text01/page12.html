@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>12. 周波数特性</title>
 </head>
 <body>
@@ -20,7 +21,119 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+ディジタル線形フィルタに<a href="../../d-sin">ディジタルサイン波</a>を入力すると振幅と位相が変化したディジタルサイン波が出てきます。
+ただし線形フィルタですので(角)周波数は変化しません。
+</p>
+
+<p>
+この様な、フィルタが持つ「ある周波数のサイン波を入力した時にどの様に振幅と位相が変化するか」を表す性質のことを「<b>周波数特性</b>」とか「<b>フィルタ特性</b>」と呼びます。
+<br>
+ここではこの周波数特性についてもう少し具体的に考えていきましょう。
+</p>
+
+
+<p>
+さて、<a href="./page04.html">4ページ目</a>で説明したように、フィルタ出力 $y[i]$ の Z 変換を $\textrm{Y}(z)$、フィルタ入力 $x[i]$ の Z 変換を $\textrm{X}(z)$、伝達関数を $\textrm{H}(z)$ とした時、以下の関係がありました。
+</p>
+
+\begin{align*}
+\textrm{Y}(z) = \textrm{H}(z) \cdot \textrm{X}(z)
+\end{align*}
+
+<p>
+ここで<a href="../../z/text01/page09.html">Z変換</a>のところで学んだように、両辺に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ ($\tau$ [秒]はサンプリング間隔)を代入すると Z 変換が以下の様にスペクトル(フーリエ変換)に変わります。
+</p>
+
+\begin{align*}
+\textrm{Y}(w) = \textrm{H}(w) \cdot \textrm{X}(w)
+\end{align*}
+
+<p>
+さらに伝達関数を<a href="../../complex/text01/page03.html">極形式</a>に書き換えます。
+</p>
+
+\begin{align*}
+\textrm{Y}(w) = |\textrm{H}(w)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w) \}}  \cdot \textrm{X}(w)
+\end{align*}
+
+<p>
+では試しにこのフィルタに $x(t)=\cos(w_0 t)$ (をサンプリングしたディジタルサイン波)を入力してみましょう。
+</p>
+
+<p>
+$x(t) = \cos(w_0t)$のフーリエ変換は $\textrm{X}(w) = \pi \delta(w-w_0) + \pi \delta(w+w_0) $ですので、上の式に代入すると
+</p>
+
+\begin{align*}
+\textrm{Y}(w)
+&= |\textrm{H}(w)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w) \}} \cdot \pi \delta(w-w_0)  + |\textrm{H}(w)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w) \}}  \cdot \pi \delta(w+w_0) \\
+\end{align*}
+
+<p>
+デルタ関数の定義より、$w=w_0$ と $w=-w_0$ 以外の $\textrm{H}(w)$ の値は無視して良いので
+</p>
+
+\begin{align*}
+\textrm{Y}(w)
+&= |\textrm{H}(w_0)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w_0) \}}  \cdot \pi \delta(w-w_0) + |\textrm{H}(-w_0)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(-w_0) \}} \cdot \pi \delta(w+w_0) \\
+\end{align*}
+
+<p>
+さらに $|\textrm{H}(-w_0)| = |\textrm{H}(w_0)|$および$\angle \textrm{H}(-w_0) = -\angle \textrm{H}(w_0)$ の関係があるので
+</p>
+
+\begin{align*}
+\textrm{Y}(w)
+&= |\textrm{H}(w_0)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w_0) \}}  \cdot \pi \delta(w-w_0) + |\textrm{H}(w_0)| \cdot \textrm{e}^{\{ -j \angle \textrm{H}(w_0) \}} \cdot \pi \delta(w+w_0) \\
+\end{align*}
+
+<p>
+$\pi\delta(w \pm w_0)$ の逆フーリエ変換は $\textrm{e}^{\mp jw_0t}/2$ なので
+</p>
+
+\begin{align*}
+\textrm{Y}(w)
+&= |\textrm{H}(w_0)| \cdot \textrm{e}^{\{ j \angle \textrm{H}(w_0) \}} \cdot \int_{-\infty}^{\infty} \left \{ \frac{ \textrm{e}^{ jw_ot } }{2}  \cdot \textrm{e}^{ -jwt }  \right \} \textrm{d}t \\
+&\ + |\textrm{H}(w_0)| \cdot \textrm{e}^{\{ -j \angle \textrm{H}(w_0) \}} \cdot \int_{-\infty}^{\infty} \left \{ \frac{ \textrm{e}^{ -jw_ot } }{2}  \cdot \textrm{e}^{ -jwt }  \right \} \textrm{d}t   \\
+&= |\textrm{H}(w_0)| \cdot \int_{-\infty}^{\infty} \left \{ \frac{ \textrm{e}^{ j(w_ot +  \angle \textrm{H}(w_0)) } }{ 2 } \cdot \textrm{e}^{ -jwt } \right \} \textrm{d}t \\
+&\ + |\textrm{H}(w_0)| \cdot \int_{-\infty}^{\infty} \left \{ \frac{ \textrm{e}^{ -j(w_ot +  \angle \textrm{H}(w_0)) } }{ 2 } \cdot \textrm{e}^{ -jwt } \right \} \textrm{d}t \\
+\end{align*}
+
+<p>
+オイラー公式より
+</p>
+
+\begin{align*}
+\textrm{Y}(w)
+&= \int_{-\infty}^{\infty} \left \{ |\textrm{H}(w_0)| \cdot \cos \left ( w_0t + \angle \textrm{H}(w_0) \right )  \cdot \textrm{e}^{ -jwt }  \right \} \textrm{d}t
+\end{align*}
+
+<p>
+$\textrm{Y}(w)$ を逆フーリエ変換して
+</p>
+
+\begin{align*}
+y(t) = |\textrm{H}(w_0)| \cdot \cos \left ( w_0t + \angle \textrm{H}(w_0) \right )
+\end{align*}
+
+</p>
+つまり、
+<p>
+
+<p>
+<b>
+「伝達関数 $\textrm{H}(z)$ を持つディジタル線形フィルタに角周波数 $w_0$ [rad/秒]のディジタルサイン波を入力すると、振幅が $|\textrm{H}(w_0)|$ 倍され、位相が $\angle \textrm{H}(w_0)$ [rad] だけ進んだ、角周波数 $w_0$ [rad/秒] のディジタルサイン波が出てくる」
+</b>
+</p>
+
+<p>
+ということを意味します。
+</p>
+
+<p>
+この様に、伝達関数 $\textrm{H}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入した  $\textrm{H}(w)$ がそのフィルタの「<b>周波数特性</b>」となります。
+<br>
+また $|\textrm{H}(w)|$を「<b>振幅特性</b>」、$\angle \textrm{H}(w)$ を「<b>位相特性</b>」と呼びます。
 </p>
 
 <script>PreNext(12,12)</script>
