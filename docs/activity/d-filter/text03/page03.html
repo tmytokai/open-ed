@@ -20,8 +20,14 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+次に IIR ハイパスフィルタの設計を行います。
+<br>
+まずベースとなるアナログハイパスフィルタは以下の回路図で表される<a href="https://ja.wikipedia.org/wiki/RC%E5%9B%9E%E8%B7%AF">CRハイパスフィルタ</a>になります。
+</p>
+
 <div class="info">
-<input type="checkbox"><b> CR ハイパスフィルタ: </b>
+<input type="checkbox"><b>  (1次) CR ハイパスフィルタの回路図: </b>
 
 <p>
 　
@@ -32,11 +38,11 @@
 </div>
 
 <p>
-　
+CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とインパルス応答は簡単に求められ、それぞれ以下の通りになります。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b> CR ハイパスフィルタの伝達関数: </b>
+<input type="checkbox"><b> (1次) CR ハイパスフィルタの伝達関数: </b>
 
 <p>
 カットオフ角周波数を $w_c = \frac{1}{RC}$ [rad/秒] とする。
@@ -50,28 +56,28 @@
 
 </div>
 
-<p>
-　
-</p>
-
+<br>
 <div class="info">
-<input type="checkbox"><b> CR ハイパスフィルタの周波数特性: </b>
+<input type="checkbox"><b> (1次) CR ハイパスフィルタの周波数特性: </b>
 
 \begin{align*}
 \textrm{H}(w) 
 & = \frac{ j\cdot w }{ j\cdot w + w_c } \\
-& = \frac{ w\cdot \textrm{e}^{j\cdot \pi/2} }{ \sqrt{w^2 + w_c^2 } \cdot \textrm{e}^{ j\cdot \tan^{-1}(w/w_c) } } \\
-& = \sqrt{ \frac{ w^2 }{ w^2 + w_c^2 } }  \cdot \textrm{e}^{ j\cdot \{\pi/2 - \tan^{-1}(w/w_c) \} } \\
+& = \frac{ w }{ w -j \cdot  w_c } \\
+& = \frac{ w }{ \sqrt{w^2 + w_c^2 } \cdot \textrm{e}^{ j\cdot \tan^{-1}(-w_c/w) } } \\
+& = \frac{ w }{ \sqrt{ w^2 + w_c^2 } }  \cdot \textrm{e}^{ - j \cdot \tan^{-1}(-w_c/w) } \\
+& = \frac{ w }{ \sqrt{ w^2 + w_c^2 } }  \cdot \textrm{e}^{ j \cdot \tan^{-1}(w_c/w) } \\
 \end{align*}
 
 </div>
 
-<p>
-　
-</p>
-
+<br>
 <div class="info">
-<input type="checkbox"><b> CR ハイパスフィルタのインパルス応答: </b>
+<input type="checkbox"><b> (1次) CR ハイパスフィルタのインパルス応答: </b>
+
+<p>
+$s/(s-a)$の逆ラプラス変換は $\delta(t) + \frac{ \textrm{d} }{\textrm{dt}} \textrm{e}^{at}  = \delta(t) + a \cdot \textrm{e}^{at} $ なので、伝達関数を逆ラプラス変換すると
+</p>
 
 \begin{align*}
 h(t)
@@ -81,11 +87,11 @@ h(t)
 </div>
 
 <p>
-　
+よって、<a href="./page02.html">IIR ローパスパスフィルタ</a>の時と同様に IIR ハイパスフィルタのインパルス応答は次の様になります。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b> 1次 IIR ハイパスフィルタのインパルス応答: </b>
+<input type="checkbox"><b> IIR ハイパスフィルタのインパルス応答: </b>
 
 <p>
 $\tau$ [秒] を<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>とした時、
@@ -98,17 +104,25 @@ h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 </div>
 
 <p>
-
+よって IIR ハイパスフィルタの伝達関数は次の様になります。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b> 1次 IIR ハイパスフィルタの伝達関数: </b>
+<input type="checkbox"><b> 標準形 1次 IIR ハイパスフィルタの伝達関数: </b>
 
 \begin{align*}
 \textrm{H}(z)
 &= 1 - \sum_{i=0}^\infty \{ \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
 &= 1 - \tau \cdot w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
-(無限級数和の公式より) &= 1 - \frac{ \tau \cdot w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+\end{align*}
+
+<p>
+右辺の第2項は<a href="./page02.html">IIR ローパスパスフィルタ</a>の伝達関数をマイナスを掛けた値なので
+</p>
+
+\begin{align*}
+\textrm{H}(z)
+&= 1 - \frac{ \tau \cdot w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
 &= \frac{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} - \tau \cdot w_c  }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
 &= \frac{ (1 - \tau \cdot w_c ) - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
 \end{align*}
@@ -116,11 +130,11 @@ h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 </div>
 
 <p>
-　
+これより、フィルタ係数は以下の通りになります。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b> 1次 IIR ハイパスフィルタ係数: </b>
+<input type="checkbox"><b> 標準形 1次 IIR ハイパスフィルタ係数: </b>
 
 \begin{align*}
 a[1] &= \textrm{e}^{-w_c \cdot \tau} \\
@@ -131,7 +145,7 @@ b[1] &= -\textrm{e}^{-w_c \cdot \tau} \\
 </div>
 
 <p>
-RC ローパスフィルタと同様に(低周波数領域では) 1次 IIR ハイパスフィルタの周波数特性も CR ハイパスフィルタの周波数特性に近似されるが、カットオフ周波数が高くなるとエイリアシングの影響でかなり特性が歪むので注意が必要。
+なお IIR ハイパスフィルタの周波数特性も<a href="./page02.html">IIR ローパスパスフィルタ</a>と同様に、カットオフ角周波数とサンプリング間隔が充分に小さければ 1次 CR ハイパスフィルタの周波数特性に近似されますが、カットオフ角周波数が高くなるにつれてエイリアシングの影響でかなり特性が歪んでくるので慎重に設計する必要があります。
 </p>
 
 </div>
