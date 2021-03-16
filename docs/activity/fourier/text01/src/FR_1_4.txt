@@ -59,7 +59,7 @@ for k in range(1,kmax):
     draw_axis(ax[k][1],k)
     draw_axis2(ax[k][2],msecmax)
 
-def exec_plot(ax,k,t,fin=False):
+def exec_plot(ax,k,t,fin):
     global pa
     global pb
     if(abs_z(k,t)!=-1000 and arg_z(k,t)!=-1000):
@@ -118,7 +118,7 @@ phi[4]=-1000 # C[4]の偏角 = z4(t)の初期位相
 ##################
 
 ax[0][0].text(-0.1,ymax+0.4,r'C[0]',fontsize=10)
-ax[0][0].plot([0,10],[C0,C0],lw=1, color='black')
+ax[0][0].plot([0,msecmax],[C0,C0],lw=1, color='black')
 
 for k in range(1,kmax):
     msec=0    
@@ -130,10 +130,8 @@ for k in range(1,kmax):
         ax[k][2].text(-0.1,ymax+0.4,r'$z_{'+r'{0:d}'.format(-k)+r'}(t)+z_'+r'{0:d}(t)$'.format(k),fontsize=10)
         ax[k][2].plot(t,2*a[k]*np.cos(k*w1*t+phi[k]),lw=1, color='black')
 
-        for i in range(msec*20):
-            exec_plot(ax[k][0],-k,i/20)
-        exec_plot(ax[k][0],-k,msec,fin=True)
+        for i in range(msec*20+1):
+            exec_plot(ax[k][0],-k,i/20,i==msec*20)
 
-        for i in range(msec*20):
-            exec_plot(ax[k][1],k,i/20)
-        exec_plot(ax[k][1],k,msec,fin=True) 
+        for i in range(msec*20+1):
+            exec_plot(ax[k][1], k,i/20,i==msec*20)
