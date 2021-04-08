@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li><a href="../">アクティビティ: Git によるバージョン管理</a></li>
 <li>学習項目: [2] ローカルリポジトリ</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -20,11 +20,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-最初に開発者がプライベートで自由に使えるローカルリポジトリの操作方法について説明します。
+最初にローカルリポジトリの操作方法について説明します。
 </p>
 
 <p>
-git を初めて使う場合、以下の手順で git config コマンドを使って自分のユーザーIDやメールアドレスを登録します(※)。
+Git を初めて使う場合、以下の手順で git config コマンドを使って自分のユーザー名やメールアドレスを登録します。
 </p>
 
 <p>
@@ -32,19 +32,15 @@ git を初めて使う場合、以下の手順で git config コマンドを使�
 </p>
 
 <p>
-ここでユーザーIDやメールアドレスはローカルリポジトリしか使わない場合は適当で良いのですが、もしリモートリポジトリを使う場合は管理者に訪ねて下さい。
+ユーザー名やメールアドレスはローカルリポジトリしか使わない場合は適当で良いのですが、GitHubなどのリモートリポジトリを使う場合は登録したIDやメールアドレスに合わせて下さい。
 </p>
 
 <div class="info">
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> 端末(※)を開いてホームディレクトリに移動する
-</p>
-<p>
-※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
-</p>
-<p>
-<span class="olradio"><input type="radio" name="r1"></span> git config --global user.name "自分のID"
+<span class="olradio"><input type="radio" name="r1"></span> 端末を開く
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> git config --global user.name "ユーザー名"
 <br>
 <span class="olradio"><input type="radio" name="r1"></span> git config --global user.email "メールアドレス"
 <br>
@@ -58,6 +54,7 @@ git を初めて使う場合、以下の手順で git config コマンドを使�
 </p>
 設定を全てリセットしたい場合はその設定ファイルを消して下さい。
 
+<br>
 <script>PreNext(1,11)</script>
 </body>
 </html>

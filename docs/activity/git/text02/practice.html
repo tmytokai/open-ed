@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li><a href="../">アクティビティ: Git によるバージョン管理</a></li>
 <li>学習項目: [2] ローカルリポジトリ</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -19,26 +19,20 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 150  分
-</p>
-
-
 <br>
 <h2><a href="./page01.html">1. 初期設定</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-1 (個人PC、15分):</b> 初期設定をします。
+<input type="checkbox"> <b>演習 2-1 (個人):</b> 初期設定をします。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 端末を開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> git config コマンドで初期設定を行なって下さい。ユーザーIDとメールアドレスは GitHub に登録したものにしてください。
+<span class="olradio"><input type="radio" name="p1"></span> テキストに従い初期設定を行なって下さい。ユーザー名とメールアドレスは GitHub に登録したものにしてください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 自分のユーザーIDとメールアドレスが正しく設定されたか git config コマンドで確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> cat コマンドを使って .gitconfig の内容を確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 自分のユーザー名とメールアドレスが正しく設定されたか確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 提出物はありません。
 </p>
@@ -47,14 +41,21 @@
 <br>
 <h2><a href="./page02.html">2. ローカルリポジトリの新規作成</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-2 (個人PC、15分):</b> ローカルリポジトリを作成します。
+<input type="checkbox"> <b>演習 2-2 (個人):</b> ローカルリポジトリを作成します。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> テキストの「状態1」 の状態まで進めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> ls -al コマンドで .git フォルダがあることを確認して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> ローカルリポジトリの本体(.git フォルダ)があることを確認します。
+</p>
+<p>
+ls -al
+</p>
+<p>
+コマンドを実行します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 提出物はありません。
 </p>
@@ -63,18 +64,19 @@
 <br>
 <h2><a href="./page03.html">3. 新規ファイルの追加</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-3 (個人PC、15分):</b> 新規ファイルを追加します。
+<input type="checkbox"> <b>演習 2-3 (個人):</b> 新規ファイルを追加します。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> テキストの「状態4」 の状態まで進めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> git log コマンドでコミットログを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コミットログを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 更にテキストの「状態5」 の状態まで進めて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> piyo.txt を追加してテキストの「状態5」 の状態まで進めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> git log コマンドでコミットログを確認し、コミットが2つ出来たことを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コミットログを確認し、コミットが2つ出来たことを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 提出物はありません。
 </p>
@@ -89,18 +91,17 @@ git reset --hard HEAD~
 </p>
 
 <p>
-コマンドを繰り返して「状態4」まで巻き戻してやり直して下さい。
+コマンドを繰り返して前の演習の「状態1」の状態までリセットしてやり直して下さい。
 <br>
-難しければファシリテーターを呼んで下さい。
-<br>
-なおこの git reset --hard コマンドは禁じ手なのであまり使わない方が良いです。
+これ以降の演習でも、もし間違えたら同様にして前の演習の状態まで戻して下さい。
 </p>
 
 <br>
 <h2><a href="./page04.html">4. 既存ファイルの更新</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-4 (個人PC、15分):</b> 既存ファイルを更新します。
+<input type="checkbox"> <b>演習 2-4 (個人):</b> 既存ファイルを更新します。
 </p>
 <div class="olradio"> 
 <p>
@@ -108,23 +109,20 @@ git reset --hard HEAD~
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> git log コマンドでコミットログを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 更にテキストの「状態9」 の状態まで進めて下さい。
+<span class="olradio"><input type="radio" name="p4"></span> piyo.txt を更新してテキストの「状態9」 の状態まで進めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> git log コマンドでコミットログを確認し、コミットが4つ出来たことを確認して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> コミットログを確認し、コミットが4つ出来たことを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 提出物はありません。
 </p>
 </div>
 
-<p>
-※ もし他のメンバーとコミットログの表示が違っている時は上の git reset コマンドで「状態8」まで巻き戻してやり直して下さい。
-</p>
-
 <br>
 <h2><a href="./page05.html">5.コミットの指定方法</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-5 (個人PC、15分):</b> git show コマンドでコミット情報を表示します。
+<input type="checkbox"> <b>演習 2-5 (個人):</b> git show コマンドでコミット情報を表示します。
 </p>
 <div class="olradio"> 
 <p>
@@ -141,8 +139,9 @@ git reset --hard HEAD~
 <br>
 <h2> <a href="./page06.html">6. ファイルの更新差分表示</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-6 (個人PC、15分):</b> git show コマンドでコミット情報を表示します。
+<input type="checkbox"> <b>演習 2-6 (個人):</b> git show コマンドでコミット情報を表示します。
 </p>
 <div class="olradio"> 
 <p>
@@ -165,8 +164,9 @@ git reset --hard HEAD~
 <br>
 <h2><a href="./page07.html">7. ファイル内容の復元</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-7 (個人PC、15分):</b> 
+<input type="checkbox"> <b>演習 2-7 (個人):</b> 
 </p>
 <div class="olradio"> 
 <p>
@@ -183,8 +183,9 @@ git reset --hard HEAD~
 <br>
 <h2><a href="./page08.html">8. ファイルの削除</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-8 (個人PC、15分):</b> 
+<input type="checkbox"> <b>演習 2-8 (個人):</b> 
 </p>
 <div class="olradio"> 
 <p>
@@ -201,8 +202,9 @@ git reset --hard HEAD~
 <br>
 <h2><a href="./page09.html">9. 一時的に過去のコミットに戻る</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-9 (個人PC、15分):</b> 
+<input type="checkbox"> <b>演習 2-9 (個人):</b> 
 </p>
 <div class="olradio"> 
 <p>
@@ -216,9 +218,11 @@ git reset --hard HEAD~
 
 <br>
 <h2><a href="./page10.html">10. コミットの巻き戻し</a></h2>
+<h2><a href="./page11.html">11. 補足</a></h2>
 
+<br>
 <p>
-<input type="checkbox"> <b>演習 2-10 (個人PC、15分):</b> 
+<input type="checkbox"> <b>演習 2-10 (個人):</b> 
 </p>
 <div class="olradio"> 
 <p>
@@ -232,13 +236,8 @@ git reset --hard HEAD~
 </p>
 </div>
 
+
 <br>
-<h2><a href="./page11.html">11. 補足</a></h2>
-
-<p>
-演習無し
-</p>
-
 <script>PreNext(12,11)</script>
 </body>
 </html>

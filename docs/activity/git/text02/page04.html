@@ -11,7 +11,7 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: git によるバージョン管理</a></li>
+<li><a href="../">アクティビティ: Git によるバージョン管理</a></li>
 <li>学習項目: [2] ローカルリポジトリ</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -20,7 +20,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次に既存のファイルを更新してコミットしてみますが、基本的には新規作成と同じ様に add して commit という流れになります。
+次に既存のファイルを更新してコミットしてみます。
+</p>
+
+<p>
+基本的には新規作成と同様に、ファイルを更新したら add して commit という流れになります。
 <br>
 では実際にやってみましょう。
 </p>
@@ -28,9 +32,9 @@
 <div class="info">
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> hoge.txtに b という文字を追加(改行は入れない)
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txtに b という文字を追加 ※ 改行は入れないこと
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt を保存
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt を上書き保存
 </p>
 </div>
 </div>
@@ -122,8 +126,9 @@ a
 
 </tr></table>
 
+<br>
 <p>
-次に前のページで学んだ git add コマンドを使って hoge.txt をインデックスに登録します。
+次に git add コマンドを使って hoge.txt をインデックスに登録します。
 </p>
 
 <div class="info">
@@ -139,7 +144,7 @@ a
 </div>
 
 <p>
-この時点でワーキングツリーとインデックスが同じである状態 7 になりますが、まだコミットしていませんのでHEADはそのままです。
+この時点でワーキングツリーとインデックスが同じである状態 7 になりますが、まだコミットしていませんのでHEADは前の状態のままです。
 </p>
 
 <br>
@@ -223,6 +228,7 @@ a
 
 </tr></table>
 
+<br>
 <p>
 最後に git commit コマンドを使ってコミットします。
 </p>
@@ -239,7 +245,7 @@ a
 </div>
 
 <p>
-するとインデックスの内容でスナップショットが作られてローカルリポジトリに登録され、そのスナップショットにHEADが移動します(状態 8 )。
+これでインデックスの内容でコミットが作られ、そこに HEAD が移動します(状態 8 )。
 </p>
 
 <br>
@@ -340,8 +346,9 @@ a
 
 </tr></table>
 
+<br>
 <p>
-では練習として手順は示しませんが、今度は piyo.txt に B を追加して次の状態 9 にして下さい。
+では練習として、今度は piyo.txt に B を追加して次の状態 9 にして下さい(piyo.txt に改行は入れないで下さい)。
 <br>
 コミット時のコメントは "piyo.txtを更新(S9)" とします。
 </p>
@@ -461,6 +468,7 @@ a
 
 </tr></table>
 
+<br>
 <script>PreNext(4,11)</script>
 </body>
 </html>
