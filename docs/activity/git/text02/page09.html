@@ -37,9 +37,7 @@ git checkout &lt;コミット&gt;
 </p>
 
 <p>
-なお上の checkout コマンドで移動した先の HEAD は本当の HEAD ではなくて「detached HEAD」という特殊な使い捨ての HEAD となります。
-<br>
-それにより本来の HEAD (これを master と言います) に影響を与えずにいろいろ実験することが可能になっています。
+※ 上の checkout コマンドで移動した HEAD は「detached HEAD」という使い捨ての HEAD となります。それにより本来の HEAD に影響を与えずにいろいろ実験することが可能になっています。
 </p>
 
 <p>
@@ -55,13 +53,15 @@ git checkout &lt;コミット&gt;
 <input type="checkbox"><b>一時的に過去のコミットに戻る(stash を使う場合):</b>
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> 対象コミットのハッシュ値を調べる: git log
-<br>
 <span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash に一時保存: git stash
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> stash の中を確認: git stash list
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 対象コミットのハッシュ値を調べる: git log
 <br>
 <span class="olradio2"><input type="radio" name="r1"></span> 過去のコミットに戻る: git checkout &lt;コミット&gt;
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと過去に戻れたか確認: git show
+<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと過去に戻れたか確認: git log --all --oneline
 </p>
 </div>
 </div>
@@ -163,8 +163,6 @@ A
 
 <td class="noborder" style="width: 10em;">
 本来のHEAD
-<br>
-( master )
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
 <table class="innerbox"><tr><td>
@@ -248,18 +246,25 @@ a
 <input type="checkbox"><b>元の状態に復帰する:</b>
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD (master) に戻る: git checkout -f master
+<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD の名前(ブランチ名)を確認する: git log --all --oneline
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD (普通は main か master) に戻る: git checkout -f main (または master)
 </p>
 <p>
-※ -f はワーキングツリーとインデックスの更新内容を全部捨てて強制的に master に戻ることを指示するオプションです
+※ -f はワーキングツリーとインデックスの更新内容を全部捨てて強制的にチェックアウトするオプション
 </p>
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと元に戻れたか確認: git show
+<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと元に戻れたか確認: git log --all --oneline
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> stash の中を確認: git stash list
 <br>
 <span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash から復元: git stash pop --index
 </p>
 <p>
 ※ --index はインデックスも復元するという意味のオプションです
+</p>
+<p>
+<span class="olradio2"><input type="radio" name="r1"></span> 復元されたか確認
 </p>
 </div>
 </div>
@@ -390,6 +395,7 @@ a
 
 </tr></table>
 
-<script>PreNext(9,11)</script>
+<br>
+<script>PreNext(9,10)</script>
 </body>
 </html>

@@ -51,10 +51,56 @@ Git を初めて使う場合、以下の手順で git config コマンドを使�
 
 <p>
 以上のコマンドを実行するとホームディレクトリ直下に設定ファイル(.gitconfig)が出来ます。
-</p>
+<br>
 設定を全てリセットしたい場合はその設定ファイルを消して下さい。
+</p>
+
+<h2>
+GitHub と連携したい場合
+</h2>
+
+<p>
+GitHub と連携したい場合は次の様にして公開鍵を GitHub に登録して下さい。
+</p>
+
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r2"></span> 端末を開く
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> (もし無ければ) ~/.ssh フォルダを作成する: mkdir ~/.ssh
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 秘密鍵と公開鍵を作成する: ssh-keygen -t rsa -C "GitHubに登録したメールアドレス"
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> Enter file in which to save the key (鍵の名前と場所はどこ？)と聞かれたらそのままエンターキーを押す → ~/.ssh/id_rsa という秘密鍵と ~/.ssh/id_rsa.pub という公開鍵が出来る
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> Enter passphrase (パスワードは？)と聞かれたらそのままエンターキーを押す ※ 業務等で使う場合はパスワードを設定して下さい
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> (もしなっていなければ)秘密鍵(~/.ssh/id_rsa)の権限を「ユーザーのみ読み込み可」に変更する: chmod 600 ~/.ssh/id_rsa
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 公開鍵(~/.ssh/id_rsa.pub)の中身を表示する: cat ~/.ssh/id_rsa.pub
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> GitHub にサインインし、右上のメニューから設定(Settings)に入る
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 「SSH and GPG keys」のページに行く
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 「New SSH Key」ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 「Title」 に適当な名前を入れる
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 「Key」に公開鍵(github.pub)の内容をコピーする
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 接続確認: ssh -T git@github.com  ※ yes/no と聞かれたら yes と答える
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 「Hi (ユーザー名)! You've successfully authenticated, but GitHub does not provide shell access.」と表示されれば設定完了
+<br>
+</p>
+</div>
+</div>
+
+
 
 <br>
-<script>PreNext(1,11)</script>
+<script>PreNext(1,10)</script>
 </body>
 </html>

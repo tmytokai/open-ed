@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-コミットの指定方法が分かったので、あるファイルが過去の状態からどの様に更新されたか差分を調べてみましょう。
+あるファイルが過去の状態からどの様に更新されたか差分を調べてみましょう。
 </p>
 
 <p>
@@ -30,11 +30,11 @@
 <div class="info">
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に c を追加して保存
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に c を追加(改行しない)して保存
 <br>
 <span class="olradio2"><input type="radio" name="r1"></span> git add hoge.txt でインデックスに hoge.txt を登録
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に d を追加して保存
+<span class="olradio2"><input type="radio" name="r1"></span> hoge.txt に d を追加(改行しない)して保存
 </p>
 </div>
 </div>
@@ -191,7 +191,9 @@ git diff &lt;ファイル名&gt;
 </div>
 
 <p>
-と表示されますが、-が付いている行が削除された行、+が付いている行が追加された行になります。
+と表示されます。
+<br>
+-が付いている行が削除された行、+が付いている行が追加された行になります。
 </p>
 
 <br>
@@ -254,6 +256,7 @@ git diff &lt;コミットA&gt; &lt;コミットB&gt; &lt;ファイル名&gt;
 </pre>
 </div>
 
-<script>PreNext(6,11)</script>
+<br>
+<script>PreNext(6,10)</script>
 </body>
 </html>
