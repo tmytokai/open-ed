@@ -156,11 +156,9 @@ a
 <div class="info">
 <input type="checkbox"><b>ワーキングツリーにあるファイルをインデックスの内容で復元:</b>
 <pre class="wrap">
-git checkout -- &lt;ファイル名&gt;
+git restore &lt;ファイル名&gt;
 
 ※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルを復元します
-※ -- は git にブランチ切り替えするなと指示するためのオプションで省略可能です。
-　ブランチ機能を使わないなら省略しても良いのですが付けておいた方が無難です。
 </pre>
 </div>
 
@@ -289,37 +287,28 @@ a
 
 <br>
 <h3>
-(2) ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元
+(2) ワーキングツリーにあるファイルを指定したコミットの内容で復元
 </h3>
 
 <p>
 次はワーキングツリーにあるファイルを指定したコミットの内容で復元する方法です。
-<br>
-なお、
-</p>
-<p>
-<b>「インデックスの内容も同時に復元される」</b>
-</p>
-<p>
-ので注意して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ワーキングツリーとインデックスにあるファイルを指定したコミットの内容で復元:</b>
+<input type="checkbox"><b>ワーキングツリーにあるファイルを指定したコミットの内容で復元:</b>
 <pre class="wrap">
-git checkout &lt;コミット&gt; -- &lt;ファイル名&gt;
+git restore -s &lt;コミット&gt; &lt;ファイル名&gt;
 
 ※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下で更新した全てのファイルを復元します
-※ コミットの所を HEAD にすると HEAD の内容で復元します。
 </pre>
 </div>
 
 <p>
-では演習としてワーキングツリーとインデックスの hoge.txt を HEAD~2 の hoge.txt の内容で復元してみましょう。
+では演習としてワーキングツリーの hoge.txt を HEAD~2 の hoge.txt の内容で復元してみましょう。
 <br>
 すると次の状態 12 になります。
 <br>
-ワーキングツリーとインデックスの hoge.txt の内容は HEAD~2の内容に戻っていますが、HEAD の hoge.txt の内容はそのままであることに注目して下さい。
+ワーキングツリーの hoge.txt の内容は HEAD~2の内容に戻っていますが、インデックスと HEAD の hoge.txt の内容はそのままであることに注目して下さい。
 </p>
 
 <br>
@@ -355,7 +344,7 @@ AB
 <table style="width: 100%;"><tr><td class="centerbold">
 hoge.txt
 <table class="innerbox"><tr><td>
-a
+abc
 </td></tr></table>
 piyo.txt
 <table class="innerbox"><tr><td>
@@ -451,11 +440,9 @@ a
 <div class="info">
 <input type="checkbox"><b>アンステージ( git add のキャンセル):</b>
 <pre class="wrap">
-git reset HEAD &lt;ファイル&gt;
+git restore --staged &lt;ファイル&gt;
 
-※ ファイル名を省略すると全てのファイルの add をキャンセルします。
-※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下の全てのファイルの add をキャンセルします。
-※ HEAD は省略可能です。
+※ ファイル名を「.」(ドット)にすると現在のディレクトリ以下の全てのファイルをアンステージします
 </pre>
 </div>
 

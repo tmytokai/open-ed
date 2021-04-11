@@ -23,7 +23,7 @@
 ここでは GitHub 上に作ったリモートリポジトリを使って多人数(今回はAさん、Bさん、Cさん、Dさんの4名)で共同開発をする演習を行います。 
 </p>
 <p>
-まずリモートリポジトリを新規作成する必要があるのですが、A さんに GitHub 上でリモートリポジトリを作成してもらい、そのリモートリポジトリをローカルリポジトリにクローンして使うことにします。 
+まず A さんに GitHub 上でリモートリポジトリを作成してもらい、他のメンバーを登録します。
 </p>
 
 <div class="info">
@@ -32,53 +32,54 @@
 <span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub にログインし、<a href="../text01/practice.html">演習1-3</a>を参考に「gitremote」という名前でリモートリポジトリを新規作成する。
 </p>
 <p>
-※ README の作成も忘れずに
+※ README.md の作成も忘れずに
 </p>
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub の「gitremote」のページにある「Create New File」ボタンを押し、ファイル名に「hoge.txt」、中身に「name?」(改行無し)と入力し、「Commit new file」の欄に「init」というコメントを入力してコミットボタンを押す。
+<span class="olradio"><input type="radio" name="r1"></span> A さんは GitHub の gitremote リポジトリの「Code」ページを開く。
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> A さんは 「Add File」ボタンを押し、「Create new file」を選択肢、ファイル名に「hoge.txt」、中身に「name?」(改行無し)と入力し、「Commit new file」ボタンを押す。
 <br>
 <span class="olradio"><input type="radio" name="r1"></span> A さんは「hoge.txt」が「gitremote」に追加されている事を確認する。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> A さんは「Setting」→「Manage access」を開き、他のメンバーからIDまたはメアドを尋ねて検索し、「gitremote」の開発者としてメンバー登録する。
+<span class="olradio"><input type="radio" name="r1"></span> A さんはgitremote リポジトリの「Setting」ページの「Manage access」欄を開き、「Invite a collaboratar」ボタンを押し、B、C、Dさんをメンバー登録する。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> 他のメンバーは A さんから招待メールが届くのを待つ。招待メールが届いたら承認リンクから登録手続きをする。
+<span class="olradio"><input type="radio" name="r1"></span> B、C、Dさんは A さんから招待メールが届くのを待つ。招待メールが届いたら承認リンクから登録手続きをする。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> 全員の登録が終わったら A さんは「Setting」→「Manage access」を再読込し、全員が登録されていることを確認する。
+<span class="olradio"><input type="radio" name="r1"></span> 全員の登録が終わったら A さんは「Manage access」欄を再読込し、全員がメンバー登録されていることを確認する。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> 他のメンバーは「Setting」→「Repositories」を開き、「gitremote」が表示されていることを確認する。
-<br>
-<span class="olradio"><input type="radio" name="r1"></span> 全員「gitremote」の「Code」のページを開き、「Clone」ホダンを押して「gitremote」のアドレスをコピーする。
-<br>
-<span class="olradio"><input type="radio" name="r1"></span> 全員は端末(※)を開いて演習用のフォルダに移動する。
-</p>
+<span class="olradio"><input type="radio" name="r1"></span> B、C、Dさんは右上のメニューから GitHub 全体の「Setting」ページを開き、「Repositories」欄に「gitremote」が表示されていることを確認する。
+</div>
+</div>
+
 <p>
-※ Windows環境の場合は 端末 ＝ コマンドプロンプトと読み替えて下さい
+次にリモートリポジトリ「gitremote」をローカルリポジトリとしてクローンします。
 </p>
+
+<div class="info">
+<div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> 以下のコマンドでリモートリポジトリ「gitremote」を clone する
+<span class="olradio"><input type="radio" name="r2"></span> 全員、「gitremote」の「Code」のページを開き、「Code」ボタンを押し、「SSH」タブをクリックして出てきたアドレス(git@github.com:(Aさんのユーザー名)/gitremote.git)をコピーします。 
+<br>
+<span class="olradio"><input type="radio" name="r2"></span> 全員端末を開き、演習用のフォルダに移動し、以下のコマンドで「gitremote」をクローンしてローカルリポジトリを作成する
 </p>
 <p>
 git clone (コピーしたアドレス)
 </p>
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> ls でローカルリポジトリが出来ているか確認する
+<span class="olradio"><input type="radio" name="r2"></span> ls でローカルリポジトリが出来ているか確認する
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> ローカルリポジトリに cd する
+<span class="olradio"><input type="radio" name="r2"></span> cd gitremote でローカルリポジトリに移動する
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> ls で README と hoge.txt があることを確認する
+<span class="olradio"><input type="radio" name="r2"></span> ls で README と hoge.txt があることを確認する
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> cat で hoge.txt の中身を確認する。
+<span class="olradio"><input type="radio" name="r2"></span> cat hoge.txt で hoge.txt の中身を確認する。
 </div>
 </div>
 
 <p>
-以上のようにリモートリポジトリ「gitremote」をクローンすると以下の状態1になります。
+この時点で以下の状態 1 となります。
 <br>
-リモートリポジトリの内容がA〜Dさんのローカル環境にそのままコビーされていることに注目して下さい。
-</p>
-
-<p>
-なおリモートリポジトリのところにある「origin」とはリモートリポジトリの別名です。
+なおリモートリポジトリのところにある「origin」は GitHub 上にあるリモートリポジトリの別名です。
 </p>
 
 <br>

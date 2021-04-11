@@ -33,17 +33,8 @@
 <input type="checkbox"><b>ワーキングツリーとインデックスからファイルを同時に消す:</b>
 <pre class="wrap">
 git rm &lt;ファイル&gt;
-</pre>
-</div>
 
-<p>
-ちなみにインデックスからは消したいけど、ワーキングツリーにはファイルを残したい場合は --cached オプションを付けます。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>インデックスからファイルを消す(ワーキングツリーにはファイルを残す):</b>
-<pre class="wrap">
-git rm --cached &lt;ファイル&gt;
+※インデックスからは消したいけど、ワーキングツリーにはファイルを残したい場合は --cached オプションを付けます
 </pre>
 </div>
 
@@ -285,14 +276,15 @@ a
 
 <br>
 <p>
-さて消したファイルを復元したい場合は、<a href="./page07.html">ファイル内容の復元</a>で学んだ checkout コマンドを使って復元できます。
+さて消したファイルを復元したい場合は、<a href="./page07.html">ファイル内容の復元</a>で学んだ restore コマンドを使って復元できます。
 <br>
-ただしインデックスからも対象のファイルは消えてますので以下のように HEAD からファイルを復元する必要があります。
+ただしインデックスからも対象のファイルは消えてますので以下のように一旦アンステージしてからファイルを復元する必要があります。
 </p>
 
 <div class="info">
 <pre class="wrap">
-git checkout HEAD -- &lt;ファイル名&gt;
+git restore --staged &lt;ファイル名&gt;
+git restore &lt;消したファイル名&gt;
 </pre>
 </div>
 
