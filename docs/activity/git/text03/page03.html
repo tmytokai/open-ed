@@ -34,22 +34,19 @@
 <p>
 <span class="olradio"><input type="radio" name="r1"></span> Aさんだけ作業するので、他のメンバーはAさんの作業を後から見る。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> Aさんは pull を実行し、リモートリポジトリの更新内容をダウンロードしてローカルリポジトリに取り込む
+<span class="olradio"><input type="radio" name="r1"></span> Aさんはプルを実行し、リモートリポジトリの更新内容をローカルリポジトリに取り込む
 </p>
 <p>
 git pull
 </p>
 <p>
-この時点ではリモートリポジトリは更新されていないので「Already up-to-date」(既に最新版です)と表示される
+※ この時点ではリモートリポジトリは更新されていないので「Already up to date」(既に最新版です)と表示される
 </p>
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> Aさんは push を実行し、自分のローカルリポジトリの更新内容をリモートリポジトリにアップロードする
+<span class="olradio"><input type="radio" name="r1"></span> Aさんはプッシュを実行し、自分のローカルリポジトリの更新内容をリモートリポジトリにアップロードする
 </p>
 <p>
 git push
-</p>
-<p>
-※ GitHub のIDとパスワードを尋ねられます
 </p>
 <p>
 <span class="olradio"><input type="radio" name="r1"></span> 全員がブラウザを開き、リモートリポジトリ「gitremote」の表示を更新し、hoge.txt の内容が変わっていることを確認する。
@@ -64,7 +61,7 @@ AさんのローカルリポジトリのHEADの内容がそのままリモート
 </p>
 
 <br>
-<h2>状態 3 (HEAD より前のコミットは省略)</h2>
+<h2>状態 3 (README.md と HEAD 以前のコミットは省略)</h2>
 <br>
 
 <table><tr>
@@ -311,7 +308,7 @@ name?
 
 </tr><tr><td colspan="4">
 
-<b>リモートリポジトリ(origin)</b>
+<b>リモートリポジトリ(origin/main)</b>
 <br>
 <table class="noborder"><tr>
 

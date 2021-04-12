@@ -20,7 +20,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次は各開発者が自分のローカルリポジトリ内で自分の作業を行いますが、次の点を常に念頭に置いて作業すると良いでしょう。
+次は各開発者が自分のローカルリポジトリ内で自分の作業を行います。
+</p>
+
+<p>
+ローカルリポジトリで作業する際は次の点を念頭に置いて下さい。
 </p>
 <p>
 <b>「開発者間のローカルリポジトリは完全に独立しているので、自分のローカルリポジトリ内だけで作業している限り、何をしても他の開発者に影響は無い」</b>
@@ -33,21 +37,35 @@
 <div class="info">
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="r1"></span> hoge.txt をエディタで開いて name? の後で改行して自分の記号(A〜D)を入力します。
+<span class="olradio"><input type="radio" name="r1"></span> hoge.txt を開いて name? の後で改行して自分の記号(A〜D)を入力します。
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> <b>記号の後に更に１回改行して以下の状態にして下さい</b>。なお 4 行目以降には空行が入らない気をつけて下さい。
+<span class="olradio"><input type="radio" name="r1"></span> <b>記号の後に更に１回改行し、以下の様な内容のファイルにして下さい</b>。
 </p>
 <p>
-name?(改行)
-</br>
-(A〜D)(改行)
-</br>
-(改行)(ファイル終端)
+1行目: name?
+<br>
+2行目: (A〜D 1文字) ※ 文字の前後にスペースを入れない
+<br>
+3行目: (空行) ※ スペースを入れない
+</p>
+<p>
+例: Aさんの場合
+</p>
+<p>
+name?
+<br>
+A
+<br>
+(空行)
 </p>
 <p>
 <span class="olradio"><input type="radio" name="r1"></span> git add hoge.txt
 <br>
-<span class="olradio"><input type="radio" name="r1"></span> git commit -m "my name is (A〜B)"
+<span class="olradio"><input type="radio" name="r1"></span> git commit -m "my name is (自分の記号(A〜D))" 
+</p>
+<p>
+例: Aさんなら git commit -m "my name is A"
+</p>
 </div>
 </div>
 
@@ -56,7 +74,7 @@ name?(改行)
 </p>
 
 <br>
-<h2>状態 2 (HEAD より前のコミットは省略)</h2>
+<h2>状態 2 (README.md と HEAD 以前のコミットは省略)</h2>
 
 <br>
 <table><tr>
@@ -303,7 +321,7 @@ name?
 
 </tr><tr><td colspan="4">
 
-<b>リモートリポジトリ(origin)</b>
+<b>リモートリポジトリ(origin/main)</b>
 <br>
 <table class="noborder"><tr>
 
@@ -315,7 +333,7 @@ hoge.txt
 name?
 </td></tr></table>
 </td></tr></table>
-"init"
+"Create hoge.txt"
 </td>
 
 </tr></table>
