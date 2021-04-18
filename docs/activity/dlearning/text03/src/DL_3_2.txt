@@ -4,27 +4,12 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
-#---------------------------
-# データセット読み込み
-
-from tensorflow.keras.datasets import mnist
-
-# (images_training, classno_training) は学習データセットで計 60,000 組
-# (images_test, classno_test) はテストデータセットで計 10,000 組
-# images〜 は 28x28, 8bit モノクロ画像 (画素値 0〜255)
-# classno〜 はそれぞれの画像が属するクラス番号 (0〜9の計10クラス)
-
-(images_training, classno_training), (images_test, classno_test) = mnist.load_data()
-classnames=['0','1','2','3','4','5','6','7','8','9']
-#---------------------------
-
-images_training = images_training / 255.0  # 0〜1の範囲に正規化
-images_test = images_test / 255.0  # 0〜1の範囲に正規化
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
 # パーセプトロンの数
-N = np.prod(images_training.shape[1:]) # 入力層は画像サイズから計算
+N = ?  # 入力層
 K = ?  # 隠れ層
-M = np.max(classno_training)+1  # 出力層はクラス数から計算
+M = ?  # 出力層
 
 #学習率
 r = ?
@@ -33,28 +18,89 @@ r = ?
 E = ?
 
 #学習データセットのサイズ
-L = images_training.shape[0]
+L = ?
 
 #バッチサイズ
 B = ?
 
-# 学習データセットを演習用のフォーマットに変換
-data_training = tf.constant(images_training.reshape(L,N), dtype=tf.float32)
-label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
+# 画像データ
+images = np.array(
+    [
+        # 画像0
+        [
+            [1, 0, 1],
+            [1, 1, 1],
+            [1, 0, 1]
+        ],
+        # 画像1
+        [
+            [0, 1, 0],
+            [1, 0, 1],
+            [0, 1, 0]
+        ],
+        # 画像2
+        [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 1, 0]
+        ],
+        # 画像3
+        [
+            [1, 0, 1],
+            [0, 1, 0],
+            [1, 0, 1]
+        ],
+        # 未知画像
+        [
+            [1, 1, 0],
+            [1, 1, 1],
+            [1, 0, 1]
+        ]        
+    ]
+)
+   
+# 画像データから学習用入力を作成
+data_training = tf.constant(images[:4].reshape(L,N), dtype=tf.float32)
 
-# 今回は検証データセットは使わない
+# 学習用ラベル
+label_training = tf.constant(
+    [ 
+        #画像 0,1 はクラス 0
+        [?,?],
+        [?,?], 
 
-# テストデータセットを演習用のフォーマットに変換
-data_test = tf.constant(images_test.reshape(images_test.shape[0],N), dtype=tf.float32)
-label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
+        #画像 2,3 はクラス1
+        [?,?],
+        [?,?]
+    ]
+    , dtype=tf.float32
+)
 
-print('N='+str(N))
-print('K='+str(K))
-print('M='+str(M))
-print('学習率='+str(r))
-print('エポック数='+str(E))
-print('学習データセットサイズ='+str(L))
-print('バッチサイズ='+str(B))
+# 未知画像から未知入力信号を作成
+data = tf.constant(images[4].reshape(1,N), dtype=tf.float32)
+
+# 画像表示
+for i in range(4):
+    print(f'画像{i}')
+    plt.imshow(images[i],cmap='gray')
+    plt.show()
+    
+print('未知画像')
+plt.imshow(images[4],cmap='gray')
+plt.show()
+
+print('学習用入力信号')
+print( data_training.numpy() )
+print('\n学習用ラベル')
+print( label_training.numpy() )
+print('\n未知入力信号')
+print( data.numpy() )
+print('')
+
+print(f'学習率={r}')
+print(f'エポック数={E}')
+print(f'学習データセットサイズ={L}')
+print(f'バッチサイズ={B}')
 
 # 3層ニューラルネットワークの構築
 # DL_3_1 からコピー
@@ -70,7 +116,9 @@ model.summary()
 # 学習前の状態
 ls, acc = model.evaluate(data_training, label_training, verbose=0)
 print('\n学習前')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
+print('画像0〜3の予測値')
+print(model.predict(data_training))
 print('')
     
 # ディープラーニング実行
@@ -80,21 +128,11 @@ print('')
 
 # 学習後の状態
 ls, acc = model.evaluate(data_training, label_training, verbose=0)
-ls_test, acc_test = model.evaluate(data_test, label_test, verbose=0)
-print('\n\n学習後')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
-
-predict_test = model.predict(data_test[0:10])
-print('テストデータセット : 損失={:0.2f}, 正解率={:0.2f}'.format(ls_test,acc_test))
+print('\n学習後')
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
+print('画像0〜3の予測値')
+print(model.predict(data_training))
 print('')
 
-# 参考までにテストデータの先頭 10 データに対する予測値を表示
-for i in range( 10 ): 
-    print('\nテスト画像'+str(i))
-    plt.imshow(images_test[i],cmap='gray')
-    plt.show()
-    print('正解='+classnames[int(classno_test[i])])
-    print('予測='+classnames[int(np.argmax(predict_test[i]))])
-    print('予測値')
-    for j in range(M):
-        print(classnames[j] +': {:0.2f}'.format( predict_test[i][j] ) )
+print('未知画像の予測値')
+print(model.predict(data))

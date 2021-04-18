@@ -2,6 +2,8 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+
 # パーセプトロンの数
 N = ?  # 入力層
 K = ?  # 隠れ層
@@ -77,7 +79,7 @@ data = tf.constant(images[4].reshape(1,N), dtype=tf.float32)
 
 # 画像表示
 for i in range(4):
-    print('画像'+str(i))
+    print(f'画像{i}')
     plt.imshow(images[i],cmap='gray')
     plt.show()
     
@@ -93,10 +95,10 @@ print('\n未知入力信号')
 print( data.numpy() )
 print('')
 
-print('学習率='+str(r))
-print('エポック数='+str(E))
-print('学習データセットサイズ='+str(L))
-print('バッチサイズ='+str(B))
+print(f'学習率={r}')
+print(f'エポック数={E}')
+print(f'学習データセットサイズ={L}')
+print(f'バッチサイズ={B}')
 
 # 隠れ層の重みとバイアス
 # DL_2_1 からコピー
@@ -137,7 +139,7 @@ ls = loss(data_training,label_training).numpy()
 predict = FFNN3(data_training)
 acc = categorical_accuracy(predict,label_training)
 print('\n学習前')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 print('画像0〜3の予測値')
 print(predict.numpy())
 print('')
@@ -151,7 +153,7 @@ ls = loss(data_training,label_training).numpy()
 predict = FFNN3(data_training)
 acc = categorical_accuracy(predict,label_training)
 print('\n\n学習後')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 print('画像0〜3の予測値')
 print(predict.numpy())
 print('未知画像の予測値')

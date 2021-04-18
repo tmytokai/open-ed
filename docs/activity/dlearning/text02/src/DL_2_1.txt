@@ -33,3 +33,6 @@ print('入力')
 print( data.numpy() )
 print('\n出力')
 print( FFNN3(data).numpy())
+
+
+

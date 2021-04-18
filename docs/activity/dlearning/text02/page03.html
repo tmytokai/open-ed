@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークを、<a href="../text01/page03.html">データフロー・グラフ</a>を使って TensorFlow で構築してみましょう。
+では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークを、<a href="../text01/page02.html">データフロー・グラフ</a>を使って TensorFlow で構築してみましょう。
 </p>
 
 <br>
@@ -52,14 +52,14 @@ data の i 列目の値 $d_i$ が入力層のパーセプトロン No.i に入�
 </p>
 
 <p>
-よって TensorFlow では入力信号は図 1 の様に 1 x N 行列の<a href="../text01/page04.html#const">定数テンソル</a>で定義されます。
+よって TensorFlow では入力信号は図 1 の様に 1 x N 行列の<a href="../text01/page03.html#const">定数テンソル</a>で定義されます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図1: 入力信号</b>
 
 <p>
-data : 入力信号、 1 x N 行列 (<a href="../text01/page04.html#const">定数テンソル</a>)
+data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定数テンソル</a>)
 <br>
 
 <img src="./img/page03-fig1.png" alt="">
@@ -82,7 +82,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page04.html#const">定�
 <input type="checkbox"><b>図2: 入力層のグラフ:</b>
 
 <p>
-※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
 </p>
 
 <img src="./img/page03-fig2.png" alt="">
@@ -120,7 +120,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page04.html#const">定�
 <input type="checkbox"><b>図4: 隠れ層のグラフ</b>
 
 <p>
-※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
 </p>
 
 <img src="./img/page03-fig4.png" alt="">
@@ -141,22 +141,12 @@ $b_{j}^{\rm h}$  ・・・ 隠れ層のパーセプトロン No.$j$ のバイア
 </p>
 
 <p>
-さて入力層はニューラルネットワークへの入力信号をそのままスルーしてただけですので、入力層からの出力信号全体は 1xN 行列
-
-\[
-{\rm data} = 
-\begin{bmatrix}
-d_{0}\ , & \cdots &,\  d_{N-1} \\
-\end{bmatrix}
-\]
-
-<p>
-となります。
+さて入力層はニューラルネットワークへの入力信号をそのままスルーしてただけですので、入力層のパーセプトロン No.$i$ から出力される信号は $d_i$ となります。
 </p>
 
 <p>
-よって出力層のパーセプトロン No.$i$ から出力される信号もそのまま $d_i$ となりますので、隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\rm h}$ は以下の式で表されます。
-</p>
+よって隠れ層のパーセプトロン No.$j$ の出力 $y_j^{\rm h}$ は以下の式で表されます。
+</b>
 
 <p>
 \[
@@ -177,6 +167,8 @@ y_j^{\rm h} = f \left ( \sum_{i=0}^{\rm N-1} \{w_{ij}^{\rm h}\cdot d_i\} + b_j^{
 \]
 
 <p>
+で表されます。
+<br>
 隠れ層の重み全体を表す行列を w_h とすると、w_h は NxK 行列
 </p>
 
@@ -192,6 +184,8 @@ w_{\rm (N-1)0}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
 </p>
 
 <p>
+で表されます。
+<br>
 隠れ層のバイアス全体を表す行列を b_h とすると、b_h は 1xK 行列
 </p>
 
@@ -205,13 +199,9 @@ w_{\rm (N-1)0}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
 </p>
 
 <p>
-また活性化関数 $f()$ には色々な種類がありますが、今回の例では<a href="../text01/page04.html#log">双曲線正接(tanh)関数</a>を使いたいと思います。
-</p>
-
-<p>
-よって隠れ層の出力信号は以下の行列演算で求められます。
+また活性化関数 $f()$ には色々な種類がありますが、今回は<a href="../text01/page03.html#log">双曲線正接(tanh)関数</a>を使いたいと思います。
 <br>
-ここで ・ は行列積で、tanh(x) は行列の全ての要素に対して演算を行います。
+すると隠れ層の出力信号は以下の行列演算で求められます。
 </p>
 
 <div class="info">
@@ -219,6 +209,13 @@ w_{\rm (N-1)0}^{\rm h}\ , & \cdots &,\  w_{\rm (N-1)(K-1)}^{\rm h}
    <p>
 y_h = tanh( data・w_h + b_h )
 </p>
+
+<p>
+「・」は行列積
+<br>
+tanh(x) は行列の全ての要素に対して演算
+</p>
+
 </div>
 
 <p>
@@ -226,7 +223,7 @@ y_h = tanh( data・w_h + b_h )
 </p>
 
 <p>
-まず重み w_h とバイアス b_h は<a href="./page04.html">次のページ</a>でディープラーニングを実行する際に値が変化しますので、定数テンソルではなく<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図5)。
+まず重み w_h とバイアス b_h はディープラーニングにより値が変化しますので、定数テンソルではなく<a href="../text01/page03.html#var">変数テンソル</a> として定義します(図5)。
 </p>
 
 
@@ -234,11 +231,11 @@ y_h = tanh( data・w_h + b_h )
 <input type="checkbox"><b>図5: 隠れ層の重みとバイアス</b>
 
 <p>
-w_h : 隠れ層の重み、 N x K 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)
+w_h : 隠れ層の重み、 N x K 行列 (<a href="../text01/page03.html#var">変数テンソル</a>)
 </p>
 
 <p>
-b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)
+b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page03.html#var">変数テンソル</a>)
 </p>
 
 <p>
@@ -256,7 +253,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page04.html#va
 <input type="checkbox"><b>図6: 隠れ層のデータフロー・グラフ</b>
 
 <p>
-入力層からの出力信号( = 入力信号) data と w_h の<a href="../text01/page04.html#matmul">行列積</a> data・w_h を求め、それに b_h を<a href="../text01/page04.html#add">足し</a>、<a href="../text01/page04.html#log">双曲線正接(tanh)</a>に通して y_h に出力する
+入力層からの出力信号( = 入力信号) data と w_h の<a href="../text01/page03.html#matmul">行列積</a> data・w_h を求め、それに b_h を<a href="../text01/page03.html#add">足し</a>、<a href="../text01/page03.html#log">双曲線正接(tanh)</a>に通して y_h に出力する
 </p>
 
 
@@ -280,7 +277,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page04.html#va
 <input type="checkbox"><b>図7: 出力層のグラフ:</b>
 
 <p>
-※ <a href="../text01/page03.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
+※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
 </p>
 
 <img src="./img/page03-fig7.png" alt="">
@@ -303,22 +300,74 @@ $b_{j}^{\textrm o}$  ・・・ 出力層のパーセプトロン No.$j$ のバ�
 </p>
 
 <p>
-つまりパーセプトロンの数と活性化関数が異なるだけで、出力層も隠れ層と同じ様な構造となります。
+つまりパーセプトロンの数と活性化関数が異なるだけで出力層も隠れ層と同じ様な構造となります。
 </p>
 
 <p>
-そこで出力層の重みとバイアス全体の行列ををそれぞれ w_o と b_o という名前にすると、これらも<a href="../text01/page04.html#var">変数テンソル</a> として定義します(図8)。
+そこで出力層の重み全体を表す行列を w_o とすると、w_o は KxM 行列
+</p>
+
+<p>
+\[
+{\rm w\_o} = 
+\begin{bmatrix}
+w_{00}^{\rm o}\ , & \cdots &,\  w_{\rm 0(M-1)}^{\rm o} \\
+\vdots & \ddots & \vdots \\
+w_{\rm (K-1)0}^{\rm h}\ , & \cdots &,\  w_{\rm (K-1)(M-1)}^{\rm o}
+\end{bmatrix}
+\]
+</p>
+
+<p>
+で表されます。
+<br>
+歯油つ力層のバイアス全体を表す行列を b_o とすると、b_o は 1xM 行列
+</p>
+
+\[
+{\rm b\_o} = 
+[b_0^{\rm o}\ , \cdots,\  b_{\rm M-1}^{\rm o}]
+\]
+
+<p>
+で表されます。
+</p>
+
+<p>
+また<a href="./page04.html">次のページ</a>で詳しく説明しますが、今回は「多クラス分類問題」を扱う予定なので活性化関数 $f()$ として <a href="../text01/page03.html#softmax">softmax 関数</a>を使います。
+<br>
+すると出力層の出力信号は以下の行列演算で求められます。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>出力層の出力信号の行列演算</b>
+   <p>
+y_o = softmax( y_h・w_o + b_o )
+</p>
+
+<p>
+「・」は行列積
+</p>
+
+</div>
+
+<p>
+ではこの行列演算を元に出力層を<a href="../text01/page03.html">データフロー・グラフ</a>化してみましょう。
+</p>
+
+<p>
+まず隠れ層の時と同様に、重み w_o とバイアス b_o はディープラーニングにより値が変化しますので、定数テンソルではなく<a href="../text01/page03.html#var">変数テンソル</a> として定義します(図8)。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図8: 出力層の隠れ層の重みとバイアス</b>
 
 <p>
-w_o : 出力層の重み、 K x M 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)
+w_o : 出力層の重み、 K x M 行列 (<a href="../text01/page03.html#var">変数テンソル</a>)
 </p>
 
 <p>
-b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#var">変数テンソル</a>)
+b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page03.html#var">変数テンソル</a>)
 </p>
 
 <p>
@@ -330,15 +379,13 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page04.html#va
 
 <p>
 すると出力層のデータフロー・グラフは図 9 となります。
-<br>
-なお<a href="./page04.html">次のページ</a>で詳しく説明しますが、今回は「多クラス分類問題」を扱う予定なので活性化関数 $f()$ として <a href="../text01/page04.html#softmax">softmax 関数</a>を使っています。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図9: 出力層のデータフロー・グラフ</b>
 
 <p>
-隠れ層からの出力信号 y_h と w_o の<a href="../text01/page04.html#matmul">行列積</a> y_h・w_oを求め、それに b_o を<a href="../text01/page04.html#add">足し</a>、<a href="../text01/page04.html#softmax">softmax 関数</a>に通し、y_o に代入する
+隠れ層からの出力信号 y_h と w_o の<a href="../text01/page03.html#matmul">行列積</a> y_h・w_oを求め、それに b_o を<a href="../text01/page03.html#add">足し</a>、<a href="../text01/page03.html#softmax">softmax 関数</a>に通し、y_o に代入する
 </p>
 
 <img src="./img/page03-fig9.png" alt="">

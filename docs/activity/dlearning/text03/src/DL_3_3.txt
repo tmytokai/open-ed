@@ -1,6 +1,8 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
 #---------------------------
 # データセット読み込み
@@ -46,67 +48,53 @@ label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M)
 data_test = tf.constant(images_test.reshape(images_test.shape[0],N), dtype=tf.float32)
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
-print('N='+str(N))
-print('K='+str(K))
-print('M='+str(M))
-print('学習率='+str(r))
-print('エポック数='+str(E))
-print('学習データセットサイズ='+str(L))
-print('バッチサイズ='+str(B))
+print(f'N={N}')
+print(f'K={K}')
+print(f'M={M}')
+print(f'学習率={r}')
+print(f'エポック数={E}')
+print(f'学習データセットサイズ={L}')
+print(f'バッチサイズ={B}')
 
-# 隠れ層の重みとバイアス
-# DL_2_2 からコピー
+# 3層ニューラルネットワークの構築
+# DL_3_1 からコピー
 ?
 
-# 出力層の重みとバイアス
-# DL_2_2 からコピー
+# 学習設定
+# テキストを参考にする
 ?
 
-# 3層ニューラルネットワークのオペレーション定義
-# DL_2_2 からコピー
-?
-
-# 損失関数
-# DL_2_2 からコピー
-?
-
-# 評価関数
-# DL_2_2 からコピー
-?
+# モデルの概要表示
+model.summary()
 
 # 学習前の状態
-ls = loss(data_training,label_training).numpy()
-predict = FFNN3(data_training)
-acc = categorical_accuracy(predict,label_training)
+ls, acc = model.evaluate(data_training, label_training, verbose=0)
 print('\n学習前')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 print('')
     
 # ディープラーニング実行
-# DL_2_2 からコピー
+# 学習中の経過を表示したい場合は verbose=1 にする
+# テキストを参考にする
 ?
 
 # 学習後の状態
-ls = loss(data_training,label_training).numpy()
-predict = FFNN3(data_training)
-acc = categorical_accuracy(predict,label_training)
+ls, acc = model.evaluate(data_training, label_training, verbose=0)
+ls_test, acc_test = model.evaluate(data_test, label_test, verbose=0)
 print('\n\n学習後')
-print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
+print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 
-ls_test = loss(data_test,label_test).numpy()
-predict_test = FFNN3(data_test)
-acc_test = categorical_accuracy(predict_test,label_test)
-predict_test = predict_test[0:10].numpy()
-print('テストデータセット : 損失={:0.2f}, 正解率={:0.2f}'.format(ls_test,acc_test))
+predict_test = model.predict(data_test[0:10])
+print(f'テストデータセット : 損失={ls_test:0.2f}, 正解率={acc_test:0.2f}')
 print('')
 
 # 参考までにテストデータの先頭 10 データに対する予測値を表示
 for i in range( 10 ): 
-    print('\nテスト画像'+str(i))
+    print(f'\nテスト画像{i}')
     plt.imshow(images_test[i],cmap='gray')
     plt.show()
     print('正解='+classnames[int(classno_test[i])])
     print('予測='+classnames[int(np.argmax(predict_test[i]))])
     print('予測値')
     for j in range(M):
-        print(classnames[j] +': {:0.2f}'.format( predict_test[i][j] ) )
+        print(classnames[j] +f': {predict_test[i][j]:0.2f}')

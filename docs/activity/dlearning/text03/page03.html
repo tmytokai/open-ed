@@ -69,11 +69,11 @@ model.compile(loss=loss, optimizer=opt, metrics=[met])
 <p>
 では学習の各種設定をしています。
 <br>
-具体的には、最初の行(loss = 〜)では損失関数として「カテゴリカル・クロスエントロピー」を指定しています。
+具体的には、最初の行(loss = 〜)では<a href="../text02/page04.html#loss">損失関数</a>として「カテゴリカル・クロスエントロピー」を指定しています。
 <br>
-2行目(opt = 〜)では最適化アルゴリズムとして「Adam」を指定しています。
+2行目(opt = 〜)では<a href="../text02/page04.html#opt">最適化アルゴリズム</a>として「Adam」を指定しています。
 <br>
-3行目(met = 〜)では評価関数として「正解率」を指定しています。
+3行目(met = 〜)では<a href="../text02/page04.html#met">評価関数</a>として「正解率」を指定しています。
 <br>
 そして最後の行(model.compile〜)でモデルのコンパイルをします。
 </p>
@@ -91,9 +91,9 @@ model.fit(data_training, label_training, epochs=E, batch_size=B,  verbose=0)
 </div>
 
 <p>
-の行では、学習用入力信号とラベルとエポック数とバッチサイズを与えてディープラーニングを実行しています。
+の行では、学習用入力信号(data_training)とラベル(label_training)と<a href="../text02/page04.html#batch">エポック数(E)とバッチサイズ(B)</a>を与えてディープラーニングを実行しています。
 <br>
-なお最後の「verbose」は詳細表示の設定で 1 をセットすると学習中の途中経過が表示されます。
+また「verbose」は詳細表示の設定で、 verbose=1 にすると学習中の途中経過が表示されます。
 </p>
 
 <p>
@@ -108,7 +108,7 @@ ls, acc = model.evaluate(data_training, label_training, verbose=0)
 </div>
 
 <p>
-では学習後の損失と評価( ＝ 正解率)を計算しています。
+では学習後の損失(カテゴリカル・クロスエントロピー)と評価(正解率)を計算し、それぞれを変数 ls と acc に代入しています。
 </p>
 
 <br>
