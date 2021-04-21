@@ -50,6 +50,13 @@ public class FRUIT {
 次は APPLE と ORANGE サブクラスを書き換えますが、name フィールドと eat() メソッドはすでにスーパークラスで定義済みなので省略出来ます(ソース 2 と 3)。
 <br>
 ただし名前(name)は異なるのでコンストラクタで別々の名前を name フィールドにセットする必要があります。
+<br>
+なおスーパークラスで定義したフィールドにはドット演算子を使わなくてもサブクラスからそのままアクセス出来ます。
+</p>
+
+<p>
+※ 正式には this.フィールド名 でアクセスします
+</p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 2 : フィールドとメソッドを省略した APPLE サブクラス</b>
@@ -59,6 +66,7 @@ public class APPLE extends FRUIT{
 	public APPLE()
 	{
 		name = "りんご";
+                // 正式には this.name = "りんご";
 	}
 }
 </pre>
@@ -73,32 +81,60 @@ public class ORANGE extends FRUIT{
 	public ORANGE()
 	{
 		name = "みかん";
+                // 正式には this.name = "みかん";
 	}
 }
 </pre>
 </div>
 
 <p>
-main メソッドと実行結果は前のページと同じなので省略します。
+main メソッドと実行結果は前のページと同じですが、一応再掲します。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 4 : Main クラスと main メソッド (再掲)</b>
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args) {
+
+		APPLE apple = new APPLE();
+		ORANGE orange = new ORANGE();
+
+		apple.eat();
+		orange.eat();
+	}
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>実行結果 (再掲) :</b>
+<pre class="wrap">
+りんご美味い
+みかん美味い
+</pre>
+</div>
+
 
 <p>
 さてこの様にスーパークラスでフィールドやメソッドを共通化すると仕様変更に強くなるというメリットがあります。
 例えば
 </p>
 
-<div class="info">
+<br>
 <p>
-eat() メソッドの表示を"不味い"に変えなさい
-</p>
-</div>
-
-<p>
-という仕様変更は FRUIT スーパークラスをソース 4 のように書き換えるだけで済み、APPLE、ORANGE サブクラスは変更する必要ありません。
+仕様変更 「eat() メソッドの表示を"美味い"から"マズイ"に変えなさい」
 </p>
 
+<br>
+<p>
+という仕様変更は FRUIT スーパークラスをソース 4 のように書き換えるだけで済み、APPLE、ORANGE サブクラス、及び Main クラスは変更する必要ありません。
+</p>
+
 <div class="info">
-<input type="checkbox"><b>ソース 4 : 仕様変更した FRUIT スーパークラス</b>
+<input type="checkbox"><b>ソース 5 : 仕様変更した FRUIT スーパークラス</b>
 <pre class="wrap">
 
 public class FRUIT {
@@ -107,38 +143,96 @@ public class FRUIT {
 	
 	public void eat()
 	{
-		System.out.println(name+"不味い");
+		System.out.println(name+"マズイ");
 	}
 }
 </pre>
 </div>
 
 <p>
-なおスーパークラスのメソッドはサブクラスからそのまま呼び出せます。
+この時の実行結果は次の通りです。
+</p>
+
 <br>
+<div class="info">
+<input type="checkbox"><b>実行結果 :</b>
+<pre class="wrap">
+りんごマズイ
+みかんマズイ
+</pre>
+</div>
+
+
+<p>
+なおフィールドと同様、スーパークラスのメソッドはドット演算子を使わなくてもサブクラスから呼び出せます。
+</p>
+
+<p>
+※ 正式には this.メソッド名 で呼び出します
+</p>
+
+<p>
 例えば APPLE クラスを次のように書き換えたとしましょう。
 <br>
 この例では APPLE サブクラスの mogu_mogu() メソッドから FRUIT スーパークラスの eat() メソッドを呼び出しています。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 5 : サブクラスからスーパークラスのメソッドを呼び出す例</b>
+<input type="checkbox"><b>ソース 6 : サブクラスからスーパークラスのメソッドを呼び出す例</b>
 <pre class="wrap">
 public class APPLE extends FRUIT{
 
 	public APPLE()
 	{
 		name = "りんご";
+                // 正式には this.name = "りんご";
 	}
 
         public void mogu_mogu()
 	{
+                System.out.println( name+"もぐもぐ");
+
 		eat();  // FURIT スーパークラスの eat() メソッドを呼び出す
+                // 正式には this.eat();
 	}
 }
 </pre>
 </div>
 
+<p>
+それでは、この様にして定義した APPLE.mogu_mogu() メソッドを以下の Main クラスから呼び出してみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 7 : Main クラスと main メソッド</b>
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args) {
+
+		APPLE apple = new APPLE();
+		ORANGE orange = new ORANGE();
+
+		apple.mogu_mogu(); // eat の代わりに mogu_mogu を呼び出す
+		orange.eat();
+	}
+}
+</pre>
+</div>
+
+<p>
+結果は次の通りです。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>実行結果:</b>
+<pre class="wrap">
+りんごもぐもぐ
+りんごマズイ
+みかんマズイ
+</pre>
+</div>
 
 
 <br>
