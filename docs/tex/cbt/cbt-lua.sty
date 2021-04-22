@@ -1,0 +1,199 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\makeatletter
+
+% 雑用カウンタ
+\newcounter{BB@i}
+\newcounter{BB@j}
+\newcounter{BB@k}
+\newcounter{BB@l}
+\newcounter{BB@n}
+\newcounter{BB@nn}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% ベクトルの要素追加と値代入
+% 引数: {ベクトル名}{値}
+% 説明: 指定したベクトルに要素を追加して値を代入する
+%       useベクトル名 : ベクトルが存在するなら t
+%       sizeベクトル名 : ベクトルのサイズ
+\newcounter{APV@i}
+%
+\newcommand{\AppendVec}[2]{%
+\if t\@nameuse{use#1}\relax%
+\else%
+\global\@namedef{use#1}{t}%
+\global\@namedef{size#1}{0}%
+\fi%
+\setcounter{APV@i}{\@nameuse{size#1}}%
+\expandafter\protected@xdef\csname #1[\the\c@APV@i]\endcsname{#2}% protected@を付けないとprotectされたマクロも展開する
+% #1[\the\c@APV@i] = \@nameuse{#1[\the\c@APV@i]}\\   %debug出力
+\stepcounter{APV@i}%
+\expandafter\xdef\csname size#1\endcsname{\the\c@APV@i}%
+% size = \@nameuse{size#1}\\   %debug出力
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% ベクトル要素表示
+\newcounter{SHV@i}
+\newcounter{SHV@n}
+%
+\newcommand{\ShowVec}[1]{%
+\if t\@nameuse{use#1}%
+\setcounter{SHV@i}{0}%
+\setcounter{SHV@n}{\@nameuse{size#1}}%
+\@whilenum\c@SHV@i<\c@SHV@n\do{%
+#1[\the\c@SHV@i/\the\c@SHV@n]=\@nameuse{#1[\the\c@SHV@i]}\\
+\stepcounter{SHV@i}}%
+\fi%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% ベクトルの内容をファイルに書きだす
+% 引数: {ファイル名}{ベクトル名}
+\newcounter{WFV@i}
+\newcounter{WFV@n}
+%
+\newcommand{\WriteFileVec}[2]{%
+\if t\@nameuse{use#2}%
+\newwrite\WFV@file%
+\immediate\openout\WFV@file=#1%
+\setcounter{WFV@i}{0}%
+\setcounter{WFV@n}{\@nameuse{size#2}}%
+\@whilenum\c@WFV@i<\c@WFV@n\do{%
+\immediate\write\WFV@file{%
+\@nameuse{#2[\the\c@WFV@i]}%
+}%
+\stepcounter{WFV@i}}%
+\immediate\closeout\WFV@file%
+\fi%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ベクトル
+% BB@qpath[]  : 問題iのパス
+% BB@qpoint[]  : 問題iの得点
+% BB@a〜bfile[] : 問題iの各解答(a〜d)のファイル名
+% BB@qcorrect[] : 問題iの正答記号(a〜d)
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% 機能：初期化 (命令)
+\newcommand{\initbb}{%
+\@tfor\BB@tmp:=abcdefghijklmnopqrstuvwxyz\do{%
+\AppendVec{BB@anstitle}{\BB@tmp}% BB@anstitle[0]='a', BB@anstitle[1]='b', ...
+}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% 機能：情報ファイル読み込み (命令)
+% 書式：\readinfo{ファイル名}
+% 説明: ./ファイル名.tex を読み込んで各種情報をベクトルに保存する
+\newcommand{\readinfo}[1]{%
+\input{./#1}%
+\AppendVec{BB@qpath}{\qpath}%
+\AppendVec{BB@qpoint}{\qpoint}%
+\AppendVec{BB@afile}{\afile}%
+\AppendVec{BB@bfile}{\bfile}%
+\AppendVec{BB@cfile}{\cfile}%
+\AppendVec{BB@dfile}{\dfile}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% 機能：正答の指定 (命令)
+% 書式：\correct
+% 説明：このマクロを正解の解答ファイルで実行する
+\newcommand{\correct}{%
+\AppendVec{BB@qcorrect}{\curanswer}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% 機能：問題・フィードバック作成 (命令)
+% 書式：\makeq[オプション]
+% オプション：
+% [q] 問題だけ表示(デフォルト), [f] 問題とフィードバックを交互に表示, [p] ペーパー試験用問題
+\newcommand{\makeq}[1][q]{%
+\setcounter{BB@i}{0}% ループ用
+\setcounter{BB@k}{0}% 問題番号
+\setcounter{BB@n}{\@nameuse{sizeBB@qpath}}% 問題数
+%
+\if#1p%
+\begin{center}%
+\parbox{\qwidth}{\examname\hfill{\normalsize  \examdate}}%
+\end{center}%
+\fi%
+%
+\@whilenum\c@BB@i<\c@BB@n\do{%
+%
+\stepcounter{BB@k}%
+\edef\qpath{\@nameuse{BB@qpath[\the\c@BB@i]}}%
+\edef\qpoint{\@nameuse{BB@qpoint[\the\c@BB@i]}}%
+\edef\afile{\@nameuse{BB@afile[\the\c@BB@i]}}%
+\edef\bfile{\@nameuse{BB@bfile[\the\c@BB@i]}}%
+\edef\cfile{\@nameuse{BB@cfile[\the\c@BB@i]}}%
+\edef\dfile{\@nameuse{BB@dfile[\the\c@BB@i]}}%
+\edef\qnumber{\the\c@BB@k}%
+\edef\filedir{\rootdir\qpath}%
+%
+\if#1q%
+\input{\cbtdir/template-q}%
+\fi%
+%
+\if#1p%
+\input{\cbtdir/template-p}%
+\fi%
+%
+\if#1f%
+\input{\cbtdir/template-q}%
+\edef\qcorrect{\@nameuse{BB@qcorrect[\the\c@BB@i]}}%
+\input{\cbtdir/template-fb}%
+\fi%
+%
+\stepcounter{BB@i}}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% 機能：ブラックボードアップロード用バッチファイル作成 (命令)
+% 書式：\makebatch{ファイル名}
+% 説明：ブラックボードで問題を作成する際にアップロードするバッチファイルを作成する。
+% 注意：現在はタブコードの代わりに文字列 _TAB_ を出力しているので、 sed -e "s/_TAB_/\t/g" bb-tmp.txt > batch.txt の様に_TAB_をタブに置き換えてからアップロードする必要がある。
+\newcommand{\makebatch}[1]{%
+\setcounter{BB@i}{0}% ループ用
+\setcounter{BB@k}{0}% 問題番号
+\setcounter{BB@n}{\@nameuse{sizeBB@qpath}}% 問題数
+\setcounter{BB@nn}{4}% 選択数
+%
+\@whilenum\c@BB@i<\c@BB@n\do{%
+%
+\stepcounter{BB@k}%
+\edef\BB@tmpa{MC}% 多肢選択
+\edef\BB@tmpa{\BB@tmpa _TAB_<span style="color: white;">}%
+\edef\BB@tmpa{\BB@tmpa\the\c@BB@k}%
+\edef\BB@tmpa{\BB@tmpa</span>}%
+%
+\setcounter{BB@l}{0}%
+\@whilenum\c@BB@l<\c@BB@nn\do{%
+\protected@edef\BB@tmpb{\@nameuse{BB@anstitle[\the\c@BB@l]}}%
+\protected@edef\BB@tmpc{\@nameuse{BB@qcorrect[\the\c@BB@i]}}%
+\edef\BB@tmpa{\BB@tmpa _TAB_(\BB@tmpb)}%
+\ifx \BB@tmpb\BB@tmpc%
+\edef\BB@tmpa{\BB@tmpa _TAB_correct_TAB_}%
+\else%
+\edef\BB@tmpa{\BB@tmpa _TAB_incorrect}%
+\fi%
+\stepcounter{BB@l}}%
+%
+\AppendVec{BB@tmpvec}{\BB@tmpa}%
+\stepcounter{BB@i}}%
+%
+\WriteFileVec{#1}{BB@tmpvec}%
+}
+
+\makeatother

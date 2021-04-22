@@ -1,0 +1,87 @@
+\makeatletter
+
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{ascmac}
+
+\def\cbtdir{\texdir/cbt}
+\usepackage{\cbtdir/cbt-lua}
+
+\pagestyle{empty}
+
+\hoffset = -1in
+\voffset = -1in
+\topmargin = 15mm
+\headheight = 0mm
+\headsep = 0mm
+\oddsidemargin = 15mm
+\evensidemargin = 15mm
+\textwidth = 210mm  
+\textheight = 287mm
+\addtolength{\textwidth}{-\oddsidemargin}
+\addtolength{\textwidth}{-\evensidemargin}
+\addtolength{\textheight}{-\topmargin}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+
+\fboxsep = 1em
+
+% 問題欄のサイズ
+\newlength{\qwidth}
+\qwidth = 0.9\textwidth
+\addtolength{\qwidth}{-2\fboxsep}
+\addtolength{\qwidth}{-2\fboxrule}
+\addtolength{\qwidth}{10pt} %微調整用
+
+\newlength{\qheight}
+\qheight = 0.3\textheight
+\addtolength{\qheight}{-2\fboxsep}
+\addtolength{\qheight}{-2\fboxrule}
+
+\newlength{\pheight}
+\pheight = 0.075\textheight
+\addtolength{\pheight}{-2\fboxsep}
+\addtolength{\pheight}{-2\fboxrule}
+
+% 選択欄のサイズ
+\newlength{\awidth}
+\awidth = 0.45\textwidth
+\addtolength{\awidth}{-1em}
+\addtolength{\awidth}{-2\fboxsep}
+\addtolength{\awidth}{-2\fboxrule}
+
+\newlength{\aheight}
+\aheight = 0.3\textheight
+\addtolength{\aheight}{-2\fboxsep}
+\addtolength{\aheight}{-2\fboxrule}
+
+\newlength{\pawidth}
+\pawidth = 0.2\textwidth
+\addtolength{\pawidth}{-1em}
+\addtolength{\pawidth}{-2\fboxsep}
+\addtolength{\pawidth}{-2\fboxrule}
+
+\newlength{\paheight}
+\paheight = 0.065\textheight
+\addtolength{\paheight}{-2\fboxsep}
+\addtolength{\paheight}{-2\fboxrule}
+
+% 画像幅
+\newlength{\figwidth}
+\figwidth = \awidth
+\intextsep = 0pt
+\textfloatsep = 0pt
+
+% フィードバックのサイズ
+\newlength{\fbwidth}
+\fbwidth = \qwidth
+
+\newlength{\fbtopheight}
+\fbtopheight = 0.08\textheight
+
+\newlength{\fbbottomheight}
+\fbbottomheight = 0.75\textheight
+
+\makeatother 
