@@ -37,46 +37,53 @@ f(t) = a \cdot \sin( w \cdot t + \phi )
 f(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
 \]
 <p>
-となります。cos の時も同じように元の時間領域アナログサイン波の式が
+となります。
+<br>
+なお
 </p>
 \[
-f(t) = a \cdot \cos( w \cdot t + \phi )
+f(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
+= -a \cdot \sin \{ w \cdot t + \phi) \}
 \]
 <p>
-ならば、位相が反転しているサイン波の式は
-</p>
-\[
-f(t) = a \cdot \cos \{ w \cdot t + (\phi \pm \pi) \}
-\]
-<p>
-です。
+なので「<b>位相を反転する = 振幅の符号を反転する</b>」とも言えます。
 </p>
 
 <p>
-ちなみにグラフが上下反転するということは、<b>位相反転は振幅 $a$ の符号を反転させることと同じ</b>意味となります。
-</p>
-
-<p>
-例えば次の図 1 は振幅が $a=1$、角周波数が $w=2\pi$、初期位相が $\phi= 0$ の典型的な時間領域アナログサイン波です。
+例えば次の図 1 は振幅が $a=1$、角周波数が $w=2\pi$、初期位相が $\phi= 0$ の時間領域アナログサイン波です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1: $f(t) = 1 \cdot \sin( 2\pi \cdot t )$</b>
-<p>
-</p>
+<input type="checkbox"><b>図1: 元のサイン波</b>
+<p></p>
+
+\[
+f(t) = 1 \cdot \sin( 2\pi \cdot t )
+\]
+
 <img src="./img/page05-fig1.png" alt="">
 </div>
 
 <p>
-一方、次の図 2 は振幅と角周波数は同じですが初期位相を $\phi= -\pi$ とした時のアナログサイン波です。もちろん初期位相を $\phi= \pi$ としたり、初期位相は元のままで振幅を $a = -1$ としても同じグラフになります。
+このサイン波の位相を反転させると次の図2のグラフとなります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2: $f(t) = 1 \cdot \sin( 2\pi \cdot t -\pi )$ 又は $f(t) = 1 \cdot \sin( 2\pi \cdot t +\pi )$  又は $f(t) = -1 \cdot \sin( 2\pi \cdot t )$</b>
-<p>
-</p>
+<input type="checkbox"><b>図2: 図1のサイン波の位相を反転</b>
+<p></p>
+
+\[
+f(t) = 1 \cdot \sin( 2\pi \cdot t \pm \pi ) = -1 \cdot \sin( 2\pi \cdot t  )
+\]
+
 <img src="./img/page05-fig2.png" alt="">
 </div>
+
+<p>
+なお、元のサイン波と位相反転したサイン波を<a href="../../a-signal/text02/page02.html">足し合わせる</a>と $f(t)=0$ となります。
+<br>
+この性質はイヤホンのノイズキャンセリング機能などに応用されています。
+</p>
 
 <br>
 <script>PreNext(5,7)</script>
