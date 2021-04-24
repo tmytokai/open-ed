@@ -45,31 +45,8 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-2 (個人):</b> 「setter」を使って、Taro と Hanako サブクラスのコンパイルエラーを消しましょう
+<input type="checkbox"><b>演習 2-2 (個人):</b> getter と setterを使って、Taro と Hanako サブクラスのコンパイルエラーを消しましょう
 </p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_2_1」をフォルダ「OELM_2_2」に丸ごとコピーし、その中に移動します。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Score.java を開きます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> private なフィールドにはサブクラスからもアクセス出来ないので、name の値をセットする setter( 名前は public void set_name(String _name) ) を Score クラスに追加します。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro.java を開き、Taro クラスのコンストラクタ Taro() の中で (3)で定義した setter を使って name フィールドに "TARO" を代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 同様に Hanako.java を開き、 Hanako クラスのコンストラクタ Hanako() の中で setter を使って name フィールドに "HANAKO" を代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro.java と Hanako.java をコンパイルするとエラーメッセージが表示されなくなったことを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 提出物はありません
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 2-3 (個人):</b> 「getter」を使って Main クラスのコンパイルエラーを消しましょう。
-</p>
-
 <div class="info">
 <pre class="wrap">
 結果:
@@ -82,29 +59,34 @@ name = HANAKO math = 14 english = 21 平均 = 17.5 合計 = 35
 ※ 乱数を使っているので、実行するたびに結果が変わります
 </pre>
 </div>
-
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> フォルダ「OELM_2_2」をフォルダ「OELM_2_3」に丸ごとコピーし、その中に移動します。
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_2_1」をフォルダ「OELM_2_2」に丸ごとコピーし、その中に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Score.java を開きます。
+<span class="olradio"><input type="radio" name="p2"></span> Score.java を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> name の値を取得する getter (名前は public String get_name() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> name の setter(メソッド名は public void set_name( String _name ) ) を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> math の値を取得する getter (名前は public int get_math() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> name の値を取得する getter (メソッド名は public String get_name() ) を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> english の値を取得する getter (名前は public int get_english() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> math の値を取得する getter (メソッド名は public int get_math() ) を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Main.java を開き、Main クラスの表示部を getter を使うように書き換えます。
+<span class="olradio"><input type="radio" name="p2"></span> english の値を取得する getter (メソッド名は public int get_english() ) を Score クラスに追加します。
+
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 実行します。
+<span class="olradio"><input type="radio" name="p2"></span> Taro.java を開き、コンストラクタの中で set_name を使って Score.name に "TARO" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Hanako.java を開き、コンストラクタの中で set_name を使って Score.name に "HANAKO" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「Main、Score、Taro、Hanakoクラスのソースコード」「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Main.java を開き、get_name、get_math、get_english を使うように書き換えます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Main、Score、Taro、Hanakoクラスのソースコード」「実行結果」を記入して下さい。
 </p>
 </div>
-
 
 <br>
 <script>PreNext(4,3)</script>

@@ -20,13 +20,17 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前のページで「フィールドは原則 private にして隠蔽しましょう」と書きましたが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
+「フィールドは原則 private にして隠蔽する」ことが推奨されますが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
 <br>
-その場合は「getter」と「setter」というテクニックがよく使われています。
+その場合は「<b>getter</b>」と「<b>setter</b>」というテクニックがよく使われています。
 </p>
 
 <p>
-「getter」は private により隠蔽されたフィールドの値を外部から取得するために使うメソッドで、例えばJavaではソース 1 の様に定義します。
+※ getter と setter を使ってしまうとカプセル化が崩れてしまうので使っていけないと主張する人も多いです
+</p>
+
+<p>
+さて getter は隠蔽されたフィールドの値を外部から取得するために使うメソッドで、例えば Java ではソース 1 の様に定義します。
 </p>
 
 <div class="info">
@@ -37,26 +41,37 @@ public class HOGE{
   private int abc;
 
   // フィールド abc の getter
-  // メソッド名は何でも良いが　get〜 とするのが一般的(かも)
+  // メソッド名は何でも良いが「getフィールド名」とする人が多い
   public int get_abc(){ return abc; }
 }
 </pre>
 </div>
 
 <p>
-HOGE 以外のクラスから abc フィールドの値を取得したい場合はソース 2 のようにします。
+HOGE 以外のクラスから HOGE.abc の値を取得したい場合はソース 2 のようにします。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 2 : getter の使い方</b>
 <pre class="wrap">
+
+・HOGE を継承していないクラスの場合
+
 HOGE hoge = new HOGE();
 int a = hoge.get_abc();
+
+
+・HOGE を継承したクラスの場合
+
+int a = get_abc();
+または
+int a = this.get_abc();
+
 </pre>
 </div>
 
 <p>
-一方「setter」は private により隠蔽されたフィールドの値を外部から変更するために使うメソッドで、例えばJavaではソース 3 の様に書きます。
+一方 setter は隠蔽されたフィールドの値を外部から変更するために使うメソッドで、例えば Java ではソース 3 の様に書きます。
 </p>
 
 <div class="info">
@@ -67,71 +82,84 @@ public class HOGE{
   private int abc;
   
   // フィールド abc の setter
-  // メソッド名は何でも良いが set〜 とするのが一般的(かも)
-  // 引数名は何でも良い。人によって名前付けの流儀もまちまち
+  // メソッド名は何でも良いが「setフィールド名」とする人が多い
+  // 引数名は人によりまちまち
   public void set_abc( int _abc ){ abc = _abc; }
 }
 </pre>
 </div>
 
 <p>
-さて、main メソッドや HOGE を継承していないクラスのメソッドから abc フィールドに値をセットしたい場合は HOGE のインスタンスを作った後にソース 4 のようにします。
+HOGE 以外のクラスから HOGE.abc に値をセットしたい場合はソース 4 のようにします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 4 : setter の使い方 (HOGE を継承していないクラスの場合)</b>
+<input type="checkbox"><b>ソース 4 : setter の使い方</b>
 <pre class="wrap">
+
+・HOGE を継承していないクラスの場合
+
 HOGE hoge = new HOGE();
 hoge.set_abc( 123 );
-</pre>
-</div>
 
-<p>
-一方、HOGE を継承しているサブクラスのメソッドから abc フィールドに値をセットしたい場合は<a href="../text01/page02.html">フィールドとメソッドの再利用</a>の所で説明したようにそのまま setter を呼び出せるのでソース 5 のようにします。
-</p>
 
-<div class="info">
-<input type="checkbox"><b>ソース 5 : setter の使い方 (HOGE のサブクラスの場合)</b>
-<pre class="wrap">
+・HOGE を継承しているクラスの場合
+
 set_abc( 123 );
+または
+this.set_abc( 123 );
+
 </pre>
 </div>
 
 <p>
-ところで「getter」と「setter」を使ってしまうとフィールドを public にすることとあまり違いがなくなるという問題があります。
+なお getter と setter の代わりに<a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)">プロパティ</a>という機能をもつ言語もあります。
 <br>
-よって「getter」と「setter」は絶対に使っていけないと主張する人も多いです。
+プロパティは最近のオブジェクト指向プログラミングでは必須の機能ですので、詳しくは自分で調べておきましょう。
 </p>
 
 <p>
-また C# や swift などの新し目の言語では「getter」と「setter」の代わりに「プロパティ」という似たような機能が用意されています。
-<br>
-参考までに C# ではプロパティはソース 6 の様にして使います。
+参考までに C# ではプロパティはソース 5 の様にして使います。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 6 : C# でのプロパティの使い方</b>
+<input type="checkbox"><b>ソース 5 : (参考) C# のプロパティの使い方</b>
 <pre class="wrap">
-定義:
 
-class HOGE{
+HOGE.cs の内容:
 
-  public int Abc{ get; set; }   // プロパティ「Abc」の定義
-
+class HOGE
+{
+    public int abc{ get; set; } = 123;  // abc プロパティの定義
 }
 
-使い方:
 
-var hoge = new HOGE();
-hoge.Abc = 123;
-Console.WriteLine( hoge.Abc );
+MyMain.cs の内容:
+
+using System;
+class Program
+{
+    static void Main(string[] args){
+        var hoge = new HOGE();
+        Console.WriteLine( hoge.abc );
+        hoge.abc = 321;
+        Console.WriteLine( hoge.abc );
+    }
+}
+
+
+実行:
+
+
+$ mcs MyMain.cs HOGE.cs 
+$ mono MyMain.exe 
+123
+321
+
 </pre>
 </div>
 
-<p>
-これ以上詳しくはこのアクティビィティでは取り扱いませんが、「プロパティ」は最近のオブジェクト指向プログラミングでは必須の機能ですので、興味がある人は自分で調べておきましょう。
-</p>
-
+<br>
 <script>PreNext(3,3)</script>
 </body>
 </html>
