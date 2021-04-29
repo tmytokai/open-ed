@@ -39,15 +39,15 @@ f(t) = \sin( 2\pi \cdot t) + \alpha
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $0 \leq t \leq 2$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 次の列に $\alpha = 0$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 「t」と書いた右隣のセルに「$\alpha = 0$」と書き、 その下のセルから $\alpha = 0$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> その次の列に $\alpha = -1$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 更に右隣の列の先頭行に「$\alpha = -1$」と書き、その下のセルから$\alpha = -1$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> その次の列に $\alpha = 2$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 更に右隣の列の先頭行に「$\alpha = 2$」と書き、 その下のセルから$\alpha = 2$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 3つのグラフを 1 枚のグラフ領域に表します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p1"></span> 「t」「$\alpha = 0$」「$\alpha = 1$」「$\alpha = 2$」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「AS_2_1」として下さい(拡張子は表計算ソフトによる)。
 <br>
@@ -73,15 +73,15 @@ f(t) = \alpha \cdot \sin( 2\pi \cdot t)
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 時刻の範囲は $0 \leq t \leq 2$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 次の列に $\alpha = 1$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 「t」と書いた右隣のセルに「$\alpha = 1$」と書き、 その下のセルから $\alpha = 1$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> その次の列に $\alpha = 2$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 更に右隣の列の先頭行に「$\alpha = 2$」と書き、その下のセルから$\alpha = 2$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> その次の列に $\alpha = -1/2$ とした時の $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 更に右隣の列の先頭行に「$\alpha = -1/2$」と書き、 その下のセルから$\alpha = -1/2$ の時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 3つのグラフを 1 枚のグラフ領域に表します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p2"></span> 「t」「$\alpha = 1$」「$\alpha = 2$」「$\alpha = -1/2$」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> シートを保存します。ファイル名は「AS_2_2」として下さい(拡張子は表計算ソフトによる)。
 <br>
@@ -119,15 +119,19 @@ g3(t) &= f(t) \cdot \beta(t)
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 時刻の範囲は $0 \leq t \leq 2$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 最初の列に各時刻をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 次の列に $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルから $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 次の列に $\beta(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 更に右隣の列の先頭行に「β(t)」と書き、 その下のセルから $\beta(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 同様に次の列から残りの3つの信号値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 更に右隣の列の先頭行に「g1(t)」と書き、 その下のセルから $g1(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 5つのグラフを 1 枚のグラフ領域に表します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p3"></span> 更に右隣の列の先頭行に「g2(t)」と書き、 その下のセルから $g2(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 更に右隣の列の先頭行に「g3(t)」と書き、 その下のセルから $g3(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「t」「f(t)」「β(t)」「g1(t)」「g2(t)」「g3(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> シートを保存します。ファイル名は「AS_2_3」として下さい。
 <br>
