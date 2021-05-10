@@ -6,49 +6,6 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<script type="text/javascript">
-<!--
-  'use strict';
-  var context = null;
-  var oscillator = null;
-  var playing = false;
-  var freq = 440;
-
-  function play(){
-
-    if( !playing ){
-      var AudioContext = window.AudioContext || window.webkitAudioContext;
-      context = new AudioContext();
-      oscillator = context.createOscillator();
-      oscillator.connect( context.destination );
-      oscillator.frequency.value = freq;
-      oscillator.start();
-      playing = true;
-    }
-    else{
-      oscillator.stop();
-      context.close();
-      playing = false;
-    }
- }
-
-  function up(){
-      if( freq < 880 ) freq += 20;
-      document.js.hz.value = freq;
-      if( playing ){
-        oscillator.frequency.value = freq;
-      }
-  }
-
-  function down(){
-      if( freq > 220 ) freq -= 20;
-      document.js.hz.value = freq;
-      if( playing ){
-        oscillator.frequency.value = freq;
-      }
-  }
-// -->
-</script>
 <title>演習</title>
 </head>
 <body>
@@ -169,12 +126,8 @@ f(t) = 2 \cdot \cos( \pi \cdot t )
 <p>
 <input type="checkbox"><b>演習 1-6 (個人):</b> 時間領域アナログサイン波を音として再生し、周波数によってどう音が変化するか確認しましょう。
 </p>
-<form name="js">
-<input type="button" value="再生/停止" onclick="play()"/>
-<input type="button" value="UP" onclick="up()"/>
-<input type="button" value="DOWN" onclick="down()"/>
-<input type="text" name="hz" value="440" readonly> [Hz]
-</form>
+<div id="root"></div>
+<script src="./js/playsin.js"></script>
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p6"></span> 再生ボタンを押した後 UP、DOWN ボタンを押すとサイン波の周波数が変化します。
