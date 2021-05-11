@@ -293,6 +293,7 @@ var MyConsole = /*#__PURE__*/function (_Component) {
 
       var freq = this.props.freq;
       var playing = this.props.playing;
+      var T = Math.floor(1000.0 / freq * 100) / 100;
       if (playing) oscillator.frequency.value = freq;
       var label = playing ? "停止" : "再生"; //        console.log(freq);
       //        console.log(label);
@@ -313,12 +314,7 @@ var MyConsole = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return _this2.props.setFreq(freq - 20);
         }
-      }), "\u3000", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        size: "5",
-        value: freq,
-        readOnly: true
-      }), " [Hz]");
+      }), "\u3000", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u5468\u6CE2\u6570 f = ", freq, " [Hz]", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "\u5468\u671F\u3000 T = ", T, " [\u30DF\u30EA\u79D2]"));
     }
   }]);
 

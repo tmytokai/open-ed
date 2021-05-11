@@ -41,11 +41,11 @@ f(t) = 2 \cdot \sin( \pi \cdot t )
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルから $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p1"></span> 「t」「f(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「ASIN_1_1」として下さい(拡張子は表計算ソフトによる)。
 <br>
@@ -73,11 +73,11 @@ f(t) = 2 \cdot \cos( \pi \cdot t )
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルから $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p2"></span> 「t」「f(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> シートを保存します。ファイル名は「ASIN_1_2」として下さい(拡張子は表計算ソフトによる)。
 <br>
@@ -130,7 +130,9 @@ f(t) = 2 \cdot \cos( \pi \cdot t )
 <script src="./js/playsin.js"></script>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> 再生ボタンを押した後 UP、DOWN ボタンを押すとサイン波の周波数が変化します。
+<span class="olradio"><input type="radio" name="p6"></span> UP、DOWN ボタンを押すとサイン波の周波数と周期が変化します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 再生ボタンを押すとサイン波の音が出力されます。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> 指定場所に「サイン波を耳で実際に聞くとどの様な音になるのか」および「周波数を高くしたり低くしたりするとどう音が変わるか」を書いて下さい。
 </p>
@@ -160,7 +162,7 @@ f(t) = 2 \cdot \sin( \pi \cdot t )
 f(t) = 2 \cdot \sin( \pi \cdot t )
 \]
 <p>
-の周波数を2倍にしたサイン波と 1/2 倍にしたサイン波のグラフを描いてみましょう。
+のクラフに、周波数を2倍にしたサイン波と 1/2 倍にしたサイン波のグラフを追加してみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -168,13 +170,15 @@ f(t) = 2 \cdot \sin( \pi \cdot t )
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p8"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 次の列に「周波数を2倍にしたサイン波」の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p8"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルから $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> その次の列に「周波数を1/2 倍にしたサイン波」の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p8"></span> 更に右隣の列の先頭行に「周波数 x2」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 2 つのグラフを 1 枚のグラフ領域に表します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p8"></span> 更に右隣の列の先頭行に「周波数 x1/2」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 「t」〜「周波数 x1/2」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> シートを保存します。ファイル名は「ASIN_1_8」として下さい(拡張子は表計算ソフトによる)。
 <br>
@@ -213,13 +217,13 @@ f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-10 (個人):</b> 演習 1-9 の時間領域アナログサイン波
+<input type="checkbox"><b>演習 1-10 (個人):</b> 演習 1-1 の時間領域アナログサイン波
 </p>
 \[
-f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)
+f(t) = 2 \cdot \sin( \pi \cdot t)
 \]
 <p>
-のグラフを表計算ソフトで描いて、演習 1-1 のグラフとの違いを確認しましょう。
+のクラフに、初期位相を $\phi = -\pi/4$ にしたサイン波のグラフを追加してみましょう。 
 </p>
 <div class="olradio"> 
 <p>
@@ -227,11 +231,13 @@ f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p10"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p10"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルから $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p10"></span> 更に右隣の列の先頭行「φ=-π/4」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 「t」〜「φ=-π/4」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> シートを保存します。ファイル名は「ASIN_1_10」として下さい(拡張子は表計算ソフトによる)。 
 <br>
@@ -252,7 +258,7 @@ f(t) = 2 \cdot \sin( \pi \cdot t - \pi/4)
 f(t) = 2 \cdot \sin( \pi \cdot t )
 \]
 <p>
-の位相を反転させたサイン波のグラフを描いてみましょう。
+のクラフに、位相を反転させたサイン波のグラフを追加してみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -260,11 +266,13 @@ f(t) = 2 \cdot \sin( \pi \cdot t )
 <br>
 <span class="olradio"><input type="radio" name="p11"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p11"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 次の列に「位相を反転させたサイン波」の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p11"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p11"></span> 更に右隣の列の先頭行に「位相反転」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 「t」〜「位相反転」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p11"></span> シートを保存します。ファイル名は「ASIN_1_11」として下さい(拡張子は表計算ソフトによる)。 
 <br>
@@ -294,11 +302,11 @@ f(t) = -2
 <br>
 <span class="olradio"><input type="radio" name="p12"></span> 時刻の範囲は $0 \leq t \leq 4$ 秒区間、代表点は 0.01 秒刻みとします。
 <br>
-<span class="olradio"><input type="radio" name="p12"></span> 最初の列に各時刻(秒)をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p12"></span> 一番上の最初の列のセルに「t」と書き、その下のセルから各時刻をオートフィルを使って入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p12"></span> 次の列に各時刻における $f(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p12"></span> 「t」と書いた右隣のセルに「f(t)」と書き、 その下のセルからその時の $f(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p12"></span> グラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
+<span class="olradio"><input type="radio" name="p12"></span> 「t」「f(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p12"></span> シートを保存します。ファイル名は「ASIN_1_12」として下さい(拡張子は表計算ソフトによる)。 
 <br>
