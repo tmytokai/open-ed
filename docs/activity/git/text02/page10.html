@@ -27,17 +27,17 @@
 
 <br>
 <h3>
-(1) HEADの状態までワーキングツリーとインデックスを強制リセット
+(1) HEADの状態までワーキングツリーとインデックスの内容全てを一気にリセット
 </h3>
 
 <p>
-まず HEAD の状態までワーキングツリーとインデックスを強制リセットする方法について学びます。
+まず HEAD の状態までワーキングツリーとインデックスの内容全てを一気にリセットする方法について学びます。
 <br>
-出来れば使いたくないコマンドですが、実際の開発中は良くお世話になります。
+なお個別のファイルをリセットしたい場合は<a href="./page07.html">7ページ目</a>で学んだ git restore --staged コマンドと git restore コマンドを使った方が安全です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>HEADの状態までワーキングツリーとインデックスを強制リセット( やや危険 ):</b>
+<input type="checkbox"><b>HEADの状態までワーキングツリーとインデックスの内容全てを一気にリセット:</b>
 <pre class="wrap">
 git reset --hard HEAD
 
@@ -368,12 +368,13 @@ a
 </tr></table>
 
 <br>
+<br>
 <h3>
-(3) 過去のコミットを消す
+(参考) 過去のコミットを消す
 </h3>
 
 <p>
-最後に、過去のコミットを消して無かったことにする方法を学びます。
+参考までに過去のコミットを消して無かったことにする方法について学びます。
 <br>
 簡単ですが危険ですのでなるべく使わない方が良いです。
 <br>
@@ -390,109 +391,14 @@ git reset --hard HEAD~N
 </div>
 
 <p>
-もし状態 20 において過去 3 回分のコミットを削除すると次の状態21になります。
-<br>
-この様に HEAD 、HEAD~1、HEAD~2 が消えて状態が状態 8 まで戻ります。
+例えば状態 20 に対して
 </p>
-
-
-<br>
-<h2>状態21( = 状態 8 )</h2>
-<br>
-
-<b>ワーキングツリー</b>
-<br>
-<table class="noborder"><tr>
-
-<td class="noborder" style="width: 10em;">
-<table style="width: 100%;"><tr><td class="centerbold">
-hoge.txt
-<table class="innerbox"><tr><td>
-ab
-</td></tr></table>
-piyo.txt
-<table class="innerbox"><tr><td>
-A
-</td></tr></table>
-</td></tr></table>
-</td>
-
-</tr></table>
-
-<br>
-<br>
-<b>インデックス</b>
-<br>
-<table class="noborder"><tr>
-
-<td class="noborder" style="width: 10em;">
-<table style="width: 100%;"><tr><td class="centerbold">
-hoge.txt
-<table class="innerbox"><tr><td>
-ab
-</td></tr></table>
-piyo.txt
-<table class="innerbox"><tr><td>
-A
-</td></tr></table>
-</td></tr></table>
-</td>
-
-</tr></table>
-
-
-<br>
-<br>
-<b>ローカルリポジトリ「gitlocal」</b>
-<br>
-<table class="noborder"><tr>
-
-<td class="noborder" style="width: 10em;">
-HEAD
-<table style="width: 100%;"><tr><td class="centerbold">
-hoge.txt
-<table class="innerbox"><tr><td>
-ab
-</td></tr></table>
-piyo.txt
-<table class="innerbox"><tr><td>
-A
-</td></tr></table>
-</td></tr></table>
-"hoge.txtを更新(S8)"
-</td>
-
-<td class="noborder">←</td>
-
-<td class="noborder" style="width: 10em;">
-HEAD~　
-<table style="width: 100%;"><tr><td class="centerbold">
-hoge.txt
-<table class="innerbox"><tr><td>
-a
-</td></tr></table>
-piyo.txt
-<table class="innerbox"><tr><td>
-A
-</td></tr></table>
-</td></tr></table>
-"piyo.txtを追加(S5)"
-</td>
-
-<td class="noborder">←</td>
-
-<td class="noborder" style="width: 10em;">
-HEAD~2
-<table style="width: 100%;"><tr><td class="centerbold">
-hoge.txt
-<table class="innerbox"><tr><td>
-a
-</td></tr></table>
-</td></tr></table>
-"hoge.txtを追加(S4)"
-</td>
-
-</tr></table>
+<p>
+git reset --hard HEAD~3
+</p>
+<p>
+を実行して過去 3 回分のコミットを削除すると HEAD 、HEAD~1、HEAD~2 が消え、状態が<a href="./page04.html">状態 8</a> まで戻ります。
+</p>
 
 <br>
 <script>PreNext(10,10)</script>
