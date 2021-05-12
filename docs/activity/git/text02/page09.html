@@ -22,24 +22,22 @@
 <p>
 バグがどこで混入したのか調べたい時など、一時的に過去のコミットに戻って作業したい場合があります。
 <br>
-その場合は次の checkout コマンドを使います。
+その場合は次の git switch コマンドを使います。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>一時的に過去のコミットに戻る:</b>
 <pre class="wrap">
-git checkout &lt;コミット&gt;
+git switch -d &lt;コミット&gt;
 
-※ 移動先の HEAD は「detached HEAD」という使い捨ての HEAD となります。それにより本来の HEAD に影響を与えずにいろいろ実験することが可能になっています。
+※ -d オプションは移動後の HEAD を「detached HEAD」という使い捨ての HEAD にするという意味
 </pre>
 </div>
 
 <p>
-ところが、上の checkout コマンドはワーキングツリーとインデックスと HEAD の内容が一致していないと実行することが出来ません。
+ところが、このコマンドはワーキングツリーとインデックスと HEAD の内容が一致していないとエラーが出て実行出来ない事があります。
 <br>
-例えば前のページの状態16ではワーキングツリーと HEAD の hoge.txt の内容が異なっているのでコマンドを実行できません。
-<br>
-そういう場合は次の様に stash 機能を使ってワーキングツリーとインデックスの内容を一時的に保存してから checkout します。
+そういう場合は次の様に stash 機能を使ってワーキングツリーとインデックスの内容を一時的に保存してから git switch を実行します。
 </p>
 
 
@@ -47,15 +45,11 @@ git checkout &lt;コミット&gt;
 <input type="checkbox"><b>一時的に過去のコミットに戻る(stash を使う場合):</b>
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash に一時保存: git stash
+<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash に一時保存する: git stash
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> stash の中を確認: git stash list
+<span class="olradio2"><input type="radio" name="r1"></span> 過去のコミットに戻る: git switch -d &lt;コミット&gt;
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> 対象コミットのハッシュ値を調べる: git log
-<br>
-<span class="olradio2"><input type="radio" name="r1"></span> 過去のコミットに戻る: git checkout &lt;コミット&gt;
-<br>
-<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと過去に戻れたか確認: git log --all --oneline
+<span class="olradio2"><input type="radio" name="r1"></span> 過去に戻れたか確認: git log --all --oneline
 </p>
 </div>
 </div>
@@ -234,31 +228,22 @@ a
 
 <p>
 何らかの作業が終わったら以下の手順で元の状態に戻すことが出来ます。
+<br>
+ただしファイルを更新した場合はエラーが出て戻る事が出来ないので、変更したファイルの内容を<a href="./page07.html">git restore</a>コマンドで復元する必要があります。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>元の状態に復帰する:</b>
 <div class="olradio">
 <p>
-<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD の名前(ブランチ名)を確認する: git log --all --oneline
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> 本来の HEAD (普通は main か master) に戻る: git checkout -f main (または master)
-</p>
-<p>
-※ -f はワーキングツリーとインデックスの更新内容を全部捨てて強制的にチェックアウトするオプション
-</p>
-<p>
-<span class="olradio2"><input type="radio" name="r1"></span> ちゃんと元に戻れたか確認: git log --all --oneline
+<span class="olradio2"><input type="radio" name="r1"></span> (ファイルを更新した場合)  <a href="./page07.html">git restore</a>コマンドで更新したファイルを復元
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> stash の中を確認: git stash list
+<span class="olradio2"><input type="radio" name="r1"></span> 元の HEAD に戻る: git switch -
 <br>
-<span class="olradio2"><input type="radio" name="r1"></span> ワーキングツリーとインデックスの内容を stash から復元: git stash pop --index
-</p>
-<p>
-※ --index はインデックスも復元するという意味のオプションです
-</p>
-<p>
-<span class="olradio2"><input type="radio" name="r1"></span> 復元されたか確認
+<span class="olradio2"><input type="radio" name="r1"></span> (git stash を行った場合)は stash から内容を復元: git stash pop --index
+<br>
+<span class="olradio2"><input type="radio" name="r1"></span> 元に戻れたか確認: git log --all --oneline
 </p>
 </div>
 </div>
