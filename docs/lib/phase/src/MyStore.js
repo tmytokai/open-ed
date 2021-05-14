@@ -5,7 +5,7 @@ const initialState = {
     w: 2.0
 };
 
-const parse = (value, max, min )  => {
+const parse = (value, min, max )  => {
     let result = parseFloat( value );
     if( isNaN( result ) ) result = 0.0;
     if( result > max ) result = max;
@@ -15,12 +15,12 @@ const parse = (value, max, min )  => {
 
 const setPhi = value => ({
     type: "SETPHI", 
-    phi: parse(value, 3.0, -3.0 )
+    phi: parse(value, -3.0, 3.0 )
 });
 
 const setW = value => ({
     type: "SETW", 
-    w: parse(value, 4.0,  1 )
+    w: parse(value, 1.0, 4.0 )
 });
 
 

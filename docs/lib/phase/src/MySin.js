@@ -122,7 +122,7 @@ class MySin extends Component {
 
         for( let t = t_min; t <= t_max; t += 1 ){
             data.labels.push( t );
-            data.datasets[0].data.push( Math.sin( w * t/20 + phi ) );
+            data.datasets[0].data.push( Math.sin( w * t/20.0 + phi ) );
         }
 
         return (

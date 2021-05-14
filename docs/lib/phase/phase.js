@@ -512,7 +512,7 @@ var MySin = /*#__PURE__*/function (_Component) {
 
       for (var t = t_min; t <= t_max; t += 1) {
         data.labels.push(t);
-        data.datasets[0].data.push(Math.sin(w * t / 20 + phi));
+        data.datasets[0].data.push(Math.sin(w * t / 20.0 + phi));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__.Line, {
@@ -564,7 +564,7 @@ var initialState = {
   w: 2.0
 };
 
-var parse = function parse(value, max, min) {
+var parse = function parse(value, min, max) {
   var result = parseFloat(value);
   if (isNaN(result)) result = 0.0;
   if (result > max) result = max;
@@ -575,14 +575,14 @@ var parse = function parse(value, max, min) {
 var setPhi = function setPhi(value) {
   return {
     type: "SETPHI",
-    phi: parse(value, 3.0, -3.0)
+    phi: parse(value, -3.0, 3.0)
   };
 };
 
 var setW = function setW(value) {
   return {
     type: "SETW",
-    w: parse(value, 4.0, 1)
+    w: parse(value, 1.0, 4.0)
   };
 };
 
@@ -54499,7 +54499,7 @@ __webpack_require__.r(__webpack_exports__);
 
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
   store: _MyStore__WEBPACK_IMPORTED_MODULE_4__.store
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_2__.default, null)), document.getElementById('phaseroot'));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_2__.default, null)), document.getElementById(rootdivid));
 })();
 
 /******/ })()
