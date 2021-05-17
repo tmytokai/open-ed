@@ -26,8 +26,8 @@ class MyConsole extends Component {
         return (
               <div>
                 <input type="button" value={ label }  onClick={ this.play } />　
-                <input type="button" value="UP"   onClick={ () => this.props.setFreq( Math.min( freq + 20, playsinopts.freq_max ) ) } />　
-                <input type="button" value="DOWN" onClick={ () => this.props.setFreq( Math.max( freq - 20, playsinopts.freq_min ) ) } />　
+                <input type="button" value="UP"   onClick={ () => this.props.setFreq( freq + 20 ) } />　
+                <input type="button" value="DOWN" onClick={ () => this.props.setFreq( freq - 20 ) } />　
                 <p>
 		周波数 f = { freq } [Hz]
                 </p>

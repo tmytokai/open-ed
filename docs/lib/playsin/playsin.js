@@ -397,13 +397,13 @@ var MyConsole = /*#__PURE__*/function (_Component) {
         type: "button",
         value: "UP",
         onClick: function onClick() {
-          return _this2.props.setFreq(Math.min(freq + 20, playsinopts.freq_max));
+          return _this2.props.setFreq(freq + 20);
         }
       }), "\u3000", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "button",
         value: "DOWN",
         onClick: function onClick() {
-          return _this2.props.setFreq(Math.max(freq - 20, playsinopts.freq_min));
+          return _this2.props.setFreq(freq - 20);
         }
       }), "\u3000", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u5468\u6CE2\u6570 f = ", freq, " [Hz]"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u5468\u671F\u3000 T = ", T, " [\u30DF\u30EA\u79D2]"));
     }
@@ -521,7 +521,7 @@ var MySin = /*#__PURE__*/function (_Component) {
               return _this2.movableAnnotations.leave(ctx);
             },
             annotations: {
-              lineCenter: {
+              lineXaxis: {
                 type: 'line',
                 yMin: 0,
                 yMax: 0,

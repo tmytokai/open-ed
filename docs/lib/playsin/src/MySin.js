@@ -44,7 +44,7 @@ class MySin extends Component {
 
                    annotations: {
 
-                       lineCenter: {
+                       lineXaxis: {
                            type: 'line',
                            yMin: 0,
                            yMax: 0,
