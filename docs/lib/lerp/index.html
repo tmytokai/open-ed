@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="./common.css">
+<title>lerp</title>
+</head>
+<body>
+
+<div id="lerp"></div>
+<script type="text/javascript" >
+const lerpopts = {
+    root : 'lerp',
+    width : 500,
+    height : 500,
+
+    x_min : 0.0,
+    x_max : 100.0,
+    x_step : 10.0,
+
+    y_min : 0.0,
+    y_max : 10.0,
+    y_step: 1.0,
+
+    x1 : 10.0,
+    y1 : 1.0,
+
+    x2 : 90.0,
+    y2 : 9.0,
+
+    x : 50.0,
+
+    table :{
+        labelx:  'x座標',
+        labely:  'y座標',
+        labelp1: '点1',
+        labelp2: '点2',
+    }
+}
+</script>
+<script src="./lerp.js"></script>
+
+</body>
+</html>
