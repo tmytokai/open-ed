@@ -47,6 +47,7 @@ class MyLine extends Component {
         const options = {
             animation: false,
             responsive: false,
+
             plugins: {
                 legend: {
                     display: false
@@ -192,11 +193,13 @@ class MyLine extends Component {
                     }
                 }
             },
+
             elements: {
         	point:{
         	    radius: 0
         	}
             },
+
             scales: {
                 x: {
                     type: 'linear',
@@ -216,6 +219,7 @@ class MyLine extends Component {
                         }
                     }
                 },
+
                 y: {
                     type: 'linear',
 		    min: lerpopts.y_min,
@@ -256,7 +260,7 @@ class MyLine extends Component {
             data.labels.push( lerpopts.x_max );
             data.datasets[0].data.push( y1 + b *(lerpopts.x_max-x1) );
         }
-        else{
+        else{ // vertical line
             data.labels.push( x1 );
             data.datasets[0].data.push( lerpopts.y_min );
             data.labels.push( x1 );
