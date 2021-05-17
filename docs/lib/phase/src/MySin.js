@@ -2,36 +2,48 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Chart, Line } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import MovableAnnotations from '../../modules/MovableAnnotations';
+import { setPhi } from './MyStore';
 
 class MySin extends Component {
 
     constructor(props) {
         super(props);
         Chart.register(annotationPlugin);
+
+	this.movableAnnotations = new MovableAnnotations( this.cbSetValue.bind(this) );
+	this.movableAnnotations.add( 'lineStart' );
+    }
+
+    cbSetValue(id,px,py){
+       const phi = Math.floor( -px * this.props.state.w * 100.0 )/100.0;
+       this.props.setPhi( phi );
     }
 
     render() {
 
-        const t_min = -3*20.0;
-        const t_max = 3*20.0;
-
-	const { phi, w } = this.props.state;
-        const delay = Math.floor(  phi / w * 1000)/1000;
-        const delaypos = 3*20.0 - ( phi / w )*20.0;
+        const { phi, w } = this.props.state;
+        const delay = phi/w;
 
         const options = {
             animation: false,
             responsive: false,
+
             plugins: {
                 legend: {
                     display: false
                 },
-               annotation: {
+
+                annotation: {
+                   enter : ctx => this.movableAnnotations.enter(ctx),
+                   leave : ctx => this.movableAnnotations.leave(ctx),
+
                    annotations: {
-                       line1: {
+
+                       lineYaxis: {
                            type: 'line',
-                           xMin: 3*20.0,
-                           xMax: 3*20.0,
+                           xMin: 0,
+                           xMax: 0,
                            borderColor: 'rgb(0, 0, 0)',
                            borderWidth: 1,
                            borderDash: [10,10],
@@ -39,7 +51,8 @@ class MySin extends Component {
 			       enabled: false
 			   }
                        },
-                       line2: {
+
+                       lineXAxis: {
                            type: 'line',
                            yMin: 0,
                            yMax: 0,
@@ -50,29 +63,39 @@ class MySin extends Component {
 			       enabled: false
 			   }
                        },
-                       line3: {
+
+                       lineStart: {
                            type: 'line',
-                           xMin: delaypos,
-                           xMax: delaypos,
-                           borderColor: 'rgb(255, 99, 132)',
-                           borderWidth: 2,
+                           xMin: -delay,
+                           xMax: -delay,
+                           borderColor: 'rgb(255, 0, 0)',
+                           borderWidth: 1,
 			   label: {
 			       enabled: true,
-			       content: "t ="+(-delay),
+			       content: "Start",
 			       position: "end",
-			       yAdjust: 30
+                               backgroundColor: 'rgba(0, 0, 0, 0.6 )',
+			       yAdjust: 32
 			   }
-                       }
+                      }
                   }
                }
             },
+
             elements: {
         	point:{
         	    radius: 0
         	}
             },
+
             scales: {
                 x: {
+                    type: 'linear',
+		    min: phaseopts.x_min,
+		    max: phaseopts.x_max,
+                    ticks: {
+			stepSize: phaseopts.x_step,
+                    },
                     title: {
                         display: true,
                         text: 't [秒]',
@@ -82,16 +105,16 @@ class MySin extends Component {
                     },
         	    grid: {
         		display: false,
-        	    },
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 0,
-                        callback: (value, index, values) => {
-        		    return index % 20 ? "" : (index-3*20)/20;
-                        }
-                    }
+        	    }
                 },
+
                 y: {
+                    type: 'linear',
+		    min: -1.0,
+		    max:  1.0,
+                    ticks: {
+                          display: false,
+                    },
                     title: {
                         display: true,
                         text: 'f(t)',
@@ -101,12 +124,7 @@ class MySin extends Component {
                     },
         	    grid: {
         		display: false,
-        	    },
-                    ticks: {
-                        callback: (value, index, values) => {
-        		    return "";
-                        }
-                    }
+        	    }
                 },
             }
         };
@@ -120,9 +138,11 @@ class MySin extends Component {
             }]
         };
 
-        for( let t = t_min; t <= t_max; t += 1 ){
+        let t = phaseopts.x_min;
+        for( let i = 0; t < phaseopts.x_max; i++ ){
+            t = phaseopts.x_min + 0.05 * i;
             data.labels.push( t );
-            data.datasets[0].data.push( Math.sin( w * t/20.0 + phi ) );
+            data.datasets[0].data.push( Math.sin( w * t + phi ) );
         }
 
         return (
@@ -136,6 +156,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    setPhi
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(MySin);

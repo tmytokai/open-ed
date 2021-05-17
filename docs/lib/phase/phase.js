@@ -142,6 +142,113 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
+/***/ "../modules/MovableAnnotations.js":
+/*!****************************************!*\
+  !*** ../modules/MovableAnnotations.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//  extension of chartjs-plugin-annotation 
+var MovableAnnotations = /*#__PURE__*/function () {
+  function MovableAnnotations(cb) {
+    _classCallCheck(this, MovableAnnotations);
+
+    this.data = [];
+    this.cb = cb;
+    this.dragging = '';
+    document.addEventListener('mousedown', this.down.bind(this));
+    document.addEventListener('mousemove', this.move.bind(this));
+    document.addEventListener('mouseup', this.up.bind(this));
+  }
+
+  _createClass(MovableAnnotations, [{
+    key: "add",
+    value: function add(id) {
+      this.data[id] = {
+        id: id,
+        chart: null,
+        element: null,
+        offsetX: 0,
+        offsetY: 0
+      };
+    } // connected to options.plugins.annotation.enter
+
+  }, {
+    key: "enter",
+    value: function enter(ctx) {
+      var id = ctx.element.options.id; //        console.log( 'enter: ' + id );
+
+      if (this.data[id]) {
+        this.data[id].entered = true;
+        this.data[id].chart = ctx.chart;
+        this.data[id].element = ctx.element;
+      }
+    } // connected to options.plugins.annotation.leave
+
+  }, {
+    key: "leave",
+    value: function leave(ctx) {
+      var id = ctx.element.options.id; //        console.log( 'leave: ' + id );
+
+      if (this.data[id]) {
+        this.data[id].entered = false;
+      }
+    }
+  }, {
+    key: "down",
+    value: function down(ev) {
+      if (this.dragging != '') return;
+
+      for (var id in this.data) {
+        if (this.data[id].entered) {
+          //                console.log(id);
+          //                console.log('down');
+          //                console.log(this.data[id].element);
+          //                console.log(ev);
+          this.dragging = id;
+          this.data[id].offsetX = this.data[id].element.x - ev.screenX;
+          this.data[id].offsetY = this.data[id].element.y - ev.screenY;
+        }
+      }
+    }
+  }, {
+    key: "move",
+    value: function move(ev) {
+      if (this.dragging != '') {
+        var id = this.dragging;
+        var x = this.data[id].chart.scales.x.getValueForPixel(ev.screenX + this.data[id].offsetX);
+        var y = this.data[id].chart.scales.y.getValueForPixel(ev.screenY + this.data[id].offsetY);
+        this.cb(id, x, y);
+      }
+    }
+  }, {
+    key: "up",
+    value: function up(ev) {
+      if (this.dragging != '') {
+        //            console.log('up');
+        this.dragging = '';
+      }
+    }
+  }]);
+
+  return MovableAnnotations;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MovableAnnotations);
+
+/***/ }),
+
 /***/ "./src/App.js":
 /*!********************!*\
   !*** ./src/App.js ***!
@@ -358,6 +465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/dist/index.modern.js");
 /* harmony import */ var chartjs_plugin_annotation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chartjs-plugin-annotation */ "./node_modules/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.esm.js");
+/* harmony import */ var _modules_MovableAnnotations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../modules/MovableAnnotations */ "../modules/MovableAnnotations.js");
+/* harmony import */ var _MyStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MyStore */ "./src/MyStore.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -385,6 +494,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var MySin = /*#__PURE__*/function (_Component) {
   _inherits(MySin, _Component);
 
@@ -397,19 +508,28 @@ var MySin = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__.Chart.register(chartjs_plugin_annotation__WEBPACK_IMPORTED_MODULE_3__.default);
+    _this.movableAnnotations = new _modules_MovableAnnotations__WEBPACK_IMPORTED_MODULE_4__.default(_this.cbSetValue.bind(_assertThisInitialized(_this)));
+
+    _this.movableAnnotations.add('lineStart');
+
     return _this;
   }
 
   _createClass(MySin, [{
+    key: "cbSetValue",
+    value: function cbSetValue(id, px, py) {
+      var phi = Math.floor(-px * this.props.state.w * 100.0) / 100.0;
+      this.props.setPhi(phi);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var t_min = -3 * 20.0;
-      var t_max = 3 * 20.0;
+      var _this2 = this;
+
       var _this$props$state = this.props.state,
           phi = _this$props$state.phi,
           w = _this$props$state.w;
-      var delay = Math.floor(phi / w * 1000) / 1000;
-      var delaypos = 3 * 20.0 - phi / w * 20.0;
+      var delay = phi / w;
       var options = {
         animation: false,
         responsive: false,
@@ -418,11 +538,17 @@ var MySin = /*#__PURE__*/function (_Component) {
             display: false
           },
           annotation: {
+            enter: function enter(ctx) {
+              return _this2.movableAnnotations.enter(ctx);
+            },
+            leave: function leave(ctx) {
+              return _this2.movableAnnotations.leave(ctx);
+            },
             annotations: {
-              line1: {
+              lineYaxis: {
                 type: 'line',
-                xMin: 3 * 20.0,
-                xMax: 3 * 20.0,
+                xMin: 0,
+                xMax: 0,
                 borderColor: 'rgb(0, 0, 0)',
                 borderWidth: 1,
                 borderDash: [10, 10],
@@ -430,7 +556,7 @@ var MySin = /*#__PURE__*/function (_Component) {
                   enabled: false
                 }
               },
-              line2: {
+              lineXAxis: {
                 type: 'line',
                 yMin: 0,
                 yMax: 0,
@@ -441,17 +567,18 @@ var MySin = /*#__PURE__*/function (_Component) {
                   enabled: false
                 }
               },
-              line3: {
+              lineStart: {
                 type: 'line',
-                xMin: delaypos,
-                xMax: delaypos,
-                borderColor: 'rgb(255, 99, 132)',
-                borderWidth: 2,
+                xMin: -delay,
+                xMax: -delay,
+                borderColor: 'rgb(255, 0, 0)',
+                borderWidth: 1,
                 label: {
                   enabled: true,
-                  content: "t =" + -delay,
+                  content: "Start",
                   position: "end",
-                  yAdjust: 30
+                  backgroundColor: 'rgba(0, 0, 0, 0.6 )',
+                  yAdjust: 32
                 }
               }
             }
@@ -464,6 +591,12 @@ var MySin = /*#__PURE__*/function (_Component) {
         },
         scales: {
           x: {
+            type: 'linear',
+            min: phaseopts.x_min,
+            max: phaseopts.x_max,
+            ticks: {
+              stepSize: phaseopts.x_step
+            },
             title: {
               display: true,
               text: 't [秒]',
@@ -473,16 +606,15 @@ var MySin = /*#__PURE__*/function (_Component) {
             },
             grid: {
               display: false
-            },
-            ticks: {
-              autoSkip: false,
-              maxRotation: 0,
-              callback: function callback(value, index, values) {
-                return index % 20 ? "" : (index - 3 * 20) / 20;
-              }
             }
           },
           y: {
+            type: 'linear',
+            min: -1.0,
+            max: 1.0,
+            ticks: {
+              display: false
+            },
             title: {
               display: true,
               text: 'f(t)',
@@ -492,11 +624,6 @@ var MySin = /*#__PURE__*/function (_Component) {
             },
             grid: {
               display: false
-            },
-            ticks: {
-              callback: function callback(value, index, values) {
-                return "";
-              }
             }
           }
         }
@@ -509,10 +636,12 @@ var MySin = /*#__PURE__*/function (_Component) {
           borderWidth: 1
         }]
       };
+      var t = phaseopts.x_min;
 
-      for (var t = t_min; t <= t_max; t += 1) {
+      for (var i = 0; t < phaseopts.x_max; i++) {
+        t = phaseopts.x_min + 0.05 * i;
         data.labels.push(t);
-        data.datasets[0].data.push(Math.sin(w * t / 20.0 + phi));
+        data.datasets[0].data.push(Math.sin(w * t + phi));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__.Line, {
@@ -533,7 +662,9 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = {};
+var mapDispatchToProps = {
+  setPhi: _MyStore__WEBPACK_IMPORTED_MODULE_5__.setPhi
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(MySin));
 
 /***/ }),
@@ -560,29 +691,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  phi: 0.0,
-  w: 2.0
-};
-
-var parse = function parse(value, min, max) {
-  var result = parseFloat(value);
-  if (isNaN(result)) result = 0.0;
-  if (result > max) result = max;
-  if (result < min) result = min;
-  return result;
+  phi: phaseopts.phi,
+  w: phaseopts.w
 };
 
 var setPhi = function setPhi(value) {
   return {
     type: "SETPHI",
-    phi: parse(value, -3.0, 3.0)
+    phi: Math.max(Math.min(value, phaseopts.phi_max), phaseopts.phi_min)
   };
 };
 
 var setW = function setW(value) {
   return {
     type: "SETW",
-    w: parse(value, 1.0, 4.0)
+    w: Math.max(Math.min(value, phaseopts.w_max), phaseopts.w_min)
   };
 };
 
@@ -54499,7 +54622,7 @@ __webpack_require__.r(__webpack_exports__);
 
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
   store: _MyStore__WEBPACK_IMPORTED_MODULE_4__.store
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_2__.default, null)), document.getElementById(rootdivid));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_2__.default, null)), document.getElementById(phaseopts.root));
 })();
 
 /******/ })()

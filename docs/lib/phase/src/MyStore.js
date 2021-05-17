@@ -1,26 +1,18 @@
 import { createStore } from 'redux';
 
 const initialState = {
-    phi: 0.0,
-    w: 2.0
-};
-
-const parse = (value, min, max )  => {
-    let result = parseFloat( value );
-    if( isNaN( result ) ) result = 0.0;
-    if( result > max ) result = max;
-    if( result < min ) result = min;
-    return result;
+    phi: phaseopts.phi,
+    w: phaseopts.w,
 };
 
 const setPhi = value => ({
     type: "SETPHI", 
-    phi: parse(value, -3.0, 3.0 )
+    phi: Math.max( Math.min( value, phaseopts.phi_max ), phaseopts.phi_min )
 });
 
 const setW = value => ({
     type: "SETW", 
-    w: parse(value, 1.0, 4.0 )
+    w: Math.max( Math.min( value, phaseopts.w_max ), phaseopts.w_min )
 });
 
 
