@@ -96,13 +96,29 @@ $\phi$を$2\pi$で割って$\textrm{T}$ を掛けるだけで秒数が求まる�
 <p>
 では例を使って確かめて見ましょう。
 <br>
-「UP」「DOWN」ボタンを押して初期位相や角周波数を変えた時に波形がどの様に変わるか確認して下さい。
+「UP」「DOWN」ボタンを押したり、スライダを移動したりして初期位相や角周波数を変えた時に波形がどの様に変わるか確認して下さい。
 </p>
 
 <br>
 
 <div id="phase"></div>
-<script type="text/javascript" > let rootdivid = 'phase'; </script>
+<script type="text/javascript" >
+const phaseopts = {
+    root : 'phase',
+
+    x_min : -3.0,
+    x_max :  3.0,
+    x_step : 1.0,
+
+    phi_min : -3.0,
+    phi_max :  3.0,
+    phi : 0.0,
+
+    w_min : 1.0,
+    w_max : 4.0,
+    w : 2.0,
+}
+</script>
 <script src="../../../lib/phase/phase.js"></script>
 
 <br>
