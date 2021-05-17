@@ -126,8 +126,23 @@ f(t) = 2 \cdot \cos( \pi \cdot t )
 <p>
 <input type="checkbox"><b>演習 1-6 (個人):</b> 時間領域アナログサイン波を音として再生し、周波数によってどう音が変化するか確認しましょう。
 </p>
-<div id="root"></div>
-<script src="./js/playsin.js"></script>
+
+<div id="playsin"></div>
+<script type="text/javascript" >
+const playsinopts = {
+    root : 'playsin',
+
+    x_max : 5.0,
+    x_step : 1.0,
+
+    freq_min : 220,
+    freq_max : 880,
+
+    freq : 440,
+}
+</script>
+<script src="../../../lib/playsin/playsin.js"></script>
+
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p6"></span> UP、DOWN ボタンを押すとサイン波の周波数と周期が変化します。
