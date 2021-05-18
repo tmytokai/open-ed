@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../common.css">
+<title>lerp</title>
+</head>
+<body>
+
+<div id="lerp"></div>
+<script type="text/javascript" >
+const lerpopts = {
+    root : 'lerp',
+    width : 500,
+    height : 300,
+
+    x_min : -100.0,
+    x_max : 1100.0,
+    x_step : 100.0,
+
+    y_min : -1.0,
+    y_max : 6.0,
+    y_step: 1.0,
+
+    x1 : 0.0,
+    y1 : 0.0,
+
+    x2 : 1000.0,
+    y2 : 5.0,
+
+    x : 500.0,
+
+    table :{
+        labelx:  'ディジタル値 x',
+        labely:  'アナログ電圧値 y [V]',
+        labelp1: 'x の最小値',
+        labelp2: 'x の最大値',
+    }
+}
+</script>
+<script src="../../lib/lerp/lerp.js"></script>
+
+</body>
+</html>
