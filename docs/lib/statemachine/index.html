@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="./common.css">
+<title>statemachine</title>
+</head>
+<body>
+
+<div id="state"></div>
+<script type="text/javascript" >
+const stateopts = {
+    root : 'state',
+    width : '600',
+    height : '400',
+
+    states: 4,
+
+    nodes : [
+       {id: 0, label: 'S0\n\nLED1:OFF\nLED2:OFF',   x: 0,   y: 0,   margin: 20 },
+       {id: 1, label: 'S1\n\nLED1:ON\nLED2:ON',     x: 300, y: 0,   margin: 20 },
+       {id: 2, label: 'S2\n\nLED1:チカ\nLED2:OFF', x: 300, y: 200, margin: 20 },
+       {id: 3, label: 'S3\n\nLED1:OFF\nLED2:ON',    x: 0,   y: 200, margin: 20 },
+    
+       {id: 4, label: 'スイッチ ON',  shape: "text", fixed: true, x: 150, y: -15 },
+       {id: 5, label: 'スイッチ OFF', shape: "text", fixed: true, x: 375, y: 100 },
+       {id: 6, label: 'スイッチ ON',  shape: "text", fixed: true, x: 150, y: 215 },
+       {id: 7, label: 'スイッチ OFF', shape: "text", fixed: true, x: -75, y: 100 },
+    
+       {id: 8, label: 'LED1', x: -100, y: -100 },
+       {id: 9, label: 'LED2', x: -40,  y: -100 },
+    ],
+
+    edges : [
+      { from: 0, to: 1, arrows: 'to' },
+      { from: 1, to: 2, arrows: 'to' },
+      { from: 2, to: 3, arrows: 'to' },
+      { from: 3, to: 0, arrows: 'to' },
+    ],
+
+    background : [
+        [ '#FFFF00', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFF00', '#FFFFFF', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FFFF00', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFF00' ],
+    
+        [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
+    
+        [ '#FFFFFF', '#FF0000', '#FF0000', '#FFFFFF' ],
+        [ '#FFFFFF', '#FF0000', '#FFFFFF', '#FF0000' ],
+    ],
+
+    blink : [
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+        [ false, false, false, false ],
+
+        [ false, false, true,  false ],
+        [ false, false, false, false ],
+    ],
+
+    blinkspeed: 200,
+
+    tr : [
+        {
+            td1 : 'S0<br/><br/>LED1:OFF<br/>LED2:OFF',
+            td2 : 'S1',
+            td3 : '―',
+        },
+        {
+            td1 : 'S1<br/><br/>LED1:ON<br/>LED2:ON',
+            td2 : '―',
+            td3 : 'S2',
+         },
+        {
+            td1 : 'S2<br/><br/>LED1:チカ<br/>LED2:OFF',
+            td2 : 'S3',
+            td3 : '―',
+         },
+        {
+            td1 : 'S3<br/><br/>LED1:OFF<br/>LED2:ON',
+            td2 : '―',
+            td3 : 'S0',
+         },
+    ],
+}
+</script>
+<script src="./state.js"></script>
+
+</body>
+</html>
