@@ -14,12 +14,13 @@ export default class App extends Component {
             <div>
               <table className='stateframe'><tbody><tr>
               <td>
-                <MyTable />
+                { stateopts.showtable ? <MyTable /> : '' }
               </td>
               <td>
                 <MySwitch />
                 <MyGraph />
               </td>
+
               </tr></tbody></table>
             </div>
         );

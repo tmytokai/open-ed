@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../common.css">
+<title>スイッチ (演習 4-1)</title>
+</head>
+<body>
+
+<div id="state"></div>
+<script type="text/javascript" >
+const stateopts = {
+    root : 'state',
+    width : '140px',
+    height : '100px',
+
+    states: 2,
+
+    nodes : [
+       {id: 0, label: 'LED', x: 0, y: -100 },
+    ],
+
+    edges : [
+    ],
+
+    background : [
+        [ '#FFFFFF', '#FF0000' ],
+    ],
+
+    blink : [
+        [ false, true ],
+    ],
+
+    blinkspeed: 200,
+
+    showtable: false,
+
+    tr : [
+    ],
+}
+</script>
+<script src="../../lib/statemachine/state.js"></script>
+
+</body>
+</html>

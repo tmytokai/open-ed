@@ -64,8 +64,16 @@ class MyGraph extends Component {
         };
 
         const options = {
+
           width:  stateopts.width,
           height: stateopts.height,
+
+          interaction:{
+            dragNodes: false,
+            dragView: false,
+            zoomView: false,
+          },
+
           physics:{
             enabled: false
           },

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../common.css">
-<title>状態遷移 1</title>
+<title>状態遷移 2 (演習4-3)</title>
 </head>
 <body>
 
@@ -11,23 +11,24 @@
 <script type="text/javascript" >
 const stateopts = {
     root : 'state',
-    width : '600',
-    height : '400',
+    width : '550px',
+    height : '400px',
 
     states: 4,
 
     nodes : [
-       {id: 0, label: 'S0\n\nLED:OFF',   x: 0,   y: 0,   margin: 20 },
-       {id: 1, label: 'S1\n\nLED:ON',     x: 300, y: 0,   margin: 20 },
-       {id: 2, label: 'S2\n\nLED:チカ', x: 300, y: 200, margin: 20 },
-       {id: 3, label: 'S3\n\nLED:OFF',    x: 0,   y: 200, margin: 20 },
+       {id: 0, label: '？', x: 0,   y: 0,   margin: 40 },
+       {id: 1, label: '？', x: 300, y: 0,   margin: 40 },
+       {id: 2, label: '？', x: 300, y: 200, margin: 40 },
+       {id: 3, label: '？', x: 0,   y: 200, margin: 40 },
     
-       {id: 4, label: 'スイッチ ON',  shape: "text", fixed: true, x: 150, y: -15 },
-       {id: 5, label: 'スイッチ OFF', shape: "text", fixed: true, x: 375, y: 100 },
-       {id: 6, label: 'スイッチ ON',  shape: "text", fixed: true, x: 150, y: 215 },
-       {id: 7, label: 'スイッチ OFF', shape: "text", fixed: true, x: -75, y: 100 },
+       {id: 4, label: '？',  shape: "text", fixed: true, x: 150, y: -15 },
+       {id: 5, label: '？', shape: "text", fixed: true, x: 375, y: 100 },
+       {id: 6, label: '？',  shape: "text", fixed: true, x: 150, y: 215 },
+       {id: 7, label: '？', shape: "text", fixed: true, x: -75, y: 100 },
     
-       {id: 8, label: 'LED', x: -100, y: -100 },
+       {id: 8, label: 'LED1', x: -100, y: -100 },
+       {id: 9, label: 'LED2', x:  -30, y: -100 },
     ],
 
     edges : [
@@ -49,6 +50,7 @@ const stateopts = {
         [ '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF' ],
     
         [ '#FFFFFF', '#FF0000', '#FF0000', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FF0000', '#FF0000' ],
     ],
 
     blink : [
@@ -63,30 +65,33 @@ const stateopts = {
         [ false, false, false, false ],
 
         [ false, false, true,  false ],
+        [ false, false, false, true  ],
     ],
 
     blinkspeed: 200,
 
+    showtable: true,
+
     tr : [
         {
-            td1 : 'S0<br/><br/>LED:OFF',
-            td2 : 'S1',
-            td3 : '―',
+            td1 : 'S0<br/><br/>LED1:？<br/>LED2:？',
+            td2 : '？',
+            td3 : '？',
         },
         {
-            td1 : 'S1<br/><br/>LED:ON',
-            td2 : '―',
-            td3 : 'S2',
+            td1 : 'S1<br/><br/>LED1:？<br/>LED2:？',
+            td2 : '？',
+            td3 : '？',
          },
         {
-            td1 : 'S2<br/><br/>LED:チカ',
-            td2 : 'S3',
-            td3 : '―',
+            td1 : 'S2<br/><br/>LED1:？<br/>LED2:？',
+            td2 : '？',
+            td3 : '？',
          },
         {
-            td1 : 'S3<br/><br/>LED:OFF',
-            td2 : '―',
-            td3 : 'S0',
+            td1 : 'S3<br/><br/>LED1:？<br/>LED2:？',
+            td2 : '？',
+            td3 : '？',
          },
     ],
 }

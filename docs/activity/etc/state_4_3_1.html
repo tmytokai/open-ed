@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../common.css">
+<title>状態遷移 2 (演習4-3)</title>
+</head>
+<body>
+
+<div id="state"></div>
+<script type="text/javascript" >
+const stateopts = {
+    root : 'state',
+    width : '140px',
+    height : '100px',
+
+    states: 4,
+
+    nodes : [
+       {id: 0, label: 'LED1', x: -100, y: -100 },
+       {id: 1, label: 'LED2', x:  -30, y: -100 },
+    ],
+
+    edges : [
+    ],
+
+    background : [
+        [ '#FFFFFF', '#FF0000', '#FF0000', '#FFFFFF' ],
+        [ '#FFFFFF', '#FFFFFF', '#FF0000', '#FF0000' ],
+    ],
+
+    blink : [
+        [ false, false, true,  false ],
+        [ false, false, false, true  ],
+    ],
+
+    blinkspeed: 200,
+
+    showtable: false,
+
+    tr : [
+    ],
+}
+</script>
+<script src="../../lib/statemachine/state.js"></script>
+
+</body>
+</html>
