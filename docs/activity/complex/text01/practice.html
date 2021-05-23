@@ -20,93 +20,95 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 100 分
-</p>
-
 <br>
 <h2><a href="./page01.html">1. 複素数の基礎</a></h2>
-
 <h2><a href="./page02.html">2. 複素平面の基礎</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 1-1 (チーム、5分):</b> 虚数の概念自体は紀元前〜紀元直後位からあったらしいのですが、「虚数(imaginary number)」という用語を始めて使った人の名前と大体の時期を調べてみましょう。
+<input type="checkbox"><b>演習 1-1 (チーム):</b> 虚数や複素数に対して自分はどの様な印象を持っているか書いてみましょう。
+
+
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> チームみんなで手分けして Web 上等で調べ、指定場所に「名前」と「時期」を書いて下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「印象」を一人1件書いて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-2 (チーム、5分):</b> 複素数がよく利用されている工学分野(最低2件)と利用される理由を調べてみましょう。
+<input type="checkbox"><b>演習 1-2 (チーム):</b> 複素数がよく利用されている工学分野を調べてみましょう。
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> チームみんなで手分けして Web 上等で調べ、指定場所に「工学分野(最低2件)」と「理由」を書いて下さい。 
+<span class="olradio"><input type="radio" name="p2"></span> チームみんなで手分けして Web 上等で調べ、指定場所に「複素数がよく利用されている工学分野」を1人1件書いて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-3 (個人、10分):</b> 5 つの複素数
+<input type="checkbox"><b>演習 1-3 (個人):</b> 以下の 5 つの複素数
 </p>
-<p>
-$z_1 = 0$
-<br>
-$z_2 = -2$
-<br>
-$z_3 = j$
-<br>
-$z_4 = \sqrt{5} - j\cdot 2$
-<br>
-$z_5 = -1 + j\cdot \sqrt{3}$
-</p>
+
+\begin{align*}
+z_1 &= 0 \\
+z_2 &= -2.5 \\
+z_3 &= j \\
+z_4 &= \sqrt{5} - j\cdot 2 \\
+z_5 &= -1 + j\cdot \sqrt{3} 
+\end{align*}
 <p>
 の複素平面上での位置を調べてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> Jupyter Notebook を起動し、「CMP_1_3」というノートブックを作ります
+<span class="olradio"><input type="radio" name="p3"></span> Jupyter Notebook を起動して<a href="./src/cmp.py">モジュールファイル(cmp.py)</a>をアップロードします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/CMP.txt">テンプレート</a>をノートブックにコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> 新規ノートブックを作って「CMP_1_3」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> コードの指示に従って $z_1$、$z_2$、 $z_3$ 、$z_4$、$z_5$ を複素平面上に表示します。
+<span class="olradio"><input type="radio" name="p3"></span> 一番上のセルに<a href="./src/CMP_1_3.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして画像を保存して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コード内の指示に従って $z_1$、$z_2$、 $z_3$ 、$z_4$、$z_5$ を複素平面上に表示します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ここから〜ここまでの間にある演習1-3のソース」「画像」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをしてて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人、15分):</b> 演習 1-3 で出てきた各複素数の絶対値を求めてみましょう。
+<input type="checkbox"><b>演習 1-4 (個人):</b> 演習 1-3 で出てきた各複素数の絶対値を求めてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> ノートブック「CMP_1_3」を「CMP_1_4」という名前でコピーして下さい
+<span class="olradio"><input type="radio" name="p4"></span> 新規ノートブックを作って「CMP_1_4」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コードの指示に従って絶対値を表示します。
+<span class="olradio"><input type="radio" name="p4"></span> 一番上のセルに<a href="./src/CMP_1_4.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして画像を保存して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> コード内の指示に従って演習 1-3 の $z_1$、$z_2$、 $z_3$ 、$z_4$、$z_5$ の絶対値を求めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ここから〜ここまでの間にある演習1-4のソース」「画像」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人、15分):</b> $z_3$、$z_4$、$z_5$ の複素共役 $z_3^*$、$z_4^*$、$z_5^*$ の複素平面上での位置とその絶対値を求めてみましょう。
+<input type="checkbox"><b>演習 1-5 (個人):</b> 演習 1-3 で出てきた $z_3$、$z_4$、$z_5$ の複素共役 $z_3^*$、$z_4^*$、$z_5^*$ の複素平面上での位置を求めてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> ノートブック「CMP_1_4」を「CMP_1_5」という名前でコピーして下さい
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 新規ノートブックを作って「CMP_1_5」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> コードの指示に従って複素共役を表示します。
+<span class="olradio"><input type="radio" name="p5"></span> 一番上のセルに<a href="./src/CMP_1_5.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして画像を保存して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> コード内の指示に従って $z_3^*$ 、$z_4^*$、$z_5^*$ を複素平面上に表示します。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ここから〜ここまでの間にある演習1-5のソース」「画像ファイル」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -118,44 +120,46 @@ $z_5 = -1 + j\cdot \sqrt{3}$
 <h2><a href="./page05.html">5. 極形式と直交形式の相互変換</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 1-6 (個人、15分):</b> これまでに出てきた各複素数の偏角を求めてみましょう。
+<input type="checkbox"><b>演習 1-6 (個人):</b> これまでに出てきた各複素数の偏角を求めてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> ノートブック「CMP_1_5」を「CMP_1_6」という名前でコピーして下さい
+<span class="olradio"><input type="radio" name="p6"></span> 新規ノートブックを作って「CMP_1_6」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> コードの指示に従って偏角を表示します。
+<span class="olradio"><input type="radio" name="p6"></span> 一番上のセルに<a href="./src/CMP_1_6.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをして画像を保存して下さい。
+<span class="olradio"><input type="radio" name="p6"></span> コード内の指示に従って演習 1-3 の $z_1$、$z_2$、 $z_3$ 、$z_4$、$z_5$ の偏角を求めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ここから〜ここまでの間にある演習1-6のソース」「画像ファイル」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
 </p>
 </div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習 1-7 (個人):</b> 極形式で表されている 2 つの複素数
+</p>
 
-<br>
+\begin{align*}
+z_6 &= 1.5 \cdot \textrm{e}^{\{j \cdot \pi/6 \}} \\
+z_7 &= 2 \cdot \textrm{e}^{\{-j \cdot \pi/3 \}}
+\end{align*}
+
 <p>
-<input type="checkbox"><b>演習 1-7 (個人、15分):</b> 極形式で表されている 2 つの複素数
-</p>
-<p>
-$z_6 = 1.5 \cdot \textrm{e}^{\{j \cdot \pi/6 \}}$
-<br>
-$z_7 = 2 \cdot \textrm{e}^{\{-j \cdot \pi/3 \}}$
-</p>
-<p>
-を表示してみましょう。
+を直交形式に変換して表示してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p7"></span> ノートブック「CMP_1_6」を「CMP_1_7」という名前でコピーして下さい
+<span class="olradio"><input type="radio" name="p7"></span> 新規ノートブックを作って「CMP_1_7」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 見づらくなってきたので、コードの指示に従ってこれまで表示してきた複素数の表示を消します。
+<span class="olradio"><input type="radio" name="p7"></span> 一番上のセルに<a href="./src/CMP_1_7.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> コードの指示に従って$z_6$、$z_7$ を表示します。
+<span class="olradio"><input type="radio" name="p7"></span> コード内の指示に従って $z_6$ 、$z_7$ を複素平面上に表示します。 
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして画像を保存して下さい。 
+<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ここから〜ここまでの間にある演習1-7のソース」「画像ファイル」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -163,24 +167,63 @@ $z_7 = 2 \cdot \textrm{e}^{\{-j \cdot \pi/3 \}}$
 <br>
 <h2><a href="./page06.html">6. 四則演算</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 1-8 (個人、20分):</b> $z_6$ と $z_7$ の足し算と掛け算を求めてみましょう。
+<input type="checkbox"><b>演習 1-8 (個人):</b> 演習 1-7 で出てきた $z_6$ と $z_7$ の足し算
 </p>
+
+\[
+z_8 = z_6 + z_7
+\]
+
+<p>
+を求めてみましょう。
+</p>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> ノートブック「CMP_1_7」を「CMP_1_8」という名前でコピーして下さい
+<span class="olradio"><input type="radio" name="p8"></span> 新規ノートブックを作って「CMP_1_8」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> はじめにコードの指示に従って$z_6+z_7$ を表示します。
+<span class="olradio"><input type="radio" name="p8"></span> 一番上のセルに<a href="./src/CMP_1_8.txt">テンプレート</a>の内容をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 次にコードの指示に従って$z_6 \cdot z_7$ を表示します。
+<span class="olradio"><input type="radio" name="p8"></span> コード内の指示に従って $z_8$ を複素平面上に表示します。 
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをして画像を保存して下さい。 
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「ここから〜ここまでの間にある演習1-8のソース」「画像ファイル」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
+</p>
 </p>
 </div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習 1-9 (個人):</b> 演習 1-7 で出てきた $z_6$ と $z_7$ の掛け算
+</p>
 
+\[
+z_9 = z_6 \cdot z_7
+\]
+
+<p>
+を求めてみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> 新規ノートブックを作って「CMP_1_9」に名前を変更します。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 一番上のセルに<a href="./src/CMP_1_9.txt">テンプレート</a>の内容をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> コード内の指示に従って $z_9$ を複素平面上に表示します。 
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。  
+</p>
+</p>
+</div>
+
+<br>
 <script>PreNext(7,6)</script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+%matplotlib inline
+import cmp
+import math
+cmp.init(True)
+########### ここから↑は消さないで下さい
+
+# 以下のz3〜z5を演習1-3でセットした値に置き換えて下さい
+
+z3 = None
+z4 = None
+z5 = None
+
+# 各zの複素共役をテキストに従って求めて下さい
+
+z3asterisk = None
+z4asterisk = None
+z5asterisk = None
+
+
+########### ここから↓は消さないで下さい
+cmp.draw((
+    ('z3',z3),
+    ('z4',z4),
+    ('z5',z5),
+    ('z3*',z3asterisk),
+    ('z4*',z4asterisk),
+    ('z5*',z5asterisk),
+))

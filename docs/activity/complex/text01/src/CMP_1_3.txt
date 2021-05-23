@@ -1,0 +1,23 @@
+%matplotlib inline
+import cmp
+import math
+cmp.init(True)
+########### ここから↑は消さないで下さい
+
+# python では z = a + b*1j により複素数の変数を作れます
+# ルートは math.sqrt 関数を使って下さい
+
+z1 = None
+z2 = None
+z3 = None
+z4 = None
+z5 = None
+
+########### ここから↓は消さないで下さい
+cmp.draw((
+    ('z1',z1),
+    ('z2',z2),
+    ('z3',z3),
+    ('z4',z4),
+    ('z5',z5),
+))
