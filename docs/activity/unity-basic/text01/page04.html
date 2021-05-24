@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. ゲームオブジェクトの移動</title>
+<title>4. Unityの座標系</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Unity 入門</a></li>
-<li>学習項目: [1] Unity の基本(2D編)</li>
+<li>学習項目: [1] Unity の基本</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,140 +20,153 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次にゲームオブジェクトを動かしてみたいと思います。
+前のページで特に説明も無くゲームオブジェクトの座標設定や回転を行いましたがもう少し詳しく説明します。
 </p>
 
-<p>
-ゲームオブジェクトを動かす方法は色々ありますが、今回は<b>物理演算エンジン</b>を使って動かしてみたいと思います。
 <br>
-そのためにはまず、以下の手順で「<b>Rigidbody 2D コンポーネント</b>」をゲームオブジェクトにアタッチします(※)。
+<h3>
+1. 左手系によるゲームオブジェクトの座標の設定
+</h3>
 
 <p>
-※ コンポーネント(Component)は各オブジェクトの振る舞いを定めるメソッドやプロパティ(＝パラメータ)のグループのことです。
-<br>
-コンポーネントをゲームオブジェクトにくっつけることをアタッチと言います。
-<br>
-例えば Transform コンポーネントはゲームオブジェクトの位置やサイズ、向きを定めるコンポーネントで、Sprite Renderer コンポーネントは画像を描画するコンポーネントです。
-<br>
-Rigidbody 2D コンポーネントはゲームオブジェクトの速度や重さ、重力などを定めるコンポーネントです。
+まず大前提として Unity は図1に示している「<b>左手系</b>」と呼ばれる座標系を使っています。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>Rigidbody 2D コンポーネントのアタッチ方法:</b>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> Hierarchy ウィンドウで対象のゲームオブジェクトを選択する。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Inspector ウィンドウの Add Component ボタンを押してメニューを表示する。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Physics 2D → Rigidbody 2D を選択すると Inspector ウィンドウに Rigidbody 2D の項目が現れる。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 重力が必要ない場合は Rigidbody 2D の Gravity Scale プロパティの値を 0 にする。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 他のゲームオブジェクトと衝突した時に回転させたくない場合は、Constraints → Freeze Rotation → Z プロパティをチェックする。
-</p>
-</div>
-</div>
 
-<p>
-ただし Rigidbody 2D をアタッチしただけでは任意の方向にオブジェクトを動かす事は出来ませんので、次は「<b>Script コンポーネント</b>」もアタッチします。
-</p>
-
-<p>
-なおScript コンポーネントの実体は C# 又は JavaScript で書かれたスクリプトファイルです。
 <br>
-今回は C# の方を使います。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>Script コンポーネントのアタッチ方法:</b>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダで右クリックし、Create → C# Script を選ぶと C# のスクリプトファイルが新規作成されるので、適切なファイル名に変更する。
+<b>図1. 左手系の座標系</b>
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hierarchy ウィンドウでスクリプトをアタッチしたいオブジェクトを選択する。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中にある、先ほど作成したスクリプトファイルを Inspector ウィンドウの上に DnD するとスクリプトがアタッチされる。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Assets フォルダの中のスクリプトファイルをダブルクリックするとエディタが起動する。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> スクリプト内に Start、Update という<a href="../../oop-basic/text01/page05.html">メソッド</a>が含まれている事を確認する(※)。
-</p>
-<p>
-※ Start メソッドはゲームオブジェクトが表示される前に一度だけ呼び出される初期化用メソッドで、Update は描画フレームごとに繰り返し呼び出されるメソッドです。
-</p>
-</div>
-</div>
-
-
-<p>
-では準備が済んだので実際にゲームオブジェクトを動かしてみましょう。
-</p>
-
-<p>
-ゲームオブジェクトを動かすためには Rigidbody 2D コンポーネント の <b>velocity (ベロシティ)</b> プロパティに値をセットします。
-<br>
-この velocity は日本語では「速度」を意味する 2 次元ベクトルで、更に「velocity.x」と「velocity.y」というプロパティに分かれます。
-<br>
-velocity.x は横方向の速度、velocity.y は縦方向の速度であり、それらに指定した方向と速さでゲームオブジェクトが動きます(図1)。 
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図1.  Rigidbody 2D の velociy で指定した方角に指定した速さでゲームオブジェクトが動く</b>
-<p>
-</p>
 <img src="./img/page04-fig1.png" alt="">
-</div>
 
 <p>
-ところがこの velocity の値は Inspector ウィンドウから変更出来ません。
+図1の各矢印が x、y、z 軸を表しますので、つまり
+</p>
+
+<ul>
+<li>左手の親指 → x 軸</li>
+<li>左手の人差指 → y 軸</li>
+<li>左手の中指 → z 軸</li>
+</ul>
+
+<p>
+に対応しています。
 <br>
-従って以下のソース 1 に示したコードをスクリプト内の Start または Update メソッドの中に書いて velocity の値をセットする必要があります。
+なお各軸の矢印の方向(＝左手の各指が向いている方向)がプラス側の方向になります。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>ソース 1: ゲームオブジェクトを移動させるスクリプト</b>
-<pre class="wrap">
-var x = 横方向の移動量;
-var y = 縦方向の移動量;
-GetComponent&lt;Rigidbody2D&gt;().velocity = new Vector2( x, y );
-</pre>
-</div>
-
 <p>
-なお、障害物にぶつかったり、摩擦が無い限りは一度 velocity を設定すればその方向に動き続けます。
+さてプロジェクトを新規作成した直後の状態では Game ビューの横方向が x 軸、縦方向が y 軸、奥行きが z 軸となっていますので、例えばあるゲームオブジェクトの Position の x 値を増やすとそのゲームオブジェクトの x 座標値が大きくなりますので右方向に移動します。
 <br>
-また重力が 0 で無い時は重力の影響も受けます。
+逆に x 値を減らすと左方向にゲームオブジェクトが移動します。
+<br>
+y、z軸方向も同じ様に動きます。
 </p>
-
 <p>
-例えばあるオブジェクトを(重力が 0 なら) 斜め右上 45 度の方向に動かしたい場合はソース 2 の様に Start または Update メソッド内に書きます。 
+では実際に「HAKO」を使って座標移動を確認してみましょう。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 2: ゲームオブジェクトを斜め右上  45 度の方向に動かす</b>
-<pre class="wrap">
-var x = 1.0f;  
-var y = 1.0f;
-GetComponent&lt;Rigidbody2D&gt;().velocity = new Vector2( x, y );
-</pre>
-</div>
 
-<p>
-さてコーディングが済んだら以下の手順でプログラムを実行してオブジェクトを動かしてみましょう。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>プログラム実行方法:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> スクリプトを上書き保存して Unity エディタの画面に戻ると自動でコンパイルされる。エラーが出たら修正する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで「HAKO」をクリックして インスペクターに情報を表示する。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 上部にある<img src="./img/button3.png" alt="">のうち一番左の再生ボタンを押すと GAME ビューに画面が切り替わってプログラムが実行される。
+<span class="olradio"><input type="radio" name="p1"></span> インスペクターの Transform の Position の x の値を増やしたり減らしたりして理論通りに移動することを確かめる。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> もう一度再生ボタンを押すと停止する。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Position の y の値を増やしたり減らしたりして理論通りに移動することを確かめる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Position の z の値を増やしたり減らしたりして理論通りに移動することを確かめる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 確認が終わったら (x,y,z) の値を (1,2,0) に戻す。
 </p>
 </div>
+
+</div>
+
+
+<br>
+<h3>
+2. 左ネジの法則によるゲームオブジェクトの回転
+</h3>
+
+<p>
+Unity は「左ねじの法則」と呼ばれる規則に従ってゲームオブジェクトの回転を行います(図2)。
+</p>
+
+<br>
+<b>図2. 左ねじの法則</b>
+<br>
+<img src="./img/page04-fig2.png" alt="">
+
+<p>
+各回転軸の矢印の方向に向かって左ねじを締める向き、つまり半時計回りがプラス回転になります。
+</p>
+
+<p>
+なおオブジェクトの座標指定の時は x、y、z 座標の値をセットする順番は自由でしたが、回転の場合は角度をセットする順番によってオブジェクトの向きが変わります。
+<br>
+Unity の場合は z 軸 → x 軸 → y 軸の順番に値がセット(回転)されます。
+</p>
+
+<p>
+では実際に「HAKO」を使って回転を確認してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> まずヒエラルキーで「HAKO」をクリックし、Transform の rotation の (x,y,z) の値をそれぞれ (0,0,0) にリセットする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> まず rotation の z の値を増やしたり減らしたりして理論通りに z 軸回りで回転することを確かめる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 次は rotation の x の値を増やしたり減らしたりして理論通りに x 軸回りで回転することを確かめる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 最後に rotation の y の値を増やしたり減らしたりして理論通りに y 軸回りで回転することを確かめる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 確認が終わったら「HAKO」の Transform の rotation の (x,y,z) の値を (45,45,0) に戻す。
+</p>
+</div>
+
+</div>
+
+<br>
+<h3>
+3. ジンバルロックに注意する
+</h3>
+
+<p>
+回転の練習をしていて気が付いたかもしれませんが、x 軸の角度を 90 度、または -90 度にすると y 軸と z 軸の値を変えても同じ様な回転しかしなくなります。
+<br>
+この現象のことを「<a href="https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%B3%E3%83%90%E3%83%AB#%E3%82%B8%E3%83%B3%E3%83%90%E3%83%AB%E3%83%AD%E3%83%83%E3%82%AF">ジンバルロック</a>」と言います。
+</p>
+
+<p>
+具体的には<a href="https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0">ヨー回転</a>が出来なくなってロール回転しか出来なくなります(飛行機で言うと一旦垂直上昇か垂直落下状態になると姿勢制御出来なくなるという状況です)。
+</p>
+
+<p>
+ジンバルロックを防ぐためにはクォータニオンというテクニックを使って回転軸を指定する必要があるのですが、これについては後のページで説明します。
+</p>
+
+<p>
+では実際に「HAKO」を使ってジンバルロックを確認してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで「HAKO」をクリックして インスペクターに情報を表示する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> インスペクターの Transform の rotation の (x,y,z) の値をそれぞれ (90,0,0) にする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> rotation の y, z の値を増やしたり減らしたりしても同じ方向(ロール回転)にしか回転しないことを確認する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 確認が終わったら (x,y,z) の値を (45,45,0) に戻す。
+</p>
+</div>
+
 </div>
 
 

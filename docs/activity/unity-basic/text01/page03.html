@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>3. ゲームオブジェクトの作成と配置</title>
+<title>3. ゲームオブジェクトの作成</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Unity 入門</a></li>
-<li>学習項目: [1] Unity の基本(2D編)</li>
+<li>学習項目: [1] Unity の基本</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,68 +20,170 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-さて背景の設置とカメラの調整が済んだので、次はキャラクターなどのゲームオブジェクトを作成して画面に配置してみましょう。
-</p>
-
-<p>
-Unity は<a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%97%E3%83%99%E3%83%BC%E3%82%B9">プロトタイプベース</a>の開発スタイルなので、まずベースとなる空のゲームオブジェクトを作成してから必要な機能をその都度組み込んでいくという手法で開発を進めて行きます。
+次はゲームオブジェクトを作成してみましょう。
 </p>
 
 <br>
-<h3 id="gobj">
-・ゲームオブジェクトの作成
+<h3>
+1. ゲームオブジェクトの作成
 </h3>
 
 <p>
-キャラクターのゲームオブジェクトの作り方は<a href="./page02.html">前ページ</a>の背景画像の設置とほとんど同じ手順になります。
+ゲームビューに表示される人や車、建物などのキャラクターのことを「ゲームオブジェクト」と呼びます。
+<br>
+<a href="https://assetstore.unity.com/">アセットストア</a>や Web などから3Dモデルをダウンロードしてゲームオブジェクトとして使っても良いのですが、今回は単純に立方体(Cube)と球(Sphere)を画面上に配置してみましょう
+</p>
+
+<p>
+まず立方体です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>キャラクターのゲームオブジェクト作成方法:</b>
+
 <div class="olradio"> 
 <p>
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> キャラクター画像を用意する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして「3D Object」→「Cube」を選択すると画面上に立方体のゲームオブジェクトが配置される
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Assets フォルダに画像を DnD すると画像が Asset として登録される。
+<span class="olradio"><input type="radio" name="p1"></span> 座標を変更する。インスペクターの Transform の Position の (x,y,z) の値(単位はメートル)を変えると指定した座標にゲームオブジェクトが移動する。今回は (x,y,z) をそれぞれ (1,2,0) にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 登録した画像をさらに Assets フォルダ から Scene ビューに DnD するとその画像がゲームオブジェクト化され、Hierarchy ウィンドウにオブジェクト名、Inspector ウィンドウにオブジェクトの情報が表示される。
+<span class="olradio"><input type="radio" name="p1"></span> 回転方向を変更する。インスペクターの Transform の rotation の (x,y,z) の値(単位は度)を変えると指定した軸を中心にゲームオブジェクトが回転する。今回は (x,y,z) をそれぞれ (45,45,0) にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (サイズを調整したい場合は) Inspector ウィンドウの Transform の Scale の x と y の値を変えるか、またはUnity エディタの左上にある<img src="./img/button1.png" alt="">のうち右から 2 番目のボタンをクリックしてからマウスで調節する。
+<span class="olradio"><input type="radio" name="p1"></span> サイズを変更する。インスペクターの Transform の Scale の (x,y,z)の値(単位はメートル)を変えると指定した値にゲームオブジェクトの大きさが変わる。今回は (x,y,z) をそれぞれ (2,1,0.5) にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (位置を調整したい場合は) Inspector ウィンドウの Transform の Position の x と y の値を変えるか、またはUnity エディタの左上にある<img src="./img/button1.png" alt="">のうち左から 2 番目のボタンをクリックしてからマウスでドラッグする。
 </p>
 </div>
+
+</div>
+
+<p>
+次に球です。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして「3D Object」→「Sphere」を選択すると画面上に立方体のゲームオブジェクトが配置される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 座標を変更する。インスペクターの Transform の Position の (x,y,z) の値をそれぞれ (-1,-2,0) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 回転方向を変更する。インスペクターの Transform の rotation の (x,y,z) の値をそれぞれ (0,-45,45) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> サイズを変更する。インスペクターの Transform の Scale の (x,y,z)の値をそれぞれ (2, 1, 1) にする
+<br>
+</p>
+</div>
+
 </div>
 
 <br>
 <h3>
-・ゲームオブジェクトのコピー
+2. ゲームオブジェクト名の選択とインスペクター表示
 </h3>
 
 <p>
-Hierarchy ウィンドウでコピーしたいゲームオブジェクトを選択してから Ctrl + c → Ctrl + v で出来ます。
+ヒエラルキーでゲームオブジェクトをクリックするとそのゲームオブジェクトが選択され、インスペクターに情報が表示されます。
 <br>
-ただしコピー直後は位置が重なっていますので適宜位置を移動して下さい。
+以下の手順で立方体と球を交互に選択してみましょう
 </p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「Cube」をクリックしてインスペクターに「Cube」の情報が表示されることを確認する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「Sphere」ををクリックしてインスペクターに「Sphere」の情報が表示されることを確認する。
+<br>
+</p>
+</div>
+
+</div>
+
 
 <br>
 <h3>
-・ゲームオブジェクト名の変更
+3. ゲームオブジェクト名の変更
 </h3>
 
 <p>
-Hierarchy ウィンドウで名前を変更したいゲームオブジェクトを選択してから右クリックメニュー → Rename で出来ます。
+ヒエラルキーで名前を変更したいゲームオブジェクトをマウスで長押しするか、右クリック → 「Rename」 で出来ます。
+<br>
+以下の手順で立方体と球の名前を変更してみましょう
 </p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「Cube」をマウスで長押しするか右クリックして「Rename」を選択し、「HAKO」に名前を変更する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「Sphere」を「TAMA」に名前を変更する。
+<br>
+</p>
+</div>
+
+</div>
+
 
 <br>
 <h3>
-・ゲームオブジェクトの削除
+4. ゲームオブジェクトのコピー
 </h3>
 
 <p>
-Hierarchy ウィンドウで削除したいゲームオブジェクトを選択してから Delete キーを押して下さい。
+ヒエラルキーでコピーしたいゲームオブジェクトの上で右クリック → 「Dupulicate」 で出来ます。
+<br>
+以下の手順で「HAKO」をコピーしてみましょう。
 </p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「HAKO」を右クリックして「Dupulicate」を選択して「HAKO(1)」という名前のコピーを作成する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「HAKO(1)」を「HAKO2」に名前を変更する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 位置が重なっているので変更する。「HAKO2」の インスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,4,0) にする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「HAKO」をコピーして「HAKO3」を作る。「HAKO2」の インスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,-4,0) にする。
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+5. ゲームオブジェクトの削除
+</h3>
+
+<p>
+ヒエラルキーウィンドウで削除したいゲームオブジェクトの上で右クリック → 「Delete」 で出来ます。
+<br>
+以下の手順で「HAKO3」を削除してみましょう。
+</p>
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「HAKO3」を右クリックして「Delete」を選択して削除する。
+</p>
+</div>
+
+</div>
+
+<p>
+この時点で図1の様にゲームビューが表示されていればOKです。
+</p>
+
+<br>
+<b>図1. ここまでの画面</b>
+<br>
+<img src="./img/page03-fig1.png" alt="">
+
+
 
 <br>
 <script>PreNext(3,10)</script>
