@@ -20,17 +20,17 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-「フィールドは原則 private にして隠蔽する」ことが推奨されますが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
+フィールドは原則 private にして隠蔽することが推奨されますが、それでもどうしても外部からフィールドにアクセスしたい場合があります。
 <br>
 その場合は「<b>getter</b>」と「<b>setter</b>」というテクニックがよく使われています。
 </p>
 
 <p>
-※ getter と setter を使ってしまうとカプセル化が崩れてしまうので使っていけないと主張する人も多いです
+※ getter と setter を使うとカプセル化が崩れてしまうので使っていけないと主張する人も多いです
 </p>
 
 <p>
-さて getter は隠蔽されたフィールドの値を外部から取得するために使うメソッドで、例えば Java ではソース 1 の様に定義します。
+getter は隠蔽されたフィールドの値を外部から取得するために使うメソッドで、例えば Java ではソース 1 の様に定義します。
 </p>
 
 <div class="info">
@@ -38,10 +38,10 @@
 <pre class="wrap">
 public class HOGE{
 
-  private int abc;
+  private int abc;  // abc は private なので外部から参照できない
 
   // フィールド abc の getter
-  // メソッド名は何でも良いが「getフィールド名」とする人が多い
+  // メソッド名は何でも良いが「getフィールド名」とする人が多いかも
   public int get_abc(){ return abc; }
 }
 </pre>
@@ -79,11 +79,11 @@ int a = this.get_abc();
 <pre class="wrap">
 public class HOGE{
 
-  private int abc;
+  private int abc; // abc は private なので外部から変更できない
   
   // フィールド abc の setter
-  // メソッド名は何でも良いが「setフィールド名」とする人が多い
-  // 引数名は人によりまちまち
+  // メソッド名は何でも良いが「setフィールド名」とする人が多いかも
+  // 引数名もなんでも良いが「 _フィールド名」とする人が多いかも
   public void set_abc( int _abc ){ abc = _abc; }
 }
 </pre>

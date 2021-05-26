@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>2. フィールドによるポリモーフィズム</title>
+<title>2. アドホック多相(オーバロード)</title>
 </head>
 <body>
 
@@ -20,66 +20,14 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-まず単純な例として「フィールドによるポリモーフィズム」を示します。
-</p>
-<p>
-これは「同じクラスの同じ名前のフィールドを使ってもインスタンス毎に動作が異なる」という性質のことで、実は今まで既に演習で体験済みです。
+「<b>アドホック多相</b>」は同じクラス内に引数の数や種類が異なる同じ名前のメソッドを複数個定義できる性質のことで、<a href="../../oop-basic/text01/page07.html">オーバロード</a>機能により実現されます。
 </p>
 
 <p>
-例えばソース 1 の FRUIT クラスに対してソース 2 の main メソッドを実行してみます。
+オーバロードについて詳しくは<a href="../../oop-basic/text01/page07.html">こちら</a>を参照して下さい。
 </p>
-
-<div class="info">
-<input type="checkbox"><b>ソース 1 : </b>
-<pre class="wrap">
-public class FRUIT {
-
-    public String name;
-}
-</pre>
-</div>
 
 <br>
-<div class="info">
-<input type="checkbox"><b>ソース 2 : </b>
-<pre class="wrap">
-public class Main{
-
-	public static void main(String[] args) {
-
-	        FRUIT apple = new FRUIT();
-	        FRUIT orange = new FRUIT();
-
-	        apple.name = "りんご";
-	        orange.name = "みかん";
-
-	        System.out.println( apple.name + "美味しい");
-	        System.out.println( orange.name + "美味しい");
-	}
-}
-</pre>
-</div>
-
-<p>
-当然実行結果は次の様になります。
-</p>
-<div class="info">
-<input type="checkbox"><b>実行結果 1 : </b>
-<pre class="wrap">
-りんご美味しい
-みかん美味しい
-</pre>
-</div>
-
-<p>
-この様に、<b>同じ FRUIT クラスの同じ name フィールドを表示しているのにインスタンス apple と orange で表示内容が異なっています</b>。
-</p>
-
-<p>
-ただし普通はカプセル化によりフィールドに直接アクセスすることは無いので、「フィールドによるポリモーフィズム」はポリモーフィズムの例として挙げられることはあまり無いようです。
-</p>
-
-<script>PreNext(2,6)</script>
+<script>PreNext(2,4)</script>
 </body>
 </html>
