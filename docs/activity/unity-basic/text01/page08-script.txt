@@ -18,7 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         t += Time.fixedDeltaTime;
         if(t >= 1f){
-            Debug.Log( t + "/" + rb.velocity.y );
+            Debug.Log( t + "/" + rb.velocity.magnitude );
             t -= 1f;
         }
     }
