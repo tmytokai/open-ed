@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>10. 摩擦</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [1] Unity の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+重力、反発と来たので次は摩擦を Unity を使って再現してみましょう。
+</p>
+
+<p>
+まず摩擦を考える場合は球よりも箱の方が分かりやすいので、新しくシーン Scene3 を作ることにします。
+<br>
+<a href="./page07.html">7ページ目</a>を参考に、アセットフォルダの中の Scenes フォルダの中に Scene3 を新規作成し、背景を真っ黒にして下さい。
+</p>
+
+<p>
+次に箱と坂道を作成します。
+<br>
+まずヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,1,0)にして下さい。
+<br>
+また<a href="./page08.html">重力</a>を使いますので Rigidbody もアタッチして下さい。
+</p>
+<p>
+同様にヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「SAKA」、Position を (0,0,0)、Scale を (30,1,1) にして下さい。
+</p>
+
+<p>
+さてこのままでは坂道になっていませんので SAKA を傾けたいと思うのですが、SAKA を傾けても HAKO は傾いてくれません。
+そこで HAKO と SAKA に「<b>親子関係</b>」を設定します。
+<br>
+SAKA を親、HAKO を子供にするにはヒエラルキーの HAKO を SAKA の上にドロップします(図1)
+</p>
+
+<p>
+<b>図1. SAKA と HAKO を親子関係にする</b>
+</p>
+
+<img src="./img/page10-fig1.png" alt="">
+
+<p>
+すると SAKA の右下に HAKO が移動し、SAKA の Position や Rotation の値を変更すると HAKO も一緒に移動します。
+<br>
+では SAKA の Position を (5,2,0)、Rotation を (0,0,30) にして下さい。
+<br>
+この時の状況が図2になります。
+</p>
+
+<p>
+<b>図2. HAKO と SAKA を用意</b>
+</p>
+
+<img src="./img/page10-fig2.png" alt="">
+
+<br>
+<br>
+<p>
+では摩擦の設定をしていきます。
+<br>
+まず<a href="./page09.html">反発</a>の時と同様に物理マテリアルを作ります。
+</p>
+
+<p>
+多分 Scenes フォルダを開いたままにしていると思うので一つ上のフォルダに戻って下さい。
+<br>
+アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選びます。
+<br>
+するとアセットフォルダ内に「New Physic Material」というアセットが出来ますので「HAKO Physic Material」に名前を変更して下さい。
+</p>
+
+<p>
+次に「HAKO Physic Material」をクリックしてインスペクタを表示し、Dynamic Friction を 0.29、Static Friction を 0.29、Bounciness を 0 にして下さい。
+</p>
+
+<p>
+値を設定したらアセットフォルダ内の「HAKO Physic Material」をドラッグしてヒエラルキーの「HAKO」の上にドロップして下さい。
+<br>
+すると HAKO のインスペクタの Box Collider の中に「HAKO Physic Material」が表示されます。
+</p>
+
+<p>
+同様に「SAKA Physic Material」を作成し、Dynamic Friction を 0.29、Static Friction を 0.29、Bounciness を 0 にし、「SAKA」にドラッグ＆ドロップして下さい。
+</p>
+
+<p>
+ここまで出来たら早速実行ボタンを押してみましょう。
+<br>
+すると HAKO が謎の回転運動をし始めますので、HAKO が変な回転をしないように設定しましょう。
+</p>
+
+<p>
+HAKO が回転しないようにするには、HAKO のインスペクタを表示し、Rigit Body の中の Constraints → Freeze Rotation の x,y,z にチェックを入れます(図3)。
+<br>
+すると実行しても HAKO が変な回転をしないで静止したままになります。
+<br>
+</p>
+
+<p>
+<b>図3. HAKO が回転しないようにする</b>
+</p>
+
+<img src="./img/page10-fig3.png" alt="">
+
+<p>
+摩擦の影響で HAKO が止まったままになっているのを確認したら、次に「HAKO Physic Material」と「SAKA Physic Material」の Dynamic Friction を 0.28、Static Friction を 0.28 にして実行して下さい。
+<br>
+すると摩擦力が落ちて HAKO が滑り落ち始めます。
+</p>
+
+<p>
+では次に「HAKO Physic Material」と「SAKA Physic Material」の Dynamic Friction を 0、Static Friction を 0 にして実行して下さい。
+<br>
+すると全く摩擦が無くなります。
+</p>
+
+<p>
+この様に、Dynamic Friction と Static Friction の値が 0 に近づくにつれて摩擦力が落ちていきます。
+</p>
+
+<br>
+<h3>
+2. 摩擦の詳しい説明
+</h3>
+
+<p>
+ここから先は少し難しい話なので分からなければ飛ばしても結構です。
+<br>
+ただし Unity の物理演算機能を使いこなすためには大事な知識ですので興味のある人は是非トライして下さい。
+</p>
+
+<p>
+反発の時と同様に、まずは現実世界の<a href="https://ja.wikipedia.org/wiki/%E6%91%A9%E6%93%A6">摩擦</a>についておさらいしておきます。
+
+<p>
+物体同士が接触している時の摩擦には動摩擦力と静止摩擦力の2種類があります。
+<br>
+$\mu$ を動摩擦係数、$\mu'$ を静止摩擦係数、$N$ を垂直抗力(接触面が物体を押し返す力、単位はニュートン)とすると
+</p>
+
+<p>
+動摩擦力 = $\mu \cdot N$
+</p>
+
+<p>
+(最大)静止摩擦力 = $\mu' \cdot N$
+</p>
+
+<p>
+となります(単位はニュートン)。
+<br>
+これらの力が物体を動かす際に力を加えた方向と逆向きにかかります。
+</p>
+
+<p>
+以上の話を踏まえて Dynamic Friction と Static Friction の話に戻ります。
+<br>
+結論から言うと
+</p>
+
+<p>
+<b>Dynamic Friction ≒ 静止摩擦係数 / 2</b>
+</p>
+
+<p>
+<b>Static Friction ≒ 動摩擦係数 / 2</b>
+</p>
+
+
+<p>
+になります。
+</p>
+
+<p>
+まず HAKO と SAKA が接触した時に使われる各 Friction の値は、反発の時と同様にデフォルトでは HAKO と SAKA の 各 Friction の平均値になります。
+<br>
+もし平均値を使いたくない場合は Physic Material の Friction Combine を Average(平均) から他の設定に変えます。
+<br>
+例えば自分のキャラクターには摩擦を設定せずに床とか壁とかだけ摩擦を設定したい時は自分のキャラクターの 各 Friction を 0、 Friction Combine を Maximum にします。
+<br>
+ここでは Friction Combine についてこれ以上詳しく説明しませんので、興味のある人は調べてみて下さい。
+</p>
+
+<p>
+次に、Unity の物理演算エンジンはある程度の大きさ(どの程度の大きさが境目になるかは未調査)のゲームオブジェクトが接触した場合、演算量を減らすため 2 点で接触しているとみなして演算します。
+<br>
+従って摩擦力は 2 倍になりますので、現実世界と同じ様な挙動をさせるには摩擦係数を2で割る必要があります。
+<br>
+なお演算誤差があるので、摩擦係数/2 の値を Friction に代入しても理論通りには動きません。
+</p>
+
+<p>
+この様な Unity 特有の癖にさえ気をつければ後は普通の摩擦係数と同様に計算できます。
+<br>
+例えば上の例の HAKO と SAKA の摩擦の問題を考えてみましょう。
+</p>
+
+<p>
+まず重力加速度を $g$ とし、 $\theta$ [ラジアン] の角度にした SAKA に、重さ $m$ [kg] の HAKO を置きます。
+<br>
+すると図4に示された力が HAKO にかかります。
+</p>
+
+
+<p>
+<b>図4. HAKO にかかる力</b>
+</p>
+
+<img src="./img/page10-fig4.png" alt="">
+
+<p>
+さて HAKO が SAKA の上で静止するということは(最大)静止摩擦力が滑り落ちる力と同じということなので、$\mu'$ を静止摩擦係数とすると
+</p>
+
+
+\[
+m \cdot g \cdot \sin \theta = \mu' \cdot m \cdot g \cdot \cos \theta
+\]
+
+<p>
+という式が成り立ちます。
+<br>
+これを解くと $m$ と $g$ が消えて
+</p>
+
+\[
+\mu' = \tan \theta
+\]
+
+<p>
+となります(重さと重力が関係なくなるのは面白いですね)。
+</p>
+
+<p>
+それで今回は $\theta = \pi/6$ ( = 30 度) としたので
+</p>
+
+<p>
+Dynamic Friction = ( $\tan \pi/6 ) /2 = 0.28867513459\cdots$
+</p>
+
+<p>
+を入れれば HAKO が静止しますが、上の例では演算誤差も考えて
+</p>
+
+
+<p>
+Dynamic Friction = 0.29
+</p>
+
+<p>
+としています。
+</p>
+
+<p>
+なお実際には Static Friction にも 0.29 をセットしないと HAKO が動き始めます
+<br>
+演算誤差か何かのせいで HAKO が微妙に動いて Dynamic Friction にセットした値が理論通りに効かない(？)時があるからです。
+<br>
+よってゲームで摩擦を扱いたい時は Dynamic Friction の値を少し大きめにしておいた方が良いかもしれません。
+</p>
+
+<p>
+一方、Dynamic Friction と Static Friction の値を約 0.288 より小さくすると HAKO が動き始めます。
+<br>
+上の例では Dynamic Friction = Static Friction = 0.28 としたら動き始めました。
+</p>
+
+<p>
+さて動き始めると滑り落ちる力と逆向きに動摩擦力がかかります。
+<br>
+動摩擦係数を $\mu $ とすると、HAKO には
+</p>
+
+\begin{align*}
+& m \cdot g \cdot \sin \pi/6 - \mu \cdot m \cdot g \cdot \cos \pi/6 \\
+&= m \cdot g \cdot \{ \sin \pi/6 - \mu \cdot \cos \pi/6 \}
+\end{align*}
+
+<p>
+の力(ニュートン)が坂下の方に向かってかかります。
+<br>
+よって $\mu$ = Dynamic Friction x2 = 0.56 だったので、 1 秒ごとに HAKO は
+</p>
+
+\[
+g \cdot \{ \sin \pi/6 - \mu \cdot \cos \pi/6 \} = 9.81 \cdot (1/2 - 0.56 \cdot \sqrt{3}/2 ) = 0.147402842\cdots
+\]
+
+<p>
+だけ加速します。
+<br>
+実際に1秒おきの HAKO の速度を測定したら以下の様になっていたので、だいたい理論通り動いていることが分かります。
+</p>
+
+<p>
+開始約 1 秒後 → 速度 0.1474044 m/秒
+</p>
+
+<p>
+開始約 2 秒後 → 落下速度 0.2948087 m/秒 ( ≒ 0.147 x 2 )
+</p>
+
+<p>
+開始約 3 秒後 → 落下速度 0.4422128 m/秒 ( ≒ 0.147 x 3 )
+</p>
+
+<p>
+開始約 4 秒後 → 落下速度 0.5896174 m/秒 ( ≒ 0.147 x 4 )
+</p>
+
+<p>
+開始約 5 秒後 → 落下速度 0.7370216 m/秒 ( ≒ 0.147 x 5 )
+</p>
+
+
+<br>
+<script>PreNext(10,20)</script>
+</body>
+</html>
