@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>9. 反発</title>
+<title>2. 反発</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Unity 入門</a></li>
-<li>学習項目: [1] Unity の基本</li>
+<li>学習項目: [3] 物理演算</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,11 +24,32 @@
 次は物体の反発を Unity を使って再現してみましょう。
 </p>
 
+<br>
+<h3>
+1. 準備
+</h3>
+
 <p>
-まず今のままでは TAMA はどこまでも落ちていくので床を用意します。
+演習を行う前に新しいシーンを作り、球と床を作成します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page07.html">こちら</a>のテキストに従ってシーンを新規作成をする(シーン名は適当で結構です。背景も任意で結構ですが以下の例では見やすいように黒にしています)
 <br>
-ヒエラルキー右クリック → 3D Object → Quad で平面を新規作成し、名前を「YUKA」、Position を (0,-2,0)、 Rotation を (90,0,0)、Scale を (10,10,10) にして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,5,0)にする
 <br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Rigidbody をアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Quad で平面を新規作成し、名前を「YUKA」、Position を (0,-2,0)、 Rotation を (90,0,0)、Scale を (10,10,1) にする
+</p>
+</div>
+
+</div>
+
+<p>
 この時の状況が図1になります。
 <br>
 この状態で実行ボタンを押すと全く反発せずにそのまま YUKA に TAMA がくっつきます。
@@ -38,48 +59,66 @@
 <b>図1. 床を用意</b>
 </p>
 
-<img src="./img/page09-fig1.png" alt="">
+<img src="./img/page02-fig1.png" alt="">
 
 <br>
 <br>
+<h3>
+2. 反発の設定
+</h3>
+
 <p>
 では反発の設定をしていきます。
 <br>
-反発を行うためには「物理マテリアル(Physic Material)」というアセットを作ります。
+反発を行うためには「<b>物理マテリアル(Physic Material)</b>」というアセットをアセットフォルダの中に以下の手順で作ります。
 </p>
 
 <p>
-※ <a href="./page06.html">色とテクスチャの設定</a>で使った「マテリアル」とは違う種類のアセットなので注意して下さい
+※ <a href="../text01/page06.html">色とテクスチャの設定</a>で使った「マテリアル」とは違う種類のアセットなので注意して下さい
 </p>
 
+<div class="info">
+
+<div class="olradio"> 
 <p>
-さて物理マテリアルもアセットなのでアセットフォルダの中に作成しますが、もし Scenes フォルダを開いたままにしている人は一つ上のフォルダ(TAMA Image などが置いてあるフォルダ) に戻って下さい。
+<span class="olradio"><input type="radio" name="p1"></span> シーンを新規作成した際に Scenes フォルダを開いたままにしている人は一つ上のフォルダに戻る
 <br>
-それからアセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選びます。
-するとアセットフォルダ内に「New Physic Material」というアセットが出来ますので「TAMA Physic Material」に名前を変更して下さい。
-</p>
-
-<p>
-※ 繰り返しますが Material の方を選ばないよう気を付けて下さい
-</p>
-
-<p>
-次に「TAMA Physic Material」をクリックしてインスペクタを表示し、Dynamic Friction を 0、Static Friction を 0、Bounciness を 0.98 にして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ
 <br>
-このうち最初の2つは摩擦の設定なのでこの後説明します。
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Physic Material」というアセットが出来るので「TAMA Physic Material」に名前を変更する
 <br>
-反発は最後の Bounciness の値で設定します。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「YUKA Physic Material」も作成する
+</p>
+</div>
+
+</div>
+
+<p>
+繰り返しますが (2) のところで Material の方を選ばないよう気を付けて下さい。
 </p>
 
 <p>
-値を設定したらアセットフォルダ内の「TAMA Physic Material」をドラッグしてヒエラルキーの「TAMA」の上にドロップして下さい。
+では反発の設定をしていきます。
 <br>
-すると「TAMA」のインスペクタの Sphere Collider の中に「TAMA Physic Material」が表示されるので反発の設定がされたことが分かります。
 </p>
 
+<div class="info">
+
+<div class="olradio"> 
 <p>
-同様に「YUKA Physic Material」を作成し、Dynamic Friction を 0、Static Friction を 0、Bounciness を 0.98 にし、「YUKA」にドラッグ＆ドロップして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Physic Material をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Bounciness を 0.98 にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Physic Material をドラッグしてヒエラルキーの TAMA の上にドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA のインスペクタを開き、 Sphere Collider の中に TAMA Physic Material と表示されているのを確認する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に YUKA Physic Material の Bounciness も 0.98 にし、YUKA にドラッグ＆ドロップし、YUKA のインスペクタを開いて確認する
 </p>
+</div>
+
+</div>
 
 <p>
 ここまで出来たら早速実行ボタンを押してみましょう。
@@ -104,12 +143,12 @@ TAMA が跳ね返ってだいたい元の位置まで戻る事が分かります
 </p>
 
 <p>
-この様に、Bounciness の値が 1 に近いと反発力が強くなり、逆に 0 に近づくにつれて反発力が落ちていきます。
+この様に、<b>Bounciness の値が 1 に近いと反発力が強くなり、逆に 0 に近づくにつれて反発力が落ちていきます</b>。
 </p>
 
 <br>
 <h3>
-反発の詳しい説明
+3. 反発の詳しい説明
 </h3>
 
 <p>
@@ -154,7 +193,15 @@ e = \frac{ |v1'| }{ |v1| }
 <p>
 以上の話を踏まえて Bounciness の話に戻ります。
 <br>
-結論から言うと Bounciness ≒ 反発係数になります。
+結論から言うと
+</p>
+
+<p>
+<b>Bounciness ≒ 反発係数</b>
+</p>
+
+<p>
+です。
 </p>
 
 <p>
@@ -169,7 +216,7 @@ e = \frac{ |v1'| }{ |v1| }
 <p>
 例えば自分のキャラクターには反発を設定せずに床とか壁とかに反発の設定を任せたい時があります(金属の床とかマットレスとかトランポリンとか色々な状況が考えられますね)。
 <br>
-その場合は 自分のキャラクターの Bounciness を 0、Bounce Combine を Maximum にします。
+その場合は自分のキャラクターの Bounciness を 0、Bounce Combine を Maximum にします。
 <br>
 ここでは Bounce Combine についてこれ以上詳しく説明しませんので、興味のある人は調べてみて下さい。
 </p>
@@ -221,10 +268,10 @@ e = \frac{|v1'|}{|v1|} = \frac{1}{\sqrt{2}} = 0.707106781\cdots
 <p>
 となります。
 <br>
-ただし Bounciness の値は現実の反発係数よりも若干小さめにしないと駄目なので今回は Bounciness = 0.69 としています。
+ただし Bounciness の値は現実の反発係数よりも若干小さめにしないと駄目なので上の例では Bounciness = 0.69 としました。
 </p>
 
 <br>
-<script>PreNext(9,10)</script>
+<script>PreNext(2,10)</script>
 </body>
 </html>

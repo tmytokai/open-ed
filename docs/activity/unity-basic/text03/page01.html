@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>8. 重力</title>
+<title>1. 重力</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Unity 入門</a></li>
-<li>学習項目: [1] Unity の基本</li>
+<li>学習項目: [3] 物理演算</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,16 +20,40 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次はゲームオブジェクトに重力の影響を与えて画面下の方に落下させてみたいと思います。
+この学習項目では Unity の物理演算機能を使ってみます。
+<br>
+手始めにゲームオブジェクトに重力の影響を与えて画面下の方に落下させてみたいと思います。
 </p>
 
 <br>
 <h3>
-1. コンポーネントとは
+1. 準備
 </h3>
 
 <p>
-ところで今まで説明を省いて来ましたがゲームオブジェクトは本来空箱の様なもので何もする能力がありません。
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page02.html">こちら</a>のテキストに従ってブロジェクトの新規作成をする(プロジェクト名は適当で結構です)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,5,0)にする
+<br>
+</p>
+</div>
+
+</div>
+
+<br>
+<h3>
+2. コンポーネント
+</h3>
+
+<p>
+ゲームオブジェクトは本来空箱の様なもので何もする能力がありません。
 <br>
 そこでゲームオブジェクトに「コンポーネント(Component)」と呼ばれる部品をアタッチ(※)して機能を追加します。
 </p>
@@ -39,11 +63,9 @@
 </p>
 
 <p>
-例えばサンプルシーンに戻って HAKO や TAMA のインスペクタを見て下さい。
+例えば TAMA のインスペクタの Position の文字列の上に Transform と書いてあるのに注目して下さい。
 <br>
-今まで深く考えないで座標や回転などの設定をして来ましたが、Position の文字列の上に Transform と書いてあるのに注目して下さい。
-<br>
-これが Transform と呼ばれるコンポーネントで、ゲームオブジェクトの位置や回転量を決めるために使われています。
+これは Transform と呼ばれるコンポーネントで、ゲームオブジェクトの位置や回転量を決めるために使われています。
 </p>
 
 <p>
@@ -57,32 +79,43 @@
 </p>
 
 <p>
-更に下の方にBox Collider とか Sphere Collider などというコンポーネントがあります。
+更に下の方に Sphere Collider というコンポーネントがあります。
 <br>
-これらのコンポーネントはゲームオブジェクトに当たり判定を設定するために使われています。
+このコンポーネントはゲームオブジェクトに当たり判定を設定するために使われています。
 </p>
 
 <br>
 <h3>
-2. Rigidbody のアタッチ
+3. Rigidbody のアタッチ
 </h3>
 
 <p>
-重力の影響を与えるためには「Rigidbody」というコンポーネントをゲームオブジェクトにアタッチする必要があります。
+重力の影響を与えるためには「<b>Rigidbody</b>」というコンポーネントを TAMA にアタッチする必要があります。
 <br>
 Rigidbody はゲームオブジェクトに落下とか加速度とかいった物理(ニュートン力学)的な挙動を与えるためのコンポーネントで、これから Unity でゲームを作っていく上で散々お世話になります。
 </p>
 
 <p>
 では具体的に演習してみましょう。
-<br>
-まず Scene2 に戻り、ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,5,0)にして下さい。
 </p>
 
+<div class="info">
+
+<div class="olradio"> 
 <p>
-インスペクタの下の方に Add Component というボタンがあるのでそれを押し、Physics → Rigidbody を選択するとRigidbody がアタッチされます。
+<span class="olradio"><input type="radio" name="p1"></span> TAMA のインスペクタの下の方に Add Component というボタンがあるのでそれを押す
 <br>
-なお Physics 2D → Rigidbody 2D という名前が似ているコンポーネントがあるので選択しないように気を付けて下さい(こちらは 2D ゲーム用の Rigidbody です)。
+<span class="olradio"><input type="radio" name="p1"></span> Physics → Rigidbody を選択する。するとRigidbody がアタッチされる
+<br>
+</p>
+</div>
+
+</div>
+
+<p>
+なお Physics 2D → Rigidbody 2D という名前が似ているコンポーネントがあるので選択しないように気を付けて下さい。
+<br>
+こちらは 2D ゲーム用の Rigidbody です。
 </p>
 
 <p>
@@ -95,7 +128,7 @@ Rigidbody はゲームオブジェクトに落下とか加速度とかいった�
 <b>図1. 実行ボタン (一番左の三角ボタン)</b>
 </p>
 
-<img src="./img/page08-fig1.png" alt="">
+<img src="./img/page01-fig1.png" alt="">
 
 
 <br>
@@ -126,7 +159,7 @@ Unity の重力加速度も g = 9.81 と設定されていてデフォルトで�
 </p>
 
 <p>
-実際に実行ボタンを押してから 1 秒ごとの TAMA の落下速度を計測すると下の値となりました (計算誤差があるので理論値通りにはなりません。参考までに使用した計測スクリプトは<a href="page08-script.txt">こちら</a>)
+実際に実行ボタンを押してから 1 秒ごとの TAMA の落下速度を計測すると下の値となりました (計算誤差があるので理論値通りにはなりません。参考までに使用した計測スクリプトは<a href="src/page01-src1.txt">こちら</a>)
 </p>
 
 <p>
@@ -170,6 +203,6 @@ Unity の重力加速度も g = 9.81 と設定されていてデフォルトで�
 
 
 <br>
-<script>PreNext(8,10)</script>
+<script>PreNext(1,10)</script>
 </body>
 </html>
