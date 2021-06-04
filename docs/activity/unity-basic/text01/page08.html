@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>8. シーンの新規作成</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [1] Unity の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ゲームはタイトル画面、キャラクター選択画面、プレイ画面、ゲームオーバー画面など様々なシーン(場面)によって構成されます。
+<br>
+Unity ではそれぞれのシーンを別々に作り、シーンを適宜切り替えてゲームを進行します。
+</p>
+
+<p>
+さてプロジェクトを新規作成した時点ではシーン(サンプルシーンと言います)は一つしかありません。
+<br>
+これまでの演習で大分画面がごちゃごちゃして来たので新しいシーンを作成してリフレッシュすることにしましょう。
+</p>
+
+<p>
+まずアセットフォルダの中の Scenes フォルダの中を開いて見て下さい。
+<br>
+SampleScene というアセットが一つ入っていますがこれがサンプルシーンです。
+<br>
+次にアセットフォルダの空いているスペースで右クリックし、Create → Scene を選ぶと「New Scene」という新しいシーンが出来るので、名前を「Scene2」に変更して下さい。
+</p>
+
+<p>
+あとは作成した Scene2 をダブルクリックすると新しいシーンが開いて、今まで作成したゲームオブジェクトが画面から消えます。
+<br>
+もちろん「SampleScene」をダブルクリックすれば何時でもサンプルシーンに戻れます。
+</p>
+
+<p>
+なおシーンを切り替える際にゲームオブジェクトに行なった変更を保存するか聞いてくる時がありますので、保存したい場合は「Save」、保存したくない場合は「Don't Save」を押して下さい。
+</p>
+
+<p>
+さて折角シーンを新規作成したので、気分転換も兼ねて背景色も変えてみましょう。
+<br>
+デフォルトでは空が表示されていますが、ヒエラルキーの Main Camera をクリックし、インスペクタの Camera → Clear Flags を Solid Color にすると空が消えて単色の背景になります。
+<br>
+次に Background をクリックすると<a href="./img/page06-fig1.png">色選択ウィンドウ</a>が出ますので真っ黒(RGBA を 0、0、0、0)にして下さい。
+</p>
+
+<p>
+なおシーンビューでは空は表示されたままになります。
+<br>
+空の画像を変更したい場合は skybox という種類のアセットを変更する必要がありますが、自分で skybox を用意するのは面倒なので今回は説明を省略します。
+</p>
+
+<br>
+<script>PreNext(8,8)</script>
+</body>
+</html>
