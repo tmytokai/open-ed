@@ -234,6 +234,58 @@ public class Main{
 </pre>
 </div>
 
+<p>
+ところでスーパークラスにコンストラクタが定義されている場合はどのタイミングで呼び出されるのでしょうか。
+<br>
+例えばソース8の様に FRUIT を書き換えてみます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 8 : コンストラクタを加えた FRUIT スーパークラス</b>
+<pre class="wrap">
+
+public class FRUIT {
+
+	public String name = "果物";
+	
+        public FRUIT()
+        {
+		System.out.println( name + "大好き");
+        }
+
+	public void eat()
+	{
+		System.out.println(name+"マズイ");
+	}
+}
+</pre>
+</div>
+
+<p>
+この時の実行結果は以下の様になります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>実行結果:</b>
+<pre class="wrap">
+果物大好き
+果物大好き
+りんごもぐもぐ
+りんごマズイ
+みかんマズイ
+</pre>
+</div>
+
+<p>
+この様に<b>各サブクラスのコンストラクタが実行される前にスーパークラスである FRUIT の コンストラクタが自動的に実行される</b>ため、「〜大好き」と表示される時点では name にはまだ "果物" が入っています。
+<br>
+その後各サブクラスのコンストラクタが実行されて name に "りんご" とか "みかん" がセットされ、後に eat メソッドが呼び出される時点ではそれらが表示されます。
+</p>
+
+<p>
+スーパークラスのコンストラクタ呼び出しについてはこれ以上詳しくは触れませんが、とても使い道の多いテクニックですので興味のある人は「コンストラクタ super」などのキーワードで調べてみて下さい。
+</p>
 
 <br>
 <script>PreNext(2,2)</script>
