@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. Hello World</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では Visual Scripting で Hello World を実行しましょう。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page02.html">こちら</a>のテキストに従ってブロジェクトの新規作成をする(プロジェクト名は適当で結構です)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Create Empty で GameObject というゲームオブジェクトを新規作成し、名前を「PROGRAM」にする (Position は適当で良いです)
+</p>
+</div>
+
+</div>
+
+<p>
+(2) で作成したゲームオブジェクトは「空(Empty)オフジェクト」と呼ばれるものです。
+<br>
+デフォルトでは何もしないし画面表示すらしませんが、マネージャとして使ったり、親子関係の親として使ったりなど、色々な用途で良く使われるゲームオブジェクトです。
+</p>
+
+
+<br>
+<br>
+<h3>
+2. スクリプトの作成
+</h3>
+
+<p>
+まず以下の手順で Script Graph アセットを作成して下さい。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Hello Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Hello Script Graph をダブルクリックして Script Graph ウィンドウを表示する(図1)
+</p>
+<p>
+※ 途中で「Your Unity preferences are set to reload scripts during play mode 〜」という警告が出る場合があります
+<br>
+※ この警告が出たらとりあえず Change now ボタンを押して下さい
+<br> 
+※ 後で元の設定に戻したい時は Preferences → General → Script Changes While Playing を変更します
+<br>
+※ この設定について詳しくはネットで検索してください
+</p>
+</div>
+
+</div>
+
+<p>
+さて図 1 の Script Graph ウィンドウにおいて
+</p>
+<p>
+画面左上のパネルのことを「<b>グラフインスペクタ(Graph Inspector)</b>」
+</p>
+<p>
+画面左下のパネルのことを「<b>ブラックボード(Blackboard)</b>」
+</p>
+<p>
+右側のエリアの事を「<b>グラフウィンドウ(Graph Window)</b>」
+</p>
+<p>
+と言います。
+<br>
+それぞれの使い方については適宜説明します。
+</p>
+
+<br>
+<b>図1. Script Graph ウィンドウ</b>
+<br>
+<img src="./img/page02-fig1.png" alt="">
+
+<p>
+では実際のプログラミングを始めます。
+<br>
+まず以下の手順に従って操作して下さい。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックし、Add Unit を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ダイアログ(ユニット選択ダイアログ)が表示されたら検索窓に「debug:log」と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Debug:Log (Message) を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 図2の様な図形が表示される
+</p>
+</div>
+
+</div>
+
+<br>
+<b>図2 Debug:Log ユニット</b>
+<br>
+<img src="./img/page02-fig2.png" alt="">
+
+<br>
+<br>
+<p>
+図2の様な図形のことを「<b>ユニット (Unit)</b>」と呼びます。
+<br>
+ユニットは命令を実行したり、イベントの起点になったり、データ出力したりするための基本構成物で「<b>ノード</b>」と呼ばれることもあります。
+<br>
+例えば図 2 のユニットはデバッグ用ログを表示するユニットです。
+</p>
+
+<p>
+ところでユニットの左右に△マークが付いていて内側に矢印が描いてあるのが見えると思います。
+<br>
+この左の△マークを「<b>コントロール(Control)入力ポート</b>」、右の△マークを「<b>コントロール(Control)出力ポート</b>」と呼びます。
+</p>
+
+<p>
+更に△マークの下に○マークがあります(図2にはありませんが右側に○マークがあるユニットもあります)。
+<br>
+左の○マークのことを「<b>値(Value)入力ポート</b>」、右の○マークのことを「<b>値(Value)出力ポート</b>」と呼びます。
+</p>
+
+</p>
+さてユニット間の入出力ポートは矢印や線で繋ぐことが出来ます。
+<br>
+矢印や線でユニット間を繋ぐことで命令を実行したり、データを入出力したり出来るようになります。
+</p>
+
+<p>
+では以下の手順で Debug:Log ユニットに「Hello World」という文字列(String)を入力してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットの値入力ポート(左の○マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索窓に「String Literal」と入力する ※ 文字列(String)を出力するユニット
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から String Literal を選択すると String Literal ユニットが表示され、その値出力ポートと Debug:Log ユニットの値入力ポートが線で繋がる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> String Literal ユニットの中にある空欄の中に Hello World と入力する
+<br>
+</p>
+</div>
+
+</div>
+
+
+
+
+<p>
+ただしこれだけだと Unity はプログラムをどこから開始すれば良いのか分からないので、開始の起点を作成します。
+</p>
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットのコントロール入力ポート(左の△マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索窓に「Start」と入力する ※ 開始(Start)イベントを表すユニット
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Start (in Events/Lifecycle) を選択すると Start イベントユニットが表示され、そのコントロール出力ポートと Debug:Log ユニットのコントロール入力ポートが矢印で繋がる
+</p>
+</div>
+
+</div>
+
+<p>
+ここまで来るとグラフウィンドウの表示は図3の様になっているはずです。
+<br>
+この図より、今回作成したスクリプトは
+</p
+<p>
+「プログラムが開始したら Start → Debug:Log の順にユニットが実行されて Hello World という文字列を表示する」
+</p>
+
+<p>
+という動作になっていることが視覚的に分かります。
+</p>
+
+<br>
+<b>図3 Hello World を表示するスクリプト</b>
+<br>
+<img src="./img/page02-fig3.png" alt="">
+
+<br>
+<br>
+<h3>
+3. スクリプトの実行
+</h3>
+
+<p>
+これで Hello World のスクリプトは完成ですが、このスクリプトを実行するには Script Machine コンポーネントをゲームオブジェクトにアタッチする必要があります。
+<br>
+今回は空オブジェクトの PROGRAM に以下の手順で Script Machine をアタッチしてみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> インスペクタの下の方に Add Component というボタンがあるのでそれを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Visual Scripting → Script Machine を選択する。すると Script Machine がアタッチされる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルにアセットフォルダの Hello Script Graph をドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が Hello Script Graph に変わっているのを確認する(図4)
+</p>
+</div>
+
+</div>
+
+<br>
+<b>図4 Script Machine のアタッチ</b>
+<br>
+<img src="./img/page02-fig4.png" alt="">
+
+
+<p>
+後は以下の手順でスクリプトを実行するだけです。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト(Project)タブの右隣にあるコンソール(Console)タブをクリックする (図5)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> するとコンソールが表示される (ここに Debug:Log ユニットは入力されたデータを表示します)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Unity エディタの上の方にある実行ボタン(図6)を押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンソールに Hello World と表示されるのを確認する (いろいろ警告が出ている場合はコンソールの右上にある警告ボタン(図7)をクリックして警告を消して下さい)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> もう一度実行ボタンを押して実行を止める
+</p>
+</div>
+
+</div>
+
+<br>
+<b>図5. コンソール(Console)タブ(黄色の円で囲んでいるタブ)</b>
+<br>
+<img src="./img/page02-fig5.png" alt="">
+
+<br>
+<br>
+<b>図6. 実行ボタン (一番左の三角ボタン)を押すと実行、もう一度押すと停止する</b>
+<br>
+<img src="./img/page02-fig6.png" alt="">
+
+<br>
+<br>
+<b>図7. 警告ボタン (真ん中の三角ボタン)を押すと警告の表示と非表示を切り替える</b>
+<br>
+<img src="./img/page02-fig7.png" alt="">
+
+<p>
+ところで、たいしたプログラムでないのに実行ボタンを押してからプログラムが開始するまでやたら遅い時があります。
+<br>
+これは Unity エディタが実行開始時に初期化処理を行なっているためです。
+<br>
+この学習項目では特に初期化処理は必要ないので、<a href="../text04/faq.html">こちら</a>にある「実行ボタンを押してから実行開始するまでの時間を短くしたい」に書いてある設定を試してみると良いと思います。
+</p>
+
+<br>
+<script>PreNext(2,10)</script>
+</body>
+</html>

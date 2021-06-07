@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. グラフウィンドウの操作</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではグラフウィンドウの操作方法について学びます。
+</p>
+
+<br>
+<h3>
+1. スクロール
+</h3>
+
+<p>
+グラフウィンドウを真ん中ボタンでドラッグするとスクロールできます。
+</p>
+
+<br>
+<h3>
+2. 全画面表示
+</h3>
+
+<p>
+グラフウィンドウをダブルクリックすると全画面表示します。
+<br>
+元に戻したい場合はもう一度ダブルクリックします。
+</p>
+
+<br>
+<h3>
+3. 拡大縮小
+</h3>
+
+<p>
+Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で拡大縮小表示します。
+</p>
+
+
+<br>
+<h3>
+4. 新規ユニットの追加
+</h3>
+
+<p>
+ユニットの追加方法は前のページでもやりましたが復習してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックし、Add Unit を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「debug:log」と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Debug:Log (Message) を選択する
+</p>
+</div>
+
+</div>
+
+<p>
+なお前のページで String Literal ユニットや Start ユニットを作った時の様に、入出力ポートをドラッグしてユニット選択ダイアログを表示することも可能です。
+</p>
+
+<br>
+<br>
+<h3>
+5. ユニット間を矢印や線でつなぐ
+</h3>
+
+<p>
+各ユニットの入出力ポートをドラッグします。
+<br>
+試しに前のページで作った Debug:Log ユニットのコントロール出力ポート(右の△)、上の 4 で作った Debug:Log ユニットのコントロール入力ポート(左の△)を矢印でつないでみましょう。
+</p>
+
+<br>
+<br>
+<h3>
+6. 矢印や線を消す
+</h3>
+
+<p>
+入力側もしくは出力側のポートを右クリックすると矢印や線が消えます。
+<br>
+試しに上の 5 で作成した矢印を消してみましょう。
+</p>
+
+
+<br>
+<br>
+<h3>
+7. ユニットのコピー
+</h3>
+
+<p>
+ユニットを右クリック → Duplicate でコピーします。
+<br>
+試しに上の 4 で作った Debug:Log ユニットをコピーしてみましょう。
+</p>
+
+
+<br>
+<br>
+<h3>
+8. ユニットの削除
+</h3>
+
+<p>
+ユニットを右クリック → Delete で削除します。
+<br>
+試しに上の 7 でコピーした Debug:Log ユニットを削除してみましょう。
+</p>
+
+
+<br>
+<br>
+<h3>
+9. ユニットの複数選択
+</h3>
+
+<p>
+グラフウィンドウをドラッグしてユニットを範囲選択できます。
+<br>
+またCtrlキー(Macの場合はCommandキー)を押しながらユニットをクリックで複数選択できます。
+<br>
+複数選択したらグラフウィンドウの適当な所を右クリックし、Duplicate Selection で複数コピー、Delete Selection で複数削除出来ます。
+<br>
+試しに全てのユニットを複数選択して削除してみてください。
+</p>
+
+
+<br>
+<br>
+<h3>
+10. アンドゥ
+</h3>
+
+<p>
+操作を間違った時は Ctrlキー(Macの場合はCommandキー)を押しながら z キーでアンドゥ可能です。
+<br>
+試しに 9 で削除した各ユニットを復元して下さい。
+</p>
+
+
+<br>
+<br>
+<h3>
+11. グループ化
+</h3>
+
+<p>
+Ctrl(Macの場合はCommandキー)を押しながらドラッグするとグループを作成できます。
+<br>
+グループの名前のところをクリックするとグループ名を変更できます。
+<br>
+グループ化そのものに何か特別な機能がある訳ではありませんが、複数のユニットをグループ化しておくとスクリプトが見やすくなったり、まとめて移動したり出来るようになります。
+<br>
+では試しに図1のような Hello World グループを作成して下さい。
+</p>
+
+
+<br>
+<b>図1. Hello World グループ</b>
+<br>
+<img src="./img/page03-fig1.png" alt="">
+
+<br>
+<script>PreNext(2,10)</script>
+</body>
+</html>

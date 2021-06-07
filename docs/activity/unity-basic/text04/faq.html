@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>FAQ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他 </li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h3>
+Q. 実行ボタンを押してから実行開始するまでの時間を短くしたい
+</h3>
+
+<p>
+A. デフォルトだと実行ボタンを押す度に Unity エディタがいちいち初期化処理を行うため実行開始するまで結構時間がかかる。
+<br>
+初期化処理を無効化するには Edit → Project Settings → Editor → Enter Play Mode Options の Enter Play Mode Options にチェックを入れる。
+<br>
+すると変数の初期化やシーンの初期化をしなくなるので実行開始が早くなる。
+</p>
+
+<p>
+※ この設定を有効にしたのを忘れたまま開発を進めると変なバグが入るので、たまに無効にして実行してみると良いです。
+</p>
+
+<br>
+<script>PreNext(1,7)</script>
+</body>
+</html>
