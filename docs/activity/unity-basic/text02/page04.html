@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. リテラルと変数</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+他のプログラミング言語と同様に Visual Scripting でもリテラルと変数を扱えます。
+<br>
+ここではそれらについて説明します。
+</p>
+
+<br>
+<h3>
+1. リテラル
+</h3>
+
+<p>
+「<b>リテラル(Literal)</b>」は直接スクリプト内に記入した値の事で「定数」とも呼ばれます。
+</p>
+
+<p>
+Visual Scripting ではリテラルもユニットで表現されます。
+<br>
+例えば<a href="./page02.html">Hello World</a> のページで使った String Literal ユニットは文字列を表す(出力する)ユニットです(図1)。
+</p>
+
+<br>
+<b>図1 リテラルの例 (String Literal ユニット)</b>
+<br>
+<img src="./img/page02-fig3.png" alt="">
+
+<br>
+<p>
+さてリテラルの型には色々ありますが Visual Scripting で良く使われるのは以下の表1の型です。
+<br>
+なお「ユニット名」の列はユニット選択ダイアログに表示される名前で、最初の何文字かで検索をかければすぐ見つかります。
+</p>
+
+
+<b>表1 Visual Scripting でよく使われるリテラル</b>
+<table>
+<tr><td>型</td><td>扱うデータの種類</td><td>ユニット名</td></tr>
+<tr><td>Float</td><td>小数</td><td>Float Literal</td></tr>
+<tr><td>Integer</td><td>整数</td><td>Integer Literal</td></tr>
+<tr><td>String</td><td>文字列</td><td>String Literal</td></tr>
+<tr><td>Boolean</td><td>正(True)か偽(False)</td><td>Boolean Literal</td></tr>
+<tr><td>Vector3</td><td>3次元ベクトル</td><td>Vector3 Literal</td></tr>
+<tr><td>Game Object</td><td>ゲームオブジェクト</td><td>Game Object Literal</td></tr>
+</table>
+
+<p>
+使い方についてはテキストに出てきた時にその都度説明します。
+</p>
+
+
+<br>
+<h3>
+2. 変数
+</h3>
+
+<p>
+「<b>変数(Variables)</b>」は値を一時的または恒久的に記録するためのメモリ領域です。
+<br>
+初心者向けのテキストでは良く「値を入れる箱」という感じで説明されています。
+</p>
+
+<p>
+さて Visual Scripting では変数もユニットで表現されますが、面倒なことに変数の種類が沢山あって定義場所がそれぞれ異なっています。
+<br>
+表2に変数の種類一覧を示します。
+</p>
+
+<b>表2 Visual Scripting で使われる変数の種類</b>
+<table>
+<tr><td>種類</td><td>定義場所</td></tr>
+<tr><td>Flow 変数</td><td>フロー</td></tr>
+<tr><td>Graph 変数</td><td>Script Graph</td></tr>
+<tr><td>Object 変数</td><td>ゲームオブジェクト</td></tr>
+<tr><td>Schene 変数</td><td>シーン</td></tr>
+<tr><td>App 変数</td><td>アプリ</td></tr>
+<tr><td>Saved 変数</td><td>アプリ終了後も消えない変数</td></tr>
+</table>
+
+<br>
+<p>
+ここではこの内、Flow 変数、Graph 変数、 Object 変数の使い方について説明します。
+<br>
+なお変数で扱える型はリテラルとほぼ同じ(表1)なので説明は省略します。
+</p>
+
+<br>
+<h3>
+3. Flow 変数の使い方
+</h3>
+
+<p>
+Flow 変数はフロー(プログラムの起点から最後のユニットまで順次処理を行う流れ)内で定義されていて、処理を完了したら消える使い捨て変数です。
+</p>
+
+<p>
+※ 一般的なプログラミング言語でいうローカル変数に相当します
+</p>
+
+<p>
+Flow 変数を定義するにはフローの中で「セット(Set)ユニット」を呼び出す必要があります。
+<br>
+また Flow 変数を参照するためには「取得(Get)ユニット」を呼び出す必要があります。
+</p>
+
+<p>
+では実際に String 型の Flow 変数を使ってみましょう。
+<br>
+まず準備です。
+<br>
+Hello World の Script Graph は残しておくことにし、変数のテスト用に別の  Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Variable Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hello Script Graph と書いてあるセルにアセットフォルダの Variable Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Variable Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+<p>
+次に Integer (整数)型の Flow 変数をセットユニットを使って定義します。
+<br>
+変数名は flowtest とします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリック
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「set flow variable」と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Set Flow Variable を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Set Flow Variable ユニットが表示されたら中央のテキストボックスに変数名の flowtest を記入する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 左下の値入力ポートからドラッグして適当な場所で指を離す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Integer Literal ユニットを選択して線で結び、適当な値(例えば123)を入れる
+</p>
+</div>
+
+</div>
+
+<p>
+これで Flow 変数の flowtest が出来たので、次はその値を参照してみます。
+<br>
+今回は Debug:Log ユニットで値を表示してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットを作成する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットの値入力ポートからドラッグして適当な場所で指を離す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「get flow variable」と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Get Flow Variable を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Get Flow Variable ユニットが表示されたら中央のテキストボックスの右にある▼を押して flowtest を選択する
+</p>
+</div>
+
+</div>
+
+<p>
+後は Start イベントユニットを作成し、Start → Set Flow Variable → Debug:Log の順に繋ぎ、ついでにグループ化してスクリプトの完成です(図2)。
+<br>
+では実行して flowtest にセットした値が表示されるか試して下さい。
+</p>
+
+<br>
+<b>図2 Flow 変数の使用例</b>
+<br>
+<img src="./img/page04-fig2.png" alt="">
+
+<br>
+<br>
+<h3>
+4. Graph 変数の使い方
+</h3>
+
+<p>
+Graph 変数は Script Graph に対して定義される変数で、フローから抜けても消えません。
+</br>
+今のところ起点が Start イベントしかないのでピンと来ないと思いますが、実は起点となるイベントは複数あり(それらのイベントはその内出てきます)、それらのイベント間で共通して使える変数になります。
+</p>
+
+<p>
+※ 一般的なプログラミング言語でいうクラスフィールドに相当します
+</p>
+
+<p>
+さて Graph 変数は Flow 変数の時と違って Script Graph ウィンドウのブラックボードで作成します。
+<br>
+例えば今回は Float (小数)型の Graph 変数を作ってみましょう。初期値は 0.1、変数名は graphtest とします。 
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ブラックボードの Graph タブを選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (New Variable Name) と書いてあるテキストボックスに graphtest と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> その隣の＋ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Type(型) を Float にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Value(初期値) に 0.1 を入力する
+</p>
+</div>
+
+</div>
+
+<p>
+するとブラックボードの表示は図3の様になります。
+</p>
+
+<br>
+<b>図3 ブラックボードで Graph 変数を作成</b>
+<br>
+<img src="./img/page04-fig3.png" alt="">
+
+<br>
+<p>
+ここまで来たら後は Flow 変数のように使えます。
+<br>
+ただしセットユニットは「Set Graph Variable」、取得ユニットは「Get Graph Variable」となります。
+</p>
+
+<p>
+では試しに図 4 の様なスクリプトを作成して実行して下さい(なお Start イベントユニットは上で作ったグループから繋ぎ直してます)。
+<br>
+実行すると初期値の 0.1 が表示された後に上書きされた 123 が表示されます。
+</p>
+
+<br>
+<b>図4 Graph 変数の使用例</b>
+<br>
+<img src="./img/page04-fig4.png" alt="">
+
+<p>
+ところで図4でセットユニット(Set Graph Variable)の値出力ポートと Debug:Log ユニットの値入力ポートが線で繋がってますね。
+<br>
+この様に、わざわざ取得ユニットを用意しなくてもセットユニットから新しい値を取得することも可能です。
+</p>
+
+
+<br>
+<h3>
+5. Object 変数の使い方
+</h3>
+
+<p>
+Object 変数はゲームオブジェクトに対して定義される変数です。
+</br>
+今のところ PROGRAM には Script Machine は一つしかアタッチされてないのでピンと来ないと思いますが、実は Script Machine は複数アタッチ出来、それらの Script Machine 間で共通して使える変数になります。
+<br>
+さらに言うと他のゲームオブジェクトにアタッチされた Script Machine からも参照可能です。
+</p>
+
+<p>
+さて Object 変数は Graph 変数と同様にブラックボードでも作成できますが、今回は PROGRAM のインスペクタ上で作ってみます。
+<br>
+試しに Vector3 (3次元ベクトル)型の Object 変数を作ってみましょう。初期値は (1,2,3)、変数名は objecttest とします。 
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> PROGRAM のインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Variables の (New Variable Name) と書いてあるテキストボックスに objecttest と入力する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> その隣の＋ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Type(型) を Vector3 にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Value(初期値) に (1,2,3) を入力する ※ 3次元ベクトルなので x,y,z の3成分に値をセットする
+</p>
+</div>
+
+</div>
+
+<p>
+するとインスペクタの表示は図5の様になります。
+<br>
+ちなみにブラックボードの Object タブにも同じ表示がされていると思います。
+</p>
+
+<br>
+<b>図5 ゲームオブジェクトのインスペクタで Object 変数を作成</b>
+<br>
+<img src="./img/page04-fig5.png" alt="">
+
+<br>
+<p>
+ここまで来たら後は Flow 変数や Graph 変数のように使えます。
+<br>
+ただしセットユニットは「Set Object Variable」、取得ユニットは「Get Object Variable」となります。
+</p>
+
+<p>
+では試しに図 6 の様なスクリプトを作成して実行して下さい(なお Start イベントユニットは上で作ったグループから繋ぎ直してます)。
+<br>
+実行すると初期値の (1,2,3) が表示された後に上書きされた (3,2,1) が表示されます。
+</p>
+
+<br>
+<b>図6 Object 変数の使用例</b>
+<br>
+<img src="./img/page04-fig6.png" alt="">
+
+<br>
+<script>PreNext(4,7)</script>
+</body>
+</html>
