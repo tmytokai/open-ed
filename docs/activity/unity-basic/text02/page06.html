@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. 分岐処理</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+分岐処理は If ユニットや Switch ユニットを使って行います。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+分岐処理テスト用に別の Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「If Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Math Script Graph と書いてあるセルにアセットフォルダの If Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると If Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. If ユニット
+</h3>
+
+<p>
+さて初歩的な分岐処理は If ユニット(if で検索)を使って行えます。
+<br>
+If ユニットの左下の値入力ポートには正(True)か偽(False)を入力し、もし True が入力されたら右側の True のコントロール出力ポートに繋がっているユニットに制御が移ります。
+<br>
+一方、False が入力されたら False のコントロール出力ポートに繋がっているユニットに制御が移ります。
+</p>
+
+<p>
+さて If ユニットの左下の値入力ポートにはイコールや大なり小なり等の判定用ユニットを接続します。
+<br>
+幸いなことに、値入力ポートからドラッグしてユニット検索ダイアログを開くと代表的な判定用ユニット一覧が表示されるので、それ程使い方には迷わないと思います。
+<p>
+
+<p>
+では早速図1のサンプルを実行してみて下さい(Random:Range は Max Exclusive 版)。
+<br>
+まずランダムで 0 から 9 までの整数を生成して表示します。
+<br>
+次に生成した数字が 5 以下なら Good、6 以上なら Bad と表示します。
+<br>
+最後に合流して OK と表示します。
+</p>
+
+<br>
+<b>図1. If ユニットの例 </b>
+<br>
+<img src="./img/page06-fig1.png" alt="">
+
+
+
+<br>
+<br>
+<h3>
+3. Switch ユニット
+</h3>
+
+<p>
+次は Switch ユニット(switchで検索)です。
+<br>
+Switch ユニットは入力された選択肢(セレクター)に従って制御を切り替えるという処理を行います。
+<br>
+では早速以下の手順で Switch ユニットを作ってみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Switch ユニットにはいくつか種類があるが、今回は Switch On Integer (in Constrol) ユニットを作る(以後 Switch ユニットと略します)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 作成した Switch ユニットをクリックするとグラフインスペクタに Options という項目が表示される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Options の隣の＋ポタンを押すと選択肢を追加出来る。今回は＋ポタンを3回押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると選択肢が 3 つ出来る。今回は整数(Integer型)を選択肢とするので上から 0、1、2 を入れる(図2)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Switch ユニットに 0、1、2 に対応したコントロール出力ポートが出来る( Default はどれでも無い場合)
+</p>
+</div>
+
+</div>
+
+<br>
+<b>図2. Switch ユニットのグラフインスペクタの Options 設定</b>
+<br>
+<img src="./img/page06-fig2.png" alt="">
+
+<br>
+<p>
+では早速図3のサンプルを実行してみて下さい(Random:Range は Max Exclusive 版)。
+<br>
+まずランダムで 0 から 2 までの整数を生成して表示します。
+<br>
+次に生成した数字に合わせて Switch ユニットで分岐します。
+<br>
+なお今回は Default は使っていません。
+<br>
+最後に合流して OK と表示します。
+</p>
+
+<br>
+<b>図3. Switch ユニットの例 </b>
+<br>
+<img src="./img/page06-fig3.png" alt="">
+
+
+<br>
+<br>
+<script>PreNext(6,10)</script>
+</body>
+</html>

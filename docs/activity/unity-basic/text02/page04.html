@@ -27,7 +27,36 @@
 
 <br>
 <h3>
-1. リテラル
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+Hello World の Script Graph は残しておくことにし、変数のテスト用に別の  Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Variable Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hello Script Graph と書いてあるセルにアセットフォルダの Variable Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Variable Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+<br>
+<h3>
+2. リテラル
 </h3>
 
 <p>
@@ -71,7 +100,7 @@ Visual Scripting ではリテラルもユニットで表現されます。
 
 <br>
 <h3>
-2. 変数
+3. 変数
 </h3>
 
 <p>
@@ -106,7 +135,7 @@ Visual Scripting ではリテラルもユニットで表現されます。
 
 <br>
 <h3>
-3. Flow 変数の使い方
+4. Flow 変数の使い方
 </h3>
 
 <p>
@@ -120,37 +149,11 @@ Flow 変数はフロー(プログラムの起点から最後のユニットま�
 <p>
 Flow 変数を定義するにはフローの中で「セット(Set)ユニット」を呼び出す必要があります。
 <br>
-また Flow 変数を参照するためには「取得(Get)ユニット」を呼び出す必要があります。
+また Flow 変数を参照するためには「ゲット(Get)ユニット」を呼び出す必要があります。
 </p>
 
 <p>
-では実際に String 型の Flow 変数を使ってみましょう。
-<br>
-まず準備です。
-<br>
-Hello World の Script Graph は残しておくことにし、変数のテスト用に別の  Script Graph を用意します
-</p>
-
-<div class="info">
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Variable Script Graph」に名前を変更する
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hello Script Graph と書いてあるセルにアセットフォルダの Variable Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると Variable Script Graph が実行されるようになる
-</p>
-</div>
-
-</div>
-
-<p>
-次に Integer (整数)型の Flow 変数をセットユニットを使って定義します。
+では演習として Integer (整数)型の Flow 変数をセットユニットを使って定義してみましょう。
 <br>
 変数名は flowtest とします。
 </p>
@@ -213,7 +216,7 @@ Hello World の Script Graph は残しておくことにし、変数のテスト
 <br>
 <br>
 <h3>
-4. Graph 変数の使い方
+5. Graph 変数の使い方
 </h3>
 
 <p>
@@ -263,7 +266,7 @@ Graph 変数は Script Graph に対して定義される変数で、フローか
 <p>
 ここまで来たら後は Flow 変数のように使えます。
 <br>
-ただしセットユニットは「Set Graph Variable」、取得ユニットは「Get Graph Variable」となります。
+ただしセットユニットは「Set Graph Variable」、ゲットユニットは「Get Graph Variable」となります。
 </p>
 
 <p>
@@ -280,13 +283,13 @@ Graph 変数は Script Graph に対して定義される変数で、フローか
 <p>
 ところで図4でセットユニット(Set Graph Variable)の値出力ポートと Debug:Log ユニットの値入力ポートが線で繋がってますね。
 <br>
-この様に、わざわざ取得ユニットを用意しなくてもセットユニットから新しい値を取得することも可能です。
+この様に、わざわざゲットユニットを用意しなくてもセットユニットから新しい値を取得することも可能です。
 </p>
 
 
 <br>
 <h3>
-5. Object 変数の使い方
+6. Object 変数の使い方
 </h3>
 
 <p>
@@ -324,7 +327,9 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 <p>
 するとインスペクタの表示は図5の様になります。
 <br>
-ちなみにブラックボードの Object タブにも同じ表示がされていると思います。
+またブラックボードの Object タブにも同じ表示がされていると思います。
+<br>
+もしブラックボードの Object タブがグレー色になっていて選択できない場合はヒエラルキーの PROGRAM をクリックして下さい。
 </p>
 
 <br>
@@ -336,7 +341,7 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 <p>
 ここまで来たら後は Flow 変数や Graph 変数のように使えます。
 <br>
-ただしセットユニットは「Set Object Variable」、取得ユニットは「Get Object Variable」となります。
+ただしセットユニットは「Set Object Variable」、ゲットユニットは「Get Object Variable」となります。
 </p>
 
 <p>
@@ -349,6 +354,28 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 <b>図6 Object 変数の使用例</b>
 <br>
 <img src="./img/page04-fig6.png" alt="">
+
+<br>
+<br>
+<h3>
+7. 変数の簡単な検索方法
+</h3>
+
+<p>
+一度変数を定義すれば検索窓で変数名で検索をかけるだけでその変数に対するセットユニット・ゲットユニットが検索可能です。
+</p>
+
+<p>
+なお後に種類が表示されますので、同じ名前の変数が違う種類の変数として定義されていても判別可能です。
+<br>
+例えば hoge という名前の変数が Flow、Graph、Object 変数として定義されている時に hoge で検索した結果が図7です。
+</p>
+
+<br>
+<b>図7 変数の検索例</b>
+<br>
+<img src="./img/page04-fig7.png" alt="">
+
 
 <br>
 <script>PreNext(4,7)</script>

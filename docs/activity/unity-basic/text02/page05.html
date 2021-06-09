@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. 演算処理と乱数</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次に足し算などの演算や乱数について説明します。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+演算テスト用に別の Script Graph を用意します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Math Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Variable Script Graph と書いてあるセルにアセットフォルダの Math Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Math Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+<br>
+<h3>
+2. 演算ユニット
+</h3>
+
+<p>
+足し算、掛け算、割り算などの演算もユニットで表されます。
+<br>
+四則演算用ユニットの名前と検索方法を表1に示します。
+<br>
+もし Subtract とか Multiply みたいな難しい単語を忘れた時はユニット選択ダイアログを Math → Generic とたどっていけばユニットが見つかります。
+</p>
+
+<b>表1 四則演算用ユニット(汎用)</b>
+<table>
+<tr><td>ユニット名</td><td>検索方法</td></tr>
+<tr><td>＋ Add (in Math/Generic)</td><td>add</td></tr>
+<tr><td>− Subtract (in Math/Generic)</td><td>subtract</td></tr>
+<tr><td>Ｘ Multiply (in Math/Generic)</td><td>multiply</td></tr>
+<tr><td>÷ Divide (in Math/Generic)</td><td>divide</td></tr>
+</table>
+
+<p>
+では試しに (1+2)*3 - 4/2 = 7 を計算してみましょう。
+<br>
+図 1 の様なスクリプトを作成して実行すると 7 と表示されるはずです。
+<br>
+なお今回は全てリテラルを使って計算していますが、もちろん変数を使うことも可能です。
+<p>
+
+<br>
+<b>図1. (1+2)*3 - 4/2 = 7</b>
+<br>
+<img src="./img/page05-fig1.png" alt="">
+
+
+<br>
+<br>
+<h3>
+3. 数字のみ対象の演算用ユニット
+</h3>
+
+<p>
+図1を見て分かるように単純な四則演算をしたいだけなのにやたらユニットが増えてしまいました。
+<br>
+表1に示した演算ユニットは文字列や数字やベクトルなどの異なる種類のリテラルや変数を相互演算するために使われる汎用的なもので、もし演算対象が数字だけならもっと簡単な演算ユニットがあります(表2)。
+<br>
+ユニット選択ダイアログでは Math → Scalar とたどっていけばユニットが見つかります。
+</p>
+
+<b>表2 四則演算用ユニット(数字用)</b>
+<table>
+<tr><td>ユニット名</td><td>検索方法</td></tr>
+<tr><td>＋ Add (in Math/Scalar)</td><td>add</td></tr>
+<tr><td>− Subtract (in Math/Scalar)</td><td>subtract</td></tr>
+<tr><td>Ｘ Multiply (in Math/Scalar)</td><td>multiply</td></tr>
+<tr><td>÷ Divide (in Math/Scalar)</td><td>divide</td></tr>
+</table>
+
+
+<p>
+これらを使って図 1 のスクリプトを作り直したのが図2です。
+<br>
+大分スッキリしました。
+<p>
+
+<br>
+<b>図2. 簡易版 (1+2)*3 - 4/2 = 7</b>
+<br>
+<img src="./img/page05-fig2.png" alt="">
+
+<br>
+<br>
+<h3>
+4. 乱数の生成
+</h3>
+
+<p>
+乱数を生成するには Random:Range ユニット(random:rangeで検索)を使います。
+<br>
+ただし Max Inclusive 版と Max Exclusive 版の2通りがあるので、使い分けについて説明します。
+</p>
+
+<p>
+まず Max Inclusive 版が出力する乱数は小数(Float型)です。
+<br>
+一方 Max Exclusive 版が出力する乱数は整数(Integer型)です。
+</br>
+
+<p>
+それでパラメータの Min にはどちらの版も最小値を入れます。
+<br>
+一方、Max には最大値を入れます。
+<br>
+ただし Max Inclusive 版は<b>MAX 以下の小数</b>、 Max Exclusive 版は<b>MAX よりも小さい整数</b>がランダムに出てきます。
+</p>
+
+<p>
+例えば図3のスクリプトを実行して下さい。
+<br>
+実行する度に違う数字が表示されますが、Max Inclusive 版は 0 から 2 までの小数、Max Exclusive 版は 0 か 1 のどちらかの整数が出力されます。
+</p>
+
+<br>
+<b>図3. 乱数の生成</b>
+<br>
+<img src="./img/page05-fig3.png" alt="">
+
+<br>
+<p>
+ところで Random:Range ユニットにコントロール入出力ポートが付いていることに注目してください。
+</p>
+
+<p>
+Random:Range ユニットは実行する度に異なる乱数を生成します。
+<br>
+従って図4の様にフローに Random:Range ユニットを組み込まない時は Debug:Log を実行する度に Random:Range ユニット が実行されて違う数字が表示されます。
+<br>
+一方、図5の様に Random:Range ユニットをフローの中に組み込むと 1 回しか呼び出されないので、最初に生成した数字がずっと保持されて同じ数字が表示されます。
+</p>
+
+<br>
+<b>図4. 違う数字が表示される例</b>
+<br>
+<img src="./img/page05-fig4.png" alt="">
+
+<br>
+<br>
+<b>図5. 同じ数字が表示される例</b>
+<br>
+<img src="./img/page05-fig5.png" alt="">
+
+
+
+<br>
+<br>
+<script>PreNext(5,10)</script>
+</body>
+</html>
