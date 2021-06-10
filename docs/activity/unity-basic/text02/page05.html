@@ -60,18 +60,19 @@
 <p>
 足し算、掛け算、割り算などの演算もユニットで表されます。
 <br>
-四則演算用ユニットの名前と検索方法を表1に示します。
+代表的な演算用ユニットの名前と検索方法を表1に示します。
 <br>
 もし Subtract とか Multiply みたいな難しい単語を忘れた時はユニット選択ダイアログを Math → Generic とたどっていけばユニットが見つかります。
 </p>
 
-<b>表1 四則演算用ユニット(汎用)</b>
+<b>表1 演算用ユニット(汎用)</b>
 <table>
-<tr><td>ユニット名</td><td>検索方法</td></tr>
-<tr><td>＋ Add (in Math/Generic)</td><td>add</td></tr>
-<tr><td>− Subtract (in Math/Generic)</td><td>subtract</td></tr>
-<tr><td>Ｘ Multiply (in Math/Generic)</td><td>multiply</td></tr>
-<tr><td>÷ Divide (in Math/Generic)</td><td>divide</td></tr>
+<tr><td>ユニット名</td><td>意味</td><td>検索方法</td></tr>
+<tr><td>＋ Add (in Math/Generic)</td><td>足し算</td><td>add</td></tr>
+<tr><td>− Subtract (in Math/Generic)</td><td>引き算</td><td>subtract</td></tr>
+<tr><td>Ｘ Multiply (in Math/Generic)</td><td>掛け算</td><td>multiply</td></tr>
+<tr><td>÷ Divide (in Math/Generic)</td><td>割り算</td><td>divide</td></tr>
+<tr><td>％ Modulo (in Math/Generic)</td><td>剰余(割り算の余り)</td><td>modulo</td></tr>
 </table>
 
 <p>
@@ -95,20 +96,28 @@
 </h3>
 
 <p>
-図1を見て分かるように単純な四則演算をしたいだけなのにやたらユニットが増えてしまいました。
+図1を見て分かるように単純な演算をしたいだけなのにやたらユニットが増えてしまいました。
 <br>
 表1に示した演算ユニットは文字列や数字やベクトルなどの異なる種類のリテラルや変数を相互演算するために使われる汎用的なもので、もし演算対象が数字だけならもっと簡単な演算ユニットがあります(表2)。
 <br>
 ユニット選択ダイアログでは Math → Scalar とたどっていけばユニットが見つかります。
 </p>
 
-<b>表2 四則演算用ユニット(数字用)</b>
+<p>
+もちろん表 1、表 2 以外にも Log とか Sin とか Cos とか様々な演算ユニットがあります。
+<br>
+どの様な演算ユニットがあるのか確認して下さい。
+</p>
+
+
+<b>表2 演算用ユニット(数字用)</b>
 <table>
-<tr><td>ユニット名</td><td>検索方法</td></tr>
-<tr><td>＋ Add (in Math/Scalar)</td><td>add</td></tr>
-<tr><td>− Subtract (in Math/Scalar)</td><td>subtract</td></tr>
-<tr><td>Ｘ Multiply (in Math/Scalar)</td><td>multiply</td></tr>
-<tr><td>÷ Divide (in Math/Scalar)</td><td>divide</td></tr>
+<tr><td>ユニット名</td><td>意味</td><td>検索方法</td></tr>
+<tr><td>＋ Add (in Math/Scalar)</td><td>足し算</td><td>add</td></tr>
+<tr><td>− Subtract (in Math/Scalar)</td><td>引き算</td><td>subtract</td></tr>
+<tr><td>Ｘ Multiply (in Math/Scalar)</td><td>掛け算</td><td>multiply</td></tr>
+<tr><td>÷ Divide (in Math/Scalar)</td><td>割り算</td><td>divide</td></tr>
+<tr><td>％ Modulo (in Math/Scalar)</td><td>剰余(割り算の余り)</td><td>modulo</td></tr>
 </table>
 
 

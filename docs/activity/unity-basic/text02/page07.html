@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>7. 繰り返し処理</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+繰り返し処理は For Loop ユニットや While Loop ユニットなどを使って行います。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+繰り返し処理テスト用に別の Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「For Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の If Script Graph と書いてあるセルにアセットフォルダの For Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると For Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. For ユニット
+</h3>
+
+<p>
+まずはおなじみの For Loop ユニット(for loop で検索)です。
+<br>
+設定項目は First、Last、Step の 3 つです。
+</p>
+
+<p>
+For Loop ユニットは内部で Index という変数を持っていて、最初に First に指定した値で Index を初期化します。
+<br>
+次に Body と書いてあるコントロール出力ポートに繋がっている処理を実行します。
+<br>
+Body の処理が終わったら Index の数を Step だけ増やします。
+<br>
+その際にもし Index の数が Last 未満の場合は再び Body の処理を実行します。
+<br>
+逆に Index の数が Last 以上の場合は Exit(出口) から繰り返し処理を抜け出します。
+
+<p>
+では早速図1のサンプルを実行してみて下さい。
+<br>
+First、Last、Step にはそれぞれ 0, 5, 2 と入れました。
+<br>
+実行すると Index の数が 0、2、4 と増えていき、6 になったら繰り返しから抜ける事が分かります。
+</p>
+
+<br>
+<b>図1. For Loop ユニットの例 </b>
+<br>
+<img src="./img/page07-fig1.png" alt="">
+
+
+
+<br>
+<br>
+<h3>
+3. While Loop ユニット
+</h3>
+
+<p>
+次もお馴染みの While Loop ユニット(while loopで検索)です。
+</p>
+
+<p>
+While Loop ユニットは値入力ポートへの入力が True の間は Body 処理を繰り返すという処理を行います。
+</p>
+
+<p>
+では早速図2のサンプルを実行してみて下さい。
+<br>
+実行すると Flow 変数 i の数が 0、1、2 と増えていき、3 になったら繰り返しから抜ける事が分かります。
+</p>
+
+<br>
+<b>図2. While Loop ユニットの例 </b>
+<br>
+<img src="./img/page07-fig2.png" alt="">
+
+
+<br>
+<br>
+<h3>
+4. Break Loop ユニット
+</h3>
+
+<p>
+繰り返し処理から強制的に抜けるユニットは、これまたおなじみの Break Loop ユニット(break loop で検索)です。
+</p>
+
+<p>
+では図3のサンプルを実行してみて下さい。
+<br>
+実行すると Flow 変数 i の数が 0、1、2 と増えていきますが、今回は While Loop ユニットの値入力ポートに True が常に入力されているためこのままでは無限に処理を繰り返します。
+<br>
+そこで If ユニットを使って i が 3 以上になったら Break Loop ユニットを使って繰り返しから抜ける様にしてあります。
+</p>
+
+<br>
+<b>図3. Break Loop ユニットの例 </b>
+<br>
+<img src="./img/page07-fig3.png" alt="">
+
+
+<br>
+<br>
+<script>PreNext(7,10)</script>
+</body>
+</html>

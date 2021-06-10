@@ -20,7 +20,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-分岐処理は If ユニットや Switch ユニットを使って行います。
+分岐処理は If ユニットや Switch ユニットなどを使って行います。
+<br>
+また分岐処理とは少し違うのですが、Select ユニットの使い方も説明します。
 </p>
 
 <br>
@@ -70,12 +72,14 @@ If ユニットの左下の値入力ポートには正(True)か偽(False)を入�
 さて If ユニットの左下の値入力ポートにはイコールや大なり小なり等の判定用ユニットを接続します。
 <br>
 幸いなことに、値入力ポートからドラッグしてユニット検索ダイアログを開くと代表的な判定用ユニット一覧が表示されるので、それ程使い方には迷わないと思います。
-<p>
+<br>
+またはユニット検索ダイアログの Logic の項目に判定用ユニットがあります。
+</p>
 
 <p>
-では早速図1のサンプルを実行してみて下さい(Random:Range は Max Exclusive 版)。
+では早速図1のサンプルを実行してみて下さい。
 <br>
-まずランダムで 0 から 9 までの整数を生成して表示します。
+まずランダムで 0 から 9 までの整数を生成して表示します(Random:Range は Max Exclusive 版)。
 <br>
 次に生成した数字が 5 以下なら Good、6 以上なら Bad と表示します。
 <br>
@@ -107,7 +111,7 @@ Switch ユニットは入力された選択肢(セレクター)に従って制�
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Switch ユニットにはいくつか種類があるが、今回は Switch On Integer (in Constrol) ユニットを作る(以後 Switch ユニットと略します)
+<span class="olradio"><input type="radio" name="p1"></span> Switch ユニットにはいくつか種類があるが、今回は Switch On Integer (in Control) ユニットを作る(以後 Switch ユニットと略します)
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 作成した Switch ユニットをクリックするとグラフインスペクタに Options という項目が表示される
 <br>
@@ -128,9 +132,9 @@ Switch ユニットは入力された選択肢(セレクター)に従って制�
 
 <br>
 <p>
-では早速図3のサンプルを実行してみて下さい(Random:Range は Max Exclusive 版)。
+では早速図3のサンプルを実行してみて下さい。
 <br>
-まずランダムで 0 から 2 までの整数を生成して表示します。
+まずランダムで 0 から 2 までの整数を生成して表示します(Random:Range は Max Exclusive 版)。
 <br>
 次に生成した数字に合わせて Switch ユニットで分岐します。
 <br>
@@ -143,6 +147,107 @@ Switch ユニットは入力された選択肢(セレクター)に従って制�
 <b>図3. Switch ユニットの例 </b>
 <br>
 <img src="./img/page06-fig3.png" alt="">
+
+
+<br>
+<br>
+<h3>
+4. Select On Integer
+</h3>
+
+<p>
+次は Select ユニット( select on で検索)です。
+<br>
+Select ユニットは厳密には分岐処理では無いのですが、If ユニットや Switch ユニット代わりに使えることが多いのでここで説明します。
+<br>
+Switch ユニットにはいくつか種類がありますが、今回は Select On Integer と Select On Flow について説明します。
+</p>
+
+<p>
+まず Select On Integer ユニットは数字の選択肢に従って値を返すというユニットです。
+<br>
+とりあえず以下の手順でユニットを作ってみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Select ユニットにはいくつか種類があるが、今回は Select On Integer (in Control) ユニットを作る(以後 Select ユニットと略します)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 作成した Select ユニットをクリックするとグラフインスペクタに Options という項目が表示される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Options の隣の＋ポタンを押すと選択肢を追加出来る。今回は＋ポタンを3回押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると選択肢が 3 つ出来る。今回は整数(Integer型)を選択肢とするので上から 0、1、2 を入れる(図4)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Select ユニットに 0、1、2 に対応した値出力ポートが出来る( Default はどれでも無い場合)
+</p>
+</div>
+
+</div>
+
+<br>
+<b>図4. Select ユニットのグラフインスペクタの Options 設定</b>
+<br>
+<img src="./img/page06-fig4.png" alt="">
+
+<br>
+<p>
+では早速図5のサンプルを実行してみて下さい(Random:Range は Max Exclusive 版)。
+<br>
+図 3 と全く同じことをしているスクリプトです。
+<br>
+まずランダムで 0 から 2 までの整数を生成して表示します。
+<br>
+次に生成した数字に合わせて Select ユニットで文字列を選択して表示します。
+<br>
+なお今回は Default は使っていません。
+<br>
+図3 と同じことをしているのに、かなりスッキリしました。
+</p>
+
+<br>
+<b>図5. Select On Integer ユニットの例 </b>
+<br>
+<img src="./img/page06-fig5.png" alt="">
+
+
+<br>
+<br>
+<h3>
+5. Select On FLow
+</h3>
+
+<p>
+Select On Flow ユニットは分岐処理ではなく、逆に処理が合流するときにやって来た経路に従って値を返すというユニットです。
+<br>
+合流する処理の数はユニット内の Branches の隣に入れます。
+</p>
+
+<p>
+多分実際に動かした方が分かりやすいと思うので、以下の図6のサンプルを実行してみて下さい。
+<br>
+これも 図 3、図5 と全く同じことをしているスクリプトです。
+<br>
+まずランダムで 0 から 2 までの整数を生成して表示します(Random:Range は Max Exclusive 版)。
+<br>
+次に生成した数字に合わせて Switch ユニットで処理を分岐します。
+<br>
+そして合流時に Select On Flow を使って文字列を選択して表示します(Branches の数を 3 にするのを忘れずに)。
+<br>
+なお今回は Default は使っていません。
+</p>
+
+<p>
+今回はあまり良い例ではありませんが、使い方次第ではいろいろ面白いことが出来そうです。
+</p>
+
+<br>
+<b>図6. Select On Flow ユニットの例 </b>
+<br>
+<img src="./img/page06-fig6.png" alt="">
+
 
 
 <br>
