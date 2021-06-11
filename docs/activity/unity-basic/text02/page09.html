@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>9. Update イベント</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+今までは Start イベントユニットだけしか使ってなかったので、実行ボタンを押してスクリプトの最後までたどり着いたらそれで動作完了でした。
+<br>
+しかし実際のゲームでは実行中にキャラクターを動かしたり、当たり判定処理を行なったりする必要があります。
+<br>
+そこで Unity では Start だけではなく様々な用途に使われるイベントが用意されていて、それらのイベント毎にスクリプトを実行出来るようになっています。
+<br>
+それらのイベントのうち、Start イベントに次いで重要な Update イベントと Fixed Update イベントについてここでは説明します。
+<br>
+これら以外の重要イベントについては必要な時にその都度説明します。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+リストのテスト用に別の Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Update Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の List Script Graph と書いてあるセルにアセットフォルダの Update Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Update Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. Update イベント
+</h3>
+
+<p>
+ゲームの実行画面はアニメーションの様に1コマごとに描画を繰り返して表示しています(よくパラパラ漫画に例えられます)。
+<br>
+そのコマのことを<b>フレーム</b>と呼びますが、描画フレーム毎に実行されるイベントが Update イベントです。
+<br>
+CPUやグラフィックカードなどの実行環境にも左右されますが、だいたい一秒間に10〜60フレームくらい Update イベントは実行されます。
+</p>
+
+<p>
+Update イベントも Start イベントと同様にグラフウィンドウ内では Update イベントユニットとして表現されます(update で検索)。
+<br>
+例えば i という Integer 型の Graph 変数を作成したあと、図 1 のスクリプトを作成して実行してください。
+<br>
+Update イベントが繰り返し実行され、ブラックボードを見ると i がすごい勢いでカウントアップしていくのが分かります。
+</p>
+
+<br>
+<b>図1. Update イベントユニットの例 </b>
+<br>
+<img src="./img/page09-fig1.png" alt="">
+
+<br>
+<br>
+<h3>
+2. Fixed Update イベント
+</h3>
+
+<p>
+Fixed Update イベントも Update イベントと同様に繰り返し実行されるイベントです。
+<br>
+ただし Update イベントは描画フレーム毎に実行されるイベントで、マシンスペックなどにより実行されるタイミングが結構変化します。
+<br>
+一方 Fixed Update イベントは可能な限り一定の間隔(※)で実行するという違いがあります。
+<br>
+よって実行タイミングが重要である物理演算処理などで良く使われます。
+</p>
+
+<p>
+※ デフォルトでは 0.02 秒(50FPS)で、この数字は Project Setting → Time → Fixed Timestep で変更できます
+</p>
+
+<p>
+さてFixed Update イベントもグラフウィンドウ内では Fixed Update イベントユニットとして表現されます(fixed update で検索)。
+<br>
+例えば 図 1 のスクリプトを作成して実行してください。
+<br>
+Fixed Update イベントもやはり繰り返し実行され、ブラックボードを見ると i がすごい勢いでカウントアップしていくのが分かります。
+</p>
+
+<br>
+<b>図2. Fixed Update イベントユニットの例 </b>
+<br>
+<img src="./img/page09-fig2.png" alt="">
+
+
+<br>
+<br>
+<script>PreNext(9,10)</script>
+</body>
+</html>
