@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>8. リスト</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではリストの使い方について学びます。
+</p>
+
+<p>
+リストはデータを順番に並べて収納しているデータ構造のことで、良く貨物列車のコンテナ車の様な図を使って説明されています(貨物列車で画像検索してみてください)。
+<br>
+リストに似た概念に配列というデータ構造もありますが、長さを変更できない配列と違ってリストは(貨物列車のコンテナ車の様に)データを繋いだり外したりすることが出来ます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+リストのテスト用に別の Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「List Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の For Script Graph と書いてあるセルにアセットフォルダの List Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると List Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. リストの作り方
+</h3>
+
+<p>
+List には<a href="./page04.html">変数</a>の様に Flow、Graph、Object 等の種類があります。
+</p>
+
+<p>
+まず Flow リストを作るには Create List ユニットを使います(create list で検索)。
+<br>
+初期値をセットしたい場合はユニット内の Elements に初期値の数を入れて、値入力ポートから初期値を入力します。
+<br>
+これだけで Flow リストは出来ますが Flow 変数に代入して置くと便利かもしれません。
+<br>
+図 1 の例では Flow リストを作り、hoge、fuga という文字列で初期化し、 flowlist という Flow 変数に代入し、flowlist の中身を表示しています。
+<br>
+後にくっついている For Each Loop ユニットについては後で説明します。
+</p>
+
+<br>
+<b>図1. Flow リストの例 </b>
+<br>
+<img src="./img/page08-fig1.png" alt="">
+
+
+<br>
+<br>
+その他の Graph リストや Object リストなどは変数と同じ様にブラックボードやゲームオブジェクトのインスペクタで定義します。
+<br>
+Type (型) を指定する時は list of 型名(float とか integer とか string とか)で検索すると便利です。
+<br>
+初期値をセットしたい場合は Value(初期値)の隣にある＋ボタンを押して項目を追加します。
+<br>
+例えば図 2 は String 型の Graph リスト graphtest を定義した例です。
+</p>
+
+<br>
+<b>図2. Graph リストの例 </b>
+<br>
+<img src="./img/page08-fig2.png" alt="">
+
+<p>
+あとは普通の変数の様にゲットユニットでアクセス出来ます(図 3)。
+</p>
+
+<br>
+<b>図3. Graph リストの使い方 </b>
+<br>
+<img src="./img/page08-fig3.png" alt="">
+
+
+<br>
+<br>
+<h3>
+3. リストに値を追加する
+</h3>
+
+<p>
+リストに値を追加するには Add List Item ユニット(add list itemで検索)を使います。
+<br>
+使い方は図 4 を見ればすぐ分かると思います。
+</p>
+
+<br>
+<b>図4. リストに値を追加 </b>
+<br>
+<img src="./img/page08-fig4.png" alt="">
+
+<br>
+<br>
+<h3>
+4. リストから値を削除する
+</h3>
+
+<p>
+逆にリストから値を削除するためには、値で指定する Remove List Item ユニット(Remove list item で検索)と、値のある位置を指定する Remove List Item At ユニット(remove list item at で検索)の 2 つがあります。
+</p>
+
+<p>
+どちらも使い方は図を見れば分かると思います。
+<br>
+まず Remove List Item ユニットの例が図 5 です。
+<br>
+hoge という値をリストから削除しています。
+</p>
+
+<br>
+<b>図5. Remove List Item ユニットの例 </b>
+<br>
+<img src="./img/page08-fig5.png" alt="">
+
+<p>
+<br>
+次に Remove List Item At ユニットの例が図 6 です。
+<br>
+Index で位置を指定します( 0 番から始まるのに注意)。
+<br>
+今回の例では 0 番目にある hoge をリストから削除しています。
+</p>
+
+<br>
+<b>図6. Remove List Item At ユニットの例 </b>
+<br>
+<img src="./img/page08-fig6.png" alt="">
+
+
+<br>
+<br>
+<h3>
+5. リストの値にアクセスする
+</h3>
+
+<p>
+リストを作ったら保存されている値にアクセスしてみましょう。
+<br>
+これも簡単で、図7 の様に Get List Item ユニット(get list item で検索)を使うだけです。
+<br>
+Index で値の位置を指定します。
+</p>
+
+<br>
+<b>図7. リストの値にアクセス </b>
+<br>
+<img src="./img/page08-fig7.png" alt="">
+
+<br>
+<br>
+<h3>
+6. リストの全ての値にアクセスする
+</h3>
+
+<p>
+次はリストに保存されている全ての値にアクセスしてみます。
+<br>
+もちろん<a href="./page07.html">For Loopユニット</a>を使ってやっても良いのですが、リストの場合は For Each Loop ユニット(for each loop で検索)を使った方が便利です。
+</p>
+
+<p>
+例えば図8 (図3と同じ内容)を見て下さい。
+<br>
+For Loop ユニットと使い方はほとんど同じですが、Index の下に Item という項目が追加されています。
+<br>
+ここから Index 番目の値が出力されます。
+</p>
+
+<br>
+<b>図8. For Each Loop ユニットの使い方 </b>
+<br>
+<img src="./img/page08-fig3.png" alt="">
+
+<br>
+<br>
+<script>PreNext(8,10)</script>
+</body>
+</html>
