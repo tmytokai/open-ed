@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. パラメータ多相 (テンプレート)</title>
+<title>4. パラメータ多相 (ジェネリクス)</title>
 </head>
 <body>
 
@@ -20,8 +20,248 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+「<b>パラメータ多相</b>」はメソッドやクラスを定義する時に特定のデータ型に依存しないで総称的に記述出来るという性質のことで「<b>ジェネリクス</b>」機能により実現されます。
+<br>
+ジェネリクスは「<b>ジェネリック</b>」「<b>総称</b>」「<b>テンプレート</b>」と呼ばれることもあります。
 </p>
+
+<p>
+ジェネリクスを使うと、引数やフィールドの型が違うだけでほとんど同じ内容のメソッドやクラスを何度も書く必要がなくなるので、ソースコードがスッキリしてバグの混入を防げます。
+</p>
+
+<p>
+はじめに、メソッドにジェネリクスを適用する方法について説明します。
+<br>
+ジェネリクスを適用したメソッドのことを「<b>ジェネリクスメソッド</b>」とか「<b>ジェネリックメソッド</b>」とか「<b>総称型メソッド</b>」などと言います。
+</p>
+
+<p>
+それではソース 1 を見て下さい。
+<br>
+ソース 1では String 型と Integer 型を引数として持つ print メソッドをオーバロードして作っています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : ジェネリクスメソッドを使わずオーバーロードを使った例</b>
+<pre class="wrap">
+
+public class Main{
+
+    public static void print( String a ){
+        System.out.println( a );
+    }
+
+    public static void print( Integer a ){
+        System.out.println( a );
+    }
+
+    public static void main(String[] args) {
+
+        print("hoge");
+        print(123);
+    }
+}
+
+
+出力結果:
+
+hoge
+123
+</pre>
+</div>
+
+
+<p>
+ところが print メソッドは引数の型が違うだけで中身は同じなので2回書くのは無駄な気がします。
+<br>
+そこで以下の様に print をジェネリクスメソッドに書き換えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : print をジェネリクスメソッドにした場合 </b>
+<pre class="wrap">
+
+public class Main{
+
+    public static &lt;T&gt; void print( T a ){
+        System.out.println( a );
+    }
+
+    public static void main(String[] args) {
+
+        print("hoge");
+        print(123);
+    }
+}
+
+出力結果:
+
+hoge
+123
+</pre>
+</div>
+
+<p>
+すると print メソッドは1つしか定義してないのに全く同じ出力結果が得られました。
+</p>
+
+<p>
+では詳しく説明します。
+<br>
+ソース 2 の print メソッドで、戻り値(void)の前にある &lt;T&gt; を「<b>型パラメータ</b>」や「<b>仮パラメータ</b>」や「<b>仮型パラメータ</b>」などと呼び、型パラメータが指定されているメソッドをジェネリクスメソッドと言います。
+<br>
+型パラメータを指定すると特定の型の代わりに型パラメータを型名として使えるようになります。
+<br>
+例えばソース 2 では T が型パラメータとなっています。
+</p>
+<p>
+※ 型パラメータの文字は適当で結構ですが T (Typeの略) や E (Elementの略) とする事が多いです
+</p>
+
+<p>
+ところでソース 2 の main メソッドにある print("hoge") と print(123) が ソース1と変わってないことに注目してください。
+<br>
+大抵のオブジェクト指向プログラミング言語ではジェクリクスメソッドを呼び出す時に型を自動認識してくれるので、呼び出し時にわざわざ引数の実際の型を指定する必要はありません。
+</p>
+
+<br>
+<p>
+次に、クラスにジェネリクスを適用した「<b>ジェネリクスクラス</b>」(または「<b>ジェネリッククラス</b>」、「<b>総称型クラス</b>」)について説明します。
+<br>
+なお、今まで特に説明しないで使ってきた<a href="../../java-basic/text04/page01.html">リスト</a>も実はジェネリクスクラスの一つです。
+</p>
+
+
+<p>
+それではソース 3〜5 を見て下さい。
+<br>
+この例では String 型及び Integer 型の data をフィールドとして持つ Hoge クラスと Fuga クラスを作っています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 3 : Hoge クラス</b>
+<pre class="wrap">
+
+public class Hoge{
+
+   private String data;
+
+   public Hoge(String _data){
+       data = _data;
+   }
+
+   public String get_data(){
+       return data;
+   }
+}
+
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 4 : Fuga クラス</b>
+<pre class="wrap">
+
+public class Fuga{
+
+   private Integer data;
+
+   public Fuga(Integer _data){
+       data = _data;
+   }
+
+   public Integer get_data(){
+       return data;
+   }
+}
+
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 5 : Main クラス</b>
+<pre class="wrap">
+
+public class Main{
+
+    public static void main(String[] args) {
+
+        Hoge hoge = new Hoge("hoge");
+        Fuga fuga = new Fuga(123);
+
+        System.out.println(hoge.get_data());
+        System.out.println(fuga.get_data());
+    }
+}
+
+出力結果:
+
+hoge
+123
+</pre>
+</div>
+
+<p>
+ただし、見て分かるように中身は殆ど同じなので、Hoge クラスと Fuga クラスをジェネリクスクラス Piyo で統一してみましょう(ソース6)。
+<br>
+この様にジェネリクスクラスでは型パラメータはクラス名の後で指定します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 6 : ジェネリクスクラスの例</b>
+<pre class="wrap">
+
+public class Piyo&lt;T&gt;{
+
+   private T data;
+
+   public Piyo(T _data){
+       data = _data;
+   }
+
+   public T get_data(){
+       return data;
+   }
+}
+
+</pre>
+</div>
+
+<p>
+この Piyo クラスを使いたい時は次のソース 7 の様にします。
+<br>
+なおジェネリクスメソッドの時と違ってインスタンスを作る際に型を指定する必要があります(オブジェクト指向プログラミング言語によっては自動認識するものもあります)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 7 : Piyo を使う Main クラス</b>
+<pre class="wrap">
+
+public class Main{
+
+    public static void main(String[] args) {
+
+        var hoge = new Piyo&lt;String&gt;("hoge");
+        var fuga = new Piyo&lt;Integer&gt;(123);
+
+        // Java のバージョンによっては var を使えないので下の様に new する
+        // Piyo&lt;String&gt; hoge = new Piyo&lt;String&gt;("hoge");
+        // Piyo&lt;Integer&gt; fuga = new Piyo&lt;Integer&gt;(123);
+
+        System.out.println(hoge.get_data());
+        System.out.println(fuga.get_data());
+    }
+}
+
+
+出力結果:
+
+hoge
+123
+</pre>
+</div>
 
 <br>
 <script>PreNext(4,4)</script>
