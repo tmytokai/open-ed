@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>10. コントローラ入力</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではゲームパッドやキーボードなどのコントローラの入力方法について学びます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+リストのテスト用に別の Script Graph を用意します
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Control Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Update Script Graph と書いてあるセルにアセットフォルダの Control Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Control Script Graph が実行されるようになる
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. 上下左右入力
+</h3>
+
+<p>
+まずコントローラの上下左右入力について説明します。
+</p>
+
+<p>
+現在の上下左右の入力状態を取得するユニットは Input Get Axis と Input Get Axis Raw の2つです(どちらも input:get axis で検索)。
+<br>
+それらの違いは以下の通りです。
+</p>
+
+<p>
+・Input Get Axis → アナログ入力用、-1〜1の間で小数値を取る
+</p>
+
+<p>
+・Input Get Axis Raw → デジタル入力用、-1か0か1の整数値を取る
+</p>
+
+<p>
+これを踏まえてまず左右入力です。
+<br>
+キーボードで左右入力をするための設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+<br>
+デフォルトでは設定名が「Horizontal」、割当キーが「左右カーソル、a,d」となっています。
+<br>
+出力結果は -1 が左、1が右、0が未入力となります。
+</p>
+
+<p>
+これを踏まえて図1を実行して下さい。
+<br>
+ログの最初の行が Input Get Axis 、2行目が  Input Get Axis Raw の結果です。
+<br>
+ユニットの「Axis Name」の中に設定名である「Horizontal」を入れます。
+<br>
+ゲームパッドを持っている人はゲームパットもつないで試してみて下さい。
+</p>
+
+<p>
+(注) もし入力をしても表示が 0 のまま変わらない人はゲームビュー内の適当な位置をクリックしてキーボードフォーカスを移して下さい。
+</p>
+
+<br>
+<b>図1. 左右入力の例 </b>
+<br>
+<img src="./img/page10-fig1.png" alt="">
+
+
+<p>
+次は上下入力を試して下さい。
+<br>
+キーボードで上下入力をするための設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+<br>
+デフォルトでは設定名が「Vertical」、割当キーが「上下カーソル、s,w」となっています。
+<br>
+出力結果は -1 が下、1が上、0が未入力となります。
+</p>
+
+<p>
+では図1の「Horizontal」の部分を「Vertical」に変更して実行して試して下さい。
+</p>
+
+
+<br>
+<br>
+<h3>
+3. ボタン入力
+</h3>
+
+<p>
+弾を撃ったりジャンプしたりするためのボタン入力は Input Get Button ユニットで行えます( input get button で検索)。
+</p>
+
+<p>
+こちらもボタンの設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+<br>
+デフォルトでは
+</p>
+
+<p>
+「Fire1」 ・・・ 左Ctrl、マウス左クリック
+</p>
+
+<p>
+「Fire2」 ・・・ 左Alt (MacはOption)、マウス右クリック
+</p>
+
+<p>
+「Fire3」 ・・・ 左Shift、マウス中クリック
+</p>
+
+<p>
+「Jump」 ・・・ スペース
+</p>
+
+<p>
+「Submit」 ・・・ エンター
+</p>
+
+<p>
+「Cancel」 ・・・ Esc
+</p>
+
+
+<p>
+が割当たっています(もちろん設定の変更や追加も可能です)。
+<br>
+Input Get Button ユニットはこれらの入力がされている時は True、されていない時は False を出力します。
+</p>
+
+<p>
+では以下の図2を実行して下さい。
+<br>
+うまく動いたらButton Name の「Fire1」を他の設定に変更して試して下さい。
+</p>
+
+<br>
+<b>図2. ボタン入力の例 </b>
+<br>
+<img src="./img/page10-fig2.png" alt="">
+
+
+<br>
+<br>
+<script>PreNext(10,11)</script>
+</body>
+</html>
