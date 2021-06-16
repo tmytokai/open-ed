@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>11. マウス入力</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次にマウスの入力方法について学びます。
+<br>
+右中左クリックについては前のページで取り扱ったので、ここでは座標の取得について取り扱います。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+テスト用に別の Script Graph を用意します。
+<br>
+さらに今回は球も2つシーン内に配置して下さい
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Mouse Script Graph」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Control Script Graph と書いてあるセルにアセットフォルダの Mouse Script Graph をドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> すると Mouse Script Graph が実行されるようになる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA1」、Position を (5,2,0)にする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> もう一度ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA2」、Position を (5,2,15)にする 
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. スクリーン座標の取得
+</h3>
+
+<p>
+まずスクリーン座標、つまりゲーム画面上に表示されているカーソルの座標をピクセル値で取得してみます。
+<br>
+</p>
+
+<p>
+スクリーン座標を取得するユニットは Input Get Mouse Position ユニットです(input get mouse position で検索)。
+<br>
+では図1を実行してみて下さい。
+<br>
+これだけで座標 (x,y,z) が取得できます。
+<br>
+なお原点は画面左下で、右上に行くほど座標が大きくなります。
+<br>
+また z の値は常に 0 となりますのでご注意下さい。
+</p>
+
+<br>
+<b>図1. スクリーン座標取得 </b>
+<br>
+<img src="./img/page11-fig1.png" alt="">
+
+<br>
+<br>
+<h3>
+3. ワールド座標への変換
+</h3>
+
+<p>
+ゲームオブジェクトがある空間の座標のことをワールド座標と言います。
+
+カーソルの画面上の座標、つまりスクリーン座標が分かってもカーソルの下にあるゲームオブジェクトのワールド座標はそのままでは分かりません。
+</p>
+
+<p>
+そこで Camera Screen To World Point (Position) というユニット(camera screen to world point で検索)を使ってスクリーン座標をワールド座標に変換します。
+<br>
+なおその際に使用しているカメラを指定する必要があります。
+<br>
+今回はメインカメラひとつしか使ってないので、Camera Get Main (camera get main で検索)を指定します。
+</p>
+
+<p>
+あとはスクリーン座標を入力すればOKなのですが落とし穴があるので注意して下さい。
+<br>
+とりあえず以下の図2(失敗例)を実行して下さい。
+<br>
+変な値が出てくると思います。
+</p>
+
+<br>
+<b>図2. スクリーン座標をワールド座標に変換(失敗例) </b>
+<br>
+<img src="./img/page11-fig2.png" alt="">
+
+<p>
+これは Input Get Mouse Position ユニットで取得したスクリーン座標の z 座標が 0 だったことが原因で、実は<b>z 座標にはカメラから測定平面までの距離を入れる必要があります(図3)</b>。
+</p>
+
+<br>
+<b>図3. 変換したいスクリーン座標の z にはメインカメラから測定平面までの距離を指定する </b>
+<br>
+<img src="./img/page11-fig3.png" alt="">
+
+
+<p>
+そこでスクリーン座標を一度適当な Flow 変数に代入し、適切な z の値をセットしてからワールド座標に変換します。
+<br>
+例えば図 4 の様にスクリプトを変更します。
+</p>
+
+<br>
+<b>図4. スクリーン座標をワールド座標に変換(正しい例) </b>
+<br>
+<img src="./img/page11-fig4.png" alt="">
+
+<p>
+デフォルトではメインカメラの座標は(0,1,-10)なので、図4の様に Vector3 Set Z ユニットを使って z 座標に 10 をセットすると、z = -10 + 10 = 0 の位置にあるゲームオブジェクトの座標を正しく取得出来るようになります。
+<br>
+例えば TAMA1 の上にカーソルを持っていくと正しい座標 (5,2,0) が表示されると思います。
+</p>
+
+<p>
+一方 TAMA2 の上にカーソルを持って行っても正しい座標は出てきません。
+<br>
+これはメインカメラから TAMA2 までの距離が 25 だからです。
+<br>
+そこで Vector3 Set Z ユニットを使って z 座標に 25 を入れてから TAMA2 の上にカーソルを持っていくと正しい座標 (5,2,15) が表示されます。
+<p>
+
+<p>
+なお今回はメインカメラを回転してないので簡単な計算で z の値を求められましたが、z はあくまでメインカメラから測定平面までの距離なので、実際の計算はメインカメラの Rotation の値も関わってきます。
+<br>
+例えばメインカメラの Rotation を(0,45,0)にしてから TAMA2 の上にカーソルを持っていって下さい。
+<br>
+変な座標値が表示されると思います。
+</p>
+
+<br>
+<br>
+<script>PreNext(11,11)</script>
+</body>
+</html>
