@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 速度を直接変更して移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [3] 物理演算</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次はゲームオブジェクトを移動させましょう。
+</p>
+
+<p>
+ゲームオブジェクトの移動方法には「速度を直接変更する方法」と「力を与えて物理的に動かす方法」があります。
+<br>
+分かりやすいのは速度を直接変更して動かす方法なので、まずこちらから説明します。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に新しいシーンを作り、箱を作成します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Velocity Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO に Rigidbody コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO のインスペクタを表示して Rigid Body の Use Gravity のチェックを外す
+</p>
+</div>
+
+</div>
+
+<p>
+またゲームオブジェクトを動かすためにはスクリプトを作る必要があるので、<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Velocity Script Graph」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Velocity Script Graph をドロップする
+</p>
+</div>
+
+</div>
+
+<br>
+<br>
+<h3>
+2. 速度を直接変更して移動する
+</h3>
+
+<p>
+Rigidbody Set Velocity ユニット(rigidbody set velocityで検索)を使って速度を変更できます。
+<br>
+なお3次元空間なので、速度は3次元ベクトル(Vector3)を使って x,y,z 方向別に指定します。
+<br>
+これを「<b>速度ベクトル</b>」と言います。
+</p>
+
+<p>
+では早速図1を実行してください。
+<br>
+右方向に 1 メートル/秒の速度で動き始めると思います。
+</p>
+
+<p>
+<b>図1. 速度を直接変更</b>
+</p>
+<img src="./img/page05-fig1.png" alt="">
+
+<br>
+<p>
+ところで<a href="../text01/page05.html">ゲームオブジェクトの向き</a>を使って移動方向を指定したい時があります。
+<br>
+ゲームオブジェクトの向きも3次元ベクトルで表すことが出来て、これを「<b>方向ベクトル</b>」と呼びます。
+</p>
+
+<p>
+さてゲームオブジェクトの方向ベクトルは以下の3つのユニットで取得できますので、これらを速度ベクトルとして Rigidbody Set Velocity ユニットに入力します。
+<br>
+なお方向ベクトルの長さは常に 1 なので、ゲームオブジェクトは指定した方向に 1 メートル/秒の速度で動き始めます。
+</p>
+
+<ul>
+<li>前方向ベクトル: Transform Get Forward ユニット (transform get forward で検索)</li>
+<li>右方向ベクトル: Transform Get Right ユニット (transform get right で検索)</li>
+<li>上方向ベクトル: Transform Get Up ユニット (transform get up で検索)</li>
+</ul>
+
+<p>
+では図2を実行してください。
+<br>
+Transform Get Right は右方向ベクトルですので、HAKO は右方向に 1 メートル/秒の速度で動き始めます。
+<br>
+うまく動いたら前方向や上方向にも動かして下さい。
+</p>
+
+<p>
+<b>図2. ゲームオブジェクトの向きで移動方向を指定</b>
+</p>
+<img src="./img/page05-fig2.png" alt="">
+
+<br>
+<p>
+また移動速度を変更したい時は適当な Float 型の変数を用意し、その変数を方向ベクトルにかけてから Rigidbody Set Velocity に入力します。
+<br>
+もしかける値がマイナスの時は逆方向に移動します。
+<br>
+例えば図3では speed という Float 型の Graph 変数に -5 を指定し、右方向ベクトルにその speed をかけてますので、左方向に 5 メートル/秒で移動します。
+<br>
+うまく動いたら速度を変えたり、前方向や上方向にも動かして下さい。
+</p>
+
+<br>
+<p>
+<b>図3. 移動速度を指定</b>
+</p>
+<img src="./img/page05-fig3.png" alt="">
+
+<br>
+<p>
+また方向ベクトルを足し合わせる事で斜め方向など好きな方向に動かすことも出来ます。
+<br>
+以下の図4は右斜め上方向に速度 speed で動かす例です。
+<br>
+なお単純に
+</p>
+
+<p>
+速度ベクトル = (右方向ベクトル + 上方向ベクトル) x speed
+</p>
+
+<p>
+で速度ベクトルを計算すると斜め方向に $\sqrt{2}$ x speed の速さで動いてしまうので、Vector3 Normalize(Value) ユニット(vector3 normalizeで検索)でノーマライズ(長さ1のベクトルにすること)してから speed をかける必要があります。
+
+
+<br>
+<p>
+<b>図4. 方向ベクトルを足し合わせ、ノーマライズしてから speed をかける</b>
+</p>
+<img src="./img/page05-fig4.png" alt="">
+
+
+
+<p>
+さらに<a href="../text02/page10.html">コントローラ入力</a>とも組み合わせてみましょう。
+<br>
+Input Get Axis Raw ユニットを使うと上下左右入力に従って 1 か 0 か -1 という値を取得出来ますので、その値を方向ベクトルにかけることでコントローラに入力にした方向に従ってゲームオブジェクトを動かす事ができます。
+<br>
+例えば図 5 を実行して上下左右入力をしてみて下さい(イベントが Start から Update に変わってるのに注意)。
+<br>
+Update イベントの中で左右方向ベクトルと上下方向ベクトルを足し合わせ、ノーマライズしてから speed をかけてます。
+</p>
+
+<br>
+<p>
+<b>図5. コントローラを使ってゲームオブジェクトを動かす例</b>
+</p>
+<img src="./img/page05-fig5.png" alt="">
+
+<br>
+<p>
+上手く動いたら Vector3 Normalize(Value) ユニットを外して試して下さい。
+<br>
+ノーマライズしないと斜め方向に$\sqrt{2}$ = 約1.4倍の速さで動いてしまうことが分かります。
+</p>
+
+<br>
+<script>PreNext(4,20)</script>
+</body>
+</html>

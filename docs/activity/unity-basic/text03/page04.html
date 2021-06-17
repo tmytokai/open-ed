@@ -39,11 +39,11 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成をする(シーン名は適当で結構です。背景も任意で結構ですが以下の例では見やすいように黒にしています)
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成をし、シーン名を「Spring Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「TENJYO」、Position を (0,6,0)にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> TENJYO に Rigidbody をアタッチする
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO に Rigidbody コンポーネントをアタッチする
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,0,0)にする
 <br>
@@ -63,7 +63,7 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> TENJYO のインスペクタを表示して Rigit Body の Use Gravity のチェックを外す (すると重力がかからなくなります)
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO のインスペクタを表示して Rigid Body の Use Gravity のチェックを外す (すると重力がかからなくなります)
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Position の x,y,z にチェックを入れる(すると位置がロックされます)
 <br>
@@ -172,7 +172,7 @@
 <p>
 では次に TAMA の重さを変えたらどうなるか見てみましょう。
 <br>
-<b>実行状態のまま </b> TAMA のインスペクタ の Rigit Body の Mass(重さ、単位は kg) を 1 kg から 2 kg に変更して下さい。
+<b>実行状態のまま </b> TAMA のインスペクタ の Rigid Body の Mass(重さ、単位は kg) を 1 kg から 2 kg に変更して下さい。
 <br>
 するとだいたい -2 メートルの辺りで静止します。
 <br>
@@ -196,7 +196,7 @@
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 実行を停止し、 TAMA の重さが 1 kg に戻っていることを確認する (戻ってない時は Mass に 1 を入れる)
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 重力がかかっていると挙動が分かりにくいので TAMA の Rigit Body の Use Gravity のチェックを外す
+<span class="olradio"><input type="radio" name="p1"></span> 重力がかかっていると挙動が分かりにくいので TAMA の Rigid Body の Use Gravity のチェックを外す
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> TAMA の Position の Y の値を 4 にする ( TAMA を押してバネを縮めている状態)
 </p>
