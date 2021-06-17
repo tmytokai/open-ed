@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
-<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li>学習項目: [1] クラス図</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -24,20 +24,22 @@
 </p>
 
 <p>
-クラス間の関係は大きく分けると
+クラス間の関係は主に
 </p>
 
 <ol>
-<li>「汎化」</li>
-<li>「関連」</li>
+<li>「<b>汎化</b> (Generalization)」</li>
+<li>「<b>関連</b> (Association)」</li>
 </ol>
 
 <p>
-の２つがあるのですが、ここではまず「汎化」について学びます。
+の２つに分けられます。
+<br>
+ここではまず汎化について学びます。
 </p>
 
 <p>
-さて「汎化」とは具体的には<a href="../../oop-element/text01/page01.html">インヘリタンス(継承)</a>の関係を表します。
+さて汎化とは具体的には<a href="../../oop-element/text01/page01.html">インヘリタンス</a>の関係を表します。
 <br>
 例えば<a href="./page01.html">前ページ</a>の FRUIT スーパークラスを継承して次の ORANGE サブクラスを作ったとします。
 </p>
@@ -60,11 +62,11 @@ public class ORANGE extends FRUIT{
 </p>
 
 <p>
-<b>ORANGE is a FRUIT : みかんはフルーツです</b>
+<b>ORANGE is a FRUIT ( みかん は フルーツ です)</b>
 </p>
 
 <p>
-となりますので(微妙に a の使い方が変な気もしますが)、「汎化」は別名<b>「is-a 関係」</b>と言います。
+となりますので(微妙に a の使い方が変な気もしますが)、汎化は別名<b>「is-a 関係」</b>と言います。
 </p>
 
 <p>
@@ -74,19 +76,18 @@ public class ORANGE extends FRUIT{
 </p>
 
 <p>
-例えば上の FRUIT スーパークラスと ORANGE サブクラスを含むクラス図は次のようになります。
+例えば上の FRUIT スーパークラスと ORANGE サブクラスを含むクラス図は次の図2となります。
 <br>
 なお ORANGE のコンストラクタは省略しています。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>図1: 汎化(is-a 関係) の例</b>
+<br>
 <p>
+<input type="checkbox"><b>図1: 汎化(is-a 関係) の例</b>
 </p>
 <img src="./img/page02-fig1.png" alt="">
-</div>
 
 <br>
-<script>PreNext(2,5)</script>
+<script>PreNext(2,4)</script>
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. オブジェクト図</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [2] オブジェクト図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではオブジェクト図について説明します。
+</p>
+
+<p>
+オブジェクト図もUMLで定められたダイアグラムの一つですが、クラス間の関係ではなくて、プログラムが動作中のある時点における「<b>インスタンス間の関係を示す図</b>」です。
+<br>
+1 つのインスタンスからなる単一オブジェクト図の描き方は次のようになります。
+</p>
+
+<br>
+<p>
+<input type="checkbox"><b>図1: 単一オブジェクト図</b>
+</p>
+<img src="./img/page01-fig1.png" alt="">
+
+<p>
+この様に、クラス名の左に具体的なインスタンス名を記入します。
+<br>
+なお<a href="../text01/page02.html">汎化</a>を行っている場合はスーパークラスの名前ではなく、実際にインスタンスを作成したサブクラスの名前を書きます。
+</p>
+
+<p>
+また属性名には各フィールドの現在値を入れます。
+<br>
+ただし属性名は省略する場合もあります。
+</p>
+
+<p>
+さてインスタンス間に何らかの関連がある場合はクラス図の<a href="../text01/page03.html">関連</a>や<a href="../text01/page04.html">集約</a>の時と同様にリンクで繋ぎますが<b>「あるクラスのインスタンスから他のクラスのインスタンスに張るリンク数はクラス図の多重度と同じ数」</b>になります。
+</p>
+
+<p>
+例えば集約の例として挙げた<a href="../text01/img/page04-fig3.png">図2</a>をもう一度考えます。
+<br>
+ソースコードも同じページにある<a href="../text01/page04.html">ソース1</a>を使います。
+</p>
+
+<p>
+ここで MyWorld のインスタンスを myworld とします。
+<br>
+すると MyWorld のコンストラクタで orange0 〜 orange3 が作られ、各 orange は myworld の所有物なので、myworld が作られた直後のオブジェクト図は次の図 2 で表されます。
+<br>
+この様に myworld から 各 orange へリンクが確かにクラス図の多重度と同じ計 4 本引かれていることが分かります。
+</p>
+
+<br>
+<p>
+<input type="checkbox"><b>図2　オブジェクト図の例</b>
+</p>
+<img src="./img/page01-fig2.png" alt="">
+
+<br>
+<script>PreNext(1,1)</script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
-<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li>学習項目: [1] クラス図</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -78,7 +78,7 @@
 <br>
 <h2><a href="./page03.html">3. 関連</a></h2>
 
-<h2><a href="./page04.html">4. 集約 (has-a 関係)</a></h2>
+<h2><a href="./page04.html">4. 集約 (has-a/part-of 関係)</a></h2>
 
 <br>
 <p>
@@ -86,7 +86,7 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> MyWorld と ORANGE のクラス図(<a href="./page04.html">テキスト 4P目の図 4</a>)を任意のドローツールで描きます。
+<span class="olradio"><input type="radio" name="p4"></span> MyWorld と ORANGE のクラス図(<a href="./page04.html">テキスト 4P目の図 3</a>)を任意のドローツールで描きます。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> <a href="./page02.html">テキスト 2P目の図 1</a>より、ORANGE は FRUIT を継承していますので、FRUIT クラスと汎化の矢印を図に追加します。
 <br>
@@ -116,7 +116,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		MyWorld myworld = new MyWorld();
-		// ※  (この行は演習1-6で使います)
+
 		myworld.get_orange0().show();
 		myworld.get_orange1().show();
 		myworld.get_orange2().show();
@@ -146,27 +146,6 @@ public class Main{
 </div>
 
 <br>
-<h2><a href="./page05.html">5. オブジェクト図</a></h2>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-6 (個人):</b> 「CDIAG_1_5」のオブジェクト図を描いてみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> 任意のドローツールを起動します。 
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 「CDIAG_1_5」を実行した際に、main メソッドの※の行まで来た時点におけるオブジェクト図を描いて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 「CDIAG_1_6」の名前で保存して下さい拡張子はドローツールによります)。 
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。 
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「画像ファイル」を貼り付けて下さい。 
-</p>
-</div>
-
-<br>
-<script>PreNext(6,5)</script>
+<script>PreNext(5,4)</script>
 </body>
 </html>

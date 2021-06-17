@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>4. 集約 (has-a 関係)</title>
+<title>4. 集約 (has-a/part-of 関係)</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
-<li>学習項目: [1] クラス図とオブジェクト図</li>
+<li>学習項目: [1] クラス図</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,69 +20,80 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは「関連」の一種である「集約」について学びます。
+ここでは関連の一種である集約について学びます。
 </p>
 
 <p>
-「集約」は「一方のクラスがもう一方のクラスの構成物になっている」あるいは「一方のクラスがもう一方のクラスを所有している」などの主従関係を明確に示すために使われます。
+集約は「一方のクラスがもう一方のクラスを所有している」あるいは「一方のクラスはもう一方のクラスの一部である」などの主従関係を明確に示すために使われます。
+<br>
+この集約をクラス図で表す場合は図1の様に所有者側のクラスに中抜きのダイヤマークを付けます。
 </p>
 
 <p>
-「集約」をクラス図で表す場合はホスト側のクラスに中抜きのダイヤマークを付けます。
+※ 中抜きダイヤマークばかりになるとクラス図が見辛くなるので<b>主従関係が明らかな場合は中抜きダイヤマークを省略することも多いです</b>
 </p>
 
 
-<div class="info">
+<br>
+<p>
 <input type="checkbox"><b>図1: 集約のクラス図</b>
-<p>
 </p>
 <img src="./img/page04-fig1.png" alt="">
-</div>
 
+<br>
 <p>
 この関係を英語で書くと
 </p>
 
 <p>
-<b>A has a B : A は B を持っている</b>
+<b>A has a B ( A は B を所有している)</b>
 </p>
 
 <p>
-となりますので、「集約」は別名<b>「has-a 関係」</b>と言います。
+または
+</b>
+
+<p>
+<b>B is part of A ( B は A の一部である)</b>
 </p>
 
 <p>
-例えば、前のページで挙げた関連の例
+となりますので集約は別名「<b>has-a 関係</b>」とか「<b>part-of 関係</b>」と言います。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>図2: 関連のクラス図の例</b>
 <p>
+例えば、前のページで挙げた<a href="./img/page03-fig2.png">関連の例</a>の場合、
 </p>
-<img src="./img/page03-fig2.png" alt="">
-</div>
-
 <p>
-の場合は「ORANGE は MyWorld を持っている」という解釈は(SFとかならともかく)変なので、普通は「MyWorld は ORANGE を持っている」と解釈されます。
+「1 個のORANGE は 1 つの MyWorld を所有している」または「1 つのMyWorld は 1 個の ORANGE の一部である」
+</p>
+<p>
+という解釈はSFでもなければ変なので普通は
+</p>
+<p>
+「1つのMyWorld は 4 個の ORANGE を所有している」または「4 個のORANGE は 1 つの MyWorld の一部である」
+</p>
+<p>
+と解釈して良いでしょう。
 <br>
-従って次のように「集約」を使って明確に MyWorld がホストであることを示せます。
+従って図2の様に集約を使って明確に MyWorld が ORANGE の所有者であることを示せます。
 </p>
 
-<div class="info">
-<input type="checkbox"><b>図3: 集約のクラス図の例</b>
-<p>
-</p>
-<img src="./img/page04-fig3.png" alt="">
-</div>
-
-<p>
-さてこれで MyWorld と ORANGE の主従関係が明らかになりましたので、MyWorld のコードは次のように書くことが出来ます。
 <br>
-「集約」のコーディング方法には色々なやり方があるのですが、以下の例のようにホスト側クラスのフィールドとして所有される側のクラスのインスタンスを定義するのが「集約」の例として一番分かりやすいと思います。
+<p>
+<input type="checkbox"><b>図2: 集約のクラス図の例</b>
+</p>
+<img src="./img/page04-fig2.png" alt="">
+
+<br>
+<p>
+さてこれで MyWorld と ORANGE の主従関係が明らかになりましたので、MyWorld のコードは次のソース1の様に書くことが出来ます。
+<br>
+集約の表現方法は色々ありますが、ソース1の様に所有者側のクラス(MyWorld)のフィールドとして所有される側のクラス(ORANGE)のインスタンスが定義されることが多いです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1 : 図3 を元にして書いた「集約」のコーディング例 </b>
+<input type="checkbox"><b>ソース 1 : 図2 を元にして書いた「集約」のコーディング例 </b>
 <pre class="wrap">
 public class MyWorld{
 
@@ -104,29 +115,21 @@ public class MyWorld{
     }
 }
 </pre>
-<p>
-※ ちなみに上の例は一般的には「集約」ではなくて「コンポジション」と呼ばれます。「コンポジション」については自分で調べてみて下さい。
-</p>
 </div>
 
 <p>
-なおフィールドを追加したので、ソース 1 のクラス図は次のように変わります。
-
-<div class="info">
-<input type="checkbox"><b>図4: ソース 1 のクラス図</b>
-<p>
+なおフィールドを 4 つ追加したので、図2は次の図3の様に変わります。
 </p>
-<img src="./img/page04-fig4.png" alt="">
-</div>
 
-<p>
-なお、中抜きダイヤマークが多いとクラス図が見辛くなるので、<b>主従関係が明らかな場合は中抜きダイヤマークを省略することも多いです</b>。
 <br>
-どの状況ならダイヤマークを入れるべきかという具体的な決まりは特にありませんので、自分でやり易いやり方を見つけたり、所属するチームのやり方に従って下さい。 
+<p>
+<input type="checkbox"><b>図3: ソース 1 のクラス図</b>
 </p>
+<img src="./img/page04-fig3.png" alt="">
+
 
 
 <br>
-<script>PreNext(4,5)</script>
+<script>PreNext(4,4)</script>
 </body>
 </html>
