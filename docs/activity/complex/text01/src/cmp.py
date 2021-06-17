@@ -81,13 +81,13 @@ def check_abs(chklist):
     for i in chklist:
         (name,z,lng) = i
         if( z is not None ):
-            check_value(name,abs(z),lng)
+            check_value(name,lng,abs(z))
 
 def check_phase(chklist):
     for i in chklist:
-        (name,z,lng) = i
+        (name,z,p) = i
         if( z is not None ):
-            check_value(name,cmath.phase(z),lng)
+            check_value(name,p,cmath.phase(z))
 
 def savefig(pngfile):
     plt.savefig(pngfile)

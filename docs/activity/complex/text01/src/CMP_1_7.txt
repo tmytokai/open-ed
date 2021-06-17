@@ -6,7 +6,7 @@ cmp.init(True)
 
 # z6、z7 の直交形式をテキストに従って求めて下さい
 # sin は math.sin 関数、cos は math.cos 関数を使って下さい
-# 円周率は path.pi を使って下さい
+# 円周率は math.pi を使って下さい
 #
 # (注) python の場合は cmath.rect 関数を使うと簡単に直交形式が求まりますが
 # 今回は使わないで計算して下さい
