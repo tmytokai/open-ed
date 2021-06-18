@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 複素正弦波の基礎</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [2] 複素信号と複素正弦波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+前ページの例で使用した $z(t)$ の絶対値 $|z(t)| = t$ は時間を表す変数 $t$ [秒]によって変化していますが、偏角 $\angle \ z(t) = \pi/4$ [rad] は $t$ [秒] によって変化していませんでした。
+<br>
+今度は逆に絶対値 $|z(t)|$ は $t$ [秒] によって変化しないけれど偏角 $\angle \ z(t)$ は変化する複素信号を考えます。
+</p>
+
+<p>
+その様な複素信号の例はいくらでもありますが、その一つとしてここでは「(時間領域)<b>複素正弦波</b>」又は「<b>複素指数関数</b>」について学びます。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>定義： 定義: (時間領域)複素正弦波、または複素指数関数</b>
+
+\[
+z(t) =  \left \{ a \cdot \textrm{e}^{\{j \cdot \phi\}} \right \} 
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<br>
+<p>
+を(時間領域)複素正弦波、または複素指数関数と呼び、複素平面の上の回転運動体となる。
+</p>
+
+<br>
+<p>
+$a$・・・振幅(または半径)、実数の<u>定数</u>、範囲は実数全体(ただし一般的には $a \geq 0$ )、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+</p>
+
+<p>
+$\phi$ (ファイ) ・・・初期位相、実数の<u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+</p>
+
+<p>
+$w$ ・・・角周波数、実数の<u>定数</u>、範囲は実数全体、単位は [rad/秒]
+</p>
+
+<p>
+$t$ ・・・時刻、実数の<u>変数</u>、単位は[秒]
+</p>
+
+</div>
+
+<p>
+この複素正弦波が複素平面上をどう動くのかは図を見ながら考えた方が分かりやすいです。
+<br>
+例えば
+</p>
+<ul>
+<li>振幅 : $a = 2$</li>
+<li>角周波数 : $w = \pi/2$ [rad/秒]</li>
+<li>初期位相が $\phi = \pi/4$ [rad]</li>
+</ul>
+<p>
+である複素正弦波の例を図1に示します。
+<br>
+参考までに $z(0)$、$z(1)$、$z(2)$、$z(3)$、$z(4)$の位置も示しています。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>図1: 時間領域複素正弦波の例</b>
+
+\[
+z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm{e}^{\{j \cdot \pi/2 \cdot t \}}
+\]
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+
+<p>
+この図1から分かるように、この時間領域複素正弦波は時刻 $t=0$ [秒] において
+</p>
+
+\[
+z(0) = 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}}
+\]
+
+<p>
+の位置からスタートして、反時計周り(ちなみに$w$が負なら時計回り)に 1秒間に $w = \pi/2$ [rad/秒] だけ回転する運動体となっていることが分かります。
+</p>
+
+<p>
+なお<a href="../../a-sin/text01/page03.html">アナログサイン波と同様</a>に「角周波数」「周波数」「周期」は以下の変換式を使って相互変換可能です。
+<br>
+ただし複素正弦波の場合は上で書いたように角周波数が負になることもあるので、周期を求める際に角周波数と周波数の絶対値を取る必要があります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>公式：角周波数、周波数、周期の相互変換式</b>
+
+<p>
+<b>(注) 周期 T は正の実数なので $f$ と $w$ の絶対値を取る必要があります</b>
+</p>
+
+\[
+w = 2\pi \cdot f
+\]
+
+\[
+f = \frac{w}{2\pi} 
+\]
+
+\[
+\textrm{T} = \frac{1}{|f|} = \frac{2\pi}{|w|}  
+\]
+
+</div>
+
+<br>
+<script>PreNext(2,4)</script>
+</body>
+</html>

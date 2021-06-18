@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. サイン波との関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [2] 複素信号と複素正弦波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+前の学習項目で学んだ<a href="../text01/page04.html">オイラー公式</a>を使うと、以下のように<a href="../../a-sin/">アナログサイン波</a>を2つの複素正弦波の和に分解できます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： オイラー公式でアナログサイン波を複素正弦波の和に分解</b>
+
+<br>
+<p>
+(サイン波として cos を使う場合)
+</p>
+
+\[
+a \cdot \cos ( w \cdot t + \phi )
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<br>
+<p>
+(サイン波として sin を使う場合)
+</p>
+
+\[
+a \cdot \sin ( w \cdot t + \phi )
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<br>
+<p>
+$a$・・・<u>アナログサイン波の</u>振幅、実数の定数、範囲は実数全体、単位は扱う信号の種類による(ボルトとかアンペアとか度とかetc.)
+</p>
+
+<p>
+$w$ ・・・<u>アナログサイン波の</u>角周波数、実数の定数、範囲は $w \geq 0$、単位は [rad/秒]
+</p>
+
+<p>
+$\phi$ (ファイ) ・・・<u>アナログサイン波の</u>初期位相、実数の定数、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
+</p>
+
+<p>
+$t$ ・・・時刻、実数の変数、単位は[秒]
+</p>
+
+</div>
+
+<p>
+なお sin 版よりも cos 版の方が少しだけ式が簡単になっていますので、特に断りの無い限り<b>今後はサイン波として cos の方を主に使って話を進めることにします</b>。
+</p>
+
+<p>
+ところで複素正弦波どうしを足し合わせると普通のアナログサイン波に変わるのは不思議な感じがします。
+<br>
+しかし式をよく見ると cos 版も sin 版も右辺の第一項目と第二項目の複素正弦波は<a href="../text01/page01.html">複素共役関係</a>にあるので、お互いを足すと虚部が消えて実部だけが残ることが分かります(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 共役関係にある複素数同士を足すと虚部が消える</b>
+<p>
+</p>
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<br>
+<script>PreNext(3,4)</script>
+</body>
+</html>

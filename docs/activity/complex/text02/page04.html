@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 工学と複素正弦波</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [2] 複素信号と複素正弦波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+以前話した様に工学分野では複素数や複素正弦波が良く使われます。
+<br>
+ところが複素数や複素正弦波に慣れていない人は「実数やアナログサイン波で十分なのに何故わざわざ複素数や複素正弦波を使う必要があるのだろうか？」と疑問を持つかと思います。
+</p>
+
+<p>
+まず工学的な計算式の中に sin や cos といったアナログサイン波が多く含まれていることはみなさんご存知だと思います。
+<br>
+しかしアナログサイン波は四則演算が苦手なので、計算式の中にアナログサイン波が入っていると途端に計算が複雑になります。
+</p>
+
+<p>
+一方、アナログサイン波をオイラー公式を使って複素正弦波の和に分解すると<a href="../text01/page06.html">四則演算が簡単に出来る</a>様になるので、複雑な計算式が簡単になることが多いです。
+</p>
+
+<p>
+では複素正弦波を使うとアナログサイン波を含む計算が簡単になる例として、次の式の証明を考えてみましょう。
+</p>
+
+\[
+a \cdot \sin ( w \cdot t + \pi/2 ) = a \cdot \cos ( w \cdot t )
+\]
+
+<p>
+この式は「sin 波の位相を90度進めると cos 波に変わる」という当たり前の事を表していますが、まともに証明しようとすると案外難しいです。
+<br>
+ところが複素正弦波を使って考えると四則演算するまでもなくあっさり証明出来ます。
+<p>
+
+<br>
+\begin{align*}
+a \cdot \sin ( w \cdot t + \pi/2 )
+&=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\pi/2-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\pi/2-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \\
+&=  \left \{ \frac{a}{2} \cdot \textrm{e}^0 \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++   \left \{ \frac{a}{2} \cdot \textrm{e}^0 \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \\
+& = a \cdot \cos ( w \cdot t + 0 ) \\
+& = a \cdot \cos ( w \cdot t )
+\end{align*}
+
+<p>
+もう一つ、今度は次の例を考えてみましょう。
+</p>
+
+\[
+\{ a \cdot \cos ( w \cdot t + \phi ) \}^2 = \frac{a^2}{2} + \frac{ a^2 \cdot \cos ( 2w \cdot t + 2\phi )}{2} 
+\]
+
+<p>
+これは単純な半角の公式ですが、やはりまともに証明しようとすると案外難しいです。
+<br>
+ところが複素正弦波を使って考えるとあっさり証明可能です。
+</p>
+
+\begin{align*}
+\{ a \cdot \cos ( w \cdot t + \phi ) \}^2
+&=  
+\left [ \left \{ \frac{a}{2} \cdot \textrm{e}^{-\phi} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++   \left \{ \frac{a}{2} \cdot \textrm{e}^\phi \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \right ]^2 \\
+
+&=  
+\left \{ \frac{a^2}{4} \cdot \textrm{e}^{-2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
++ 2 \cdot \left \{ \frac{a^2}{4} \cdot \textrm{e}^0 \right \} \cdot \textrm{e}^{0}
++ \left \{ \frac{a^2}{4} \cdot \textrm{e}^{2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}} \\
+
+&= \frac{a^2}{2} 
++ \frac{1}{2} 
+\left [
+\left \{ \frac{a^2}{2} \cdot \textrm{e}^{-2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
++ \left \{ \frac{a^2}{2} \cdot \textrm{e}^{2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}}
+\right ] \\
+
+&= \frac{a^2}{2} + \frac{ a^2 \cdot \cos ( 2w \cdot t + 2\phi )}{2} 
+
+\end{align*}
+
+<br>
+<p>
+計算が楽だという以外にも複素数と複素正弦波を使うことには様々なメリットがありますので自分で調べてみてください。
+</p>
+
+<br>
+<script>PreNext(4,4)</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [2] 複素信号と複素正弦波</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2><a href="./page01.html">1. 複素信号の基礎</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 2-1 (個人):</b> テキストの時間領域複素信号
+</p>
+\[
+z(t) = |z(t)| \cdot \textrm{e}^{\{j\cdot \angle z(t) \}} = t \cdot \textrm{e}^{\{j\cdot \pi/4 \}}
+\]
+<p>
+が複素平面上でどう動くか予想し、実際に複素平面上で動かして確かめてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook を起動し、「CMP_2_1」というノートブックを作ります
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/CMP_2_1.txt">テンプレート</a>をノートブックにコピーします
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コードの指示に従って $|z(t)|$ と $\angle z(t)$ の式を入力します
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行する前に $z(t)$ がどう動くか予想して下さい
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行して $z(t)$ の動きを確認してください
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして画像を保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-2 (個人):</b> 演習 1-1 の時間領域複素信号 $z(t)$ の偏角を $\angle z(t) = \pi/4 \cdot t$ に変えた時に複素平面上での動きがどう変わるか予想し、実際に複素平面上で動かして確かめてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> ノートブック「CMP_2_1」を「CMP_2_2」という名前でコピーして下さい
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> $\angle z(t)$ の式を変更して下さい
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行する前に $z(t)$ がどう動くか予想して下さい
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行して $z(t)$ の動きを確認してください
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして画像を保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい
+</p>
+</div>
+
+<br>
+<h2><a href="./page02.html">2. 複素正弦波の基礎</a></h2>
+
+
+<p>
+<input type="checkbox"><b>演習 2-3 (個人):</b> テキストの図1の時間領域複素正弦波
+</p>
+\[
+z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm{e}^{\{j \cdot \pi/2 \cdot t \}}
+\]
+<p>
+の動きと周期を予想し、実際に複素平面上で動かして確かめてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Jupyter Notebook を起動し、「CMP_2_3」というノートブックを作ります
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/CMP_2_3.txt">テンプレート</a>をノートブックにコピーします
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> コードの指示に従って $z(t)$ の振幅、初期位相、角周波数をセットします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行する前に $z(t)$ がどう動くか予想して下さい
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行して $z(t)$ の動きを確認してください
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして画像を保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-4 (個人):</b> 演習 1-3 の時間領域複素正弦波の振幅を $a = 3$、初期位相を $\phi = -\pi/2$、 角周波数を $w = -\pi/8$ [rad/秒] に変えた時に周期と動きがどう変わるか予想し、実際に複素平面上で動かして確かめてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> ノートブック「CMP_2_3」を「CMP_2_4」という名前でコピーして下さい 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> $z(t)$ の振幅、初期位相、角周波数の値を変更して下さい
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 実行する前に $z(t)$ がどう動くか予想して下さい
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 実行して $z(t)$ の動きを確認してください
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして画像を保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい
+</p>
+</div>
+
+<br>
+<h2><a href="./page03.html">3. サイン波との関係</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-5 (個人):</b> 
+
+\[
+z_1(t) =   \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
+\]
+
+\[
+z_2(t) = \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\]
+
+<br>
+<p>
+とした時、テキストで出てきた分解式(オイラー公式)
+</p>
+
+<br>
+\[
+f(t) = a \cdot \cos ( w \cdot t + \phi ) = z_1(t) + z_2(t)
+\]
+<br>
+<p>
+が正しい事を確かめてみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> Jupyter Notebook を起動し、「CMP_2_5」というノートブックを作ります
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="./src/CMP_2_5.txt">テンプレート</a>をノートブックにコピーします
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 今回は例として
+\[
+f(t) = 4 \cdot \cos ( \pi/4 \cdot t - \pi/4)
+\]
+を描画します。複素正弦波 $z_2(t)$ の振幅、初期位相、角周波数の値を変更して下さい ※ $z_1(t)$のパラメータは自動でセットされます
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 実行します
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> $z_1(t)$ 、$z_2(t)$、$f(t)$ の動きを見て分解式が正しいことを再確認します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして画像を保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ここから〜ここまでの間にあるソース」「画像」を貼り付けて下さい 
+</p>
+</div>
+
+<br>
+<h2><a href="./page04.html">4. 工学と複素正弦波</a></h2>
+
+<p>
+なし
+</p>
+
+<script>PreNext(5,4)</script>
+</body>
+</html>
