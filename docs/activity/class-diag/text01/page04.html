@@ -65,18 +65,21 @@
 例えば、前のページで挙げた<a href="./img/page03-fig2.png">関連の例</a>の場合、
 </p>
 <p>
-「1 個のORANGE は 1 つの MyWorld を所有している」または「1 つのMyWorld は 1 個の ORANGE の一部である」
+「ORANGE は MyWorld を所有している」または「MyWorld は ORANGE の一部である」
 </p>
 <p>
 という解釈はSFでもなければ変なので普通は
 </p>
 <p>
-「1つのMyWorld は 4 個の ORANGE を所有している」または「4 個のORANGE は 1 つの MyWorld の一部である」
+「MyWorld は ORANGE を所有している」または「ORANGE は MyWorld の一部である」
 </p>
 <p>
 と解釈して良いでしょう。
-<br>
+</p>
+<p>
 従って図2の様に集約を使って明確に MyWorld が ORANGE の所有者であることを示せます。
+<br>
+なお多重度より MyWorld は ORANGE を 4 つ所有しているという事も分かります。
 </p>
 
 <br>
@@ -90,6 +93,8 @@
 さてこれで MyWorld と ORANGE の主従関係が明らかになりましたので、MyWorld のコードは次のソース1の様に書くことが出来ます。
 <br>
 集約の表現方法は色々ありますが、ソース1の様に所有者側のクラス(MyWorld)のフィールドとして所有される側のクラス(ORANGE)のインスタンスが定義されることが多いです。
+<br>
+MyWorld は ORANGE を 4 つ所有していますので、ORANGE クラスのフィールドを 4 つ定義しています。
 </p>
 
 <div class="info">
@@ -97,7 +102,10 @@
 <pre class="wrap">
 public class MyWorld{
 
-    private ORANGE orange0,orange1,orange2,orange3;
+    private ORANGE orange0;
+    private ORANGE orange1;
+    private ORANGE orange2;
+    private ORANGE orange3;
 
     // getter
     public ORANGE get_orange0(){ return orange0; }
