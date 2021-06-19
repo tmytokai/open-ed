@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>6. 物理演算を使って移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [3] 物理演算</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+次はゲームオブジェクトに力(Force)を与えて物理的に動かしてみます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に新しいシーンを作り、箱を作成します。
+<br>
+今回は重さ(Mass)の設定もします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Addforce Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO に Rigidbody コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO のインスペクタを表示して Rigid Body の Mass に 10 を入れる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 更に Rigid Body の Use Gravity のチェックを外す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Addforce Script Graph」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Addforce Script Graph をドロップする
+</p>
+</div>
+
+</div>
+
+<br>
+<br>
+<h3>
+2. Fixed Update イベントの中で力を与え続けて物理的に動かす
+</h3>
+
+<p>
+実世界で何か物を動かしたい時は動かしたい方向に向かって力(単位はニュートン)を与え続ける必要があります。
+<br>
+力を与えるのを止めると慣性で動き続けますが、摩擦がある場合は減速してそのうち止まります。
+</p>
+
+<p>
+さて Unity でゲームオブジェクトに力を与えるユニットは Rigidbody Add Force (Force) ユニット(rigidbody add force で検索)です。
+<br>
+このユニットを <a href="../text02/page09.html">Fixed Update</a>イベントの中で実行し続けます。
+</p>
+
+<p>
+※ 物理演算を使ってるので、今回は Update イベントではなくて Fixed Update イベントを使います
+</p>
+
+<p>
+なお3次元空間なので、力は3次元ベクトル(Vector3)を使って x,y,z 方向別に指定します。
+</p>
+
+<p>
+では早速図1を実行してください。
+<br>
+実行すると右方向に徐々にスピードを上げながら動き始めると思います。
+</p>
+
+<p>
+<b>図1. 力を与え続けて移動</b>
+</p>
+<img src="./img/page06-fig1.png" alt="">
+
+<p>
+さてこの例では power という Float 型の Graph 変数を用意し、
+</p>
+<p>
+力 = 右方向ベクトル x power
+</p>
+<p>
+で力を計算しています。
+<br>
+上手く動いたら power の数値を変えたり(マイナスにすると逆に動きます)、HAKO の重さ(Mass)を変えたり、方向ベクトルを変更したりするとどの様に動きが変わるか試して下さい
+<br>
+またコントローラを使って動かしてみても良いでしょう。
+</p>
+
+<br>
+<h3>
+3. 瞬間的に力を与えて物理的に動かす
+</h3>
+
+<p>
+上では力を与え続けてゲームオブジェクトを動かしていましたが、現実的にはボールをバットで打ったり、爆弾で物を吹き飛ばしたりなど、瞬間的に力を加えて一気に物体を加速させることも多いです。
+</p>
+
+<p>
+Unity でゲームオブジェクトに瞬間的に力を与えるユニットは Rigidbody Add Force (Force,Mode) ユニット(rigidbody add force で検索)で、Mode には Impulse を指定します。
+</p>
+
+<p>
+では例を使って確認してみましょう。
+<br>
+まず HAKO の重さ(Mass)と Graph 変数 power の値を 10 に戻します。
+<br>
+次に力は1回しか与えないので、Fixed Update イベントを削除して代わりに Start イベントを使います。
+<br>
+その上で図2を実行してください。
+<br>
+実行すると右方向に一定速度で動き始めます。
+<br>
+上手く動いたら power の数値を変えたり(マイナスにすると逆に動きます)、HAKO の重さ(Mass)を変えたり、方向ベクトルを変更したりするとどの様に動きが変わるか試して下さい
+</p>
+
+<p>
+<b>図2. 瞬間的に力を与えて移動</b>
+</p>
+<img src="./img/page06-fig2.png" alt="">
+
+
+
+<br>
+<h3>
+4. 力の詳しい説明
+</h3>
+
+<p>
+ここから先は少し難しい話なので分からなければ飛ばしても結構です。
+<br>
+ただし Unity の物理演算機能を使いこなすためには大事な知識ですので興味のある人は是非トライして下さい。
+</p>
+
+<p>
+既に<a href="./page03.html">摩擦</a>で使いましたが、改めて<a href="https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%88%E3%83%B3%E3%81%AE%E9%81%8B%E5%8B%95%E6%96%B9%E7%A8%8B%E5%BC%8F">ニュートンの運動方程式</a>についておさらいしておきます。
+</p>
+
+<p>
+$m$ [kg]を物体の重さ、$a$ [m/$s^2$] を加速度ベクトル、 $F$ [ニュートン] を力とします。
+<br>
+するとニュートンの運動方程式は
+</p>
+
+\[
+m \cdot a = F
+\]
+
+<p>
+となります。
+</p>
+
+<p>
+さてこのページの 1 番目の例はオーソドックスに運動方程式を適用できます。
+<br>
+今回は Mass = 10 [Kg] の HAKO に対し、右方向に大きさ power = 10 [ニュートン] の力を加え続けていますので、右方向に $1$ [m/$s^2$] の加速度がかかります。
+<br>
+実際に1秒おきの HAKO の速度を測定したら以下の様になっていたので、だいたい理論通り動いていることが分かります。
+</p>
+
+<p>
+開始約 1 秒後 → 速度 約 1 m/秒
+</p>
+
+<p>
+開始約 2 秒後 → 速度 約 2 m/秒
+</p>
+
+<p>
+開始約 3 秒後 → 速度 約 3 m/秒
+</p>
+
+<p>
+開始約 4 秒後 → 速度 約 4 m/秒
+</p>
+
+<p>
+開始約 5 秒後 → 速度 約 5 m/秒
+</p>
+
+<br>
+<p>
+一方、2番目の例( mode = Impulse)で Add Force ユニットに入力しているベクトルは実は力ではないので運動方程式は適用できません。
+<br>
+Add Force ユニットの mode を Impulse にすると、運動方程式の加速度ベクトルの項が速度ベクトルに置き換わって
+</p>
+
+<p>
+重さ(Mass) ・ 速度ベクトル(Velocity) = Add Force の入力ベクトル
+</p>
+
+<p>
+という計算式に変わります。
+</p>
+
+<p>
+今回は Mass = 10 [Kg] の HAKO に対し、右方向に大きさ power = 10 のベクトルを与えましたので、1 フレーム後に HAKO は右方向に 1 [m/秒] の速度で動き始めます。
+<br>
+実際に HAKO の速度を測定すると実行開始直後からずっと 1 [m/秒]の速度で動いていることが分かります。
+</p>
+
+
+<br>
+<script>PreNext(6,20)</script>
+</body>
+</html>
