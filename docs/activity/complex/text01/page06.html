@@ -20,12 +20,17 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+ここでは複素数の四則演算について説明します。
+</p>
+
+<br>
 <h4>
 (1) 足し算
 </h4>
 
 <p>
-複素数と複素数の足し算は直交形式で考えると楽です。
+複素数の足し算は直交形式で考えると楽です。
 </p>
 
 <div class="info">
@@ -63,7 +68,47 @@ z_3 = (a + c) + j \cdot (b + d)
 
 <br>
 <h4>
-(2) 掛け算
+(2) 引き算
+</h4>
+
+<p>
+引き算も直交形式で考えると楽です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>引き算</b>
+<p>
+直交形式を使って実数、虚数成分別に引く
+</p>
+
+\begin{align*}
+z_1 &= a + j \cdot b \\
+z_2 &= c + j \cdot d \\
+z_3 &= z_1 - z_2
+\end{align*}
+
+\[
+z_3 = (a - c) + j \cdot (b - d)
+\]
+
+</div>
+
+<p>
+ベクトル的には $z_1$ から $z_2$ を引くという行為は、$z_1$ に $z_2$ を 180 度回転させた $-z_2$ を足すことを意味します。
+<br>
+図2が引き算 $z_1 - z_2$ をベクトルで表した図になります。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>図2: 引き算</b>
+<p>　</p>
+<img src="./img/page06-fig2.png" alt="">
+</div>
+
+<br>
+<h4>
+(3) 掛け算
 </h4>
 
 <p>
@@ -75,7 +120,7 @@ z_3 = (a + c) + j \cdot (b + d)
 <p>
 極形式を使ってネイピア数 e の掛け算をおこなう
 <br>
-つまり絶対値どうしは掛け、偏角どうしは足すという演算手順になる
+絶対値同士は掛ける、偏角同士は足すという演算手順になる
 </p>
 
 \begin{align*}
@@ -103,131 +148,15 @@ z_3 = ( |z_1|\cdot|z_2| ) \cdot \textrm{e}^{\{j\cdot (\angle \ z_1 + \angle \ z_
 
 </div>
 
-<br>
-<h4>
-(3) 回転
-</h4>
-
 <p>
-次に、掛け算の特殊な場合である回転について説明します。
+ところで $z_1$ がただの実数 $a$ であるときは $a$ の符号に気を付けて下さい。
 </p>
-
-<div class="info">
-<input type="checkbox"><b>回転</b>
-
 <p>
-$\theta$ [rad] を任意の値(ラジアン)とする
-<br>
-ある複素数 $z$ に
+もし $a \geq 0$ ならそのまま $z_1 = a$ として
 </p>
 
 \[
-\textrm{e}^{\{j\cdot \theta\}}
-\]
-
-<p>
-を掛けることは、原点を中心として$z$ を $\theta$ [rad] だけ反時計回りに回転させることに相当する
-<br>
-つまり
-</p>
-
-\[
-z \cdot \textrm{e}^{\{j\cdot \theta\}} = |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta)\}}
-\]
-
-<p>
-なお$\theta$ がマイナスの時は時計回りに回転する
-</p>
-</div>
-
-<p>
-上の式の意味は図で考えた方が分かりやすいでしょう
-<br>
-図2を見れば元の複素数が $\theta$ [rad] だけ逆時計回りに回転移動していることが一目瞭然です。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図2: 回転</b>
-<p>　</p>
-<img src="./img/page06-fig2.png" alt="">
-</div>
-
-<br>
-<h4>
-(4)  $-1$ を掛ける
-</h4>
-<p>
-さらに回転の特別の場合として複素数に $-1$ を掛けた時の話をします。
-</p>
-<p>
-ある複素数に -1 をかけるという行為は、その複素数を直交形式で考えているのか、極形式で考えているのかによって意味が変わってきます。
-<br>
-まず直交形式の場合ですが至極当たり前の話になります。
-</p>
-<div class="info">
-<input type="checkbox"><b>直交形式で考えた場合</b>
-<p>
-実数成分と虚数成分の符号を変える。つまり
-</p>
-
-\[
-z = a + j \cdot b
-\]
-
-<p>
-の時
-</p>
-
-\[
--z = (-a) + j \cdot (-b)
-\]
-</div>
-
-<p>
-一方、極形式で考えた場合は $-1 = \textrm{e}^{j\pi}$ ですので、<b>複素数 $z$ を 180 度回転させる</b>ことを意味しています。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>極形式で考えた場合</b>
-<p>
-$\pi$ [rad] 回転させる。つまり
-</p>
-\[
-z = |z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}}
-\]
-<p>
-の時
-</p>
-\[
--z = z \cdot (-1) = |z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}} \cdot \textrm{e}^{j\pi}
-= |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
-\]
-</div>
-
-<p>
-なお、直交形式で考えようが、極形式で考えようが、複素数に -1 を掛けるという行為は複素平面上ではベクトルの向きが逆になることを意味します(図3)。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図3: -1 をかけるとベクトルの向きが180度逆になる</b>
-<p>　</p>
-<img src="./img/page06-fig3.png" alt="">
-</div>
-
-<br>
-<h4>
-(5) 極形式で実数をかける
-</h4>
-
-<p>
-極形式で考えている時に実数 $a$ を $z$ にかける場合は $a$ の符号に気を付けて下さい。
-</p>
-<p>
-もし $a>0$ ならそのまま
-</p>
-
-\[
-a\cdot z = (a \cdot |z|) \cdot \textrm{e}^{\{j\cdot \angle \ z\}}
+z_3 = (a \cdot |z_2|) \cdot \textrm{e}^{\{j\cdot \angle \ z_2\}}
 \]
 
 <p>
@@ -235,71 +164,40 @@ a\cdot z = (a \cdot |z|) \cdot \textrm{e}^{\{j\cdot \angle \ z\}}
 </p>
 
 <p>
-一方、$a &lt; 0$ なら (4) で説明したようにベクトルの向きが逆になりますので
+一方、$a &lt; 0$ なら
 </p>
 
 \[
-a \cdot z = |a|\cdot(-1)\cdot z = ( |a| \cdot |z| )\cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
+z_1 = |a| \cdot \textrm{e}^{j\pi}
 \]
-<p>
-となります。
-</p>
-
-<br>
-<h4>
-(6) 引き算
-</h4>
 
 <p>
-次に引き算の話をします。引き算は足し算と同様に直交形式で考えると楽です。
+と $a$ の絶対値を含む形式に $z_1$ を変形してから
 </p>
-
-<div class="info">
-<input type="checkbox"><b>引き算</b>
-<p>
-直交形式を使って実数、虚数成分別に引く
-</p>
-
-\begin{align*}
-z_1 &= a + j \cdot b \\
-z_2 &= c + j \cdot d \\
-z_3 &= z_1 - z_2
-\end{align*}
 
 \[
-z_3 = (a - c) + j \cdot (b - d)
+z_3 = ( |a| \cdot |z| )\cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
 \]
-
-</div>
-
 <p>
-なおベクトル的には $z_1$ から $z_2$ を引くという行為は、$z_1$ に $z_2$ を 180 度回転させた $-z_2$ を足すことを意味します。
-<br>
-図4が引き算 $z_1 - z_2$ をベクトルで表した図になります。
+と計算します。
 </p>
 
 
-<div class="info">
-<input type="checkbox"><b>図4: 引き算</b>
-<p>　</p>
-<img src="./img/page06-fig4.png" alt="">
-</div>
-
 <br>
 <h4>
-(7) 割り算
+(4) 割り算
 </h4>
 
-<p>
-最後に割り算について話します。
 <br>
-割り算は掛け算と同様に極形式で考えると楽です。
+割り算も極形式で考えると楽です。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>割り算</b>
 <p>
 極形式を使ってネイピア数 e の割り算をおこなう
+<br>
+絶対値同士は割る、偏角同士は引くという演算手順になる
 </p>
 
 \begin{align*}
@@ -321,13 +219,9 @@ z_3 &= \frac{z_1}{z_2}
 z_3 = \frac{|z_1|}{|z_2|} \cdot \textrm{e}^{\{j\cdot (\angle \ z_1 - \angle \ z_2)\}}
 \]
 
-<p>
-※ つまり割り算は絶対値どうしは割る、偏角どうしは引くという演算手順になる
-</p>
-
 </div>
 
 <br>
-<script>PreNext(6,6)</script>
+<script>PreNext(6,7)</script>
 </body>
 </html>

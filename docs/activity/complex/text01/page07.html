@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>7. 回転</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [1] 複素数と複素平面</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここでは掛け算の特殊な場合である回転について説明します。
+</p>
+
+<br>
+<h4>
+(1) 回転
+</h4>
+
+<p>
+絶対値が 1 の複素数の掛け算は回転を表します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>回転</b>
+
+<p>
+$\theta$ [rad] を任意の実数値としたとき、絶対値が 1 の複素数
+</p>
+
+\[
+\textrm{e}^{\{j\cdot \theta\}}
+\]
+
+<p>
+を考える。
+<br>
+これを任意の複素数 $z$ に掛けると
+</p>
+
+\[
+z \cdot \textrm{e}^{\{j\cdot \theta\}} = |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta)\}}
+\]
+
+<p>
+が得られるが、これは原点を中心として $z$ が $\theta$ [rad] だけ複素平面内で反時計回りに回転したことを意味する。
+<br>
+なお $\theta$ がマイナスの時は時計回りに回転する。
+</p>
+</div>
+
+<p>
+上の式の意味は図で考えた方が分かりやすいでしょう
+<br>
+図1を見れば元の複素数が $\theta$ [rad] だけ逆時計回りに回転移動していることが一目瞭然です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 回転</b>
+<p>　</p>
+<img src="./img/page07-fig1.png" alt="">
+</div>
+
+<br>
+<h4>
+(2)  -1 を掛ける
+</h4>
+
+<p>
+さらに回転の特別の場合として複素数に -1 を掛けた時のことを考えます。
+</p>
+
+<p>
+結論から言うと複素数 $z$ は 180 度回転します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>-1 を掛けると180度回転</b>
+
+\[
+-1 = \textrm{e}^{j\pi}
+\]
+
+<p>
+より
+</p>
+
+\[
+-z = z \cdot \textrm{e}^{j\pi} = |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z + \pi)\}}
+\]
+<p>
+なので、複素数 $z$ に -1 を掛けることは $z$ を複素平面内で180度回転させることと同じ意味である。
+</p>
+
+</div>
+
+<p>
+これも図で見ると理解しやすいです(図2)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: -1 をかけると180度回転</b>
+<p>　</p>
+<img src="./img/page07-fig2.png" alt="">
+</div>
+
+
+<br>
+<h4>
+(3) 回転行列との関係
+</h4>
+
+<p>
+複素数の回転は<a href="https://ja.wikipedia.org/wiki/%E5%9B%9E%E8%BB%A2%E8%A1%8C%E5%88%97">回転行列</a>を使った 2 次元ベクトルの回転と実質的に同じであることを説明します。
+</p>
+
+<p>
+まず任意の 2 次元ベクトル $(x,y)$ を元に複素数 $z = x + j \cdot y$ を作ります。
+<br>
+$z$ を $\theta$ だけ回転させた複素数は上で示した通りに
+</p>
+
+\[
+|z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta)\}}
+\]
+
+<p>
+となります。
+<br>
+次にこれを直交形式に変換して sin と cos を展開します。
+</p>
+
+\begin{align*}
+|z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta) \}} 
+=& |z| \cdot \cos (\angle \ z+\theta) + j \cdot |z| \cdot \sin (\angle \ z+\theta) \\
+
+=& \left \{ |z| \cdot \cos \angle \ z \cdot \cos\theta - |z| \cdot \sin \angle \ z \cdot \sin\theta \right \} \\
+&+ j \left \{ |z| \cdot \sin \angle \ z \cdot \cos\theta + |z| \cdot \cos \angle \ z \cdot \sin\theta \right \} \\
+
+=& \left \{ x \cdot \cos\theta - y \cdot \sin\theta \right \} + j \left \{ y \cdot \cos\theta + x \cdot \sin\theta \right \} \\
+\end{align*}
+
+<p>
+さてこの結果の実部を $x'$、虚部を$y'$とすると
+</p>
+
+\[
+x' = x \cdot \cos \theta - y \cdot \sin \theta
+\]
+\[
+y' = y \cdot \cos \theta + x \cdot \sin \theta
+\]
+
+<p>
+となりますが、これを行列演算で書き直すと次の様になります。
+</p>
+
+\[
+\begin{bmatrix}
+x' \\
+y' \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta \\
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+\end{bmatrix}
+\]
+
+<p>
+これは回転行列を使って 2次元ベクトル $(x,y)$ を $\theta$ [rad] だけ回転させて 2次元ベクトル $(x',y')$ を求めていることを意味します。
+</p>
+
+<br>
+<script>PreNext(7,7)</script>
+</body>
+</html>
