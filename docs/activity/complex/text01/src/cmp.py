@@ -7,28 +7,33 @@ import re
 
 ax = None
 
-def init(drawax):
+def init(drawax=True,draw3d=False,xlim=[-3.5,3,5],ylim=[-3.5,3,5],zlim=[-3.5,3,5]):
 
+    global ax
     scale=8 # 画面が小さい時は数字を下げる
     dpi=100
-    xmin=-3.5
-    xmax=3.5
-    ymin=-3.5
-    ymax=3.5
 
     if( drawax ):
-        global ax
         plt.figure( figsize=(scale, scale), dpi=dpi )
-        ax = plt.subplot(1,1,1)
-        ax.set_xlim(xmin,xmax)
-        ax.set_ylim(ymin,ymax)
-        ax.spines['bottom'].set_position(('data',0))
-        ax.spines['left'].set_position(('data',0))
-        ax.spines['right'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-        ax.grid()
-        ax.text(xmax+0.1,-0.1,'Re[z]',fontsize=10)
-        ax.text(-0.2,ymax+0.1,'Im[z]',fontsize=10)
+        if( draw3d is not True ):
+            ax = plt.subplot(1,1,1)
+            ax.set_xlim(*xlim)
+            ax.set_ylim(*ylim)
+            ax.spines['bottom'].set_position(('data',0))
+            ax.spines['left'].set_position(('data',0))
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.grid()
+            ax.text(xmax+0.1,-0.1,'Re[z]',fontsize=10)
+            ax.text(-0.2,ymax+0.1,'Im[z]',fontsize=10)
+        else:
+            ax = plt.subplot(1,1,1,projection='3d')
+            ax.set_xlim(*xlim)
+            ax.set_ylim(*ylim)
+            ax.set_zlim(*zlim)
+            ax.set_xlabel("x")
+            ax.set_ylabel("y")
+            ax.set_zlabel("z")
 
 def complexstr(c,name):
     name=re.sub(r'([0-9]+)',r'_{\1}',name)
@@ -83,11 +88,50 @@ def check_abs(chklist):
         if( z is not None ):
             check_value(name,lng,abs(z))
 
-def check_phase(chklist):
+def check_arg(chklist):
     for i in chklist:
         (name,z,p) = i
         if( z is not None ):
             check_value(name,p,cmath.phase(z))
+
+def plot_signal(sec,z_abs,z_arg):
+    if(z_abs(0) is None or z_arg(0) is None):
+        return
+    pa = 0
+    pb = 0
+    for i in range(sec*20+1):
+        t = i/20
+        a = z_abs(t)*np.cos(z_arg(t))
+        b = z_abs(t)*np.sin(z_arg(t))
+        if(i<sec*20):
+            ax.plot([pa,a],[pb,b],lw=1, color='red')
+        else:
+            ax.arrow(pa,pb,a-pa,b-pb,width=0.005,head_width=0.15,length_includes_head=True,color='red')
+        pa=a
+        pb=b
+        if((t*10)%10==0):
+            name=r'$z({0:.0f})$'.format(t)
+            ax.plot(a,b,marker='.',markersize=15,color='black')
+            ax.text(a+0.1,b+0.1,name,size=10)
+
+def plot_rotation(v,theta,u,w_q,v_q,v_dash,num):
+    global ax
+    v=np.array(v)
+    wq = w_q(theta)
+    vq = np.array(v_q(theta,u))
+    p=np.array([v])
+    for counter in range(num):
+        vd = v_dash(v,wq,vq)
+        if(vd is not None):
+            d = vd - v
+            ax.quiver( *v, *d, color='black')
+            p=np.vstack([p,vd])
+            v = vd  
+    print(p)
+    ax.quiver(0,0,0, [0,u[0]],[0,u[1]],[0,u[2]], color='red')
+    ax.scatter(*p[0], s = 80, c = "red")
+    ax.scatter(p[:,0],p[:,1],p[:,2] ,s = 30, c = "red")
+    plt.show()
 
 def savefig(pngfile):
     plt.savefig(pngfile)

@@ -1,0 +1,30 @@
+%matplotlib inline
+import cmp
+import numpy as np
+import math
+cmp.init(draw3d=True,xlim=[-1,1],ylim=[-1,1],zlim=[-1,1])
+########### ここから↑は消さないで下さい
+
+v=[0,0,0]
+
+#円周率は math.pi
+theta = 0
+
+#平方根は math.sqrt 関数
+u = [0,0,0]
+
+# cos(x) は math.cos(x)
+def w_q(theta):
+    return 0
+
+# sin(x) は math.sin(x)
+def v_q(theta,u):
+    return [0,0,0]
+
+# x と y の内積は np.dot(x,y)
+# x と y のクロス積は np.cross(x,y)
+def v_dash(v,wq,vq):
+    return None
+
+########### ここから↓は消さないで下さい
+cmp.plot_rotation(v,theta,u,w_q,v_q,v_dash,9)

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. クォータニオンの基礎</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 複素数と複素平面</a></li>
+<li>学習項目: [3] クォータニオン</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+「<a href="https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%85%83%E6%95%B0">クォータニオン(quaternion)</a>」または「<b>四元数</b>」は複素数を4次元に拡張した数字です。
+<br>
+1843年にアイルランドの数学者である<a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%83%AA%E3%82%A2%E3%83%A0%E3%83%BB%E3%83%AD%E3%83%BC%E3%83%AF%E3%83%B3%E3%83%BB%E3%83%8F%E3%83%9F%E3%83%AB%E3%83%88%E3%83%B3">ハミルトン</a>によって考案されました。
+<br>
+3 次元を飛ばしていきなり 4 次元に拡張しているのは 3 次元の複素数の掛け算が定義出来ないためです(ハミルトンも長い間悩んでたみたいです)。
+<br>
+このクォータニオンを使うことで 3 次元のベクトルを高速回転出来るので、現代ではロボットやロケット等の制御分野からCG、3Dゲームなどのエンターテインメント分野まで広く使われています。
+</p>
+
+<p>
+ちなみにハミルトンがクォータニオンを思いついた場所はアイルランドのダブリンの<a href="https://en.wikipedia.org/wiki/Broom_Bridge">ブルーム橋</a>というところで、<a href="https://goo.gl/maps/KDs9nP2pDAyPo54r9">ストリートビュー</a>で記念碑を見ることが出来ます(落書きが酷いですが)。
+</p>
+
+<br>
+<h4>
+(1) 虚数単位
+</h4>
+
+<p>
+さて複素数の<a href="../text01/page01.html">虚数単位</a>は $j$ だけでしたが、クォータニオンは表1の乗算規則に従った $i$、$j$、$k$ を虚数単位とします。
+<br>
+表の行が積の左側、列が右側の虚数単位になります。 (例) $i \cdot j = k$
+</p>
+
+<br>
+<div>
+<input type="checkbox"><b>表 1 : クォータニオン虚数単位と乗算規則</b>
+<table>
+<tr><td class="center"></td><td class="center">1</td><td class="center">i</td><td class="center">j</td><td class="center">k</td></tr>
+<tr><td class="center">1</td><td class="center">1</td><td class="center">i</td><td class="center">j</td><td class="center">k</td></tr>
+<tr><td class="center">i</td><td class="center">i</td><td class="center">-1</td><td class="center">k</td><td class="center">-j</td></tr>
+<tr><td class="center">j</td><td class="center">j</td><td class="center">-k</td><td class="center">-1</td><td class="center">i</td></tr>
+<tr><td class="center">k</td><td class="center">k</td><td class="center">j</td><td class="center">-i</td><td class="center">-1</td></tr>
+</table>
+</div>
+
+<p>
+なお詳しくはこの後説明しますが、クォータニオン同士の積(ハミルトン積と言います)は交換則が成り立っていませんので掛ける順番を変えると符号が変わります。
+<br>
+例えば $i\cdot j = k$ ですが $j \cdot i = -k$ になります。
+</p>
+
+
+<br>
+<h4>
+(2) クォータニオン
+</h4>
+
+
+<p>
+上の虚数単位のもとでクォータニオンは次のように定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン(四元数)</b>
+
+<p>
+$w$、$x$、$y$、$z$ が実数の時
+</p>
+
+\[
+q = w + i \cdot x + j \cdot y + k \cdot z
+\]
+
+<p>
+をクォータニオン $q$ と呼ぶ
+</p>
+
+</div>
+
+<p>
+ここで $w$ の事を<b>実部</b>(Real part)または「<b>スカラー部</b>」、$i \cdot x + j \cdot y + k \cdot z$の事を<b>虚部</b>(Imaginary part)または「<b>ベクトル部</b>」と言って次のように表します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン $q$ の実部、虚部</b>
+
+<p>
+$q = w + i \cdot x + j \cdot y + k \cdot z$ の時
+</p>
+
+<p>
+実部： Re[q] = $w$
+</p>
+<p>
+虚部： Im[q] = $i \cdot x + j \cdot y + k \cdot z$ 
+</p>
+
+</div>
+
+<p>
+なお虚部は別名ベクトル部と言うだけあって 3 次元ベクトル $v = (x\ ,\ y\ ,\ z)$ と同じ形をしていますので、次の様に $v$ を用いてクォータニオンを定義することも出来ます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>定義： 3次元ベクトル $v$ を用いたクォータニオンの定義</b>
+
+<p>
+$w$、$x$、$y$、$z$ が実数の時
+</p>
+
+\[
+q = (w,v)
+\]
+
+<p>
+ただし $v = (x\ ,\ y\ ,\ z)$
+</p>
+
+<p>
+をクォータニオン $q$ と呼び、$w$ を実部(またはスカラー部)、$v$を虚部(またはベクトル部)と言う
+</p>
+
+</div>
+
+<p>
+こちらの定義を使った方が説明がシンプルになるので、特に断りが無い限り今後は 3 次元ベクトル $v$ を用いた定義の方を使って説明していきます。
+</p>
+
+<br>
+<h4>
+(3) 絶対値
+</h4>
+
+<p>
+クォータニオン $q$ の絶対値は次のように定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン $q$  の絶対値</b>
+
+\[
+|q| = \sqrt{w^2 + x^2 + y^2 + z^2}
+\]
+
+</div>
+
+<p>
+絶対値は必ず 0 以上の実数になります。
+</p>
+
+<br>
+<h4>
+(4) 共役クォータニオン
+</h4>
+
+<p>
+あるクォータニオンと虚部の符号だけが異なるクォータニオンのことを「<b>共役クォータニオン</b>」といいます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン $q$ の共役クォータニオン</b>
+
+<p>
+$q$ と虚部の符号がだけ異なるクォータニオンのことを共役クォータニオンと言って記号 $q^*$ で表す。
+</p>
+<p>
+つまり $q = (w,v)$ の共役クォータニオンは以下となる。
+</p>
+
+\[
+q^* = (w,v^*)
+\]
+
+<p>
+ただし $v^* = -v = (-x\ ,\ -y\ ,\ -z)$
+</p>
+
+
+</div>
+
+<br>
+<h4>
+(5) 積 (ハミルトン積)
+</h4>
+
+<p>
+クォータニオン同士の積は正式には「<b>ハミルトン積</b>」と呼んで次で定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン $q_1$、$q_2$ の積 (ハミルトン積)</b>
+
+\[
+q_1 = (w1,v1)
+\]
+
+\[
+q_2 = (w2,v2)
+\]
+
+<p>
+としたとき、$q_1$ と $q_2$ の積(ハミルトン積)は次で表される。
+</p>
+
+\[
+q_1q_2 = (w_1w_2 - v_1\cdot v_2\ ,\  w_1v_2 + w_2v1 + v1\times v2)
+\]
+
+<p>
+ここで「$\cdot$」は内積で「$\times$」はクロス積である。
+</p>
+
+</div>
+
+<p>
+なおクロス積は交換則が成り立ちませんので、一般に $q_1q_2 \neq q_2q_1$ であることに注意して下さい。
+</p>
+
+<br>
+<h4>
+(6) 逆数
+</h4>
+
+<p>
+クォータニオン $q$ の逆数 $q^{-1}$は次のように定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： クォータニオン $q$  の逆数</b>
+
+\[
+q^{-1} = \frac{q^*}{|q|^2}
+\]
+
+<p>
+ここで $\vec{1} = (1,(0,0,0))$ を単位元とすると $qq^{-1} = q^{-1}q = \vec{1}$ が成りたつ
+</p>
+
+</div>
+
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>
