@@ -1,7 +1,6 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(xlim=[-6.5,6.5],ylim=[-6.5,6.5])
 ########### ここから↑は消さないで下さい
 
 # z_abs(t) が絶対値 |z(t)| です
@@ -16,4 +15,5 @@ def z_arg(t):
     return None
 
 ########### ここから↓は消さないで下さい
-cmp.plot_signal(5,z_abs,z_arg)
+cmp.init(cxlim=(-6,6), cylim=(-6,6))
+cmp.plot_csignal('z',z_abs,z_arg,5)

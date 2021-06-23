@@ -2,7 +2,6 @@
 import cmp
 import numpy as np
 import math
-cmp.init(draw3d=True,xlim=[-1,1],ylim=[-1,1],zlim=[-1,1])
 ########### ここから↑は消さないで下さい
 
 v=[0,0,0]
@@ -27,4 +26,8 @@ def v_dash(v,wq,vq):
     return None
 
 ########### ここから↓は消さないで下さい
-cmp.plot_rotation(v,theta,u,w_q,v_q,v_dash,9)
+cmp.init(
+    axs=( ('3',r'',(0,0),1,1), ),
+    cxlim=(-1,1), cylim=(-1,1), czlim=(-1,1)
+)
+cmp.plot_3d(v,theta,u,w_q,v_q,v_dash,9)

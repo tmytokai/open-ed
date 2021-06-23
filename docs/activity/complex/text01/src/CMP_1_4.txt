@@ -1,7 +1,6 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(drawax=False)
 ########### ここから↑は消さないで下さい
 
 # 以下のz1〜z5を演習1-3でセットした値に置き換えて下さい
@@ -26,6 +25,7 @@ z4_abs = 0
 z5_abs = 0
 
 ########### ここから↓は消さないで下さい
+cmp.init(axs=None)
 cmp.check_abs((
     ('z1',z1,z1_abs),
     ('z2',z2,z2_abs),

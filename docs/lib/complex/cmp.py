@@ -170,6 +170,8 @@ def plot_tsignal(name,f,sec,axno=0):
 
 # 複素正弦波の合成
 def plot_synth( name, csinlist, sec, imag, axno=0 ):
+    for a,phi,w in csinlist: 
+        if( a is None or phi is None or w is None ) : return
     csin = lambda a,phi,w,t: a * np.cos( w*t + phi ) + a * np.sin( w*t + phi )*1j
     if( imag is False ) : f = lambda t : sum( [ csin(a,phi,w,t).real for a,phi,w in csinlist ] )
     else : f = lambda t : sum( [ csin(a,phi,w,t).imag for a,phi,w in csinlist ] )

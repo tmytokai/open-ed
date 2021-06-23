@@ -1,7 +1,6 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init()
 ########### ここから↑は消さないで下さい
 
 # z6、z7 の直交形式をテキストに従って求めて下さい
@@ -15,7 +14,8 @@ z6 = None
 z7 = None
 
 ########### ここから↓は消さないで下さい
-cmp.draw((
+cmp.init()
+cmp.plot_c((
     ('z6',z6),
     ('z7',z7),
 ))

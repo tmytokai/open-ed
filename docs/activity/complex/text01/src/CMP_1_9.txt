@@ -1,7 +1,6 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init()
 ########### ここから↑は消さないで下さい
 
 # 以下の z6 と z7 を演習1-7でセットした値に置き換えて下さい
@@ -26,7 +25,8 @@ z9_arg = 0
 z9 = None
 
 ########### ここから↓は消さないで下さい
-cmp.draw((
+cmp.init()
+cmp.plot_c((
     ('z6',z6),
     ('z7',z7),
     ('z9',z9),

@@ -1,7 +1,6 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init()
 ########### ここから↑は消さないで下さい
 
 # python では z = a + b*1j により複素数の変数を作れます
@@ -14,7 +13,8 @@ z4 = None
 z5 = None
 
 ########### ここから↓は消さないで下さい
-cmp.draw((
+cmp.init()
+cmp.plot_c((
     ('z1',z1),
     ('z2',z2),
     ('z3',z3),

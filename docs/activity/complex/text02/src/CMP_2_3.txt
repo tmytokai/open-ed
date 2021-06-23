@@ -1,15 +1,15 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init()
 ########### ここから↑は消さないで下さい
 
 # None を数値に置き換えて下さい
 # 円周率は math.pi です
 
-a = None     # 振幅
-phi = None   # 初期位相
-w = None     # 角周波数
+z_a = None     # 振幅
+z_phi = None   # 初期位相
+z_w = None     # 角周波数
 
 ########### ここから↓は消さないで下さい
-cmp.plot_csin(a,phi,w)
+cmp.init()
+cmp.plot_csin('z',z_a,z_phi,z_w)
