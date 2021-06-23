@@ -35,7 +35,9 @@ z(t) = |z(t)| \cdot \textrm{e}^{\{j\cdot \angle z(t) \}} = (\sqrt{2}\cdot t) \cd
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook を起動し、「CMP_2_1」というノートブックを作ります
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook を起動して(まだアップロードしていない場合は)<a href="../../../lib/complex/cmp.py">モジュールファイル(cmp.py)</a>をアップロードします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規ノートブックを作って「CMP_2_1」に名前を変更します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="./src/CMP_2_1.txt">テンプレート</a>をノートブックにコピーします
 <br>
@@ -112,13 +114,17 @@ z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm
 <p>
 <input type="checkbox"><b>演習 2-4 (個人):</b> 演習 2-3 の $z(t)$ の
 </p>
-<ul>
-<li>振幅を $a = 3$</li>
-<li>初期位相を $\phi = -\pi/2$</li>
-<li>角周波数を $w = -\pi/8$ [rad/秒]</li>
-</ul>
+<p>
+振幅を $a = 3$
 </p>
-に変えた時に周期と動きがどう変わるか確かめてみましょう。
+<p>
+初期位相を $\phi = -\pi/4$
+</p>
+<p>
+角周波数を $w = -\pi/8$ [rad/秒]
+</p>
+<p>
+に変えると周期と動きがどう変わるか確かめてみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -142,6 +148,7 @@ z(t) =  \left \{ 2 \cdot \textrm{e}^{\{j \cdot \pi/4 \}} \right \} \cdot \textrm
 <br>
 <p>
 <input type="checkbox"><b>演習 2-5 (個人):</b> 
+</p>
 
 \[
 z_1(t) =   \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
@@ -151,19 +158,17 @@ z_1(t) =   \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} 
 z_2(t) = \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
 \]
 
-<br>
 <p>
-とした時、テキストで出てきた分解式(オイラー公式)
+の時
 </p>
 
-<br>
 \[
-f(t) = a \cdot \cos ( w \cdot t + \phi ) = z_1(t) + z_2(t)
+z_1(t) + z_2(t) = a \cdot \cos ( w \cdot t + \phi ) 
 \]
-<br>
+
 <p>
 が正しい事を確かめてみましょう。
-</p>
+<br>
 
 <div class="olradio"> 
 <p>
@@ -173,13 +178,13 @@ f(t) = a \cdot \cos ( w \cdot t + \phi ) = z_1(t) + z_2(t)
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 今回は例として
 \[
-f(t) = 4 \cdot \cos ( \pi/4 \cdot t - \pi/4)
+z_1(t) + z_2(t) = 4 \cdot \cos ( \pi/4 \cdot t - \pi/4)
 \]
-を描画します。複素正弦波 $z_2(t)$ の振幅、初期位相、角周波数の値を変更して下さい ※ $z_1(t)$のパラメータは自動でセットされます
+を考えます。パラメータ $a$、$w$、$\phi$ の値をセットして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 実行します
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> $z_1(t)$ 、$z_2(t)$、$f(t)$ の動きを見て分解式が正しいことを再確認します。
+<span class="olradio"><input type="radio" name="p5"></span> 分解式が正しいことを確認します。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい
 <br>

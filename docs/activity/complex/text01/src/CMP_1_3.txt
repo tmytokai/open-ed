@@ -1,7 +1,7 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(True)
+cmp.init()
 ########### ここから↑は消さないで下さい
 
 # python では z = a + b*1j により複素数の変数を作れます

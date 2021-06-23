@@ -1,7 +1,7 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(False)
+cmp.init(drawax=False)
 ########### ここから↑は消さないで下さい
 
 # 以下のz1〜z5を演習1-3でセットした値に置き換えて下さい
@@ -19,17 +19,17 @@ z5 = None
 # (注) python の場合は cmath.phase 関数を使うと簡単に偏角が求まりますが
 # 今回は使わないで計算して下さい
 
-z1_phase = 0
-z2_phase = 0
-z3_phase = 0
-z4_phase = 0
-z5_phase = 0
+z1_arg = 0
+z2_arg = 0
+z3_arg = 0
+z4_arg = 0
+z5_arg = 0
 
 ########### ここから↓は消さないで下さい
-cmp.check_phase((
-    ('z1',z1,z1_phase),
-    ('z2',z2,z2_phase),
-    ('z3',z3,z3_phase),
-    ('z4',z4,z4_phase),
-    ('z5',z5,z5_phase),
+cmp.check_arg((
+    ('z1',z1,z1_arg),
+    ('z2',z2,z2_arg),
+    ('z3',z3,z3_arg),
+    ('z4',z4,z4_arg),
+    ('z5',z5,z5_arg),
 ))

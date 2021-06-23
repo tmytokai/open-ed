@@ -1,7 +1,7 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(True)
+cmp.init()
 ########### ここから↑は消さないで下さい
 
 # z6、z7 の直交形式をテキストに従って求めて下さい

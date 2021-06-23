@@ -38,9 +38,7 @@
 </p>
 
 <p>
-一方、<a href="./page03.html">前ページ</a>でした様にサイン波を複素正弦波の和に分解すると<a href="../text01/page06.html">四則演算が簡単に出来る</a>様になるので、複雑な計算でも楽に解けることが多いです。
-<br>
-計算が楽である以外にも複素数と複素正弦波を使うことには様々なメリットがありますので自分で調べてみてください。
+一方、<a href="./page03.html">サイン波を複素正弦波の和に分解</a>すると<a href="../text01/page06.html">四則演算が簡単に出来る</a>様になるので、複雑な計算でも楽に解けることが多いです。
 </p>
 
 <p>
@@ -56,7 +54,7 @@ a \cdot \sin ( w \cdot t + \pi/2 ) = a \cdot \cos ( w \cdot t )
 <p>
 この式をまともに証明しようとすると案外難しいです。
 <br>
-ところが複素正弦波を使って考えるとあっさり証明出来ます。
+ところが複素正弦波を使って考えると以下の様にしてあっさり証明出来ます。
 <p>
 
 <br>
@@ -87,24 +85,28 @@ a \cdot \sin ( w \cdot t + \pi/2 )
 \begin{align*}
 \{ a \cdot \cos ( w \cdot t + \phi ) \}^2
 &=  
-\left [ \left \{ \frac{a}{2} \cdot \textrm{e}^{-\phi} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
-+   \left \{ \frac{a}{2} \cdot \textrm{e}^\phi \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \right ]^2 \\
+\left [ \left \{ \frac{a}{2} \cdot \textrm{e}^{-j \cdot \phi} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++   \left \{ \frac{a}{2} \cdot \textrm{e}^{j \cdot \phi} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}} \right ]^2 \\
 
 &=  
-\left \{ \frac{a^2}{4} \cdot \textrm{e}^{-2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
+\left \{ \frac{a^2}{4} \cdot \textrm{e}^{-j \cdot 2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
 + 2 \cdot \left \{ \frac{a^2}{4} \cdot \textrm{e}^0 \right \} \cdot \textrm{e}^{0}
-+ \left \{ \frac{a^2}{4} \cdot \textrm{e}^{2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}} \\
++ \left \{ \frac{a^2}{4} \cdot \textrm{e}^{j \cdot 2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}} \\
 
 &= \frac{a^2}{2} 
 + \frac{1}{2} 
 \left [
-\left \{ \frac{a^2}{2} \cdot \textrm{e}^{-2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
-+ \left \{ \frac{a^2}{2} \cdot \textrm{e}^{2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}}
+\left \{ \frac{a^2}{2} \cdot \textrm{e}^{-j\cdot 2\phi} \right \} \cdot \textrm{e}^{\{-j \cdot 2w \cdot t \}}
++ \left \{ \frac{a^2}{2} \cdot \textrm{e}^{j \cdot 2\phi} \right \} \cdot \textrm{e}^{\{j \cdot 2w \cdot t \}}
 \right ] \\
 
 &= \frac{a^2}{2} + \frac{ a^2 \cdot \cos ( 2w \cdot t + 2\phi )}{2} 
 
 \end{align*}
+
+<p>
+上では例として計算が楽になるというメリットを挙げましたが、それ以外にも複素数と複素正弦波を使うことには様々なメリットがありますので自分で調べてみてください。
+</p>
 
 <br>
 <script>PreNext(4,4)</script>

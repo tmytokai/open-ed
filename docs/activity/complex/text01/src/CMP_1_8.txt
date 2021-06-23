@@ -1,7 +1,7 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(True)
+cmp.init()
 ########### ここから↑は消さないで下さい
 
 # 以下の z6 と z7 を演習1-7でセットした値に置き換えて下さい

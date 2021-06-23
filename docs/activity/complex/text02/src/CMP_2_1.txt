@@ -1,7 +1,7 @@
 %matplotlib inline
 import cmp
 import math
-cmp.init(drawax=True,width=13,height=13)
+cmp.init(xlim=[-6.5,6.5],ylim=[-6.5,6.5])
 ########### ここから↑は消さないで下さい
 
 # z_abs(t) が絶対値 |z(t)| です
