@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>8. 物理演算を使って回転</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [3] 物理演算</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+次はゲームオブジェクトにトルク(Torque)を与えて物理的に動かしてみます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に新しいシーンを作って回転物を作成します。
+<br>
+少し長いので慎重に進めて下さい。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Torque Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Create Empty で空オブジェクトを新規作成し、名前を「KAITEN」、Position を (0,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> KAITEN に Rigidbody コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> KAITEN のインスペクタを表示して Rigid Body の Mass に 8 を入れる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 更に Rigid Body の Angular Drag に 0 を入れる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 更に Rigid Body の Use Gravity のチェックを外す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Torque Script Graph」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> KAITEN に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Torque Script Graph をドロップする
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでで KAITEN のインスペクタは次の様になります。
+</p>
+
+<p>
+<b>図1. KAITEN のインスペクタ</b>
+</p>
+<img src="./img/page08-fig1.png" alt="">
+
+<p>
+では準備を続けます。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO1」、Position を (0,0,0)、Scale を (3,2,1) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO2」、Position を (2,1,1)、Scale を (2,1,1) にする
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでで HAKO1 と HAKO2 のインスペクタは次の様になります。
+</p>
+
+<p>
+<b>図2. HAKO1 のインスペクタ</b>
+</p>
+<img src="./img/page08-fig2.png" alt="">
+
+<p>
+<b>図3. HAKO2 のインスペクタ</b>
+</p>
+<img src="./img/page08-fig3.png" alt="">
+
+
+<p>
+では準備を続けます。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「X」、Position を (0.5, 0.25, 0.25)、Rotation を (19.2, 349.2, 20.3 )、Scale を (10, 0.1, 0.1) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <b>インスペクタから Box Collider コンポーネントを削除する</b> (3点ドッドをクリック → Remove Component)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> X をコピーして名前を「Y」にし、Scale を (0.1, 10, 0.1) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> X をコピーして名前を「Z」にし、Scale を (0.1, 0.1, 10) にする
+</p>
+</div>
+
+</div>
+
+<p>
+X、Y、Z から Box Collider を削除するのを忘れるとうまく回らないので気を付けて下さい。
+<br>
+ここまでで X のインスペクタは次の様になります(YとZは省略)。
+</p>
+
+<p>
+<b>図4. X のインスペクタ</b>
+</p>
+<img src="./img/page08-fig4.png" alt="">
+
+<p>
+あとは親子関係を作って準備は終わりです。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで HAKO1、HAKO2、X、Y、Z を範囲選択し KAITEN の上にドロップして親子関係にする( KAITEN が親、その他が子供)
+</p>
+</div>
+
+</div>
+
+<p>
+この時のヒエラルキーは次の様になっています。
+</p>
+
+<p>
+<b>図5. 親子関係を作る</b>
+</p>
+<img src="./img/page08-fig5.png" alt="">
+
+<p>
+最終的に次の様な画面になってれば OK です
+</p>
+
+<p>
+<b>図6. KAITEN</b>
+</p>
+<img src="./img/page08-fig6.png" alt="">
+
+
+<br>
+<br>
+<h3>
+2. Fixed Update イベントの中でトルクを与え続けて物理的に回転させる
+</h3>
+
+<p>
+実世界で何か物を回転させたい時は回転軸の方向にトルク(単位はニュートン・メートル)を与え続ける必要があります。
+</p>
+
+<p>
+さて Unity でゲームオブジェクトにトルクを与えるユニットは Rigidbody Add Torque (Torque) ユニット(rigidbody add Torque で検索)です。
+<br>
+このユニットを Fixed Update イベントの中で実行し続けます。
+</p>
+
+<p>
+※ 物理演算を使ってるので Update イベントではなくて Fixed Update イベントを使います
+</p>
+
+<p>
+なお3次元空間なので、トルクは3次元ベクトル(Vector3)を使って x,y,z 方向別に指定します。
+</p>
+
+<p>
+では早速図 7 を実行してください。
+<br>
+このスクリプトでは Y 軸(上)方向に 1 [ニュートン・メートル]のトルクを与えて回転させています。
+</p>
+
+<p>
+<b>図 7 . トルクを与え続けて回転 (歳差運動が起きる例)</b>
+</p>
+<img src="./img/page08-fig7.png" alt="">
+
+<p>
+ところが図 7 を実行すると、いわゆる<a href="https://ja.wikipedia.org/wiki/%E6%AD%B3%E5%B7%AE">歳差運動</a>が生じてコマの様に回転軸がぶれながら回転している事に気がつくと思います。
+</p>
+
+<p>
+今回例として使っている KAITEN の様に、重心が中心からズレている物体はある方向(<b>慣性主軸</b>と言います)にトルクを与えないと歳差運動が生じます。
+<br>
+慣性主軸には X 軸、Y 軸、Z 軸の 3 方向があるのですが、KAITEN の場合はゲームオブジェクト X、Y、Z が慣性主軸となります(図 8)。
+</p>
+
+<p>
+<b>図 8 . KAITEN の 慣性主軸方向</b>
+</p>
+<img src="./img/page08-fig8.png" alt="">
+
+<br>
+<p>
+この慣性主軸を自力で計算して求めるのはなかなか大変な作業なのですが、Unity の場合は図 9 の様に、Rigidbody Get Inertia Tensor Rotatin ユニット(rigidbody get inertia tensor rotatin で検索)で取得できるクォータニオンをトルクにかけてあげることで簡単に求めることが出来ます。
+</p>
+
+<p>
+<b>図 9 . トルクを与え続けて回転 (歳差運動が起きない例)</b>
+</p>
+<img src="./img/page08-fig9.png" alt="">
+
+<p>
+では図 9 のスクリプトを実行して下さい。
+<br>
+今度は Vector3 で指定した (0,1,0) を元に慣性主軸の Y 軸方向を求めてから Add Torque ユニットに入力してますので綺麗に回転すると思います。
+<br>
+上手く動いたら Vector3 の値を (1,0,0) や (0,0,1) に変更して X 軸や Z 軸でも回転することを確認して下さい。
+<br>
+また 1 をもっと大きい数字に変えると速く回転しますので、こちらも試してみて下さい。
+</p>
+
+<br>
+<h3>
+3. ブレーキ
+</h3>
+
+<p>
+Rigid Body の Angular Drag の値はブレーキの強さ(＝ 回転のし辛さ)を意味します。
+</br>
+準備のところで KAITEN の Rigid Body の Angular Drag の値を 0 にしていますので今は全くブレーキがかかっていない状態です。
+</p>
+
+<p>
+では充分に回転が早くなったら実行を停止しないで Angular Drag に大きな値(10くらい)を入れてみて下さい。
+<br>
+急ブレーキがかかると思います。
+</p>
+
+<br>
+<h3>
+4. トルクの詳しい説明
+</h3>
+
+<p>
+以下準備中
+</p>
+
+<br>
+<script>PreNext(6,20)</script>
+</body>
+</html>
