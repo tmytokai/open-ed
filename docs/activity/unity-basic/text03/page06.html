@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>6. 物理演算を使って移動</title>
+<title>6. バネ</title>
 </head>
 <body>
 
@@ -20,9 +20,8 @@
 
 <h2><script>GetTitle()</script></h2>
 
-
 <p>
-次はゲームオブジェクトに力(Force)を与えて物理的に動かしてみます。
+次はバネの動きを Unity を使って再現してみましょう。
 </p>
 
 <br>
@@ -31,125 +30,193 @@
 </h3>
 
 <p>
-演習を行う前に新しいシーンを作り、箱を作成します。
+演習を行う前に新しいシーンを作り、天井と球を作成します。
 <br>
-今回は重さ(Mass)の設定もします。
+なおバネを繋ぐためにはバネの両端にあるゲームオブジェクト両方に Rigidbody をアタッチする必要があります。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Addforce Scene」にする。背景色は任意で構わない
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成をし、シーン名を「Spring Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0)にする
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「TENJYO」、Position を (0,6,0)にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> HAKO に Rigidbody コンポーネントをアタッチする
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO に Rigidbody コンポーネントをアタッチする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> HAKO のインスペクタを表示して Rigid Body の Mass に 10 を入れる
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,0,0)にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 更に Rigid Body の Use Gravity のチェックを外す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Addforce Script Graph」に名前を変更する 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Addforce Script Graph をドロップする
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Rigidbody をアタッチする
 </p>
 </div>
 
 </div>
 
+<p>
+ただこのままでは TENJYO にも重力がかかっているので TENJYO も落ちます。
 <br>
+そこで以下の手順で TENJYO を空間に固定して動かないようにしてあげましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO のインスペクタを表示して Rigid Body の Use Gravity のチェックを外す (すると重力がかからなくなります)
 <br>
-<h3>
-2. Fixed Update イベントの中で力を与え続けて物理的に動かす
-</h3>
-
-<p>
-実世界で何か物を動かしたい時は動かしたい方向に向かって力(単位はニュートン)を与え続ける必要があります。
+<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Position の x,y,z にチェックを入れる(すると位置がロックされます)
 <br>
-力を与えるのを止めると慣性で動き続けますが、摩擦がある場合は減速してそのうち止まります。
+<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Rotation の x,y,z にチェックを入れる(すると回転しなくなります)。
+</p>
+</div>
+
+</div>
+
+<p>
+以上の設定を行なうと図1の様な設定状態になります。
 </p>
 
 <p>
-さて Unity でゲームオブジェクトに力を与えるユニットは Rigidbody Add Force (Force) ユニット(rigidbody add force で検索)です。
-<br>
-このユニットを <a href="../text02/page09.html">Fixed Update</a>イベントの中で実行し続けます。
+<b>図1. TENJYO を動かないようにする</b>
 </p>
 
-<p>
-※ 物理演算を使ってるので、今回は Update イベントではなくて Fixed Update イベントを使います
-</p>
-
-<p>
-なお3次元空間なので、力は3次元ベクトル(Vector3)を使って x,y,z 方向別に指定します。
-</p>
-
-<p>
-では早速図1を実行してください。
-<br>
-実行すると右方向に徐々にスピードを上げながら動き始めると思います。
-</p>
-
-<p>
-<b>図1. 力を与え続けて移動</b>
-</p>
 <img src="./img/page06-fig1.png" alt="">
 
-<p>
-さてこの例では power という Float 型の Graph 変数を用意し、
-</p>
-<p>
-力 = 右方向ベクトル x power
-</p>
-<p>
-で力を計算しています。
-<br>
-上手く動いたら power の数値を変えたり(マイナスにすると逆に動きます)、HAKO の重さ(Mass)を変えたり、方向ベクトルを変更したりするとどの様に動きが変わるか試して下さい
-<br>
-またコントローラを使って動かしてみても良いでしょう。
-</p>
+
+
 
 <br>
+<br>
 <h3>
-3. 瞬間的に力を与えて物理的に動かす
+2. バネの設定
 </h3>
 
 <p>
-上では力を与え続けてゲームオブジェクトを動かしていましたが、現実的にはボールをバットで打ったり、爆弾で物を吹き飛ばしたりなど、瞬間的に力を加えて一気に物体を加速させることも多いです。
+次にバネの設定をします。
+<br>
+なおバネの機能をゲームオブジェクトに与えるコンポーネントは <b>Spring Joint</b> と呼ばれます。
 </p>
 
 <p>
-Unity でゲームオブジェクトに瞬間的に力を与えるユニットは Rigidbody Add Force (Force,Mode) ユニット(rigidbody add force で検索)で、Mode には Impulse を指定します。
+まず以下の手順で TENJYO と HAKO をバネで繋ぎます
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA のインスペクタを開いて Add Component ボタンをおす
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Physics → Spring Joint で Spring Joint コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TENJYO をドラッグして Spring Joint の Connected Body の右にある None と書いてあるセルにドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変ったことを確認する(図2参照)
+</p>
+</div>
+
+</div>
+
+<p>
+なお「<b>バネは透明で目では見えません</b>」ので、何も表示されなくても慌てなくて良いです。
 </p>
 
 <p>
-では例を使って確認してみましょう。
+次にバネとダンパーの強さなどの設定をします。
 <br>
-まず HAKO の重さ(Mass)と Graph 変数 power の値を 10 に戻します。
+ダンパーとは乗用車にもついているバネの振動を抑える装置のことでショックアブソーバとも呼ばれます。
+</p>
+
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Spring Joint の Auto Configure Connected Anchor のチェックを外す (バネの長さの自動調整機能を OFF にします)
 <br>
-次に力は1回しか与えないので、Fixed Update イベントを削除して代わりに Start イベントを使います。
+<span class="olradio"><input type="radio" name="p1"></span> Spring を 10 にする (これがバネの強さです)
 <br>
-その上で図2を実行してください。
-<br>
-実行すると右方向に一定速度で動き始めます。
-<br>
-上手く動いたら power の数値を変えたり(マイナスにすると逆に動きます)、HAKO の重さ(Mass)を変えたり、方向ベクトルを変更したりするとどの様に動きが変わるか試して下さい
+<span class="olradio"><input type="radio" name="p1"></span> Dumper を 1 にする (これがダンパーの強さです)
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでの Spring Joint の設定は以下の図2となります。
 </p>
 
 <p>
-<b>図2. 瞬間的に力を与えて移動</b>
+<b>図2. Spring Joint の設定</b>
 </p>
+
 <img src="./img/page06-fig2.png" alt="">
 
 
 
 <br>
+<br>
+<p>
+ではこれから 2 つほど実験をしてみましょう。
+</p>
+
+<br>
+<h3>(例1) バネと重力の実験</h3>
+
+<p>
+では実行ボタンを押して下さい。
+<br>
+すると TAMA が落ち始め、しばらくすると振動して、だいたい -1 メートルの辺りで静止すると思います(TAMA のインスペクタを開いて Position の Y 値を見て下さい)。
+</p>
+
+<p>
+では次に TAMA の重さを変えたらどうなるか見てみましょう。
+<br>
+<b>実行状態のまま </b> TAMA のインスペクタ の Rigid Body の Mass(重さ、単位は kg) を 1 kg から 2 kg に変更して下さい。
+<br>
+するとだいたい -2 メートルの辺りで静止します。
+<br>
+同様に 3 kg にすると -3 メートル辺りまで落ちる事が分かります。
+</p>
+
+<p>
+この様に、重さに比例してバネの長さが伸びる事が分かりました。
+</p>
+
+<br>
+<h3>(例2) 振動の実験</h3>
+
+<p>
+では次に TAMA を振動させてみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 実行を停止し、 TAMA の重さが 1 kg に戻っていることを確認する (戻ってない時は Mass に 1 を入れる)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 重力がかかっていると挙動が分かりにくいので TAMA の Rigid Body の Use Gravity のチェックを外す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA の Position の Y の値を 4 にする ( TAMA を押してバネを縮めている状態)
+</p>
+</div>
+
+</div>
+
+<p>
+では実行ボタンを押してみましょう。
+<br>
+すると HAKO が振動を始め、やがて 0 メートルの位置で静止します。
+</p>
+
+<p>
+なお実行したまま Y の値を 4 に戻すとまた振動し始めますので、Spring や Dumper や Mass の値を色々変更してどの様な動きになるか試してみましょう。
+</p>
+
+<br>
 <h3>
-4. 力の詳しい説明
+3. バネの詳しい説明
 </h3>
 
 <p>
@@ -159,74 +226,163 @@ Unity でゲームオブジェクトに瞬間的に力を与えるユニット�
 </p>
 
 <p>
-既に<a href="./page03.html">摩擦</a>で使いましたが、改めて<a href="https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%88%E3%83%B3%E3%81%AE%E9%81%8B%E5%8B%95%E6%96%B9%E7%A8%8B%E5%BC%8F">ニュートンの運動方程式</a>についておさらいしておきます。
-</p>
-
-<p>
-$m$ [kg]を物体の重さ、$a$ [m/$s^2$] を加速度ベクトル、 $F$ [ニュートン] を力とします。
+まず最初に示した例 1 は<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%83%E3%82%AF%E3%81%AE%E6%B3%95%E5%89%87">フックの法則</a>を再現しています。
 <br>
-するとニュートンの運動方程式は
-</p>
+フックの法則とは、$F$ をバネにかかる力、$k$ をバネ定数、$y$ を自然長から伸び縮みした長さとしたとき
 
 \[
-m \cdot a = F
+F = k \cdot y
 \]
 
 <p>
-となります。
+となる法則です。
 </p>
 
 <p>
-さてこのページの 1 番目の例はオーソドックスに運動方程式を適用できます。
+もし $F$ として重力を考えると、$m$ を物体の重さ、 $g$ を重力加速度としたとき
+</p>
+
+\[
+m \cdot g = k \cdot y
+\]
+
+<p>
+なので、これを変形して
+</p>
+
+\[
+y = \frac{m \cdot g}{k}
+\]
+
+<p>
+が成り立ちます。
+</p>
+
+<p>
+さて Unity では
+</p>
+
+<p>
+<b>Spring ≒ $k$ (バネ定数)</b>
+</p>
+
+<p>
+となります(完全イコールでないのは例のごとく計算誤差があるためです)。
 <br>
-今回は Mass = 10 [Kg] の HAKO に対し、右方向に大きさ power = 10 [ニュートン] の力を加え続けていますので、右方向に $1$ [m/$s^2$] の加速度がかかります。
+例 1 では $m$ = mass、 $g$ = 9.81、Spring = 10 としていたので、
+</p>
+
+<p>
+重さ 1 kg → 最初の位置から 約 1 メートル下がる
+</p>
+<p>
+重さ 2 kg → 最初の位置から 約 2 メートル下がる
+</p>
+<p>
+重さ 3 kg → 最初の位置から 約 3 メートル下がる
+</p>
+
+
+<p>
+という結果になりました。
+</p>
+
+<p>
+次に例 2 ではダンパーをバネに加えた時の<a href="https://ja.wikipedia.org/wiki/%E6%B8%9B%E8%A1%B0%E6%8C%AF%E5%8B%95">減衰振動</a>を再現しています。
+</p>
+
+<p>
+$k$ をバネ定数、$c$ をダンパーの減衰係数(どれだけ振動を抑えるかを決めるパラメータ)、 $m$ を物体の重さ(kg)とします。
 <br>
-実際に1秒おきの HAKO の速度を測定したら以下の様になっていたので、だいたい理論通り動いていることが分かります。
+これから減衰率(振動が小さくなる速さ) $r$ と 固有角周波数(ダンパーが付いてない時の振動の速さ) $w_0$ を以下のように求めます。
+</p>
+
+\[
+r = \frac{c}{2\cdot m}
+\]
+
+\[
+w_0 = \sqrt{\frac{k}{m}}
+\]
+
+<p>
+ここでもし $w_0^2 - r^2 > 0$ つまり $2 \cdot \sqrt{ m \cdot k} > c $ ならば、時刻 t 秒時点における物体の位置 $y(t)$ は以下の式で求まります。
+</p>
+
+\[
+y(t) = y(0) \cdot {\rm e}^{-r\cdot t} \left \{ \cos (w_d \cdot t) + \frac{r}{w_d}\cdot \sin (w_d\cdot t) \right \}
+\]
+
+<p>
+ここで $y(0)$ は初期位置で、$w_d = \sqrt{ w_0^2 - r^2}$ です。
 </p>
 
 <p>
-開始約 1 秒後 → 速度 約 1 m/秒
+※ この式を求めるためには微分方程式を解く必要があって長くなるので今回は省略します。気になる人は調べてみましょう。
 </p>
 
 <p>
-開始約 2 秒後 → 速度 約 2 m/秒
+さて Unity では
 </p>
 
 <p>
-開始約 3 秒後 → 速度 約 3 m/秒
+<b>Spring ≒ $k$ (バネ定数)</b>
 </p>
 
 <p>
-開始約 4 秒後 → 速度 約 4 m/秒
+<b>Dumper ≒ $c$ (減衰係数)</b>
 </p>
 
 <p>
-開始約 5 秒後 → 速度 約 5 m/秒
+<b>Mass ≒ $m$ [kg]</b>
 </p>
+
+<p>
+という関係になります。
+<br>
+よって例 2 では Spring = 10、Dumper = 1, mass = 1、$y(0) = 4$ としてたので、理論的には次の様な式となります。
+</p>
+
+\[
+r = \frac{1}{2\cdot 1} = 0.5
+\]
+
+\[
+w_0 = \sqrt{\frac{10}{1}}( = 3.1622776\cdots)
+\]
+
+\[
+w_d = \sqrt{ 9.75 }( = 3.12249899\cdots)
+\]
+
+\[
+y(t) = 4 \cdot {\rm e}^{-0.5\cdot t} \left \{ \cos (\sqrt{ 9.75 } \cdot t) + \frac{0.5}{\sqrt{ 9.75 }}\cdot \sin (\sqrt{ 9.75 }\cdot t) \right \}
+\]
 
 <br>
 <p>
-一方、2番目の例( mode = Impulse)で Add Force ユニットに入力しているベクトルは実は力ではなくて運動量(単位はニュートン秒)になります。
+この理論値と Unity 上で実際に測定した値をグラフにすると図3の通りになります。
 <br>
-つまり Add Force ユニットの mode を Impulse にすると運動方程式ではなくて運動量の計算が適用され
+縦軸が $y(t)$、横軸が $t$ 秒です。
+<br>
+誤差はありますが、だいたい理論通りに減衰振動していることが分かります。
 </p>
 
 <p>
-重さ(Mass) ・ 速度ベクトル(Velocity) = Add Force の入力ベクトル (mode = Impulse の場合)
+<b>図3. 理論値と実際の値</b>
 </p>
+
+<img src="./img/page06-fig3.png" alt="">
 
 <p>
-という計算式に変わります。
+なお Dumper = 0 にすれば理論的にはずっと振動しているはずなのですが、Unity の場合はいずれ静止します。
+<br>
+ちゃんと調べてはいませんが、どうやら Unity では Dumper の値が現実世界の減衰係数よりも少し大きめに設定されているみたいです。
+<br>
+
 </p>
 
-<p>
-今回は Mass = 10 [Kg] の HAKO に対し、右方向に大きさ power = 10 [ニュートン秒]の運動量を与えましたので、1 フレーム後に HAKO は右方向に 1 [m/秒] の速度で動き始めます。
 <br>
-実際に HAKO の速度を測定すると実行開始直後からずっと 1 [m/秒]の速度で動いていることが分かります。
-</p>
-
-
-<br>
-<script>PreNext(6,20)</script>
+<script>PreNext(6,8)</script>
 </body>
 </html>

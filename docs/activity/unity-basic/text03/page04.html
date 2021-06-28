@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>4. バネ</title>
+<title>4. 反発</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次はバネの動きを Unity を使って再現してみましょう。
+次は物体の反発を Unity を使って再現してみましょう。
 </p>
 
 <br>
@@ -30,193 +30,125 @@
 </h3>
 
 <p>
-演習を行う前に新しいシーンを作り、天井と球を作成します。
-<br>
-なおバネを繋ぐためにはバネの両端にあるゲームオブジェクト両方に Rigidbody をアタッチする必要があります。
+演習を行う前に新しいシーンを作り、球と床を作成します。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成をし、シーン名を「Spring Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Bounciness Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「TENJYO」、Position を (0,6,0)にする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> TENJYO に Rigidbody コンポーネントをアタッチする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,0,0)にする
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,5,0)にする
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> TAMA に Rigidbody をアタッチする
-</p>
-</div>
-
-</div>
-
-<p>
-ただこのままでは TENJYO にも重力がかかっているので TENJYO も落ちます。
 <br>
-そこで以下の手順で TENJYO を空間に固定して動かないようにしてあげましょう。
-</p>
-
-<div class="info">
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> TENJYO のインスペクタを表示して Rigid Body の Use Gravity のチェックを外す (すると重力がかからなくなります)
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Position の x,y,z にチェックを入れる(すると位置がロックされます)
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Rotation の x,y,z にチェックを入れる(すると回転しなくなります)。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Quad で平面を新規作成し、名前を「YUKA」、Position を (0,-2,0)、 Rotation を (90,0,0)、Scale を (10,10,1) にする
 </p>
 </div>
 
 </div>
 
 <p>
-以上の設定を行なうと図1の様な設定状態になります。
+この時の状況が図1になります。
+<br>
+この状態で実行ボタンを押すと全く反発せずにそのまま YUKA に TAMA がくっつきます。
 </p>
 
 <p>
-<b>図1. TENJYO を動かないようにする</b>
+<b>図1. 床を用意</b>
 </p>
 
 <img src="./img/page04-fig1.png" alt="">
 
-
-
-
 <br>
 <br>
 <h3>
-2. バネの設定
+2. 反発の設定
 </h3>
 
 <p>
-次にバネの設定をします。
+では反発の設定をしていきます。
 <br>
-なおバネの機能をゲームオブジェクトに与えるコンポーネントは <b>Spring Joint</b> と呼ばれます。
+反発を行うためには「<b>物理マテリアル(Physic Material)</b>」というアセットをアセットフォルダの中に以下の手順で作ります。
 </p>
 
 <p>
-まず以下の手順で TENJYO と HAKO をバネで繋ぎます
-
-<div class="info">
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> TAMA のインスペクタを開いて Add Component ボタンをおす
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Physics → Spring Joint で Spring Joint コンポーネントをアタッチする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TENJYO をドラッグして Spring Joint の Connected Body の右にある None と書いてあるセルにドロップする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変ったことを確認する(図2参照)
-</p>
-</div>
-
-</div>
-
-<p>
-なお「<b>バネは透明で目では見えません</b>」ので、何も表示されなくても慌てなくて良いです。
-</p>
-
-<p>
-次にバネとダンパーの強さなどの設定をします。
-<br>
-ダンパーとは乗用車にもついているバネの振動を抑える装置のことでショックアブソーバとも呼ばれます。
-</p>
-
-
-<div class="info">
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> Spring Joint の Auto Configure Connected Anchor のチェックを外す (バネの長さの自動調整機能を OFF にします)
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Spring を 10 にする (これがバネの強さです)
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Dumper を 1 にする (これがダンパーの強さです)
-</p>
-</div>
-
-</div>
-
-<p>
-ここまでの Spring Joint の設定は以下の図2となります。
-</p>
-
-<p>
-<b>図2. Spring Joint の設定</b>
-</p>
-
-<img src="./img/page04-fig2.png" alt="">
-
-
-
-<br>
-<br>
-<p>
-ではこれから 2 つほど実験をしてみましょう。
-</p>
-
-<br>
-<h3>(例1) バネと重力の実験</h3>
-
-<p>
-では実行ボタンを押して下さい。
-<br>
-すると TAMA が落ち始め、しばらくすると振動して、だいたい -1 メートルの辺りで静止すると思います(TAMA のインスペクタを開いて Position の Y 値を見て下さい)。
-</p>
-
-<p>
-では次に TAMA の重さを変えたらどうなるか見てみましょう。
-<br>
-<b>実行状態のまま </b> TAMA のインスペクタ の Rigid Body の Mass(重さ、単位は kg) を 1 kg から 2 kg に変更して下さい。
-<br>
-するとだいたい -2 メートルの辺りで静止します。
-<br>
-同様に 3 kg にすると -3 メートル辺りまで落ちる事が分かります。
-</p>
-
-<p>
-この様に、重さに比例してバネの長さが伸びる事が分かりました。
-</p>
-
-<br>
-<h3>(例2) 振動の実験</h3>
-
-<p>
-では次に TAMA を振動させてみましょう。
+※ <a href="../text01/page06.html">色とテクスチャの設定</a>で使った「マテリアル」とは違う種類のアセットなので注意して下さい
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 実行を停止し、 TAMA の重さが 1 kg に戻っていることを確認する (戻ってない時は Mass に 1 を入れる)
+<span class="olradio"><input type="radio" name="p1"></span> シーンを新規作成した際に Scenes フォルダを開いたままにしている人は一つ上のフォルダに戻る
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 重力がかかっていると挙動が分かりにくいので TAMA の Rigid Body の Use Gravity のチェックを外す
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> TAMA の Position の Y の値を 4 にする ( TAMA を押してバネを縮めている状態)
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Physic Material」というアセットが出来るので「TAMA Physic Material」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に「YUKA Physic Material」も作成する
 </p>
 </div>
 
 </div>
 
 <p>
-では実行ボタンを押してみましょう。
-<br>
-すると HAKO が振動を始め、やがて 0 メートルの位置で静止します。
+繰り返しますが (2) のところで Material の方を選ばないよう気を付けて下さい。
 </p>
 
 <p>
-なお実行したまま Y の値を 4 に戻すとまた振動し始めますので、Spring や Dumper や Mass の値を色々変更してどの様な動きになるか試してみましょう。
+では反発の設定をしていきます。
+<br>
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Physic Material をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Bounciness を 0.98 にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Physic Material をドラッグしてヒエラルキーの TAMA の上にドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA のインスペクタを開き、 Sphere Collider の中に TAMA Physic Material と表示されているのを確認する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に YUKA Physic Material の Bounciness も 0.98 にし、YUKA にドラッグ＆ドロップし、YUKA のインスペクタを開いて確認する
+</p>
+</div>
+
+</div>
+
+<p>
+ここまで出来たら早速実行ボタンを押してみましょう。
+<br>
+TAMA が跳ね返ってだいたい元の位置まで戻る事が分かります。
+</p>
+
+<p>
+※ 計算誤差があるので完全に同じ位置までは戻りません
+</p>
+
+<p>
+次に「TAMA Physic Material」と「YUKA Physic Material」の Bounciness を両方とも 0.69 にして実行して下さい。
+<br>
+すると反発力が落ちて跳ね返るたびに元の半分の高さまでしか戻らなくなります。
+</p>
+
+<p>
+最後に「TAMA Physic Material」と「YUKA Physic Material」の Bounciness を両方とも 0 にして実行して下さい。
+<br>
+すると全く反発しなくなります。
+</p>
+
+<p>
+この様に、<b>Bounciness の値が 1 に近いと反発力が強くなり、逆に 0 に近づくにつれて反発力が落ちていきます</b>。
 </p>
 
 <br>
 <h3>
-3. バネの詳しい説明
+3. 反発の詳しい説明
 </h3>
 
 <p>
@@ -226,163 +158,120 @@
 </p>
 
 <p>
-まず最初に示した例 1 は<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%83%E3%82%AF%E3%81%AE%E6%B3%95%E5%89%87">フックの法則</a>を再現しています。
-<br>
-フックの法則とは、$F$ をバネにかかる力、$k$ をバネ定数、$y$ を自然長から伸び縮みした長さとしたとき
-
-\[
-F = k \cdot y
-\]
+Physic Material の Bounciness について詳しく説明する前に現実世界の<a href="https://ja.wikipedia.org/wiki/%E5%8F%8D%E7%99%BA%E4%BF%82%E6%95%B0">反発係数</a>についておさらいしておきます。
 
 <p>
-となる法則です。
-</p>
-
-<p>
-もし $F$ として重力を考えると、$m$ を物体の重さ、 $g$ を重力加速度としたとき
+TAMA と YUKA がぶつかった時に TAMA の速度が $v1$ から $v1'$ 、YUKA の速度が $v2$ から $v2'$ に変わったとしたら反発係数は
 </p>
 
 \[
-m \cdot g = k \cdot y
+e = \frac{ |v1' - v2'| }{ |v1 - v2| }
 \]
 
 <p>
-なので、これを変形して
+となりますが、今回のシチュエーションでは YUKA は静止している( $v2 = v2' = 0$) ので反発係数は
+</p>
+
+<p>
+\[
+e = \frac{ |v1'| }{ |v1| }
+\]
+</p>
+
+<p>
+となります。
+</p>
+
+<p>
+ここで $e = 1$ の状況を完全弾性衝突と呼んで、 TAMA の反発後の速度は不変で方向だけ変わります(つまり $v1' = -v1$ )。
+<br>
+逆に $e = 0$ の状況を完全非弾性衝突と呼んで、 TAMA の反発後の速度は $v1' = 0$ となります。
+<br>
+また $e$ が 1 より大きい場合は跳ね返った後の速度の方が早くなります(トランポリンのイメージ)。
+</p>
+
+<p>
+以上の話を踏まえて Bounciness の話に戻ります。
+<br>
+結論から言うと
+</p>
+
+<p>
+<b>Bounciness ≒ 反発係数</b>
+</p>
+
+<p>
+です。
+</p>
+
+<p>
+※ 完全にイコールでない理由についてはこれから順を追って説明します
+</p>
+
+<p>
+まず TAMA と YUKA がぶつかった時に使われる Bounciness の値はデフォルトでは TAMA と YUKA の Bounciness の平均値になります。
+<br>
+今回は両方とも同じ値を使う様にしていたので Bounciness の平均値も同じになりますが、もし平均値を使いたくない場合は Physic Material の Bounce Combine を Average(平均) から他の設定に変えます。
+</p>
+<p>
+例えば自分のキャラクターには反発を設定せずに床とか壁とかに反発の設定を任せたい時があります(金属の床とかマットレスとかトランポリンとか色々な状況が考えられますね)。
+<br>
+その場合は自分のキャラクターの Bounciness を 0、Bounce Combine を Maximum にします。
+<br>
+ここでは Bounce Combine についてこれ以上詳しく説明しませんので、興味のある人は調べてみて下さい。
+</p>
+
+<p>
+次に、Unity の物理演算エンジンは反発する時に若干運動エネルギーを加えます(計算誤差を補正するため？)。
+<br>
+そのため Bounciness の値を 1 にすると反発後の速度の方が若干早くなります。
+<br>
+従って Bounciness の値は現実の反発係数よりも若干小さめの値にする必要があります(理論的にどの位小さくすれば良いかは未調査です)。
+<br>
+上の方で Bounciness の値を 0.98 にしていた理由はそのためです。
+</p>
+
+<p>
+この様な Unity 特有の癖にさえ気をつければ後は普通の反発係数と同様に計算できます。
+<br>
+例えば上の例の様に反発後に戻る高さを元の 1/2 にしたい場合は Bounciness の値をいくつにすればよいか考えてみましょう。
+</p>
+
+<p>
+戻る高さが半分になるということは反発時に位置エネルギーの半分が失われるということを意味します。
+<br>
+つまり衝突時に運動エネルギーが半分になるということなので、TAMA の重さを $m$ 、反発前の速度を $v1$ 、反発後の速度を $v1'$ とすると
 </p>
 
 \[
-y = \frac{m \cdot g}{k}
+m \cdot \frac{ |v_1'|^2 }{2} = \frac{1}{2} \cdot \left \{m \cdot \frac{ |v_1|^2 }{2} \right \}
 \]
 
 <p>
-が成り立ちます。
-</p>
-
-<p>
-さて Unity では
-</p>
-
-<p>
-<b>Spring ≒ $k$ (バネ定数)</b>
-</p>
-
-<p>
-となります(完全イコールでないのは例のごとく計算誤差があるためです)。
+という式が成り立ちます。
 <br>
-例 1 では $m$ = mass、 $g$ = 9.81、Spring = 10 としていたので、
-</p>
-
-<p>
-重さ 1 kg → 最初の位置から 約 1 メートル下がる
-</p>
-<p>
-重さ 2 kg → 最初の位置から 約 2 メートル下がる
-</p>
-<p>
-重さ 3 kg → 最初の位置から 約 3 メートル下がる
-</p>
-
-
-<p>
-という結果になりました。
-</p>
-
-<p>
-次に例 2 ではダンパーをバネに加えた時の<a href="https://ja.wikipedia.org/wiki/%E6%B8%9B%E8%A1%B0%E6%8C%AF%E5%8B%95">減衰振動</a>を再現しています。
-</p>
-
-<p>
-$k$ をバネ定数、$c$ をダンパーの減衰係数(どれだけ振動を抑えるかを決めるパラメータ)、 $m$ を物体の重さ(kg)とします。
-<br>
-これから減衰率(振動が小さくなる速さ) $r$ と 固有角周波数(ダンパーが付いてない時の振動の速さ) $w_0$ を以下のように求めます。
+これを解くと 
 </p>
 
 \[
-r = \frac{c}{2\cdot m}
-\]
-
-\[
-w_0 = \sqrt{\frac{k}{m}}
+|v1'| = \frac{|v1|}{\sqrt{2}}
 \]
 
 <p>
-ここでもし $w_0^2 - r^2 > 0$ つまり $2 \cdot \sqrt{ m \cdot k} > c $ ならば、時刻 t 秒時点における物体の位置 $y(t)$ は以下の式で求まります。
+なので反発係数は
 </p>
 
 \[
-y(t) = y(0) \cdot {\rm e}^{-r\cdot t} \left \{ \cos (w_d \cdot t) + \frac{r}{w_d}\cdot \sin (w_d\cdot t) \right \}
+e = \frac{|v1'|}{|v1|} = \frac{1}{\sqrt{2}} = 0.707106781\cdots
 \]
 
 <p>
-ここで $y(0)$ は初期位置で、$w_d = \sqrt{ w_0^2 - r^2}$ です。
-</p>
-
-<p>
-※ この式を求めるためには微分方程式を解く必要があって長くなるので今回は省略します。気になる人は調べてみましょう。
-</p>
-
-<p>
-さて Unity では
-</p>
-
-<p>
-<b>Spring ≒ $k$ (バネ定数)</b>
-</p>
-
-<p>
-<b>Dumper ≒ $c$ (減衰係数)</b>
-</p>
-
-<p>
-<b>Mass ≒ $m$ [kg]</b>
-</p>
-
-<p>
-という関係になります。
+となります。
 <br>
-よって例 2 では Spring = 10、Dumper = 1, mass = 1、$y(0) = 4$ としてたので、理論的には次の様な式となります。
-</p>
-
-\[
-r = \frac{1}{2\cdot 1} = 0.5
-\]
-
-\[
-w_0 = \sqrt{\frac{10}{1}}( = 3.1622776\cdots)
-\]
-
-\[
-w_d = \sqrt{ 9.75 }( = 3.12249899\cdots)
-\]
-
-\[
-y(t) = 4 \cdot {\rm e}^{-0.5\cdot t} \left \{ \cos (\sqrt{ 9.75 } \cdot t) + \frac{0.5}{\sqrt{ 9.75 }}\cdot \sin (\sqrt{ 9.75 }\cdot t) \right \}
-\]
-
-<br>
-<p>
-この理論値と Unity 上で実際に測定した値をグラフにすると図3の通りになります。
-<br>
-縦軸が $y(t)$、横軸が $t$ 秒です。
-<br>
-誤差はありますが、だいたい理論通りに減衰振動していることが分かります。
-</p>
-
-<p>
-<b>図3. 理論値と実際の値</b>
-</p>
-
-<img src="./img/page04-fig3.png" alt="">
-
-<p>
-なお Dumper = 0 にすれば理論的にはずっと振動しているはずなのですが、Unity の場合はいずれ静止します。
-<br>
-ちゃんと調べてはいませんが、どうやら Unity では Dumper の値が現実世界の減衰係数よりも少し大きめに設定されているみたいです。
-<br>
-
+ただし Bounciness の値は現実の反発係数よりも若干小さめにしないと駄目なので上の例では Bounciness = 0.69 としました。
 </p>
 
 <br>
-<script>PreNext(4,20)</script>
+<script>PreNext(4,8)</script>
 </body>
 </html>

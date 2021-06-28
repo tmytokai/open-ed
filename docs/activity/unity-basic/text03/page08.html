@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>8. 物理演算を使って回転</title>
+<title>8. トルクを与えて回転</title>
 </head>
 <body>
 
@@ -309,7 +309,7 @@ V^\textrm{T}
 </p>
 
 <p>
-ではここで $a$ を任意の実数とし、トルク $N$ を
+ではここで試しに $a$ を任意の実数とし、トルク $N$ を
 </p>
 
 
@@ -368,9 +368,9 @@ a/i_y \\
 \end{align*}
 
 <p>
-となりますので、慣性主軸 $V_y$ を中心に回転する事が分かります。
+となりますので、慣性主軸 $V_y$ を中心に $a/i_y$ [rad/$s^2$] の角加速度で回転する事が分かります。
 <br>
-$V_x$、$V_z$ についても同様の話が成り立ちます。。
+$V_x$、$V_z$ についても同様の話が成り立ちます。
 </p>
 
 
@@ -391,7 +391,7 @@ KAITEN は 2 個の Cube (HAKO1 と HAKO2) から出来ていますので、ま�
 <br>
 Cube の慣性モーメントは立方体の慣性モーメントを求めるためのモデルを使って求められます。
 <br>
-このモデルでは立方体の各面の中心に同じ計 6 個の質点(質量は同じ)があると仮定しますので、Cube の中心座標を Vector3 型の Position = $(p_x,p_y,p_z)$、大きさを Vector3 型の Scale=$(s_x,s_y,s_z)$ で表すと各質点の座標 $r$ は
+このモデルでは立方体の各面の中心に同じ質量の 6 個の質点があると仮定しますので、Cube の中心座標を Vector3 型の Position = $(p_x,p_y,p_z)$、大きさを Vector3 型の Scale=$(s_x,s_y,s_z)$ で表すと各質点の座標 $r$ は
 </p>
 
 \[
@@ -401,7 +401,7 @@ p_x + s_x/2& p_y & p_z \\
 p_x -s_x/2 & p_y & p_z \\
 p_x & p_y + s_y/2 & p_z \\
 p_x & p_y - s_y/2 &  p_z \\
-p_x & p_y & p_z + s_x/2 \\
+p_x & p_y & p_z + s_z/2 \\
 p_x & p_y & p_z - s_z/2 \\
 \end{bmatrix}
 \]
@@ -658,6 +658,6 @@ V_y
 
 
 <br>
-<script>PreNext(6,20)</script>
+<script>PreNext(8,8)</script>
 </body>
 </html>
