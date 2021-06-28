@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rotation : MonoBehaviour
+{
+    float t = 0;
+    Rigidbody rb;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        Debug.Log( rb.inertiaTensor.ToString("F4"));
+        Debug.Log( rb.inertiaTensorRotation.eulerAngles.ToString("F4"));
+        Debug.Log( (rb.inertiaTensorRotation*Vector3.up).ToString("F4"));
+        Debug.Log( rb.centerOfMass.ToString("F4"));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        t += Time.deltaTime;
+        if( t >= 1f){
+            
+            Debug.Log( t + "/" + transform.InverseTransformDirection(rb.angularVelocity).ToString("F4") );
+            t -= 1f;
+        }
+    }
+}

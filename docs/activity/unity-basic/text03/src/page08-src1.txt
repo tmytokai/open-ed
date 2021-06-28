@@ -1,0 +1,128 @@
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy.spatial.transform import Rotation
+
+np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
+
+# Cubeの重さと質点座標
+# 1 kg/M^3 とする
+def cube(position,scale):  
+    return np.prod(scale), np.ones([6,3])*position + np.array(
+            [
+                [ 1/2,0,0],
+                [-1/2,0,0],
+                [0, 1/2,0],
+                [0,-1/2,0],
+                [0,0, 1/2],
+                [0,0,-1/2]
+            ])*scale
+
+# 慣性モーメント
+def inertia(m,rs):
+    I = np.zeros((3,3))
+    for r in rs:
+        nn=np.diag([np.dot(r,r)]*3)
+        rr=np.outer(r,r)
+        I+=m/rs.shape[0]*(nn-rr)
+    return I
+
+cubes=[]
+cubes.append(cube((0,0,0),(3,2,1)))
+cubes.append(cube((2,1,1),(2,1,1)))
+for i in range(len(cubes)):
+    print('\nHako',i+1)
+    mass,r=cubes[i]
+    print('重さ ',mass)
+    print('質点座標(ローカル座標系)')
+    print(r)
+
+m=np.sum([mass for mass,rs in cubes])
+c=np.sum([mass*np.sum(rs,axis=0)/rs.shape[0] for mass,rs in cubes],axis=0)/m
+print('\n重さ計')
+print(m)
+print('\n重心位置(ローカル座標系) = Rigidbody.centerOfMass')
+print(c)
+
+# 質点の座標を重心からの相対座標にする
+for mass,r in cubes: r-=np.ones([6,3])*c
+for i in range(len(cubes)):
+    print('\nHako',i+1)
+    mass,r=cubes[i]
+    print('質点の重心からの相対座標(ローカル座標系)')
+    print(r)
+
+I=np.zeros([3,3])
+for i in range(len(cubes)):
+    print('\nHako',i+1)
+    I_tmp=inertia(*cubes[i])
+    print('慣性モーメント')
+    print(I_tmp)
+    I += I_tmp
+print('\n全体の慣性モーメント')
+print(I)
+
+i,V=np.linalg.eig(I)
+print('\n固有値')
+print(i)
+print('\n固有ベクトル')
+print(V)
+
+order=[0,1,2]  # 主慣性モーメントの順番を Rigidbody.inertiaTensor と合わせる
+inv=[-1,1,1]  # 左手系になるように軸方向を変更
+i=i[order]
+V=V[:,order]*inv
+rot = Rotation.from_matrix(V)
+rot = rot.as_euler('zxy',degrees=True) # unity は z -> x -> y の順で回転する
+rot = np.array((rot[1],360+rot[2],rot[0])) # y軸に360足してるのはRigidbody.inertiaTensorRotationと合わせるため
+print('\n主慣性モーメント = Rigidbody.inertiaTensor')
+print(i)
+print('\n慣性主軸')
+print(V)
+print('\n回転角度(オイラー角) = Rigidbody.inertiaTensorRotation')
+print(rot)
+
+
+print('\n一応検算')
+print(V@np.diag(i)@V.T)
+
+print('\nトルク(慣性主軸座標系)')
+a=1
+N=(0,a,0)
+print(N)
+
+print('\nトルク(ローカル座標系)')
+print(V@N)
+
+dw=np.diag((1/i[0],1/i[1],1/i[2]))@N
+print('\n角加速度(慣性主軸座標系)')
+print(dw)
+
+print('\n角加速度(ローカル座標系)')
+print(V@dw)
+
+print('\n角速度(ローカル座標系)')
+for i in range(1,10):
+    print(i,'秒後 : ',V@dw*i)
+
+plt.figure( figsize=(8,8), dpi=100 )
+axlist=[]
+axlist.append( plt.subplot2grid( (2,2),(0,0),projection='3d') )
+axlist.append( plt.subplot2grid( (2,2),(0,1),projection='3d') )
+axlist.append( plt.subplot2grid( (2,2),(1,0),projection='3d') )
+axlist.append( plt.subplot2grid( (2,2),(1,1),projection='3d') )
+for ax in axlist:
+    ax.set_xlim((-1.5,1.5))
+    ax.set_ylim((-1.5,1.5))
+    ax.set_zlim((-1.5,1.5))
+    ax.set_xlabel("x")
+    ax.set_ylabel("z")
+    ax.set_zlabel("y")
+axlist[0].view_init(elev=45, azim=-45)
+axlist[1].view_init(elev=0, azim=-90)
+axlist[2].view_init(elev=0, azim=0)
+axlist[3].view_init(elev=90, azim=-90)
+color=('red','green','blue')
+for ax in axlist:
+    for i in range(3):
+        ax.quiver(c[0],c[1],c[2], [0,V[0,i]],[0,V[2,i]],[0,V[1,i]], color=color[i])
