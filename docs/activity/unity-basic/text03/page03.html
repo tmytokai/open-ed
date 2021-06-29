@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 回転</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [3] 物理演算</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次はゲームオブジェクトを移動させましょう。
+</p>
+
+<p>
+ゲームオブジェクトの回転方法には「<a href="https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%85%83%E6%95%B0">クォータニオン</a>(Quaternion)を使う方法」と「<a href="./page08.html">トルクを与えて物理的に回転する方法</a>」があります。
+<br>
+ここではクォータニオンを使う方法について説明します。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に新しいシーンを作り、箱を作成します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Qt Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0) にする
+</p>
+</div>
+
+</div>
+
+<p>
+またゲームオブジェクトを回転させるためにはスクリプトを作る必要があるので、<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Qt Script Graph」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Qt Script Graph をドロップする
+</p>
+</div>
+
+</div>
+
+<br>
+<br>
+<h3>
+2. クォータニオンを使って回転する
+</h3>
+
+<p>
+X、Y、Z 軸の回転角度を直に指定してゲームオブジェクトを回転させると<a href="../text01/page04.html">ジンバルロック</a>が起きる危険性がありました。
+<br>
+そこで CG や 3D ゲームなどで物体を回転させたい場合はクォータニオン(または四元数)という特殊な数字を使って回転させる必要があります。
+</p>
+
+<p>
+具体的にはクォータニオンを物体の現在の回転角度にかけるとその物体が回転します。
+<br>
+そこでまずはクォータニオンを作る必要があります。
+<br>
+Unity にはクォータニオンを作るユニットが色々用意されていますが、今回は最も基本的な Quaternion Angle Axis ユニット(quaternion angle axis で検索)を使ってみたいと思います。
+</p>
+
+<p>
+この Quaternion Angle Axis には回転角度(Angleに度で指定)と回転軸(Axis に 3次元ベクトルで指定)をセットする欄がありますので、そこに好きな値を入力することでクォータニオンを作ることができます。
+<br>
+そしてこのユニット出力を Transform Get Rotation (transform get rotation で検索)にかけ、その出力を Transform Set Rotation (transform set rotation で検索)の入力とすることで回転軸を中心にゲームオブジェクトが回転を始めます。
+</p>
+
+<p>
+では早速図1を実行してください。
+<br>
+すると右斜め上方向を軸にしてグルグル回転し始めると思います。
+<br>
+回転したら回転軸の方向を変えたり、回転角度を変えたり(マイナスにすると逆回転します)して試して下さい。
+</p>
+
+<p>
+<b>図1. 回転スクリプト</b>
+</p>
+<img src="./img/page03-fig1.png" alt="">
+
+<br>
+<p>
+回転速度を指定したい場合は、<a href="./page02.html">前ページ</a>の様に適当な変数を用意して Quaternion Angle Axis の Angle にセットしてあげれば良いでしょう。
+<br>
+またコントローラと組み合わせたい場合も前のページの様にすれば可能です。
+<br>
+例えば図 2 の様な感じでしょうか。
+</p>
+
+<br>
+<p>
+<b>図2. コントローラを使ってゲームオブジェクトを回転する例</b>
+</p>
+<img src="./img/page03-fig2.png" alt="">
+
+<br>
+<br>
+<h3>
+3. クォータニオンの詳しい説明
+</h3>
+
+<p>
+ここから先は少し難しい話なので分からなければ飛ばしても結構です。
+<br>
+ただし Unity の物理演算機能を使いこなすためには大事な知識ですので興味のある人は是非トライして下さい。 
+</p>
+
+<p>
+クォータニオンは複素数を4次元に拡張した特殊な数字です。
+<br>
+ただクォータニオンをこのページだけで解説するのは無理なので<a href="../../complex/">別の場所に解説ページを用意しました</a>。
+<br>
+詳しくはそちらの方を参照して下さい。
+</p>
+
+<br>
+<script>PreNext(3,8)</script>
+</body>
+</html>
