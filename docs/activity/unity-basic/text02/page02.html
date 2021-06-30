@@ -58,19 +58,25 @@
 </h3>
 
 <p>
-まず以下の手順で Script Graph アセットを作成して下さい。
+まず以下の手順でスクリプト( Script Graph ファイル)を作成して下さい。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Scripts」という名前に変更する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Hello Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Hello Script Graph をダブルクリックして Script Graph ウィンドウを表示する(図1)
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Hello Script」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Hello Script をダブルクリックして Script Graph ウィンドウを表示する(図1)
 </p>
+<br>
+<b>図1. Script Graph ウィンドウ</b>
+<br>
+<img src="./img/page02-fig1.png" alt="">
 <p>
 ※ 途中で「Your Unity preferences are set to reload scripts during play mode 〜」という警告が出る場合があります
 <br>
@@ -102,11 +108,6 @@
 それぞれの使い方については適宜説明します。
 </p>
 
-<br>
-<b>図1. Script Graph ウィンドウ</b>
-<br>
-<img src="./img/page02-fig1.png" alt="">
-
 <p>
 では実際のプログラミングを始めます。
 <br>
@@ -117,27 +118,28 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックし、Add Unit を選択する
+<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックしてユニット選択ダイアログを表示する(もしメニューが表示されたら Add Unit を選択)
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ダイアログ(ユニット選択ダイアログ)が表示されたら検索窓に「debug:log」と入力する
+<span class="olradio"><input type="radio" name="p1"></span> 検索窓に「debug log」と入力する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Debug:Log (Message) を選択する
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Debug Log (Message) を選択する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 図2の様な図形が表示される
 </p>
-</div>
-
-</div>
-
-<br>
-<b>図2 Debug:Log ユニット</b>
-<br>
+<p>
+<b>図2 Debug Log ユニット</b>
+</p>
 <img src="./img/page02-fig2.png" alt="">
+
+</div>
+
+</div>
+
 
 <br>
 <br>
 <p>
-図2の様な図形のことを「<b>ユニット (Unit)</b>」と呼びます。
+図 2 の様な図形のことを「<b>ユニット (Unit)</b>」と呼びます。
 <br>
 ユニットは命令を実行したり、イベントの起点になったり、データ出力したりするための基本構成物で「<b>ノード</b>」と呼ばれることもあります。
 <br>
@@ -145,36 +147,38 @@
 </p>
 
 <p>
-ところでユニットの左右に△マークが付いていて内側に矢印が描いてあるのが見えると思います。
+ところでユニットの左右に三角マークが付いていて内側に矢印が描いてあるのが見えると思います。
 <br>
-この左の△マークを「<b>コントロール(Control)入力ポート</b>」、右の△マークを「<b>コントロール(Control)出力ポート</b>」と呼びます。
+この左の三角マークを「<b>コントロール(Control)入力ポート</b>」、右の三角マークを「<b>コントロール(Control)出力ポート</b>」と呼びます。
 </p>
 
 <p>
-更に△マークの下に○マークがあります(図2にはありませんが右側に○マークがあるユニットもあります)。
+さらに三角マークの下に○マークがあります。
+<br>
+なお図 2 にはありませんが右側に○マークがあるユニットもあります。
 <br>
 左の○マークのことを「<b>値(Value)入力ポート</b>」、右の○マークのことを「<b>値(Value)出力ポート</b>」と呼びます。
 </p>
 
-</p>
+<p>
 さてユニット間の入出力ポートは矢印や線で繋ぐことが出来ます。
 <br>
 矢印や線でユニット間を繋ぐことで命令を実行したり、データを入出力したり出来るようになります。
 </p>
 
 <p>
-では以下の手順で Debug:Log ユニットに「Hello World」という文字列(String)を入力してみましょう。
+では以下の手順で Debug Log ユニットに「Hello World」という文字列(String)を入力してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットの値入力ポート(左の○マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
+<span class="olradio"><input type="radio" name="p1"></span> Debug Log ユニットの値入力ポート(左の○マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 検索窓に「String Literal」と入力する ※ 文字列(String)を出力するユニット
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から String Literal を選択すると String Literal ユニットが表示され、その値出力ポートと Debug:Log ユニットの値入力ポートが線で繋がる
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から String Literal を選択すると String Literal ユニットが表示され、その値出力ポートと Debug Log ユニットの値入力ポートが線で繋がる
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> String Literal ユニットの中にある空欄の中に Hello World と入力する
 <br>
@@ -183,21 +187,18 @@
 
 </div>
 
-
-
-
 <p>
-ただしこれだけだと Unity はプログラムをどこから開始すれば良いのか分からないので、開始の起点を作成します。
+ただしこれだけだと Unity はプログラムをどこから開始すれば良いのか分からないので、プログラムの開始起点を作成します。
 </p>
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットのコントロール入力ポート(左の△マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
+<span class="olradio"><input type="radio" name="p1"></span> Debug Log ユニットのコントロール入力ポート(左の三角マーク)からドラッグして適当な場所で指を離すとユニット選択ダイアログが表示される
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 検索窓に「Start」と入力する ※ 開始(Start)イベントを表すユニット
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Start (in Events/Lifecycle) を選択すると Start イベントユニットが表示され、そのコントロール出力ポートと Debug:Log ユニットのコントロール入力ポートが矢印で繋がる
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Start (in Events/Lifecycle) を選択すると Start イベントユニットが表示され、そのコントロール出力ポートと Debug Log ユニットのコントロール入力ポートが矢印で繋がる
 </p>
 </div>
 
@@ -207,9 +208,10 @@
 ここまで来るとグラフウィンドウの表示は図3の様になっているはずです。
 <br>
 この図より、今回作成したスクリプトは
-</p
+</p>
+
 <p>
-「プログラムが開始したら Start → Debug:Log の順にユニットが実行されて Hello World という文字列を表示する」
+「プログラムが開始したら Start → Debug Log の順にユニットが実行されて Hello World という文字列を表示する」
 </p>
 
 <p>
@@ -243,19 +245,18 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Visual Scripting → Script Machine を選択する。すると Script Machine がアタッチされる
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルにアセットフォルダの Hello Script Graph をドロップする
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Scripts フォルダの Hello Script をドロップする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> None の表示が Hello Script Graph に変わっているのを確認する(図4)
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が Hello Script に変わっているのを確認する(図4)
 </p>
-</div>
-
-</div>
-
 <br>
 <b>図4 Script Machine のアタッチ</b>
 <br>
 <img src="./img/page02-fig4.png" alt="">
 
+</div>
+
+</div>
 
 <p>
 後は以下の手順でスクリプトを実行するだけです。
@@ -266,35 +267,35 @@
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> プロジェクト(Project)タブの右隣にあるコンソール(Console)タブをクリックする (図5)
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> するとコンソールが表示される (ここに Debug:Log ユニットは入力されたデータを表示します)
+</p>
+<p>
+<b>図5. コンソール(Console)タブ(黄色の円で囲んでいるタブ)</b>
+</p>
+<img src="./img/page02-fig5.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> するとコンソールが表示されて、ここに Debug Log ユニットに入力されたデータが表示される
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Unity エディタの上の方にある実行ボタン(図6)を押す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> コンソールに Hello World と表示されるのを確認する (いろいろ警告が出ている場合はコンソールの右上にある警告ボタン(図7)をクリックして警告を消して下さい)
-<br>
+</p>
+<p>
+<b>図6. 実行ボタン (一番左の三角ボタン)を押すと実行、もう一度押すと停止する</b>
+</p>
+<img src="./img/page02-fig6.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> コンソールに Hello World と表示されるのを確認する。いろいろ警告が出ている場合はコンソールの右上にある警告ボタン(図7)をクリックすると警告が消える
+</p>
+<p>
+<b>図7. 警告ボタン (真ん中の三角ボタン)を押すと警告の表示と非表示を切り替える</b>
+</p>
+<img src="./img/page02-fig7.png" alt="">
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> もう一度実行ボタンを押して実行を止める
 </p>
 </div>
 
 </div>
 
-<br>
-<b>図5. コンソール(Console)タブ(黄色の円で囲んでいるタブ)</b>
-<br>
-<img src="./img/page02-fig5.png" alt="">
 
-<br>
-<br>
-<b>図6. 実行ボタン (一番左の三角ボタン)を押すと実行、もう一度押すと停止する</b>
-<br>
-<img src="./img/page02-fig6.png" alt="">
-
-<br>
-<br>
-<b>図7. 警告ボタン (真ん中の三角ボタン)を押すと警告の表示と非表示を切り替える</b>
-<br>
-<img src="./img/page02-fig7.png" alt="">
 
 <p>
 ところで、たいしたプログラムでないのに実行ボタンを押してからプログラムが開始するまでやたら遅い時があります。

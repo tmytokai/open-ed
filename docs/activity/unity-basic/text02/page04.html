@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-他のプログラミング言語と同様に Visual Scripting でもリテラルと変数を扱えます。
+他のプログラミング言語と同様に Visual Scripting でもリテラル(定数)と変数を扱えます。
 <br>
 ここではそれらについて説明します。
 </p>
@@ -33,22 +33,20 @@
 <p>
 まず準備です。
 <br>
-Hello World の Script Graph は残しておくことにし、変数のテスト用に別の  Script Graph を用意します
+<a href="./page02.html">Hello World</a> で作ったスクリプトは残しておくことにして、テスト用に別のスクリプトを用意します
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Variable Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Hensu Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hello Script Graph と書いてあるセルにアセットフォルダの Variable Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると Variable Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hello Script と書いてあるセルに Hensu Script をドロップする 
 </p>
 </div>
 
@@ -162,50 +160,52 @@ Flow 変数を定義するにはフローの中で「セット(Set)ユニット�
 
 <div class="olradio"> 
 <p>
+<span class="olradio"><input type="radio" name="p1"></span> Hensu Script を開く
+<br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリック
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「set flow variable」と入力する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Set Flow Variable を選択する
-<br>
+</p>
+<p>
+※ これ以降はユニットの検索方法については説明を省略します
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> Set Flow Variable ユニットが表示されたら中央のテキストボックスに変数名の flowtest を記入する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 左下の値入力ポートからドラッグして適当な場所で指を離す
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Integer Literal ユニットを選択して線で結び、適当な値(例えば123)を入れる
+<span class="olradio"><input type="radio" name="p1"></span> Integer Literal ユニットを追加・接続し、適当な値(例えば123)を入れる
 </p>
 </div>
 
 </div>
 
 <p>
-これで Flow 変数の flowtest が出来たので、次はその値を参照してみます。
+これで Flow 変数の flowtest が出来たので、次はGet Flow Variable ユニットを使ってその値を参照してみます。
 <br>
-今回は Debug:Log ユニットで値を表示してみましょう。
+今回は Debug Log ユニットで値を表示してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットを作成する
+<span class="olradio"><input type="radio" name="p1"></span> Debug Log ユニットを作成する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Debug:Log ユニットの値入力ポートからドラッグして適当な場所で指を離す
+<span class="olradio"><input type="radio" name="p1"></span> Debug Log ユニットの値入力ポートからドラッグして適当な場所で指を離す
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「get flow variable」と入力する
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Get Flow Variable を選択する
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Get Flow Variable ユニットが表示されたら中央のテキストボックスの右にある▼を押して flowtest を選択する
+<span class="olradio"><input type="radio" name="p1"></span> Get Flow Variable ユニットを追加・接続し、中央のテキストボックスの右にある▼を押して flowtest を選択する
 </p>
 </div>
 
 </div>
 
 <p>
-後は Start イベントユニットを作成し、Start → Set Flow Variable → Debug:Log の順に繋ぎ、ついでにグループ化してスクリプトの完成です(図2)。
+後は Start イベントユニットを作成し、Start → Set Flow Variable → Debug Log の順に繋ぎスクリプトの完成です(図2)。
 <br>
-では実行して flowtest にセットした値が表示されるか試して下さい。
+では実行して flowtest にセットした値がコンソールに表示されるか試して下さい。
 </p>
 
 <br>
@@ -220,14 +220,17 @@ Flow 変数を定義するにはフローの中で「セット(Set)ユニット�
 </h3>
 
 <p>
-Graph 変数は Script Graph に対して定義される変数で、フローから抜けても消えません。
-</br>
-今のところ起点が Start イベントしかないのでピンと来ないと思いますが、実は起点となるイベントは複数あり(それらのイベントはその内出てきます)、それらのイベント間で共通して使える変数になります。
+Graph 変数は一つのスクリプト内で共通して使える変数です。
 </p>
 
 <p>
 ※ 一般的なプログラミング言語でいうクラスフィールドに相当します
 </p>
+
+<p>
+今のところ Start イベントしか使ってないのでピンと来ないと思いますが、イベントは複数あって、それらのイベント間で共通して使える変数になります。
+</p>
+
 
 <p>
 さて Graph 変数は Flow 変数の時と違って Script Graph ウィンドウのブラックボードで作成します。
@@ -270,7 +273,7 @@ Graph 変数は Script Graph に対して定義される変数で、フローか
 </p>
 
 <p>
-では試しに図 4 の様なスクリプトを作成して実行して下さい(なお Start イベントユニットは上で作ったグループから繋ぎ直してます)。
+では試しに図 3 で作ったスクリプトを削除し、図 4 の様なスクリプトを作成して実行して下さい。
 <br>
 実行すると初期値の 0.1 が表示された後に上書きされた 123 が表示されます。
 </p>
@@ -281,9 +284,9 @@ Graph 変数は Script Graph に対して定義される変数で、フローか
 <img src="./img/page04-fig4.png" alt="">
 
 <p>
-ところで図4でセットユニット(Set Graph Variable)の値出力ポートと Debug:Log ユニットの値入力ポートが線で繋がってますね。
+ところで図4で Set Graph Variable ユニットの値出力ポートと Debug Log ユニットの値入力ポートが線で繋がってますね。
 <br>
-この様に、わざわざゲットユニットを用意しなくてもセットユニットから新しい値を取得することも可能です。
+この様に、わざわざ Get Graph Variable ユニットを用意しなくてもセットユニットから値を取得することも可能です。
 </p>
 
 
@@ -293,9 +296,11 @@ Graph 変数は Script Graph に対して定義される変数で、フローか
 </h3>
 
 <p>
-Object 変数はゲームオブジェクトに対して定義される変数です。
-</br>
-今のところ PROGRAM には Script Machine は一つしかアタッチされてないのでピンと来ないと思いますが、実は Script Machine は複数アタッチ出来、それらの Script Machine 間で共通して使える変数になります。
+Object 変数はゲームオブジェクト内で共通して使える変数です。
+</p>
+
+<p>
+今のところ PROGRAM には Script Machine は一つしかアタッチされてないのでピンと来ないと思いますが、実は Script Machine は複数アタッチ出来て、それらの Script Machine 間で共通して使える変数になります。
 <br>
 さらに言うと他のゲームオブジェクトにアタッチされた Script Machine からも参照可能です。
 </p>
@@ -326,10 +331,6 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 
 <p>
 するとインスペクタの表示は図5の様になります。
-<br>
-またブラックボードの Object タブにも同じ表示がされていると思います。
-<br>
-もしブラックボードの Object タブがグレー色になっていて選択できない場合はヒエラルキーの PROGRAM をクリックして下さい。
 </p>
 
 <br>
@@ -337,7 +338,14 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 <br>
 <img src="./img/page04-fig5.png" alt="">
 
+<p>
+では Hensu Script を開いてブラックボードを見て下さい。
 <br>
+ブラックボードの Object タブを開くと objecttest が追加されていると思います。
+<br>
+もしブラックボードの Object タブがグレー色になっていて選択できない場合はヒエラルキーの PROGRAM をクリックして下さい。
+</p>
+
 <p>
 ここまで来たら後は Flow 変数や Graph 変数のように使えます。
 <br>
@@ -345,7 +353,7 @@ Object 変数はゲームオブジェクトに対して定義される変数で�
 </p>
 
 <p>
-では試しに図 6 の様なスクリプトを作成して実行して下さい(なお Start イベントユニットは上で作ったグループから繋ぎ直してます)。
+では試しに図 4 で作ったスクリプトを削除し、図 5 の様なスクリプトを作成して実行して下さい。
 <br>
 実行すると初期値の (1,2,3) が表示された後に上書きされた (3,2,1) が表示されます。
 </p>

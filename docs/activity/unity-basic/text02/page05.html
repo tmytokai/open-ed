@@ -38,15 +38,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Math Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Enzan Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Variable Script Graph と書いてあるセルにアセットフォルダの Math Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると Math Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Hensu Script と書いてあるセルに Enzan Script をドロップする 
 </p>
 </div>
 
@@ -139,60 +137,68 @@
 </h3>
 
 <p>
-乱数を生成するには Random:Range ユニット(random:rangeで検索)を使います。
+乱数を生成するには Random Range ユニットを使います。
 <br>
-ただし Max Inclusive 版と Max Exclusive 版の2通りがあるので、使い分けについて説明します。
+ただし Max Inclusive 版と Max Exclusive 版の2通りがあるので使い分けについて説明します。
+<br>
+図 3 の左側の Random Range ユニットが  Max Inclusive 版で、右側が Max Exclusive 版です。
 </p>
 
 <p>
-まず Max Inclusive 版が出力する乱数は小数(Float型)です。
-<br>
-一方 Max Exclusive 版が出力する乱数は整数(Integer型)です。
-</br>
-
+大きな違いは
+</p>
 <p>
-それでパラメータの Min にはどちらの版も最小値を入れます。
-<br>
-一方、Max には最大値を入れます。
-<br>
-ただし Max Inclusive 版は<b>MAX 以下の小数</b>、 Max Exclusive 版は<b>MAX よりも小さい整数</b>がランダムに出てきます。
+<b>Max Inclusive 版 → 出力する乱数は小数(Float型)</b>
+</p>
+<p>
+<b>Max Exclusive 版 → 出力する乱数は整数(Integer型)</b>
 </p>
 
 <p>
-例えば図3のスクリプトを実行して下さい。
+です。
+</p>
+
+<p>
+その上で、パラメータの Min にはどちらも最小値を入れます。
+<br>
+一方 Max には最大値を入れますが、<b>Max Inclusive 版は MAX 以下の小数</b>、 <b>Max Exclusive 版は MAX よりも小さい整数</b>がランダムに出てきます。
+</p>
+
+<p>
+では図 3 のスクリプトを実行して下さい。
 <br>
 実行する度に違う数字が表示されますが、Max Inclusive 版は 0 から 2 までの小数、Max Exclusive 版は 0 か 1 のどちらかの整数が出力されます。
 </p>
 
-<br>
+<p>
 <b>図3. 乱数の生成</b>
-<br>
+</p>
 <img src="./img/page05-fig3.png" alt="">
 
 <br>
 <p>
-ところで Random:Range ユニットにコントロール入出力ポートが付いていることに注目してください。
+ところで Random Range ユニットにコントロール入出力ポートが付いていることに注目してください。
 </p>
 
 <p>
-Random:Range ユニットは実行する度に異なる乱数を生成します。
+Random Range ユニットは実行する度に異なる乱数を生成します。
 <br>
-従って図4の様にフローに Random:Range ユニットを組み込まない時は Debug:Log を実行する度に Random:Range ユニット が実行されて違う数字が表示されます。
+従って図 4 の様にフローに Random Range ユニットを組み込まない時は Debug Log を実行する度に Random Range ユニット がその都度実行されて違う数字が表示されます。
 <br>
-一方、図5の様に Random:Range ユニットをフローの中に組み込むと 1 回しか呼び出されないので、最初に生成した数字がずっと保持されて同じ数字が表示されます。
+一方、図 5 の様に Random Range ユニットをフローの中に組み込むと一度しか実行されないので、最初に生成した数字がずっと保持されて同じ数字が表示されます。
 </p>
 
 <br>
+<p>
 <b>図4. 違う数字が表示される例</b>
-<br>
+</p>
 <img src="./img/page05-fig4.png" alt="">
 
 <br>
-<br>
+<p>
 <b>図5. 同じ数字が表示される例</b>
-<br>
+</p>
 <img src="./img/page05-fig5.png" alt="">
-
 
 
 <br>

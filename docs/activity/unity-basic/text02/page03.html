@@ -66,18 +66,22 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックし、Add Unit を選択する
+<span class="olradio"><input type="radio" name="p1"></span> グラフウィンドウの適当なところで右クリックしてユニット選択ダイアログを表示する(もしメニューが表示されたら Add Unit を選択)
+</p>
+<p>
+※ 前のページで String Literal ユニットや Start ユニットを作った時の様に、入出力ポートをドラッグしてユニット選択ダイアログを表示することも出来ます
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 検索窓で追加したいユニットの名前を入れる
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ユニット選択ダイアログが表示されたら検索窓に「debug:log」と入力する
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中から Debug:Log (Message) を選択する
+<span class="olradio"><input type="radio" name="p1"></span> 検索結果の中からユニットを選択する
 </p>
 </div>
 
 </div>
 
 <p>
-なお前のページで String Literal ユニットや Start ユニットを作った時の様に、入出力ポートをドラッグしてユニット選択ダイアログを表示することも可能です。
+
 </p>
 
 <br>
@@ -87,9 +91,7 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 </h3>
 
 <p>
-各ユニットの入出力ポートをドラッグします。
-<br>
-試しに前のページで作った Debug:Log ユニットのコントロール出力ポート(右の△)、上の 4 で作った Debug:Log ユニットのコントロール入力ポート(左の△)を矢印でつないでみましょう。
+各ユニットの入出力ポート間をドラッグすると矢印や線を繋ぎます。
 </p>
 
 <br>
@@ -100,8 +102,6 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 
 <p>
 入力側もしくは出力側のポートを右クリックすると矢印や線が消えます。
-<br>
-試しに上の 5 で作成した矢印を消してみましょう。
 </p>
 
 
@@ -113,8 +113,6 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 
 <p>
 ユニットを右クリック → Duplicate でコピーします。
-<br>
-試しに上の 4 で作った Debug:Log ユニットをコピーしてみましょう。
 </p>
 
 
@@ -126,8 +124,6 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 
 <p>
 ユニットを右クリック → Delete で削除します。
-<br>
-試しに上の 7 でコピーした Debug:Log ユニットを削除してみましょう。
 </p>
 
 
@@ -143,8 +139,6 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 またCtrlキー(Macの場合はCommandキー)を押しながらユニットをクリックで複数選択できます。
 <br>
 複数選択したらグラフウィンドウの適当な所を右クリックし、Duplicate Selection で複数コピー、Delete Selection で複数削除出来ます。
-<br>
-試しに全てのユニットを複数選択して削除してみてください。
 </p>
 
 
@@ -156,8 +150,6 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 
 <p>
 操作を間違った時は Ctrlキー(Macの場合はCommandキー)を押しながら z キーでアンドゥ可能です。
-<br>
-試しに 9 で削除した各ユニットを復元して下さい。
 </p>
 
 
@@ -168,22 +160,20 @@ Ctrlキー(Macの場合はCommandキー)を押しながらホイール上下で�
 </h3>
 
 <p>
-Ctrl(Macの場合はCommandキー)を押しながらドラッグするとグループを作成できます。
+Ctrl(Macの場合はCommandキー)を押しながらドラッグすると図 1 の様なグループを作成できます。
 <br>
 グループの名前のところをクリックするとグループ名を変更できます。
 <br>
 グループ化そのものに何か特別な機能がある訳ではありませんが、複数のユニットをグループ化しておくとスクリプトが見やすくなったり、まとめて移動したり出来るようになります。
-<br>
-では試しに図1のような Hello World グループを作成して下さい。
 </p>
 
 
 <br>
-<b>図1. Hello World グループ</b>
+<b>図1. グループの例</b>
 <br>
 <img src="./img/page03-fig1.png" alt="">
 
 <br>
-<script>PreNext(2,11)</script>
+<script>PreNext(3,11)</script>
 </body>
 </html>
