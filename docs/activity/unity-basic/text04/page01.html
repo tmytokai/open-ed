@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. 当たり判定</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+自分が敵にぶつかったり、自分が撃った弾が敵に当たったりなど、ゲームでは様々な当たり判定処理が行われています。
+<br>
+ここでは Unity で当たり判定処理を行う方法について学びます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ブロジェクトの新規作成をする(プロジェクト名は適当で結構です)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中にシーンを新規作成し、シーン名を「Atari Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「JIBUN」、Position を (0,-3,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA1」、Position を (-0.5,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA1 に Rigidbody をアタッチする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA2」、Position を (0.5,3,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA2 に Rigidbody をアタッチする。
+</p>
+</div>
+
+</div>
+
+<br>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Script」という名前に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Atari Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> JIBUN に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Atari Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. 当たり判定の基本
+</h3>
+
+<p>
+Unity では On Collision Enter というイベントを使って当たり判定処理を行うことが出来ます。
+<br>
+では試しに図1のスクリプトを実行してみましょう。
+<br>
+すると JIBUN に TAMA1、TAMA2 がぶつかると On Collision Enter イベントが呼び出されて「ITAI」とデバッグ表示されます。
+</p>
+
+<p>
+<b>図1. 当たり判定処理</b>
+</p>
+
+<img src="./img/page01-fig1.png" alt="">
+
+
+<br>
+<h3>
+3. 当たったゲームオブジェクトを消す
+</h3>
+
+<p>
+敵の弾が自分に当たった時など、自分や敵とぶつかったゲームオブジェクトを消したい時があります。
+<br>
+Unity では On Collision Enter イベントの Collider 出力を Game Object Get Game Object ユニットに接続するとぶつかったゲームオブジェクトを取得できます。
+<br>
+それを Game Object Destroy ユニットを接続することでぶつかったゲームオブジェクトを消せます。
+<br>
+試しに図 2 を実行してください。
+<br>
+TAMA1、TAMA2 がぶつかった時にそれらが消えると思います。
+</p>
+
+<p>
+<b>図2. 当たったゲームオブジェクトを消す</b>
+</p>
+
+<img src="./img/page01-fig2.png" alt="">
+
+<br>
+<h3>
+4. 何かに当たったら自分を消す
+</h3>
+
+<p>
+何かに自分を当たったら自分を消したい場合は Game Object Destroy ユニットの入力に This ユニットを繋ぎます。
+<br>
+This ユニットの出力は自分自身を表しますので、自分が消えまする
+<br>
+では試しに図 3 を実行してください。
+<br>
+TAMA1 がぶつかったら JIBUN が消えます。
+</p>
+
+<p>
+<b>図3. 何かに当たったら自分を消す</b>
+</p>
+
+<img src="./img/page01-fig3.png" alt="">
+
+<br>
+<h3>
+5. タグ別に当たった時の処理を分ける
+</h3>
+
+<p>
+ゲームオブジェクトにタグを付けて当たった時の処理を分ける事もできます。
+</p>
+
+<p>
+まず例として、以下の手順で TAMA1 に tama1、TAMA2 に tama2 というタグを付けてみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 または TAMA2 をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Tag と書いてある隣の「Untagged」をクリックし、一番下にある Add Tag... を選択する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Tags ＆ Layers 画面の Tags の + を押し、New Tag Name に「tama1」と入れて Save ボタンを押す(図4)。するとリストに tama1 が追加される。
+</p>
+<p>
+<b>図4. 新規タグの作成</b>
+</p>
+<img src="./img/page01-fig4.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> もう一度 Tags の + を押し、New Tag Name に「tama2」と入れて Save ボタンを押す。するとリストに tama2 が追加される。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 クリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama1 を選択する(図5)
+</p>
+<p>
+<b>図5. TAMA1 に tama1 タグを付ける</b>
+</p>
+<img src="./img/page01-fig5.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA2 クリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama2 を選択する
+</p>
+</div>
+
+</div>
+
+<p>
+これで準備が出来たので、On Collision Enter イベントの中で TAMA1 と TAMA2 別に処理を分けてみましょう。
+<br>
+On Collision Enter イベントの Collider 出力を Component Get Tag ユニットに接続すると当たったオブジェクトのタグを取得できます。
+<br>
+後はタグに従って普通に<a href="../text02/page06.html">分岐処理</a>するだけです。
+<br>
+試しに図 6 を実行してください。
+<br>
+TAMA1 がぶつかったら TAMA1 が、TAMA2 がぶつかったら JIBUN が消えると思います。
+</p>
+
+<p>
+<b>図6. タグ別に当たった時の処理を分ける</b>
+</p>
+
+<img src="./img/page01-fig6.png" alt="">
+
+
+
+<br>
+<script>PreNext(1,9)</script>
+</body>
+</html>
