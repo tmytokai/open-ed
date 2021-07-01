@@ -139,10 +139,12 @@ Edit メニユー → Project Setting → Input Manager → Axes
 
 <p>
 弾を撃ったりジャンプしたりするためのボタン入力は Input Get Button ユニットで行えます。
+<br>
+なお Input Get Button ユニットにはいくつか種類がありますが、今回は Input Get Button ユニットと Input Get Button Down ユニット について説明します。 
 </p>
 
 <p>
-こちらもボタンの設定名と割当キーは
+さて、ボタンの設定名と割当キーも
 </p>
 <p>
 Edit メニュー → Project Setting → Input Manager → Axes
@@ -180,24 +182,40 @@ Edit メニュー → Project Setting → Input Manager → Axes
 
 <p>
 が割当たっています(もちろん設定の変更や追加も可能です)。
-<br>
-Input Get Button ユニットはこれらの入力がされている時は True、されていない時は False を出力します。
 </p>
 
 <p>
-では以下の図2を実行して下さい。
+では Input Get Button ユニットについて説明します。
 <br>
-うまく動いたらButton Name の「Fire1」を他の設定に変更して試して下さい。
+Input Get Button ユニットはボタンを押している間はずっと True、されていない時はずっと False を出力し続けます。
+<br>
+例えば以下の図2を実行し、Fire1 ボタンを押しっぱなしにしてみて下さい。
 </p>
 
 <br>
-<b>図2. ボタン入力の例 </b>
-<br>
+<p>
+<b>図2. Input Get Button ユニットによるボタン入力 </b>
+</p>
 <img src="./img/page10-fig2.png" alt="">
 
+<p>
+一方 Input Get Button Down ユニットはボタンが押された時に一度だけ True を出力します。
+<br>
+例えば以下の図 3 を実行して、Fire1 ボタンを押しっぱなしにして図 2 のスクリプトとの違いを確認して下さい。
+</p>
+
+<br>
+<p>
+<b>図3. Input Get Button Down ユニットによるボタン入力 </b>
+</p>
+<img src="./img/page10-fig3.png" alt="">
+
+<p>
+
+
 
 <br>
 <br>
-<script>PreNext(10,11)</script>
+<script>PreNext(10,12)</script>
 </body>
 </html>
