@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. トリガー</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Unity には<b>トリガー (Trigger)</b>という当たり判定処理方式も用意されています。
+<br>
+トリガーは目印やチェックポイントを通過した時など、透明またはすり抜け可能なゲームオブジェクトに触れた時に使う当たり判定処理です。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中にシーンを新規作成し、シーン名を「Trigger Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「JIBUN」、Position を (0,3,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> JIBUN に Rigidbody をアタッチする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO1」、Position を (0,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO2」、Position を (0,-3,0)にする
+<br>
+</p>
+</div>
+
+</div>
+
+<br>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Trigger Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> JIBUN に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Trigger Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. トリガーによる当たり判定
+</h3>
+
+<p>
+トリガー機能を使うためにはゲームオブジェクトをすり抜け可能にする必要があります。
+<br>
+以下の手順で HAKO1 と HAKO2 をすり抜け可能にしてください。
+<br>
+ついでに hako1、hako2 というタグもつけておきましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの HAKO1 をクリックしてインスペクターを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> インスペクターの Box Collider コンポーネントの中にある Is Trigger にチェックを入れる(図1)
+<p>
+<b>図1. Is Trigger 設定</b>
+</p>
+<img src="./img/page02-fig1.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="./page01.html">前ページ</a>を参考にして hako1 というタグを付ける
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO2 に対しても同様に Is Trigger をチェックして hako2 というタグを付ける
+<br>
+</p>
+</div>
+
+</div>
+
+<p>
+この時点で試しに実行して下さい。
+<br>
+JIBUN が HAKO1 と HAKO2 をすり抜けて落ちていったと思います。
+</p>
+
+<p>
+では次は図2のスクリプトを実行してみましょう。
+<br>
+通常の当たり判定と同様に、トリガーでは On Trigger Enter というイベントを使って当たり判定処理を行うことが出来ます。 
+<br>
+図2 の例では JIBUN が TAMA1、TAMA2 に触れた時にそれぞれのタグを表示してあります。
+</p>
+
+<p>
+<b>図2. トリガーによる当たり判定処理</b>
+</p>
+
+<img src="./img/page02-fig2.png" alt="">
+
+<br>
+<script>PreNext(2,10)</script>
+</body>
+</html>
