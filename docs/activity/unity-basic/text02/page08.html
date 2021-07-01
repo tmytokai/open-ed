@@ -44,15 +44,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「List Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「List Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の For Script Graph と書いてあるセルにアセットフォルダの List Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると List Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の For Script と書いてあるセルにアセットフォルダの List Script をドロップする 
 </p>
 </div>
 
@@ -69,15 +67,17 @@ List には<a href="./page04.html">変数</a>の様に Flow、Graph、Object 等
 </p>
 
 <p>
-まず Flow リストを作るには Create List ユニットを使います(create list で検索)。
+まず Flow リストを作るには Create List ユニットを使います。
 <br>
 初期値をセットしたい場合はユニット内の Elements に初期値の数を入れて、値入力ポートから初期値を入力します。
 <br>
 これだけで Flow リストは出来ますが Flow 変数に代入して置くと便利かもしれません。
 <br>
 図 1 の例では Flow リストを作り、hoge、fuga という文字列で初期化し、 flowlist という Flow 変数に代入し、flowlist の中身を表示しています。
-<br>
-後にくっついている For Each Loop ユニットについては後で説明します。
+</p>
+
+<p>
+なお最後にくっついている For Each Loop ユニットについては後ほど説明します。
 </p>
 
 <br>
@@ -96,6 +96,8 @@ Type (型) を指定する時は list of 型名(float とか integer とか stri
 初期値をセットしたい場合は Value(初期値)の隣にある＋ボタンを押して項目を追加します。
 <br>
 例えば図 2 は String 型の Graph リスト graphtest を定義した例です。
+<br>
+初期値は hoge、fuga にしました。
 </p>
 
 <br>
@@ -120,7 +122,7 @@ Type (型) を指定する時は list of 型名(float とか integer とか stri
 </h3>
 
 <p>
-リストに値を追加するには Add List Item ユニット(add list itemで検索)を使います。
+リストに値を追加するには Add List Item ユニットを使います。
 <br>
 使い方は図 4 を見ればすぐ分かると思います。
 </p>
@@ -137,12 +139,10 @@ Type (型) を指定する時は list of 型名(float とか integer とか stri
 </h3>
 
 <p>
-逆にリストから値を削除するためには、値で指定する Remove List Item ユニット(Remove list item で検索)と、値のある位置を指定する Remove List Item At ユニット(remove list item at で検索)の 2 つがあります。
+逆にリストから値を削除するためには、値で指定する Remove List Item ユニットと、値のある位置を指定する Remove List Item At ユニットの 2 つがあります。
 </p>
 
 <p>
-どちらも使い方は図を見れば分かると思います。
-<br>
 まず Remove List Item ユニットの例が図 5 です。
 <br>
 hoge という値をリストから削除しています。
@@ -157,7 +157,7 @@ hoge という値をリストから削除しています。
 <br>
 次に Remove List Item At ユニットの例が図 6 です。
 <br>
-Index で位置を指定します( 0 番から始まるのに注意)。
+Index で削除する位置を指定します( 0 番から始まるのに注意)。
 <br>
 今回の例では 0 番目にある hoge をリストから削除しています。
 </p>
@@ -177,9 +177,9 @@ Index で位置を指定します( 0 番から始まるのに注意)。
 <p>
 リストを作ったら保存されている値にアクセスしてみましょう。
 <br>
-これも簡単で、図7 の様に Get List Item ユニット(get list item で検索)を使うだけです。
+これも簡単で、図7 の様に Get List Item ユニットを使うだけです。
 <br>
-Index で値の位置を指定します。
+Index でアクセスする位置を指定します( 0 番から始まるのに注意)。
 </p>
 
 <br>
@@ -196,11 +196,11 @@ Index で値の位置を指定します。
 <p>
 次はリストに保存されている全ての値にアクセスしてみます。
 <br>
-もちろん<a href="./page07.html">For Loopユニット</a>を使ってやっても良いのですが、リストの場合は For Each Loop ユニット(for each loop で検索)を使った方が便利です。
+もちろん<a href="./page07.html">For Loopユニット</a>を使ってやっても良いのですが、リストの場合は For Each Loop ユニットを使った方が便利です。
 </p>
 
 <p>
-例えば図8 (図3と同じ内容)を見て下さい。
+例えば図8 (図3と同じスクリプトです)を見て下さい。
 <br>
 For Loop ユニットと使い方はほとんど同じですが、Index の下に Item という項目が追加されています。
 <br>

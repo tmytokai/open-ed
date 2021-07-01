@@ -23,11 +23,13 @@
 今までは Start イベントユニットだけしか使ってなかったので、実行ボタンを押してスクリプトの最後までたどり着いたらそれで動作完了でした。
 <br>
 しかし実際のゲームでは実行中にキャラクターを動かしたり、当たり判定処理を行なったりする必要があります。
-<br>
+</p>
+<p>
 そこで Unity では Start だけではなく様々な用途に使われるイベントが用意されていて、それらのイベント毎にスクリプトを実行出来るようになっています。
 <br>
 それらのイベントのうち、Start イベントに次いで重要な Update イベントと Fixed Update イベントについてここでは説明します。
-<br>
+</p>
+<p>
 これら以外の重要イベントについては必要な時にその都度説明します。
 </p>
 
@@ -46,15 +48,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Update Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Update Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の List Script Graph と書いてあるセルにアセットフォルダの Update Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると Update Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の List Script と書いてあるセルにアセットフォルダの Update Script をドロップする 
 </p>
 </div>
 
@@ -75,7 +75,7 @@ CPUやグラフィックカードなどの実行環境にも左右されます�
 </p>
 
 <p>
-Update イベントも Start イベントと同様にグラフウィンドウ内では Update イベントユニットとして表現されます(update で検索)。
+Update イベントも Start イベントと同様にグラフウィンドウ内では Update イベントユニットとして表現されます。
 <br>
 例えば i という Integer 型の Graph 変数を作成したあと、図 1 のスクリプトを作成して実行してください。
 <br>
@@ -108,11 +108,11 @@ Fixed Update イベントも Update イベントと同様に繰り返し実行�
 </p>
 
 <p>
-さてFixed Update イベントもグラフウィンドウ内では Fixed Update イベントユニットとして表現されます(fixed update で検索)。
+さてFixed Update イベントもグラフウィンドウ内では Fixed Update イベントユニットとして表現されます。
 <br>
-例えば 図 1 のスクリプトを作成して実行してください。
+例えば 図 1 の Update を Fixed Update に置き換えた図 2 のスクリプトを作成して実行してください。
 <br>
-Fixed Update イベントもやはり繰り返し実行され、ブラックボードを見ると i がすごい勢いでカウントアップしていくのが分かります。
+やはり繰り返し実行され、ブラックボードを見ると i がすごい勢いでカウントアップしていくのが分かります。
 </p>
 
 <br>

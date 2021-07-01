@@ -38,15 +38,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span>  Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「For Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「For Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の If Script Graph と書いてあるセルにアセットフォルダの For Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると For Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の If Script と書いてあるセルにアセットフォルダの For Script をドロップする 
 </p>
 </div>
 
@@ -59,7 +57,7 @@
 </h3>
 
 <p>
-まずはおなじみの For Loop ユニット(for loop で検索)です。
+まずはおなじみの For Loop ユニットです。
 <br>
 設定項目は First、Last、Step の 3 つです。
 </p>
@@ -97,7 +95,7 @@ First、Last、Step にはそれぞれ 0, 5, 2 と入れました。
 </h3>
 
 <p>
-次もお馴染みの While Loop ユニット(while loopで検索)です。
+次もお馴染みの While Loop ユニットです。
 </p>
 
 <p>
@@ -105,7 +103,7 @@ While Loop ユニットは値入力ポートへの入力が True の間は Body 
 </p>
 
 <p>
-では早速図2のサンプルを実行してみて下さい。
+では早速図 2 のサンプルを実行してみて下さい。
 <br>
 実行すると Flow 変数 i の数が 0、1、2 と増えていき、3 になったら繰り返しから抜ける事が分かります。
 </p>
@@ -123,11 +121,11 @@ While Loop ユニットは値入力ポートへの入力が True の間は Body 
 </h3>
 
 <p>
-繰り返し処理から強制的に抜けるユニットは、これまたおなじみの Break Loop ユニット(break loop で検索)です。
+繰り返し処理から強制的に抜けるユニットは、これまたおなじみの Break Loop ユニットです。
 </p>
 
 <p>
-では図3のサンプルを実行してみて下さい。
+では図 3 のサンプルを実行してみて下さい。
 <br>
 実行すると Flow 変数 i の数が 0、1、2 と増えていきますが、今回は While Loop ユニットの値入力ポートに True が常に入力されているためこのままでは無限に処理を繰り返します。
 <br>

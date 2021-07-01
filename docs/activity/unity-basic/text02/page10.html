@@ -38,15 +38,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、フォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Control Script Graph」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Control Script」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Update Script Graph と書いてあるセルにアセットフォルダの Control Script Graph をドロップする 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> すると Control Script Graph が実行されるようになる
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Update Script と書いてあるセルにアセットフォルダの Control Script をドロップする 
 </p>
 </div>
 
@@ -63,57 +61,69 @@
 </p>
 
 <p>
-現在の上下左右の入力状態を取得するユニットは Input Get Axis と Input Get Axis Raw の2つです(どちらも input:get axis で検索)。
+現在の上下左右の入力状態を取得するユニットは Input Get Axis と Input Get Axis Raw の2つです。
 <br>
 それらの違いは以下の通りです。
 </p>
 
 <p>
-・Input Get Axis → アナログ入力用、-1〜1の間で小数値を取る
+<b>Input Get Axis → アナログ入力用、出力結果は -1〜1の間で小数値、0 がニュートラル</b>
 </p>
 
 <p>
-・Input Get Axis Raw → デジタル入力用、-1か0か1の整数値を取る
+<b>Input Get Axis Raw → デジタル入力用、出力結果は -1 か 0 か 1 の整数値、0 がニュートラル</b>
 </p>
 
 <p>
 これを踏まえてまず左右入力です。
 <br>
-キーボードで左右入力をするための設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+キーボードで左右入力をするための設定名と割当キーは
+</p>
+<p>
+Edit メニュー → Project Setting → Input Manager → Axes 
+
+<p>
+から確認できます。
 <br>
 デフォルトでは設定名が「Horizontal」、割当キーが「左右カーソル、a,d」となっています。
 <br>
-出力結果は -1 が左、1が右、0が未入力となります。
+出力結果はマイナス値が左方向、プラス値が右方向、0 がニュートラルとなります。
 </p>
 
 <p>
-これを踏まえて図1を実行して下さい。
+では図 1 を実行して下さい。
 <br>
-ログの最初の行が Input Get Axis 、2行目が  Input Get Axis Raw の結果です。
+各ユニットの「Axis Name」の中に設定名の「Horizontal」を入れます。
 <br>
-ユニットの「Axis Name」の中に設定名である「Horizontal」を入れます。
+デバック出力の最初の行が Input Get Axis 、2行目が  Input Get Axis Raw の結果です。
 <br>
 ゲームパッドを持っている人はゲームパットもつないで試してみて下さい。
 </p>
 
 <p>
-(注) もし入力をしても表示が 0 のまま変わらない人はゲームビュー内の適当な位置をクリックしてキーボードフォーカスを移して下さい。
+(注) もしキーボードのキーを押しても表示が 0 のまま変わらない人は、ゲームビュー内の適当な位置をクリックしてキーボードフォーカスを移してからキーを押して下さい
 </p>
 
-<br>
+<p>
 <b>図1. 左右入力の例 </b>
-<br>
+</p>
 <img src="./img/page10-fig1.png" alt="">
 
 
 <p>
 次は上下入力を試して下さい。
 <br>
-キーボードで上下入力をするための設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+キーボードで上下入力をするための設定名と割当キーも
+</p>
+<p>
+Edit メニユー → Project Setting → Input Manager → Axes 
+</p>
+<p>
+から確認できます。
 <br>
 デフォルトでは設定名が「Vertical」、割当キーが「上下カーソル、s,w」となっています。
 <br>
-出力結果は -1 が下、1が上、0が未入力となります。
+出力結果はマイナス値が下方向、プラス値が上方向、0 がニュートラルとなります。
 </p>
 
 <p>
@@ -128,11 +138,17 @@
 </h3>
 
 <p>
-弾を撃ったりジャンプしたりするためのボタン入力は Input Get Button ユニットで行えます( input get button で検索)。
+弾を撃ったりジャンプしたりするためのボタン入力は Input Get Button ユニットで行えます。
 </p>
 
 <p>
-こちらもボタンの設定名と割当キーは Edit → Project Setting → Input Manager → Axes で確認できます。
+こちらもボタンの設定名と割当キーは
+</p>
+<p>
+Edit メニュー → Project Setting → Input Manager → Axes
+</p>
+<p>
+から確認できます。
 <br>
 デフォルトでは
 </p>
