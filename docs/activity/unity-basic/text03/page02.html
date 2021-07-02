@@ -43,7 +43,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Velocity Scene」にする。背景色は任意で構わない
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Idou Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0)にする
 <br>
@@ -63,13 +65,15 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Scripts」という名前に変更する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Velocity Script Graph」に名前を変更する 
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Idou Script」に名前を変更する 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Velocity Script Graph をドロップする
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Idou Script をドロップする
 </p>
 </div>
 
@@ -82,7 +86,7 @@
 </h3>
 
 <p>
-Rigidbody Set Velocity ユニット(rigidbody set velocityで検索)を使って速度を変更できます。
+結論を言うと Rigidbody Set Velocity ユニットを使って移動速度を設定できます。
 <br>
 なお3次元空間なので、速度は3次元ベクトル(Vector3)を使って x,y,z 方向別に指定します。
 <br>
@@ -114,9 +118,9 @@ Rigidbody Set Velocity ユニット(rigidbody set velocityで検索)を使って
 </p>
 
 <ul>
-<li>前方向ベクトル: Transform Get Forward ユニット (transform get forward で検索)</li>
-<li>右方向ベクトル: Transform Get Right ユニット (transform get right で検索)</li>
-<li>上方向ベクトル: Transform Get Up ユニット (transform get up で検索)</li>
+<li>前方向ベクトル: Transform Get Forward ユニット</li>
+<li>右方向ベクトル: Transform Get Right ユニット</li>
+<li>上方向ベクトル: Transform Get Up ユニット</li>
 </ul>
 
 <p>
@@ -163,7 +167,7 @@ Transform Get Right は右方向ベクトルですので、HAKO は右方向に 
 </p>
 
 <p>
-で速度ベクトルを計算すると三平方の定理より斜め方向に $\sqrt{2}$ x speed の速さで動いてしまうので、Vector3 Normalize(Value) ユニット(vector3 normalizeで検索)でノーマライズ(長さ1のベクトルにすること)してから speed をかける必要があります。
+で速度ベクトルを計算すると三平方の定理より斜め方向に $\sqrt{2}$ x speed の速さで動いてしまうので、Vector3 Normalize(Value) ユニットでノーマライズ(長さ1のベクトルにすること)してから speed をかける必要があります。
 
 
 <br>

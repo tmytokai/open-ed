@@ -37,7 +37,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Bounciness Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「HANPATU Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,5,0)にする
 <br>
@@ -81,21 +83,17 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> シーンを新規作成した際に Scenes フォルダを開いたままにしている人は一つ上のフォルダに戻る
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Materials」という名前に変更する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ ※ Material の方を選ばないよう注意
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Physic Material」というアセットが出来るので「TAMA Physic Material」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダ内に「New Physic Material」というアセットが出来るので「TAMA Physic Material」に名前を変更する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様に「YUKA Physic Material」も作成する
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Materials フォルダ内に「YUKA Physic Material」も作成する
 </p>
 </div>
 
 </div>
-
-<p>
-繰り返しますが (2) のところで Material の方を選ばないよう気を付けて下さい。
-</p>
 
 <p>
 では反発の設定をしていきます。
@@ -187,7 +185,7 @@ e = \frac{ |v1'| }{ |v1| }
 <br>
 逆に $e = 0$ の状況を完全非弾性衝突と呼んで、 TAMA の反発後の速度は $v1' = 0$ となります。
 <br>
-また $e$ が 1 より大きい場合は跳ね返った後の速度の方が早くなります(トランポリンのイメージ)。
+また $e$ が 1 より大きい場合は跳ね返った後の速度の方が早くなります。
 </p>
 
 <p>
@@ -234,7 +232,7 @@ e = \frac{ |v1'| }{ |v1| }
 <p>
 この様な Unity 特有の癖にさえ気をつければ後は普通の反発係数と同様に計算できます。
 <br>
-例えば上の例の様に反発後に戻る高さを元の 1/2 にしたい場合は Bounciness の値をいくつにすればよいか考えてみましょう。
+例えば反発後に戻る高さを元の 1/2 にしたい場合は Bounciness の値をいくつにすればよいか考えてみましょう。
 </p>
 
 <p>

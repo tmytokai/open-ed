@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<script src="../../../mathjax.js"></script>
 <title>3. 回転</title>
 </head>
 <body>
@@ -43,7 +42,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Qt Scene」にする。背景色は任意で構わない
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Qt Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,0,0) にする
 </p>
@@ -59,13 +60,13 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「Qt Script Graph」に名前を変更する 
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Qt Script」に名前を変更する 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> HAKO に Script Machine コンポーネントをアタッチする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Qt Script Graph をドロップする
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Qt Script をドロップする
 </p>
 </div>
 
@@ -88,13 +89,13 @@ X、Y、Z 軸の回転角度を直に指定してゲームオブジェクトを�
 <br>
 そこでまずはクォータニオンを作る必要があります。
 <br>
-Unity にはクォータニオンを作るユニットが色々用意されていますが、今回は最も基本的な Quaternion Angle Axis ユニット(quaternion angle axis で検索)を使ってみたいと思います。
+Unity にはクォータニオンを作るユニットが色々用意されていますが、今回は最も基本的な Quaternion Angle Axis ユニットを使ってみたいと思います。
 </p>
 
 <p>
-この Quaternion Angle Axis には回転角度(Angleに度で指定)と回転軸(Axis に 3次元ベクトルで指定)をセットする欄がありますので、そこに好きな値を入力することでクォータニオンを作ることができます。
+この Quaternion Angle Axis ユニットには回転角度(Angleに度で指定)と回転軸(Axis に 3次元ベクトルで指定)をセットする欄がありますので、そこに好きな値を入力することでクォータニオンを作ることができます。
 <br>
-そしてこのユニット出力を Transform Get Rotation (transform get rotation で検索)にかけ、その出力を Transform Set Rotation (transform set rotation で検索)の入力とすることで回転軸を中心にゲームオブジェクトが回転を始めます。
+そしてこのユニット出力を Transform Get Rotation ユニットからの出力に掛けて、その値を Transform Set Rotation ユニットへの入力とすることで回転軸を中心にゲームオブジェクトが回転を始めます。
 </p>
 
 <p>
@@ -112,9 +113,7 @@ Unity にはクォータニオンを作るユニットが色々用意されて�
 
 <br>
 <p>
-回転速度を指定したい場合は、<a href="./page02.html">前ページ</a>の様に適当な変数を用意して Quaternion Angle Axis の Angle にセットしてあげれば良いでしょう。
-<br>
-またコントローラと組み合わせたい場合も前のページの様にすれば可能です。
+また<a href="./page02.html">前ページ</a>の様に適当な変数を用意して Quaternion Angle Axis ユニットの Angle にセットしてあげたり、コントローラと組み合わせたりするのも良いでしょう。
 <br>
 例えば図 2 の様な感じでしょうか。
 </p>

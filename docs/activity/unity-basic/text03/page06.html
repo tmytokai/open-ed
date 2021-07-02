@@ -39,7 +39,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成をし、シーン名を「Spring Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「BANE Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「TENJYO」、Position を (0,6,0)にする
 <br>
@@ -67,24 +69,17 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Position の x,y,z にチェックを入れる(すると位置がロックされます)
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Rotation の x,y,z にチェックを入れる(すると回転しなくなります)。
+<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Rotation の x,y,z にチェックを入れる(すると回転しなくなります)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 以上の設定を行なうと図1の様な設定状態になる
 </p>
-</div>
-
-</div>
-
 <p>
-以上の設定を行なうと図1の様な設定状態になります。
+<b>図1. TENJYO を動かないようにする設定</b>
 </p>
-
-<p>
-<b>図1. TENJYO を動かないようにする</b>
-</p>
-
 <img src="./img/page06-fig1.png" alt="">
+</div>
 
-
-
+</div>
 
 <br>
 <br>
@@ -95,7 +90,7 @@
 <p>
 次にバネの設定をします。
 <br>
-なおバネの機能をゲームオブジェクトに与えるコンポーネントは <b>Spring Joint</b> と呼ばれます。
+なおバネの機能をゲームオブジェクトに与えるためには <b>Spring Joint</b> コンポーネントをアタッチします。
 </p>
 
 <p>
@@ -111,7 +106,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TENJYO をドラッグして Spring Joint の Connected Body の右にある None と書いてあるセルにドロップする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変ったことを確認する(図2参照)
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変ったことを確認する(以下の図2参照)
 </p>
 </div>
 
@@ -137,34 +132,30 @@
 <span class="olradio"><input type="radio" name="p1"></span> Spring を 10 にする (これがバネの強さです)
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Dumper を 1 にする (これがダンパーの強さです)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ここまでの Spring Joint の設定は以下の図2となる
 </p>
-</div>
-
-</div>
-
-<p>
-ここまでの Spring Joint の設定は以下の図2となります。
-</p>
-
 <p>
 <b>図2. Spring Joint の設定</b>
 </p>
-
 <img src="./img/page06-fig2.png" alt="">
+</div>
 
+</div>
 
-
-<br>
 <br>
 <p>
 ではこれから 2 つほど実験をしてみましょう。
 </p>
 
 <br>
-<h3>(例1) バネと重力の実験</h3>
+<br>
+<h3>
+3. (実験 1) バネと重力の実験
+</h3>
 
 <p>
-では実行ボタンを押して下さい。
+では今の状態で早速実行ボタンを押して下さい。
 <br>
 すると TAMA が落ち始め、しばらくすると振動して、だいたい -1 メートルの辺りで静止すると思います(TAMA のインスペクタを開いて Position の Y 値を見て下さい)。
 </p>
@@ -184,10 +175,12 @@
 </p>
 
 <br>
-<h3>(例2) 振動の実験</h3>
+<h3>
+4. (実験 2) 振動の実験
+</h3>
 
 <p>
-では次に TAMA を振動させてみましょう。
+次に以下の手順で TAMA を振動させてみましょう。
 </p>
 
 <div class="info">
@@ -211,12 +204,12 @@
 </p>
 
 <p>
-なお実行したまま Y の値を 4 に戻すとまた振動し始めますので、Spring や Dumper や Mass の値を色々変更してどの様な動きになるか試してみましょう。
+実行したまま Y の値を 4 に戻すとまた振動し始めますので、Spring や Dumper や Mass の値を色々変更してどの様な動きになるか試してみましょう。
 </p>
 
 <br>
 <h3>
-3. バネの詳しい説明
+5. バネの詳しい説明
 </h3>
 
 <p>
@@ -226,9 +219,9 @@
 </p>
 
 <p>
-まず最初に示した例 1 は<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%83%E3%82%AF%E3%81%AE%E6%B3%95%E5%89%87">フックの法則</a>を再現しています。
+まず実験 1 は<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%83%E3%82%AF%E3%81%AE%E6%B3%95%E5%89%87">フックの法則</a>を再現しています。
 <br>
-フックの法則とは、$F$ をバネにかかる力、$k$ をバネ定数、$y$ を自然長から伸び縮みした長さとしたとき
+フックの法則とは、$F$ をバネにかかる力(単位はニュートン)、$k$ をバネ定数(単位はニュートン/メートル)、$y$ を自然長から伸び縮みした長さ(単位はメートル)としたとき
 
 \[
 F = k \cdot y
@@ -269,17 +262,17 @@ y = \frac{m \cdot g}{k}
 <p>
 となります(完全イコールでないのは例のごとく計算誤差があるためです)。
 <br>
-例 1 では $m$ = mass、 $g$ = 9.81、Spring = 10 としていたので、
+実験 1 では $m$ = mass、 $g$ = 9.81、Spring = 10 としていたので、
 </p>
 
 <p>
-重さ 1 kg → 最初の位置から 約 1 メートル下がる
+重さ 1 kg → 最初の位置から 9.81/10 ≒ 約 1 メートル下がる
 </p>
 <p>
-重さ 2 kg → 最初の位置から 約 2 メートル下がる
+重さ 2 kg → 最初の位置から 9.81/10*2 ≒約 2 メートル下がる
 </p>
 <p>
-重さ 3 kg → 最初の位置から 約 3 メートル下がる
+重さ 3 kg → 最初の位置から 9.81/10*3 ≒ 約 3 メートル下がる
 </p>
 
 
@@ -288,7 +281,7 @@ y = \frac{m \cdot g}{k}
 </p>
 
 <p>
-次に例 2 ではダンパーをバネに加えた時の<a href="https://ja.wikipedia.org/wiki/%E6%B8%9B%E8%A1%B0%E6%8C%AF%E5%8B%95">減衰振動</a>を再現しています。
+次に実験 2 ではダンパーをバネに加えた時の<a href="https://ja.wikipedia.org/wiki/%E6%B8%9B%E8%A1%B0%E6%8C%AF%E5%8B%95">減衰振動</a>を再現しています。
 </p>
 
 <p>
@@ -377,7 +370,7 @@ y(t) = 4 \cdot {\rm e}^{-0.5\cdot t} \left \{ \cos (\sqrt{ 9.75 } \cdot t) + \fr
 <p>
 なお Dumper = 0 にすれば理論的にはずっと振動しているはずなのですが、Unity の場合はいずれ静止します。
 <br>
-ちゃんと調べてはいませんが、どうやら Unity では Dumper の値が現実世界の減衰係数よりも少し大きめに設定されているみたいです。
+ちゃんと調べてはいませんが、どうやら Unity の物理演算では振動中のどこかで運動エネルギーが失われているみたいです。
 <br>
 
 </p>

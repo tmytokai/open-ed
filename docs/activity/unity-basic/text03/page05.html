@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. 摩擦</title>
+<title>5. 摩擦</title>
 </head>
 <body>
 
@@ -37,7 +37,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page08.html">こちら</a>のテキストに従ってシーンを新規作成し、シーン名を「Friction Scene」にする。背景色は任意で構わない(以下の例では見やすいように黒にしています)
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「MASATU Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で箱を新規作成し、名前を「HAKO」、Position を (0,1,0)にする
 <br>
@@ -117,11 +119,9 @@ SAKA を親、HAKO を子供に設定するには以下の様にします。
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> シーンを新規作成した際に Scenes フォルダを開いたままにしている人は一つ上のフォルダに戻る
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ ※ Material の方を選ばないよう注意 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Physic Material を選ぶ
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Physic Material」というアセットが出来るので「HAKO Physic Material」に名前を変更する
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダ内に「New Physic Material」というアセットが出来るので「HAKO Physic Material」に名前を変更する
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 同様に「SAKA Physic Material」も作成する
 </p>
@@ -166,17 +166,15 @@ SAKA を親、HAKO を子供に設定するには以下の様にします。
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> HAKO のインスペクタを表示する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Rigid Body の中の Constraints → Freeze Rotation の x,y,z にチェックを入る(図3)。
-</p>
-</div>
-
-</div>
-
+<span class="olradio"><input type="radio" name="p1"></span> Rigid Body の中の Constraints → Freeze Rotation の x,y,z にチェックを入る(図3)
 <p>
 <b>図3. HAKO が回転しないようにする</b>
 </p>
-
 <img src="./img/page05-fig3.png" alt="">
+</p>
+</div>
+
+</div>
 
 <p>
 では改めて実行ボタンを押してみましょう。
@@ -319,7 +317,7 @@ m \cdot g \cdot \sin \theta = \mu' \cdot m \cdot g \cdot \cos \theta
 </p>
 
 <p>
-Static Friction = $\tan ( \pi/6 ) /2 = 0.28867513459\cdots$
+Static Friction = $\mu'/2 = \tan ( \pi/6 ) /2 = 0.28867513459\cdots$
 </p>
 
 <p>
