@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>12. コルーチン</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [2] Visual Scripting</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+例えば 1 秒おきに敵に弾を撃たせたり、10フレーム後に爆発させたりとか、ゲームを作っているとタイミングを取るために一定期間だけ今の処理を止めて、その間他の処理を実行させておきたいという場合があります。
+<br>
+こういう場合は<a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">スレッド</a>による並列処理を行うのがオーソドックスな方法ですが、スレッドは制御が難しくバグが混入しやすいという問題があります。
+</p>
+
+<p>
+一方Unity(というかC#)にはスレッドに似た「<b>コルーチン (Coroutine)</b>」という機能があります。
+<br>
+コルーチンはスレッドと違ってパフォーマンスは良く無い(※)のですが、上で書いた様なタイミング処理を安全かつ簡単に出来るというメリットがあります。
+<br>
+ここではコルーチンの使い方について学びます。
+</p>
+
+<p>
+※ コルーチンはシングルスレッドで実行されるため
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+まず準備です。
+<br>
+テスト用に別の Script Graph を用意します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内に「New Script Graph」というアセットが出来るので「CR Script」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の Mouse Script と書いてあるセルに CR Script をドロップする 
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. コルーチンを使わない失敗例
+</h3>
+
+<p>
+例として「実行開始後 10 秒たったら hoge と表示させたい」場合を考えてみましょう。
+</p>
+
+<p>
+もしコルーチンを使わないと 図1 の様なスクリプトになります。
+<br>
+Start イベントの中にある Get Realtime Since Startup ユニットはゲームが開始してからの経過時間を取得するユニットです。
+<br>
+よって Start イベントが開始したら 10 秒経過するまで While Loop ユニットの中から出ないという処理を行なっています。
+<br>
+また Update イベントでは一回だけ fuga と表示します。
+</p>
+<p>
+それでは 図1 を実行して下さい。
+<br>
+すると確かに 10 秒後に hoge が表示されるのですが、ゲームの実行自体も停止してしまうために Update イベントも 10 秒経つまで実行されないという問題がおきました(Unity エディタが 10 秒間フリーズします)。
+</p>
+
+<br>
+<p>
+<b>図1. 失敗例 </b>
+</p>
+<img src="./img/page12-fig1.png" alt="">
+
+
+<br>
+<h3>
+3. コルーチンの基本
+</h3>
+
+<p>
+ではコルーチンを使って「実行開始後 10 秒たったら hoge と表示させたい」を行なってみましょう。
+</p>
+
+<p>
+改めて詳しく説明すると、コルーチンは Start や Update などのイベント処理を行なっている際に一時的に処理を止め、一定期間が経つまで他の処理を行わせるという機能です。
+<br>
+従ってイベントユニットに対してコルーチンの設定を行います。
+</p>
+
+<p>
+※ イベント以外の処理(メソッド)もコルーチン化出来ますが今回は説明を省きます
+</p>
+
+<p>
+例えば Start イベントを選択してグラフインスペクタを見て下さい。
+<br>
+Coroutine というチェック欄があると思います。
+<br>
+チェックを入れると Start イベントがコルーチン化されてユニットの右上に矢印が二本表示されます(図2)。
+</p>
+
+<br>
+<p>
+<b>図2. イベントのコルーチン化 </b>
+</p>
+<img src="./img/page12-fig2.png" alt="">
+
+
+<p>
+イベントをコルーチン化したら Wait ユニットを使って一定期間処理を停止することが出来ます。
+<br>
+Wait ユニットにはいくつか種類があるりますが、今回は Wait For Seconds ユニットを使ってみましょう。
+<br>
+Wait For Seconds ユニットは指定秒数だけ処理を停止し、その間他の処理を行うというユニットで、例えば図3の様に使います。
+<br>
+今回は Unity エディタもフリーズせずに Update イベントがすぐに実行されて fuga と表示され、10秒後に hoge が表示されると思います。
+</p>
+
+<br>
+<p>
+<b>図3. 成功例 </b>
+</p>
+<img src="./img/page12-fig3.png" alt="">
+
+
+
+<br>
+<br>
+<h3>
+4. 複数のコルーチンの実行
+</h3>
+
+<p>
+コルーチンは複数実行することが出来ますので並列処理の様なことも可能です。
+</p>
+
+<p>
+※ ただしマルチスレッドではなくてシングルスレッドで実行するので効率が良くなる訳ではありません
+</p>
+
+<p>
+例えば図 4 では 3 つのコルーチンを実行しています。
+<br>
+それぞれのコルーチンで何をしてるかについては実際に実行して確認してみて下さい
+</p>
+
+<br>
+<p>
+<b>図4. 複数のコルーチンの実行 </b>
+</p>
+<img src="./img/page12-fig4.png" alt="">
+
+<br>
+<br>
+<script>PreNext(12,13)</script>
+</body>
+</html>
