@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前のページで特に説明も無くゲームオブジェクトの座標設定や回転を行いましたがもう少し詳しく説明します。
+ここではゲームオブジェクトの座標や回転の設定方法についてもう少し詳しく説明します。
 </p>
 
 <br>
@@ -29,17 +29,17 @@
 </h3>
 
 <p>
-まず大前提として Unity は図1に示している「<b>左手系</b>」と呼ばれる座標系を使っています。
+CG で使われる座標系は<a href="https://ja.wikipedia.org/wiki/%E5%8F%B3%E6%89%8B%E7%B3%BB">右手系と左手系</a>がありますが、Unity は図 1 に示している左手系の方を使っています。
 </p>
 
-
 <br>
+<p>
 <b>図1. 左手系の座標系</b>
-<br>
+</p>
 <img src="./img/page04-fig1.png" alt="">
 
 <p>
-図1の各矢印が x、y、z 軸を表しますので、つまり
+図1の各矢印が x、y、z 軸の方向を表し、それぞれ
 </p>
 
 <ul>
@@ -55,21 +55,21 @@
 </p>
 
 <p>
-さてプロジェクトを新規作成した直後の状態では Game ビューの横方向が x 軸、縦方向が y 軸、奥行きが z 軸となっていますので、例えばあるゲームオブジェクトの Position の x 値を増やすとそのゲームオブジェクトの x 座標値が大きくなりますので右方向に移動します。
+さてプロジェクトを新規作成した直後の状態ではゲームビューの横方向が x 軸、縦方向が y 軸、奥行きが z 軸となっていますので、例えばあるゲームオブジェクトの Position の x 値を増やすとそのゲームオブジェクトの x 座標値が大きくなりますので右方向に移動します。
 <br>
 逆に x 値を減らすと左方向にゲームオブジェクトが移動します。
 <br>
 y、z軸方向も同じ様に動きます。
 </p>
 <p>
-では実際に「HAKO」を使って座標移動を確認してみましょう。
+では実際に HAKO を使って座標移動を確認してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで「HAKO」をクリックして インスペクターに情報を表示する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで HAKO をクリックして インスペクターに情報を表示する。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> インスペクターの Transform の Position の x の値を増やしたり減らしたりして理論通りに移動することを確かめる。
 <br>
@@ -90,12 +90,13 @@ y、z軸方向も同じ様に動きます。
 </h3>
 
 <p>
-Unity は「左ねじの法則」と呼ばれる規則に従ってゲームオブジェクトの回転を行います(図2)。
+Unity は「<b>左ねじの法則</b>(または左手の法則)」と呼ばれる規則に従ってゲームオブジェクトの回転を行います(図2)。
 </p>
 
 <br>
-<b>図2. 左ねじの法則</b>
-<br>
+<p>
+<b>図2. 左ねじの法則(左手の法則)</b>
+</p>
 <img src="./img/page04-fig2.png" alt="">
 
 <p>
@@ -105,18 +106,24 @@ Unity は「左ねじの法則」と呼ばれる規則に従ってゲームオ�
 <p>
 なおオブジェクトの座標指定の時は x、y、z 座標の値をセットする順番は自由でしたが、回転の場合は角度をセットする順番によってオブジェクトの向きが変わります。
 <br>
-Unity の場合は z 軸 → x 軸 → y 軸の順番に値がセット(回転)されます。
+Unity の場合は
+</p>
+<p>
+<b>z 軸 → x 軸 → y 軸</b>
+</p>
+<p>
+の順番に値がセット(回転)されます。
 </p>
 
 <p>
-では実際に「HAKO」を使って回転を確認してみましょう。
+では実際に HAKO を使って回転を確認してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> まずヒエラルキーで「HAKO」をクリックし、Transform の rotation の (x,y,z) の値をそれぞれ (0,0,0) にリセットする。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで HAKO をクリックし、Transform の rotation の (x,y,z) の値をそれぞれ (0,0,0) にリセットする。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> まず rotation の z の値を増やしたり減らしたりして理論通りに z 軸回りで回転することを確かめる。
 <br>
@@ -124,7 +131,7 @@ Unity の場合は z 軸 → x 軸 → y 軸の順番に値がセット(回転)�
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 最後に rotation の y の値を増やしたり減らしたりして理論通りに y 軸回りで回転することを確かめる。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 確認が終わったら「HAKO」の Transform の rotation の (x,y,z) の値を (45,45,0) に戻す。
+<span class="olradio"><input type="radio" name="p1"></span> 確認が終わったら HAKO の Transform の rotation の (x,y,z) の値を (45,45,0) に戻す。
 </p>
 </div>
 
@@ -150,14 +157,14 @@ Unity の場合は z 軸 → x 軸 → y 軸の順番に値がセット(回転)�
 </p>
 
 <p>
-では実際に「HAKO」を使ってジンバルロックを確認してみましょう。
+では実際に HAKO を使ってジンバルロックを確認してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで「HAKO」をクリックして インスペクターに情報を表示する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで HAKO をクリックして インスペクターに情報を表示する。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> インスペクターの Transform の rotation の (x,y,z) の値をそれぞれ (90,0,0) にする。
 <br>
@@ -172,6 +179,6 @@ Unity の場合は z 軸 → x 軸 → y 軸の順番に値がセット(回転)�
 
 
 <br>
-<script>PreNext(4,7)</script>
+<script>PreNext(4,8)</script>
 </body>
 </html>

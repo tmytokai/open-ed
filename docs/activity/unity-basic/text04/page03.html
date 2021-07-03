@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. プレハブ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ゲーム中では敵を出現させたり、弾を発射したりなど、既存のゲームオブジェクトをコピーして使いまわしたい場合が多いです。
+<br>
+その際に、ヒエラルキーにあるゲームオブジェクトをコピーして使うよりも便利な「<b>プレハブ (Prefab)</b>」という機能があります。
+<br>
+ここではプレハブの使い方について説明します。
+</p>
+
+<p>
+※ ちなみに英語ではプレファブとかプリファブと発音します
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Prefab Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,0,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Rigidbody をアタッチする。
+</p>
+</div>
+
+</div>
+
+<p>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Prefab Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Prefab Script をドロップする
+</p>
+</div>
+
+</div>
+
+<p>
+次に Prefab Script を開いて以下の図 1 のスクリプトを入力して下さい。
+<br>
+単に Start イベントの中で Rigidbody Add Force  ユニットを使って斜め上方向に<a href="../text03/page07.html">力を加えて飛ばしている</a>だけのスクリプトです。
+<br>
+mode を Impulse にするのを忘れないで下さい。
+</p>
+
+<p>
+<b>図1. Prefab Script</b>
+</p>
+<img src="./img/page03-fig1.png" alt="">
+<p>
+
+
+
+<br>
+<h3>
+2. プレハブの作り方
+</h3>
+
+<p>
+では早速以下の手順で TAMA をプレハブ化してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Prefabs」という名前に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Prefabs フォルダの中に入る
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの TAMA を Prefabs フォルダにドラッグ＆ドロップすると TAMA がプレハブ化される(図2)
+<p>
+<b>図2. TAMA のプレハブ化</b>
+</p>
+<img src="./img/page03-fig2.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの TAMA を削除する
+<br>
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+3. プレハブをコピーしてゲームオブジェクトを作成
+</h3>
+
+<p>
+プレハブをコピーしてゲームオブジェクトを作成するには、単に TAMA プレハブをヒエラルキーにドロップするだけです。
+<br>
+名前と座標(Position)は適宜変更可能です。
+<br>
+ここでは以下の 3 つのゲームオブジェクトを作って下さい。
+</p>
+
+<p>
+名前: TAMA1、 Position: (0,0,0)
+</p>
+<p>
+名前: TAMA2、 Position: (2,0,0)
+</p>
+<p>
+名前: TAMA3、 Position: (-3,0,0)
+</p>
+
+<p>
+ヒエラルキーとゲームビューは図3のようになります
+</p>
+
+<p>
+<b>図3. プレハブのコピー</b>
+</p>
+<img src="./img/page03-fig3.png" alt="">
+
+<br>
+<h3>
+4. プレハブの編集
+</h3>
+
+<p>
+ある既存のゲームオブジェクトをコピーしていくつも画面上に表示したい場合があります。
+<br>
+<a href="../text01/page03.html">ここ</a>で説明した様にヒエラルキーにあるゲームオブジェクトを右クリック → Dupulicate でコピーすることも可能ですが、コピーしたゲームオブジェクトは元のゲームオブジェクトとは別の個体になるため、元のゲームオブジェクトを編集しても何もおきません。
+</p>
+
+<p>
+一方プレハブからゲームオブジェクトをコピーして作った場合は、元のプレハブを編集するとコピーして作ったゲームオブジェクトも自動的に編集されます。
+<br>
+</p>
+
+<p>
+例えば次の手順で TAMA プレハブの編集を行なってみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ゲームビューからシーンビューに画面を切り替える
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Prefabs フォルダの TAMA プレハブをダブルクリックすると編集画面に切り替わり、ヒエラルキーとシーンビューには TAMA だけが表示される(図4)。
+</p>
+<p>
+<b>図4. TAMA プレハブの編集画面</b>
+</p>
+<img src="./img/page03-fig4.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 試しに大きさを変える。インスペクタの Scale を (0.5,2,1) にする。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 色も変えてみる。アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Materials」という名前に変更する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Material を選ぶ ※ Physic Material の方を選ばないよう注意 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダ内に「New Material」というアセットが出来るので「Prefab Material」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> <a href="../text01/page06.html">ここ</a>を参考に色を変更する(色は任意で結構です)
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの TAMA に Prefab Material をドロップすると色が変わる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 図4 の左上の「＜」マークをクリックして TAMA の編集画面から抜ける
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ゲームビューに画面を切り替える
+</p>
+</div>
+
+</div>
+
+<p>
+すると図5の様に TAMA プレハブをコピーして作った TAMA1、2、3の形や色も変わります。
+</p>
+
+<p>
+<b>図5. 元のプレハブを編集するとコピー先も変わる</b>
+</p>
+<img src="./img/page03-fig5.png" alt="">
+
+
+<br>
+<h3>
+5. スクリプトでプレハブをコピー
+</h3>
+
+<p>
+自分や敵の弾など、ゲーム中に何千とか何万個も現れるゲームオブジェクトを始めからヒエラルキー上用意しておくと大変なことになります。
+<br>
+その様な状況ではスクリプトを使って任意のタイミングでプレハブをコピーしてゲームオブジェクトを作成することになります。
+</p>
+
+<p>
+まず次の手順でマネージャ役のゲームオブジェクトを新規作成して下さい
+</p>
+
+<div class="info">
+
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 
+ヒエラルキー右クリック → Create Empty で GameObject というゲームオブジェクトを新規作成し、名前を「Manager」にする (Position は適当で良いです) 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Prefab Manager Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Manager に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Prefab Manager Script をドロップする
+</p>
+</div>
+
+</div>
+
+<p>
+次に Prefab Manager Script を開いて以下の図 6 のスクリプトを入力して下さい。
+<br>
+スクリプト内に出てくる Compoent Instantiate (Origianl, Position, Rotation) ユニットがプレハブをコピーするユニットです。
+</p>
+<p>
+Compoent Instantiate ユニット内の Original にはコピー元のプレハブを指定します。
+<br>
+最初 None と書いてあるので、そこに Prefabs フォルダ内の TAMA プレハブをドロップして下さい。
+</p>
+<p>
+Compoent Instantiate ユニット内の Position にはコピー先の座標を指定します。
+<br>
+今回は Vector3 Create ユニットと <a href="../text02/page05.html">Random Range ユニット(Max Inclusive 版)</a> を使ってランダムに x 座標を決めています。
+</p>
+
+<p>
+Compoent Instantiate ユニット内の Rotation には<a href="../text03/page03.html">クォータニオン</a>によって初期角度を指定します。
+<br>
+今回は無回転を意味する Quaternion Get Identity ユニットを指定しています。
+</p>
+
+<p>
+なお Start ユニットは<a href="../text02/page12.html">コルーチン</a>化して下さい。
+<br>
+コルーチン化し忘れると Unity エディタがフリーズしますので注意して下さい。
+</p>
+
+<p>
+<b>図6. Prefab Manager Script</b>
+</p>
+<img src="./img/page03-fig6.png" alt="">
+
+
+<br>
+<script>PreNext(2,10)</script>
+</body>
+</html>

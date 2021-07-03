@@ -29,22 +29,24 @@
 </h3>
 
 <p>
-ゲームビューに表示される人や車、建物などのキャラクターのことを「ゲームオブジェクト(GameObject)」と呼びます。
+ゲームビューに表示される人や車、建物などのキャラクターのことを「<b>ゲームオブジェクト(GameObject)</b>」と呼びます。
 <br>
 目に見える物体の他にもカメラ、光源、音楽などもゲームオブジェクトに含まれます。
+<br>
+ここでは例として立方体(Cube)と球(Sphere)のゲームオブジェクトを画面上に配置してみましょう。
 </p>
 
 <p>
-さて<a href="https://assetstore.unity.com/">アセットストア</a>や Web などから3Dモデルをダウンロードしてゲームオブジェクトとして使っても良いのですが、今回は単純に立方体(Cube)と球(Sphere)を画面上に配置してみましょう。
-<br>
 まず立方体です。
+<br>
+以下の手順に従って画面上に配置して下さい。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして「3D Object」→「Cube」を選択すると画面上に立方体のゲームオブジェクトが配置される
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして 3D Object → Cube を選択すると画面上に立方体のゲームオブジェクトが配置される
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 座標を変更する。インスペクターの Transform の Position の (x,y,z) の値(単位はメートル)を変えると指定した座標にゲームオブジェクトが移動する。今回は (x,y,z) をそれぞれ (1,2,0) にする
 <br>
@@ -65,7 +67,7 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして「3D Object」→「Sphere」を選択すると画面上に球のゲームオブジェクトが配置される
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーで右クリックして 3D Object → Sphere を選択すると画面上に球のゲームオブジェクトが配置される
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 座標を変更する。インスペクターの Transform の Position の (x,y,z) の値をそれぞれ (-1,-2,0) にする
 <br>
@@ -86,16 +88,16 @@
 <p>
 ヒエラルキーでゲームオブジェクトをクリックするとそのゲームオブジェクトが選択され、インスペクターに情報が表示されます。
 <br>
-以下の手順で立方体と球を交互に選択してみましょう
+以下の手順で立方体と球を交互に選択してみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「Cube」をクリックしてインスペクターに「Cube」の情報が表示されることを確認する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの Cube をクリックしてインスペクターに Cube の情報が表示されることを確認する。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様に「Sphere」ををクリックしてインスペクターに「Sphere」の情報が表示されることを確認する。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Sphere をクリックしてインスペクターに Sphere の情報が表示されることを確認する。
 <br>
 </p>
 </div>
@@ -109,7 +111,7 @@
 </h3>
 
 <p>
-ヒエラルキーで名前を変更したいゲームオブジェクトをマウスで長押しするか、右クリック → 「Rename」 で出来ます。
+ヒエラルキーで名前を変更したいゲームオブジェクトをマウスで長押しするか、または右クリック →  Rename で出来ます。
 <br>
 以下の手順で立方体と球の名前を変更してみましょう
 </p>
@@ -118,9 +120,9 @@
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「Cube」をマウスで長押しするか右クリックして「Rename」を選択し、「HAKO」に名前を変更する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの Cube をマウスで長押しするか、または右クリック → Rename を選択して HAKO に名前を変更する。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様に「Sphere」を「TAMA」に名前を変更する。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Sphere を TAMA に名前を変更する。
 <br>
 </p>
 </div>
@@ -134,22 +136,22 @@
 </h3>
 
 <p>
-ヒエラルキーでコピーしたいゲームオブジェクトの上で右クリック → 「Dupulicate」 で出来ます。
+ヒエラルキーでコピーしたいゲームオブジェクトの上で右クリック →  Dupulicate  で出来ます。
 <br>
-以下の手順で「HAKO」をコピーしてみましょう。
+以下の手順で HAKO をコピーしてみましょう。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「HAKO」を右クリックして「Dupulicate」を選択して「HAKO(1)」という名前のコピーを作成する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの HAKO を右クリックして Dupulicate を選択して HAKO(1) という名前のコピーを作成する。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「HAKO(1)」を「HAKO2」に名前を変更する。
+<span class="olradio"><input type="radio" name="p1"></span> HAKO(1) を HAKO2 に名前を変更する。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 位置が重なっているので変更する。「HAKO2」の インスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,4,0) にする。
+<span class="olradio"><input type="radio" name="p1"></span> 位置が重なっているので変更する。 HAKO2 の インスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,4,0) にする。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様に「HAKO」をコピーして「HAKO3」を作る。「HAKO2」の インスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,-4,0) にする。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に HAKO をコピーして HAKO3 を作る。 HAKO3 のインスペクターの Transform の Position の (x,y,z) をそれぞれ (-1,-4,0) にする。
 </p>
 </div>
 
@@ -162,15 +164,15 @@
 </h3>
 
 <p>
-ヒエラルキーウィンドウで削除したいゲームオブジェクトの上で右クリック → 「Delete」 で出来ます。
+ヒエラルキーウィンドウで削除したいゲームオブジェクトの上で右クリック →  Delete  で出来ます。
 <br>
-以下の手順で「HAKO3」を削除してみましょう。
+以下の手順で HAKO3 を削除してみましょう。
 </p>
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「HAKO3」を右クリックして「Delete」を選択して削除する。
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの HAKO3 を右クリック → Delete を選択して削除する。
 </p>
 </div>
 
@@ -181,13 +183,14 @@
 </p>
 
 <br>
+<p>
 <b>図1. ここまでの画面</b>
-<br>
+</p>
 <img src="./img/page03-fig1.png" alt="">
 
 
 
 <br>
-<script>PreNext(3,7)</script>
+<script>PreNext(3,8)</script>
 </body>
 </html>
