@@ -78,10 +78,18 @@
 
 <p>
 次に Prefab Script を開いて以下の図 1 のスクリプトを入力して下さい。
-<br>
-単に Start イベントの中で Rigidbody Add Force  ユニットを使って斜め上方向に<a href="../text03/page07.html">力を加えて飛ばしている</a>だけのスクリプトです。
+</p>
+
+<p>
+図 1 は単に Start イベントの中で Rigidbody Add Force  ユニットを使って斜め上方向に<a href="../text03/page07.html">力を加えて飛ばしている</a>だけのスクリプトです。
 <br>
 mode を Impulse にするのを忘れないで下さい。
+</p>
+
+<p>
+その後に付いている Game Object Destroy (Obj, T)ユニットは Obj で指定したゲームオブジェクトを T に指定した秒数後に消すというユニットです。
+<br>
+今回は this ユニットを接続してますので、this つまり自分自身を 5 秒後に消すように設定してあります(そうしないといつまでも TAMA が画面に残り続けるので)。
 </p>
 
 <p>
@@ -289,6 +297,6 @@ Compoent Instantiate ユニット内の Rotation には<a href="../text03/page03
 
 
 <br>
-<script>PreNext(2,10)</script>
+<script>PreNext(3,10)</script>
 </body>
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. パーティクル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+「<b>パーティクル (Particle)</b>」は細かい粒を画面上に一度に大量に撒き散らすという機能です。
+<br>
+パーティクルを使うと煙、炎、雷、液体などのエフェクトを表現できるようになります。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Particle Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Effects → Particle でパーティクルを新規作成し、名前を「Particle」、Position を (0,0,20)にする
+</p>
+</div>
+
+</div>
+
+
+<p>
+これだけで図1 の様な画面が表示されます。
+</p>
+
+<p>
+<b>図1. パーティクル</b>
+</p>
+<img src="./img/page04-fig1.png" alt="">
+<p>
+
+
+
+<br>
+<h3>
+2. パーティクルの設定
+</h3>
+
+<p>
+パーティクルは放出方向や色などを変えることで様々な効果を表すことが出来ます。
+<br>
+ただ設定項目が多すぎて、全ての項目について扱うとそれだけでテキスト一冊分になってしまうので、今回は基本的な設定だけ取り扱います。
+</p>
+
+<p>
+では以下の手順でパーティクルの放出方向、色、スピード、ライフタイム、大きさ、重力の影響を変更してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの「Particle」をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 放出方向を変えるには Rotation を変える(<a href="../text01/page04.html">ジンバルロックに注意</a>)。例えば (0, 90, 0)にすると横に粒子を放出する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 色を変えるには Particle → Start Color を変える。例えば RGBA = (255,255,0,255)にすると黄色になる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> スピードを変えるには Particle → Start Speed を変える。例えば 2 にすると遅くなる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ライフタイム(消えるまでの時間)を変えるには Particle → Start Lifetime を変える。例えば 10 にすると長くなる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 大きさを変えるには Particle → Start Size を変える。例えば 5 にすると大きくなる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 重力の影響を変えるには Particle → Gravity Modifier を変える。例えば 0.05 にすると下に落ちる
+<br>
+</p>
+</div>
+
+</div>
+
+<p>
+上の編集をすると図2の様な画面になります。
+<br>
+他にも様々な設定がありますし、もちろん<a href="./page03.html">プレハブ化</a>して使うことも出来ますので、色々試して下さい。
+</p>
+
+<p>
+<b>図2. パーティクルの設定</b>
+</p>
+<img src="./img/page04-fig2.png" alt="">
+<p>
+
+<br>
+<script>PreNext(4,10)</script>
+</body>
+</html>
