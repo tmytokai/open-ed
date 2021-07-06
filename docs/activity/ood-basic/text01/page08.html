@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-あるオブジェクトが他のオブジェクトと重なっているかどうかを判定するには、Actor クラスの getOneIntersectingObject メソッドを利用します。
+あるオブジェクトが他のオブジェクトと重なっているかどうかを判定するには、Actor クラスで定義されている getOneIntersectingObject メソッドを利用します。
 </p>
 
 <div class="info">
@@ -28,7 +28,8 @@
 <pre class="wrap">
 protected Actor getOneIntersectingObject( クラス名.class )
 
-戻り値(Actor): もし指定したクラスのオブジェクトと重なっていたらそのオブジェクトが戻る。重なって無ければ null が戻る。
+戻り値(Actor): もし指定したクラスのオブジェクトと重なっていたらそのオブジェクトが戻る。
+重なって無ければ null が戻る。
 </pre>
 </div>
 

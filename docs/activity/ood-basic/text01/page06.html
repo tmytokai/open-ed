@@ -37,28 +37,42 @@ public void World.showText( "文字列", x 座標, y 座標 )
 </div>
 
 <p>
-ただし、あるクラスのメソッドの中で文字列を表示させたい場合は、そのオブジェクトが表示されているワールドのオブジェクトを取得しなければいけません。
-<br>
-それにはワールドオブジェクトの getter である getWorld メソッドを利用します。
+このメソッドを呼び出すためには、Actor クラスで定義されている getWorld メソッドを使って自分が表示されているワールドのオブジェクトを取得する必要があります。
+</b>
+
+<div class="info">
+<input type="checkbox"><b>自分が所属するワールドのオブジェクトを取得</b>
+<pre class="wrap">
+public World Actor.getWorld()
+
+戻り値(World): 自分が所属するワールドのオブジェクト
+
+引数: 無し
+</pre>
+</div>
+
+
 
 <p>
-例えばあるクラスの中で文字列 "HOGE" を座標 (100,50) に表示するには ソース 1 の様にします。
+例えば文字列 "HOGE" を座標 (100,50) に表示するには ソース 1 の様にします。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 1: 文字列 "HOGE" を座標 (100,100) に表示</b>
 <pre class="wrap">
-getWorld().showText( "HOGE", 100, 50 ); // getWorld() は World オブジェクトの getter
+getWorld().showText( "HOGE", 100, 50 );
 </pre>
 </div>
 
 <p>
-ちなみに MyWorld の様な World クラスのサブクラスの場合は showText が継承されていますので、ソース 2 の様に getWorld を使わず直接 showText を呼び出せます。
+ただし MyWorld の様な World クラスのサブクラスの場合は showText が継承されていますので、ソース 2 の様に getWorld を使わず直接 showText を呼び出せます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 2: World のサブクラス内で文字列を表示</b>
 <pre class="wrap">
+※ getWorld メソッドを使う必要が無い
+
 showText( "HOGE", 100, 50 );
 </pre>
 </div>

@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-現在キーボード上の指定したキーを押しているかどうかを判定するには、Greenfoot というユーティリティクラスの isKeyDown メソッドを利用します。
+キーボード上の指定したキーを押しているかどうかを判定するには、Greenfoot クラスで定義されている isKeyDown メソッドを利用します。
 </p>
 
 <div class="info">
@@ -31,15 +31,20 @@ public static boolean Greenfoot.isKeyDown( "キーの名前" )
 戻り値(boolean): 指定したキーを押してれば true、押して無ければ false が戻る 
 
 "キーの名前":
-文字キーなら "a", "b", ・・・, "z" 
-数字キーなら "0", ・・・ ,"9" 
-カーソルキーなら "up", "down", "left", "right" 
-その他 "enter", "space", "tab", "escape", "backspace", "shift", "control", "F1", "F2",・・・, "F12"
+
+文字キー:  "a", "b", ・・・, "z" 
+
+数字キー  "0", ・・・ ,"9" 
+
+カーソルキー:  "up", "down", "left", "right" 
+
+その他:  "enter", "space", "tab", "escape", "backspace", "shift", "control", "F1", "F2",・・・, "F12"
+
 </pre>
 </div>
 
 <p>
-このメソッドは public static なので、コード内のどこからでも呼び出すことが出来ます。 
+このメソッドは public static なのでコード内のどこからでも呼び出すことが出来ます。 
 <br>
 従ってカーソルキーの右を押したら右に 1 だけ移動したい場合はソース 1 の様に act メソッド内に書きます。 
 </p>

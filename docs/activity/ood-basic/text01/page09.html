@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-オブジェクトをプログラム内で動的に削除するには、World クラスの removeObject メソッドを利用します。
+オブジェクトをプログラム内で動的に削除するには、World クラスで定義されている removeObject メソッドを利用します。
 </p>
 
 <div class="info">
@@ -33,13 +33,13 @@ public void World.removeObject( オブジェクト )
 </div>
 
 <p>
-ただし、このメソッドを使うには削除したいオブジェクトを取得する必要があります。
+このメソッドを使うためには<a href="./page06.html">6ページ</a>で説明した getWorld メソッドを使ってワールドオブジェクトを取得する必要があります。
+<br>
+さらに削除対称のオブジェクトも取得する必要があります。
 </p>
 
 <p>
-削除対象のオブジェクトを取得する方法は色々ありますが、前のページの例の続きとして、あるオブジェクトが TARO オブジェクトにぶつかったら TARO オブジェクトを削除する処理をソース 1 に書いてみます。
-<br>
-なお getWorld は以前説明した通りワールドオブジェクトの getter です。
+削除対象のオブジェクトを取得する方法は色々ありますが、例えばあるオブジェクトが TARO オブジェクトにぶつかったら TARO オブジェクトを削除する処理はソース 1 の様になります。
 </p>
 
 <div class="info">
@@ -47,7 +47,7 @@ public void World.removeObject( オブジェクト )
 <pre class="wrap">
 Actor actor = getOneIntersectingObject( TARO.class );
 if( actor != null ){
-    getWorld().removeObject( actor ); // getWorld() は World オブジェクトの getter
+    getWorld().removeObject( actor );
 }       
 </pre>
 </div>

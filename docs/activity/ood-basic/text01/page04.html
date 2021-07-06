@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-さてワールド上に配置したキャラクターのオブジェクトはそのままでは静止したままなので、これを動かしてみたいと思います。
+ワールド上に配置したキャラクターのオブジェクトはそのままでは静止したままなので、これを動かしてみたいと思います。
 </p>
 
 <p>
@@ -38,7 +38,7 @@
 </p>
 
 <p>
-次に act メソッドの中で Actor クラスの setRotation メソッドを利用して移動したい方向にオブジェクト向きを変えます。
+次に act メソッドの中で Actor クラスで定義されている setRotation メソッドを利用して移動したい方向にオブジェクト向きを変えます。
 </p>
 
 <div class="info">
@@ -46,14 +46,14 @@
 <pre class="wrap">
 public void Actor.setRotation( 角度 )
 
-戻り値(void): 無し。
+戻り値(void): 無し
 
-角度(int): 0 〜 359 の範囲で角度を指定する。
+角度(int): 0 〜 359 の範囲で角度を指定する
 </pre>
 </div>
 
 <p>
-移動したい方向にオブジェクトを向けたら、同様に Actor クラスの move メソッドを利用してオブジェクトを移動させます。
+移動したい方向にオブジェクトを向けたら、同様に Actor クラスで定義されている move メソッドを利用してオブジェクトを移動させます。
 </p>
 
 <div class="info">
@@ -61,7 +61,7 @@ public void Actor.setRotation( 角度 )
 <pre class="wrap">
 public void Actor.move( 移動距離 )
 
-戻り値(void): 無し。
+戻り値(void): 無し
 
 移動距離(int): 大きいほど移動距離大
 </pre>
@@ -87,13 +87,17 @@ move(1);
 <input type="checkbox"><b>プログラム実行方法:</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Reset ボタンを押して初期化する。
+<span class="olradio"><input type="radio" name="p1"></span> エディタの Complie ボタンを押してコンパイルする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (必要なら) オブジェクトを手動配置する。
+<span class="olradio"><input type="radio" name="p1"></span> メインウィンドウに戻り、実行コントロール上の Reset ボタンを押して初期化する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Run ボタンを押すとプログラムが実行する。ちなみに Act ボタンを押すと act メソッドが 1 回だけ実行される。
+<span class="olradio"><input type="radio" name="p1"></span> (必要なら) オブジェクトを手動配置する
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Reset ボタンを押すと停止する。
+<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Act ボタンを押すと act メソッドが 1 回だけ実行される
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行コントロール上の Run ボタンを押すと act メソッドがタイマーで繰り返し呼び出される。タイマーの呼び出し速度は Speed で調整出来る。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Reset ボタンを押すとタイマーが停止する
 </p>
 </div>
 </div>

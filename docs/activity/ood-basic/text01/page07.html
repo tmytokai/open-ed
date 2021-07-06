@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-あるオブジェクトをプログラム中で new して動的に作成してから画面に配置するためには World クラスの addObject メソッドを利用します。
+あるオブジェクトをプログラム中で new して動的に作成してから画面に配置するためには World クラスで定義されている addObject メソッドを利用します。
 </p>
 
 <div class="info">
@@ -28,28 +28,30 @@
 <pre class="wrap">
 public void World.addObject( new したオブジェクト, x 座標, y 座標 )
 
-戻り値(void): 無し。
+戻り値(void): 無し
 </pre>
 </div>
 
 <p>
-例えばあるクラスの中で TARO クラスのオブジェクトを new してから座標 (300,200) に配置するには、前のページで説明した getWorld メソッドを経由して ソース 1 の様にします。
+例えばあるクラスの中で TARO クラスのオブジェクトを座標 (300,200) に配置するには、<a href="./page06.html">前ページ</a>で説明した getWorld メソッドを経由して ソース 1 の様にします。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 1: TARO オブジェクトを (300,200) に動的配置</b>
 <pre class="wrap">
-getWorld().addObject( new TARO(), 300, 200 ); // getWorld() は World オブジェクトの getter
+getWorld().addObject( new TARO(), 300, 200 );
 </pre>
 </div>
 
 <p>
-なお前のページで説明したとおり、MyWorld の様な World クラスのサブクラスの場合は addObject が継承されていますので、ソース 2 の様に getWorld を使わず直接 addObject を呼び出せます。
+ただし MyWorld の様な World クラスのサブクラスの場合は addObject が継承されていますので、ソース 2 の様に getWorld を使わず直接 addObject を呼び出せます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 2: World のサブクラス内でオブジェクトを動的配置</b>
 <pre class="wrap">
+※ getWorld メソッドを使う必要が無い
+
 addObject( new TARO(), 300, 200 );
 </pre>
 </div>
