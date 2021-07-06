@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. 文字列の表示</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここでは文字列を画面上に表示する方法について学びます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Moji Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Create Empty で GameObject というゲームオブジェクトを新規作成し、名前を「PROGRAM」にする (Position は適当で良いです) 
+</p>
+</div>
+
+</div>
+
+<p>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Moji Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> PROGRAM に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Moji Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. テキスト表示エリアの作成
+</h3>
+
+<p>
+Unity で使われている GUI 機能のことを Unity UI と呼びます。
+<br>
+テキストエリアやボタン、スクロールバーなどの GUI パーツを画面に表示するために利用します。
+<br>
+では早速以下の手順でテキストエリアを作成してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → UI → Text を選択すると Canvas というフォルダと Text というゲームオブジェクトが出来る。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Text を MyText に名前を変更する
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでで図 1 の様な文字列が画面上に出ていると思います。
+</p>
+
+<p>
+<b>図1. 文字列の表示</b>
+</p>
+<img src="./img/page05-fig1.png" alt="">
+
+<p>
+次に文字列の表示位置を変えてみましょう。
+<br>
+通常のゲームオブジェクトの場合は Transform コンポーネントの Position で位置を変更しますが、Unity UI で使う GUI パーツの場合は Transform コンポーネントの代わりに Rect Transform コンポーネントを使って位置を変更します(図2)。
+</p>
+
+<p>
+<b>図2. Rect Transform コンポーネント</b>
+</p>
+<img src="./img/page05-fig2.png" alt="">
+
+<p>
+図2 の左上に center と middle と書いてある四角形がありますが、これをアンカーと言います。
+<br>
+このアンカーを使って GUI パーツを表示する中心の位置を決めることが出来ます。
+<br>
+ユーザーが使っているモニターサイズはまちまちなので、ピクセル値を使って GUI パーツの座標を直接指定すると位置が激しくズレる時があります。
+<br>
+そこでアンカーを使って GUI パーツの大まかな表示位置を指定する必要があります。
+</p>
+
+<p>
+では次の手順でアンカーの位置を画面左上にしてみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アンカーのアイコンをクリックしてアンカープリセット(設定用のポップアップ)を開く(図3)
+</p>
+<p>
+<b>図3. アンカープリセット</b>
+</p>
+<img src="./img/page05-fig3.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 左上にアンカーをセットするため、アンカープリセットの左上のマス目をクリックしてアンカープリセットを閉じる(図4)
+</p>
+<p>
+<b>図4. アンカーを左上にセット</b>
+</p>
+<img src="./img/page05-fig4.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> PosX と PosY でアンカーからの位置を調整をする。今回は PosX に 100、 PosY に -20 を入れる
+<br>
+</p>
+</div>
+
+</div>
+
+<p>
+後は普通のワープロの様に、以下の手順で文字列の内容、大きさ、色等を変更できます。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 文字列を変更するには Text コンポーネントの New Text と書いてある文字列を変更する。今回は「こんにちは」と入れる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 大きさを変更するには Text コンポーネントの Font Size を変更すると文字の大きさが変わる。ただし大きくしすぎると表示されなくなるので Rect Transform コンポーネントのの Width(幅)と Height(高さ)も変更する。今回は Font Size を 32、Width を 160、 Height を 50 にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 色を変更するには Text コンポーネントの Color を変更する。今回は黄色(RGBA=(255,255,0,255))にする。
+</p>
+</div>
+
+</div>
+
+<p>
+これで文字列が図 5 の様に変わると思います。
+
+<p>
+<b>図5. テキストの編集</b>
+</p>
+<img src="./img/page05-fig5.png" alt="">
+<p>
+
+
+<br>
+<h3>
+3. スクリプトの中から文字列を変更する
+</h3>
+
+<p>
+スクリプトから文字列を変更するには Text Set Text ユニットを使います。
+<br>
+例えば Moji Script に図 6 を入力して下さい。
+<br>
+このスクリプトを実行し、Jump ボタンを押すと文字列が HOGE に変わります。
+<br>
+なお Text Set Text ユニットで文字列を変更するためには、Game Object Find ユニットを使って文字列を変更したいゲームオブジェクト(今回は MyText )を検索して Text Set Text ユニットに入力する必要があります。
+</p>
+
+<p>
+<b>図6. Moji Script の例</b>
+</p>
+<img src="./img/page05-fig6.png" alt="">
+
+<p>
+またスコアや経過時間など、数字を表示したい場合もあると思います。
+<br>
+その場合は図7の様に Integer To String ユニットを使って数字を文字列に変換できます。
+</p>
+
+<p>
+<b>図7. 数字を文字列に変換</b>
+</p>
+<img src="./img/page05-fig7.png" alt="">
+
+
+<br>
+<script>PreNext(5,10)</script>
+</body>
+</html>
