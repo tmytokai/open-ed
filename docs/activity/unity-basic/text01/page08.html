@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>8. シーンの新規作成</title>
+<title>8. シーンの新規作成と背景色の変更</title>
 </head>
 <body>
 
@@ -20,48 +20,90 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ゲームはタイトル画面、キャラクター選択画面、プレイ画面、ゲームオーバー画面など様々なシーン(場面)によって構成されます。
+ここではシーンの新規作成と背景色の変更について学びます。
+</p>
+
+<br>
+<h3>
+1. シーンの新規作成
+</h3>
+
+<p>
+ゲームはタイトル画面、キャラクター選択画面、プレイ画面、ゲームオーバー画面など様々な「<b>シーン(scene、場面)</b>」によって構成されます。
 <br>
 Unity ではそれぞれのシーンを別々に作り、シーンを適宜切り替えてゲームを進行します。
 </p>
 
 <p>
-さてプロジェクトを新規作成した時点ではシーン(サンプルシーンと言います)は一つしかありません。
+プロジェクトを新規作成した時点ではシーン(サンプルシーンと言います)は一つしかありません。
 <br>
-これまでの演習で大分画面がごちゃごちゃして来たので新しいシーンを作成してリフレッシュすることにしましょう。
+これまでの演習で大分画面がごちゃごちゃして来たので、以下の手順で新しいシーンを作成してリフレッシュすることにしましょう。
 </p>
 
-<p>
-まずアセットフォルダの中の Scenes フォルダの中を開いて見て下さい。
-<br>
-SampleScene というアセットが一つ入っていますがこれがサンプルシーンです。
-<br>
-次にアセットフォルダの空いているスペースで右クリックし、Create → Scene を選ぶと「New Scene」という新しいシーンが出来るので、名前を「Scene2」に変更して下さい。
-</p>
 
-<p>
-あとは作成した Scene2 をダブルクリックすると新しいシーンが開いて、今まで作成したゲームオブジェクトが画面から消えます。
-<br>
-もちろん「SampleScene」をダブルクリックすれば何時でもサンプルシーンに戻れます。
-</p>
+<div class="info">
 
+<div class="olradio"> 
 <p>
-なおシーンを切り替える際にゲームオブジェクトに行なった変更を保存するか聞いてくる時がありますので、保存したい場合は「Save」、保存したくない場合は「Don't Save」を押して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダ内にある Scenes フォルダに入る
 </p>
+<p>
+※ Scenes フォルダ内に「SampleScene」というアセットが一つ入っていますがこれがサンプルシーンです
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scenes フォルダの空いているスペースで右クリックし、Create → Scene を選ぶと「New Scene」という新しいシーンが出来るので、名前を「Scene2」に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scene2 をダブルクリックすると新しいシーンが開いて、今まで作成したゲームオブジェクトが画面から消える。もしサンプルシーンに行なった変更を保存するか聞いてきたら「Save」を押す。「Don't Save」を押すと変更箇所が消えるので注意
+</p>
+<p>
+※ もちろん SampleScene をダブルクリックすればいつでもサンプルシーンに戻れます
+</p>
+</div>
+
+</div>
+
+<br>
+<br>
+<h3>
+2. 背景色の変更
+</h3>
 
 <p>
 さて折角シーンを新規作成したので、気分転換も兼ねて背景色も変えてみましょう。
-<br>
-デフォルトでは空が表示されていますが、ヒエラルキーの Main Camera をクリックし、インスペクタの Camera → Clear Flags を Solid Color にすると空が消えて単色の背景になります。
-<br>
-次に Background をクリックすると<a href="./img/page06-fig1.png">色選択ウィンドウ</a>が出ますので真っ黒(RGBA を 0、0、0、0)にして下さい。
 </p>
 
 <p>
-なおシーンビューでは空は表示されたままになります。
+なおデフォルトで表示されている空画像の事を「<b>スカイボックス(skybox)</b>」と言います。
 <br>
-空の画像を変更したい場合は skybox という種類のアセットを変更する必要がありますが、自分で skybox を用意するのは面倒なので今回は説明を省略します。
+もしスカイボックスの画像を変更したい場合は<a href="./page09.html">次のページ</a>で説明するアセットストアで skybox で検索してみて下さい。
+<br>
+自分好みのスカイボックスが見つかると思います。
 </p>
+
+<p>
+では以下の手順でゲームビューの背景からスカイボックスを消して背景色を変更してみましょう。
+<br>
+シーンビューではスカイボックスが表示されたままなので慌てなくて結構です。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの Main Camera をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> インスペクタの Camera → Clear Flags を Solid Color にすると空が消えて単色の背景に変わる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Background をクリックすると色選択ウィンドウ(図1)が出るので好きな色にセットする
+</p>
+<p>
+<b>図1. 色選択ウィンドウ</b>
+</p>
+<img src="./img/page06-fig1.png" alt="">
+</div>
+
+</div>
+
 
 <br>
 <script>PreNext(8,9)</script>

@@ -20,48 +20,51 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ゲームオブジェクトを着色したりテクスチャを貼りたい時は「マテリアル(Material)」と呼ばれるアセット(※)を作成してゲームオブジェクトにセットする必要があります。
-</p>
-
-<p>
-※ Unity ではゲームを作るために必要な 3D モデル、画像、音楽、その他のデータを「アセット(Asset)」と呼びます
-</p>
-
-<p>
-では早速マテリアルを作ってみましょう。
-</p>
-
-<p>
-Unity エディタの下にあるアセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Material を選びます。
+Unity ではゲームを作るために必要な 3D モデル、画像、音楽、その他のデータを引っくるめて「<b>アセット(Asset)</b>」と呼びます。
 <br>
-するとアセットフォルダ内に「New Material」というデータが出来ますので「HAKO Material」に名前を変更して下さい。
+ゲームオブジェクトを着色したりテクスチャを貼りたい時は「マテリアル(Material)」と呼ばれるアセットを作成してゲームオブジェクトにセットする必要があります。
+<br>
+ここではそのマテリアルの使い方を学びましょう。
 </p>
+
 <p>
-※ <a href="./page09.html">Physic Material</a> という名前が似ている方を選ばないよう気を付けて下さい
+※ <a href="../text03/page04.html">物理マテリアル(Physic Material)</a> という名前が似ているアセットがあるので、そちらを選ばないよう気を付けて下さい
 </p>
 
 <p>
-次に「HAKO Material」をクリックしてインスペクタを表示し、Albedo という文字列の隣の白い四角をクリックすると色選択ウィンドウが出てきますので、今回は赤色(RGBA を 255、0、0、255) にして下さい(図1)
+では早速以下の手順でマテリアルを作成して下さい。
 </p>
 
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Materials」という名前に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Material を選ぶ ※ Physic Material の方を選ばないよう注意
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダ内に「New Material」というアセットが出来るので「HAKO Material」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> HAKO Material をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Albedo という文字列の隣の白い四角をクリックすると色選択ウィンドウが出てくるので、赤色(RGBA = (255、0、0、255) )に設定する(図1)
+</p>
 <p>
 <b>図1. 色選択ウィンドウで赤色をセット</b>
 </p>
-
 <img src="./img/page06-fig1.png" alt="">
-
-<br>
-<br>
 <p>
-色を設定したらアセットフォルダ内の「HAKO Material」をドラッグしてヒエラルキーの「HAKO」の上にドロップして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> HAKO Material をドラッグしてヒエラルキーの HAKO の上にドロップすると HAKO が赤色に変わる
 <br>
-すると HAKO が赤色に変わります。
+<span class="olradio"><input type="radio" name="p1"></span> 同様に Materials フォルダ内に「HAKO2 Material」も作って HAKO2 を青(RGBA = (0、0、255、255)) に変更する
+
 </p>
+</div>
+
+</div>
 
 <p>
-では同様に「HAKO2 Material」も作って HAKO2 を青(RGBA を 0、0、255、255) にして下さい。
-<br>
-すると図2の様になります。
+以上を実行すると図 2 の様になります。
 </p>
 
 <p>
@@ -69,7 +72,6 @@ Unity エディタの下にあるアセットフォルダの空いている部�
 </p>
 
 <img src="./img/page06-fig2.png" alt="">
-
 
 <br>
 <br>
@@ -86,15 +88,37 @@ Unity エディタの下にあるアセットフォルダの空いている部�
 <img src="./img/Texture.png" alt="">
 
 <p>
-上の図3(Texture.png)を保存したら OS のダウンロードフォルダを開き、Unity エディタのアセットフォルダに保存した Texture.png をドラッグ＆ドロップしてください。
-<br>
-するとアセットフォルダに「Texture」というアセットが出来ますので名前を「TAMA Image」に変更してください(名前の上をマウス長押しするか、右クリック → Rename で名前の変更が出来ます)。
+では以下の手順でテクスチャを貼ってみましょう。
 </p>
 
+<div class="info">
+
+<div class="olradio"> 
 <p>
-次にアセットフォルダ内に「TAMA Material」を作成し、インスペクタの Albedo の文字列の先頭にある◎をクリックして画像選択ウィンドウを開き、「TAMA Image」を選択して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 図3(Texture.png)を保存したら OS のファイラ(エクスプローラや Finder など)でダウンロードフォルダを開く
 <br>
-あとは「TAMA Material」を TAMA にセットすると図4の様にテクスチャが TAMA に貼られます。
+<span class="olradio"><input type="radio" name="p1"></span> Unity エディタのアセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Images」という名前に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Images フォルダの中に入り、ダウンロードした Texture.png をドラッグ＆ドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Images フォルダ内に「Texture」というアセットが出来るので、アセット名を「TAMA Image」に変更する
+</p>
+<p>
+※ アセット名の上をマウス長押しするか、右クリック → Rename で名前の変更が出来ます
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Materials フォルダ内に「TAMA Material」を作成する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Material のインスペクタの Albedo の文字列の先頭にある◎をクリックして画像選択ウィンドウを開き、TAMA Image を選択する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA Material をドラッグしてヒエラルキーの TAMA の上にドロップする
+</p>
+</div>
+
+</div>
+
+<p>
+すると図4の様にテクスチャが TAMA に貼られます。 
 <br>
 なおゲームビューよりもシーンビューで拡大表示した方が見やすいと思います。
 </p>
@@ -102,7 +126,6 @@ Unity エディタの下にあるアセットフォルダの空いている部�
 <p>
 <b>図4. テクスチャを貼った状態(シーンビューで拡大表示)</b>
 </p>
-
 <img src="./img/page06-fig3.png" alt="">
 
 <p>
