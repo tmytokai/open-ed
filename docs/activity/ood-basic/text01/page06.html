@@ -58,24 +58,36 @@ public World Actor.getWorld()
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1: 文字列 "HOGE" を座標 (100,100) に表示</b>
+<input type="checkbox"><b>ソース 1: 文字列 "HOGE" を座標 (100,50) に表示</b>
 <pre class="wrap">
 getWorld().showText( "HOGE", 100, 50 );
 </pre>
 </div>
 
 <p>
-ただし MyWorld の様な World クラスのサブクラスの場合は showText が継承されていますので、ソース 2 の様に getWorld を使わず直接 showText を呼び出せます。
+文字列を消したい場合は、ソース 2 の様に文字列として "" を指定するだけです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 2: World のサブクラス内で文字列を表示</b>
+<input type="checkbox"><b>ソース 2: 座標 (100,50) に表示した文字列を消す</b>
+<pre class="wrap">
+getWorld().showText( "", 100, 50 );
+</pre>
+</div>
+
+<p>
+なお MyWorld の様な World クラスのサブクラスの場合は showText が継承されていますので、ソース 3 の様に getWorld を使わず直接 showText を呼び出せます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 3: World のサブクラス内で文字列を表示</b>
 <pre class="wrap">
 ※ getWorld メソッドを使う必要が無い
 
 showText( "HOGE", 100, 50 );
 </pre>
 </div>
+
 
 
 <br>
