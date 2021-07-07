@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. 効果音・BGM</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここでは効果音やBGMを鳴らしてみたいと思います。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Sound Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Create Empty で GameObject というゲームオブジェクトを新規作成し、名前を「PROGRAM」にする (Position は適当で良いです) 
+</p>
+</div>
+
+</div>
+
+<p>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Sound Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> PROGRAM に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Sound Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. サウンドファイルの取り込み
+</h3>
+
+
+<p>
+効果音やBGMを鳴らす前にサウンドファイルを用意する必要があります。
+<br>
+Web で検索し、爆発とかレーザー音みたいに効果音として適当なサウンドファイルを 2 つ用意して下さい。
+<br>
+また BGM として使うサウンドファイルを 1 つ用意して下さい。
+<br>
+ファイル形式は Wave か MP3 が無難だと思います。
+</p>
+
+<p>
+サウンドファイルを 3 つ用意したら、以下の手順で Unity にアセットとして取り込みます
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> OS のファイラ(エクスプローラや Finder など)でサウンドファイルのあるフォルダを開く 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Unity エディタのアセットフォルダの空いている部分を右クリックしてメニューを表示し、Create → Folder でフォルダを新規作成し、「Sounds」という名前に変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Sounds フォルダの中に入り、１つ目のファイルをドラッグ＆ドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 名前を「Sound1」に変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に 2 つ目のファイルも Unity に取り込んで「Sound2」に名前を変更する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 同様に BGM 用のファイルも Unity に取り込んで「BGM」に名前を変更する
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでで Sounds フォルダが図 1 の様な画面になっていればOKです。
+</p>
+
+<br>
+<p>
+<b>図1. サウンドファイルの取り込み</b>
+</p>
+<img src="./img/page06-fig1.png" alt="">
+
+<br>
+<br>
+<h3>
+3. 効果音 を鳴らす
+</h3>
+
+<p>
+効果音を鳴らすためには Audio Source コンポーネントを PROGRAM にアタッチし、Audio Source Play One Shot ユニットを使います。
+<br>
+例えば図 2 のスクリプトを実行して下さい。
+<br>
+Fire1 ボタンを押すと Sound1 が、Fire2 ボタンを押すと Sound2 が鳴ります。
+<br>
+なお Audio Source Play One Shot ユニットの Clip の欄に Sounds フォルダから Sound1 と Sound2 をドロップしてから実行して下さい。
+</p>
+
+<br>
+<p>
+<b>図2. 効果音を鳴らすスクリプト</b>
+</p>
+<img src="./img/page06-fig2.png" alt="">
+
+<br>
+<br>
+<h3>
+4. BGM を鳴らす
+</h3>
+
+<p>
+BGM に関しては Audio Source コンポーネントに再生を丸投げした方が楽です。
+<br>
+以下の手順で設定し、実行ボタンを押すと BGM が再生されます。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの PROGRAM をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Audio Source コンポーネントの AudioClip の None と書いてある欄に Sounds フォルダにある BGM をドラッグ＆ドロップする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Loop をチェックする。すると BGM がループ再生される
+</p>
+</div>
+
+</div>
+
+<p>
+上の設定後の Audio Source コンポーネントは次のようになります。
+</p>
+
+<br>
+<p>
+<b>図3. Audio Source コンポーネントで BGM を鳴らす</b>
+</p>
+<img src="./img/page06-fig3.png" alt="">
+
+
+<br>
+<script>PreNext(6,6)</script>
+</body>
+</html>
