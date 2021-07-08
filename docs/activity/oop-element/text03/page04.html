@@ -29,6 +29,11 @@
 ジェネリクスを使うと、引数やフィールドの型が違うだけでほとんど同じ内容のメソッドやクラスを何度も書く必要がなくなるので、ソースコードがスッキリしてバグの混入を防げます。
 </p>
 
+<br>
+<h3>
+1. ジェネリクスメソッド
+</h3>
+
 <p>
 はじめに、メソッドにジェネリクスを適用する方法について説明します。
 <br>
@@ -38,7 +43,7 @@
 <p>
 それではソース 1 を見て下さい。
 <br>
-ソース 1では String 型と Integer 型を引数として持つ print メソッドをオーバロードして作っています。
+ソース 1では String 型と Integer 型を引数として持つ show メソッドを<a href="./page02.html">オーバロード</a>して作っています。
 </p>
 
 <div class="info">
@@ -47,18 +52,18 @@
 
 public class Main{
 
-    public static void print( String a ){
+    public static void show( String a ){
         System.out.println( a );
     }
 
-    public static void print( Integer a ){
+    public static void show( Integer a ){
         System.out.println( a );
     }
 
     public static void main(String[] args) {
 
-        print("hoge");
-        print(123);
+        show("hoge");
+        show(123);
     }
 }
 
@@ -72,25 +77,25 @@ hoge
 
 
 <p>
-ところが print メソッドは引数の型が違うだけで中身は同じなので2回書くのは無駄な気がします。
+ところが show メソッドは引数の型が違うだけで中身は同じなので2回書くのは無駄な気がします。
 <br>
-そこで以下の様に print をジェネリクスメソッドに書き換えます。
+そこで以下の様に show メソッドをジェネリクスメソッドに書き換えます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 2 : print をジェネリクスメソッドにした場合 </b>
+<input type="checkbox"><b>ソース 2 : show メソッドをジェネリクスメソッドにした場合 </b>
 <pre class="wrap">
 
 public class Main{
 
-    public static &lt;T&gt; void print( T a ){
+    public static &lt;T&gt; void show( T a ){
         System.out.println( a );
     }
 
     public static void main(String[] args) {
 
-        print("hoge");
-        print(123);
+        show("hoge");
+        show(123);
     }
 }
 
@@ -102,13 +107,13 @@ hoge
 </div>
 
 <p>
-すると print メソッドは1つしか定義してないのに全く同じ出力結果が得られました。
+すると show メソッドは1つしか定義してないのに全く同じ出力結果が得られました。
 </p>
 
 <p>
 では詳しく説明します。
 <br>
-ソース 2 の print メソッドで、戻り値(void)の前にある &lt;T&gt; を「<b>型パラメータ</b>」や「<b>仮パラメータ</b>」や「<b>仮型パラメータ</b>」などと呼び、型パラメータが指定されているメソッドをジェネリクスメソッドと言います。
+ソース 2 の show メソッドで、戻り値(void)の前にある &lt;T&gt; を「<b>型パラメータ</b>」や「<b>仮パラメータ</b>」や「<b>仮型パラメータ</b>」などと呼び、型パラメータが指定されているメソッドをジェネリクスメソッドと言います。
 <br>
 型パラメータを指定すると特定の型の代わりに型パラメータを型名として使えるようになります。
 <br>
@@ -119,12 +124,16 @@ hoge
 </p>
 
 <p>
-ところでソース 2 の main メソッドにある print("hoge") と print(123) が ソース1と変わってないことに注目してください。
+ところでソース 2 の main メソッドにある show("hoge") と show(123) が ソース1と変わってないことに注目してください。
 <br>
 大抵のオブジェクト指向プログラミング言語ではジェクリクスメソッドを呼び出す時に型を自動認識してくれるので、呼び出し時にわざわざ引数の実際の型を指定する必要はありません。
 </p>
 
 <br>
+<h3>
+2. ジェネリクスクラス
+</h3>
+
 <p>
 次に、クラスにジェネリクスを適用した「<b>ジェネリクスクラス</b>」(または「<b>ジェネリッククラス</b>」、「<b>総称型クラス</b>」)について説明します。
 <br>
