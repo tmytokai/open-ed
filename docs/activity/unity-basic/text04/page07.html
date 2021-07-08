@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>7. ジョイント</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではゲームオブジェクト同士を連結する「<b>ジョイント(Joint)</b>」について説明します。
+</p>
+
+<p>
+ジョイントには色々な種類があります。
+<br>
+すでに<a href="../text03/page06.html">スプリングジョイント(Spring Joint)</a>については説明済なので、ここでは固定ジョイント(Fixed Joint)とヒンジジョイント(Hinge Joint)について説明します。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+<br>
+<a href="../text03/page06.html">スプリングジョイント</a>の時と同様に天井と、天井に連結する板と、板にぶつける玉を用意します。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Joint Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「TENJYO」、Position を (0,6,0)にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO に Rigidbody コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「ITA」、Position を (0,0,0)、Scale を (5,5,0.1) にする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ITA に Rigidbody をアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Sphere で球を新規作成し、名前を「TAMA」、Position を (0,0,-2)にする 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Rigidbody をアタッチする
+</p>
+</div>
+
+</div>
+
+<p>
+次に TENJYO を空間に固定して動かないようにします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> TENJYO のインスペクタを表示して Rigid Body の Use Gravity のチェックを外す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Position の x,y,z にチェックを入れる
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Constraints → Freeze Rotation の x,y,z にチェックを入れる
+</p>
+</div>
+
+</div>
+
+<p>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Joint Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> TAMA に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Joint Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+
+<br>
+<h3>
+2. 固定ジョイント(Fixed Joint)
+</h3>
+
+
+<p>
+固定ジョイント(Fixed Joint)は文字通りゲームオブジェクト同士を固定して連結する機能です。
+<br>
+親子関係と似ていますが簡単に連結を解除出来るので使い勝手が良いです。
+</p>
+
+<p>
+さて具体的には Fixed Joint コンポーネントを連結するどちらかのゲームオブジェクトにアタッチして使います。
+<br>
+では以下の手順で TENJYO と ITA を繋いで下さい。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ITA のインスペクタを開いて Add Component ボタンをおす
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Physics → Fixed Joint で Fixed Joint コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TENJYO をドラッグして Fixed Joint の Connected Body の右にある None と書いてあるセルにドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変わったことを確認する
+</p>
+
+</div>
+
+</div>
+
+<p>
+では実行しても ITA が重力で下に落ちないことを確認して下さい。
+<br>
+なお「<b>ジョイントは透明で目では見えません</b>」ので、何も表示されなくても慌てなくて良いです。
+</p>
+
+<p>
+次に連結の強さの設定を行います。
+<br>
+インスペクタの Fixed Joint の設定の Break Force の欄に指定した数字以上の力(ニュートン)を与えると連結が解除されます。
+<br>
+デフォルトでは無限大(Infinity)になっているので、試しにこれを 9 にして実行して下さい。
+<br>
+すると連結が切れて ITA が下に落ちると思います。
+</p>
+<p>
+※ ITA の重さが 1 Kg で重力加速度が 9.81 だから下方向に 9.81 ニュートンの力がかかってるため
+</p>
+
+<p>
+次は TAMA を ITA にぶつけて連結を切ってみます。
+<br>
+まず Break Force の値を 9 から 10 に変更して TENJYO と ITA がギリギリ繋がっている状態にします。
+<br>
+それから図 1 のスクリプトを実行して下さい。
+<br>
+TAMA が ITA の方に飛んでいき、両方がぶつかると TENJYO と ITA の連結が切れます。
+</p>
+
+<br>
+<p>
+<b>図1. 玉をぶつけて固定ジョイントの連結を解除</b>
+</p>
+<img src="./img/page07-fig1.png" alt="">
+
+
+
+<br>
+<h3>
+3. ヒンジジョイント(Hinge Joint)
+</h3>
+
+<p>
+次はヒンジジョイントを使ってみます。
+<br>
+ヒンジジョイントでゲームオブジェクトを繋ぐと、ゲームオブジェクトがヒンジ(日本語で言えば蝶番(ちょうつがい))で繋がっているような動きをします。
+<br>
+ヒンジの中心位置や回転軸の方向は自由に決めれるので、上手く使えば扉、鎖、振り子、シーソーなど様々な物を作ることが出来ます。
+</b>
+
+<p>
+では以下の手順で早速使ってみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ITA にアタッチしている固定ジョイントを削除する。Fixed Joint コンポーネントの右にある三点リーダをクリック → Remove Component を選択する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Physics → Hinge Joint で Hinge Joint コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TENJYO をドラッグして Hinge Joint の Connected Body の右にある None と書いてあるセルにドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> None の表示が TENJYO に変わったことを確認する
+</p>
+
+</div>
+
+</div>
+
+<p>
+では実行して下さい。
+<br>
+ボールが当たると ITA の上にヒンジが繋がっている様な振り子運動をすると思います。
+</p>
+
+<p>
+次にヒンジの中心位置や回転軸の方向を変えてみましょう。
+<br>
+ヒンジの中心位置や回転軸の方向はシーンビューで確認する事ができます。
+<br>
+シーンビューに切り替えてヒエラルキーで ITA をクリックすると(小さくて物凄く分かり辛いですが)赤い矢印が表示されます(図 2)。
+<br>
+矢印の中心がヒンジの中心位置、矢印の向きが回転軸の方向です。
+</p>
+
+<br>
+<p>
+<b>図2. 赤い矢印がヒンジの中心位置と回転軸方向を示す</b>
+</p>
+<img src="./img/page07-fig2.png" alt="">
+
+
+<br>
+<p>
+さてヒンジの中心位置は Hinge Joint の設定項目である Anchor の x,y,z で指定します。
+<br>
+ただし x,y,z で指定する座標はローカル座標系なので、ワールド座標系に換算したい場合は scale の値をかける必要があります。
+<br>
+例えば現在は ITA の Anchor は (0, 0.5, 0) 、 scale は (5, 5, 0.1) となっていると思います。
+<br>
+よってヒンジの現在の中心座標はワールド座標系では (0*5, 5*0.5, 0*0.1) = (0, 2.5 ,0) となります。
+</p>
+
+<p>
+またヒンジの回転軸の方向は Hinge Joint の設定項目である Axis で指定します。
+<br>
+今は Axis = (1, 0, 0) となっているので x 軸方向が回転軸となっています。
+</p>
+
+<p>
+では試しに 
+</p>
+
+<p>
+Anchor = (0.5, 0.5, 0)  ※ ワールド座標系だと (2.5, 2.5, 0 )
+</p>
+
+<p>
+Axis = (0, 1, 0)  ※ y 軸方向
+</p>
+
+<p>
+にして下さい。
+<br>
+すると(相変わらず分かり辛いですが)シーンビューの赤い矢印が図 3 の様に変わると思います。
+</p>
+
+<br>
+<p>
+<b>図3. ヒンジの中心位置と回転軸方向を変更</b>
+</p>
+<img src="./img/page07-fig3.png" alt="">
+
+<p>
+では実行ボタンを押して TAMA を ITA に当ててください。
+<br>
+回転扉のようにヒンジを中心にグルグル回り始めます。
+</p>
+
+<p>
+ヒンジジョイントは大変高性能で、回転軸にバネやモーターを付けたり、回転角度を制限したりすることも可能です。
+<br>
+ネット等を調べて色々試してみて下さい。
+</p>
+
+<br>
+<script>PreNext(7,7)</script>
+</body>
+</html>
