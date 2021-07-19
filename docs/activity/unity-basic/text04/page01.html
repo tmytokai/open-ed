@@ -175,14 +175,14 @@ TAMA1 がぶつかったら JIBUN が消えます。
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> もう一度 Tags の + を押し、New Tag Name に「tama2」と入れて Save ボタンを押す。するとリストに tama2 が追加される。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 クリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama1 を選択する(図5)
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 をクリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama1 を選択する(図5)
 </p>
 <p>
 <b>図5. TAMA1 に tama1 タグを付ける</b>
 </p>
 <img src="./img/page01-fig5.png" alt="">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA2 クリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama2 を選択する
+<span class="olradio"><input type="radio" name="p1"></span> 同様にヒエラルキーにある TAMA2 をクリックしてインスペクタを表示し、Tag と書いてある隣の「Untagged」をクリックし、tama2 を選択する
 </p>
 </div>
 
@@ -205,6 +205,73 @@ TAMA1 がぶつかったら TAMA1 が、TAMA2 がぶつかったら JIBUN が消
 </p>
 
 <img src="./img/page01-fig6.png" alt="">
+
+
+<br>
+<br>
+<h3>
+6. レイヤー設定をして当たり判定を無効にする
+</h3>
+
+<p>
+ゲームオブジェクトにレイヤーを設定し、特定のレイヤー間で当たり判定を無効にすることが出来ます。
+</p>
+
+<p>
+まず例として、以下の手順で TAMA1 に tama1layer、TAMA2 に tama2layer というレイヤーを設定してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 または TAMA2 をクリックしてインスペクタを表示する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Layer と書いてある隣の「Default」をクリックし、一番下にある Add Layer... を選択する。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Tags ＆ Layers 画面の User Layer〜 のうち空いているセル(以下の例では User Layer 6と7) に「tama1layer」、「tama2layer」を入れる(図7)。するとリストに tama1layer と tama2 layer が追加される。
+</p>
+<p>
+<b>図7. 新規レイヤーの作成</b>
+</p>
+<img src="./img/page01-fig7.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーにある TAMA1 をクリックしてインスペクタを表示し、Layer と書いてある隣の「Default」をクリックし、tama1layer を選択する(図8)
+</p>
+<p>
+<b>図8. TAMA1 のレイヤーを tama1layer を設定する</b>
+</p>
+<img src="./img/page01-fig8.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 同様にヒエラルキーにある TAMA2 をクリックしてインスペクタを表示し、Layer と書いてある隣の「Default」をクリックし、tama2layer を選択する。
+</p>
+</div>
+
+</div>
+
+<p>
+これで準備が出来たので、JIBUN と TAMA1 はぶつかるけど、TAMA2 とはぶつからないようにしてみましょう。
+<br>
+まず
+</p>
+<p>
+Edit メニュー → Project Settings → Physics → Layer Collision Matrix 
+</p>
+
+<p>
+で当たり判定の設定画面を表示してください。
+<br>
+そこのチェックがついているレイヤー間で当たり判定が生じますので、Default (JIBUNのレイヤー) と Tama2layer のチェックを外します
+<br>
+あとは実行すると TAMA2 とはぶつからなくなっているはずです。
+</p>
+
+<p>
+<b>図9. JIBUN (Default) と TAMA2 (tama2layer) の当たり判定を無効にする</b>
+</p>
+
+<img src="./img/page01-fig9.png" alt="">
+
 
 
 
