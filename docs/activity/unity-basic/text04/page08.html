@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>8. スライダー</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [4] その他</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではスライダーを使って値を取得したりセットしたりしてみます。
+</p>
+
+<br>
+<h3>
+1. 準備
+</h3>
+
+<p>
+演習を行う前に準備をしましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> アセットフォルダの Scenes フォルダの中に<a href="../text01/page08.html">シーンを新規作成</a>し、シーン名を「Slider Scene」にする。背景色は任意で構わない
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 新規作成したシーンへ移動する
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → Create Empty で GameObject というゲームオブジェクトを新規作成し、名前を「PROGRAM」にする (Position は適当で良いです) 
+</p>
+</div>
+
+</div>
+
+<p>
+次に<a href="../text02/page02.html">こちら</a>を参考にして Visual Scripting のセットアップもします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダの中に入り、空いている部分を右クリックしてメニューを表示し、Create → Visual Scripting → Script Graph を選ぶ
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Scripts フォルダ内に「New Script Graph」というアセットが出来るので「Slider Script」に名前を変更する 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> PROGRAM に Script Machine コンポーネントをアタッチする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Script Machine の Graph の None と書いてあるセルに Slider Script をドロップする
+</p>
+</div>
+
+</div>
+
+
+<br>
+<h3>
+2. スライダーの作成
+</h3>
+
+<p>
+スライダーも Unity UI の一種で、スライドを表示して値を取得します。
+<br>
+では早速以下の手順でスライダを作成してみましょう。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → UI → Slider を選択すると Canvas というフォルダと Slider というゲームオブジェクトが出来る。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Slider を MySlider に名前を変更する
+</p>
+</div>
+
+</div>
+
+<p>
+ここまでで図 1 の様なスライダーが画面上に出ていると思います。
+</p>
+
+<p>
+<b>図1. スライダー</b>
+</p>
+<img src="./img/page08-fig1.png" alt="">
+
+<p>
+なお座標はテキストの時の様に<a href="./page05.html">Rect Transform コンポーネント</a>を使って位置を変更します。
+<br>
+また色や形なども調整可能ですのでネットで調べて色々試して下さい。
+</p>
+
+<p>
+さてスライダーの範囲や初期値はスライダーの中にある Slider コンポーネントの Min Value、Max Value、Value で調整可能です(図2)。
+<br>
+今回は最小値 0、最大値10、初期値 5 として下さい。
+</p>
+
+<p>
+<b>図2. 範囲、初期値を最小値 0、最大値10、初期値 5 にする</b>
+</p>
+<img src="./img/page08-fig2.png" alt="">
+
+
+<br>
+<h3>
+3. スライダーの値を取得する
+</h3>
+
+<p>
+スクリプトからスライダーの値を取得するには Slider Get Value ユニットを使います。
+<br>
+例えば図 3 を実行すると現在値がログに表示されます。
+<br>
+なお<a href="./page05.html">文字列表示の時と同様</a>に Game Object Find ユニットを使って MySlider を検索する必要があります。
+</p>
+
+<p>
+<b>図3. 現在値の取得</b>
+</p>
+<img src="./img/page08-fig3.png" alt="">
+
+<br>
+<h3>
+4. スライダーの値をセットする
+</h3>
+
+<p>
+逆にスクリプトからスライダーの値をセットするには Slider Set Value ユニットを使います。
+<br>
+例えば図 4 を実行するとスライダーが左右に移動します。
+<br>
+なお Mathf Ping Pong ユニットは時間毎に 0 〜 Length までの数字を増減させるユニットで、Time Get Time ユニットなどと組み合わせて使います。
+</p>
+
+<p>
+<b>図4. 値のセット</b>
+</p>
+<img src="./img/page08-fig4.png" alt="">
+
+
+<br>
+<script>PreNext(8,8)</script>
+</body>
+</html>
