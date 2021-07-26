@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>10. アセットストア</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Unity 入門</a></li>
+<li>学習項目: [1] Unity の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Unity Technologies が運営している<a href="https://assetstore.unity.com/">アセットストア</a>から無料・有料を問わず様々なアセットをダウンロードして利用することが出来ます。
+<br>
+ここでは練習としてアセットストアから Unity Technologies が用意している「<b>Standard Assets</b>」というアセットをダウンロードして使ってみましょう。
+</p>
+
+<p>
+※ なお Standard Assets はもうメンテナンスしていないらしく、Unity 2021 以降でインポートすると様々なエラーが表示されるので近いうちに使えなくなる可能性があります
+</p>
+
+<p>
+まず以下の手順でマイアセット(My Assets)に Standard Assets を登録し、PC にダウンロードします。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> (サインインしてなければ) Unity ハブを開いて Unity ID にサインインする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Webブラウザで<a href="https://assetstore.unity.com/">アセットストア</a>にアクセスする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> (サインインしてなければ) Webブラウザ上でも Unity ID にサインインする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「Standard Assets」で検索して「Standard Assets (for Unity 2018.4)」のページを開く
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「Add to My Assets」または「マイアセットに追加」ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 使用許諾が表示されたら Accept ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Unity で開くかどうか聞いてくるので、「Open in Unity」または「Unity で開く」ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Web ブラウザから Unity エディタにアプリが切り替わり、パッケージマネージャ(Package Manager)ダイアログ内にマイアセットが開いて Standard Assets が表示される
+</p>
+<p>
+※ もしパッケージマネージャが開かない場合は Unity エディタの Window メニュー → Package Manager を選択し、「Package Manager」と書いてあるタブの下の「Packages:〜」と書いてある欄を「Pakages: My Assets」に切り替えるとマイアセットが表示されます(図1)
+</p>
+<p>
+<b>図1. 「Pakages: My Assets」に切り替えるとマイアセットが表示される</b>
+</p>
+<img src="./img/page10-fig1.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 右下にある「Download」ボタンを押すと PC に Standard Assets がダウンロードされる
+</div>
+
+</div>
+
+<p>
+では次に Standard Assets をプロジェクトに取り入れて 3D の飛行機を画面内に表示してみます。
+</p>
+
+<div class="info">
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> パッケージマネージャの右下にある Import ボタンを押す
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> どのファイルを取り入れるか聞いてくるのでそのまま「Import」ボタンを押す。すると全てのファイルをプロジェクトに取り入れる。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> するとアセットフォルダに「Standard Assets」というフォルダが出来る
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Standard Assets → Vehicles → Aircraft → Prefabs を開く(図 2)
+</p>
+<p>
+<b>図2. Standard Assets の中身</b>
+</p>
+<img src="./img/page10-fig2.png" alt="">
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Prefabs フォルダに含まれているファイルを適当に選んで(例えば AircraftJet.prefab)ヒエラルキーにドラッグ＆ドロップする
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> するとゲームビューに 3D モデルの飛行機が表示されるので、Position や Rotation を適当に調整する
+</p>
+</div>
+
+</div>
+
+<p>
+この他にも色々なアセットがありますので、色々試してみて下さい。
+</p>
+
+
+<br>
+<script>PreNext(10,10)</script>
+</body>
+</html>

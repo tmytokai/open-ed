@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>9. アセットストア</title>
+<script src="../../../mathjax.js"></script>
+<title>9. 親子関係とワールド・ローカル座標系</title>
 </head>
 <body>
 
@@ -20,87 +21,137 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Unity Technologies が運営している<a href="https://assetstore.unity.com/">アセットストア</a>から無料・有料を問わず様々なアセットをダウンロードして利用することが出来ます。
+ゲームオブジェクト間に「<b>親子関係</b>」を設定すると、親を移動させたり回転させたりするだけで子供も自動的に移動したり回転したりするようにできます。
 <br>
-ここでは練習としてアセットストアから Unity Technologies が用意している「<b>Standard Assets</b>」というアセットをダウンロードして使ってみましょう。
+この際に「<b>ワールド座標系</b>」「<b>ローカル座標系</b>」という新しい概念も出てきますので併せて説明します。
 </p>
 
-<p>
-※ なお Standard Assets はもうメンテナンスしていないらしく、Unity 2021 以降でインポートすると様々なエラーが表示されるので近いうちに使えなくなる可能性があります
-</p>
+
+<br>
+<h3>
+1. 親子関係の設定
+</h3>
 
 <p>
-まず以下の手順でマイアセット(My Assets)に Standard Assets を登録し、PC にダウンロードします。
+親子関係の設定について説明する前にまず立方体を2つ作ります。
+<br>
+以下の手順に従って画面上に配置して下さい。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> (サインインしてなければ) Unity ハブを開いて Unity ID にサインインする
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「OYA」、Position を (1,1,0) 、rotation を (0,0,45)にし、<a href="./page06.html">HAKO Material</a>を使って赤色にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Webブラウザで<a href="https://assetstore.unity.com/">アセットストア</a>にアクセスする
+<span class="olradio"><input type="radio" name="p1"></span> 同様にヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「KO」、Position を (0,0,0) 、rotation を (0,0,0)にし、<a href="./page06.html">HAKO2 Material</a>を使って赤色にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (サインインしてなければ) Webブラウザ上でも Unity ID にサインインする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「Standard Assets」で検索して「Standard Assets (for Unity 2018.4)」のページを開く
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 「Add to My Assets」または「マイアセットに追加」ボタンを押す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 使用許諾が表示されたら Accept ボタンを押す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Unity で開くかどうか聞いてくるので、「Open in Unity」または「Unity で開く」ボタンを押す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Web ブラウザから Unity エディタにアプリが切り替わり、パッケージマネージャ(Package Manager)ダイアログ内にマイアセットが開いて Standard Assets が表示される
 </p>
+</div>
+
+</div>
+
 <p>
-※ もしパッケージマネージャが開かない場合は Unity エディタの Window メニュー → Package Manager を選択し、「Package Manager」と書いてあるタブの下の「Packages:〜」と書いてある欄を「Pakages: My Assets」に切り替えるとマイアセットが表示されます(図1)
+ここまでで次の様な画面になります。
 </p>
+
 <p>
-<b>図1. 「Pakages: My Assets」に切り替えるとマイアセットが表示される</b>
+<b>図1. OYA(赤) と KO(青) を作成</b>
 </p>
+
 <img src="./img/page09-fig1.png" alt="">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 右下にある「Download」ボタンを押すと PC に Standard Assets がダウンロードされる
-</div>
 
-</div>
 
 <p>
-では次に Standard Assets をプロジェクトに取り入れて 3D の飛行機を画面内に表示してみます。
+次に以下の様にして OYA を親、KO を子供に設定します。
 </p>
 
 <div class="info">
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> パッケージマネージャの右下にある Import ボタンを押す
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> どのファイルを取り入れるか聞いてくるのでそのまま「Import」ボタンを押す。すると全てのファイルをプロジェクトに取り入れる。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> するとアセットフォルダに「Standard Assets」というフォルダが出来る
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Standard Assets → Vehicles → Aircraft → Prefabs を開く(図 2)
+<span class="olradio"><input type="radio" name="p1"></span> ヒエラルキーの KO を OYA の上にドロップする
 </p>
+</div>
+
+</div>
+
 <p>
-<b>図2. Standard Assets の中身</b>
+すると OYA の右下に KO が移動して親子関係になり(図1)、OYA の Position や Rotation の値を変更すると HAKO も一緒に移動するようになります。
+<br>
+試しに OYA の Position や Rotation を変更してみて下さい。
 </p>
+
+<p>
+<b>図2. OYA と KO を親子関係にする</b>
+</p>
+
 <img src="./img/page09-fig2.png" alt="">
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> Prefabs フォルダに含まれているファイルを適当に選んで(例えば AircraftJet.prefab)ヒエラルキーにドラッグ＆ドロップする
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> するとゲームビューに 3D モデルの飛行機が表示されるので、Position や Rotation を適当に調整する(図3)
-</p>
-</div>
-
-</div>
-
-<p>
-この他にも色々なアセットがありますので、色々試してみて下さい。
-</p>
 
 
 <br>
-<script>PreNext(9,9)</script>
+<br>
+<h3>
+2. ワールド座標系
+</h3>
+
+<p>
+ヒエラルキーの直下にあるゲームオブジェクト、例えば今回の場合なら OYA の座標や回転角度(PositionとRotation)の事を「<b>ワールド座標系</b>」と言います。
+<br>
+ワールド座標系については今までも散々扱ってきたので特に説明はいらないと思います。
+</p>
+
+
+<br>
+<br>
+<h3>
+3. ローカル座標系
+</h3>
+
+<p>
+親子関係で子供のゲームオブジェクトの座標の座標や回転角度(PositionとRotation)の事を「<b>ローカル座標系</b>」と言います。
+<br>
+ローカル座標系は親の座標や回転角度を基準にして決まる相対的な座標となります。
+<br>
+と言ってもピンと来ないと思いますので具体的に演習しながら説明していきます。
+</p>
+
+<p>
+まず OYA の Position を (1,1,0) 、rotation を (0,0,45) に戻し、ヒエラルキーの KO をクリックして KO の Positoin と Rotation を表示して下さい(図3)。
+<br>
+最初 KO を作った時は Position を (0,0,0) 、rotation を (0,0,0)にしたはずなのに良く分からない数字になっていると思います。
+</p>
+
+<p>
+<b>図3. KO の座標と回転角度(ローカル座標系)</b>
+</p>
+
+<img src="./img/page09-fig3.png" alt="">
+
+<p>
+なぜ KO の Position や rotation が上の様な数字になったかについては、OYA の Position を (0,0,0) 、Rotation を (0,0,0) にし、Scene 画面を見ると分かりやすいと思います(図4)。
+<br>
+図4の様に、KO は OYA を基準にして見ると x軸方向で $-\sqrt{2}=-1.41421$ の位置にあり、Z 軸を中心に -45 度回転していることが分かります。
+</p>
+
+<p>
+<b>図4. OYA(赤) から見た KO(青) の座標と回転角度</b>
+</p>
+
+<img src="./img/page09-fig4.png" alt="">
+
+<br>
+<p>
+ではまた OYA の Position や Rotation を適当に変更して下さい。
+<br>
+OYA と KO は指定した場所に一緒に移動しますが、KO の Position や Rotation は 図3 の値のままであることが分かります。
+</p>
+
+<p>
+この様に、子供の座標をローカル座標系で指定することでプログラマーや 3D モデラーは親の座標を気にせずに子供に対する作業を続けることが出来るようになります。
+</p>
+
+<br>
+<script>PreNext(9,10)</script>
 </body>
 </html>
