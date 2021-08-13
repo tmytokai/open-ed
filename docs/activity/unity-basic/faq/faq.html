@@ -61,9 +61,41 @@ A. 以下の様に Vector3 To String ユニットを間に挟む
 桁数を変えたい時はFの後の数字を変更する
 </p>
 
-<img src="./img/faq1.png" alt="">
+<img src="./img/vecdebug.png" alt="">
 
 <br>
-<script>PreNext(1,7)</script>
+<br>
+<hr>
+<h3>
+Q. テキスチャを貼ったオブジェクトを斜めに傾けたときに奥の方のテクスチャの模様が崩れる
+</h3>
+
+<p>
+A. 「<a href="https://ja.wikipedia.org/wiki/%E7%95%B0%E6%96%B9%E6%80%A7%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0">異方性フィルタリング</a>(Anisotropic filtering: アニソトロピックフィルタリング)」がきちんと設定されているか確認する。
+</p>
+
+<p>
+例えば道路を作ろうと思って Plane に<a href="./img/aniso_road.png">このテキスチャ</a>を貼り付けたたら下の様に奥側の模様が変になったとする。
+</p>
+
+<img src="./img/aniso1.png" alt="">
+
+<p>
+この場合まずはテクスチャのインスペクタを開き、Filter Mode の項目を確認する。
+<br>
+もし Filter Mode が 「Point(no filter)」になっていたら下の様に「Bilinear」または「Trilinear」にする(Trilinearの方が綺麗になるが計算の負荷が大きくなる)
+</p>
+
+<img src="./img/aniso2.png" alt="">
+
+<p>
+すると下の様に奥側の模様も綺麗になる。
+<br>
+それでも綺麗にならない場合は Filter Mode の下にある Aniso Level の数値を上げる(ただし数値が大きいほど負荷が大きくなる)
+</p>
+
+<img src="./img/aniso3.png" alt="">
+
+
 </body>
 </html>
