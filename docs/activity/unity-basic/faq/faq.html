@@ -96,6 +96,45 @@ A. 「<a href="https://ja.wikipedia.org/wiki/%E7%95%B0%E6%96%B9%E6%80%A7%E3%83%9
 
 <img src="./img/aniso3.png" alt="">
 
+<br>
+<br>
+<hr>
+<h3>
+Q. ヒンジジョイントなどのジョイントで関節が伸びる
+</h3>
+
+<p>
+A. ジョイントで結合しているオブジェクトの質量に極端な差があると関節が伸びる。
+<br>
+関節が伸びないようにするするためにはヒンジジョイントのインスペクタにある「Mass Scale」と「Connected Mass Scale」に適切な値をセットする。
+<br>
+するとヒンジジョイントがアタッチされているオブジェクトの質量が 1/(Mass Scale) 倍、ヒンジジョイントが接続されているオブジェクトの質量が 1/(Connected Mass Scale) 倍されて物理演算されるようになるので質量の差が補正される。
+</p>
+
+<p>
+例えば下の様な腕を考える。
+</p>
+
+<img src="./img/joint1.png" alt="">
+
+<p>
+ARM1 の重さを 2 kg、ARM2 の重さを 1000 kg として ARM1 と ARM 2 をヒンジジョイントで繋ぎ(ARM2にヒンジジョイントをアタッチ、ちなみにBALLとARM1は固定ジョイント)、BALLを中心にして回転させると次の画像の様に関節が伸びる。
+</p>
+
+<img src="./img/joint3.gif" alt="">
+
+<p>
+そこで ARM2 にアタッチされているヒンジジョイントのインスペクタを開き Mass Scale = 1000、Connected Mass Scale = 2 と入れる(下の図)。
+</p>
+
+<img src="./img/joint2.png" alt="">
+
+<p>
+すると ARM2 は 1000/1000 = 1 kg、 ARM1 は　2/2 = 1 kg に換算されて物理演算されるので下の画像の様に関節が伸びないようになる。
+</p>
+
+<img src="./img/joint4.gif" alt="">
+
 
 </body>
 </html>
