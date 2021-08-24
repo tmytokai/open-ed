@@ -136,5 +136,31 @@ ARM1 の重さを 2 kg、ARM2 の重さを 1000 kg として ARM1 と ARM 2 を�
 <img src="./img/joint4.gif" alt="">
 
 
+<br>
+<br>
+<hr>
+<h3>
+Q. 今まで動いてたのに VSCode の補完が急に効かなくなった
+</h3>
+
+<p>
+A. 何かの拍子に設定が壊れる時があるので、以下の手順で Visual Studio Code Editor パッケージを再インストールし直すと補完が効くようになる(場合がある)
+</p>
+
+<pre>
+PackageManager を開く
+→ Packages を Unity Registry にセットする
+→ Visual Studio Code Editor パッケージを選択して Remove
+→ Unity 閉じる
+→ Unity 起動
+→ PackageManagerを開く
+→ Visual Studio Code Editor パッケージを選択してインストール
+→ Unity 閉じる
+→ プロジェクトフォルダ内にある .csproj ファイルと .sln ファイルを削除
+→ Unity 起動
+→ Assets メニューから Open C# Project を選択して VSCode を起動
+</pre>
+
+
 </body>
 </html>
