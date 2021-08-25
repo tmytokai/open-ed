@@ -140,15 +140,35 @@ ARM1 の重さを 2 kg、ARM2 の重さを 1000 kg として ARM1 と ARM 2 を�
 <br>
 <hr>
 <h3>
-Q. 今まで動いてたのに VSCode の補完が急に効かなくなった
+Q. 今までちゃんと動いてたし、Unity のアップデートとかもしてないのに VSCode の補完が急に効かなくなった
 </h3>
 
 <p>
-A. 何かの拍子に設定が壊れる時があるので、以下の手順で Visual Studio Code Editor パッケージを再インストールし直すと補完が効くようになる(場合がある)
+A. まず以下の手順で VSCode の補完機能(OmniSharp サーバ)が動いているかログを確認する。
 </p>
 
 <pre>
-PackageManager を開く
+VSCode の View メニューから Output を選択
+→ Output が表示されたら OmniSharp Log を選択
+</pre>
+
+<p>
+何も表示されてない時は OmniSharp サーバが動いてないのでターゲットを手動で選択する。
+</p>
+
+<pre>
+VSCode の View メニューから Command Palette を選択
+→ Command Palette が表示されたら 「OmniSharp: Select Project」を検索して選択
+→ Select 画面が表示されたら「〜.sln」 を選択(多分一番上に表示されてる)
+→ OmniSharp が起動して Output にログが表示される
+</pre>
+
+<p>
+OmniSharp サーバが起動してもエラーを吐く場合は、以下の手順で Unity の Visual Studio Code Editor パッケージを再インストールし直すと補完が効くようになる場合がある
+</p>
+
+<pre>
+Unity の PackageManager を開く
 → Packages を Unity Registry にセットする
 → Visual Studio Code Editor パッケージを選択して Remove
 → Unity 閉じる
@@ -159,7 +179,26 @@ PackageManager を開く
 → プロジェクトフォルダ内にある .csproj ファイルと .sln ファイルを削除
 → Unity 起動
 → Assets メニューから Open C# Project を選択して VSCode を起動
+→ 上の手順で VSCode の OmniSharp サーバが動いてるか確認して、止まってたらターゲットを指定
 </pre>
+
+<p>
+それでも駄目な場合は VSCode の最終アップデート日を確認し、動かなくなった日と同じ日だったら VSCode の問題な気がするので、情報を集めて何とかするかしばらく補完無しで様子を見る。
+</p>
+
+<br>
+<br>
+<hr>
+<h3>
+Q. ヒエラルキー上にあるプレハブインスタンスを通常のゲームオブジェクトにしたい(アンパックしたい)
+</h3>
+
+<p>
+A. ヒエラルキー上のプレハブインスタンスを右クリックして Unpack Prefab か Unpack Prefab Completely を選択するとプレハブへのリンクが切れて通常のゲームオブジェクトになる。
+</p>
+<p>
+Unpack Prefab と Unpack Prefab Completely の違いはプレハブインスタンスの内部にある別のプレハブインスタンスもオブジェクト化するかどうかで、Unpack Prefab Completely を選ぶと内部のプレハブインスタンスも含めて全てがゲームオブジェクトになる。
+</p>
 
 
 </body>
