@@ -9,23 +9,34 @@ axlist = []
 
 dpi=100
 fontsize=10
+
+# デフォルトの図のサイズ(インチ)
 figsize=8
+
+# 複素平面の各軸の範囲のデフォルト値
 defaultcxlim=(-3.5,3.5)
 defaultcylim=(-3.5,3.5)
 defaultczlim=(-3.5,3.5)
+
+# 時間領域の各軸の範囲のデフォルト値
 defaulttxlim=(0,7)
 defaulttylim=(-3.5,3.5)
 
 # 初期化
 #
-# shape : plt.subplot2grid の shape
-# wsize, hsize : plt.figure の figsize = (figsize*wsize, figsize*hsize)
+# shape : plt.subplot2grid の shape = (縦数, 横数)
+# wsize, hsize : plt.figure の figsize = (figsize*wsize, figsize*hsize) ※ 単位はインチ
 # axs :
-#   type  : タイプ
+#   type  : タイプ ( c:複素領域, t:時間領域, 3: 3D )
 #   title : タイトル
-#   loc,rowspan,colspan : plt.subplot2grid の loc,rowspan,colspan
-# *grid : グリッド表示
-# *lim  : 各軸の値の範囲
+#   loc     : plt.subplot2grid の loc(ation)
+#   rowspan : plt.subplot2grid の rowspan
+#   colspan : plt.subplot2grid の colspan
+# cgrid : 複素平面をグリッド表示
+# cxlim, cylim, czlim  : 複素平面の各軸の値の範囲
+# tgrid : 時間領域をグリッド表示
+# txlim, tylim  : 時間寮機の各軸の値の範囲
+
 #
 def init( 
     shape=(1,1),
@@ -125,6 +136,11 @@ def plot_c(clist,axno=0):
             ax.text(a+0.2*xscale,b-0.3*yscale,label('arg',name,argvalue/np.pi),fontsize=fontsize,color='green')
 
 # 複素信号
+# x, y : 時刻tにおける座標、ラムダ式で与える
+# sec :  0 〜 sec 秒間、1秒毎にプロットする
+# csin : 複素正弦波の時は True
+# orthogonal: True なら直交形式、False なら極形式( x(t)が絶対値、y(t)が角度)
+# axno : plt.subplot2grid の ax の番号
 def plot_csignal(name,x,y,sec,csin=False,orthogonal=False,axno=0):
     if(x(0) is None or y(0) is None): return
     ax,xscale,yscale = axlist[axno]
@@ -169,6 +185,8 @@ def plot_tsignal(name,f,sec,axno=0):
     plot_csignal( name, lambda t: t, f, sec, orthogonal=True, axno=axno )
 
 # 複素正弦波の合成
+# csinlist: (振幅, 初期位相、角周波数) のリスト
+# imag: False なら実数成分、 True なら虚数成分をグラフ表示
 def plot_synth( name, csinlist, sec, imag, axno=0 ):
     for a,phi,w in csinlist: 
         if( a is None or phi is None or w is None ) : return

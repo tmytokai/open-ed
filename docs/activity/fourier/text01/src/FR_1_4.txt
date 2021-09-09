@@ -1,137 +1,77 @@
-# coding: utf-8
 %matplotlib inline
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import numpy as np
+import cmp
 import math
-import re
+#ここから↑は消さないで下さい
 
-scale=4 # PCの画面が小さいときは数字を下げる
-dpi=100
-xmin=-4
-xmax=4
-ymin=-4
-ymax=4
-kmax=5
-msecmax=8
-ax=[]
+# None を数値に置き換えて下さい
+# 円周率は math.pi です
 
-C0=0
-a=[0]*kmax
-phi=[0]*kmax
-w1=0
+w1=None  # 基本角周波数
 
-pa=0
-pb=0
+C0=None  #  C[0] = 直流成分
 
-def draw_axis(ax,k):
-    ax.set_xlim(xmin,xmax)
-    ax.set_ylim(ymin,ymax)
-    ax.spines['bottom'].set_position(('data',0))
-    ax.spines['left'].set_position(('data',0))
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
-    ax.text(xmax+0.2,-0.1,'Re[z]',fontsize=10)
-    ax.text(-0.2,ymax+0.1,'Im[z]',fontsize=10)
-    ax.text(xmin,ymax,r'$z_{'+r'{0:d}'.format(k)+r'}(t)$',fontsize=20)
-
-def draw_axis2(ax,tmax):
-    ax.set_xlim(0,tmax)
-    ax.set_ylim(ymin,ymax)
-    ax.spines['bottom'].set_position(('data',0))
-    ax.spines['left'].set_position(('data',0))
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
-    ax.text(tmax+0.1,-0.1,'t',fontsize=10)
-    
-plt.figure(figsize=(scale*2, scale*(2*kmax-1)), dpi=dpi)
-
-ax.append(list())
-ax[0].append(plt.subplot2grid((2*kmax-1,2),(0,0),colspan=2))
-draw_axis2(ax[0][0],msecmax)
-
-for k in range(1,kmax):
-    ax.append(list())
-    ax[k].append(plt.subplot2grid((2*kmax-1,2),(2*k-1,0)))
-    ax[k].append(plt.subplot2grid((2*kmax-1,2),(2*k-1,1)))
-    ax[k].append(plt.subplot2grid((2*kmax-1,2),(2*k,0),colspan=2))
-    draw_axis(ax[k][0],-k)
-    draw_axis(ax[k][1],k)
-    draw_axis2(ax[k][2],msecmax)
-
-def exec_plot(ax,k,t,fin):
-    global pa
-    global pb
-    if(abs_z(k,t)!=-1000 and arg_z(k,t)!=-1000):
-        a = abs_z(k,t)*np.cos(arg_z(k,t))
-        b = abs_z(k,t)*np.sin(arg_z(k,t))
-        if(t>0):
-            if(fin):
-                ax.arrow(pa,pb,a-pa,b-pb,width=0.005,head_width=0.3,length_includes_head=True,color='red')
-            else:
-                ax.plot([pa,a],[pb,b],lw=1, color='red')
-        pa=a
-        pb=b
-        if((t*10)%10==0):
-            name=r'$z_{'+r'{0:d}'.format(k)+r'}'+r'({0:.0f})$'.format(t)
-            cl='black'
-            if(fin):
-                cl='blue'
-            ax.plot(a,b,marker='.',markersize=15,color=cl)
-            if(t<msec):
-                ax.text(a+0.2,b+0.1,name,size=10)
-            else:
-                ax.text(a+1.5,b+0.1,'= '+name,size=10)
-
-def abs_z(k,t):
-    return a[abs(k)]
-
-def arg_z(k,t):
-    return np.sign(k)*(w1*abs(k)*t+phi[abs(k)])
-
-##################
-# ここから
-
-# -1000 を正しい値に修正してください 
-# 円周率は np.pi です
-
-w1=-1000  # 基本角周波数
-
-C0=-1000  #  C[0] = 直流成分
-
-# 各 C[k] のパラメータをセットしてください 
+# 複素フーリエ係数 C[k] のパラメータをセットしてください 
 # C[-k]のパラメータは自動でセットされます
 
-a[1]=-1000   # C[1]の絶対値 = z1(t)の振幅
-phi[1]=-1000 # C[1]の偏角 = z1(t)の初期位相
+C1_a=None   # C[1]の絶対値
+C1_phi=None # C[1]の偏角
 
-a[2]=-1000   # C[2]の絶対値 = z2(t)の振幅
-phi[2]=-1000 # C[2]の偏角 = z2(t)の初期位相
+C2_a=None   # C[2]の絶対値
+C2_phi=None # C[2]の偏角
 
-a[3]=-1000   # C[3]の絶対値 = z3t)の振幅
-phi[3]=-1000 # C[3]の偏角 = z3(t)の初期位相
+C3_a=None   # C[3]の絶対値
+C3_phi=None # C[3]の偏角
 
-a[4]=-1000   # C[4]の絶対値 = z4t)の振幅
-phi[4]=-1000 # C[4]の偏角 = z4(t)の初期位相
+C4_a=None   # C[4]の絶対値
+C4_phi=None # C[4]の偏角
 
-# ここまで
-##################
+########### ここから↓は消さないで下さい
+cmp.init(
+    shape=(9,2),
+    hsize=4.5,
+    axs=(
+        ('t',r'$f_0(t)$',(0,0),1,2),
+        
+        ('c',r'$z_1(t)=C[1]e^{jw_1t}$',(1,0),1,1),
+        ('c',r'$z_{-1}(t)=C[-1]e^{-jw_1t}$',(1,1),1,1),
+        ('t',r'$f_1(t)$',(2,0),1,2),
+        
+        ('c',r'$z_2(t)=C[2]e^{j2w_1t}$',(3,0),1,1),
+        ('c',r'$z_{-2}(t)=C[-2]e^{-j2w_1t}$',(3,1),1,1),
+        ('t',r'$f_2(t)$',(4,0),1,2),
 
-ax[0][0].text(-0.1,ymax+0.4,r'C[0]',fontsize=10)
-ax[0][0].plot([0,msecmax],[C0,C0],lw=1, color='black')
+        ('c',r'$z_3(t)=C[3]e^{j3w_1t}$',(5,0),1,1),
+        ('c',r'$z_{-3}(t)=C[-3]e^{-j3w_1t}$',(5,1),1,1),
+        ('t',r'$f_3(t)$',(6,0),1,2),
+        
+        ('c',r'$z_4(t)=C[4]e^{j4w_1t}$',(7,0),1,1),
+        ('c',r'$z_{-4}(t)=C[-4]e^{-j4w_1t}$',(7,1),1,1),
+        ('t',r'$f_4(t)$',(8,0),1,2),
+    ),
+    cgrid=False, cxlim=(-2.5,2.5), cylim=(-2.5,2.5),
+    tgrid=True,  txlim=(-0.1,8.1), tylim=(-4.1,4.1)
+)
 
-for k in range(1,kmax):
-    msec=0    
-    if(a[k]!=-1000 and a[k] >0 and phi[k]!=-1000 and w1 !=-1000):
-        msec=np.ceil(2*np.pi/np.abs(k*w1)).astype(np.int64)
-    
-    if(msec>0):
-        t=np.linspace(0,msecmax,100)
-        ax[k][2].text(-0.1,ymax+0.4,r'$z_{'+r'{0:d}'.format(-k)+r'}(t)+z_'+r'{0:d}(t)$'.format(k),fontsize=10)
-        ax[k][2].plot(t,2*a[k]*np.cos(k*w1*t+phi[k]),lw=1, color='black')
+if w1 is None: w1=0
+if C1_phi is None: C1_phi = 0
+if C2_phi is None: C2_phi = 0
+if C3_phi is None: C3_phi = 0
+if C4_phi is None: C4_phi = 0
+            
+cmp.plot_tsignal('f',lambda t: C0, 8, axno=0)
 
-        for i in range(msec*20+1):
-            exec_plot(ax[k][0],-k,i/20,i==msec*20)
+cmp.plot_csin('z1',C1_a,C1_phi,1*w1,axno=1)
+cmp.plot_csin('z-1',C1_a,-C1_phi,-1*w1,axno=2)
+cmp.plot_synth( 'f1', ((C1_a,C1_phi,1*w1),(C1_a,-C1_phi,-1*w1)), sec=8, imag=False, axno=3)
 
-        for i in range(msec*20+1):
-            exec_plot(ax[k][1], k,i/20,i==msec*20)
+cmp.plot_csin('z2',C2_a,C2_phi,2*w1,axno=4)
+cmp.plot_csin('z-2',C2_a,-C2_phi,-2*w1,axno=5)
+cmp.plot_synth( 'f2', ((C2_a,C2_phi,2*w1),(C2_a,-C2_phi,-2*w1)), sec=8, imag=False, axno=6)
+
+cmp.plot_csin('z3',C3_a,C3_phi,3*w1,axno=7)
+cmp.plot_csin('z-3',C3_a,-C3_phi,-3*w1,axno=8)
+cmp.plot_synth( 'f3', ((C3_a,C3_phi,3*w1),(C3_a,-C3_phi,-3*w1)), sec=8, imag=False, axno=9)
+
+cmp.plot_csin('z4',C4_a,C4_phi,4*w1,axno=10)
+cmp.plot_csin('z-4',C4_a,-C4_phi,-4*w1,axno=11)
+cmp.plot_synth( 'f4', ((C4_a,C4_phi,4*w1),(C4_a,-C4_phi,-4*w1)), sec=8, imag=False, axno=12)

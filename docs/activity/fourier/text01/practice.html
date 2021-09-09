@@ -91,7 +91,7 @@ f(t) &= 1 \\
 &+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{4} \cdot t - \frac{\pi}{2} \right ) \\
 \end{align*}
 <p>
-に含まれている直流成分、基本波、第2〜4高調波を表計算ソフトを使って描いてみましょう。
+に含まれている直流成分 $f_0(t)$、基本波 $f_1(t)$、第2高調波 $f_2(t)$、第3高調波 $f_3(t)$、第4高調波 $f_4(t)$ を表計算ソフトを使って描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -101,7 +101,7 @@ f(t) &= 1 \\
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> $f(t)$のグラフを削除します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 3列目の一番上のセルから右に向かって「直流成分」「基本波」「第2高調波」「第3高調波」「第4高調波」と入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 3列目の一番上のセルから右に向かって「直流成分f0(t)」「基本波f1(t)」「第2高調波f2(t)」「第3高調波f3(t)」「第4高調波f4(t)」と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 3列目の2行目に時刻0における基本波の値を入力します。その際に基本角周波数 $w_1$ [rad/秒]の値も確認して下さい。
 <br>
@@ -109,7 +109,7 @@ f(t) &= 1 \\
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 各時刻における直流成分、基本波、第2〜4高調波の値をオートフィルを使ってまとめて入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「t」〜「第4高調波」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化「あり」とします。
+<span class="olradio"><input type="radio" name="p3"></span> 「t」〜「第4高調波f4(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線のみ、平滑化「あり」とします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> シートを上書き保存します。
 <br>
@@ -135,10 +135,10 @@ f(t) &= 1 \\
 &+ 2 \cdot \cos \left( 4 \cdot \frac{\pi}{4} \cdot t - \frac{\pi}{2} \right ) \\
 \end{align*}
 <p>
-に含まれている直流成分、基本波、第2〜4高調波を 9 個の複素正弦波
+に含まれている直流成分 $f_0(t)$、基本波 $f_1(t)$、第2高調波 $f_2(t)$、第3高調波 $f_3(t)$、第4高調波 $f_4(t)$ を 9 個の複素正弦波
 </p>
 \[
-z_k(t) = \textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \quad , \quad (k=-4,-3,\cdots,3,4)
+z_k(t) = \textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \quad , \quad (k=-4,-3,-2,-1,0,1,2,3,4)
 \]
 <p>
 に分解し、それらの複素平面上での動きを確かめてみましょう。
@@ -149,7 +149,7 @@ z_k(t) = \textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \qu
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 新規ノートブックを作って「FR_1_4」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 一番上のセルにテンプレートの内容をコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> 一番上のセルに<a href="./src/FR_1_4.txt">テンプレート</a>の内容をコピーします。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 基本角周波数 $w_1$ [rad/秒]の値をセットします。
 <br>
@@ -159,7 +159,7 @@ z_k(t) = \textrm{C}[k] \cdot \textrm{e}^{ \{j \cdot k \cdot w_1 \cdot t \} } \qu
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 実行します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 各$z_k(t)$ の動きとサイン波の形状を見て複素フーリエ級数展開が正しいことを再確認します。
+<span class="olradio"><input type="radio" name="p4"></span> 演習 1-3 で描いたグラフと見比べて複素フーリエ級数展開が正しいことを確認します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。
 <br>
