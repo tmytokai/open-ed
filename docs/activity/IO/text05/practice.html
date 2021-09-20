@@ -19,15 +19,12 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 30  分
-</p>
-
 <br>
 <h2><a href="./page01.html">1. 割り込み処理とは</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 5-1 (個人PC、30分):</b> INT 割り込みを使ってみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 5-1 (個人PC):</b> INT 割り込みを使ってみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -77,7 +74,7 @@
 3: CCP4 (PWM) -- 圧電スピーカ
 4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-(*)6: RB0/INT (GPIO入力/INT割り込み) -- スイッチ ※ 実際には回路に変更はありません
+(*)6: RB0/INT (GPIO入力/INT割り込み) -- タクトスイッチ ※ 実際には回路に変更はありません
 7: RB1
 8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: CCP1 (PWM) -- オシロスコープ
@@ -103,7 +100,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-2 (個人PC、30分):</b> タイマー割り込みを使ってみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 5-2 (個人PC):</b> タイマー割り込みを使ってみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -152,7 +149,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>(追加課題) 演習 5-3 (個人PC、30分):</b> コンペア割り込みとタイマー割り込みを組み合わせて PWM 出力をしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>(追加課題) 演習 5-3 (個人PC):</b> コンペア割り込みとタイマー割り込みを組み合わせて PWM 出力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -164,8 +161,8 @@
 <li>CCP1 に接続するタイマーとして Timer1 を使う ※ コンペアモードではTimer1しか接続できません</li>
 <li>Timer1 の動作クロックは FOSC/4 = 1 MHz とする</li>
 <li>Timer1 の prescale は x8 とする</li>
-<li>スイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
-<li>スイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
+<li>タクトスイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
+<li>タクトスイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
 </ol>
 
 </div>
@@ -200,7 +197,7 @@
 
 </div>
 
-
+<br>
 <script>PreNext(2,1)</script>
 </body>
 </html>

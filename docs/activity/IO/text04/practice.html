@@ -19,16 +19,13 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 30  分
-</p>
-
 <br>
 <h2><a href="./page01.html">1. PWM とは</a></h2>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 4-1 (個人PC、30分):</b> PWM を使ってみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 4-1 (個人PC):</b> PWM を使ってみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -46,8 +43,8 @@
 <li>CCP1 の出力ピンは 9 pin とする</li>
 <li>CCP1 に接続するタイマーとして Timer2 を使う</li>
 <li>Timer2 の prescale は x64 とする</li>
-<li>スイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
-<li>スイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
+<li>タクトスイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
+<li>タクトスイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
 </ol>
 
 </div>
@@ -89,7 +86,7 @@
 3: RA4
 4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-6: RB0 (GPIO入力) -- スイッチ
+6: RB0 (GPIO入力) -- タクトスイッチ
 7: RB1
 8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 (*)9: CCP1 (PWM) -- オシロスコープ
@@ -115,7 +112,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-2 (個人PC、30分):</b> PWM を使って音を鳴らしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 4-2 (個人PC):</b> PWM を使って音を鳴らしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -126,8 +123,8 @@
 <li>CCP4 の出力ピンは 3 pin とする(固定)</li>
 <li>CCP4 に接続するタイマーとして Timer4 を使う</li>
 <li>Timer4 の prescale は x64 とする</li>
-<li>スイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
-<li>スイッチを押している特はオクターブ3のソ(196 Hz) の音を出す</li>
+<li>タクトスイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
+<li>タクトスイッチを押している特はオクターブ3のソ(196 Hz) の音を出す</li>
 </ol>
 
 <p>
@@ -191,7 +188,7 @@
 (*)3: CCP4 (PWM) -- 圧電スピーカ
 4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-6: RB0 (GPIO入力) -- スイッチ
+6: RB0 (GPIO入力) -- タクトスイッチ
 7: RB1
 8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: CCP1 (PWM) -- オシロスコープ

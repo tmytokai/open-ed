@@ -19,10 +19,6 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 50  分
-</p>
-
 <br>
 <p>
 今回の演習環境は以下の通りです。
@@ -43,14 +39,15 @@
 <br>
 <h2><a href="./page01.html">1. GPIOとは</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 1-1 (個人PC、30分):</b> PIC にプログラムの書き込みをしてみましょう。
+<input type="checkbox"><b>演習 1-1 (個人PC):</b> PIC にプログラムの書き込みをしてみましょう。
 </p>
 <div class="olradio">
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="./src/template_v8.zip">テンプレートプロジェクト</a>をダウンロードして展開してください。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> IDE を起動してテンプレートプロジェクト(template.X)を開いて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> IDE を起動してテンプレートプロジェクトを開いて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> コンパイルボタンを押してエラーが無いことを確認して下さい。
 <br>
@@ -59,7 +56,7 @@
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
 <p>
-この時点では PIC のピン配置設定と回路接続方法は以下の通りなっていますので、以下の設定に従って回路を作成して下さい。
+以下の設定に従って回路を作成して下さい。
 <br>
 (*) が接続箇所です。 
 <br>
@@ -100,8 +97,9 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <br>
 <h2><a href="./page02.html">2. 出力</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 1-2 (個人PC、30分):</b> GPIO を使って LED を光らせてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 1-2 (個人PC):</b> GPIO を使って LED を光らせてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -110,22 +108,12 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <ol>
 <li>RA0 (17ピン) をデジタル出力モードにする</li>
 <li>RA0 (17ピン) に LED を接続する</li>
-<li>LEDが 100 ミリ秒光る → 100 ミリ秒消える → 100 ミリ秒光る ・・・を繰り返す</li>
+<li>LEDが 200 ミリ秒光る → 200 ミリ秒消える → 200 ミリ秒光る ・・・を繰り返す</li>
 </ol>
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> テンプレートプロジェクト(template.x)を「IO_1_2」にコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> テンプレートプロジェクトを閉じます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_2.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<span class="olradio"><input type="radio" name="p2"></span> 演習1-1から続けます。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 回路を作成します。
 </p>
@@ -160,6 +148,8 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 </pre>
 </div>
 <p>
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートのままだと 1000 ミリ秒周期で点滅しますので、200 ミリ周期になるようにソースを変更します。
+<br>
 <span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main.c」を記入して下さい。 
@@ -169,8 +159,9 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <br>
 <h2><a href="./page03.html">3. 入力</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 1-3 (個人PC、30分):</b> GPIO を使ってデジタル入力をしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 1-3 (個人PC):</b> GPIO を使ってデジタル入力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -179,25 +170,23 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <ol>
 <li> RB0 (6ピン) をデジタル入力モードにセットする</li>
 <li> RB0 (6ピン) にタクトスイッチを接続する</li>
-<li> タクトスイッチを押してない時は LED が光ってる</li>
+<li> タクトスイッチを「押してない時」は LED が光っている</li>
 <li> タクトスイッチを押すと LED が消える</li>
 </ol>
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「IO_1_2」を「IO_1_3」にコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートプロジェクト(template)を「IO_1_3」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_1_2 を閉じます。
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートプロジェクト(template) を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<span class="olradio"><input type="radio" name="p3"></span> (MPLAB のバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> setting.h を開き、デジタル入力(USE_INPUT)のコメントアウトを解除します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> input.c を開きます。
+<span class="olradio"><input type="radio" name="p3"></span> input.c を開いてコメントに従って設定します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> main.c を開き、ファイルの中身を<a href="./src/IO_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
@@ -217,7 +206,7 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 3: RA4
 4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-(*)6: RB0 (GPIO入力) -- スイッチ -- GND ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
+(*)6: RB0 (GPIO入力) -- タクトスイッチ ※ PIC内部で弱プルアップしてるのでプルアップ抵抗必要無
 7: RB1
 8: RB2
 9: RB3
@@ -240,6 +229,30 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 </p>
 </div>
 
+<br>
+<br>
+<p>
+<input type="checkbox"><b>演習 1-4 (個人PC):</b> デバッガを使ってみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 「NOP()」の行にブレークポイントを打ちます(行番号をクリック)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Debug → Debug Project でデバッグを開始します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> タクトスイッチを押すとブレークポイントの行でプログラムが停止します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> プログラムが停止した時の RA0 と RB0 の値を確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> ブレークポイントを解除し(行番号をクリック)、Debug → Continue で実行を再開します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Debug → Finish でデバッグを終了します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所にプログラムが停止した時の 「RA0の値」と「RB0の値」を記入して下さい。 
+</p>
+</div>
+
+<br>
 <script>PreNext(4,3)</script>
 </body>
 </html>

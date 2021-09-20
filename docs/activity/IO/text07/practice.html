@@ -19,16 +19,13 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 70  分
-</p>
-
 <br>
 <h2><a href="./page01.html">1. I2C とは</a></h2>
 
 
+<br>
 <p>
-<input type="checkbox"><b>演習 7-1 (個人PC、30分):</b> I2C 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 7-1 (個人PC):</b> I2C 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
@@ -81,7 +78,7 @@
 3: CCP4 (PWM) -- 圧電スピーカ
 4: MCLR/VPP -- PICkit の 1: NMCLR
 5: VSS -- GND
-6: RB0/INT (GPIO入力/INT割り込み) -- スイッチ
+6: RB0/INT (GPIO入力/INT割り込み) -- タクトスイッチ
 (*)7: SDA1 (I2C) -- ATP3011 の 27 : SDA  ※要プルアップ抵抗
 8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
 9: CCP1 (PWM) -- オシロスコープ
@@ -106,7 +103,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 7-2 (個人PC、70分):</b>  I2C 通信で加速度センサ(ADXL345)から加速度データを受け取り、音声合成 LSI (ATP3011F1-PU)と連携をしましょう。プログラムの仕様は以下の通りです。 
+<input type="checkbox"><b>演習 7-2 (個人PC):</b>  I2C 通信で加速度センサ(ADXL345)から加速度データを受け取り、音声合成 LSI (ATP3011F1-PU)と連携をしましょう。プログラムの仕様は以下の通りです。 
 </p>
 <div class="info">
 <p>
@@ -292,6 +289,7 @@ ATP3011 の GND --  ADXL345 の  2: GND
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main.c」を記入してください。
 </p>
 
+<br>
 <script>PreNext(2,1)</script>
 </body>
 </html>

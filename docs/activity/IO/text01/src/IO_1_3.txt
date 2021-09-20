@@ -6,7 +6,10 @@ void main(void) {
     init();
 
     while(1){
-        if( RB0 == ? ) RA0 = 0;
+        if( RB0 == ? ){
+            RA0 = 0;
+            NOP(); // 何もしないという命令
+        }
         else RA0 = 1;
     }
     
