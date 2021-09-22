@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>演習</title>
 </head>
 <body>
@@ -24,7 +25,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-1 (個人):</b>  <a href="./page01.html">テキスト</a>の手順に従って 10 進数の 53 を 2 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-1 (個人):</b>  <a href="./page01.html">テキスト</a>の手順に従って 10 進数の 53 を 2 進数に変換してみましょう。有効桁数は n = 8 とします。
 </p>
 
 <div class="info">
@@ -34,25 +35,25 @@ A = 53 なので
 </p>
 
 <ol>
-<li> 53 を 2 で割る。商は q_0 = (?)、余りは r_0 = (?)
-<li> q_0 = (?) を 2 で割る。商は q_1 = (?)、余りは r_1 = (?)
-<li> q_1 = (?) を 2 で割る。商は q_2 = (?)、余りは r_2 = (?)
-<li> q_2 = (?) を 2 で割る。商は q_3 = (?)、余りは r_3 = (?)
-<li> q_3 = (?) を 2 で割る。商は q_4 = (?)、余りは r_4 = (?)
-<li> q_4 = (?) を 2 で割る。商は q_5 = (?)、余りは r_5 = (?)
-<li> 商が 0 になったので計算終了
-<li> 余りを r_5 を先頭に r_0 まで逆順に並べる
+<li> 有効桁数を n = 8 ビットとする
+<li> A = 53 を 2 で割る。商は $q_0$ = ？、余りは $r_0$ = ？
+<li> $q_0$ = ？ を 2 で割る。商は $q_1$ = ？、余りは $r_1$ = ？
+<li> $q_1$ = ？ を 2 で割る。商は $q_2$ = ？、余りは $r_2$ = ？
+<li> $q_2$ = ？ を 2 で割る。商は $q_3$ = ？、余りは $r_3$ = ？
+<li> $q_3$ = ？ を 2 で割る。商は $q_4$ = ？、余りは $r_4$ = ？
+<li> $q_4$ = ？ を 2 で割る。商は $q_5$ = ？、余りは $r_5$ = ？
+<li> $q_5$ = ？ を 2 で割る。商は $q_6$ = ？、余りは $r_6$ = ？
+<li> $q_6$ = ？ を 2 で割る。商は $q_7$ = ？、余りは $r_7$ = ？
+<li> 余りを $r_{7}$ から $r_0$ まで順に並べると ？
 <li> 0b を先頭に付ける
-<li> 6 ビットの 2 進数 0b (?) が得られる
+<li> n = 8 ビットの 2 進数 ？ が得られる
 </ol>
 
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定した場所で上の穴埋め問題を解いて下さい。
 </p>
 </div>
 
@@ -64,20 +65,18 @@ A = 53 なので
 <div class="info">
 
 <p>
-A = (?) * 2^5  + (?) * 2^4 + (?) * 2^3 + (?) * 2^2 + (?) *  2^1 + (?) * 2^0
+A = ？・128 + ？・64 + ？・32 + ？・16 + ？・8 + ？・4 + ？・2 + ？・1
 </p>
 <p>
-　= (?) + (?) + (?) + (?) + (?) + (?) = (?)
-<p>
+　= ？ + ？ + ？ + ？ = 53
+</p>
 
 </div>
 
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定した場所で上の穴埋め問題を解いて下さい。
 </p>
 </div>
 
@@ -88,7 +87,28 @@ A = (?) * 2^5  + (?) * 2^4 + (?) * 2^3 + (?) * 2^2 + (?) *  2^1 + (?) * 2^0
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に解答して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に解答して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-4 (個人):</b> 演習 1-1〜1-3 の結果が正しいかプログラムを使って確認してみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_1_4」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_1_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Main.cpp に<a href="./src/FP_1_4.txt">テンプレート</a>の内容をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 一旦実行確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> main 関数内の A の値を 53、n_int の値を 8 に変更してもう一度実行確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。 
 </p>
 </div>
 
@@ -98,7 +118,7 @@ A = (?) * 2^5  + (?) * 2^4 + (?) * 2^3 + (?) * 2^2 + (?) *  2^1 + (?) * 2^0
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人):</b>  <a href="./page02.html">テキスト</a>の手順に従って 10 進数の -53 を 2 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-5 (個人):</b>  <a href="./page02.html">テキスト</a>の手順に従って 10 進数の -53 を 2 進数に変換してみましょう。
 </p>
 
 <div class="info">
@@ -108,30 +128,30 @@ A = -53 なので
 </p>
 
 <ol>
-<li> |A| = 53 の 2 進数は演習 1-1 より 6 ビットの 2 進数 0b (?)
-<li> 精度(有効桁数)を n = 8 ビットとすると、先頭に 0 を (?) 個付け加えて 0b (?)
-<li> 1 と 0 をひっくり返すと 0b (?)
-<li> 1 を足して 8 ビットの 2 進数 0b (?) が得られる
+<li> |A| = 53 の 2 進数は演習 1-1 より 6 ビットの 2 進数 0b ？
+<li> 精度(有効桁数)を n = 8 ビットとすると、先頭に 0 を ？ 個付け加えて 0b ？
+<li> 1 と 0 をひっくり返すと 0b ？
+<li> 1 を足して 8 ビットの 2 進数 0b ？ が得られる
 </ol>
 
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 上の穴埋め問題を指定場所にコピーして下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 上の穴埋め問題を指定場所にコピーして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 問題を解いて下さい。
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人):</b> 演習 1-4 で得られた 2 進数を 16 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-6 (個人):</b> 演習 1-5 で得られた 2 進数を 16 進数に変換してみましょう。
 </p>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に解答して下さい。
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に解答して下さい。
 </p>
 </div>
 
@@ -142,7 +162,7 @@ A = -53 なので
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-6 (個人):</b>  <a href="./page03.html">テキスト</a>の手順に従って 10 進数の 0.1 を 2 進数に変換してみましょう。ただし精度(有効桁数) を n = 4 ビットとします。
+<input type="checkbox"><b>演習 1-7 (個人):</b>  <a href="./page03.html">テキスト</a>の手順に従って 10 進数の 0.1 を 2 進数に変換してみましょう。ただし精度(有効桁数) を n = 4 ビットとします。
 </p>
 
 <div class="info">
@@ -153,44 +173,20 @@ A = 0.1 なので
 
 <ol>
 <li> 精度(有効桁数) を n = 4 ビットとする。
-<li> A に 2 をかけると (?) 。積の整数部分は r_{-1} = (?)、積から r_{-1} を引いた残りは p_{-1} = (?)
-<li> p_{-1} = (?) に 2 をかけると (?) 。積の整数部分は r_{-2} = (?)、積から r_{-2} を引いた残りは p_{-2} = (?)
-<li> p_{-2} = (?) に 2 をかけると (?) 。積の整数部分は r_{-3} = (?)、積から r_{-3} を引いた残りは p_{-3} = (?)
-<li> p_{-3} = (?) に 2 をかけると (?) 。積の整数部分は r_{-4} = (?)、積から r_{-4} を引いた残りは p_{-4} = (?)
-<li> p_{-4} = (?) に 2 をかけると (?) 。積の整数部分は r_{-5} = (?)、積から r_{-5} を引いた残りは p_{-5} = (?)
+<li> A に 2 をかけると ？ 。積の整数部分は r_{-1} = ？、積から r_{-1} を引いた残りは p_{-1} = ？
+<li> p_{-1} = ？ に 2 をかけると ？ 。積の整数部分は r_{-2} = ？、積から r_{-2} を引いた残りは p_{-2} = ？
+<li> p_{-2} = ？ に 2 をかけると ？ 。積の整数部分は r_{-3} = ？、積から r_{-3} を引いた残りは p_{-3} = ？
+<li> p_{-3} = ？ に 2 をかけると ？ 。積の整数部分は r_{-4} = ？、積から r_{-4} を引いた残りは p_{-4} = ？
+<li> p_{-4} = ？ に 2 をかけると ？ 。積の整数部分は r_{-5} = ？、積から r_{-5} を引いた残りは p_{-5} = ？
 <li> n = 5 回繰り返したので計算終了
 <li> r_{-1} を先頭に r_{-5} まで順に並べる
 <li> 0b を先頭に付ける
-<li> この時点で 5 ビットの 2 進数 0b (?) が得られる
-<li> r_{-5} = (?) なので最後のビットを (?)
-<li> 4 ビットの 2 進数 0b (?) が得られる
+<li> この時点で 5 ビットの 2 進数 0b ？ が得られる
+<li> r_{-5} = ？ なので最後のビットを ？
+<li> 4 ビットの 2 進数 0b ？ が得られる
 </ol>
 
 </div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 問題を解いて下さい。
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-7 (個人):</b> <a href="./page03.html">テキスト</a>の手順に従って演習 1-6 で得られた 2 進数を 10 進数に変換してみましょう。
-</p>
-
-<div class="info">
-
-A = (?) * 2^{-1} + (?) * 2^{-2} + (?) * 2^{-3} + (?) * 2^{-4}
-</p>
-<p>
-　= (?) + (?) + (?) + (?) = (?) = (?)
-</p>
-
-</div>
-
 
 <div class="olradio"> 
 <p>
@@ -202,18 +198,43 @@ A = (?) * 2^{-1} + (?) * 2^{-2} + (?) * 2^{-3} + (?) * 2^{-4}
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-8 (個人):</b> 演習 1-6 で得られた 2 進数を 16 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-8 (個人):</b> <a href="./page03.html">テキスト</a>の手順に従って演習 1-7 で得られた 2 進数を 10 進数に変換してみましょう。
 </p>
+
+<div class="info">
+
+<p>
+A = ？ * 2^{-1} + ？ * 2^{-2} + ？ * 2^{-3} + ？ * 2^{-4}
+</p>
+<p>
+　= ？ + ？ + ？ + ？ = ？ = ？
+</p>
+
+</div>
+
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に解答して下さい。
+<span class="olradio"><input type="radio" name="p8"></span> 上の穴埋め問題を指定場所にコピーして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 問題を解いて下さい。
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-9 (個人):</b> 精度(有効桁数) n = 4 ビットで 10 進数の 0.1 を 2 進数に変換した時の丸め誤差はいくつでしょうか。
+<input type="checkbox"><b>演習 1-9 (個人):</b> 演習 1-7 で得られた 2 進数を 16 進数に変換してみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に解答して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-10 (個人):</b> 精度(有効桁数) n = 4 ビットで 10 進数の 0.1 を 2 進数に変換した時の丸め誤差はいくつでしょうか。
 </p>
 <p>
 (ヒント) 丸め誤差 = 変換後の値 - 元の値
@@ -224,11 +245,11 @@ A = (?) * 2^{-1} + (?) * 2^{-2} + (?) * 2^{-3} + (?) * 2^{-4}
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p9"></span> 指定場所に解答して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 指定場所に解答して下さい。
 </p>
 </div>
 
-
+<br>
 <script>PreNext(4,3)</script>
 </body>
 </html>
