@@ -22,8 +22,8 @@ void main(void){
 
        if( RB0 == 1 ){
 
-          printf("O3C = 131 Hz\r\n");
-
+          // O3C = 131 Hz
+          // PWM 周期 = 7.6 msec, パルス幅 = 3.8 msec
           PR4 = ? ;
           CCPR4L = ? ;
           CCP4CONbits.DC4B1 = ? ;
@@ -31,8 +31,8 @@ void main(void){
         }
 	else{
 
-          printf("O3G = 196 Hz\r\n");
-
+          // O3G = 196 Hz
+          // PWM 周期 = 5.1 msec, パルス幅 = 2.6 msec
           PR4 = ? ;
           CCPR4L = ? ;
           CCP4CONbits.DC4B1 = ? ;

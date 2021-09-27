@@ -22,8 +22,7 @@ void main(void){
 
        if( RB0 == 1 ){
 
-          printf("period = 16 msec, width = 8 msec\r\n");
-
+          // PWM 周期 = 16 msec, パルス幅 = 8 msec
           PR2 = ? ;
           CCPR1L = ? ;
           CCP1CONbits.DC1B1 = ? ;
@@ -31,15 +30,12 @@ void main(void){
        }
         else{
 
-          printf("period = 8 msec, width = 6 msec\r\n");
-
+          // PWM 周期 = 8 msec, パルス幅 = 6 msec
           PR2 = ? ;
           CCPR1L = ? ;
           CCP1CONbits.DC1B1 = ? ;
           CCP1CONbits.DC1B0 = ? ;
        }
-
-       __delay_ms(100);
     }
 
    return;
