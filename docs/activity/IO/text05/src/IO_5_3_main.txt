@@ -8,28 +8,33 @@ void main(void){
 
     init();
     
-    // 周期 period と幅 width (クロック)の計算方法
+    // PWM 周期 period とパルス幅 width (※ 単位はクロック)の計算方法
     //
-    // タイマーがカウントアップする間隔を τ 秒とすると
+    // Timer 1 がカウントアップする間隔を τ 秒とすると
     // 
     // τ = 1 / タイマークロック * prescale [秒]
     //
-    // なので、周期や幅を a 秒としたい場合は
+    // なので、PWM 周期 を a 秒、パルス幅を b 秒とすると
     //
-    //  a/τ = a * タイマークロック / prescale [クロック]
+    //  period = a/τ = a * タイマークロック / prescale [クロック]
+    //  width  = b/τ = b * タイマークロック / prescale [クロック]
     //
     // と計算します ※ 16bitの範囲(65535)を超えないように注意
     //
     // 今回はタイマークロック = FOSC/4 = 1 MHz、prescale = x8 なので
     //
-    // a * 1000000 / 8
+    // period = a * 1000000 / 8
+    // width  = b * 1000000 / 8
     //
+
+    // PWM 周期 a = 16 msec = 0.016 sec, パルス幅 b = 8 msec = 0.008 sec で period と width を計算します
     period = ? ;
     width = ? ;
     
     // Timer1 のカウンターとCCPR1に初期値をセットします
-    // タイマー割り込みが起きてから width クロック後にコンペア割り込みをかけます
-    // タイマー割り込みが起きた時に PWM 出力を High、コンペア割り込みが起きた時に Low にします
+    // タイマー割り込みが起きたら PWM 出力を High にします
+    // タイマー割り込みが起きてから width クロック経過後にコンペア割り込みをかけます
+    // コンペア割り込みが起きたら PWM 出力を Low にします
     TMR1 = (unsigned short)( 65536 - ? );
     CCPR1 = (unsigned short)( 65536 - ? + ? );
     
@@ -40,21 +45,17 @@ void main(void){
     while(1){
         if( RB0 == 1 ){
 
-          printf("period = 16 msec, width = 8 msec\r\n");
-          
+          // PWM 周期 a = 16 msec = 0.016 sec, パルス幅 b = 8 msec = 0.008 sec
           period = ? ;
           width = ? ;
 
        }
         else{
 
-          printf("period = 8 msec, width = 6 msec\r\n");
-          
+          // PWM 周期 a = 8 msec = 0.008 sec, パルス幅 b = 6 msec = 0.006 sec
           period = ? ;
           width = ? ;
        }
-        
-        __delay_ms(100);
     }
 
    return;

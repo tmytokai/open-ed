@@ -38,9 +38,9 @@
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_4_2」を「IO_5_1」にコピーします。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_4_2」を「IO_5_1」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_4_2 を閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_4_2 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -50,7 +50,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、INT割り込み(USE_RB0INT)のコメントアウトを解除します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Modlules/rb0int.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/rb0int.c を開いてコメントに従って設定します。 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -107,7 +107,7 @@
 <b>仕様:</b>
 </p>
 <ol>
-<li>タイマーとして Timer1 を使う</li>
+<li>タイマーとして 16bit タイマーの Timer1 を使う</li>
 <li>Timer1 の動作クロックは FOSC/4 = 1 MHz とする</li>
 <li>Timer1 の prescale は x8 とする</li>
 <li>プログラムを実行すると int 型変数 count の値を表示し続ける</li>
@@ -118,9 +118,9 @@
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_5_1」を「IO_5_2」にコピーします。
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_5_1」を「IO_5_2」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_5_1 を閉じます。
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_5_1 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -128,9 +128,11 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> setting.h を開き、一旦全ての機能をオフにします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> シリアル通信(USE_UART)、INT割り込み(USE_RB0INT)、タイマー 1 割り込み(USE_TIMER1)のコメントアウトを解除します。 
+<span class="olradio"><input type="radio" name="p2"></span> シリアル通信(USE_UART)、INT 割り込み(USE_RB0INT)、Timer 1 割り込み(USE_TIMER1)のコメントアウトを解除します。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Modlules/timer.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Timer 1 を使うので、Timer 1 の初期化関数( void init_timer1( void )をコメントに従って設定します。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_2_main.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -168,9 +170,9 @@
 </div>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「IO_5_2」を「IO_5_3」にコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> プロジェクト「IO_5_2」を「IO_5_3」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_5_3 を閉じます。
+<span class="olradio"><input type="radio" name="p3"></span> プロジェクト IO_5_2 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -178,9 +180,13 @@
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> setting.h を開き、一旦全ての機能をオフにします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> デジタル入力(USE_INPUT)、シリアル通信(USE_UART)、タイマー 1 割り込み(USE_TIMER1)、コンペア割り込み(USE_CCP1_COMPARE) のコメントアウトを解除します。 
+<span class="olradio"><input type="radio" name="p3"></span> デジタル入力(USE_INPUT)、タイマー 1 割り込み(USE_TIMER1)、コンペア割り込み(USE_CCP1_COMPARE) のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Modlules/timer.c の設定は演習 5-2 のままです。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Modlules/ccp_compare.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> CCP1 を使うので、CCP1 の初期化関数( void init_ccp1_compare( void )をコメントに従って設定します。 
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_3_main.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
