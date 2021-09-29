@@ -221,9 +221,9 @@
 
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_2」(もし演習5-3を実施していたら IO_5_3)を「IO_6_1」にコピーします。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_2」または「IO_5_3」を「IO_6_1」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_2 (または IO_5_3) を閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_2 または IO_5_3 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -233,11 +233,11 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、SPI(USE_MSSP1_SPI) のコメントアウトを解除します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_spi.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_spi.c を開き、内容を確認します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_6_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_6_1_isr.txt">テンプレート</a>の内容に置き換えて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_6_1_isr.txt">テンプレート</a>の内容に置き換えて下さい ※ isr 関数の中身を空にしています
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
@@ -268,23 +268,47 @@
 13: ICSPDAT -- PICkit の 4: PGD
 14: VDD -- 3.3V
 (*)15: SDO1 (SPI) -- ATP3011 の 17 : SDI
-(*)16: CS (SPI) -- ATP3011 の 16 : CS
+(*)16: RA7/CS (SPI) -- ATP3011 の 16 : CS
 17: RA0 (GPIO出力) -- LED
 18: AN1 (ADC) -- 可変抵抗の中央ピン
 </pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押し、以下の手順で正常に動作する事を確認して下さい。 
 </p>
 <div class="info">
 <pre class="wrap">
-起動したら「@を数回入力 → # → V → エンター → @を数回入力」の順に入力するとバージョンが表示される
+(1) PIC が起動したら「@を数回入力 → # → V → エンター → @を数回入力」の順に入力し、バージョンが表示されるのを確認する
 
-また「@を数回入力 → # → J → エンター」の順に入力するとチャイムが鳴る
+(表示例)
+dummy(ff) : >
+dummy(ff) : >
+#(23) : >
+V(56) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : V
+dummy(ff) : F
+dummy(ff) : 1
+dummy(ff) : a
+dummy(ff) : >
+dummy(ff) : >
 
-さらに「@を数回入力 → h → o → g → e → .(ドット) → エンター」の順に入力すると「ほげ」と発声する
 
-※ hoge の代わりに違うローマ字を入力してもOKだが、最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+(2) 「@を数回入力 → # → J(大文字) → エンター → @を数回入力」の順に入力するとチャイムが鳴るのを確認する
+
+(表示例)
+dummy(ff) : >
+dummy(ff) : >
+#(23) : >
+J(4a) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : >
+dummy(ff) : >
+
+
+(3) 「@を数回入力 → h → o → g → e → .(ドット) → エンター → @を数回入力」の順に入力すると「ほげ」と発声するのを確認する
 
 (表示例)
 dummy(ff) : >
@@ -297,6 +321,13 @@ e(65) : >
 enter(d) : >
 dummy(ff) : *
 dummy(ff) : >
+dummy(ff) : >
+
+
+(4) 好きな音声を発生させる
+
+※ 最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+
 </pre>
 </div>
 <p>

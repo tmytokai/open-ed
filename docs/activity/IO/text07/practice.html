@@ -44,9 +44,9 @@
 
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_6_1」を「IO_7_1」にコピーします。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_6_1」を「IO_7_1」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_6_1 を閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_6_1 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -54,9 +54,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> I2C(USE_MSSP1_I2C) のコメントアウトを解除します。 
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、I2C(USE_MSSP1_I2C) のコメントアウトを解除します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_i2c.c を開きます。
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_i2c.c を開き、内容を確認します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_7_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
@@ -252,9 +252,9 @@
 
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_7_1」を「IO_7_2」にコピーします。
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト「IO_7_1」を「IO_7_2」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_7_1 を閉じます。
+<span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_7_1 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
@@ -275,7 +275,8 @@
 <pre class="wrap">
 <b>ピン配置設定・回路接続方法:</b>
 
-※ PIC - ATP3011 間の接続は変更ありません
+※ PIC - 音声合成 LSI ATP3011 間の接続は変更ありません
+※ ADXL345の基盤上に SDA とか SCL みたいな名称が書いてあります
 
 ATP3011 の 27 : SDA  -- ADXL345 の 8: SDA
 ATP3011 の 28 : SCL  -- ADXL345 の 9: SCL
