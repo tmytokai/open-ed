@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<script src="../../../mathjax.js"></script>
 <title>演習</title>
 </head>
 <body>
@@ -34,20 +33,20 @@
 A = 53 とする
 </p>
 
-<ol>
-<li> 桁数を n = 8 ビットとする
-<li> A = 53 を 2 で割る。商は $q_0$ = ？、余りは $r_0$ = ？
-<li> $q_0$ = ？ を 2 で割る。商は $q_1$ = ？、余りは $r_1$ = ？
-<li> $q_1$ = ？ を 2 で割る。商は $q_2$ = ？、余りは $r_2$ = ？
-<li> $q_2$ = ？ を 2 で割る。商は $q_3$ = ？、余りは $r_3$ = ？
-<li> $q_3$ = ？ を 2 で割る。商は $q_4$ = ？、余りは $r_4$ = ？
-<li> $q_4$ = ？ を 2 で割る。商は $q_5$ = ？、余りは $r_5$ = ？
-<li> $q_5$ = ？ を 2 で割る。商は $q_6$ = ？、余りは $r_6$ = ？
-<li> $q_6$ = ？ を 2 で割る。商は $q_7$ = ？、余りは $r_7$ = ？
-<li> 余りを $r_{7}$ から $r_0$ まで順に並べると ？
-<li> 0b を先頭に付ける
-<li> n = 8 ビットの 2 進数 ？ が得られる
-</ol>
+<pre>
+1. 桁数を n = 8 ビットとする
+2. A = 53 を 2 で割る。商は q0 = ？、余りは r0 = ？
+3. q0 = ？ を 2 で割る。商は q1 = ？、余りは r1 = ？
+4. q1 = ？ を 2 で割る。商は q2 = ？、余りは r2 = ？
+5. q2 = ？ を 2 で割る。商は q3 = ？、余りは r3 = ？
+6. q3 = ？ を 2 で割る。商は q4 = ？、余りは r4 = ？
+7. q4 = ？ を 2 で割る。商は q5 = ？、余りは r5 = ？
+8. q5 = ？ を 2 で割る。商は q6 = ？、余りは r6 = ？
+9. q6 = ？ を 2 で割る。商は q7 = ？、余りは r7 = ？
+10. 余りを r7 から r0 まで順に並べると ？
+11. 0b を先頭に付ける
+12. n = 8 ビットの 2 進数 ？ が得られる
+</pre>
 
 </div>
 
@@ -118,7 +117,7 @@ A = ？・128 + ？・64 + ？・32 + ？・16 + ？・8 + ？・4 + ？・2 + �
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人):</b>  <a href="./page02.html">テキスト</a>の手順に従って 10 進数の -53 を 2 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-5 (個人):</b>  <a href="./page02.html">テキスト</a>の手順に従って 10 進数の -53 を 2 進数に変換してみましょう。桁数は n = 8 とします。
 </p>
 
 <div class="info">
@@ -127,20 +126,18 @@ A = ？・128 + ？・64 + ？・32 + ？・16 + ？・8 + ？・4 + ？・2 + �
 A = -53 とする
 </p>
 
-<ol>
-<li> |A| = 53 の 2 進数は演習 1-1 より 6 ビットの 2 進数 0b ？
-<li> 桁数を n = 8 ビットとすると、先頭に 0 を ？ 個付け加えて 0b ？
-<li> 1 と 0 をひっくり返すと 0b ？
-<li> 1 を足して 8 ビットの 2 進数 0b ？ が得られる
-</ol>
+<pre>
+1. |A| = 53 の 2 進数は演習 1-1 より n = 8 ビットの 2 進数 0b ？
+2. 先頭ビットが 0 なので桁数 n はそのまま
+3. 1 と 0 をひっくり返すと 0b ？
+4. 1 を足して n = 8 ビットの 2 進数 0b ？ が得られる
+</pre>
 
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 指定した場所で上の穴埋め問題を解いて下さい。 
 </p>
 </div>
 
@@ -156,13 +153,31 @@ A = -53 とする
 </div>
 
 
+<br>
+<p>
+<input type="checkbox"><b>演習 1-7 (個人):</b> 演習 1-5〜1-6 の結果が正しいかプログラムを使って確認してみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「FP_1_4」を「FP_1_7」にコピーして、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 「Main.cpp」を開きます
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> main 関数内の A の値を -53 に変更して実行確認します。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。 
+</p>
+</div>
+
+
 
 <br>
 <h2><a href="./page03.html">3. 絶対値が 1 より小さい小数</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-7 (個人):</b>  <a href="./page03.html">テキスト</a>の手順に従って 10 進数の 0.1 を 2 進数に変換してみましょう。ただし有効桁数 を n = 4 ビットとします。
+<input type="checkbox"><b>演習 1-8 (個人):</b>  <a href="./page03.html">テキスト</a>の手順に従って 10 進数の 0.1 を 2 進数に変換してみましょう。ただし有効桁数 を n = 4 ビットとします。
 </p>
 
 <div class="info">
@@ -171,40 +186,37 @@ A = -53 とする
 A = 0.1 とする
 </p>
 
-<ol>
-<li> 有効桁数 を n = 4 ビットとする。
-<li> A に 2 をかけると ？ 。積の整数部分は r_{-1} = ？、積から r_{-1} を引いた残りは p_{-1} = ？
-<li> p_{-1} = ？ に 2 をかけると ？ 。積の整数部分は r_{-2} = ？、積から r_{-2} を引いた残りは p_{-2} = ？
-<li> p_{-2} = ？ に 2 をかけると ？ 。積の整数部分は r_{-3} = ？、積から r_{-3} を引いた残りは p_{-3} = ？
-<li> p_{-3} = ？ に 2 をかけると ？ 。積の整数部分は r_{-4} = ？、積から r_{-4} を引いた残りは p_{-4} = ？
-<li> p_{-4} = ？ に 2 をかけると ？ 。積の整数部分は r_{-5} = ？、積から r_{-5} を引いた残りは p_{-5} = ？
-<li> n = 5 回繰り返したので計算終了
-<li> r_{-1} を先頭に r_{-5} まで順に並べる
-<li> 0b を先頭に付ける
-<li> この時点で 5 ビットの 2 進数 0b ？ が得られる
-<li> r_{-5} = ？ なので最後のビットを ？
-<li> 4 ビットの 2 進数 0b ？ が得られる
-</ol>
+<pre>
+1. 有効桁数 を n = 4 ビットとする
+2. A に 2 をかけると ？ 。積の整数部分は r{-1} = ？、積から r{-1} を引いた残りは p{-1} = ？
+3. p{-1} = ？ に 2 をかけると ？ 。積の整数部分は r{-2} = ？、積から r{-2} を引いた残りは p{-2} = ？
+4. p{-2} = ？ に 2 をかけると ？ 。積の整数部分は r{-3} = ？、積から r{-3} を引いた残りは p{-3} = ？
+5. p{-3} = ？ に 2 をかけると ？ 。積の整数部分は r{-4} = ？、積から r{-4} を引いた残りは p{-4} = ？
+6. p{-4} = ？ に 2 をかけると ？ 。積の整数部分は r{-5} = ？、積から r{-5} を引いた残りは p{-5} = ？
+7. n = 4+1 = 5 回繰り返したので計算終了
+8. r{-1} を先頭に r{-5} まで順に並べて ？
+9. 0b を先頭に付けると ？
+10. 最後のビット(r{-5}) が ？ なので最後のビットを ？
+11. n = 4 ビットの 2 進数 0b ？ が得られる
+</pre>
 
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p7"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p8"></span> 指定した場所で上の穴埋め問題を解いて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-8 (個人):</b> <a href="./page03.html">テキスト</a>の手順に従って演習 1-7 で得られた 2 進数を 10 進数に変換してみましょう。
+<input type="checkbox"><b>演習 1-9 (個人):</b> <a href="./page03.html">テキスト</a>の手順に従って演習 1-8 で得られた 2 進数を 10 進数に変換してみましょう。
 </p>
 
 <div class="info">
 
 <p>
-A = ？ * 2^{-1} + ？ * 2^{-2} + ？ * 2^{-3} + ？ * 2^{-4}
+A = ？・(1/2) + ？・(1/4) + ？・(1/8) + ？・(1/16)
 </p>
 <p>
 　= ？ + ？ + ？ + ？ = ？ = ？
@@ -215,32 +227,13 @@ A = ？ * 2^{-1} + ？ * 2^{-2} + ？ * 2^{-3} + ？ * 2^{-4}
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> 指定した場所で上の穴埋め問題を解いて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-9 (個人):</b> 演習 1-7 で得られた 2 進数を 16 進数に変換してみましょう。
-</p>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p9"></span> 指定場所に解答して下さい。
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-10 (個人):</b> 有効桁数 n = 4 ビットで 10 進数の 0.1 を 2 進数に変換した時の丸め誤差はいくつでしょうか。
-</p>
-<p>
-(ヒント) 丸め誤差 = 変換後の値 - 元の値
-</p>
-<p>
-※ | 変換後の値 - 元の値 | という様に絶対値を取る定義もあります
+<input type="checkbox"><b>演習 1-10 (個人):</b> 演習 1-8 で得られた 2 進数を 16 進数に変換してみましょう。
 </p>
 
 <div class="olradio"> 
@@ -248,6 +241,35 @@ A = ？ * 2^{-1} + ？ * 2^{-2} + ？ * 2^{-3} + ？ * 2^{-4}
 <span class="olradio"><input type="radio" name="p10"></span> 指定場所に解答して下さい。
 </p>
 </div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-11 (個人):</b> 有効桁数 n = 4 ビットで 10 進数の 0.1 を 2 進数に変換した時の丸め誤差はいくつでしょうか。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p11"></span> 指定場所に解答して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-12 (個人):</b> 演習 1-8〜1-11 の結果が正しいかプログラムを使って確認してみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p12"></span> フォルダ「FP_1_7」を「FP_1_12」にコピーして、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 「Main.cpp」を開きます
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> main 関数内の A の値を 0.1 に変更して実行確認します。n_decimal は 4 のままで結構です
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。 
+</p>
+</div>
+
 
 <br>
 <script>PreNext(4,3)</script>

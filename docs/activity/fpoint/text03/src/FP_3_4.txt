@@ -1,39 +1,16 @@
 #include <stdio.h>
-#include <math.h>
-
-void show_binary(float *v)
-{
-    unsigned int *pv = (unsigned int*)v;
-    printf("10進数 %16.14f\n",*v);
-    printf("16進数 0x%x\n",*pv);
-    for(int i=31; i >= 0; --i){
-        if(i==31) printf("符号部 0b ");
-        if(i==30) printf("\n指数部 0b "); 
-        if(i==22) printf("\n仮数部 0b "); 
-        putchar( '0'+ ( ( (*pv)&(1<<i) ) > 0 ) );
-    }
-    printf("\n\n");
-}
 
 int main()
 {
-    float a = 5.375;
-    show_binary(&a);
+    float a = 1.0;
+    float A = ? ; // 同値判定したい数字
+    float e = ? ; // 算機イプシロン (任意の小さい数字)
 
-    a = 0.0;
-    show_binary(&a);
+    for( int i=0; i<10; ++i) a -= 0.1;
+    printf("a=%lf\n",a);
 
-    a = -0.0;
-    show_binary(&a);
+    if( ? ) printf("aはゼロです\n");
+    else printf("aはゼロではありません\n");
 
-    a = 1.0/0.0;
-    show_binary(&a);
-
-    a = -1.0/0.0;
-    show_binary(&a);
-
-    a = 0.0/0.0;
-    show_binary(&a);
-    
     return 0;
 }

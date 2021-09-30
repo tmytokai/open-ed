@@ -24,51 +24,47 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-1 (個人):</b> 10 進数の 5.375 を単精度(32ビット)の浮動小数点数形式の 2 進数に変換してみましょう。 
+<input type="checkbox"><b>演習 3-1 (個人):</b> 10 進数の 48.375 を単精度(32ビット)の浮動小数点数形式の 2 進数に変換してみましょう。 
 </p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p12"></span> フォルダ「FP_1_12」を「FP_3_1」にコピーして、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 「Main.cpp」を開きます
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> main 関数内の A の値を 48.375 に変更して実行確認します。n_int は 8 、n_decimal は 4 のままで結構です
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> A の固定小数点数が求まったので、指定した場所で以下の穴埋め問題を解いて下さい。 
+</p>
+</div>
+
 
 <div class="info">
 
 <p>
-A = 5.375 なので
+A = 48.375 とする
 </p>
 
+<pre>
+1.「符号部」を求める。A はプラス値なので 符号部は ？
+2. A の絶対値 |48.375| = 48.375 を固定小数点数形式の 2 進数に
+   変換(整数部の桁数 8 ビット、小数部の有効桁数 4 ビット)すると ？
+3. 小数点を「？に ？ 回」移動して整数部を 0b1 の 1 桁だけにする(※先頭の 2 つの 0 は取り除く)と ？
+   ？に ？ 回移動したので E = ？
+4. 「指数部」を求める。単精度なので E に 127 を足した E = ？ を 2 進数に変換して ？
+なお今回は表1で示した指数部のビット数と比べると同じビット数(8ビット)なので先頭を0で埋めなくても良い
+5. 「仮数部」を求める。(3)で求めた値の先頭から "0b1." を取り除いて M = ？
+   表1で示したビット数(23ビット) よりも M の方が短いので、末尾を 0 で埋めて M = ？
+6. 符号部、指数部、仮数部の順につなげて 0b を先頭に付けると 48.375 の単精度浮動小数点数は
 
-<ol>
-<li>「符号部」を求める。A はプラスの値なので 符号部は 0b (?)
-<li> |5.375| = (?) を<a href="../text02/page01.html">固定小数点数形式の2進数</a>に変換すると 0b (?) ※ ヒント 0.375 = 3/8
-<li> 小数点を (?) に (?) 回移動して整数部を 1 桁だけにすると 0b (?)
-<br>
-左に (?) 回移動したので E = (?)
-<li>「指数部」を求める。単精度なので E+(?) = (?) を 2 進数に変換すると 0b (?)
-<br>
-表1で示したビット数(8ビット)と比べると、 (?)
-<br>
-よって指数部は (?)
-<li>「仮数部」を求める。(3)で求めた小数の先頭 1 ビットと小数点(つまり 1. )を取り除いて M = 0b (?)
-<br>
-表1で示したビット数(23ビット) よりも M の方が短い( (?) ビット)ので、末尾を (?) 個の 0で埋める
-<br>
-よって仮数部は 0b (?)
-<li> 符号部、指数部、仮数部の順につなげて 0b を先頭に付けると 5.375 の単精度浮動小数点数は
-<br>
-0b (?)_(?)_(?)
-<br>
-※ 分かりやすいように各部の間にアンダーバーを入れてます
-</ol>
+0b_？_？_？
+
+(注) 見やすいように各部の間にアンダーバーを入れてますが、実際にはアンダーバーは入りません
+</pre>
 
 </div>
 
-
-</div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 問題を解いて下さい。
-</p>
-</div>
 
 <br>
 <p>
@@ -78,21 +74,25 @@ A = 5.375 なので
 <div class="info">
 
 <p>
-符号部 = 0 (?)
+符号部 =？
 <br>
-指数部 = 0b (?)
+指数部 = ？
 <br>
-仮数部 = 0b (?)
+仮数部 = ？
 </p>
 
-<ol>
-<li> 指数部の 2 進数を<a href="../text01/page01.html">10進数の整数に変換</a>すると (?)
-<lI> 単精度なので、(1)で求めた値から (?) を引いて (?)
-<li> 仮数部の先頭に「1.」を追加して固定小数点数に変換すると 0b (?) ※ 見づらいので末尾の0は省略
-<li> (3)で求めた固定小数点数の小数点の位置を (?) に (?) 回移動すると 0b (?)
-<li> (5)で求めた<a href="../text02/page01.html">固定小数点数を10進数に戻す</a>と (?)
-<li> 符号部が 0b (?) なので (?) を付けて +5.375
-</ol>
+<p>
+なので
+</p>
+
+<pre>
+1. 指数部の2進数を 10 進数の整数に変換すると E = ？
+2. 単精度なので、E から 127 を引いて E = ？
+3. 仮数部の先頭に「0b1.」を追加して固定小数点数に変換すると ？ ※ 見づらいので末尾の 0 は省略
+4. (3)で求めた固定小数点数の小数点の位置を E = ？ 回(？なので？に)移動すると ？
+5. (5)で求めた固定小数点数を10進数に戻すと 48.375
+6. 符号部が ？ なのでマイナス記号は付けない
+</pre>
 
 </div>
 
@@ -100,42 +100,30 @@ A = 5.375 なので
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 上の穴埋め問題を指定場所にコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 問題を解いて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定した場所で上の穴埋め問題を解いて下さい。 
 </p>
 </div>
 
-<br>
-<p>
-<input type="checkbox"><b>演習 3-3 (個人):</b> 演習 3-1 で得られた 2 進数を 16 進数に変換してみましょう。
-</p>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に解答して下さい。
-</p>
-</div>
 
 <br>
 <h2><a href="./page02.html">2. 特殊な値</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-4 (個人):</b> サンプルプログラムを使って、演習3-1の値(5.375)や特殊な値が実際にコンピュータ内でどのように浮動小数点数(単精度)で表されているのか確認してみましょう
+<input type="checkbox"><b>演習 3-3 (個人):</b> サンプルプログラムを使って、演習3-1の値や特殊な値が実際にコンピュータ内でどのように浮動小数点数(単精度)で表されているのか確認してみましょう
 </p>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」を新規作成し、その中に移動します
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「FP_3_3」を新規作成し、その中に移動します
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「FP_3_3」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> <a href="./src/FP_3_4.txt">サンプルコード</a>をコピーします。
+<span class="olradio"><input type="radio" name="p3"></span> Main.cpp に<a href="./src/FP_3_3.txt">テンプレート</a>をコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルと実行をして結果を確認します。
+<span class="olradio"><input type="radio" name="p3"></span> 実行確認します。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「結果」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」「出力結果」を貼り付けて下さい。 
 </p>
 </div>
 
@@ -144,7 +132,30 @@ A = 5.375 なので
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-5 (個人):</b>  <a href="./page03.html">テキスト</a>のソース 1 が上手く動くように修正しましょう。
+<input type="checkbox"><b>演習 3-4 (個人):</b>  テキストのソース 1 が上手く動くように修正しましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「FP_3_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> まず Main.cpp にソース1をコピーし、実行して上手く条件判定されないことを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 次に Main.cpp に<a href="./src/FP_3_4.txt">テンプレート</a>をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-5 (個人):</b>  テキストの桁落ちの例を確認し、計算手順を工夫して桁落ちによる影響を減らしてみましょう。
 </p>
 
 <div class="olradio"> 
@@ -153,44 +164,21 @@ A = 5.375 なので
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> フォルダ「FP_3_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="./page03.html">ソース 1</a>をコピーして、解答します。e は適当な数字で結構です。
+<span class="olradio"><input type="radio" name="p5"></span> Main.cpp に<a href="./src/FP_3_5.txt">テンプレート</a>をコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 一旦コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> テキストの桁落ちの例を確認します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 確認が終わったらコメントに従って解答してください。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
 <br>
-<p>
-<input type="checkbox"><b>演習 3-6 (個人):</b>  <a href="./page03.html">テキスト</a>の桁落ちの例を確認し、計算手順を工夫して桁落ちによる影響を減らしてみましょう。
-</p>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p6"></span> フォルダ「FP_3_6」を新規作成し、その中に移動します
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> フォルダ「FP_3_6」の中で新規に 1 つソースを作ります。ファイル名を「Main.cpp」とします。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> <a href="./src/FP_3_6.txt">サンプルコード</a>をコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 一旦コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> テキストの桁落ちの例を確認します。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 確認が終わったらコメントに従って解答してください。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをしてください。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
-</p>
-</div>
-
-
 <script>PreNext(4,3)</script>
 </body>
 </html>

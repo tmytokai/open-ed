@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+const double A = 12;
+const int n_int = 4;     // 整数部の桁数
+const int n_decimal = 4; // 小数部の有効桁数
+
+
 void convert_int( const int A, const int n )
 {
     printf("桁数: %d\n", n );
@@ -45,9 +50,5 @@ void convert(const double A, const int n_int, const int n_decimal = 4)
 
 int main()
 {
-    const double A = 12;
-    const int n_int = 4;     // 整数部の桁数
-    const int n_decimal = 4; // 小数部の有効桁数
-
     convert(A,n_int,n_decimal);
 }
