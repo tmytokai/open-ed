@@ -29,19 +29,29 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-2-1.cpp">テンプレートソース</a>(D-FILTER-2-1.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_2_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_2_1」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>(trumpet_22k_mono.wav)をソースと同じフォルダにダウンロードします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、フィルタ長は $\textrm{L} = 31$ とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 D-FILTER-2-1.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 DF_2_1.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を確認してください。 
+<span class="olradio"><input type="radio" name="p1"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、スペクトログラムを確認して下さい。
+</p>
+<p>
+(参考) スペクトログラム画像の作成方法: $ sox 入力.wav -n spectrogram -z (デシベル) -o 出力.png 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(D-FILTER-2-1.wav)を演奏し、スペクトログラム画像を見て高周波成分が減衰していることを確認して下さい。 
+デシベルは適宜調整(今回の例では 60 位が目安)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(DF_2_1.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、高周波成分が減衰していることを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -61,7 +71,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-2」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_2」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -76,23 +86,27 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/D-FILTER-2-3.cpp">テンプレートソース</a>(D-FILTER-2-3.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_2_3」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_2_3」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_3.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開いて穴埋めをします。各パラメータ値は演習 2-1 と同じです。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-3.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行するとCSVファイル(DF_2_3-4.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> D-FILTER-2-3.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に 「f」、次の列の先頭に「|H(f)|」 と入力します。
+<span class="olradio"><input type="radio" name="p3"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に 「f」、次の列の先頭に「|H(f)|」 と入力します。
 </p>
 <p>
-※ テキストの振幅特性のグラフ(図4)では横軸を角周波数(rad/秒)にしていますが、今回は分かりやすく周波数[Hz]形式にしています。
+※ グラフの横軸の単位は角周波数(rad/秒)では無く、分かりやすい様に周波数[Hz]にしています。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 移動平均フィルタがローパス特性であることを確認します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-3-L31」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_3_L31」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -107,21 +121,21 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 演習 2-3 で使ったテンプレートソース(D-FILTER-2-3.cpp)を使い回します。 
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「DF_2_3」を「DF_2_4」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> テンプレートソースを開き、$\textrm{L} = 3$ に変更します。
+<span class="olradio"><input type="radio" name="p4"></span> main.cpp を開き、$\textrm{L} = 3$ に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-3.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行するとCSVファイル(DF_2_3-4.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> D-FILTER-2-3.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
+<span class="olradio"><input type="radio" name="p4"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 減衰が緩やかになっていることを確認します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-4-L3」として下さい(拡張子は使用する表計算ソフトによって変わります)。
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_4_L3」として下さい(拡張子は使用する表計算ソフトによって変わります)。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 同様に、$\textrm{L} = 127$ のグラフも描いて「D-FILTER-2-4-L127」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。また減衰が急になっていることも確認します。
+<span class="olradio"><input type="radio" name="p4"></span> 同様に、$\textrm{L} = 127$ のグラフも描いて「DF_2_4_L127」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。また減衰が急になっていることも確認します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -137,17 +151,23 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="./src/D-FILTER-2-5.cpp">テンプレートソース</a>(D-FILTER-2-5.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DF_2_5」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DF_2_5」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_5.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>(trumpet_22k_mono.wav)をソースと同じフォルダにダウンロードします。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、フィルタ長は $\textrm{L}$ = 63、カットオフ周波数は $f_c$ = 1000 [Hz] とします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行すると「 D-FILTER-2-5.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行すると「 DF_2_5-9.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を確認してください。
+<span class="olradio"><input type="radio" name="p5"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(演習2-1参照、名前は任意)、スペクトログラムを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> フィルタリング後の音声(D-FILTER-2-5.wav)を演奏し、スペクトログラム画像を見て高周波成分が減衰していることを確認して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> フィルタリング後の音声(DF_2_5-9.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、高周波数成分が減衰していることを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p5"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -157,18 +177,22 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> <a href="./src/D-FILTER-2-6.cpp">テンプレートソース</a>(D-FILTER-2-6.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「DF_2_6」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「DF_2_6」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_6.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> テンプレートソースを開いて穴埋めをします。各パラメータ値は演習 2-5 と同じです。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-6.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行するとCSVファイル(DF_2_6-10.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> D-FILTER-2-6.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。
+<span class="olradio"><input type="radio" name="p6"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
 
-<span class="olradio"><input type="radio" name="p6"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-6」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p6"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_6」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -182,23 +206,27 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p7"></span> <a href="./src/D-FILTER-2-7.cpp">テンプレートソース</a>(D-FILTER-2-7.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「DF_2_7」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「DF_2_7」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_7.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p7"></span> テンプレートソースを開いて穴埋めをします。各パラメータ値は演習 2-5 と同じです。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-7.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p7"></span> コンパイルして実行するとCSVファイル(DF_2_7-8-11.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> D-FILTER-2-7.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
+<span class="olradio"><input type="radio" name="p7"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
 </p>
 <p>
-※ テキストの振幅特性のグラフ(図4)では横軸を角周波数 [rad/秒] にしていますが、今回は分かりやすく周波数[Hz]形式にしています。
+※ グラフの横軸の単位は角周波数(rad/秒)では無く、分かりやすい様に周波数[Hz]にしています。 
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p7"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p7"></span> カットオフ周波数 $f_c$ [Hz] 前後で減衰していることを確認します。またギブズ現象が起きていることも確認します。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-7-L63」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p7"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_7_L63」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -213,21 +241,21 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 演習 2-7 で使ったテンプレートソース(D-FILTER-2-7.cpp)を使い回します。
+<span class="olradio"><input type="radio" name="p8"></span> フォルダ「DF_2_7」を「DF_2_8」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> テンプレートソースを開き、$\textrm{L} = 127$ に変更します。
+<span class="olradio"><input type="radio" name="p8"></span> main.cppを開き、$\textrm{L} = 127$ に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-7.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行するとCSVファイル(DF_2_7-8-11.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> D-FILTER-2-7.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」 と入力します。
+<span class="olradio"><input type="radio" name="p8"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」 と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> カットオフ周波数 $f_c$ [Hz] 前後で減衰していることを確認します。またギブズ現象が演習 2-7 に比べて控えめになっていることを確認します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-8-L127」として下さい(拡張子は使用する表計算ソフトによって変わります)。
+<span class="olradio"><input type="radio" name="p8"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_8_L127」として下さい(拡張子は使用する表計算ソフトによって変わります)。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 同様に、$\textrm{L} = 511$ のグラフも描いて「D-FILTER-2-8-L511」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。またギブズ現象が更に控えめになっていることを確認します。
+<span class="olradio"><input type="radio" name="p8"></span> 同様に、$\textrm{L} = 511$ のグラフも描いて「DF_2_8_L511」で保存して下さい(拡張子は使用する表計算ソフトによって変わります)。またギブズ現象が更に控えめになっていることを確認します。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -244,19 +272,17 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p9"></span> 演習 2-5で使った FIR ローパスフィルタのテンプレートソース(D-FILTER-2-5.cpp) を D-FILTER-2-9.cpp の名前でコピーします。
+<span class="olradio"><input type="radio" name="p9"></span> フォルダ「DF_2_5」を「DF_2_9」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> コピーしたテンプレートソース(D-FILTER-2-9.cpp)を開いて FIR ローパスフィルタのインパルス応答を FIR ハイパスフィルタのインパルス応答に置き換えます。パラメータは $\textrm{L} = 63$、$f_c = 3000$ [Hz]、$f_s = 22050$ [Hz] とします。
+<span class="olradio"><input type="radio" name="p9"></span> main.cpp を開いて FIR ローパスフィルタのインパルス応答を FIR ハイパスフィルタのインパルス応答に置き換えます。パラメータは $\textrm{L} = 63$、$f_c = 3000$ [Hz]、$f_s = 22050$ [Hz] とします。※ fc の値が異なるので注意
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 同様に「D-FILTER-2-5.wav」をfopenしている部分を「D-FILTER-2-9.wav」に書き換えます。
+<span class="olradio"><input type="radio" name="p9"></span> コンパイルして実行すると「 DF_2_5-9.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> コンパイルして実行すると「 D-FILTER-2-9.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p9"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(演習2-1参照、名前は任意)、スペクトログラムを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を確認してください。 
+<span class="olradio"><input type="radio" name="p9"></span> フィルタリング後の音声(DF_2_5-9.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、低周波数成分が減衰していることを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> フィルタリング後の音声(D-FILTER-2-9.wav)を演奏し、スペクトログラム画像を見て高周波成分が減衰していることを確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p9"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p9"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -266,19 +292,17 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p10"></span> 演習 2-6 で使ったテンプレートソース(D-FILTER-2-6.cpp)をD-FILTER-2-10.cpp の名前でコピーします。 
+<span class="olradio"><input type="radio" name="p10"></span> フォルダ「DF_2_6」を「DF_2_10」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> コピーしたテンプレートソース(D-FILTER-2-10.cpp)を開いて FIR ハイパスフィルター向けのコードに修正します。各パラメータ値は演習 2-9 と同じです(※ $f_c$ の値が違うので注意)。 
+<span class="olradio"><input type="radio" name="p10"></span> main.cpp を開いて FIR ハイパスフィルター向けのコードに修正します。各パラメータ値は演習 2-9 と同じです(※ $f_c$ の値が違うので注意)。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 同様に「D-FILTER-2-6.csv」をfopenしている部分を「D-FILTER-2-10.csv」に書き換えます。
+<span class="olradio"><input type="radio" name="p10"></span> コンパイルして実行するとCSVファイル(DF_2_6-10.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-10.csv)が出力されます。
-<br>
-<span class="olradio"><input type="radio" name="p10"></span> D-FILTER-2-10.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。
+<span class="olradio"><input type="radio" name="p10"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-10」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p10"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_10」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -292,25 +316,23 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p11"></span> 演習 2-7 と 2-8 で使ったテンプレートソース(D-FILTER-2-7.cpp)をD-FILTER-2-11.cpp の名前でコピーします。 
+<span class="olradio"><input type="radio" name="p11"></span> フォルダ「DF_2_7」を「DF_2_11」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> コピーしたテンプレートソース(D-FILTER-2-11.cpp)を開いて FIR ハイパスフィルター向けのコードに修正します。各パラメータ値は演習 2-9 と同じです。(※ $f_c$ の値が違うので注意、L の値も 63 に戻す)。 
+<span class="olradio"><input type="radio" name="p11"></span> main.cpp を開いて FIR ハイパスフィルター向けのコードに修正します。各パラメータ値は演習 2-9 と同じです。(※ $f_c$ の値が違うので注意、L の値が 63 になってるか確認)。 
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 同様に「D-FILTER-2-7.csv」をfopenしている部分を「D-FILTER-2-11.csv」に書き換えます。
+<span class="olradio"><input type="radio" name="p11"></span> コンパイルして実行するとCSVファイル(DF_2_7-8-11.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> コンパイルして実行するとCSVファイル(D-FILTER-2-11.csv)が出力されます。
-<br>
-<span class="olradio"><input type="radio" name="p11"></span> D-FILTER-2-11.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
+<span class="olradio"><input type="radio" name="p11"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「f」、次の列の先頭に「|H(f)|」と入力します。
 </p>
 <p>
-※ テキストの振幅特性のグラフ(図4)では横軸を角周波数(rad/秒)にしていますが、今回は分かりやすく周波数[Hz]形式にしています。
+※ グラフの横軸の単位は角周波数(rad/秒)では無く、分かりやすい様に周波数[Hz]にしています。
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p11"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。
 <br>
 <span class="olradio"><input type="radio" name="p11"></span> 0 に近かったゲインがカットオフ周波数 $f_c$ [Hz] 前後で増幅していることを確認します。またギブズ現象が起きていることも確認します。
 <br>
-<span class="olradio"><input type="radio" name="p11"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-2-11-L63」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p11"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_2_11_L63」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p11"></span> チーム内で答え合わせをして下さい。
 <br>
@@ -318,7 +340,7 @@
 </p>
 </div>
 
-
+<br>
 <script>PreNext(4,3)</script>
 </body>
 </html>

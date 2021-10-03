@@ -27,7 +27,7 @@ FIR (Finite Impulse Response) フィルタは日本語では「有限インパ�
 </p>
 
 <p>
-従ってこのインパルス応答を<a href="../../z">Z 変換</a>して<a href="../text01/page05.html">伝達関数</a>を求めると、伝達関数は<a href="../../z/text01/page04.html">有限長の時間領域ディジタル信号のZ変換</a>の所で勉強した式と同じ形で表されます。
+従ってこのインパルス応答を<a href="../../z">Z 変換</a>して<a href="../text01/page05.html">伝達関数</a>を求めると、伝達関数は<a href="../../z/text01/page03.html">有限長の時間領域ディジタル信号のZ変換</a>の所で勉強した式と同じ形で表されます。
 </p>
 
 <p>
@@ -49,7 +49,7 @@ FIR (Finite Impulse Response) フィルタは日本語では「有限インパ�
 \end{align*}
 
 <p>
-・インパルス応答 $h[i]$ は「<b>FIRフィルタ係数</b>」または「<b>タップ係数</b>」と言う
+・$\textrm{L}$ 個のインパルス応答 $h[0]$ 〜 $h[\textrm{L}-1]$ を「<b>FIRフィルタ係数</b>」または「<b>タップ係数</b>」と言う
 </p>
 <p>
 ・整数 $\textrm{L}$ を「<b>フィルタ長</b>」または「<b>フィルタ次数</b>」または「<b>タップ数</b>」と言う
@@ -98,8 +98,8 @@ x[i] は時刻 i が負の時は 0 とする
 </p>
 
 <pre class="wrap">
-y[i] = 0;
-for( n = 0; n &lt L; ++n ) y[i] += h[n] * x[i-n]
+y[i] = 0 ;
+for( int n = 0; n &lt L; ++n ) y[i] += h[n] * x[i-n] ;
 </pre>
 
 </div>

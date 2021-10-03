@@ -102,7 +102,7 @@ int main()
     const double fc = ? ;
 
     // 正規化カットオフ周波数
-    const double Alpha = ? ;
+    const double alpha = ? ;
 
     // FIR フィルタ長
     const int L = ? ;
@@ -110,7 +110,7 @@ int main()
     // インパルス応答
     double h[L];
 
-    // FIR ローパスフィルタのインパルス応答の計算
+    // FIR ローパスまたはハイパスフィルタのインパルス応答の計算
     // 円周率は M_PI を使用する
     const int C = (L-1)/2;
     h[C] = ? ;
@@ -128,7 +128,7 @@ int main()
     // ここまで
     //----------------------------------------------
 
-    FILE* fout = fopen( "D-FILTER-2-5.wav", "wb" );
+    FILE* fout = fopen( "DF_2_5-9.wav", "wb" );
     if( !fout ){
         fprintf( stderr, "ファイルオープンに失敗しました\n" );
         exit(EXIT_FAILURE);

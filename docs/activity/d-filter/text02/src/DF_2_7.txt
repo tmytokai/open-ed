@@ -26,7 +26,7 @@ int main()
     const double fc = ? ;
 
     // 正規化カットオフ周波数
-    const double Alpha = ? ;
+    const double alpha = ? ;
 
     // FIR フィルタ長
     const int L = ? ;
@@ -34,7 +34,7 @@ int main()
     // インパルス応答
     double h[L];
 
-    // FIR ローパスフィルタのインパルス応答の計算
+    // FIR ローパスまたはハイパスフィルタのインパルス応答の計算
     // 円周率は M_PI を使用する
     const int C = (L-1)/2;
     h[C] = ? ;
@@ -44,7 +44,7 @@ int main()
 
     const int N = 200;
     const double wmax = M_PI*fs;
-    FILE* f = fopen( "D-FILTER-2-7.csv", "wb");
+    FILE* f = fopen( "DF_2_7-8-11.csv", "wb");
     for( int i = 0; i <N ; ++i ){
         double w = wmax*i/N;
         fprintf( f, "%lf, %lf\n", w/(2*M_PI), H(w,h,L,C,fs) );
