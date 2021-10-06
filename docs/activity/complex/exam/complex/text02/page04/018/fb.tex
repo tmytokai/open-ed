@@ -8,25 +8,7 @@
 \noindent \textbf{【重要事項】}
 
 \medskip
-\noindent ・ 時間領域アナログサイン波はオイラー公式を用いて2つの時間領域複素正弦波の和に分解できる
-
-\medskip
-\noindent \mbox{(sin 版)}
-
-\[
-a \cdot \sin ( w \cdot t + \phi )
-=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
-+  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
-\]
-
-\medskip
-\noindent \mbox{(cos 版)}
-
-\[
-a \cdot \cos ( w \cdot t + \phi )
-=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j \cdot \phi \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
-+  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j  \cdot \phi \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
-\]
+\noindent 時間領域アナログサイン波同士の計算はオイラー公式を用いて2つの時間領域複素正弦波の和に分解することで計算や証明が楽になることが多い。
 
 \bigskip
 
@@ -53,3 +35,16 @@ a \cdot \cos ( w \cdot t + \phi )
   \frac{1}{2} \cdot \textrm{e}^{\{ j \cdot \pi/2 \}} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
 + \frac{1}{2} \cdot \textrm{e}^{\{-j \cdot \pi/2 \}} \cdot \textrm{e}^{\{ j \cdot w \cdot t \}}
 \end{align*}
+
+\bigskip
+(別解) 積和公式を使う
+
+\begin{align*}
+2 \cdot \sin(w/2 \cdot t) \cdot \cos( w/2 \cdot t) 
+&= \sin( w \cdot t ) + \sin( 0 ) \\
+&= \sin( w \cdot t ) \\
+& =
+  \frac{1}{2} \cdot \textrm{e}^{\{ j \cdot \pi/2 \}} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++ \frac{1}{2} \cdot \textrm{e}^{\{-j \cdot \pi/2 \}} \cdot \textrm{e}^{\{ j \cdot w \cdot t \}}
+\end{align*}
+
