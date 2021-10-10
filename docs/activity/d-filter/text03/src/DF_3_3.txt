@@ -47,7 +47,7 @@ int main()
     }
 
     // インパルス応答をcsvファイルに出力
-    FILE* f = fopen( "D-FILTER-3-3.csv", "wb");
+    FILE* f = fopen( "DF_3-8.csv", "wb");
     for( int i = 0; i < N ; ++i ){
         fprintf( f, "%d, %lf\n", i, y[i] );
     }

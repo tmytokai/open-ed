@@ -59,6 +59,40 @@ RC ローパスフィルタの(アナログ)伝達関数と周波数特性とイ
 & = \frac{ w_c }{ s + w_c } \\
 \end{align*}
 
+<p>
+(求め方)
+</p>
+
+<p>
+$V_{in}(t)$ を入力電圧(正弦波とする)のフェーザ表示、$I(t)$ を回路内を流れる電流のフェーザ表示とすると、
+</p>
+
+\[
+V_{in}(t) = \left \{ R + \frac{1}{j \cdot \textrm{C} \cdot w} \right \} \cdot I(t)
+\]
+
+<p>
+であるから、$V_{out}(t)$ をコンデンサの両端にかかる電圧のフェーザ表示とすると
+</p>
+
+\begin{align*}
+V_{out}(t) &= \frac{1}{j \cdot \textrm{C} \cdot w} \cdot I(t) \\
+&= \frac{ \frac{1}{j \cdot \textrm{C} \cdot w} }{ R + \frac{1}{j \cdot \textrm{C} \cdot w} } \cdot V_{in}(t)  \\
+&= \frac{ 1 }{ 1 + j \cdot RC \cdot w } \cdot V_{in}(t)  \\
+\end{align*}
+
+<p>
+よって $j\cdot w = s$ を代入してラプラス変換にすることで
+</p>
+
+\[
+\textrm{H}(s) = \frac{ V_{out}(t) }{ V_{in}(t) } = \frac{ 1 }{ 1 + RC\cdot s }
+\]
+
+<p>
+が求められる。
+</p>
+
 </div>
 
 <br>
@@ -76,6 +110,19 @@ RC ローパスフィルタの(アナログ)伝達関数と周波数特性とイ
 & = \frac{ w_c }{ \sqrt{w^2 + w_c^2 }}  \cdot \textrm{e}^{ -j\cdot \tan^{-1}(w/w_c) } \\
 & = \frac{ w_c }{ \sqrt{w^2 + w_c^2 }}  \cdot \textrm{e}^{ j\cdot \tan^{-1}(-w/w_c) } \\
 \end{align*}
+
+<p>
+よって振幅特性(ゲイン)と位相特性はそれぞれ
+</p>
+
+\[
+|\textrm{H}(w)| = \frac{ w_c }{ \sqrt{w^2 + w_c^2 }} 
+\]
+
+\[
+\angle \textrm{H}(w) = \tan^{-1}(-w/w_c)
+\]
+
 
 </div>
 
@@ -98,11 +145,11 @@ h(t)
 <p>
 あとはこの RC ローパスフィルタのインパルス応答を<a href="../../d-signal/text02/page01.html">サンプリング間隔</a> $\tau$ [秒] でサンプリングしてディジタルフィルタの<a href="../text01/page03.html">インパルス応答</a> $h[i]$ を求めます。
 <br>
-ただしそのままだと$\tau$の大小でゲインが変化してしまうので、ゲインを一定にするために $\tau$ をかけます。
+ただしそのままだと$\tau$の大小で振幅特性(ゲイン)が変化してしまうので、振幅特性を一定にするために $\tau$ をかけます。
 </p>
 
 <p>
-※ このページの一番下にあるIIRフィルタの周波数特性の導出式をみると分かりますが$\tau$がキャンセルされます
+※ このページの一番下にあるIIRフィルタの周波数特性の導出式をみると分かりますが $\tau$ は最終的にキャンセルされます
 </p>
 
 <div class="info">
@@ -120,9 +167,18 @@ h[i] = \tau \cdot h(\tau \cdot i ) = \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot
 
 <p>
 よって IIR ローパスフィルタの伝達関数は次の様になります。
+</p>
 
 <div class="info">
 <input type="checkbox"><b> 標準形 1次 IIR ローパスフィルタの伝達関数: </b>
+
+\begin{align*}
+\textrm{H}(z) = \frac{ \tau \cdot w_c }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } 
+\end{align*}
+
+<p>
+(求め方)
+</p>
 
 \begin{align*}
 \textrm{H}(z) &= \sum_{i=0}^\infty \{ h[i] \cdot z^{-i} \} \\
@@ -187,7 +243,7 @@ $|x|$ が十分小さい時、$\textrm{e}^{x}$ をマクローリン展開する
 </div>
 
 <p>
-よってカットオフ角周波数 $w_c$ [rad/秒] とサンプリング間隔 $\tau$ [秒]が充分に小さければ、標準形 1次 IIR ローパスフィルタの周波数特性は 1次 RC ローパスフィルタの周波数特性に近似されます。
+よってカットオフ角周波数 $w_c$ [rad/秒] があまり高くなく、かつサンプリング間隔 $\tau$ [秒]が充分に小さければ(つまりサンプリング周波数が充分に高ければ)、標準形 1次 IIR ローパスフィルタの周波数特性は 1次 RC ローパスフィルタの周波数特性に近似されることが分かります。
 </p>
 
 <br>

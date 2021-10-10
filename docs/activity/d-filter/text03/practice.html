@@ -30,19 +30,29 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-3-1.cpp">テンプレートソース</a>(D-FILTER-3-1.cpp)をダウンロードします。 
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_3_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「DF_3_1」の中に main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_3_1.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>(trumpet_22k_mono.wav)をソースと同じフォルダにダウンロードします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、カットオフ周波数は $f_c$ = 1000 [Hz] とします。
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、フィルタ長は $\textrm{L} = 1$ 、カットオフ周波数は $f_c$ = 1000 [Hz] とします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「D-FILTER-3-1.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 DF_3_1-6.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を確認してください。
+<span class="olradio"><input type="radio" name="p1"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、スペクトログラムを確認して下さい。
+</p>
+<p>
+(参考) スペクトログラム画像の作成方法: $ sox 入力.wav -n spectrogram -z (デシベル) -o 出力.png 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(D-FILTER-3-1.wav)を演奏し、スペクトログラム画像を見て高周波成分が減衰していることを確認して下さい。
+デシベルは適宜調整(今回の例では 60 位が目安)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> フィルタリング後の音声(DF_3_1-6.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、高周波成分が減衰していることを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p1"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -52,23 +62,25 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 表計算ソフトを起動します。
+<span class="olradio"><input type="radio" name="p2"></span> カットオフ周波数は $f_c = 1000$ [Hz] とします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 今回考えるローパスフィルタのカットオフ周波数は 1000 [Hz] とします。 一番上の最初の列のセルに「fc」と書き、その隣のセルに「1000」と入力して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 表計算ソフトを起動し、1行目の最初の列に「fc」と書き、その隣の列に「1000」と入力して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 更にその隣の列のセルに「wc」と書き、その隣のセルに計算式を入力して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 更にその隣の列に「wc」と書き、その隣の列に計算式を入力してカットオフ角周波数を求めます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 2行目の最初の列のセルに「t」と書き、その下のセルから各 $t$ の値を 0 [秒] から 0.01 [秒] まで 0.0001 [秒] 間隔で オートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 2行目の最初の列に「t」、次の列に「h(t)」と入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「t」と書いた右隣のセルに「h(t)」と書き、その下のセルから各 $t$ における $h(t)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 3行目の最初の列から各 $t$ の値を 0 [秒] から 0.01 [秒] まで 0.0001 [秒] 間隔で オートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「t」と「h(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
+<span class="olradio"><input type="radio" name="p2"></span> 次の列に各 $h(t)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> シートを保存します。ファイル名は「D-FILTER-3-2」として下さい(拡張子は表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_3_2」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「インパルス応答のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -78,28 +90,28 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./src/D-FILTER-3-3.cpp">テンプレートソース</a>(D-FILTER-3-3.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「DF_3_3」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開いて穴埋めをします。パラメータは サンプリング周波数 $f_s = 22050$ [Hz]、$f_c = 1000$ [Hz] として下さい。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「DF_3_3」の中に main.cpp を作成します
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行するとCSVファイル(D-FILTER-3-3.csv)が出力されます。
+<span class="olradio"><input type="radio" name="p3"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_3_3.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> D-FILTER-3-3.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に h[i] と入力します。
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートソースを開いて穴埋めをします。各パラメータ値は演習 3-1 と同じです。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点あり、線なしとします。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行するとCSVファイル(DF_3_3-8.csv)が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-3-3」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p3"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、結果のグラフが演習3-2で求めた RC アナログローパスフィルタのインパルス応答と同じ形になっている事を確認して下さい(※)。
-</p>
-<p>
-※ ゲイン調整のためサンプリングした後にサンプリング周期 $\tau$ [秒]を掛けているので値は一致しません
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
+<br>
+
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_3_3」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「インパルス応答のグラフ」を貼り付けて下さい。 
 </p>
 </div>
-
 
 <br>
 <p>
