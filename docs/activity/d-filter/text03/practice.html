@@ -70,7 +70,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 2行目の最初の列に「t」、次の列に「h(t)」と入力します。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 3行目の最初の列から各 $t$ の値を 0 [秒] から 0.01 [秒] まで 0.0001 [秒] 間隔で オートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p2"></span> 3行目の最初の列から各 $t$ の値を 0 [秒] から約 0.01 [秒] まで $\tau = 1/22050$ [秒] 間隔で オートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 次の列に各 $h(t)$ の値をオートフィルを使って入力します。
 <br>
@@ -107,7 +107,11 @@
 
 <span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_3_3」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、RC アナログローパスフィルタのインパルス応答とほぼ同じ形になっている事を確認して下さい(※)。
+</p>
+<p>
+※ ゲイン調整のためサンプリングした後に $\tau$ を掛けているので値は一致しません
+</p>
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 指定場所に「インパルス応答のグラフ」を貼り付けて下さい。 
 </p>
@@ -115,88 +119,88 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習3-4 (個人):</b> RC アナログローパスフィルタの周波数特性(振幅特性)のグラフを描いてみましょう。
+<input type="checkbox"><b>演習3-4 (個人):</b> RC アナログローパスフィルタの振幅特性のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトを起動します。 
+<span class="olradio"><input type="radio" name="p4"></span> カットオフ周波数は $f_c = 1000$ [Hz] とします。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 今回考えるローパスフィルタのカットオフ周波数は 1000 [Hz] とします。 一番上の最初の列のセルに「fc」と書き、その隣のセルに「1000」と入力して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトを起動し、1行目の最初の列に「fc」と書き、その隣の列に「1000」と入力して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 更にその隣の列のセルに「wc」と書き、その隣のセルに計算式を入力して下さい。
+<span class="olradio"><input type="radio" name="p4"></span>  更にその隣の列に「wc」と書き、その隣の列に計算式を入力してカットオフ角周波数を求めます。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 2行目の最初の列のセルに「f」と書き、その下のセルから各 $f$ の値を 0 [Hz] から 11000 [hz] まで 100 [Hz] 間隔で オートフィルを使って入力します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 「f」と書いた右隣のセルに「|H(f)|」と書き、その下のセルから各 $f$ における $|H(f)|$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p4"></span> 2行目の最初の列に「f」、次の列に「|H(f)|」と入力します。 
 </p>
 <p>
 ※ 横軸の単位は角周波数 [rad/秒] にすることも多いですが、今回は分かりやすく周波数 [Hz]にしています。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 「f」と「|H(f)|」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
+<span class="olradio"><input type="radio" name="p4"></span> 3行目の最初の列から各 $f$ の値を 0 [Hz] から 11000 [hz] まで 100 [Hz] 間隔で オートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 次の列に各 $|H(f)|$ の値をオートフィルを使って入力します。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> グラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> カットオフ周波数 $f_c$ [Hz] 前後で減衰していることを確認します(※)。
 </p>
 <p>
-※ 理論的には $f_c$ [Hz] において $|H(f_c)| = 1/\sqrt{2} \approx 0.7071$ となります(※ $20\log_{10} 1/\sqrt{2} = -3.01$ なので約 3 dB 減衰)。
+※ 理論的には $f_c$ [Hz] において $|H(f_c)| = 1/\sqrt{2} \approx 0.7071$ となります( $20 \cdot \log_{10} 1/\sqrt{2} = -3.01$ より約 3 [dB] 減衰)
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-3-4」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p4"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_3_4」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「振幅特性グラフ」を貼り付けて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習3-5 (個人):</b> RC アナログローパスフィルタの周波数特性(位相特性)のグラフを描いてみましょう。
+<input type="checkbox"><b>演習3-5 (個人):</b> RC アナログローパスフィルタの位相特性のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 「D-FILTER-3-4」を「D-FILTER-3-5」にコピーして開きます。
+<span class="olradio"><input type="radio" name="p5"></span> 「DF_3_4」を「DF_3_5」にコピーして表計算ソフトで開きます。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 「|H(f)|」を「∠H(f)」に変更し、その下のセルから各 $f$ における $∠H(f)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p5"></span> 2行目の「|H(f)|」を「∠H(f)」に変更し、その下のセルから各 $\angle H(f)$ の値をオートフィルを使って入力します。
 </p>
 <p>
-※1 $\tan^{-1} (b/a)$ は表計算ソフトでは atan2(a,b) で計算できます。
+※ $\tan^{-1} (b/a)$ は表計算ソフトでは atan2(a,b) で計算できます。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> カットオフ周波数 fc [Hz] 前後での位相変化を確認します。
+<p>
+※ 理論的には $f_c$ [Hz] において $∠H(f_c) = -\pi/4 \approx -0.7853$ [rad] となります(つまり 45 度遅れ)。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> シートを上書き保存します。
 <br>
-※2 横軸は角周波数 [rad/秒] にすることも多いですが、今回は分かりやすく周波数[Hz]形式にしています。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> 「f」と「∠H(f)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
-<p>
-※ 理論的には $f_c$ [Hz] において $∠H(f_c) = -\pi/4 \approx -0.7853$ [rad] となります(つまり 45度遅れる)。
-</p>
-<p>
 <span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p5"></span> 各自が指定場所に「位相特性のグラフ」を貼り付けて下さい。 
 </p>
 </div>
 
 <br>
 <h2><a href="./page03.html">3. ハイパスフィルタの設計</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習3-6 (個人):</b> 1次 IIR ハイパスフィルタを使ってサンプル音声から高周波成分を取り除いてみましょう。 
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> 演習 3-1 のテンプレートソース(D-FILTER-3-1.cpp)を D-FILTER-3-6.cpp の名前でコピーします。
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「DF_3_1」を「DF_3_6」にコピーします 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> D-FILTER-3-6.cpp を開いてハイパスフィルタになるようにパラメータを変更します。なおサンプリング周波数は $f_s = 22050$ [Hz]、カットオフ周波数は $f_c$ = 3000 [Hz] とします。
+<span class="olradio"><input type="radio" name="p6"></span> main.cpp を開いてハイパスフィルタになるようにフィルタ係数を変更します。なおサンプリング周波数は $f_s = 22050$ [Hz]、フィルタ長は $\textrm{L} = 1$ 、カットオフ周波数は $f_c = 3000$ [Hz] とします。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 「D-FILTER-3-1.wav」をfopenしている部分を「D-FILTER-3-6.wav」に変更します。
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行すると「 DF_3_1-6.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行すると「D-FILTER-3-6.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p6"></span> フィルタリング後の音声(DF_3_1-6.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、低周波成分が減衰していることを確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span> フィルタリング後の音声(D-FILTER-3-6.wav)を演奏し、スペクトログラム画像を見て高周波成分が減衰していることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p6"></span>  指定場所に「ソースコード」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。
+<span class="olradio"><input type="radio" name="p6"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -206,25 +210,17 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p7"></span> 表計算ソフトを起動します。
+<span class="olradio"><input type="radio" name="p7"></span> 「DF_3_2」を「DF_3_7」にコピーして表計算ソフトで開きます。 
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 今回考えるハイパスフィルタのカットオフ周波数は 3000 [Hz] とします。 一番上の最初の列のセルに「fc」と書き、その隣のセルに「3000」と入力して下さい。
+<span class="olradio"><input type="radio" name="p7"></span> カットオフ周波数を $f_c = 3000$ [Hz] とします。  「fc」の値を「3000」に変更して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 2行目の最初の列のセルに「t」と書き、その下のセルから各 $t$ の値を 0 [秒] から 0.01 [秒] まで 0.0001 [秒] 間隔で オートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p7"></span> 各 $h(t)$ の値をオートフィルを使って入力します。ただし $\delta(0) = 22050$ とします(実際には $\delta(0) = \infty$ )
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 「t」と書いた右隣のセルに「h(t)」と書き、その下のセルから各 $t$ における $h(t)$ の値をオートフィルを使って入力します。ただし $\delta(0) = 22050$ とします(※)。
-</p>
-<p>
-※ 実際には $\delta(0) = \infty$
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p7"></span> 「t」と「h(t)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
-<br>
-<span class="olradio"><input type="radio" name="p7"></span> シートを保存します。ファイル名は「D-FILTER-3-7」として下さい(拡張子は表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p7"></span> シートを上書き保存します。
 <br>
 <span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。  
+<span class="olradio"><input type="radio" name="p7"></span> 各自が指定場所に「インパルス応答のグラフ」を貼り付けて下さい。  
 </p>
 </div>
 
@@ -234,78 +230,76 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 演習 3-3のテンプレートソース</a>(D-FILTER-3-3.cpp)をD-FILTER-3-8.cppの名前でコピーします。
+<span class="olradio"><input type="radio" name="p8"></span> フォルダ「DF_3_3」を「DF_3_8」にコピーします 
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> D-FILTER-3-8.cpp を開いてハイパスフィルタのインパルス応答になるようにパラメータを変更します。パラメータは サンプリング周波数 $f_s = 22050$ [Hz]、$f_c = 3000$ [Hz] として下さい。
+<span class="olradio"><input type="radio" name="p8"></span> main.cpp を開いてハイパスフィルタのインパルス応答になるようにパラメータを変更します。各パラメータ値は演習 3-6 と同じです。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 「D-FILTER-3-3.csv」をfopenしている部分を「D-FILTER-3-8.csv」に変更します。
+<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行するとCSVファイル(DF_3_3-8.csv))が出力されます。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行するとCSVファイル(D-FILTER-3-8.csv)が出力されます。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> D-FILTER-3-8.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に i 、次の列の先頭に h[i] と入力します。
+<span class="olradio"><input type="radio" name="p8"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「h[i]」と入力します。 
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> グラフを挿入します。グラフの種類は散布図、点あり、線なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「D-FILTER-3-8」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p8"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DF_3_8」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをし、結果のグラフが演習3-7で求めた CR アナログハイパスフィルタのインパルス応答と同じ形になっている事を確認して下さい(※)。
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをし、CR アナログハイパスフィルタのインパルス応答とほぼ同じ形になっている事を確認して下さい(※)。
 </p>
 <p>
-※ ゲイン調整のためサンプリングした後に $\tau$ を掛けているので値は一致しない。
+※ ゲイン調整のためサンプリングした後に $\tau$ を掛けているので値は一致しません
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p8"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「インパルス応答のグラフ」を貼り付けて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習3-9 (個人):</b> RC アナログハイパスフィルタの周波数特性(振幅特性)のグラフを描いてみましょう。
+<input type="checkbox"><b>演習3-9 (個人):</b> RC アナログハイパスフィルタの振幅特性のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p9"></span> 「D-FILTER-3-4」を「D-FILTER-3-9」にコピーして開いて下さい。
+<span class="olradio"><input type="radio" name="p9"></span> 「DF_3_4」を「DF_3_9」にコピーして表計算ソフトで開きます。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 今回考えるハイパスフィルタのカットオフ周波数は 3000 [Hz] とします。 「fc」の値を「3000」に変更して下さい。
+<span class="olradio"><input type="radio" name="p9"></span> カットオフ周波数を $f_c = 3000$ [Hz] とします。 「fc」の値を「3000」に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> $|H(f)|$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p9"></span> 各 $|H(f)|$ の値をオートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> カットオフ周波数 $f_c$ [Hz] 前後で減衰していることを確認します(※)。
 </p>
 <p>
-※ 理論的には $f_c$ [Hz] において $|H(f_c)| = 1/\sqrt{2} \approx 0.7071$ となります(※ $20\log_{10} 1/\sqrt{2} = -3.01$ なので約 3 dB 減衰)。
+※ 理論的には $f_c$ [Hz] において $|H(f_c)| = 1/\sqrt{2} \approx 0.7071$ となります(※ $20 \cdot \log_{10} 1/\sqrt{2} = -3.01$ より約 3 [dB] 減衰)。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p9"></span> シートを保存します。
+<span class="olradio"><input type="radio" name="p9"></span> シートを上書き保存します。
 <br>
 <span class="olradio"><input type="radio" name="p9"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p9"></span> 各自が指定場所に「振幅特性のグラフ」を貼り付けて下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習3-10 (個人):</b> RC アナログハイパスフィルタの周波数特性(位相特性)のグラフを描いてみましょう。
+<input type="checkbox"><b>演習3-10 (個人):</b> RC アナログハイパスフィルタの位相特性のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p10"></span> 「D-FILTER-3-5」を「D-FILTER-3-10」にコピーして開いて下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 「DF_3_5」を「DF_3_10」にコピーして表計算ソフトで開きます。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 今回考えるハイパスフィルタのカットオフ周波数は 3000 [Hz] とします。 「fc」の値を「3000」に変更して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> カットオフ周波数を $f_c = 3000$ [Hz] とします。 「fc」の値を「3000」に変更して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> $∠H(f)$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p10"></span> 各 $\angle H(f)$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 「f」と「∠H(f)」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、線あり、平滑化なしとします。 
+<span class="olradio"><input type="radio" name="p10"></span> カットオフ周波数 $f_c$ [Hz] 前後での位相変化を確認します。 
 <p>
 ※ 理論的には $f_c$ [Hz] において $∠H(f_c) = \pi/4 \approx 0.7853$ [rad] となります(つまり 45度進む)。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p10"></span> シートを保存します。
+<span class="olradio"><input type="radio" name="p10"></span> シートを上書き保存します。
 <br>
 <span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p10"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。 
+<span class="olradio"><input type="radio" name="p10"></span> 各自が指定場所に「位相特性グラフ」を貼り付けて下さい。 
 </p>
 </div>
 

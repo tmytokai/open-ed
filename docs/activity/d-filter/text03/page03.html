@@ -38,7 +38,7 @@
 </div>
 
 <p>
-CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とインパルス応答は簡単に求められ、それぞれ以下の通りになります。 
+まず CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とインパルス応答はそれぞれ以下の通りになります。 
 </p>
 
 <div class="info">
@@ -53,6 +53,10 @@ CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とイ
 & = \frac{ 1 }{ 1 + \frac{w_c}{s} } \\
 & = \frac{ s }{ s + w_c } \\
 \end{align*}
+
+<p>
+※ 導出方法については<a href="./page02.html">前ページ</a>を参考
+</p>
 
 </div>
 
@@ -69,6 +73,18 @@ CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とイ
 & = \frac{ w }{ \sqrt{ w^2 + w_c^2 } }  \cdot \textrm{e}^{ j \cdot \tan^{-1}(w_c/w) } \\
 \end{align*}
 
+<p>
+よって振幅特性(ゲイン)と位相特性はそれぞれ
+</p>
+
+\[
+|\textrm{H}(w)| = \frac{ w }{ \sqrt{w^2 + w_c^2 }} 
+\]
+
+\[
+\angle \textrm{H}(w) = \tan^{-1}(w/w_c)
+\]
+
 </div>
 
 <br>
@@ -77,6 +93,9 @@ CR ハイパスフィルタの(アナログ)伝達関数と周波数特性とイ
 
 <p>
 $s/(s-a)$の逆ラプラス変換は $\delta(t) + \frac{ \textrm{d} }{\textrm{dt}} \textrm{e}^{at}  = \delta(t) + a \cdot \textrm{e}^{at} $ なので、伝達関数を逆ラプラス変換すると
+</p>
+<p>
+※ $\delta(t)$ は<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">ディラックのデルタ関数</a>
 </p>
 
 \begin{align*}
@@ -87,7 +106,7 @@ h(t)
 </div>
 
 <p>
-よって、<a href="./page02.html">IIR ローパスパスフィルタ</a>の時と同様に IIR ハイパスフィルタのインパルス応答は次の様になります。 
+よって IIR ハイパスフィルタのインパルス応答は次の様になります。 
 </p>
 
 <div class="info">
@@ -98,8 +117,17 @@ $\tau$ [秒] を<a href="../../d-signal/text02/page01.html">サンプリング�
 </p>
 
 \begin{align*}
+h[i] = \tau \cdot h(\tau \cdot i ) = \tau \cdot \delta( \tau \cdot i ) - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
+\end{align*}
+
+<p>
+ただし $\tau \cdot \delta( \tau \cdot i )$ をプログラミングで扱うのは困難なので<a href="../../z/text01/page04.html">ディジタルインパルス信号</a> $\delta[i]$ で置き換えて
+</p>
+
+\begin{align*}
 h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 \end{align*}
+
 
 </div>
 
@@ -110,14 +138,27 @@ h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 <div class="info">
 <input type="checkbox"><b> 標準形 1次 IIR ハイパスフィルタの伝達関数: </b>
 
+\[
+\textrm{H}(z)= \frac{ (1 - \tau \cdot w_c ) - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} }{ 1 - \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} } \\
+\]
+
+<p>
+(求め方)
+</p>
+
+<p>
+インパルス応答の両辺を Z 変換して
+</p>
+
 \begin{align*}
 \textrm{H}(z)
+&= \sum_{i=0}^\infty \{ \delta[i] \cdot z^{-i} \} - \sum_{i=0}^\infty \{ \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
 &= 1 - \sum_{i=0}^\infty \{ \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i} \cdot z^{-i} \} \\
 &= 1 - \tau \cdot w_c \cdot \sum_{i=0}^\infty \{ \textrm{e}^{-w_c \cdot \tau} \cdot z^{-1} \}^i \\
 \end{align*}
 
 <p>
-右辺の第2項は<a href="./page02.html">IIR ローパスパスフィルタ</a>の伝達関数をマイナスを掛けた値なので
+右辺の第2項は<a href="./page02.html">IIR ローパスパスフィルタ</a>の伝達関数にマイナスを掛けた値なので
 </p>
 
 \begin{align*}
@@ -138,7 +179,7 @@ h[i] = \delta[i] - \tau \cdot w_c \cdot \textrm{e}^{-w_c \cdot \tau \cdot i}
 
 \begin{align*}
 a[1] &= \textrm{e}^{-w_c \cdot \tau} \\
-b[0] &= 1 - \tau \cdot w_c \\
+b[0] &= 1 - w_c \cdot \tau \\
 b[1] &= -\textrm{e}^{-w_c \cdot \tau} \\
 \end{align*}
 
@@ -149,7 +190,6 @@ b[1] &= -\textrm{e}^{-w_c \cdot \tau} \\
 </p>
 
 </div>
-
 
 
 <br>
