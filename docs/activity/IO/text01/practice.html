@@ -70,7 +70,7 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 2: RA3
 3: RA4
 (*) 4: MCLR/VPP -- PICkit の 1: NMCLR ※ PIC内部で弱プルアップされてるのでプルアップ抵抗必要無
-5: VSS -- GND
+(*) 5: VSS -- GND(接続済)  ※ PICkit から電源を取る場合は 3: GND
 6: RB0
 7: RB1
 8: RB2
@@ -80,7 +80,7 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 11: RB5
 (*) 12: ICSPCLK -- PICkit の 5: PGC
 (*) 13: ICSPDAT -- PICkit の 4: PGD
-14: VDD -- 3.3V ※ USBから供給
+(*) 14: VDD -- 3.3V(接続済) ※ PICkit から電源を取る場合は 2: Vdd
 15: RA6
 16: RA7
 17: RA0
