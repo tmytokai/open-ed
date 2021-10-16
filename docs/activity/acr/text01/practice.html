@@ -20,37 +20,42 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: ?  分
-</p>
-
 <br>
-<h2><a href="./page01.html">1. 自己相関関数とは</a></h2>
-<h2><a href="./page02.html">2. 雑音を含む周期性信号の場合</a></h2>
+<h2><a href="./page01.html">1. 定常過程</a></h2>
+<h2><a href="./page02.html">2. (標本)自己相関関数</a></h2>
+<h2><a href="./page03.html">3. 雑音を含む周期性信号の場合</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習1-1 (個人、? 分):</b> <a href="./page02.html">テキスト</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
+<input type="checkbox"><b>演習1-1 (個人):</b> <a href="./page03.html">3ページ目</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/ACR-1-1.cpp">テンプレートソース</a>(ACR-1-1.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「ACR_1_1」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートソースを開いて穴埋めをします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「ACR_1_1」の中に main.cpp を作成します 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると 2 つのCSVファイル(ACR-1-1-f.csv、ACR-1-1-R.csv)が出力されます。ACR-1-1-f.csv が信号値で ACR-1-1-R.csv が自己相関関数値です。
+<span class="olradio"><input type="radio" name="p1"></span> main.cpp を開き、ファイルの中身を <a href="./src/ACR_1_1.txt">テンプレートソース</a>の内容に置き換えて下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ACR-1-1-f.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「f[i]」 と入力します。
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると 2 つの CSV ファイルが出来ます。ACR_1_1_f.csv が信号値で ACR_1_1_R.csv が自己相関関数値です。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 信号値(ACR_1_1_f.csv)を表計算ソフトで開いてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 一行目に空行を挿入し、1 行目の最初の列に「i」、次の列に「f[i]」 と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-1-f」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR_1_1_f」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様に ACR-1-1-R.csv を表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「n」、次の列の先頭に「R[n]」と入力します。
+<span class="olradio"><input type="radio" name="p1"></span> 次に自己相関関数値(ACR_1_1_R.csv)を表計算ソフトで開いてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 一行目に空行を挿入し、1 行目の最初の列に「n」、次の列に「R[n]」と入力します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR-1-1-R」として下さい(拡張子は使用する表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「ACR_1_1_R」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
@@ -59,11 +64,11 @@
 </div>
 
 <br>
-<h2><a href="./page03.html">3. 白色雑音の場合</a></h2>
+<h2><a href="./page04.html">4. 白色雑音の場合</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習1-2 (個人、? 分):</b> <a href="./page03.html">テキスト</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
+<input type="checkbox"><b>演習1-2 (個人):</b> <a href="./page03.html">テキスト</a>で例として示した信号とその自己相関関数のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -95,7 +100,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習1-3 (個人、? 分):</b> 一様乱数を用いた白色雑音と自己相関関数のグラフを描いてみましょう。
+<input type="checkbox"><b>演習1-3 (個人):</b> 一様乱数を用いた白色雑音と自己相関関数のグラフを描いてみましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -126,11 +131,11 @@
 </div>
 
 <br>
-<h2><a href="./page04.html">4. パワースペクトルとの関係</a></h2>
+<h2><a href="./page05.html">5. パワースペクトルとの関係</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人、30分):</b> 時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-4 (個人):</b> 時間領域ディジタル信号
 </p>
 \[
 f[i] = 
@@ -170,7 +175,7 @@ f[i] =
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人、30分):</b> 演習 1-4 で使用した時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-5 (個人):</b> 演習 1-4 で使用した時間領域ディジタル信号
 </p>
 \[
 f[i] = 
@@ -212,6 +217,6 @@ ACR-1-5-P.csv がパワースペクトル値で ACR-1-5-R.csv がパワースペ
 
 
 
-<script>PreNext(5,4)</script>
+<script>PreNext(6,5)</script>
 </body>
 </html>

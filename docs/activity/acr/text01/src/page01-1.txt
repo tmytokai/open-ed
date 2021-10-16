@@ -1,0 +1,23 @@
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+N = 512
+y = []
+e1 = 0
+e2 = 0
+for i in range(N):
+  e0 = np.random.normal(0,1)
+  tmp = e0 + 3*e1 + 2*e2
+  y.append(tmp)
+  e2 = e1
+  e1 = e0
+
+plt.plot(y)
+plt.xlim([0,N-1])
+plt.show()
+
+fft = np.fft.fft(y)
+plt.plot(np.abs(fft))
+plt.xlim([0,N/2-1])
+plt.show()

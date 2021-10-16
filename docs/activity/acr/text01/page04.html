@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>4. パワースペクトルとの関係</title>
+<title>4. 白色雑音の場合</title>
 </head>
 <body>
 
@@ -21,33 +21,52 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%8A%E3%83%BC%EF%BC%9D%E3%83%92%E3%83%B3%E3%83%81%E3%83%B3%E3%81%AE%E5%AE%9A%E7%90%86">ウィーナー＝ヒンチンの定理</a>によると、<a href="../../d-signal/text01/page02.html">時間領域ディジタル信号</a> $f[i]$の<a href="./page01.html">自己相関関数</a> $R[n]$ の<a href="../../dft/">DFT</a>(の実数成分)は $f[i]$ の<a href="../../spectrum/text03/page01.html">パワースペクトル</a> $|\textrm{C}[k]|^2$ になります。
+$f[i]$ が一様分布や正規分布の様な白色雑音(ホワイトノイズ)の場合は $R[0]$ が最大値になるのは通常の信号の時と同じなのですが、 $n > 0$ の $R[n]$ の値は $f[i]$ と $f[i+n]$ が無相関なのでほぼ一定値になります。
 </p>
 
 <p>
-逆に言うと、$f[i]$ のパワースペクトルの<a href="../../dft/">IDFT</a>は自己相関関数になります。
+具体的には $f[i]$ が平均 $\mu$、分散 $\sigma^2$ の白色雑音なら
+</p>
+
+\[
+R[0] = \mu^2 + \sigma^2
+\]
+
+\[
+R[n] = \mu^2 \ ,\ n \geq 1
+\]
+
+<p>
+に近づきます。
 </p>
 
 <p>
-この関係を利用すると、以下の様に<a href="../../dft/text01/page05.html">FFT</a>を用いて自己相関関数を高速に求めることが出来ます。
+ではここで例として平均 $\mu = -2$、分散 $\sigma^2 = 9$ の正規乱数を N=10000 点生成した信号を考えます。
+<br>
+実際に得られた信号は以下の図1です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>自己相関関数をFFTで高速に求める方法</b>
-
-<p>
-　
-</p>
-
-<ol>
-<li>$f[i]$ をFFTしてDFT係数 $\textrm{C}[k]$ を求める</li>
-<li>パワースペクトル $|\textrm{C}[k]|^2$ を求める</li>
-<li>パワースペクトル $|\textrm{C}[k]|^2$ をIFFTして自己相関関数 $R[n]$ を求める</li>
-</ol>
-
+<input type="checkbox"><b>図1: 正規乱数 N(-2,9) (最初の 20 点だけ表示)</b>
+<p>　</p>
+<img src="./img/page04-fig1.png" alt="">
 </div>
 
+<p>
+この信号の自己相関関数のグラフが以下の図2です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 図1の信号から求めた自己相関関数 (最初の 20 点だけ表示)</b>
+<p>　</p>
+<img src="./img/page04-fig2.png" alt="">
+</div>
+
+<p>
+この様に自己相関関数を計算してみたら $R[0]$ は $\mu^2 + \sigma^2 = 13$ に近く、その他の自己相関関数値は $\mu^2 = 4 $ に近い値でほぼ一定なので、元の信号は白色雑音であることが分かります。
+</p>
+
 <br>
-<script>PreNext(4,4)</script>
+<script>PreNext(4,5)</script>
 </body>
 </html>

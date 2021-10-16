@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>1. 自己相関関数とは</title>
+<title>1. 定常過程</title>
 </head>
 <body>
 
@@ -21,114 +21,208 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-長さ N の<a href="../../d-signal/text01/page02.html">時間領域ディジタル信号</a> $f[i],  (i = 0, \cdots, \textrm{N}-1)$ が与えられた時に、その信号が周期的な信号であるのか、それともただのノイズなのかは<b>自己相関関数</b>(autocorrelation function) $R[n]$ を使って判定できます。
+<a href="../../d-signal/">時間領域ディジタル信号</a> $f[i]$ が与えられた時に、その信号が周期的な信号であるのか、それともただのノイズなのかは<b>自己相関関数</b>(autocorrelation function) $\textrm{R}[n]$ を使って判定できます。
 </p>
 
 <p>
-自己相関関数 $R[n]$ の本来の定義は、ある時刻 $i$ における信号値 $f[i]$ とそこから $n$ 時刻だけ遅延させた信号値 $f[i+n]$ を<a href="https://ja.wikipedia.org/wiki/%E5%AE%9A%E5%B8%B8%E9%81%8E%E7%A8%8B">定常な確率過程</a>(つまり平均と分散・共分散が時間によって変化しない)と仮定した時の自己相関関数
+ただし前提として $f[i]$ が<a href="https://ja.wikipedia.org/wiki/%E5%AE%9A%E5%B8%B8%E9%81%8E%E7%A8%8B">(弱)定常過程</a>であるとします。
+</br>
+そこでまずここでは定常過程について説明します。
+</p>
+
+<p>
+定常過程とは $f[i]$ がある確率に従って出力されている時に、$f[i]$ の平均
 </p>
 \[
-R[n] = \textrm{E}\left [ f[i] \cdot f[i+n] \right ]
+\textrm{E} \left ( f[i] \right )
 \]
 <p>
-です。
+が時刻 $i$ によらず定数になり、かつ $n$ を遅延時刻とした時に $f[i]$ と $f[i+n]$ の共分散
+</p>
+\[
+Cov \left ( f[i], f[i+n] \right )
+\]
+<p>
+が時刻 $i$ によらず遅延時刻 $n$ のみで値が決まる信号列のことです。
+</p>
+<p>
+なお共分散の性質より
+</p>
+\[
+Cov \left ( f[i], f[i+n] \right ) = Cov \left ( f[i+n], f[i] \right )
+\]
+<p>
+という等式が成り立ちます。
 <br>
-定常な確率過程を仮定しているので時刻 $i$ の値に寄らず、遅延時刻 $n$ のみに寄って値が決まる関数となります。
+また定常な確率過程の場合は時刻 $i$ が関係無くなるので
+</p>
+\[
+Cov \left ( f[i], f[i+n] \right ) = Cov \left ( f[i], f[i-n] \right ) = Cov \left ( f[n], f[0] \right )
+\]
+<p>
+という等式も成り立ちます。
 </p>
 
 <p>
-こうやって求めた $R[n]$ の値が相対的に大きい値の時、$f[i]$ とそこから時刻 $n$ だけ遅延させた $f[i+n]$ の間には強い相関があるということを意味します(※)。
+では具体的に定常過程となっている信号の例を示しましょう。
+<br>
+以下の図 1 は信号
 </p>
 
-<p>
-※ 自己相関「関数」と自己相関「係数」は似ているので混同している人も多いですが、自己相関関数の場合は平均と分散を使って正規化していないので、 自己相関係数の様に値が -1 から 1 の間に収まるとは限りません。
-</p>
+\[
+f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] 
+\]
 
 <p>
-ただし $f[i]$ と $f[i+n]$ の積 $f[i] \cdot f[i+n]$ の真の確率分布は普通分かりませんし、分かってもかなり複雑な分布になったりしますので、ディジタル信号処理の世界では実際に観測された $f[i]$ の値を使った<b>標本自己相関関数</b>(sample autocorrelation function)で代用することが多いです。
-</p>
-
-<p>
-それでこの(標本)自己相関関数の定義は $f[i]$ が周期 $\textrm{N}$ で周期的であるとみなすかどうかによって変わるのですが、今回のアクティビティでは周期的であるとみなして次のように定義します。
+を $i=0$ から $i=511$ まで 512 点出力したグラフで、いわゆる「<b>移動平均(MA)モデル</b>」と呼ばれる式です(参考までにソースは<a href="src/page01-1.txt">こちら</a>)。
+<br>
+ここで $e[i]$ は各時刻毎に独立な平均 0、分散 1 の正規乱数です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義: (標本)自己相関関数:</b>
-
-<p>
-$f[i]$ が周期 $\textrm{N}$ で周期的とみなしたとき
-</p>
-
-\[
-R[n] = \frac{1}{\textrm{N}}\sum_{i = 0}^{\textrm{N-1}} 
-\left \{
-f[\ i\ ] \cdot f[\ (i+n)\ \textrm{mod}\ \textrm{N} \ ]
-\right \}
-\]
-
-<p>
-$n$・・・遅延時刻、ラグ(lag)、整数の変数、範囲は $n=0,1,\cdots,\textrm{N-1}$、単位は[点]
-</p>
-
-<p>
-A mod N・・・割った余りを求める剰余演算(modulo)、(例) 5 mod 2 = 1
-</p>
-
-</div>
-
-<p>
-上の定義の中でも触れている通り独立変数 $n$ の範囲は $n=0,1,\cdots,\textrm{N-1}$ なので、自己相関関数も $R[0]$ から $R[\textrm{N}-1]$ までの長さ N のディジタル信号になります。
-<br>
-ただし独立変数 $n$ は時刻ではなく遅延時刻(ラグ)を表しますので、$R[n]$ は時間領域信号ではありません。
-<br>
-また $\sum$ の計算をしたあと全体を $\textrm{N}$ で割っていますが、文献によっては割らない場合もあります。
-<br>
-なお $R[0]$ の時は同じ信号間の相関関数になりますので値は必ず最大値になり、
-</p>
-
-\[
-R[0] = \frac{1}{\textrm{N}}\sum_{i = 0}^{\textrm{N-1}} 
-\left \{
-f[\ i\ ]
-\right \}^2
-\]
-
-<p>
-より、$R[0]$ は信号の平均パワーを表します。
-</p>
-
-<p>
-ではここで例として<a href="../../d-sin">ディジタルサイン波</a>
-</p>
-
-\[
-f[i] = 1 \cdot \sin( 2\pi /5 \cdot i -\pi/2 )
-\]
-
-<p>
-を N=10 点生成した信号を考えます。
-<br>
-実際に得られた信号が以下の図1です。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図1: 元の信号 (最初の 10 点だけ表示)</b>
+<input type="checkbox"><b>図1: $f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]$ のグラフ</b>
 <p>　</p>
 <img src="./img/page01-fig1.png" alt="">
 </div>
 
 <p>
-この信号の自己相関関数のグラフが以下の図2です。
+一見するとただのノイズの様に見えますが、平均と共分散を計算すると
+</p>
+
+<p>
+平均 : ※ 導出はこのページの下の方を参照
+</P>
+
+\[
+\textrm{E}(f[i]) = 0
+\]
+
+<p>
+共分散 : ※ 導出はこのページの下の方を参照
+</P>
+
+\[
+Cov \left ( f[i], f[i+0] \right ) = 14
+\]
+
+\[
+Cov \left ( f[i], f[i+1] \right ) = 9
+\]
+
+\[
+Cov \left ( f[i], f[i+2] \right ) = 2
+\]
+
+\[
+Cov \left ( f[i], f[i+n] \right ) = 0 \ , \ (n \geq 3)
+\]
+
+<p>
+の様に平均が定数になり、共分散も $i$ が含まれておらず $n$ だけで値が決まっているので、$f[i]$ は定常過程であることが分かります。
+</p>
+
+<p>
+参考までにこの $f[i]$ の振幅スペクトルは以下の図2の様になります。
+<br>
+なかなか特徴的なスペクトルになっていますので、確かにノイズでは無いことが分かります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2: 図1の信号から求めた自己相関関数のグラフ (最初の 10 点だけ表示)</b>
+<input type="checkbox"><b>図2: $f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]$ の振幅スペクトル</b>
 <p>　</p>
 <img src="./img/page01-fig2.png" alt="">
 </div>
 
+
+<br>
+<h3>(補足) 例で挙げた $f[i]$ の平均と共分散の導出</h3>
+
+\[
+f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] 
+\]
+
 <p>
-なお $R[0] = 1/2$ は振幅 1 のサイン波の平均パワー(= 実効値( $1/\sqrt{2}$ )の自乗)に相当します。
+ここで $e[i]$ は各時刻毎に独立な平均 0、分散 1 の正規乱数とする。
+</p>
+
+<p>
+平均は以下の様にして求められる。
+</p>
+
+\begin{align*}
+\textrm{E}(f[i]) 
+&= \textrm{E}( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] ) \\
+&= \textrm{E} ( e[i] ) + 3 \cdot \textrm{E} ( e[i-1] )  + 2 \cdot \textrm{E} ( e[i-2] ) \\
+&= 0
+\end{align*}
+
+<p>
+共分散は以下の様にして求められる。
+</p>
+
+\begin{align*}
+Cov \left ( f[i], f[i+n] \right ) 
+&= \textrm{E} \left \{ \left( f[i] - \textrm{E}(f[i]) \right ) \cdot \left( f[i+n] - \textrm{E}(f[i+n]) \right ) \right \} \\
+&= \textrm{E} \left \{ \left( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] \right ) \cdot \left( e[i+n] + 3 \cdot e[i+n-1] + 2 \cdot e[i+n-2] \right ) \right \} \\
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+n] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n]   \right ) \\
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+n-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-1] \right ) \\
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+n-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-2] \right ) \\
+\end{align*}
+
+<p>
+$e[i]$ は時刻毎に独立なので $i \neq j$ の時 $ \textrm{E} \left ( e[i] \cdot e[j] \right ) = 0$
+<br>
+よって$n=0$ の時
+</p>
+
+\begin{align*}
+Cov \left ( f[i], f[i] \right ) 
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i]   \right ) \\
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-2] \right ) \\
+&= 1 + 9 + 4\\
+&= 14
+\end{align*}
+
+<p>
+$n=1$ の時
+</p>
+
+\begin{align*}
+Cov \left ( f[i], f[i+1] \right ) 
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+1] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1]   \right ) \\
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\
+&= 3 + 6 \\
+&= 9
+\end{align*}
+
+<p>
+$n=2$ の時
+</p>
+
+\begin{align*}
+Cov \left ( f[i], f[i+2] \right ) 
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+2] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2]   \right ) \\
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\
+&= 2
+\end{align*}
+
+<p>
+$n=3$ の時
+</p>
+
+\begin{align*}
+Cov \left ( f[i], f[i+3] \right ) 
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+3] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+3]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+3]   \right ) \\
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+2] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2] \right ) \\
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\
+&= 0
+\end{align*}
+
+<p>
+同様にして $n \geq 4$ の時も 0
 </p>
 
 <br>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. パワースペクトルとの関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己相関関数</a></li>
+<li>学習項目: [1] 自己相関関数</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%8A%E3%83%BC%EF%BC%9D%E3%83%92%E3%83%B3%E3%83%81%E3%83%B3%E3%81%AE%E5%AE%9A%E7%90%86">ウィーナー＝ヒンチンの定理</a>によると、$f[i]$ の自己相関関数$R[n]$ の<a href="../../dft/">FFT</a>(高速フーリエ変換)の実数成分は $f[i]$ の<a href="../../spectrum/text03/page01.html">パワースペクトル</a> $|\textrm{C}[k]|^2$ と一致します。
+</p>
+
+<p>
+逆に言うと、$f[i]$ のパワースペクトルの IFFT (逆高速フーリエ変換)は自己相関関数になります。
+</p>
+
+<p>
+この関係を利用することで、以下の様に FFT を用いて自己相関関数を高速に求めることが可能です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>自己相関関数をFFTで高速に求める方法</b>
+
+<p>　</p>
+
+<ol>
+<li>$f[i]$ をFFTして係数 $\textrm{C}[k]$ を求める</li>
+<li>自乗してパワースペクトル $|\textrm{C}[k]|^2$ を求める</li>
+<li>パワースペクトル $|\textrm{C}[k]|^2$ をIFFTして自己相関関数 $R[n]$ を求める</li>
+</ol>
+
+</div>
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>

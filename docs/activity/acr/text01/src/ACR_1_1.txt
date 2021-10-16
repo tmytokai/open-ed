@@ -27,20 +27,27 @@ double ACR( const int n, const double* f, const int N )
 
 int main()
 {
-    const int N = 10000;
-    const int Nout = 20;
+    const int N = 10000;  // 生成する点数
+    const int Nout = 20;  // グラフに表示する点数
     double f[N];
     double R[Nout];
 
+    // 元の信号値をセット
     for(int i=0;i < N; ++i ){
         f[i] = ?;
     }
 
+    // 雑音を加える
+    for(int i=0;i < N; ++i ){
+        f[i] += ?;
+    }
+
+    // 自己相関関数を求める
     for(int n=0; n < Nout; ++n ){
         R[n] = ACR( n, f, N );
     }
 
-    FILE* file = fopen( "ACR-1-1-f.csv", "wb");
+    FILE* file = fopen( "ACR_1_1_f.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
@@ -50,7 +57,7 @@ int main()
     }
     fclose(file);
 
-    file = fopen( "ACR-1-1-R.csv", "wb");
+    file = fopen( "ACR_1_1_R.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
