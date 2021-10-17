@@ -26,15 +26,21 @@ int main()
     double f[N];
     double R[Nout];
 
+    // 元の信号値は0
     for(int i=0;i < N; ++i ){
-        f[i] = ? ;
+        f[i] = 0 ;
+    }
+
+    // 雑音を加える
+    for(int i=0;i < N; ++i ){
+        f[i] += ?;
     }
 
     for(int n=0; n < Nout; ++n ){
         R[n] = ACR( n, f, N );
     }
 
-    FILE* file = fopen( "ACR-1-2-f.csv", "wb");
+    FILE* file = fopen( "ACR_1_2_f.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
@@ -44,7 +50,7 @@ int main()
     }
     fclose(file);
 
-    file = fopen( "ACR-1-2-R.csv", "wb");
+    file = fopen( "ACR_1_2_R.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);

@@ -54,7 +54,7 @@ Cov \left ( f[i], f[i+n] \right ) = Cov \left ( f[i+n], f[i] \right )
 <p>
 という等式が成り立ちます。
 <br>
-また定常な確率過程の場合は時刻 $i$ が関係無くなるので
+また定常過程の場合は時刻 $i$ が関係無くなるので
 </p>
 \[
 Cov \left ( f[i], f[i+n] \right ) = Cov \left ( f[i], f[i-n] \right ) = Cov \left ( f[n], f[0] \right )
@@ -74,7 +74,7 @@ f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]
 \]
 
 <p>
-を $i=0$ から $i=511$ まで 512 点出力したグラフで、いわゆる「<b>移動平均(MA)モデル</b>」と呼ばれる式です(参考までにソースは<a href="src/page01-1.txt">こちら</a>)。
+を $i=0$ から $i=511$ まで 512 点出力したグラフで、いわゆる「<b>移動平均(MA)モデル</b>」と呼ばれるモデルです(図1,2のソースは<a href="src/page01-1.txt">こちら</a>)。
 <br>
 ここで $e[i]$ は各時刻毎に独立な平均 0、分散 1 の正規乱数です。
 </p>
@@ -129,13 +129,43 @@ Cov \left ( f[i], f[i+n] \right ) = 0 \ , \ (n \geq 3)
 
 <div class="info">
 <input type="checkbox"><b>図2: $f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]$ の振幅スペクトル</b>
-<p>　</p>
+
+<p>※ 橙色の線は理論的なスペクトル包絡線</p>
+
 <img src="./img/page01-fig2.png" alt="">
 </div>
 
+<p>
+もう少し複雑な例として図3を見て下さい。
+<br>
+図3の信号も図1と同様に移動平均(MA)モデルから生成した信号です(図3,4のソースは<a href="src/page01-2.txt">こちら</a>)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: 正規乱数列をバンドパスフィルタに通して生成した信号  </b>
+<p>　</p>
+<img src="./img/page01-fig3.png" alt="">
+</div>
+
+<p>
+一見すると平均が上下していて定常過程でないような印象を受けますが、もちろんこの信号も定常過程になっています。
+<br>
+参考までに図3の信号の振幅スペクトルを図4に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: 図3の信号の振幅スペクトル </b>
+
+<p>※ 橙色の線は理論的なスペクトル包絡線</p>
+
+<img src="./img/page01-fig4.png" alt="">
+</div>
+
+
+
 
 <br>
-<h3>(補足) 例で挙げた $f[i]$ の平均と共分散の導出</h3>
+<h3>(補足) 最初の例で挙げた $f[i]$ の平均と共分散の導出</h3>
 
 \[
 f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] 

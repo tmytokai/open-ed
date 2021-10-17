@@ -3,11 +3,18 @@ import math
 import matplotlib.pyplot as plt
 
 N = 512
-L=3
+L=64
 f = []
 F = []
-h = [1,3,2]
+h = np.zeros(L)
 e = np.zeros(L)
+
+C=int((L-1)/2)
+al=0.2
+ah=0.25
+h[C]=ah-al
+for i in range(1,C+1):
+    h[C-i] = h[C+i] = 2*math.sin(math.pi*i*(ah-al))/(math.pi*i)*math.cos(math.pi*i*(ah+al))
 
 for i in range(N):
   e[0] = np.random.normal(0,1)
