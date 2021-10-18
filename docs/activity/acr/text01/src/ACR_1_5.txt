@@ -47,7 +47,7 @@ int main()
     memset( B, 0, sizeof(double)*N ); // 虚数成分 B[k] をゼロクリアして再利用する
     IDFT(P,B,R,N);
 
-    FILE* file = fopen( "ACR-1-5-P.csv", "wb");
+    FILE* file = fopen( "ACR_1_5_P.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
@@ -57,7 +57,7 @@ int main()
     }
     fclose(file);
 
-    file = fopen( "ACR-1-5-R.csv", "wb");
+    file = fopen( "ACR_1_5_R.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);

@@ -3,24 +3,48 @@ import math
 import matplotlib.pyplot as plt
 
 N = 512
-L=64
+L = 64
+sigma2 = 1
+Scatter = 100
+Cov = 70
+n = 2
 f = []
+x = []
+y = []
 F = []
-h = np.zeros(L)
+cov = np.zeros(Cov)
 e = np.zeros(L)
 
+h = np.zeros(L)
 C=int((L-1)/2)
 al=0.2
 ah=0.25
 h[C]=ah-al
 for i in range(1,C+1):
     h[C-i] = h[C+i] = 2*math.sin(math.pi*i*(ah-al))/(math.pi*i)*math.cos(math.pi*i*(ah+al))
+       
+def setf(f,h,e):
+    f.clear()
+    e = np.zeros(L)
+    for i in range(N):
+      e[0] = np.random.normal(0,1)
+      f.append(sum([h[j]*e[j] for j in range(L)]))
+      e = np.roll(e,1)
 
-for i in range(N):
-  e[0] = np.random.normal(0,1)
-  f.append(sum([h[j]*e[j] for j in range(L)]))
-  e = np.roll(e,1)
+for i in range(Scatter):
+    setf(f,h,e)
+    x.append(f[100])
+    y.append(f[100+n])
 
+for k in range(Cov):
+    if k >= L :
+        cov[k] = 0
+    else:
+        cov[k] = 0
+        for i in range(k,L):
+            cov[k] += h[i]*h[i-k]
+        cov[k] *= sigma2
+    
 for i in range(int(N/2)):
     th = 2*math.pi*i/N;
     re = h[0] + sum([h[j]*math.cos(-j*th) for j in range(1,L)])
@@ -31,6 +55,15 @@ fft = np.fft.fft(f)/np.sqrt(N)
     
 plt.xlim([0,N-1])
 plt.plot(f)
+plt.show()
+
+plt.xlim([0,Cov-1])
+plt.plot(cov,'-o')
+plt.show()
+
+plt.scatter(x,y)
+plt.xlabel("f [100]")
+plt.ylabel("f [{}]".format(100+n))
 plt.show()
 
 plt.xlim([0,N/2-1])
