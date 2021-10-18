@@ -4,6 +4,7 @@
 *.dvi
 *.log
 *.xbb
+.#*
 tmp
 exam*-all.pdf
 MathJax
