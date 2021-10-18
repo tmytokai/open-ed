@@ -7,10 +7,10 @@ void main(void) {
 
     while(1){
         if( RB0 == ? ){
-            RA0 = 0;
-            NOP(); // 何もしないという命令
+            RA0 = 1;
+            NOP(); // 何もしないという命令(演習1-4で使用)
         }
-        else RA0 = 1;
+        else RA0 = 0;
     }
     
     return;

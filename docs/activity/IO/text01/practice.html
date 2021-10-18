@@ -170,8 +170,8 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <ol>
 <li> RB0 (6ピン) をデジタル入力モードにセットする</li>
 <li> RB0 (6ピン) にタクトスイッチを接続する</li>
-<li> タクトスイッチを「押してない時」は LED が光っている</li>
-<li> タクトスイッチを押すと LED が消える</li>
+<li> タクトスイッチを押してない時は LED が消えている</li>
+<li> タクトスイッチを押すと LED が点く</li>
 </ol>
 </div>
 <div class="olradio">
@@ -238,13 +238,17 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 「NOP()」の行にブレークポイントを打ちます(行番号をクリック)。
+<span class="olradio"><input type="radio" name="p4"></span> 引き続きプロジェクト「IO_1_3」を使用します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイラをデバックモードにします。プロパティーを開き、XC8 Compiler → Option Categories → Optimizations → Debug をチェックして OK ボタンを押して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「NOP()」の行にブレークポイントを打ちます。行番号の所をクリックしてください。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> Debug → Debug Project でデバッグを開始します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> タクトスイッチを押すとブレークポイントの行でプログラムが停止します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> プログラムが停止した時の RA0 と RB0 の値を確認します。
+<span class="olradio"><input type="radio" name="p4"></span> プログラムを停止した時点における RA0 と RB0 の値を確認します(変数ウォッチやマウスオーバー時のポップアップを確認)。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> ブレークポイントを解除し(行番号をクリック)、Debug → Continue で実行を再開します。
 <br>
