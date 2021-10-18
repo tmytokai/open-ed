@@ -62,15 +62,20 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="../../git/text01/practice.html">こちら</a>を参考にして、代表者は GitHub 上に新規でリモートリポジトリを作成します。
-<br>
-リポジトリ名は「team(チーム番号)」としてください (例) 1班なら team1
-<br>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="../../git/text01/practice.html">こちら</a>の演習1-3を参考にして、代表者は GitHub 上に新規でパブリック・リモートリポジトリを作成します。
+</p>
+<p>
+※ リポジトリ名は「team(チーム番号)」としてください (例) 1班なら team1
+</p>
+<p>
+※ パブリック・リモートリポジトリなので著作権等に注意して下さい
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> 代表者は端末を開いてリモートリポジトリを clone します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者は<a href="./dot.gitignore">こちら</a>の設定ファイル(※)をダウンロードしてローカルリポジトリの中に保存して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 代表者は<a href="./dot.gitignore">設定ファイル</a>( gitignore ファイル )をダウンロードしてローカルリポジトリの中に保存して下さい。
 <p>
-※ gitignore と呼ばれるファイルで、中に名前が書いてあるファイルは git の管理外に置かれます。
+※ gitignore ファイル内に名前が書いてあるファイルは git の管理外に置かれます
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore をリポジトリに追加して下さい。
@@ -104,11 +109,14 @@ git push
 <span class="olradio"><input type="radio" name="p3"></span> A〜Dさん役を決めます。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> AさんはGreenfootを起動して新規シナリオを作成します。
-<br>
-シナリオ名は「team(チーム番号)」としてください (例) 1班なら team1
-<br>
-また、シナリオの保存先として演習 2-2 で作成したローカルリポジトリを指定します。
-<br>
+</p>
+<p>
+シナリオの保存先として演習 2-2 で作成したローカルリポジトリを指定してください
+</p>
+<p>
+※ シナリオ名は「game(チーム番号)」としてください (例) 1班なら game1
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p3"></span> Aさんは「World」のサブクラスとして「MyWorld」を作って下さい。キャンパスの大きさ、背景画像等の設定は後で変更出来ますので今の所は任意の設定で構いません。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 一度 Run して下さい。
@@ -118,7 +126,7 @@ git push
 <span class="olradio"><input type="radio" name="p3"></span> Aさんは「<b>Greenfootを閉じてから(※)</b>」
 </p>
 <p>
-※ 一度greenhootを閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されないためです
+※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
 </p>
 <pre>
 git status
@@ -154,7 +162,7 @@ git pull --no-edit
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 全員 greenfoot でシナリオを開いて下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 全員 Greenfoot を起動し、演習 2-3 で作成したシナリオを開いて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 全員 Actor のサブクラスとして適当なキャラを作って下さい。名前、画像は適当で構いませんが、打ち合わせて他の人と同じ名前にならないようにして下さい。ソースの中身は空で構いません。
 <br>
@@ -163,7 +171,7 @@ git pull --no-edit
 <span class="olradio"><input type="radio" name="p4"></span> 「<b>Greenfootを閉じてから(※)</b>」
 </p>
 <p>
-※ 一度greenhootを閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されないためです
+※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
 </p>
 <pre>
 git status
@@ -220,7 +228,7 @@ pull してまた衝突が生じたり、画像指定が外れている場合は
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 衝突が無くなったら git push を実行してリモートリポジトリを更新して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 全員の git push が終わったら、全員が再び git pull してローカルリポジトリを最新状態に更新して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 全員の git push が終わったら、全員が再び git pull --no-edit してローカルリポジトリを最新状態に更新して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 提出物はありません。
 </div>
