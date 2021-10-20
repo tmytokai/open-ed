@@ -25,18 +25,17 @@
 </p>
 
 <p>
-線形量子化ビット数 $q$ [bit] と対応する値域の分割数及び C言語における整数型の関係を示した表を以下に示します。
-<br>
-C 言語の場合は char 型(8 bit)、 short 型(16 bit)や int 型(32 bit)などの整数型の変数を使ってデータを記録します。
+線形量子化ビット数 $q$ [bit] と対応する値域の分割数及び C言語等における整数型の関係を示した表を以下に示します。
 </p>
 
 <table>
 <tr><th>線形量子化ビット数 $q$ [bit] </th><th>  値域の分割数 </th><th> 整数型変数 </th></tr>
-<tr><td class="center"> 1 bit </td><td class="center">  $2^1-1= 1$ 等分              </td><td class="center">  (unsigned) char型<br>※ 8 bit 変数 x1 → 1 bitのデータ x 8</td></tr>
-<tr><td class="center"> 2 bit </td><td class="center">  $2^2-1= 3$ 等分              </td><td class="center">  (unsigned) char型<br>※ 8 bit 変数 x1 → 2 bitのデータ x 4</td></tr>
+<tr><td class="center"> 1 bit </td><td class="center">  $2^1-1= 1$ 等分              </td><td class="center">  (unsigned) char型<br><br>※ 8 bit 変数なので 1 bitの信号を 8 個格納できます</td></tr>
+<tr><td class="center"> 2 bit </td><td class="center">  $2^2-1= 3$ 等分              </td><td class="center">  (unsigned) char型<br><br>※ 8 bit 変数なので 2 bitの信号を 4 個格納できます</td></tr>
+<tr><td class="center"> 4 bit </td><td class="center">  $2^4-1= 15$ 等分              </td><td class="center">  (unsigned) char型<br><br>※ 8 bit 変数なので 4 bitの信号を 2 個格納できます</td></tr>
 <tr><td class="center"> 8 bit </td><td class="center">  $2^8-1= 255$ 等分            </td><td class="center">  (unsigned) char 型 </td></tr>
 <tr><td class="center">16 bit </td><td class="center">  $2^{16}-1= 65535$ 等分       </td><td class="center">  (unsigned) short 型 </td></tr>
-<tr><td class="center">24 bit </td><td class="center">  $2^{24}-1= 16777215$ 等分    </td><td class="center">  (unsigned) char型 x 3 個<br>※ 8 bit 変数 x 3 → 24 bitのデータ x 1 </td></tr>
+<tr><td class="center">24 bit </td><td class="center">  $2^{24}-1= 16777215$ 等分    </td><td class="center">  (unsigned) char型 x 3 個<br><br>※ 24 bit の信号なので格納するためには 8 bit 変数が 3 個必要です </td></tr>
 <tr><td class="center">32 bit </td><td class="center">  $2^{32} -1= 4294967295$ 等分 </td><td class="center">  (unsigned) int 型 </td></tr>
 </table>
 
@@ -45,21 +44,42 @@ C 言語の場合は char 型(8 bit)、 short 型(16 bit)や int 型(32 bit)な�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>前ページの図1を $q$ = 2 bit で量子化した例 </b>
+<input type="checkbox"><b>図 1 : 前ページの図 1 を $q$ = 2 bit で量子化した例 </b>
 
 <p>
 $f[i]$ の値域は [0, 1]で、それが $2^2-1 = 3$ 等分されるので、信号値は 0 か 1/3 か 2/3 か 1 のどれかの値に量子化される。
-<br>
-よって 2 bit あればディジタルデータひとつ分を記録する事が出来る。
 </p>
 
 <p>
-例えば信号値 0 のデータを二進数 0b00、1/3 のデータを 0b01、2/3 のデータを 0b10、1 のデータを 0b11 で記録する事にすると、下の信号全体は二進数 0b001100011110 で表される。
+ここで信号値 0 のデータを二進数 0b00 (10進数の0)、1/3 のデータを 0b01 (10進数の1)、2/3 のデータを 0b10(10進数の2)、1 のデータを 0b11 (10進数の3) で記録する事にすると、量子化後の信号は二進数 0b 00 11 00 01 11 10 で表される。
 </p>
 
 <img src="./img/page02-fig1.png" alt="">
 
 </div>
+
+<p>
+また $q$ = 4 bit で量子化すると次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図 2: 前ページの図1を $q$ = 4 bit で量子化した例 </b>
+
+<p>
+$f[i]$ の値域は [0, 1]で、それが $2^4-1 = 15$ 等分されるので、信号値は 0、1/15、・・・、14/15、1 のどれかの値に量子化される。
+</p>
+
+<p>
+ここで信号値 0 のデータを二進数 0b0000(10進数の0)、1/15 のデータを 0b0001(10進数の1)、・・・、14/15 のデータを 0b1110(10進数の14)、1 のデータを 0b1111 (10進数の15) で記録する事にすると、量子化後の信号は二進数 0b 0000 1100 0010 0110 1101 1001 で表される。
+</p>
+
+<img src="./img/page02-fig2.png" alt="">
+
+</div>
+
+<p>
+上の例から分かる様に、量子化ビット数を増やすと量子化誤差は減りますがデータサイズが大きくなります。
+</p>
 
 <br>
 <script>PreNext(2,2)</script>
