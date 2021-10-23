@@ -21,13 +21,13 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="./page01.html">前ページ</a>で $x[i]$ の予測値 $\hat{x}[i]$ を求めましたので、次は真の値と予測値の誤差について考えましよう。
+<a href="./page01.html">前ページ</a>で入力値 $x[i]$ の予測値 $\hat{x}[i]$ を求めましたので、次は $x[i]$ と $\hat{x}[i]$ の誤差について考えましよう。
 <br>
 その誤差のことを「<b>線形予測誤差</b>」または「<b>線形予測残差</b>」などといいます。
 </p>
 
 <p>
-時刻 $i$ における線形予測誤差を記号 $err[i]$ で表すことにすると、$err[i]$ は次の計算式で求められます。
+時刻 $i$ における線形予測誤差を記号 $e[i]$ で表すことにすると、$e[i]$ は次の計算式で求められます。
 
 
 <div class="info">
@@ -38,7 +38,7 @@
 </p>
 
 \begin{align*}
-err[i] 
+e[i] 
 & = x[i] - \hat{x}[i] \\
 & = x[i] + \sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
 \end{align*}
@@ -74,6 +74,11 @@ $a[n]$ ・・・ LPC 係数
 <img src="./img/page02-fig1.png" alt="">
 
 </div>
+
+<p>
+要するに $x[i]$ を入力すると線形予測誤差 $e[i]$ が出力される FIR フィルタになります。
+</p>
+
 
 <br>
 <script>PreNext(2,4)</script>

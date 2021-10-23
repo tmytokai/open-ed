@@ -21,9 +21,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="./page02.html">前ページ</a>で示した線形予測誤差の定義式を以下の式の様に変形してみます。
+次に<a href="./page02.html">前ページ</a>で示した線形予測誤差の定義式を以下の式の様に変形してみます。
 <br>
-この式の事を「<b>$\textrm{L}$ 次 AR モデル</b>」( Auto-Regressive model : <b>自己回帰モデル</b>)と呼び、記号では AR(L) で表します。
+この式の事を「<b>$\textrm{L}$ 次 AR モデル</b>」( Auto-Regressive model : <a href="https://ja.wikipedia.org/wiki/%E8%87%AA%E5%B7%B1%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB">自己回帰モデル</a>)と呼び、記号 AR(L) で表します。
 </p>
 
 <div class="info">
@@ -35,8 +35,8 @@
 
 \begin{align*}
 x[i]
-& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + err[i] \\
-& = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + err[i] \\
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + e[i] \\
+& = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] \\
 \end{align*}
 
 <p>
@@ -46,23 +46,37 @@ $a[n]$ ・・・ LPC 係数
 </div>
 
 <p>
-ただし線形予測誤差とは異なり、AR モデルでは <b>$err[i]$ を任意のホワイトノイズとみなし</b>、$x[i]$ は $err[i]$ を入力信号とした時の <a href="../text03/page01.html">IIR フィルタ</a>の出力信号であるとみなします。
+ただし AR モデルでは線形予測誤差 $e[i]$ を正規分布などの<b>任意のホワイトノイズ</b>に置き換えます。
+<br>
+すると観測データ $x[i]$ は<b>確率変数</b>に変わるのでサンプリング毎に異なる値が出てくる様になります。
 </p>
 
 <p>
-つまり AR モデルは次のブロック図で表されます。
+※1 線形予測誤差をホワイトノイズに置き換えるのは強引ではないのかと思うかもしれませんがモデル化の世界では割とポピュラーな手法です。ただし検定などをしてモデルの当てはまり具合を調べる必要があります。
+</p>
+<p>
+※2 「$x[0]$ から $x[\textrm{N}-1]$ まで $\textrm{N}$ 個分だけ観測データとして手に入れた」と<a href="./page01.html">1 ページ目</a>で書きましたが、AR モデルではこれらの観測データは確率変動しない静的なデータではなくて、ある確率に従ってたまたま出力された<b>実現値</b>であるとみなします。
 </p>
 
+
+
+<p>
+さて AR モデルは次の<a href="../text03/page01.html">IIR フィルタ</a>で表されます。
+</p>
 
 <div class="info">
 <input type="checkbox"><b> $\textrm{L}$ 次 AR モデル AR(L) のブロック図: </b>
 
 <p>
-$err[i]$ は任意のホワイトノイズとする
+$e[i]$ は任意のホワイトノイズとする
 </p>
 
-<img src="./img/page04-fig1.png" alt="">
+<img src="./img/page03-fig1.png" alt="">
 </div>
+
+<p>
+要するにホワイトノイズ $e[i]$ を入力すると確率変数 $x[i]$ が出力される IIR フィルタとなります。
+</p>
 
 <br>
 <script>PreNext(3,4)</script>

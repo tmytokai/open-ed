@@ -21,11 +21,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-AR モデルについて説明する前にARモデルの基盤となっている「<b>線形予測モデル</b>」について説明します。
+AR モデルについて説明する前にARモデルの基盤となっている「<a href="https://ja.wikipedia.org/wiki/%E7%B7%9A%E5%BD%A2%E4%BA%88%E6%B8%AC%E6%B3%95">線形予測モデル</a>」について説明します。
 </p>
 
 <p>
-まずディジタル信号を $x[0]$ から $x[\textrm{N}-1]$ まで $\textrm{N}$ 個分だけ手に入れたという状況を考えます。
+まずディジタル信号を $x[0]$ から $x[\textrm{N}-1]$ まで $\textrm{N}$ 個分だけ観測データとして手に入れたとします。
 <br>
 この時、時刻 $i$ における信号値 $x[i]$ に何かしらの数学的な構造を仮定することを「<b>モデル化</b>」とか「<b>モデリング</b>」と言います。
 </p>
@@ -40,7 +40,7 @@ $x[i]$ の予測値を $\hat{x}[i]$ とすると線形予測モデルは次の�
 <input type="checkbox"><b>定義： $\textrm{L}$ 次線形予測モデル : </b>
 
 <p>
-次数 $\textrm{L}$ を正の整数とした時
+次数 $\textrm{L}$ を正の整数とし、 $i \leq -1$ の時は $x[i] = 0$ とした時
 </p>
 
 \begin{align*}
@@ -54,7 +54,7 @@ $\hat{x}[i]$ ・・・ $x[i]$ の予測値
 </p>
 
 <p>
-$a[n]$ ・・・ <b>LPC 係数</b>(Linear Prediction Coefficient) (または<b>線形予測係数</b>と呼ぶ)
+$a[n]$ ・・・ <b>LPC 係数</b>(Linear Prediction Coefficient) または<b>線形予測係数</b>
 </p>
 
 </div>
@@ -62,15 +62,14 @@ $a[n]$ ・・・ <b>LPC 係数</b>(Linear Prediction Coefficient) (または<b>�
 <p>
 $\sum$ の前にマイナスが付いている理由は<a href="./page02.html">次ページ</a>で説明しますので、今の所は特に気にしなくても結構です。
 <br>
-また次数 $\textrm{L}$ と LPC 係数の値は本来は未知数なのですが、とりあえず今の所は既知であるとします。
+また次数 $\textrm{L}$ と LPC 係数 $a[n]$ の値は本来は未知数なのですが、とりあえず今の所は既知であるとします。
 </p>
 
 <p>
-ところでこの線形予測モデルは $\textrm{L}$ 次の<a href="../text02/page01.html">FIR フィルタ</a>の形式になっています。
+さてこの線形予測モデルは $\textrm{L}$ 次の<a href="../text02/page01.html">FIR フィルタ</a>の形式になっています。
 <br>
 よって線形予測モデルは次のブロック図で表されます。
 </p>
-
 
 <div class="info">
 <input type="checkbox"><b> $\textrm{L}$ 次線形予測モデルのブロック図: </b>
@@ -82,6 +81,10 @@ $\sum$ の前にマイナスが付いている理由は<a href="./page02.html">�
 <img src="./img/page01-fig1.png" alt="">
 
 </div>
+
+<p>
+要するに $x[i]$ を入力すると予測値 $\hat{x}[i]$ が出力される FIR フィルタになります。
+</p>
 
 <br>
 <script>PreNext(1,4)</script>

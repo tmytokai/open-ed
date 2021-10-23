@@ -21,15 +21,15 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-今まで $\textrm{L}$ 個の LPC 係数 $a[1]$ 〜 $a[\textrm{L}]$ の値は既知であるとしましたが、実際には未知数ですので、次に示す<b>正規方程式</b>または<b>Yule-Walker 方程式</b>を解くことによって値を推定します(※)。
+今まで $\textrm{L}$ 個の LPC 係数 $a[1]$ 〜 $a[\textrm{L}]$ の値は既知であるとしましたが、実際には未知数ですので、次に示す<b>正規方程式</b>または<b>Yule-Walker 方程式</b>を解くことによって LPC 係数の値を推定します。
 </p>
 
 <p>
-※ Yule-Walker 推定値と呼び、AR モデルにおいてディジタル信号 $x[0]$ 〜 $x[\textrm{N}-1]$ が実現値として与えた時の LPC 係数の最尤推定値になります。
+※ この推定値のことを<b>Yule-Walker 推定値</b>と呼びます。ディジタル信号 $x[0]$ 〜 $x[\textrm{N}-1]$ が実現値として与えられた時の LPC 係数の<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%A4%E6%8E%A8%E5%AE%9A">最尤推定値</a>になります。
 </p>
 
 <p>
-なお次数 $\textrm{L}$ も未知なので本当ならば AIC 等の方法を用いて決定する必要がありますが、今回は $\textrm{L}$ は既知であるとします。
+なお次数 $\textrm{L}$ も未知なので本当ならば <a href="https://ja.wikipedia.org/wiki/%E8%B5%A4%E6%B1%A0%E6%83%85%E5%A0%B1%E9%87%8F%E8%A6%8F%E6%BA%96">AIC</a> 等の方法を用いて決定する必要がありますが、今回は $\textrm{L}$ は既知であるとします。
 </p>
 
 <div class="info">
@@ -42,8 +42,8 @@
 \[
 \begin{array}{rrrrrc}
 R[0]\cdot a[1] & +R[1]\cdot a[2] & +R[2]\cdot a[3] & +\cdots & +R[\textrm{L}-1]\cdot a[\textrm{L}] & =-R[1] \\
-R[1]\cdot a[1] & +R[0]\cdot a[1] & +R[1]\cdot a[3] & +\cdots & +R[\textrm{L}-2]\cdot a[\textrm{L}] & =-R[2] \\
-R[2]\cdot a[1] & +R[1]\cdot a[1] & +R[0]\cdot a[3] & +\cdots & +R[\textrm{L}-3]\cdot a[\textrm{L}] & =-R[3] \\
+R[1]\cdot a[1] & +R[0]\cdot a[2] & +R[1]\cdot a[3] & +\cdots & +R[\textrm{L}-2]\cdot a[\textrm{L}] & =-R[2] \\
+R[2]\cdot a[1] & +R[1]\cdot a[2] & +R[0]\cdot a[3] & +\cdots & +R[\textrm{L}-3]\cdot a[\textrm{L}] & =-R[3] \\
  &  & \vdots &  &  &  \\
 R[\textrm{L}-1]\cdot a[1] & +R[\textrm{L}-2]\cdot a[2] & +R[\textrm{L}-3]\cdot a[3] & +\cdots & +R[0]\cdot a[\textrm{L}] & =-R[\textrm{L}] \\
 \end{array}
@@ -60,19 +60,17 @@ $R[n]$ ・・・ $x[i]$ の<a href="../../acr/">(標本)自己相関関数</a>
 </div>
 
 <p>
-さて正規方程式はただの連立方程式なのでガウス消去法などのアルゴリズムを使って解くことが出来ます。
+さて正規方程式はただの連立方程式なので<a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%82%A6%E3%82%B9%E3%81%AE%E6%B6%88%E5%8E%BB%E6%B3%95">ガウス消去法</a>などのアルゴリズムを使って解くことが出来ます。
 </p>
 
 <p>
 ただし正規方程式は<b>テプリッツ(Toeplitz)行列</b>という特殊な形をしているので、次に示す<b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム</b>を使って高速に計算することが可能です。
 <br>
-さらにレビンソン・ダービン・アルゴリズムは計算途中で<b>PARCOR(パーコール)係数</b>と呼ばれる重要なパラメータも同時に計算してくれるというメリットがあります(※)。
+さらにレビンソン・ダービン・アルゴリズムは計算途中で<b>PARCOR(パーコール)係数</b>と呼ばれる重要なパラメータも同時に計算してくれるというメリットがあります。
 </p>
 
 <p>
-※ PARCOR係数は「偏自己相関係数」とも呼び、 $f[i]$ と $f[i+n]$ から $f[i+1], \cdots, f[i+n-1]$ の影響を取り除いた後の$f[i]$ と $f[i+n]$ の間の自己相関を意味します。
-<br>
-今回のアクティビティではPARCOR係数について詳しくは取り扱わないので、興味のある人は自学自習して下さい。
+※ PARCOR係数は「偏自己相関係数」とも呼び、 $x[i]$ と $x[i+n]$ から $x[i+1], \cdots, x[i+n-1]$ の影響を取り除いた後の $x[i]$ と $x[i+n]$ の間の自己相関を意味します。
 </p>
 
 <div class="info">
