@@ -21,7 +21,7 @@
 
 <br>
 <h2><a href="./page01.html">1. PWM とは</a></h2>
-<h2><a href="./page02.html">2. 出力</a></h2>
+<h2><a href="./page02.html">2. 出力波形</a></h2>
 
 <br>
 <p>
@@ -34,9 +34,9 @@
 <p>
 1827は CCP(Capture/Compare/PWM)モジュールを4つ(CCP1、CCP2、CCP3、CCP4) 積んでいます
 <br>
-またタイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
+タイマーモジュールを3つ(Timer2、Timer4、Timer6) 積んでるので同時に 3 つ PWM 出力可能です
 <br>
-なお CCP1 と CCP2 は設定で PWM 出力ピンの位置を変更できます
+CCP1 と CCP2 は設定で PWM 出力ピンの位置を変更できます
 </p>
 <ol>
 <li>PWM 出力モジュールとして CCP1 を使用する</li>
@@ -120,15 +120,16 @@
 </p>
 <ol>
 <li>CCP4 を使用する</li>
-<li>CCP4 の出力ピンは 3 pin とする(固定)</li>
+<li>CCP4 の出力ピンは 3 pin とする ※ CCP4 は 3 pin 固定</li>
 <li>CCP4 に接続するタイマーとして Timer4 を使う</li>
 <li>Timer4 の prescale は x64 とする</li>
 <li>タクトスイッチを離している時はオクターブ3のド(131 Hz) の音を出す</li>
 <li>タクトスイッチを押している特はオクターブ3のソ(196 Hz) の音を出す</li>
 </ol>
 
+<br>
 <p>
-<b>音階とPWM周期、パルス幅の関係:</b>
+<b>音階と PWM 周期、パルス幅の関係:</b>
 </p>
 
 <p>
