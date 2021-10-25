@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+int i_rand = 0;
+double eorg[100];
+
 // 正規乱数 N( mu, sigma^2)の出力
 // mu : 平均
 // sigma2 : 分散
@@ -10,13 +13,14 @@ double nrand( double mu, double sigma2 )
     // Box-Muller 法を使用
     double sigma = sqrt(sigma2);
     double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
+    if(i_rand<100) eorg[i_rand++] = mu + sigma*x;
     return mu + sigma*x;
 }
 
 // 自己相関 R[n]
 double ACR( const int n, const double* f, const int N )
 {
-    // 自己相関の演習で作成した ACR 関数の中身をコピーする
+    // 演習 4-1 の ACR 関数の中身をコピーする
 }
 
 int main()
@@ -39,14 +43,13 @@ int main()
     // 演習 4-1 のレビンソン・ダービン(Levinson-Durbin)・アルゴリズムをコピーする
 
 
-    // 線形予測モデル
-    double hatx[Nout];
+    // 予測誤差の推定値
+    double hate[Nout];
     for( int i = 0; i < Nout; ++i ){
-        hatx[i] = 0;
+        hate[i] = ? ;
         for( int n = 1; n <= L; ++n ){
-            hatx[i] += ? ;
+            hate[i] += ? ;
         }
-        hatx[i] *= ? ;
     }
 
     printf("LPC係数の推定値\n");
@@ -54,13 +57,13 @@ int main()
         printf( "a[%d] = %lf\n", n, a[n] );
     }
 
-    FILE* file = fopen( "D-FILTER-4-2-hatx.csv", "wb");
+    FILE* file = fopen( "DF_4_3_hate.csv", "wb");
     if( file == NULL ){
         printf( "ファイルを開けません");
         exit(1);
     }
     for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d, %lf\n", i, hatx[i] );
+        fprintf( file, "%d, %lf, %lf\n", i, hate[i], eorg[i] );
     }
     fclose(file);
 
