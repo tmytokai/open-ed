@@ -4,7 +4,7 @@ int main()
 {
     float a = 1.0;
     float A = ? ; // 同値判定したい数字
-    float e = ? ; // 算機イプシロン (任意の小さい数字)
+    float e = ? ; // 計算機イプシロン (任意の小さい数字)
 
     for( int i=0; i<10; ++i) a -= 0.1;
     printf("a=%lf\n",a);
