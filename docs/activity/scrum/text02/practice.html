@@ -271,6 +271,7 @@ CONFLICT (content): Merge conflict in (衝突ファイル名)
 <p>
 git status
 </p>
+<p>
 を実行し、衝突しているファイル( both modified マークが付いているファイル)を確認します。
 <br>
 次に Greenfoot を起動し、衝突しているファイルを開いて衝突箇所を修正し、Run ボタンを押して動作確認します。
@@ -456,6 +457,9 @@ git pull --no-edit
 その際に作業担当者も決めて名前(<b>個人特定されないように要注意</b>)も記入して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p13"></span> 代表者はプロダクトバックログへのリンクをプロジェクトフォルダ内に作成して下さい。リンク名は「スプリントバックログ(スプリント番号).url」とします。(例) スプリント1なら「スプリントバックログ1.url」
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> スプリントバックログの ToDo の中にある作業の中から、各自が最初に実施する作業を一つ選んで Doing 状態に変えます。 ※ 依存関係に注意
+</p>
 </div>
 
 <br>
@@ -484,30 +488,50 @@ git pull --no-edit
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p15"></span> 自分の担当している作業を行います。
+<span class="olradio"><input type="radio" name="p15"></span> 各自はスプリントバックログで選んだ担当作業を行います。
 <br>
-<span class="olradio"><input type="radio" name="p15"></span> 適当なタイミングでローカルリポジトリを更新します。「<b>Greenfootを閉じてから</b>」
+<span class="olradio"><input type="radio" name="p15"></span> 適当なタイミングでローカルリポジトリを更新します。
 </p>
 <pre>
+<b>Greenfootを閉じてから</b>
+
 git status
 git add .
 git status
 git commit -m "(適当なコメント)"
 </pre>
 <p>
-を実行してください。
+の順にコマンドを実行してローカルリポジトリを更新して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p15"></span> 担当している作業が終わったら以下の手順で push と次の作業の選択をします。
+
+<span class="olradio"><input type="radio" name="p15"></span> 担当作業が終わったら、他のメンバーの更新内容を取り込むために
 </p>
-<ol>
-<li>git pull --no-edit を実行します ※ 衝突したら演習2-4や2-5の手順に従って修正して下さい</li>
-<li>git push を実行します。※ マナーとして git push するときは他のメンバーに「これから push する」と一声かけましょう</li>
-<li>対応するスプリントバックログのアイテムを Doing から Done 状態に変えます</li>
-<li>プロダクトバックログも、対応するタスクが全て終わっていたら Done 状態に変えます</li>
-<li>スプリントバックログの ToDo の中に残っている自分の作業を一つ選び Doing 状態に変えます</li>
-<li>選んだ作業を開始します</li>
-<li>もし自分の作業が全て終わっていたら他の人の手伝いをするか、デバッグ作業をします</li>
-</ol>
+<p>
+git pull --no-edit
+</p>
+<p>
+を実行して下さい。
+<br>
+もし衝突が起きたら演習 2-5 の手順で修正してください。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p15"></span> 衝突しなかったら
+</p>
+<pre>
+git push
+</pre>
+<p>
+を実行してリモートリポジトリを更新して下さい。 ※ マナーとして git push するときは他のメンバーに「これから push する」と一声かけましょう。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p15"></span> 対応するスプリントバックログのアイテムを Doing から Done 状態に変えます。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> 対応するタスクが全て終わったらプロダクトバックログも Done 状態に変えます。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> スプリントバックログの ToDo の中に残っている自分の作業を一つ選び Doing 状態に変えて作業を再開します。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> もし予定していた自分の作業が全て Done になっていたら他の人の手伝いをして下さい。
+</p>
 </div>
 
 <br>
