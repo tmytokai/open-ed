@@ -67,17 +67,19 @@ f(t) = \sin(  2\pi \cdot 2 \cdot t ) + \sin(  2\pi \cdot 4 \cdot t )
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 表計算ソフトを起動します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 1行目の一番左のセルに「fs」と書き、隣の列にその値(10)を入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 1行目の一番左のセルに「サンプリング周波数 fs [Hz]」と書き、隣の列にその値(10)を入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 2行目の一番左のセルに「Ts」と書き、隣の列にその値(4)を入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 2行目の一番左のセルに「サンプリングする秒数 Ts [秒]」と書き、隣の列にその値(4)を入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 3行目の一番左のセルに「τ」と書き、隣の列でその値を計算して求めます。
+<span class="olradio"><input type="radio" name="p3"></span> 3行目の一番左のセルに「サンプリング間隔 τ [秒]」と書き、隣の列でその値を計算して求めます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 4行目の一番左のセルに「iMax」と書き、隣の列でその値を計算して求めます。
+<span class="olradio"><input type="radio" name="p3"></span> 4行目の一番左のセルに「最大時刻 iMax」と書き、隣の列でその値を計算して求めます。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 5行目の一番左のセルに「i」と書き、その下のセルから 各 $i$ の値を 0 から iMax の値までオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 5行目の「i」と書いた右隣のセルに「f[i]」と書き、その下のセルから 各時刻における $f[i]$ の値をオートフィルを使って入力します。
+<span class="olradio"><input type="radio" name="p3"></span> 5行目の「i」と書いた<b>2つ右隣</b>のセル(5行C列)に「t」と書き、その下のセルから $t = \tau \cdot i$ の値をオートフィルを使って入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 5行目の「i」と書いた右隣のセル(5行B列)に「f[i]」と書き、その下のセルから $f[i] = f(t) = f(\tau \cdot i)$ の値をオートフィルを使って入力します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 「i」と「f[i]」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「あり」とします。
 <br>
@@ -105,9 +107,9 @@ f(t) = \sin(  2\pi \cdot 2 \cdot t ) + \sin(  2\pi \cdot 4 \cdot t )
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> $f_s = 5$ にします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> iMax の値も変化するので、適宜行数を増減してグラフも作り直します。
+<span class="olradio"><input type="radio" name="p4"></span> iMax の値も変化するので適宜 i の行数を増減します。もしグラフの横軸の長さが自動修正されなかった場合は古いグラフを削除してグラフを作り直します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> グラフが変化したことを確認します。
+<span class="olradio"><input type="radio" name="p4"></span> グラフの変化がどの様に変化したか確認します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> シートを上書き保存します。
 <br>
