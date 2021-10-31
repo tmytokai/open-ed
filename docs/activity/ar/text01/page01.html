@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1.自己回帰モデル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己回帰モデル</a></li>
+<li>学習項目: [1] 自己回帰モデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+あるディジタル信号列 $x[i]$ が次の式に従って確率的に生成されているとき、この $x[i]$ は<b> L 次 <a href="https://ja.wikipedia.org/wiki/%E8%87%AA%E5%B7%B1%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB">自己回帰モデル</a></b>( Auto-Regressive model : AR モデル )に従って生成されていると言います。
+<br>
+この L 次自己回帰モデルは記号 AR(L) で表されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： L 次自己回帰モデル AR(L): </b>
+
+<p>
+次数 $\textrm{L}$ を正の整数とした時
+</p>
+
+\begin{align*}
+x[i]
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + e[i] \\
+& = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] \\
+\end{align*}
+
+<p>
+$a[n]$ ・・・ LPC 係数 (Linear Prediction Coefficient: <b>線形予測係数</b> )
+</p>
+
+<p>
+$e[i]$ ・・・正規乱数などの任意のホワイトノイズ
+</p>
+
+</div>
+
+<p>
+$x[i]$ は確率変数になるので、信号列を生成する毎に異なる信号列が出てくることに注意して下さい。
+<br>
+また次数 L と LPC 係数 $a[n]$ の値は本来は未知数なのですが、とりあえず今の所は既知であるとします。
+<br>
+なお $\sum$ の前にマイナスが付いている理由は歴史的な背景によるもの(計算を見やすくするため？)なので特に気にしなくても結構です。
+</p>
+
+<p>
+さて AR(L) は次のブロック図で表されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> AR(L) のブロック図: </b>
+
+<p>　</p>
+
+<img src="./img/page01-fig1.png" alt="">
+</div>
+
+<p>
+要するにホワイトノイズ $e[i]$ を入力すると確率変数 $x[i]$ が出力される<a href="../../d-filter/text03/page01.html">標準形 L 次 IIR フィルタ</a>となります。
+<br>
+ただし後段フィードフォワード部の IIRフィルタ係数は b[0] = 1 で残りは b[n] = 0 なので、プログラム表現は以下の通りに簡略化されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> AR(L) のプログラム表現: </b>
+
+<pre class="wrap">
+x[i] = 任意のホワイトノイズ 
+for( int n = 1; n &lt= L; ++n ) x[i] += -a[n] * x[i-n]; // a[n]の符号注意
+</pre>
+
+</div>
+
+
+<br>
+<script>PreNext(1,5)</script>
+</body>
+</html>

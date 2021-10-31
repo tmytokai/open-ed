@@ -12,8 +12,8 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: ディジタル線形フィルタ</a></li>
-<li>学習項目: [4] ARモデル</li>
+<li><a href="../">アクティビティ: 自己回帰モデル</a></li>
+<li>学習項目: [1] 自己回帰モデル</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -21,11 +21,13 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-今まで $\textrm{L}$ 個の LPC 係数 $a[1]$ 〜 $a[\textrm{L}]$ の値は既知であるとしましたが、実際には未知数ですので、次に示す<b>正規方程式</b>または<b>Yule-Walker 方程式</b>を解くことによって LPC 係数の値を推定します。
+今まで LPC 係数 $a[n]$ の値は既知であるとしましたが、実際には未知数ですので次に示す<b>正規方程式</b>または<b>Yule-Walker 方程式</b>を解くことによって値を推定する必要があります。
+<br>
+この推定値のことを<b>Yule-Walker 推定値</b>と呼びます。
 </p>
 
 <p>
-※ この推定値のことを<b>Yule-Walker 推定値</b>と呼びます。ディジタル信号 $x[0]$ 〜 $x[\textrm{N}-1]$ が実現値として与えられた時の LPC 係数の<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%A4%E6%8E%A8%E5%AE%9A">最尤推定値</a>になります。
+※ 理論的には $x[i]$ の実現値が得られた際の LPC 係数の<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%A4%E6%8E%A8%E5%AE%9A">最尤推定値</a>になります。
 </p>
 
 <p>
@@ -35,26 +37,22 @@
 <div class="info">
 <input type="checkbox"><b>定義： 正規方程式(Yule-Walker 方程式): </b>
 
-<p>
-次の $a[1]$ 〜 $a[\textrm{L}]$ に関する $\textrm{L}$ 次連立方程式を正規方程式または Yule-Walker 方程式と呼ぶ
-</p>
-
 \[
 \begin{array}{rrrrrc}
-R[0]\cdot a[1] & +R[1]\cdot a[2] & +R[2]\cdot a[3] & +\cdots & +R[\textrm{L}-1]\cdot a[\textrm{L}] & =-R[1] \\
-R[1]\cdot a[1] & +R[0]\cdot a[2] & +R[1]\cdot a[3] & +\cdots & +R[\textrm{L}-2]\cdot a[\textrm{L}] & =-R[2] \\
-R[2]\cdot a[1] & +R[1]\cdot a[2] & +R[0]\cdot a[3] & +\cdots & +R[\textrm{L}-3]\cdot a[\textrm{L}] & =-R[3] \\
+R[0]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[2]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-1]\cdot \hat{a}[\textrm{L}] & =-R[1] \\
+R[1]\cdot \hat{a}[1] & +R[0]\cdot \hat{a}[2] & +R[1]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-2]\cdot \hat{a}[\textrm{L}] & =-R[2] \\
+R[2]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[0]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-3]\cdot \hat{a}[\textrm{L}] & =-R[3] \\
  &  & \vdots &  &  &  \\
-R[\textrm{L}-1]\cdot a[1] & +R[\textrm{L}-2]\cdot a[2] & +R[\textrm{L}-3]\cdot a[3] & +\cdots & +R[0]\cdot a[\textrm{L}] & =-R[\textrm{L}] \\
+R[\textrm{L}-1]\cdot \hat{a}[1] & +R[\textrm{L}-2]\cdot \hat{a}[2] & +R[\textrm{L}-3]\cdot \hat{a}[3] & +\cdots & +R[0]\cdot \hat{a}[\textrm{L}] & =-R[\textrm{L}] \\
 \end{array}
 \]
 
 <p>
-　
+$\hat{a}[n]$ ・・・ LPC 係数 $a[n]$ の推定値(Yule-Walker 推定値)
 </p>
 
 <p>
-$R[n]$ ・・・ $x[i]$ の<a href="../../acr/">(標本)自己相関関数</a>
+$R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自己相関関数</a>
 </p>
 
 </div>
@@ -76,31 +74,35 @@ $R[n]$ ・・・ $x[i]$ の<a href="../../acr/">(標本)自己相関関数</a>
 <div class="info">
 <input type="checkbox"><b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム: </b>
 
+<p>
+変数 hat_a[n] ・・・ Yule-Walker 推定値 $\hat{a}[n]$ の値が入る
+</p>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="LD"></span> (標本)自己相関関数 R[0] 〜 R[L] を計算する
+<span class="olradio"><input type="radio" name="LD"></span> 標本自己相関関数 R[0] 〜 R[L] を計算する
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> 変数 e (予測誤差の自乗和)に R[0] を代入
+<span class="olradio"><input type="radio" name="LD"></span> 変数 e に R[0] を代入
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 W に R[1] を代入
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> n = 1 から L までの for ループに入る
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> a[1] 〜 a[n]の値を a2[1] 〜 a2[n] にバックアップ
+<span class="olradio"><input type="radio" name="LD"></span> hat_a[1] 〜 hat_a[n]の値を tmp_a[1] 〜 tmp_a[n] にバックアップ
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 P[n] (PARCOR 係数)に W/e を代入
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> a[n] に -P[n] を代入
+<span class="olradio"><input type="radio" name="LD"></span> hat_a[n] に -P[n] を代入
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> i = 1 から n-1 までの for ループに入る
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> a[i] = a2[i] - P[n] * a2[n-i] と更新
+<span class="olradio"><input type="radio" name="LD"></span> hat_a[i] = tmp_a[i] - P[n] * tmp_a[n-i] と更新
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> i のループを抜ける
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> e = e * ( 1 - P[n]*P[n] ) と更新
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> W = R[n+1] + $\sum_{i=1}^{n}$ { a[i] * R[n+1-i] } と更新
+<span class="olradio"><input type="radio" name="LD"></span> W = R[n+1] + $\sum_{i=1}^{n}$ { hat_a[i] * R[n+1-i] } と更新
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> n のループを抜ける
 </p>
@@ -109,6 +111,6 @@ $R[n]$ ・・・ $x[i]$ の<a href="../../acr/">(標本)自己相関関数</a>
 </div>
 
 <br>
-<script>PreNext(4,4)</script>
+<script>PreNext(4,5)</script>
 </body>
 </html>

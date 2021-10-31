@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. 推定モデルの利用</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己回帰モデル</a></li>
+<li>学習項目: [1] 自己回帰モデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+今までの話をまとめると次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>まとめ: </b>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="LD"></span> N 個の実現値 $x[0]$ 〜 $x[\textrm{N}-1]$ を観測する
+<br>
+<span class="olradio"><input type="radio" name="LD"></span> N 個の実現値 $x[0]$ 〜 $x[\textrm{N}-1]$ から <a href="../../acr/">標本自己相関関数</a>を求める
+<br>
+<span class="olradio"><input type="radio" name="LD"></span> 標本自己相関関数からレビンソン・ダービン・アルゴリズムを使って LPC 係数の推定値 $\hat{a}[n]$ を求める
+</p>
+</div>
+
+</div>
+
+<p>
+よって $x[i]$ を生成した自己回帰モデルを $\hat{a}[n]$ を使って復元出来るようになったので、いくらでも新しい信号列を生成出来るようになりました。
+<br>
+また線形予測モデルを使うことで、次の時刻の値を予測することも出来るようになりました。
+<br>
+他にも色々なことに応用することが可能です。
+</p>
+
+<p>
+ただし、
+</p>
+<p>
+<b>そもそも実現値 $x[i]$ が自己回帰モデルから生成された信号列でなかった場合は $\hat{a}[n]$ を推定しても無意味</b>
+</p>
+<p>
+であることには充分注意してください。
+</p>
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>

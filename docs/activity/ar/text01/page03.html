@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. 線形予測誤差</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己回帰モデル</a></li>
+<li>学習項目: [1] 自己回帰モデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+今度は時刻 $i$ の時に $x[i]$ を観測して実現値を手に入れたとします。
+<br>
+すると実現値 $x[i]$ とその線形予測値 $\hat{x}[i]$の差分から時刻 $i$ で付加されたホワイトノイズ $e[i]$ の値を予測できます。
+</p>
+<p>
+その予測値のことを L 次<b>線形予測誤差</b>や<b>線形予測残差</b>などといって、次の式で求められます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： L 次線形予測誤差 : </b>
+
+<p>
+次数 $\textrm{L}$ を正の整数とする
+<br>
+$x[i]$ は AR(L) に従って生成されている
+<br>
+$x[i]$ まで実現値を入手済みとする
+</p>
+
+\begin{align*}
+\hat{e}[i] 
+& = x[i] - \hat{x}[i] \\
+& = x[i] + \sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
+\end{align*}
+
+<p>
+$\hat{e}[i]$ ・・・ $e[i]$ の L 次線形予測誤差
+</p>
+
+<p>
+$\hat{x}[i]$ ・・・ $x[i]$ の L 次線形予測値
+</p>
+
+
+<p>
+$a[n]$ ・・・ LPC 係数
+</p>
+
+</div>
+
+<p>
+さて L 次線形予測誤差は次のブロック図で表されます。 
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b> L 次線形予測誤差のブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page03-fig1.png" alt="">
+
+</div>
+
+<p>
+要するに $x[i]$ を入力すると線形予測誤差 $\hat{e}[i]$ が出力される<a href="../../d-filter/text02/page01.html">FIR フィルタ</a>となります。
+<br>
+よってプログラム表現は次の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>L 次線形予測誤差のプログラム表現: </b>
+
+<p>
+実現値 $x[i]$ は時刻 i が負の時は 0 とする
+</p>
+
+<pre class="wrap">
+hat_e[i] = x[i] ;
+for( int n = 1; n &lt= L; ++n ) hat_e[i] += a[n] * x[i-n] ;  // a[n]の符号注意
+</pre>
+</div>
+
+<br>
+<script>PreNext(3,5)</script>
+</body>
+</html>

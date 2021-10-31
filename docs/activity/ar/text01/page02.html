@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. 線形予測モデル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 自己回帰モデル</a></li>
+<li>学習項目: [1] 自己回帰モデル</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ある信号列 $x[i]$ が AR(L) から生成されていると分かっているとします。
+<br>
+ただし 次数 L や LPC 係数 $a[n]$ は既知であるとします。
+</p>
+
+<p>
+さらに時刻 $i$ において $x[i-1]$ まで観測した値を既に入手しているとします。
+<br>
+この入手済の観測値のことを<b>実現値</b>と呼びます。
+</p>
+
+<p>
+※ $x[i]$ は確率変数なので信号列を生成する度に異なる実現値が出てくることに注意
+</p>
+
+<p>
+このとき、$x[i]$ の値は過去の実現値を用いて次の式で予測出来ます。
+<br>
+この式を<b> L 次<a href="https://ja.wikipedia.org/wiki/%E7%B7%9A%E5%BD%A2%E4%BA%88%E6%B8%AC%E6%B3%95">線形予測モデル</a></b>と言います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： L 次線形予測モデル : </b>
+
+<p>
+次数 $\textrm{L}$ を正の整数とする
+<br>
+$x[i]$ は AR(L) に従って生成されている
+<br>
+$x[i-1]$ まで実現値を入手済みとする
+</p>
+
+\begin{align*}
+\hat{x}[i]
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
+& = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}]
+\end{align*}
+
+<p>
+$\hat{x}[i]$ ・・・ $x[i]$ の L 次線形予測値
+</p>
+
+<p>
+$a[n]$ ・・・ <b>LPC 係数</b>
+</p>
+
+</div>
+
+<p>
+ L 次線形予測モデルは L 次自己回帰モデルからホワイトノイズの項である $e[i]$ を取り除いた形、つまり
+</p>
+
+\[
+\hat{x}[i] = x[i] - e[i]
+\]
+
+<p>
+となっていることに注目して下さい。
+</p>
+
+<p>
+さて L 次線形予測モデルは次のブロック図で表されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> L 次線形予測モデルのブロック図: </b>
+
+<p>
+　
+</p>
+
+<img src="./img/page02-fig1.png" alt="">
+
+</div>
+
+<p>
+要するに $x[i-1]$ を入力すると次の時刻の信号値 $x[i]$ の線形予測値 $\hat{x}[i]$ が出力される<a href="../../d-filter/text02/page01.html">FIR フィルタ</a>となります。
+<br>
+よってプログラム表現は次の通りになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>L 次線形予測モデルのプログラム表現: </b>
+
+<p>
+実現値 $x[i]$ は時刻 i が負の時は 0 とする
+</p>
+
+<pre class="wrap">
+hat_x[i] = 0 ;
+for( int n = 1; n &lt= L; ++n ) hat_x[i] += -a[n] * x[i-n] ; // a[n]の符号注意
+</pre>
+
+</div>
+
+<br>
+<script>PreNext(2,5)</script>
+</body>
+</html>
