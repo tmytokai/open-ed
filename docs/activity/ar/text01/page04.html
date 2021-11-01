@@ -21,21 +21,21 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-今まで LPC 係数 $a[n]$ の値は既知であるとしましたが、実際には未知数ですので次に示す<b>正規方程式</b>または<b>Yule-Walker 方程式</b>を解くことによって値を推定する必要があります。
+今まで LPC 係数 $a[n]$ の値は既知であるとしましたが、実際には未知数ですので<a href="./page01.html"> 1 ページ目</a>で出てきた Yule-Walker 方程式を解いて値を推定する必要があります。
 <br>
-この推定値のことを<b>Yule-Walker 推定値</b>と呼びます。
+ただし今回は自己相関係数の代わりに<a href="../../acr/">標本自己相関関数</a>を使って $a[n]$の推定値 $\hat{a}[n]$ を求める方程式となります。
 </p>
 
 <p>
-※ 理論的には $x[i]$ の実現値が得られた際の LPC 係数の<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%A4%E6%8E%A8%E5%AE%9A">最尤推定値</a>になります。
-</p>
-
-<p>
-なお次数 $\textrm{L}$ も未知なので本当ならば <a href="https://ja.wikipedia.org/wiki/%E8%B5%A4%E6%B1%A0%E6%83%85%E5%A0%B1%E9%87%8F%E8%A6%8F%E6%BA%96">AIC</a> 等の方法を用いて決定する必要がありますが、今回は $\textrm{L}$ は既知であるとします。
+なお次数 L の値も未知なので本当ならば <a href="https://ja.wikipedia.org/wiki/%E8%B5%A4%E6%B1%A0%E6%83%85%E5%A0%B1%E9%87%8F%E8%A6%8F%E6%BA%96">AIC</a> 等の方法を用いて L の値も決定する必要がありますが、今回は L は既知であるとします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： 正規方程式(Yule-Walker 方程式): </b>
+<input type="checkbox"><b>定義： Yule-Walker 方程式: </b>
+
+<p>
+※ 次数 L は既知とする
+</p>
 
 \[
 \begin{array}{rrrrrc}
@@ -48,21 +48,26 @@ R[\textrm{L}-1]\cdot \hat{a}[1] & +R[\textrm{L}-2]\cdot \hat{a}[2] & +R[\textrm{
 \]
 
 <p>
-$\hat{a}[n]$ ・・・ LPC 係数 $a[n]$ の推定値(Yule-Walker 推定値)
+$\hat{a}[n]$ ・・・ LPC 係数 $a[n]$ の推定値
 </p>
 
 <p>
 $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自己相関関数</a>
 </p>
 
+<p>
+※ 理論的には $\hat{a}[n]$ は $x[i]$ の実現値が得られた際の LPC 係数の<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%A4%E6%8E%A8%E5%AE%9A">最尤推定値</a>になります
+</p>
+
+
 </div>
 
 <p>
-さて正規方程式はただの連立方程式なので<a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%82%A6%E3%82%B9%E3%81%AE%E6%B6%88%E5%8E%BB%E6%B3%95">ガウス消去法</a>などのアルゴリズムを使って解くことが出来ます。
+さてこの Yule-Walker 方程式はただの連立方程式なので<a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%82%A6%E3%82%B9%E3%81%AE%E6%B6%88%E5%8E%BB%E6%B3%95">ガウス消去法</a>などのアルゴリズムを使って解くことが出来ます。
 </p>
 
 <p>
-ただし正規方程式は<b>テプリッツ(Toeplitz)行列</b>という特殊な形をしているので、次に示す<b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム</b>を使って高速に計算することが可能です。
+ただし Yule-Walker 方程式は<b>テプリッツ(Toeplitz)行列</b>という特殊な形をしているので、次に示す<b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム</b>を使って高速に計算することが可能です。
 <br>
 さらにレビンソン・ダービン・アルゴリズムは計算途中で<b>PARCOR(パーコール)係数</b>と呼ばれる重要なパラメータも同時に計算してくれるというメリットがあります。
 </p>
@@ -75,11 +80,13 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <input type="checkbox"><b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム: </b>
 
 <p>
-変数 hat_a[n] ・・・ Yule-Walker 推定値 $\hat{a}[n]$ の値が入る
+変数 hat_a[n] に Yule-Walker 推定値 $\hat{a}[n]$ の値が入る
 </p>
 
 <div class="olradio"> 
 <p>
+<span class="olradio"><input type="radio" name="LD"></span> hat_a[1] 〜 hat_a[L] を 0 でクリアする
+<br>
 <span class="olradio"><input type="radio" name="LD"></span> 標本自己相関関数 R[0] 〜 R[L] を計算する
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 e に R[0] を代入
@@ -88,7 +95,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> n = 1 から L までの for ループに入る
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> hat_a[1] 〜 hat_a[n]の値を tmp_a[1] 〜 tmp_a[n] にバックアップ
+<span class="olradio"><input type="radio" name="LD"></span> hat_a[1] 〜 hat_a[n]　の値を tmp_a[1] 〜 tmp_a[n] にバックアップ
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 P[n] (PARCOR 係数)に W/e を代入
 <br>

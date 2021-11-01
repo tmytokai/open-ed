@@ -40,11 +40,15 @@ x[i]
 \end{align*}
 
 <p>
-$a[n]$ ・・・ LPC 係数 (Linear Prediction Coefficient: <b>線形予測係数</b> )
+$a[n]$ ・・・ LPC 係数 (Linear Prediction Coefficient: 線形予測係数 )
 </p>
 
 <p>
 $e[i]$ ・・・正規乱数などの任意のホワイトノイズ
+</p>
+
+<p>
+※ 文献によっては LPC 係数の前にマイナスが付かない定義もあります
 </p>
 
 </div>
@@ -54,15 +58,15 @@ $x[i]$ は確率変数になるので、信号列を生成する毎に異なる�
 <br>
 また次数 L と LPC 係数 $a[n]$ の値は本来は未知数なのですが、とりあえず今の所は既知であるとします。
 <br>
-なお $\sum$ の前にマイナスが付いている理由は歴史的な背景によるもの(計算を見やすくするため？)なので特に気にしなくても結構です。
+なお  LPC 係数の前にマイナスが付いている理由は歴史的な背景によるもの(？)なので特に気にしなくても結構です。
 </p>
 
 <p>
-さて AR(L) は次のブロック図で表されます。
+さてこの L 次自己回帰モデルは次のブロック図で表されます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b> AR(L) のブロック図: </b>
+<input type="checkbox"><b> L 次自己回帰モデルのブロック図: </b>
 
 <p>　</p>
 
@@ -76,7 +80,7 @@ $x[i]$ は確率変数になるので、信号列を生成する毎に異なる�
 </p>
 
 <div class="info">
-<input type="checkbox"><b> AR(L) のプログラム表現: </b>
+<input type="checkbox"><b> L 次自己回帰モデルのプログラム表現: </b>
 
 <pre class="wrap">
 x[i] = 任意のホワイトノイズ 
@@ -85,6 +89,108 @@ for( int n = 1; n &lt= L; ++n ) x[i] += -a[n] * x[i-n]; // a[n]の符号注意
 
 </div>
 
+<p>
+なお L 次自己回帰モデルを IIR フィルタとみなした際の伝達関数
+</p>
+
+
+\[
+\textrm{H}(z) 
+ = \frac{1}{ 1 + a[1] \cdot z^{-1} + a[2] \cdot z^{-2} + \cdots + a[\textrm{L}] \cdot z^{-\textrm{L}} }
+\]
+
+<p>
+の分母が 0 になる条件式、つまり
+</p>
+
+\[
+z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cdots + a[\textrm{L}] = 0
+\]
+
+<p>
+を<b>特性多項式</b>と呼び、$x[i]$が<a href="../../acr/text01/page01.html">定常</a>であるためには<a href="../../d-filter/text01/page11.html">特性多項式の全ての根が単位円の内側にある必要</a>があります。
+</p>
+
+<p>
+※ 定常でない状態を<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%AF">ランダムウォーク</a>といいます
+</p>
+
+
+<p>
+そしてもし $x[i]$ が定常ならば、平均は
+</p>
+
+\[
+\textrm{E}(x[i]) = 0
+\]
+
+<p>
+となります。
+</p>
+<p>
+分散と共分散の計算は少しややこしくなります。
+<br>
+まず $\rho[n]$ を自己相関係数としたとき、次の Yule-Walker 方程式と呼ばれる方程式を解いて $\rho[1]$ 〜 $\rho[\textrm{L}]$ を求めます($\rho[0]$ は 1 )。
+
+<div class="info">
+<input type="checkbox"><b> Yule-Walker 方程式: </b>
+
+<p>
+※ $\rho[0] = 1$ 
+</p>
+
+\[
+\begin{array}{rrrrrc}
+\rho[0]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[2]\cdot a[3] & +\cdots & +\rho[\textrm{L}-1]\cdot a[\textrm{L}] & =-\rho[1] \\
+\rho[1]\cdot a[1] & +\rho[0]\cdot a[2] & +\rho[1]\cdot a[3] & +\cdots & +\rho[\textrm{L}-2]\cdot a[\textrm{L}] & =-\rho[2] \\
+\rho[2]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[0]\cdot a[3] & +\cdots & +\rho[\textrm{L}-3]\cdot a[\textrm{L}] & =-\rho[3] \\
+ &  & \vdots &  &  &  \\
+\rho[\textrm{L}-1]\cdot a[1] & +\rho[\textrm{L}-2]\cdot a[2] & +\rho[\textrm{L}-3]\cdot a[3] & +\cdots & +\rho[0]\cdot a[\textrm{L}] & =-\rho[\textrm{L}] \\
+\end{array}
+\]
+
+</div>
+
+<p>
+次に $\gamma[n] = Cov \left ( x[i], x[i-n] \right )$、ホワイトノイズの分散を $\sigma^2$ とおくと
+</p>
+
+
+\begin{align*}
+\gamma[0] &= Cov \left ( x[i], x[i] \right ) \\
+&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i] \right ) \\
+&= -a[1] \cdot \gamma[1] - a[2] \cdot \gamma[2] - \cdots - a[\textrm{L}] \cdot \gamma[\textrm{L}] + \sigma^2
+\end{align*}
+
+<p>
+ここで両辺を $\gamma[0]$ で割ると
+</p>
+
+\[
+1 = -a[1] \cdot \rho[1] - a[2] \cdot \rho[2] - \cdots - a[\textrm{L}] \cdot \rho[\textrm{L}] + \frac{\sigma^2}{\gamma[0]}
+\]
+
+<p>
+となり、式を変形して
+</p>
+
+\[
+\gamma[0] = Cov \left ( x[i], x[i] \right ) = \frac{\sigma^2}{1 +a[1] \cdot \rho[1] + a[2] \cdot \rho[2] + \cdots + a[\textrm{L}] \cdot \rho[\textrm{L}] }
+\]
+
+<p>
+と分散が得られます。
+<br>
+ここまで来たら共分散は漸化式
+</p>
+
+\[
+\gamma[n] = Cov \left ( x[i], x[i-n] \right ) = -a[1] \cdot \gamma[n-1] - a[2] \cdot \gamma[n-2] - \cdots - a[\textrm{L}] \cdot \gamma[n-\textrm{L}]
+\]
+
+<p>
+を使って順次求められます。
+</p>
 
 <br>
 <script>PreNext(1,5)</script>
