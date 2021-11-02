@@ -22,8 +22,126 @@
 
 <br>
 <h2><a href="./page01.html">自己回帰モデル</a></h2></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-1 (個人):</b> 以下の仕様の自己回帰モデルから信号列 $x[i]$ を生成してみましょう。
+</p>
+
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li> 次数は L = 4 </li>
+<li> 信号の長さは N = 100 </li>
+<li> LPC 係数は a[1] = 0.1、a[2] = 0.3、a[3] = -0.2、a[4] = 0.15 </li>
+<li> $x[-1] = x[-2] = x[-3] = x[-4] = 0$ </li>
+<li> ホワイトノイズは平均 0、分散 1 の時刻毎に独立な正規乱数</li>
+</ol>
+</div>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「AR_1_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「AR_1_1」の中に main.cpp を作成します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.cpp を開き、ファイルの中身を<a href="./src/AR_1_1.txt">テンプレートソース</a>の内容に置き換えて下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると 1 つの CSV ファイル (AR_1_1_x.csv)が出力されます。この CSV ファイルは信号値 $x[i]$ の N = 100 個分の値です。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「x[i]」と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> グラフを挿入します。グラフの種類は散布図、点なし、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「AR_1_1_x」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main.cpp のソースコード」と「グラフ」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
 <h2><a href="./page02.html">線形予測モデル</a></h2></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-2 (個人):</b> 演習 1-1 で生成した信号列 $x[i]$ の線形予測値を求めてみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「AR_1_2」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「AR_1_2」の中に main.cpp を作成します 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> main.cpp を開き、ファイルの中身を<a href="./src/AR_1_2.txt">テンプレートソース</a>の内容に置き換えて下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行すると 1 つの CSV ファイル(AR_1_2_hat_x.csv)が出力されます。この CSV ファイルは 線形予測値 $\hat{x}[i]$ のN = 100 個分の値です。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「hat_x[i]」と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> グラフを挿入します。グラフの種類は散布図、点なし、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 縦軸の範囲を演習1-1で書いたグラフと合わせます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「AR_1_2_hat_x」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、元の信号 $x[i]$ のグラフと線形予測値 $\hat{x}[i]$ のグラフを見比べてみましょう。
+</p>
+<p>
+※ $\hat{x}[i] = x[i]-e[i]$ なので、$\hat{x}[i]$ は各時刻でホワイトノイズ $e[i]$ を取り除いた $x[i]$ の予測値とみなせます
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「main.cpp のソースコード」と「グラフ」を貼り付けて下さい。  
+</p>
+</div>
+
+<br>
 <h2><a href="./page03.html">線形予測誤差</a></h2></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-3 (個人):</b> 演習 1-1 で生成した信号列 $x[i]$ の線形予測誤差を求めてみましょう。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「AR_1_3」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「AR_1_3」の中に main.cpp を作成します 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> main.cpp を開き、ファイルの中身を<a href="./src/AR_1_3.txt">テンプレートソース</a>の内容に置き換えて下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行すると 1 つの CSV ファイル(AR_1_3_hat_e.csv)が出力されます。この CSV ファイルは 線形予測誤差 $\hat{e}[i]$ のN = 100 個分の値です。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「i」、次の列の先頭に「hat_e[i]」と入力します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> グラフを挿入します。グラフの種類は散布図、点なし、線あり、平滑化なしとします。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 縦軸の範囲を演習1-1で書いたグラフと合わせます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「AR_1_3_hat_e」として下さい(拡張子は使用する表計算ソフトによる)。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、元の信号 $x[i]$ のグラフ、線形予測誤差 $\hat{x}[i]$ のグラフ、線形予測誤差 $\hat{e}[i]$ のグラフを見比べてみましょう。
+</p>
+<p>
+※ $\hat{e}[i] = x[i]-\hat{x}[i]$ なので、$\hat{e}[i]$ は各時刻で付加されたホワイトノイズ $e[i]$ の予測値となります
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「main.cpp のソースコード」と「グラフ」を貼り付けて下さい。  
+</p>
+</div>
+
+
+<br>
 <h2><a href="./page04.html">レビンソン・ダービン・アルゴリズム</a></h2>
 <h2><a href="./page05.html">推定モデルの利用</a></h2>
 

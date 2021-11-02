@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// 正規乱数 N( mu, sigma^2)の出力
+// mu : 平均
+// sigma2 : 分散
+double nrand( double mu, double sigma2 )
+{
+    // Box-Muller 法を使用
+    double sigma = sqrt(sigma2);
+    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
+    return mu + sigma*x;
+}
+
+
+// 自己回帰モデル
+void AR( double *x, // 出力信号列 x[i]
+         const double *e, // 入力信号列 e[i]
+         const double *a, // LPC 係数
+         const int L, // 次数
+         const int N  // 信号長
+){
+    // 演習1-1の内容をコピーする
+}
+
+
+// 線形予測誤差
+void LinearPredictionError( double *hat_e, // 線形予測誤差 hat_e[i]
+         const double *x, // 信号列 x[i]
+         const double *a, // LPC 係数
+         const int L, // 次数
+         const int N  // 信号長
+){
+    for( int i=0;i < N; ++i ){
+        hat_e[i] = ? ;
+        for( int n = 1; n <= L; ++n ){
+            hat_e[i] += ? ;
+        }
+    }
+}
+
+
+int main()
+{
+    const int L = ? ; // 次数
+    const int N = 100; // 信号長
+
+    const double a[L+1] = { 0, ?, ?, ?, ? };  // LPC 係数
+
+    double e[N]={0}; // ホワイトノイズの信号列
+
+    double X[N+L]={0};
+    double *x = X+L; // 出力信号列
+
+    double hat_e[N]={0}; // 線形予測誤差
+
+    // ホワイトノイズをセットする
+    for( int i = 0; i < N; ++i ){
+        e[i] = ? ;
+    }
+
+    // 自己回帰モデル
+    AR( x, e, a, L, N );
+
+    // 線形予測誤差
+    LinearPredictionError( hat_e, x, a, L, N );
+
+    FILE* file = fopen( "AR_1_3_hat_e.csv", "wb");
+    if( file == NULL ){
+        printf( "ファイルを開けません");
+        exit(1);
+    }
+    for( int i = 0; i <N ; ++i ){
+        fprintf( file, "%d, %lf\n", i, hat_e[i] );
+    }
+    fclose(file);
+
+    return 0;
+}
