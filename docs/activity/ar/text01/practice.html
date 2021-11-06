@@ -143,10 +143,72 @@
 
 <br>
 <h2><a href="./page04.html">レビンソン・ダービン・アルゴリズム</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習1-4 (個人):</b> レビンソン・ダービン・アルゴリズムを使って演習 1-1 で生成した信号列 $x[i]$ の LPC 係数を推定してみましょう。なお今回は信号の長さを N = 50000 とします。
+</p>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「AR_1_4」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「AR_1_4」の中に main.cpp を作成します 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> main.cpp を開き、ファイルの中身を<a href="./src/AR_1_4.txt">テンプレートソース</a>の内容に置き換えて下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると L 個の LPC 係数の真の値 $a[n]$ と推定値 $\hat{a}[n]$ が画面上に表示されます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、真の値と推定値の値が似ていることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「画面出力結果」をコピーして貼り付けて下さい。  
+</p>
+</div>
+
+<br>
 <h2><a href="./page05.html">推定モデルの利用</a></h2>
 
+<br>
 <p>
-準備中
+<input type="checkbox"><b>演習1-5 (個人):</b> 自分の声(あ、い、う、え、お)をサンプリングしてスペクトログラムを見てみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「AR_1_5」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> マイクを PC の端子に繋ぎます。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> マイクの設定を開いて音量調整をします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <a href="../../../lib/sound/recorder.html" onclick="window.open( '../../../lib/sound/recorder.html', 'recorder','width=300,height=200 ');return false;" >レコーダー</a>を開きます。もしブラウザからマイク権限を求められたら許可します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span>「アー」の声を「2 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> out.wav を試しに再生し、もし音が小さかったり、逆に音割れが生じた場合はマイクのボリュームを調整して録音し直します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> out.wav をダウンロードフォルダから AR_1_5 フォルダに移動して「 a.wav 」に名前を変更します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 同様に「イー」の声を「i.wav」、「ウー」の声を「u.wav」、「エー」の声を「e.wav」、「オー」の声を「o.wav」に録音及び保存して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 各音声のスペクトログラム画像を作成して下さい。
+</p>
+<p>
+(参考) スペクトログラム画像の作成方法: $ sox 入力.wav -n spectrogram -z (デシベル) -o 出力.png 
+<br>
+デシベルは適宜調整(今回の例では 60 位が目安)
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で画像を見比べて下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「スペクトログラム画像(あ、い、う、え、お)」を貼り付けて下さい。
+</div>
+
+
+<br>
+<p>
+以下準備中
 </p>
 
 <script>PreNext(6,5)</script>
