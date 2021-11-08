@@ -23,22 +23,18 @@
 Java も、C言語などと同じ様にまずソースコードをコンパイルしてバイナリファイル(正確には <b>Java バイトコード</b>と呼びます)を作る必要があります。
 <br>
 一般に Java のソースコードの拡張子は「.java」で、バイナリファイルの拡張子は「.class」です。
-<br>
-Java のコンパイラには色々な種類がありますが、今回のアクティビティでは OpenJDK の「javac」コマンドを使います。
 </p>
 
 <p>
-コンパイルが終わったら次はプログラムを実行します。
+コンパイルしてバイナリファイルを作ったら次はプログラムを実行します。
 <br>
-ただし javac でコンパイルして作ったバイナリファイルはそのままでは実行できません。
+ただしバイナリファイルはそのままでは実行できません。
 <br>
 Java のプログラムは「<b>Java 仮想マシン</b>」と呼ばれる仮想のコンピュータ上で動かすという仕組みになっています。
-<br>
-この Java 仮想マシンにも色々な種類がありますが、今回のアクティビティではOpenJDK の「java」コマンドを使います。
 </p>
 
 <p>
-では早速ソース 1 に示した Hello World のソースコードを使って、具体的にコンパイルと実行をしてみましょう。
+では早速ソース 1 に示した Hello World のソースコードを使って、コンパイルと実行をしてみましょう。
 </p>
 
 <div class="info">
@@ -60,29 +56,10 @@ public class Main{
 2 行目の「public static void main(String[] args)」が Java 言語のメイン関数になります。
 <br>
 このメイン関数の中で文字列 "Hello World" を画面に表示しています。
-<br>
+</p>
+<p>
 なお Java では関数のことを「メソッド」と呼びますので、以降はメイン関数を「<b>メインメソッド</b>」と呼ぶことにします。
 </p>
-
-<p>
-ではこのソース1を以下の手順でコンパイル＆実行して下さい。
-</p>
-
-<div class="info">
-<input type="checkbox"> <b>ソース 1 のコンパイル＆実行手順</b>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="r1"></span> 「Main.java」という空のテキストファイルを新規作成する
-※先頭の M は大文字にすること
-<br>
-<span class="olradio"><input type="radio" name="r1"></span> そのファイルにソース1の内容をコピーして上書き保存する
-<br>
-<span class="olradio"><input type="radio" name="r1"></span> 「javac Main.java」 でコンパイルしてバイナリファイル「Main.class」を作る
-<br>
-<span class="olradio"><input type="radio" name="r1"></span> 「java Main」 で実行する ※ 拡張子 .class は必要ありません
-</p>
-</div>
-</div>
 
 <br>
 <script>PreNext(1,8)</script>
