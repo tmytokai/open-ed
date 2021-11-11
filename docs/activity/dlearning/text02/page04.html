@@ -306,11 +306,17 @@ p_{\rm (L-1)0}\ , & \cdots &,\  p_{\rm (L-1)(M-1)} \\
 </p>
 
 <p>
-ところで上の定義式は<a href="../text01/page03.html#redsum">総和演算</a>を使って次のような行列演算で表すことができます。
+さて上の定義式は<a href="../text01/page03.html#redsum">総和演算</a>を使って次のような行列演算で表すことができます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>カテゴリカル・クロスエントロピーの行列演算</b>
+
+<p>
+<br>
+予測確率 predict を <a href="../text01/page03.html#log">log</a> を通し、ラベル label_training と<a href="../text01/page03.html#mul">掛け合わせる</a>、さらに<a href="../text01/page03.html#redsum">総和演算</a>をして -1 倍して entropy に出力する
+</p>
+
 <p>
 entropy = - reduce_sum( log(predict)*label_training )
 </p>
@@ -319,28 +325,22 @@ entropy = - reduce_sum( log(predict)*label_training )
 ※ * は行列積ではなくてただの<a href="../text01/page03.html#mul">掛け算</a>
 </p>
 
-</div>
-
-<p>
-従ってカテゴリカル・クロスエントロピーの演算をデータフロー・グラフ化すると次のようになります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図3: カテゴリカル・クロスエントロピーのデータフロー・グラフ</b>
-
-<p>
-<br>
-予測確率 predict に<a href="../text01/page03.html#log">log</a> を通し、ラベル label_training と<a href="../text01/page03.html#mul">掛け合わせる</a>、さらに<a href="../text01/page03.html#redsum">総和演算</a>をして -1 倍して entropy に出力する
-</p>
-
 <p>
 ※ 最後に -1 倍するのを良く忘れるので注意
 </p>
 
 
-<img src="./img/page04-fig3.png" alt="">
 </div>
 
+<p>
+従ってカテゴリカル・クロスエントロピーの演算を predict の計算部分も含めてデータフロー・グラフ化すると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: カテゴリカル・クロスエントロピーのデータフロー・グラフ</b>
+
+<img src="./img/page04-fig3.png" alt="">
+</div>
 
 <br>
 <h3 id="opt">
@@ -362,9 +362,8 @@ entropy = - reduce_sum( log(predict)*label_training )
 </p>
 <p>
 の 2 つを取り扱います。
-</p>
-<p>
-※ チュートリアルでは SGD が良く使われていますが、学習の収束速度が遅いので、実際には Adam が使われることが多いようです
+<br>
+※ SGD は学習の収束速度が遅いので Adam が使われることが多いようです
 </p>
 
 <p>
@@ -375,35 +374,30 @@ entropy = - reduce_sum( log(predict)*label_training )
 <input type="checkbox"><b>SGD クラスと Adam クラス </b>
 
 <p>
-SGD クラス: tf.keras.optimizers.SGD( learning_rate=学習率 )
+SGD クラス: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD">tf.keras.optimizers.SGD</a>
 </p>
 
 <p>
-Adam クラス: tf.keras.optimizers.Adam( learning_rate=学習率 )
-</p>
-
-<p>
-学習実行メソッド: minimize( lambda: 損失関数, [学習対象の変数のリスト] )・・・学習を1回実施する、戻り値は実施済み学習回数
+Adam クラス: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam">tf.keras.optimizers.Adam</a>
 </p>
 
 </div>
 
 <p>
-ここで学習率(learning rate)は学習の精度と速度を表しています。
+例えば以下のソース 1 は Adam を用いた学習例です。
+</p>
+<p>
+ソース内に出てくる「 learning rate = 0.1 」の数値 0.1 を「<b>学習率</b>」と呼び、学習の精度と速度を表しています。
 <br>
 学習率の値が大きいほどニューラルネットワークは適当に学習しますが速く学習が進みます。
 <br>
 逆に値が小さいとニューラルネットワークはきちんと学習しますが遅く学習が進みます。
-</p>
-
-<p>
+<br>
 いずれにしろ 1 回では学習は終わりませんので、損失関数の値が十分小さくなるまで何回も学習を繰り返す必要があります。
 </p>
 
 <p>
-例えば以下のソース 1 は Adam を用いた学習例です。
-<br>
-この例では学習対象である変数 x と y の初期値をそれぞれ 1,0 と-0.5、損失関数を ${\rm loss}() = x^2+y^2$、学習率を 0.1、学習回数を 50 回 としたとき、損失を最小にする x と y の値(x=0,y=0)を Adam を使って求めています。
+さてこの例では学習対象である変数 x と y の初期値をそれぞれ 1,0 と-0.5、損失関数を ${\rm loss}() = x^2+y^2$、学習率を 0.1、学習回数を 50 回 としたとき、損失を最小にする x と y の値(正解は x=0, y=0)を Adam を使って求めています。
 </p>
 
 <div class="info">
@@ -419,19 +413,19 @@ y = tf.Variable([[-0.5]], dtype=tf.float32)
 #損失関数
 @tf.function
 def loss():
-    return x**2 + y**2
+    return x**2 + y**2  # ** は乗
 
-print(f'損失={loss().numpy()}');
+print(f'損失={loss()}');
 print(f'x={x.numpy()}');
 print(f'y={y.numpy()}');
 print('')
 
-opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adamクラスのインスタンス
+opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
 #opt = tf.keras.optimizers.SGD( learning_rate=0.1 ) # SGD を使いたい場合はこちら
 for i in range(50):  # 学習を50回繰り返す
-    opt.minimize(lambda: loss(), [x,y])
+    opt.minimize(lambda: loss(), [x,y])  #学習を1回実施。lambda は損失関数の名前、[x,y]は学習対象の変数
     
-print('結果')
+print('学習結果')
 print(f'損失={loss()}');
 print(f'x={x.numpy()}');
 print(f'y={y.numpy()}');
@@ -442,7 +436,7 @@ print('')
 <p>
 結果は以下のようになります。
 <br>
-学習を50回繰り返すと損失が十分小さくなり、 (x,y) の値が loss() を最小する (0,0) に近づいていることが分かります。
+学習を50回繰り返すと損失が十分小さくなり、 (x,y) の値が損失関数の戻り値を最小にする (0,0) に近づいていることが分かります。
 </p>
 
 <div class="info">
@@ -453,10 +447,10 @@ print('')
 x=[[1.]]
 y=[[-0.5]]
 
-結果
+学習結果
 損失=[[0.0007694]]
-x=[[-0.00481954]]
-y=[[-0.02731619]]
+x=[[-0.00481909]]
+y=[[-0.02731627]]
 </pre>
 </div>
 
@@ -488,7 +482,7 @@ y=[[-0.02731619]]
 <br>
 バッチ No.0 から順にバッチ No.(L/B)-1 まで全てのバッチを使って一通り学習を済ませることを「<b>エポック</b>(epoch)」と呼び、エポックの繰り返し回数のことを「<b>エポック数</b>」と呼びます。
 <br>
-例えばエポック数が 3 で、学習データセットのサイズが L =6、バッチサイズが B=2 の時は次の様にして学習が繰り返されます。
+例えばエポック数が 3 で、学習データセットのサイズが L =6、バッチサイズが B=2 の時はバッチが3つあるので次の様にして学習が繰り返されます。
 </p>
 
 <br>
@@ -520,7 +514,7 @@ y=[[-0.02731619]]
 </p>
 
 \[
-{\rm data\_batch\_k} =
+{\rm data\_training\_k} =
 \begin{bmatrix}
 t_{(B*k)0} \ , & \cdots &,\  t_{\rm (B*k)(N-1)} \\
 \vdots & \ddots & \vdots \\
@@ -534,7 +528,7 @@ t_{\rm (B*k+B-1)0}\ ,  & \cdots &,\  t_{\rm (B*k+B-1)(N-1)} \\
 </p>
 
 \[
-{\rm label\_batch\_k} =
+{\rm label\_training\_k} =
 \begin{bmatrix}
 l_{(B*k)0} \ , & \cdots &,\  l_{\rm (B*k)(M-1)} \\
 \vdots & \ddots & \vdots \\
@@ -543,24 +537,8 @@ l_{\rm (B*k+B-1)0}\ ,  & \cdots &,\  l_{\rm (B*k+B-1)(M-1)} \\
 \]
 
 <p>
-となります。
+とします。
 </p>
-
-<p>
-このバッチを使うと、カテゴリカル・クロスエントロピーは次のようなデータフロー・グラフで表されます。
-<br>
-なお予測値(predict)を求める 3 層ニューラルネットワークのデータフロー・グラフも図に含めています。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図4: カテゴリカル・クロスエントロピー (ミニバッチ学習版)</b>
-
-<p>
-※ 今回は loss(data_batch_k,label_batch_k) という名前のオペレーションとして定義する
-</p>
-
-<img src="./img/page04-fig4.png" alt="">
-</div>
 
 
 <br>
@@ -580,22 +558,21 @@ l_{\rm (B*k+B-1)0}\ ,  & \cdots &,\  l_{\rm (B*k+B-1)(M-1)} \\
 <input type="checkbox"><b>ソース 2: ディープラーニングの実行</b>
 
 <pre class="wrap">
-opt = tf.keras.optimizers.Adam( learning_rate=r ) # 最適化アルゴリズムは Adam
-#opt = tf.keras.optimizers.SGD( learning_rate=r ) # SGD を使いたい場合はこちら
+opt = tf.keras.optimizers.Adam( learning_rate=r )
 for e in range(E):
     for k in range(int(L/B)):
         print(f'\repoch {e} batch {k}', end='')
-        data_batch_k = data_training[B*k:B*k+B]
-        label_batch_k = label_training[B*k:B*k+B]
-        opt.minimize(lambda: loss(data_batch_k,label_batch_k), [w_h,b_h,w_o,b_o])
+        data_training_k = data_training[B*k:B*k+B]
+        label_training_k = label_training[B*k:B*k+B]
+        opt.minimize(lambda: loss(data_training_k,label_training_k), [w_h,b_h,w_o,b_o])
 
 ※1 r : 学習率
 ※2 E : エポック数
 ※3 L : 学習データセットのサイズ
 ※4 B : バッチサイズ
-※5 data_training, label_training : 学習用入力信号全体とラベル全体、
+※5 data_training, label_training : 学習用入力信号とラベル
 ※6 w_h, b_h, w_o, b_o : 隠れ層の重み、隠れ層のバイアス、出力層の重み、出力層のバイアス
-※7 loss(data_batch_k,label_batch_k) : カテゴリカル・クロスエントロピー(図4)
+※7 loss(data_training_k,label_training_k) : 図3のカテゴリカル・クロスエントロピー
 </pre>
 </div>
 
@@ -659,10 +636,6 @@ for e in range(E):
 今回の様に多クラス分類問題、かつラベルが one-hot ベクトル形式の場合は以下のソース 3 で示した関数によって計算できます。
 </p>
 
-<p>
-※ 評価関数は学習には関係ないので TensorFlow を使わないでただの Python の関数として定義しています
-</p>
-
 <div class="info">
 <input type="checkbox"><b>ソース 3: 正解率(カテゴリカルデータ用) </b>
 
@@ -675,6 +648,8 @@ def categorical_accuracy(predict,label):
 
 ※1 predict: 学習・検証・テストデータセットから求めた予測値
 ※2 label : 正しいラベル (one-hot ベクトル形式)
+
+評価関数は学習に関係無いので @tf.function を付けずただの Python の関数として定義しています
 </pre>
 </div>
 

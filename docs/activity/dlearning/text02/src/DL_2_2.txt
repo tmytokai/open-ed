@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
 # パーセプトロンの数
-N = ?  # 入力層
-K = ?  # 隠れ層
-M = ?  # 出力層
+N = ?  # 入力層の数
+K = ?  # 隠れ層の数
+M = ?  # 出力層の数
 
 #学習率
 r = ?
@@ -108,31 +108,20 @@ print(f'バッチサイズ={B}')
 # DL_2_1 からコピー
 ?
 
-# 3層ニューラルネットワークのオペレーション定義
+# 3層ニューラルネットワーク
 # DL_2_1 からコピー
 ?
 
 # 損失関数
-# 上の FFNN3(data) とテキストを参考にする
 @tf.function
-def loss(data_batch_k,label_batch_k):
-    # 隠れ層
-    tmp = ? # 行列積 data_batch_k・w_h
-    tmp = ? # b_h を足す
-    y_h = ? # 双曲線正接(tanh)関数に通す
-    # 出力層
-    tmp = ? # 行列積 y_h・w_o
-    tmp = ? # b_o を足す
-    predict = ? # softmax 関数に通す
-    # カテゴリカル・クロスエントロピー
-    tmp = ? # predict を log 関数に通す
-    tmp = ? # label_batch_k と掛け合わせる
-    entropy = ? # 総和演算をして -1をかける
+def loss(data_training ,label_training):
+    predict = FFNN3(data_training)
+    entropy = ?
     return entropy
 
 # 評価関数
-# テキストを参考にする
-?
+def categorical_accuracy(predict,label):
+    ?
 
 # 学習前の状態
 ls = loss(data_training,label_training).numpy()
@@ -145,7 +134,6 @@ print(predict.numpy())
 print('')
     
 # ディープラーニング実行
-# テキストを参考にする
 ?
 
 # 学習後の状態
