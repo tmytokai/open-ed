@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-では<a href="./page02.html">前ページ</a>で説明した 3 層ニューラルネットワークを、<a href="../text01/page02.html">データフロー・グラフ</a>を使って TensorFlow で構築してみましょう。
+では 3 層ニューラルネットワークを <a href="../text01/page02.html">データフロー・グラフ</a>化して TensorFlow で構築してみましょう。
 </p>
 
 <br>
@@ -67,7 +67,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定�
 
 <br>
 <h3>
-2. 入力層
+2. 入力層(Input Layer)
 </h3>
 
 <p>
@@ -79,7 +79,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2: 入力層のグラフ:</b>
+<input type="checkbox"><b>図2: 入力層(Input Layer)のグラフ:</b>
 
 <p>
 ※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
@@ -94,7 +94,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図3: 入力層 のデータフローグラフ</b>
+<input type="checkbox"><b>図3: 入力層(Input Layer) のデータフローグラフ</b>
 
 <p>
 入力信号 data をスルーして隠れ層にそのまま渡すだけ(つまり何もしない)
@@ -105,7 +105,7 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定�
 
 <br>
 <h3>
-3. 隠れ層
+3. 隠れ層(Hidden Layer)
 </h3>
 
 <p>
@@ -113,11 +113,11 @@ data : 入力信号、 1 x N 行列 (<a href="../text01/page03.html#const">定�
 </p>
 
 <p>
-<a href="./img/page02-fig3.png">前ページの図3</a>から(入力層と)隠れ層を切り出したのが以下の図4です。
+<a href="./img/page02-fig3.png">前ページの図3</a>から入力層と隠れ層を切り出したのが以下の図4です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図4: 隠れ層のグラフ</b>
+<input type="checkbox"><b>図4: 隠れ層(Hidden Layer)のグラフ</b>
 
 <p>
 ※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
@@ -219,7 +219,7 @@ tanh(x) は行列の全ての要素に対して演算
 </div>
 
 <p>
-ではこの行列演算を元に隠れ層を<a href="../text01/page03.html">データフロー・グラフ</a>化してみましょう。
+ではこの行列演算を元に隠れ層をデータフロー・グラフ化してみましょう。
 </p>
 
 <p>
@@ -250,7 +250,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page03.html#va
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図6: 隠れ層のデータフロー・グラフ</b>
+<input type="checkbox"><b>図6: 隠れ層(Hidden Layer)のデータフロー・グラフ</b>
 
 <p>
 入力層からの出力信号( = 入力信号) data と w_h の<a href="../text01/page03.html#matmul">行列積</a> data・w_h を求め、それに b_h を<a href="../text01/page03.html#add">足し</a>、<a href="../text01/page03.html#log">双曲線正接(tanh)</a>に通して y_h に出力する
@@ -262,7 +262,7 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page03.html#va
 
 <br>
 <h3>
-4. 出力層
+4. 出力層(Output Layer)
 </h3>
 
 <p>
@@ -270,11 +270,11 @@ b_h : 隠れ層のバイアス、1 x K 行列 (<a href="../text01/page03.html#va
 </p>
 
 <p>
-<a href="./img/page02-fig3.png">前ページの図3</a>から(隠れ層と)出力層を切り出したのが以下の図4です。
+<a href="./img/page02-fig3.png">前ページの図3</a>から隠れ層と出力層を切り出したのが以下の図4です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図7: 出力層のグラフ:</b>
+<input type="checkbox"><b>図7: 出力層(Output Layer)のグラフ:</b>
 
 <p>
 ※ <a href="../text01/page02.html">データフロー・グラフ</a>ではなくて一般的なグラフ表現です
@@ -321,7 +321,7 @@ w_{\rm (K-1)0}^{\rm h}\ , & \cdots &,\  w_{\rm (K-1)(M-1)}^{\rm o}
 <p>
 で表されます。
 <br>
-歯油つ力層のバイアス全体を表す行列を b_o とすると、b_o は 1xM 行列
+出力層のバイアス全体を表す行列を b_o とすると、b_o は 1xM 行列
 </p>
 
 \[
@@ -352,7 +352,7 @@ y_o = softmax( y_h・w_o + b_o )
 </div>
 
 <p>
-ではこの行列演算を元に出力層を<a href="../text01/page03.html">データフロー・グラフ</a>化してみましょう。
+ではこの行列演算を元に出力層をデータフロー・グラフ化してみましょう。
 </p>
 
 <p>
@@ -382,7 +382,7 @@ b_o : 出力層のバイアス、1 x M 行列 (<a href="../text01/page03.html#va
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図9: 出力層のデータフロー・グラフ</b>
+<input type="checkbox"><b>図9: 出力層(Output Layer)のデータフロー・グラフ</b>
 
 <p>
 隠れ層からの出力信号 y_h と w_o の<a href="../text01/page03.html#matmul">行列積</a> y_h・w_oを求め、それに b_o を<a href="../text01/page03.html#add">足し</a>、<a href="../text01/page03.html#softmax">softmax 関数</a>に通し、y_o に代入する

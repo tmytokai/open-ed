@@ -25,7 +25,7 @@
 
 <br>
 <h3 id="const">
-1. 定数オペレーション: tf.constant
+1. 定数オペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/constant">tf.constant</a>
 </h3>
 
 <p>
@@ -69,51 +69,53 @@ import tensorflow as tf
 # dtype=tf.float32 は要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.constant( 1, dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# 1.0
+# 1
 
 # 3 次元ベクトル
 # dtype=tf.float32 は各要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.constant( [1, 2, 3], dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# [1. 2. 3.]
+# [1 2 3]
 
 # 3 x 2 行列
 # dtype=tf.float32 は各要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.constant([[1, 2], [3, 4], [5, 6]], dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# [[1. 2.]
-#  [3. 4.]
-#  [5. 6.]]
+# [[1 2]
+#  [3 4]
+#  [5 6]]
 
 # 3 x 1 行列 
 # dtype=tf.float32 は各要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.constant( [[1], [2], [3]], dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果 ※ 3 次元ベクトルとの違いに注意！
-#[[1.]
-# [2.]
-# [3.]]
+#[[1]
+# [2]
+# [3]]
 </pre>
+
+<p>
+データフロー・グラフ
+</p>
 
 <img src="./img/page03-fig1.png" alt="">
 </div>
 
-</div>
-
 <br>
 <h3 id="var">
-2. 変数オペレーション: tf.Variable
+2. 変数オペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/Variable">tf.Variable</a>
 </h3>
 
 <p>
@@ -173,45 +175,45 @@ import tensorflow as tf
 # dtype=tf.float32 は要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.Variable( 1, dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 #表示結果
-# 1.0
+# 1
 
 # 3 x 2 行列
 # dtype=tf.float32 は各要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.Variable([[1, 2], [3, 4], [5, 6]], dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# [[1. 2.]
-#  [3. 4.]
-#  [5. 6.]]
+# [[1 2]
+#  [3 4]
+#  [5 6]]
 
 # assign メソッドで値を変更
 A.assign( [[-1,-2],[-3,-4],[-5,-6]] )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# [[-1. -2.]
-#  [-3. -4.]
-# [-5. -6.]]
+# [[-1 -2]
+#  [-3 -4]
+# [-5 -6]]
 
 # 3 x 2 行列を作って要素全てを 0 で初期化
 # dtype=tf.float32 は各要素を 32 bit浮動小数点数として扱うという意味
 
 A = tf.Variable( tf.zeros([3,2]), dtype=tf.float32 )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果
-# [[ 0.  0.]
-#  [ 0.  0.]
-#  [ 0.  0.]]
+# [[ 0  0]
+#  [ 0  0]
+#  [ 0  0]]
 
 # 3 x 2 行列を作って、要素全てを平均 0、標準偏差 0.1 の正規乱数で初期化
 A = tf.Variable( tf.random.normal( [3, 2], mean=0.0, stddev=0.1, dtype=tf.float32 ) )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果 ※ 乱数なので毎回変わる
 # [[-0.0252009071 -0.0138573265]
@@ -220,20 +222,24 @@ print( A.numpy() )
 
 # 3 x 2 行列を作って、要素全てを -1 〜 3 までの範囲の一様乱数で初期化
 A = tf.Variable( tf.random.uniform( [3, 2], minval=-1, maxval=3, dtype=tf.float32 ) )
-print( A.numpy() )
+tf.print( A )
 
 # 表示結果 ※ 乱数なので毎回変わる
 # [[-0.6053071  2.604982 ]
 #  [ 2.2764373  1.8386497]
 #  [ 2.4975042 -0.6781211]]
+</pre>
+
+<p>
+データフロー・グラフ
+</p>
 
 <img src="./img/page03-fig2.png" alt="">
-</pre>
 </div>
 
 <br>
 <h3 id="add">
-3. 足し算オペレーション: tf.math.add
+3. 足し算オペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/math/add">tf.math.add</a>
 </h3>
 
 <p>
@@ -244,11 +250,7 @@ print( A.numpy() )
 <input type="checkbox"><b>足し算オペレーション: </b>
 
 <p>
-書式:  tf.math.add( x, y )
-</p>
-
-<p>
-※ x + y や tf.add(x,y) と書いても良い
+書式:  tf.math.add( x, y )  または x+y
 </p>
 
 <p>
@@ -262,7 +264,7 @@ x、y ・・・定数テンソルでも変数テンソルでもどちらでも�
 出力:
 </p>
 <p>
-x + y
+計算結果が入ったテンソル 
 </p>
 
 <p>
@@ -289,20 +291,27 @@ import tensorflow as tf
 A = tf.constant( 1, dtype=tf.float32 )
 B = tf.constant( 2, dtype=tf.float32 )
 C = tf.math.add( A, B )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果
-# 3.0
+# 3
+
+# + 記号を使っても良い
+C = A+B
+tf.print( C )
+
+# 表示結果
+# 3
 
 # 行列同士
 A = tf.constant( [[1,2],[3,4]], dtype=tf.float32 )
 B = tf.constant( [[5,6],[7,8]], dtype=tf.float32 )
 C = tf.math.add( A, B )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果 ※ ベクトルや行列の足し算の場合は要素毎に足し合わされる
-#[[ 6.  8.]
-# [10. 12.]]
+#[[ 6  8]
+# [10 12]]
 </pre>
 
 <p>
@@ -314,7 +323,7 @@ print( C.numpy() )
 
 <br>
 <h3 id="mul">
-4. 掛け算オペレーション: tf.math.multiply
+4. 掛け算オペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/math/multiply">tf.math.multiply</a>
 </h3>
 
 <p>
@@ -331,11 +340,7 @@ print( C.numpy() )
 <input type="checkbox"><b>掛け算オペレーション: </b>
 
 <p>
-書式:  tf.math.multiply( x, y )
-</p>
-
-<p>
-※ x * y や tf.multiply(x,y) と書いても良い
+書式:  tf.math.multiply( x, y ) または x*y
 </p>
 
 <p>
@@ -348,7 +353,7 @@ x、y ・・・定数テンソルでも変数テンソルでもどちらでも�
 出力:
 </p>
 <p>
-x * y
+計算結果が入ったテンソル 
 </p>
 <p>
 ※1 ベクトルや行列の掛け算の場合は要素毎に掛け合わされます
@@ -370,26 +375,32 @@ x * y
 import tensorflow as tf
 
 # スカラー同士
-A = tf.constant( 1, dtype=tf.float32 )
-B = tf.constant( 2, dtype=tf.float32 )
+A = tf.constant( 2, dtype=tf.float32 )
+B = tf.constant( 3, dtype=tf.float32 )
 C = tf.math.multiply( A, B )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果
-# 2.0
+# 6
+
+# * 記号を使っても良い
+C = A*B
+tf.print( C )
+
+# 表示結果
+# 6
 
 # 行列同士
 A = tf.constant( [[1,2],[3,4]], dtype=tf.float32 )
 B = tf.constant( [[5,6],[7,8]], dtype=tf.float32 )
 C = tf.math.multiply( A, B )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果 ※ ベクトルや行列の足し算の場合は要素毎に掛け合わされる
-#[[ 5. 12.]
-# [21. 32.]]
+#[[ 5 12]
+# [21 32]]
 </pre>
 
-<br>
 <p>
 データフロー・グラフ
 </p>
@@ -399,7 +410,7 @@ print( C.numpy() )
 
 <br>
 <h3 id="matmul">
-5. 行列積オペレーション : tf.linalg.matmul
+5. 行列積オペレーション : <a href="https://www.tensorflow.org/api_docs/python/tf/linalg/matmul">tf.linalg.matmul</a>
 </h3>
 
 <p>
@@ -410,7 +421,7 @@ print( C.numpy() )
 <input type="checkbox"><b>行列積オペレーション: </b>
 
 <p>
-書式:  tf.linalg.matmul( x, y )
+書式:  tf.linalg.matmul( x, y ) または x@y
 </p>
 
 <p>
@@ -426,7 +437,7 @@ x、y ・・・行列型テンソル。定数テンソルでも変数テンソ�
 出力:
 </p>
 <p>
-行列積 x・y
+計算結果が入ったテンソル
 </p>
 <p>
 ※ 行列積 x・y と 行列積 y・x の値は一般的に異なりますので注意
@@ -448,12 +459,21 @@ import tensorflow as tf
 A = tf.constant( [[1,2], [3,4], [5,6]], dtype=tf.float32 )
 B = tf.constant( [[1],[2]], dtype=tf.float32 )
 C = tf.linalg.matmul( A, B )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果
-#[[ 5.]
-#  [11.]
-#  [17.]]
+#[[ 5]
+#  [11]
+#  [17]]
+
+# @ 記号を使っても良い
+C = A@B
+tf.print( C )
+
+# 表示結果
+#[[ 5]
+#  [11]
+#  [17]]
 </pre>
 
 <br>
@@ -487,24 +507,24 @@ A = tf.constant( [ 1, 2, 3], tf.float32 )
 
 # log(x) の例 ※自然対数
 B = tf.math.log( A )
-print( B.numpy() )
+tf.print( B )
 
 # 表示結果  ※ベクトルや行列の場合は要素毎に演算される
-# [ 0. 0.69314718  1.09861231]
+# [0 0.693147182 1.09861231]
 
 # sigmoid(x) の例
 B = tf.math.sigmoid( A )
-print( B.numpy() )
+tf.print( B )
 
 # 表示結果 ※ベクトルや行列の場合は要素毎に演算される
-# [ 0.7310586 0.88079703 0.95257413]
+# [0.731058598 0.880797 0.952574134]
 
 # tanh(x) の例
 C = tf.math.tanh( A )
-print( C.numpy() )
+tf.print( C )
 
 # 表示結果 ※ベクトルや行列の場合は要素毎に演算される
-# [0.7615942 0.9640276 0.9950548]
+# [0.761594176 0.964027524 0.995054722]
 </pre>
 
 <br>
@@ -518,7 +538,7 @@ print( C.numpy() )
 
 <br>
 <h3 id="softmax">
-7. softmaxオペレーション: tf.nn.softmax
+7. softmaxオペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/nn/softmax">tf.nn.softmax</a>
 </h3>
 
 <p>
@@ -568,13 +588,12 @@ import tensorflow as tf
 
 A = tf.constant( [ 1, 2, 3], tf.float32 )
 B = tf.nn.softmax( A )
-print( B.numpy() )
+tf.print( B )
 
 # 表示結果 ※ 結果を全て足すと 1 になる → 各要素は確率の数字を表している
-# [ 0.09003057  0.24472848  0.66524094]
+# [0.0900305733 0.244728476 0.665240943]
 </pre>
 
-<br>
 <p>
 データフロー・グラフ
 </p>
@@ -585,7 +604,7 @@ print( B.numpy() )
 
 <br>
 <h3 id="redsum">
-8. 総和オペレーション: tf.math.reduce_sum
+8. 総和オペレーション: <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_sum">tf.math.reduce_sum</a>
 </h3>
 
 <p>
@@ -625,15 +644,15 @@ xの各要素をすべて足し合わせた値
 
 <pre class="wrap">
 import tensorflow as tf
+
 A = tf.constant( [ 1, 2, 3], tf.float32 )
 B = tf.math.reduce_sum( A )
-print( B.numpy() )
+tf.print( B )
 
 # 表示結果
-# 6.0
+# 6
 </pre>
 
-<br>
 <p>
 データフロー・グラフ
 </p>

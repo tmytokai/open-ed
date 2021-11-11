@@ -22,7 +22,7 @@
 <p>
 Python の関数として自作のオペレーションを定義することができます。
 <br>
-当たり前ですが、定義した自作オペレーションは普通の関数のように使うことが出来ます。
+ただし関数定義の前に <a href="https://www.tensorflow.org/guide/function?hl=ja">@tf.function</a> デコレータを追加する必要があります。
 </p>
 
 <div class="info">
@@ -39,7 +39,7 @@ def オペレーション名(引数)
   return 戻り値
 
 
-※ <a href="https://www.tensorflow.org/guide/function?hl=ja">@tf.function</a> デコレータを関数定義の前につけるとパフォーマンスが上がりますが、<a href="https://www.tensorflow.org/tutorials/customization/performance?hl=ja">ガイドライン</a>に沿ってプログラムを書かないと予期しない動きをすることがあるので注意が必要です
+※ @tf.function デコレータを関数定義の前につけるとパフォーマンスが上がりますが、<a href="https://www.tensorflow.org/tutorials/customization/performance?hl=ja">ガイドライン</a>に沿ってプログラムを書かないと予期しない動きをすることがあるので注意
 
 </pre>
 
@@ -56,27 +56,20 @@ def オペレーション名(引数)
 <pre class="wrap">
 import tensorflow as tf
 
-#自作オペレーション : myOP(a,b,c) = (a+b)*c
+#自作オペレーション
 @tf.function
 def myOP(a, b, c):
-  tmp = tf.math.add( a, b )
-  return tf.math.multiply( tmp, c )
-
-# (注)
-# @tf.function
-# def myOP(a, b, c):
-#   return tf.math.multiply( tf.math.add( a, b ), c )
-# 
-# とすると分かりにくいので tmp という一時的な使い捨てテンソルを使っています
+    return (a+b)*c
 
 A = tf.constant( [1,2], dtype=tf.float32 )
 B = tf.constant( [3,4], dtype=tf.float32 )
 C = tf.constant( [5,6], dtype=tf.float32 )
 D = myOP(A,B,C)
-print( D.numpy() )
+
+tf.print( D )
 
 # 表示結果
-# [20. 36.]
+# [20 36]
 </pre>
 
 <br>
