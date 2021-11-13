@@ -1,8 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
 #---------------------------
 # データセット読み込み
@@ -22,9 +20,9 @@ images_training = images_training / 255.0  # 0〜1の範囲に正規化
 images_test = images_test / 255.0  # 0〜1の範囲に正規化
 
 # パーセプトロンの数
-N = np.prod(images_training.shape[1:]) # 入力層は画像サイズから計算
-K = ?  # 隠れ層
-M = np.max(classno_training)+1  # 出力層はクラス数から計算
+N = np.prod(images_training.shape[1:]) # 入力層の数は画像サイズから計算
+K = ?  # 隠れ層の数
+M = np.max(classno_training)+1  # 出力層の数はクラス数から計算
 
 #学習率
 r = ?
@@ -32,7 +30,7 @@ r = ?
 #エポック数
 E = ?
 
-#学習データセットのサイズ
+#学習データセットのサイズは学習データセットの行数から計算
 L = images_training.shape[0]
 
 #バッチサイズ

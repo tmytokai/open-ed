@@ -1,15 +1,13 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
 np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
 # パーセプトロンの数
-N = ?  # 入力層
-K = ?  # 隠れ層
-M = ?  # 出力層
+N = ?  # 入力層の数
+K = ?  # 隠れ層の数
+M = ?  # 出力層の数
 
 #学習率
 r = ?
@@ -127,7 +125,9 @@ print('')
 ?
 
 # 学習後の状態
-ls, acc = model.evaluate(data_training, label_training, verbose=0)
+# テキストを参考にする
+?
+
 print('\n学習後')
 print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 print('画像0〜3の予測値')

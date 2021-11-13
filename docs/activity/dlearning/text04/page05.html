@@ -22,25 +22,16 @@
 <p>
 CNN は基本的には MLP と同じくフィードフォワード型のニューラルネットワークですのでモデルとしてSequential モデルを使います。
 <br>
-つまり、はじめに
-</p>
-
-<div class="info">
-<pre class="wrap">
-model = Sequential()
-</pre>
-</div>
-
-<p>
-を指定し、その後 add メソッドを使って各層を順々に積み重ねて作成します。
+その後 add メソッドを使って各層を順々に積み重ねて作成します。
 </p>
 
 <p>
 さて CNN では以下の層がよく使われています。
 </p>
 
+<br>
 <h3>
-1. 畳み込み層
+1. 畳み込み層: <a href="https://keras.io/api/layers/convolution_layers/convolution2d/">Conv2Dクラス</a>
 </h3>
 
 <p>
@@ -49,28 +40,21 @@ model = Sequential()
 
 <div class="info">
 <pre class="wrap">
-※要  from tensorflow.keras.layers import Conv2D
-
-Conv2D( Cout, ( kernel_size, kernel_size ), input_shape=( rows, cols, Cin ),  activation='活性化関数' )
+tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size),  activation='活性化関数' )
 </pre>
 </div>
 
 <p>
-改めて説明すると、引数 Cout は出力画像のチャンネル数、kernel_size はカーネルのサイズ、input_shape=(rows,cols,Cin) は入力画像のサイズとチャンネル数を表しています。
+引数 Cout は出力画像のチャンネル数、kernel_size はカーネルのサイズです。
 <br>
-なお最初に add する層以降では input_shape を指定する必要はありません(自動計算してくれます)。
-</p>
-
-<p>
-また最後の activation では活性化関数を指定します。
+activation では活性化関数を指定します。
 <br>
-活性化関数としては 'tanh' (＝ 双曲線正接)や 'relu' (＝ ReLU)などがよく使われています。
+活性化関数としては 'tanh' (＝ <a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">双曲線正接</a>)や 'relu' (＝ <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>)などがよく使われています。
 </p>
 
-</p>
-
+<br>
 <h3>
-2. プーリング層
+2. プーリング層: <a href="https://keras.io/api/layers/pooling_layers/max_pooling2d/">MaxPooling2Dクラス</a>、<a href="https://keras.io/api/layers/pooling_layers/average_pooling2d/">AveragePooling2Dクラス</a>
 </h3>
 
 <p>
@@ -81,11 +65,9 @@ Conv2D( Cout, ( kernel_size, kernel_size ), input_shape=( rows, cols, Cin ),  ac
 
 <div class="info">
 <pre class="wrap">
-※要 from tensorflow.keras.layers import MaxPooling2D, AveragePooling2D
+(最大値)  tf.keras.layers.MaxPooling2D( (pool_size, pool_size) )
 
-(最大値)  MaxPooling2D( (pool_size, pool_size) )
-
-(平均値)  AveragePooling2D( (pool_size, pool_size) )
+(平均値)  tf.keras.layers.AveragePooling2D( (pool_size, pool_size) )
 </pre>
 </div>
 
@@ -95,24 +77,24 @@ Conv2D( Cout, ( kernel_size, kernel_size ), input_shape=( rows, cols, Cin ),  ac
 なお引数 pool_size は窓のサイズで、入力した画像が 1/pool_size 倍になって出力されます。
 </p>
 
+<br>
 <h3>
-3. 平坦化層
+3. 平坦化層: <a href="https://keras.io/api/layers/reshaping_layers/flatten/">Flattenクラス</a>
 </h3>
 
 <div class="info">
 <pre class="wrap">
-※要 from tensorflow.keras.layers import Flatten
-
-Flatten()
+tf.keras.layers.Flatten()
 </pre>
 </div>
 
 <p>
 は平坦化、つまり入力画像を1次元配列に変換して出力する層です。
 <br>
-全結合層 (Dense)などに接続する前に使わます。
+全結合層 (<a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>)などに接続する前に使わます。
 </p>
 
+<br>
 <script>PreNext(5,6)</script>
 </body>
 </html>

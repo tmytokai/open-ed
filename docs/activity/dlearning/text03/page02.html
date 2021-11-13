@@ -22,17 +22,15 @@
 
 <p>
 では早速 Keras を用いて MLP の構築と学習をしてみましょう。
-</p>
-
-<p>
-まず今回は MLP として3層ニューラルネットワークを考えていました(図1)。
+<br>
+今回も MLP として<a href="../text02/page02.html">3層ニューラルネットワーク</a>を使います(図1)。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図1. 3層ニューラルネットワーク(再掲)</b>
 
 <p>
-入力層が N 個、隠れ層が K 個、出力層が M 個のパーセプトロンで出来ている
+入力層(Input Layer)が N 個、隠れ層(Hidden Layer)が K 個、出力層(Output Layer)が M 個のパーセプトロンで出来ている 
 </p>
 
 <img src="../text02/img/page02-fig3.png" alt="">
@@ -52,30 +50,29 @@
 
 <pre class="wrap">
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
 # パーセプトロンの数
-N = 3  # 入力層
-K = 5  # 隠れ層
-M = 2  # 出力層
+N = 3  # 入力層の数
+K = 5  # 隠れ層の数
+M = 2  # 出力層の数
 
 # 入力信号
 data = tf.constant( [[1, 2, 3]], dtype=tf.float32 )
 
 # 3層ニューラルネットワークの構築
-model = Sequential()
-model.add( Dense(K, activation='tanh',input_dim=N) )
-model.add( Dense(M, activation='softmax') )
-
-# 出力
-y = model.predict(data)
+model = tf.keras.Sequential()
+model.add( tf.keras.Input(shape=(N,)))
+model.add( tf.keras.layers.Dense(K, activation='tanh') )
+model.add( tf.keras.layers.Dense(M, activation='softmax') )
 
 # モデルの概要表示
 model.summary()
 
+# 出力 ※ 戻り値は numpy 配列
+y = model.predict(data)
+
 print('入力')
-print( data.numpy() )
+tf.print( data )
 print('\n出力')
 print( y )
 </pre>
@@ -92,27 +89,32 @@ print( y )
 <div class="info">
 <pre class="wrap">
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+
+# パーセプトロンの数
+N = 3  # 入力層の数
+K = 5  # 隠れ層の数
+M = 2  # 出力層の数
+
+# 入力信号
+data = tf.constant( [[1, 2, 3]], dtype=tf.float32 )
 </pre>
 </div>
 
 <p>
-でこれから使う Sequential クラスと Dense クラスの import を行っています。
-</p>
-
-<p>
-パーセプトロンの数や入力信号の定義部分は飛ばし、次の
+でパーセプトロンの数や入力信号を定義しています。
+<br>
+次の
 </p>
 
 <div class="info">
 <pre class="wrap">
-model = Sequential()
+# 3層ニューラルネットワークの構築
+model = tf.keras.Sequential()
 </pre>
 </div>
 
 <p>
-の行では Sequential クラスのインスタンスである model を作成しています。
+の行では<a href="https://keras.io/api/models/sequential/">Sequentialクラス</a>のインスタンスである model を作成しています。
 </p>
 <p>
 ニューラルネットワークの構造(モデル)として Sequential モデルを選ぶと add メソッドを使って各層を順々に積み重ねることが出来るようになります。
@@ -122,52 +124,40 @@ model = Sequential()
 
 <div class="info">
 <pre class="wrap">
-model.add( Dense(K, activation='tanh',input_dim=N) )
+model.add( tf.keras.Input(shape=(N,)))
 </pre>
 </div>
 
 <p>
-の行では add メソッドを使って model に隠れ層のインスタンスを追加しています。
-</p>
-
-<p>
-さて上で add している Dense は「全結合層」を意味するクラスであり、引数の K はパーセプトロンの数、activation='tanh' は活性化関数として<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">双曲線正接(tanh)</a>を使う事、input_dim=N は入力信号の次元として N を指定する事を意味します。
-</p>
-
-<p>
-さらに続けて、次の
+ではパーセプトロン数 N の入力層(<a href="https://keras.io/api/layers/core_layers/input/">Inputクラス</a>)をモデルに追加しています。
+<br>
+また
 </p>
 
 <div class="info">
 <pre class="wrap">
-model.add( Dense(M, activation='softmax') )
+model.add( tf.keras.layers.Dense(K, activation='tanh') )
 </pre>
 </div>
 
 <p>
-の行でも add メソッドを使って model に出力層のインスタンスを追加しています。
+の行では隠れ層としてパーセプトロン数 K 、活性化関数<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">tanh</a>の全結合層(<a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>)をモデルに追加しています。
 <br>
-今回は出力層のパーセプトロン数として M、活性化関数として <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> 関数を指定しています。
-<br>
-なお2段目以降の層では input_dim を指定する必要はありません(自動計算してくれるので)。
-</p>
-
-<p>
-これで3層ニューラルネットワークモデルが出来たので、次の行で
+そして最後に
 </p>
 
 <div class="info">
 <pre class="wrap">
-y = model.predict(data)
+model.add( tf.keras.layers.Dense(M, activation='softmax') )
 </pre>
 </div>
 
 <p>
-の様にして predict メソッドを使って入力信号 data に対する出力 y が求めています。
+の行では出力層としてパーセプトロン数 M 、活性化関数<a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a>の全結合層(<a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>)をモデルに追加しています。
 </p>
 
 <p>
-なお、次の
+これで3層ニューラルネットワークモデルが出来たので、次の行の
 </p>
 
 <div class="info">
@@ -177,12 +167,12 @@ model.summary()
 </div>
 
 <p>
-の行ではモデルの概要を表示しています(図2)。
+でモデルの概要を表示します(図2)。
 </p>
 
 <div class="info">
 <pre class="wrap">
-<input type="checkbox"><b>図2. リスト1で構築したニューラルネットワークの概要</b>
+<input type="checkbox"><b>図2. リスト1で構築したモデルの概要</b>
 
 Model: "sequential_10"
 _________________________________________________________________
@@ -199,11 +189,25 @@ Non-trainable params: 0
 </div>
 
 <p>
-この概要を見ると、確かに K=5 の隠れ層と M=2 の出力層からなる3層ニューラルネットワークになっている事が分かります(上から下に向かって信号が流れます)。
+そして最後に
+</p>
+
+<div class="info">
+<pre class="wrap">
+y = model.predict(data)
+</pre>
+</div>
+
+<p>
+の様にして predict メソッドを使って入力信号 data に対する出力 y が求めます。
 </p>
 
 <p>
-なお Param の列にある数字(20と12)は各層のパラメータの個数です。
+ところで図 2 に示したモデル概要を見ると、確かに K=5 の隠れ層と M=2 の出力層からなる3層ニューラルネットワークになっている事が分かります(上から下に向かって信号が流れます)。
+</p>
+
+<p>
+なお Param の列にある数字(20と12)は各層のパラメータの個数、Total params の数字(32)はパラメータ数の合計です。
 <br>
 図1より
 </p>
@@ -212,6 +216,9 @@ Non-trainable params: 0
 </p>
 <p>
 ・出力層の重みの数は K*M 個でバイアスの数は M 個なので、出力層のパラメータ数は K*M+M = 5*2+2 = 12 個
+</p>
+<p>
+・計 20 + 12 = 32
 </p>
 <p>
 なので確かに数字が合っています。

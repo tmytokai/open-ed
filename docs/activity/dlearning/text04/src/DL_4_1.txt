@@ -1,8 +1,18 @@
 import tensorflow as tf
+
+'''
+# CUDA を有効にしている時に「UnknownError:  Failed to get convolution algorithm.」というエラーが
+# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
+from tensorflow.compat.v1.keras.backend import set_session
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+set_session(sess)
+'''
+
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, AveragePooling2D, Flatten
 
 #---------------------------
 # データセット読み込み
@@ -21,8 +31,8 @@ classnames=['airplane  ','automobile','bird      ','cat       ','deer      ','do
 images_training = images_training / 255.0  # 0〜1の範囲に正規化
 images_test = images_test / 255.0  # 0〜1の範囲に正規化
 
-# パーセプトロンの数
-M = np.max(classno_training)+1  # 出力層はクラス数から計算
+# 出力層のパーセプトロン数(クラス数から計算)
+M = np.max(classno_training)+1
 
 #学習率
 r = ?
@@ -30,7 +40,7 @@ r = ?
 #エポック数
 E = ?
 
-#学習データセットのサイズ
+#学習データセットのサイズ (データ数から計算)
 L = images_training.shape[0]
 
 #バッチサイズ
@@ -46,10 +56,10 @@ label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M)
 data_test = images_test # 画像データをそのまま入力する
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
-print('学習率='+str(r))
-print('エポック数='+str(E))
-print('学習データセットサイズ='+str(L))
-print('バッチサイズ='+str(B))
+print(f'学習率={r}')
+print(f'エポック数={E}')
+print(f'学習データセットサイズ={L}')
+print(f'バッチサイズ={B}')
 
 # CNNの構築
 # テキストを参考にする

@@ -42,7 +42,9 @@ CNN とディープラーニングの仕様は以下の通りです。
 (1) いわゆる「<a href="https://en.wikipedia.org/wiki/LeNet">LeNet-5</a>」を作る
 </p>
 <p>
-第1層: 畳み込み層、Cout = 6、kernel_size = 5、 rows = 32、 cols = 32、Cin = 3、activation='tanh'
+入力層: rows = 32、 cols = 32、Cin = 3 ※ tf.keras.Input(shape=(rows, cols, Cin, ))
+<br>
+第1層: 畳み込み層、Cout = 6、kernel_size = 5、 activation='tanh'
 <br>
 第2層: プーリング層(平均値)、pool_size = 2
 <br>

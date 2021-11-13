@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Keras では Conv2D クラスが畳み込み層を意味するクラスになります。
+Keras では<a href="https://keras.io/api/layers/convolution_layers/convolution2d/">Conv2Dクラス</a>が畳み込み層のクラスになります。
 <br>
 では早速、Conv2D クラスを使って<a href="./page03.html">前ページ</a>の例を演算してみましょう(ソース1)。
 </p>
@@ -30,15 +30,25 @@ Keras では Conv2D クラスが畳み込み層を意味するクラスになり
 
 <pre class="wrap">
 import tensorflow as tf
-import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.initializers import Constant
-from tensorflow.keras.layers import Conv2D
 
-rows = 4 # 入力画像の高さ
-cols = 4 # 入力画像の幅
+'''
+# CUDA を有効にしている時に「UnknownError:  Failed to get convolution algorithm.」というエラーが
+# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
+from tensorflow.compat.v1.keras.backend import set_session
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+set_session(sess)
+'''
+
+import numpy as np
+
+rows = 4 # 画像の高さ
+cols = 4 # 画像の幅
 Cin = 2  # 入力画像のチャンネル数
 Cout = 2 # 出力画像のチャンネル数
+kernel_size = 3 # カーネルサイズ
 
 # 入力画像の 0 番目のチャンネル
 data_0 = np.array(
@@ -61,7 +71,7 @@ data_1 = np.array(
 )
 
 # 入力画像の 0 番目のチャンネルと出力画像の 0 番目のチャンネルに対するカーネル
-kernel_0_0 = np.array(
+kernel_00 = np.array(
     [ 
         [ 0, 1, 0 ],
         [ 2, 0, 3 ],
@@ -70,7 +80,7 @@ kernel_0_0 = np.array(
 )
 
 # 入力画像の 0 番目のチャンネルと出力画像の 1 番目のチャンネルに対するカーネル
-kernel_0_1 = np.array(
+kernel_01 = np.array(
     [ 
         [ 2, 0, 1 ],
         [ 0, 1, 0 ],
@@ -79,7 +89,7 @@ kernel_0_1 = np.array(
 )
 
 # 入力画像の 1 番目のチャンネルと出力画像の 0 番目のチャンネルに対するカーネル
-kernel_1_0 = np.array(
+kernel_10 = np.array(
     [ 
         [ 0, 0, 0 ],
         [ 0, 1, 0 ],
@@ -88,7 +98,7 @@ kernel_1_0 = np.array(
 )
 
 # 入力画像の 1 番目のチャンネルと出力画像の 1 番目のチャンネルに対するカーネル
-kernel_1_1 = np.array(
+kernel_11 = np.array(
     [ 
         [ 1, 0, 0 ],
         [ 0, 2, 3 ],
@@ -102,18 +112,21 @@ b_0 = 1
 # 出力画像の 1 番目のチャンネルに対するバイアス
 b_1 = -1
 
-# 入力画像全体: shape = (データ番号, rows, cols, Cin) の 4 階テンソル
+# 入力画像全体: shape = (データ数, rows, cols, Cin) の 4 階テンソル
 data = tf.constant( [ np.stack( [data_0,data_1], -1) ], dtype=tf.float32 )
 
-# カーネル全体: shape = (3, 3, Cin * Cout) の 3 階テンソル 
-kernel = np.stack( [kernel_0_0,kernel_0_1,kernel_1_0,kernel_1_1], -1)
+# カーネル全体: shape = (kernel_size, kernel_size, Cin * Cout) の 3 階テンソル 
+kernel = np.stack( [kernel_00,kernel_01,kernel_10,kernel_11], -1)
 
 # バイアス全体 :  shape = (Cout) のベクトル
 b = [b_0, b_1]
 
 # モデル作成
-model = Sequential();
-model.add( Conv2D( Cout, (3,3), input_shape=(rows,cols,Cin), kernel_initializer=Constant(kernel), bias_initializer=Constant(b) ) )
+model = tf.keras.Sequential()
+model.add( tf.keras.Input(shape=(rows,cols,Cin,)))
+model.add( tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
+                                  kernel_initializer=tf.keras.initializers.Constant(kernel), 
+                                  bias_initializer=tf.keras.initializers.Constant(b) ))
 model.summary()
 
 # 畳み込み演算
@@ -122,47 +135,41 @@ y = model.predict( data )
 print('')
 np.set_printoptions(precision=0, suppress=True)
 for i in range(Cin):
-    print('data_'+str(i)+'=')
+    print(f'data_{i}=')
     print( data[0,:,:,i].numpy())
     print('')
 
 for i in range(Cin):
     for i2 in range(Cout):
-        print('kernel_'+str(i)+'_'+str(i2)+' = ')
+        print(f'kernel_{i}{i2} = ')
         print(kernel[:,:,Cin*i+i2])
         print('')
 
 for i in range(Cout):
-    print('b_'+str(i)+' = '+str(b[i]))
+    print(f'b_{i} = {b[i]}')
     print('')
 
 for i in range(Cout):
-    print('y_'+str(i)+'=')
+    print(f'y_{i} =')
     print(y[0,:,:,i])
     print('')
 </pre>
 </div>
 
 <p>
-基本的には<a href="../text03/page02.html">MLP</a>と同様にしてモデルを作成し、predict メソッドで出力を求めます。
-</p>
-
-<p>
-さてソース1中の
+基本的には<a href="../text03/page02.html">MLP</a>と同様に Sequential モデルを作成し、predict メソッドで出力を求めますが、
 </p>
 
 <div class="info">
 <pre class="wrap">
-model.add( Conv2D( Cout, (3,3), input_shape=(rows,cols,Cin), kernel_initializer=Constant(kernel), bias_initializer=Constant(b) ) )
+model.add( tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
+                                  kernel_initializer=tf.keras.initializers.Constant(kernel), 
+                                  bias_initializer=tf.keras.initializers.Constant(b) ))
 </pre>
 </div>
 
 <p>
-の行で add メソッドを使って model に Conv2D のインスタンスを追加しています。
-<br>
-ここで Conv2D の最初の引数 Cout は出力画像のチャンネル数、2番目の (3,3) はカーネルのサイズ、3番目の input_shape=(rows,cols,Cin) は入力画像のサイズとチャンネル数を表しています。
-<br>
-また残りのkernel_initializer=Constant(kernel) と bias_initializer=Constant(b) でカーネルとバイアスをセットしています。
+の行で畳み込み層(<a href="https://keras.io/api/layers/convolution_layers/convolution2d/">Conv2Dクラス</a>)をモデルに追加しています。
 </p>
 
 <p>
@@ -173,11 +180,11 @@ model.add( Conv2D( Cout, (3,3), input_shape=(rows,cols,Cin), kernel_initializer=
 <input type="checkbox"><b>ソース 1の実行結果</b>
 
 <pre class="wrap">
-Model: "sequential_6"
+Model: "sequential_2"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d_6 (Conv2D)            (None, 2, 2, 2)           38        
+conv2d_2 (Conv2D)            (None, 2, 2, 2)           38        
 =================================================================
 Total params: 38
 Trainable params: 38
@@ -196,22 +203,22 @@ data_1=
  [2. 2. 3. 2.]
  [3. 1. 0. 0.]]
 
-kernel_0_0 = 
+kernel_00 = 
 [[0 1 0]
  [2 0 3]
  [0 4 0]]
 
-kernel_0_1 = 
+kernel_01 = 
 [[2 0 1]
  [0 1 0]
  [1 0 3]]
 
-kernel_1_0 = 
+kernel_10 = 
 [[0 0 0]
  [0 1 0]
  [0 0 0]]
 
-kernel_1_1 = 
+kernel_11 = 
 [[1 0 0]
  [0 2 3]
  [2 0 0]]
@@ -220,11 +227,11 @@ b_0 = 1
 
 b_1 = -1
 
-y_0=
+y_0 =
 [[15. 18.]
  [ 9. 19.]]
 
-y_1=
+y_1 =
 [[16. 14.]
  [34. 21.]]
 </pre>
@@ -236,6 +243,7 @@ y_1=
 カーネル1つに含まれるパラメータ数は 9 個、カーネルは計 4 個、バイアスは計 2 個より、9*4+2=38 なので確かに合っています。
 </p>
 
+<br>
 <script>PreNext(4,6)</script>
 </body>
 </html>
