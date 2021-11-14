@@ -42,7 +42,7 @@ CNN とディープラーニングの仕様は以下の通りです。
 (1) いわゆる「<a href="https://en.wikipedia.org/wiki/LeNet">LeNet-5</a>」を作る
 </p>
 <p>
-入力層: rows = 32、 cols = 32、Cin = 3 ※ tf.keras.Input(shape=(rows, cols, Cin, ))
+入力層: rows = 32、 cols = 32、Cin = 3  ※ 入力画像は R・G・B の 3 チャンネル
 <br>
 第1層: 畳み込み層、Cout = 6、kernel_size = 5、 activation='tanh'
 <br>
@@ -58,7 +58,7 @@ CNN とディープラーニングの仕様は以下の通りです。
 <br>
 第7層: 全結合層、 K = 84、 activation='tanh'
 <br>
-出力層: 全結合層、 M = 10、 activation='softmax'
+出力層: 全結合層、 M = 10、 activation='softmax' ※ 出力は各クラスに属する確率
 </p>
 <p>
 (2) 学習率は r = 0.001、エポック数は E = 100、バッチサイズは B = 512 とする
@@ -89,7 +89,7 @@ CNN とディープラーニングの仕様は以下の通りです。
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 「DL_4_1」を「DL_4_2」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> テストデータセットの正解率が70％を超えるようにCNNの構造を変更してください
+<span class="olradio"><input type="radio" name="p3"></span> テストデータセットの正解率が70％を超えるようにCNNの構造を変更したり、ドロップアウト層を加えたり、エポック数やバッチサイズを変更したり等の工夫をして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
 </p>
