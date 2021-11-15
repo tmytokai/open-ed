@@ -9,9 +9,9 @@ void main(void){
 
        // CCP4(3 pin) から PWM 出力、Timer4 使用、prescale = x64
        //
-       // 今回は CCP4 + Timer4 の組み合わせなので 
-       // PWM 周期と パルス 幅は FOSC、prescale、PR4、CCPR4L、DC4B1、DC4B0 を使って以下のように決まります
-       // PR4 は Timer4 の設定用の 8bit レジスタです
+       // 今回は CCP4 + Timer6 の組み合わせなので 
+       // PWM 周期と パルス 幅は FOSC、prescale、PR6、CCPR4L、DC4B1、DC4B0 を使って以下のように決まります
+       // PR6 は Timer6 の設定用の 8bit レジスタです
        // CCPR4L は CCP4 の設定用の 8bit レジスタです
        // DC4B1、DC4B0 は CCP1 の設定用の 8bit レジスタ CCP4CON の bit 5〜4 です
        // 詳しい計算式は 212p を参照して下さい
@@ -20,23 +20,20 @@ void main(void){
        // PWM 周期 = TOSC * (4* prescale) * (PR4+1) 秒
        // パルス幅 = TOSC * prescale * (CCPR4L:DC4B1:DC4B0) 秒
 
-       if( RB0 == 1 ){
+       if( RB0 == 0 ){
+          // Timer6 ON
+          T6CONbits.TMR6ON = 1 ;
 
-          // O3C = 131 Hz
+          // オクターブ3のド = 131 Hz
           // PWM 周期 = 7.6 msec, パルス幅 = 3.8 msec
-          PR4 = ? ;
+          PR6 = ? ;
           CCPR4L = ? ;
           CCP4CONbits.DC4B1 = ? ;
           CCP4CONbits.DC4B0 = ? ;
         }
 	else{
-
-          // O3G = 196 Hz
-          // PWM 周期 = 5.1 msec, パルス幅 = 2.6 msec
-          PR4 = ? ;
-          CCPR4L = ? ;
-          CCP4CONbits.DC4B1 = ? ;
-          CCP4CONbits.DC4B0 = ? ;
+          // Timer6 OFF
+          T6CONbits.TMR6ON = 0 ;
         }
 
        __delay_ms(100);
