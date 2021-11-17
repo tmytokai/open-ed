@@ -84,9 +84,17 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <span class="olradio"><input type="radio" name="p2"></span> ここまでで一旦コンパイルと実行をして結果を確認します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 「JAVABSC_2_2」フォルダに空の hoge.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
-<br>
+</p>
+<p>
+※ hoge.txt を追加するコマンド: touch hoge.txt
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> 更に空の fuga.txt ファイルを追加して実行し、エラーメッセージが変化したことを確認します。
-<br>
+</p>
+<p>
+※ fuga.txt を追加するコマンド: touch fuga.txt
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをしてください。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
@@ -115,8 +123,6 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で作った「JAVABSC_2_2」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_3」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 「JAVABSC_2_3」フォルダ内の hoge.txt を消します( fuga.txt は残したままにします )。
-<br>
 <span class="olradio"><input type="radio" name="p3"></span> try 文が書いてある行と hoge.txt をオープンしている行の間に以下の処理を追加します。
 </p>
 <div class="info">
@@ -128,7 +134,7 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> IOException の catch 処理の下に <b>ArithmeticException</b> の catch 処理を追加します。なお println の中身は「<b>"算術例外発生: "+e</b>」として下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルと実行をし、0 を入力したら算術例外、0 以外を入力したら入出力例外が起きることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルと実行をし、0 を入力したら算術例外(0除算)、0 以外を入力したら入出力例外(piyo.txtが無い)が起きることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをしてください。 
 <br>
