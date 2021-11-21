@@ -1,0 +1,5 @@
+<span class="olradio"><input type="radio" name="p4"></span> double 型配列 f2[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 実数成分と虚数成分から元の信号値を外側 i、内側 k の 2 重 for ループを使って計算し、配列 f2[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 求めた f2[0] 〜 f2[N-1] の値を printf して下さい。 

@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    // 周期
+    const int N = ? ;
+
+    // f[i] を求める
+    // (注1)  円周率は M_PI
+    // (注2)  (15/7)は (15.0/7.0)とする
+    double f[N] = {0};
+    for( int i = 0; i < N; ++i ){
+        f[i] = ? ;
+    }
+
+    for( int i = 0; i < N; ++i ){
+        printf("f[%d] = %lf\n", i, f[i]);
+    }
+
+    return 0;
+}

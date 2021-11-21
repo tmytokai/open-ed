@@ -1,0 +1,37 @@
+<span class="olradio"><input type="radio" name="p3"></span> DFT_1_3.cpp を開いて続きから作成します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 A[N] と B[N] を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の実数成分 $\textrm{A}[0]$ 〜 $\textrm{A}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 A[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の虚数成分 $\textrm{B}[0]$ 〜 $\textrm{B}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 B[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を printf して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 absC[N] と argC[N] を定義して下さい(※)。
+</p>
+<p>
+ ※ abs は absolute value(絶対値)、arg は argument(偏角)の略です。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の絶対値 $|\textrm{C}[0]|$ 〜 $|\textrm{C}[\textrm{N}-1]|$ を k の for ループを使って計算して配列 absC[] に代入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 argC[]  に代入して下さい。
+<br>
+なお絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 (※)の時は argC[k] = 0 として下さい
+</p>
+<p>
+※ 0.01 という値は適当に決めたもので特に深い意味はありません。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を printf して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 実行して各値を画面に表示します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 表計算ソフトを起動し、各列のタイトルを追加します。1列目の先頭に「k」、2列目の先頭に「絶対値」、3列目の先頭に「偏角」と入力して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> k列を挿入します。「k」列のタイトルの下に 0 から $\textrm{N}-1$までオートフィルで数字を入力して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「絶対値」列のタイトルの下に absC[0] 〜  absC[N-1] の値をコピペして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「偏角」列のタイトルの下 argC[0] 〜 argC[N-1] の値をコピペして下さい。

@@ -20,23 +20,19 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-演習時間: 270  分
-</p>
-
 <br>
 <h2><a href="./page01.html">1. 周期性時間領域ディジタル信号</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-1 (個人、10分):</b> 表計算ソフトを使って周期性時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-1 (個人):</b> 表計算ソフトを使って周期性時間領域ディジタル信号
 </p>
 \[
 f[i] = 
 -1
-+ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
-+ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
-+ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
 \]
 <p>
 のグラフを描いてみましょう。
@@ -51,15 +47,49 @@ f[i] =
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「i」と書いた右隣のセルに「f[i]」と書き、その下のセルから各 $i$ における $f[i]$ の値をオートフィルを使って入力します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「i」と「f[i]」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「無し」とします。
+<span class="olradio"><input type="radio" name="p1"></span> 「i」と「f[i]」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> グラフから $f[i]$ の周期 $\textrm{N}$ [点]を求めてタイトルに記述して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> グラフを見て $f[i]$ の周期 $\textrm{N}$ [点]を求めて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「DFT-1-1」として下さい(拡張子は表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p1"></span> シートを保存します。ファイル名は「DFT_1_1」として下さい(拡張子は表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「グラフ」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「周期 N [点]」と「グラフ」を貼り付けて下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-2 (個人):</b> 演習 1-1 の時間領域ディジタル信号
+</p>
+<p>
+\[
+f[i] = 
+-1
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
+\]
+</p>
+<p>
+の信号値をプログラムで求めてみましょう。
+</p>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「DFT_1_2」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「DFT_1_2」の中に Main.cpp を作成します
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Main.cpp を開き、ファイルの中身を<a href="./src/DFT_1_2.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行すると f[0] 〜 f[N-1] の値が画面に表示されます。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 実行して出力した値と、演習 1-1 で求めた値がほぼ一致していることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソースコード」「出力結果」を記入して下さい。
 </p>
 </div>
 
@@ -70,148 +100,66 @@ f[i] =
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-2 (個人、30分):</b> 演習 1-1 の時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-3 (個人):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
 <p>
 \[
 f[i] = 
 -1
-+ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
-+ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
-+ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
 \]
 </p>
 <p>
-の信号値をプログラム上で求めてみましょう。
+の DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \textrm{C}[k]$ をプログラムで求め、表計算ソフトでグラフ化しましょう。
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> C言語 の開発環境を起動します。ソース名は「DFT-1-2.cpp」とします。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「DFT_1_3」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> main 関数で int 型変数 N を定義し(※)、演習 1-1 で求めた周期 $\textrm{N}$ の値を代入して下さい。
-</p>
-<p>
-※ コンパイルエラーが出る場合は const int 型にするか man 関数の上で define して下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> double 型の配列 f[N] を定義して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>  フォルダ「DFT_1_3」の中に Main.cpp を作成します
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> f[0] 〜 f[N-1] の値を for ループを使って計算して代入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>  Main.cpp を開き、ファイルの中身を<a href="./src/DFT_1_3.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 求めた f[0] 〜 f[N-1] の値を画面に表示して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>  テンプレートソースを開いて穴埋めをします。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 実行して出力した値と、演習 1-1 で求めた値がほぼ一致していることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span>  コンパイルして実行するとCSVファイル(DFT_1_3.csv)が出力されます。1列目がDTF係数の番号 $k$、2列目が絶対値 $|\textrm{C}[k]|$、3列目が偏角 $\angle \textrm{C}[k]$ です。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> CSV ファイルを表計算ソフトで開き、一行目に空行を挿入し、最初の列の先頭に「k」、次の列の先頭に「|C[k]|」、次の列の先頭に「∠C[k]」と入力して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「ソースコード」を記入して下さい。
-</p>
-</div>
-
+<span class="olradio"><input type="radio" name="p3"></span>  1列目と2列目を選択して絶対値 $|\textrm{C}[k]|$ のグラフを挿入します。グラフの種類は散布図、点あり、線なし、平滑化なしとします。
 <br>
-<p>
-<input type="checkbox"><b>演習 1-3 (個人、70分):</b> 演習 1-1 の時間領域ディジタル信号
-</p>
-<p>
-\[
-f[i] = 
--1
-+ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
-+ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
-+ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
-\]
-</p>
-<p>
-の DFT 係数 $\textrm{C}[k]$ の絶対値と偏角をプログラム上で求め、表計算ソフトでグラフ化しましょう。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> 演習 1-2 のソース(DFT-1-2.cpp)を DFT-1-3.cpp の名前でコピーします。 
+<span class="olradio"><input type="radio" name="p3"></span>  1列目と3列目を選択して偏角 $\angle \textrm{C}[k]$ のグラフを挿入します。グラフの種類は散布図、点あり、線なし、平滑化なしとします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> DFT-1-3.cpp を開いて続きから作成します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 A[N] と B[N] を定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の実数成分 $\textrm{A}[0]$ 〜 $\textrm{A}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 A[] に代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の虚数成分 $\textrm{B}[0]$ 〜 $\textrm{B}[\textrm{N}-1]$ を外側 k、内側 i の 2 重 for ループを使って計算し、 配列 B[] に代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> A[0] 〜  A[N-1] と B[0] 〜 B[N-1] の値を printf して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  double 型の配列 absC[N] と argC[N] を定義して下さい(※)。
-</p>
-<p>
- ※ abs は absolute value(絶対値)、arg は argument(偏角)の略です。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の絶対値 $|\textrm{C}[0]|$ 〜 $|\textrm{C}[\textrm{N}-1]|$ を k の for ループを使って計算して配列 absC[] に代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span>  DFT 係数の偏角 $\angle\textrm{C}[0]$ 〜 $\angle\textrm{C}[\textrm{N}-1]$ を k の for ループを使って計算して配列 argC[]  に代入して下さい。
-<br>
-なお絶対値の値が小さいと偏角の値が正しく出ないので、ある k において absC[k] &lt;  0.01 (※)の時は argC[k] = 0 として下さい
-</p>
-<p>
-※ 0.01 という値は適当に決めたもので特に深い意味はありません。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> absC[0] 〜  absC[N-1] と argC[0] 〜 argC[N-1] の値を printf して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 実行して各値を画面に表示します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 表計算ソフトを起動し、各列のタイトルを追加します。1列目の先頭に「k」、2列目の先頭に「絶対値」、3列目の先頭に「偏角」と入力して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> k列を挿入します。「k」列のタイトルの下に 0 から $\textrm{N}-1$までオートフィルで数字を入力して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 「絶対値」列のタイトルの下に absC[0] 〜  absC[N-1] の値をコピペして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 「偏角」列のタイトルの下 argC[0] 〜 argC[N-1] の値をコピペして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 「k」列と「絶対値」列を選択して絶対値のグラフを挿入します。グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 「k」列と「偏角」列を選択して偏角のグラフを挿入します。グラフの種類は散布図、点あり、線「無し」、平滑化「無し」とします。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> シートを保存します。ファイル名は「DFT-1-3」として下さい(拡張子は表計算ソフトによる)。
+<span class="olradio"><input type="radio" name="p3"></span> 「名前を付けて保存」でシートを表計算形式で保存します。ファイル名は「DFT_1_3」として下さい(拡張子は使用する表計算ソフトによる)。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 各自が指定場所に「ソースコード」と「絶対値と偏角のグラフ」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」「絶対値のグラフ」「偏角のグラフ」を貼り付けて下さい。
 </p>
 </div>
 
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人、60分):</b> 演習 1-3 で求めた DFT 係数 $\textrm{C}[k]$ の値から元の周期性時間領域ディジタル信号 $f[i]$ を IDFT を使って復元してみましょう。
+<input type="checkbox"><b>演習 1-4 (個人):</b> 演習 1-3 で求めた DFT 係数 $\textrm{C}[k]$ の値から元の周期性時間領域ディジタル信号 $f[i]$ を IDFT を使って復元してみましょう。
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 演習 1-3 のソース(DFT-1-3.cpp)を DFT-1-4.cpp の名前でコピーします。 
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「DFT_1_4」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> DFT-1-4.cpp を開いて続きから作成します。
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「DFT_1_4」の中に Main.cpp を作成します
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> double 型配列 f2[N] を定義して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> Main.cpp を開き、ファイルの中身を<a href="./src/DFT_1_4.txt">テンプレート</a>の内容に置き換えて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 実数成分と虚数成分から元の信号値を外側 i、内側 k の 2 重 for ループを使って計算し、配列 f2[] に代入して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行すると IDFT により復元された f[0] 〜 f[N-1] の値が画面に表示されます。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 求めた f2[0] 〜 f2[N-1] の値を printf して下さい。 
+<span class="olradio"><input type="radio" name="p4"></span> 実行して出力した値と、演習 1-1 で求めた値がほぼ一致していることを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 実行して各値を画面に表示します。
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 表計算ソフトを起動します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 時刻の範囲は $i = 0, 1,  \cdots, \textrm{N}-1$ とします。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 一番上の最初の列のセルに「i」と書き、その下のセルから各 $i$ の値をオートフィルを使って入力します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 「i」と書いた右隣のセルに「f[i]」と書き、その下のセルから IDFT で求めた f2[0] 〜  f2[N-1] の値をコピーします。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 「i」と「f[i]」の列を範囲選択してからグラフを挿入します。グラフの種類は散布図、点あり、線あり、平滑化「無し」とします。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> シートを保存します。ファイル名は「DFT-1-4」として下さい(拡張子は表計算ソフトによる)。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし演習 1-1 のグラフ(の先頭部分)とほぼ一致していることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 各自が指定場所に「ソースコード」と「グラフ」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」「出力結果」を記入して下さい。
 </p>
 </div>
 
@@ -220,41 +168,33 @@ f[i] =
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人、60分):</b> 演習 1-1 の時間領域ディジタル信号
+<input type="checkbox"><b>演習 1-5 (個人):</b> 演習 1-1 の時間領域ディジタル信号
 </p>
 <p>
 \[
 f[i] = 
 -1
-+ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{1.0} \right ) } \cdot i + 1 \right )
-+ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{3.0} \right ) } \cdot i +0.5 \right )
-+ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15.0}{7.0} \right ) } \cdot i -2 \right )
++ 2 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{1} \right ) } \cdot i + 1 \right )
++ 4 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{3} \right ) } \cdot i +0.5 \right )
++ 3 \cdot \cos \left ( \frac{2 \pi}{ \left ( \frac{15}{7} \right ) } \cdot i -2 \right )
 \]
 </p>
 <p>
-の直流成分、基本波、高調波をプログラム上で求めて表示しましょう。
+の直流成分、基本波、高調波のパラメータをプログラムで求めてみましょう。
 </p>
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 演習 1-4 のソース(DFT-1-4.cpp)を DFT-1-5.cpp の名前でコピーします。 
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DFT_1_5」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> DFT-1-5.cpp を開いて続きから作成します。
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DFT_1_5」の中に Main.cpp を作成します
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 直流成分の値を printf して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> Main.cpp を開き、ファイルの中身を<a href="./src/DFT_1_5.txt">テンプレート</a>の内容に置き換えて下さい
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 基本波の振幅、周期、初期位相を printf して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行すると各パラメータの値が表示されます
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 残りの高調波の振幅、周期(※)、初期位相をprintf して下さい。
-</p>
-<p>
-※ 周期 は N か k をdouble型にキャストしないと正しい値が出ないので注意しましょう。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> 実行して各値を画面に表示します。 
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして、表示された値が理論値とほぼ近いことを確認してください
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、理論値とほぼ一致していることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 各自が指定場所に「ソースコード」と「各値」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「出力結果」を貼り付けて下さい
 </p>
 </div>
 
