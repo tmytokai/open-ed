@@ -49,7 +49,7 @@ public class Main{
             writer.println( a + "足す" + b + "は" + (a+b) );
             writer.close();
         }
-        catch ( IOException e ) {
+        catch ( IOException e ) { // 例外処理しないとコンパイルエラーになる
             System.out.println( e );
         }
     }

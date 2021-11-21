@@ -40,7 +40,7 @@ public class Main{
             }
             reader.close();
         }
-        catch ( IOException e ) {
+        catch ( IOException e ) { // 例外処理しないとコンパイルエラーになる
             System.out.println( e );
         }
     }
@@ -61,7 +61,7 @@ public class Main{
 </p>
 
 <p>
-一度オープンすれば、あとは reader.readLine() でファイルの1行分を読み込む事が出来ます。
+一度オープンすれば、あとは reader.readLine() でファイルの1行分を文字列として読み込む事が出来ます。
 <br>
 なお、ファイルの終わり(EOF)にたどり着くと reader.readLine() は null を返します(上の例では while のループから抜けます)。
 </p>
