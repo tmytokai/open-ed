@@ -1,0 +1,35 @@
+import numpy as np
+import math
+
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+
+# DFT_1_4 から SetF(f) 関数をコピーする
+?
+
+# DFT_1_4 から DFT(A,B,f) 関数をコピーする
+?
+
+# DFT 係数の実数成分と虚数成分から元の f[i] を計算する関数
+def IDFT(f,A,B):
+    N = A.shape[0]
+    for i in range(N):
+        f[i]=0.0;
+        for k in range(N):
+            # cos は math.cos
+            # sin は math.sin
+            # 円周率は math.pi
+            f[i] += ?
+        
+N = ? # 周期 = 信号長
+
+f=np.zeros(N) # 元の信号f[i]
+A=np.zeros(N) # DFT係数 C[k] の実数成分
+B=np.zeros(N) # C[k] の虚数成分
+f2=np.zeros(N) # 復元した信号
+
+SetF(f)
+DFT(A,B,f)
+IDFT(f2,A,B)
+
+for i in range(N):
+    print(f'f[{i}] : 元の値 {f[i]: 0.3f} → 復元した値 {f2[i]: 0.3f}')

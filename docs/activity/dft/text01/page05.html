@@ -21,7 +21,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-DFT / IDFT の最大の欠点は計算量が多くて時間がかかることです。具体的な DFT / IDFT の計算量(オーダー)は次の通りです。
+DFT / IDFT の最大の欠点は計算量が多くて時間がかかることです。
+<br>
+具体的な DFT / IDFT の計算量(オーダー)は次の通りです。
 </p>
 
 <div class="info">
@@ -37,11 +39,13 @@ $\textrm{N}$ を周期とした時
 </div>
 
 <p>
-そこで DFT を高速化した高速フーリエ変換( Fast Fourier Transform, FFT )、及び高速フーリエ逆変換( Inverse Fast Fourier Transform, IFFT )が考案されました。
+そこで DFT を高速化した<a href="https://ja.wikipedia.org/wiki/%E9%AB%98%E9%80%9F%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">高速フーリエ変換</a>( Fast Fourier Transform, FFT )、及び高速フーリエ逆変換( Inverse Fast Fourier Transform, IFFT )が考案されました。
 </p>
 
 <p>
-FFT / IFFT は周期 $\textrm{N}$ が $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ )でないと使えないという制限はありますが、次の様に計算量が劇的に減ります。もちろん計算結果は DFT / IDFT と同一です。
+FFT / IFFT は周期 $\textrm{N}$ が $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ )でないと使えないという制約はありますが、次の様に計算量が劇的に減ります。
+<br>
+もちろん計算結果は DFT / IDFT と同じです。
 </p>
 
 <div class="info">
@@ -61,15 +65,16 @@ $\textrm{N}$ を周期とした時(※)
 </div>
 
 <p>
-$\textrm{N}$ が小さい時は DFT と FFT はそれ程計算速度は変わりませんが、大きくなるにつれて速度差が大きくなっていきます(演習で確認します)。
+$\textrm{N}$ が小さい時はそれ程計算速度は変わりませんが、大きくなるにつれて速度差が大きくなっていきます。
 <br>
-従って世間一般的には DFT は普通使わず、代わりに FFT が良く使われています。
+従って世間的には DFT / IDFT より FFT / IFFT が良く使われています。
 </p>
 
 <p>
-具体的な FFT / IFFT の計算方法についてはこのアクティビティの範囲外になりますし、フリーの FFT ライブラリが Web 上に沢山ありますので興味がある人は自分で調べて下さい。
+フリーの FFT / IFFT ライブラリは沢山ありますので興味がある人は自分で調べて試して下さい。
 </p>
 
+<br>
 <script>PreNext(5,5)</script>
 </body>
 </html>

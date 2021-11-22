@@ -1,22 +1,20 @@
-#include <stdio.h>
-#include <math.h>
+import numpy as np
+import math
 
-int main()
-{
-    // 周期
-    const int N = ? ;
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
-    // f[i] を求める
-    // (注1)  円周率は M_PI
-    // (注2)  (15/7)は (15.0/7.0)とする
-    double f[N] = {0};
-    for( int i = 0; i < N; ++i ){
-        f[i] = ? ;
-    }
+# 元の信号 f[i] をセットする関数
+def SetF(f):
+    N = f.shape[0]
+    for i in range(N):
+        # cos は math.cos
+        # 円周率は math.pi
+        f[i] = ?
 
-    for( int i = 0; i < N; ++i ){
-        printf("f[%d] = %lf\n", i, f[i]);
-    }
+N = ? # 周期 = 信号長
 
-    return 0;
-}
+f=np.zeros(N) # 元の信号f[i]
+
+SetF(f)
+for i in range(N):
+    print(f'f[{i}] = {f[i]: 0.3f}')

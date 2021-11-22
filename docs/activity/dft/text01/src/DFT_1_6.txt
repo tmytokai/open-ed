@@ -1,0 +1,43 @@
+import numpy as np
+import math
+
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+
+# DFT_1_4 から SetF(f) 関数をコピーする
+?
+
+# DFT_1_4 から DFT(A,B,f) 関数をコピーする
+?
+
+# DFT_1_4 から GetAbsArg(C_abs,C_arg,A,B) 関数をコピーする
+?
+
+N = ? # 周期 = 信号長
+
+f=np.zeros(N) # 元の信号f[i]
+A=np.zeros(N) # DFT係数 C[k] の実数成分
+B=np.zeros(N) # C[k] の虚数成分
+C_abs=np.zeros(N) # C[k] の絶対値
+C_arg=np.zeros(N) # C[k] の偏角
+
+SetF(f)
+DFT(A,B,f)
+GetAbsArg(C_abs,C_arg,A,B)
+
+M = int((N-1)/2)
+a = np.zeros(M+1)  # 直流成分および基本波と高調波の振幅
+phi = np.zeros(M+1) # 基本波と高調波の初期位相
+
+a[0]= ?  # 直流成分 ※ 虚数成分は必ず0なので実数成分だけ代入する
+
+a[1] = ?  # 基本波の振幅
+phi[1] = ? # 基本波の初期位相
+    
+for k in range(2,M+1):
+    a[k] = ?  # 第k高調波の振幅
+    phi[k] = ?  # 第k高調波の初期位相
+
+print(f'直流成分 a0 = {a[0]: 0.2f}')
+print(f'基本波の振幅 a1 = {a[1]: 0.2f}, 初期位相 φ1 = {phi[1]: 0.2f}')
+for k in range(2,M+1):
+    print(f'第{k}高調波の振幅 a{k} = {a[k]: 0.2f}, 初期位相 φ{k} = {phi[k]: 0.2f}')

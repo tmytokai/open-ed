@@ -1,5 +1,41 @@
-<span class="olradio"><input type="radio" name="p4"></span> double 型配列 f2[N] を定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 実数成分と虚数成分から元の信号値を外側 i、内側 k の 2 重 for ループを使って計算し、配列 f2[] に代入して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 求めた f2[0] 〜 f2[N-1] の値を printf して下さい。 
+import numpy as np
+import math
+
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+
+# DFT_1_3 から SetF(f) 関数をコピーする
+?
+
+# DFT_1_3 から DFT(A,B,f) 関数をコピーする
+?
+
+# DFT係数の絶対値と偏角を計算する関数
+def GetAbsArg(C_abs,C_arg,A,B):
+    N = A.shape[0]
+    for k in range(N):
+        # ルートは math.sqrt
+        # 偏角は math.atan2
+        C_abs[k] = ?  # 絶対値
+        C_arg[k] = ?  # 偏角
+        #
+        # (参考) math ではなく numpy の関数を使う場合は下の様にします
+        #
+        # C = A[k]+B[k]*1j
+        # C_abs[k] = np.abs(C)
+        # C_arg[k] = np.angle(C)
+        if( C_abs[k]<0.001 ): C_arg[k] = 0  # 絶対値が0に近い場合は偏角を0にする
+
+N = ? # 周期 = 信号長
+
+f=np.zeros(N) # 元の信号f[i]
+A=np.zeros(N) # DFT係数 C[k] の実数成分
+B=np.zeros(N) # C[k] の虚数成分
+C_abs=np.zeros(N) # C[k] の絶対値
+C_arg=np.zeros(N) # C[k] の偏角
+
+SetF(f)
+DFT(A,B,f)
+GetAbsArg(C_abs,C_arg,A,B)
+
+for k in range(N):
+    print(f'絶対値 |C[{k}]| = {C_abs[k]: 0.2f}, 偏角 ∠C[{k}] = {C_arg[k]: 0.2f}')
