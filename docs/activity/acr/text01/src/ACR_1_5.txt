@@ -15,12 +15,6 @@ void IDFT( const double* A, const double* B, double* f, const int N )
     ?
 }
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    // 演習 1-1 の内容をコピーする
-}
-
 int main()
 {
     const int N = 45;
