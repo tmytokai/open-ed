@@ -776,6 +776,135 @@ A. 説明が難しいので<a href="src/jump.zip">サンプル</a>を参考に�
 <br>
 
 
+<br>
+<h3>
+Q. 文字列の大きさを変えたり、色を変えたり、太字にしたい
+</h3>
+
+<p>
+A. 標準では出来ないので、MyWorld クラスに機能を追加する。
+<br>
+まず MyWorld クラスを以下の様に書き換える
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+import greenfoot.core.TextLabel;
+import greenfoot.WorldVisitor;
+import greenfoot.util.GraphicsUtilities;
+import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+
+public class MyWorld extends World
+{
+    // Reffered from core/TextLabel.java
+    // Copyright (C) 2013,2014 Poul Henriksen and Michael Kolling 
+    // Licence: GPL2
+    class TextLabelEx extends TextLabel
+    {
+        boolean enable;
+        int xpos;
+        int ypos;
+        int size;
+        boolean bold;
+        greenfoot.Color gfcolor;
+        java.awt.Color color;
+        String text;
+        String[] lines;
+        private GraphicsUtilities.MultiLineStringDimensions dimensions = null;
+        
+        @Override
+        public int getX(){ return xpos;}
+        
+        @Override
+        public int getY(){ return ypos;}
+        
+        @Override
+        public String getText(){ return text;}     
+        
+        public TextLabelEx(String _text, int _xpos, int _ypos, int _size, boolean _bold, greenfoot.Color _gfcolor )
+        {
+            super("", 0, 0 );
+            lines = new String[1];
+            xpos = _xpos;
+            ypos = _ypos;
+            reset( _text, _size, _bold, _gfcolor );
+        }
+        
+        public void reset( String _text, int _size, boolean _bold, greenfoot.Color _gfcolor )
+        {
+            if( text == _text && size == _size && bold == _bold && gfcolor == _gfcolor ) return;
+            text = _text;
+            size = _size;
+            bold = _bold;
+            gfcolor = _gfcolor;
+            lines[0] = text;
+            dimensions = null;
+            
+            if( text.length() == 0 ) enable = false;
+            else enable = true;
+        }
+
+        @Override
+        public void draw(Graphics2D g, int cellsize)
+        {
+            if( !enable ) return;
+            if(dimensions == null) {
+                dimensions = GraphicsUtilities.getMultiLineStringDimensions(lines, bold ? java.awt.Font.BOLD : java.awt.Font.PLAIN, size);
+                color = new java.awt.Color( gfcolor.getRed(), gfcolor.getGreen(), gfcolor.getBlue(), gfcolor.getAlpha() );
+            }
+                
+            int ydraw = ypos * cellsize - dimensions.getHeight() / 2 + cellsize / 2;
+            int xdraw = xpos * cellsize - dimensions.getWidth() / 2 + cellsize / 2;
+            g.translate(xdraw, ydraw);
+            GraphicsUtilities.drawOutlinedText(g, dimensions, color, java.awt.Color.BLACK);
+            g.translate(-xdraw, -ydraw);
+        }
+    }   
+    
+    public void showTextEx(String text, int x, int y, int size, boolean bold, greenfoot.Color color )
+    {
+        for( TextLabel label : WorldVisitor.getTextLabels(this) ){
+            if( label.getX() == x && label.getY() == y ){
+                if( label instanceof TextLabelEx ){
+                    ((TextLabelEx)label).reset(text, size, bold, color);
+                    return;                    
+                }
+            }
+        }
+        WorldVisitor.getTextLabels(this).add(new TextLabelEx( text, x, y, size, bold, color ) );
+        
+        //showText( "labels: "+WorldVisitor.getTextLabels(this).size(), 80, 20 );
+    }
+    
+    public MyWorld()
+    {
+        super(600, 400, 1);
+    }
+    
+}
+</pre>
+</div>
+
+
+<p>
+後は上の MyWorld 内で定義した showTextEx() メソッドを以下の様にして呼び出す。
+</p>
+
+<div class="info">
+<pre class="wrap">
+((MyWorld)getWorld()).showTextEx( 文字列, x 座標, y 座標, サイズ, 太字(true か false ), 色 );
+
+使用例:  ((MyWorld)getWorld()).showTextEx("hoge", 200, 200, 64, false, Color.RED );
+</pre>
+</div>
+
+<p>
+色は<a href="https://www.greenfoot.org/files/javadoc/">マニュアル</a>の Color のページを参考にする。
+</p>
 
 </body>
 </html>
