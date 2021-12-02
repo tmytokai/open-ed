@@ -240,15 +240,15 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> 引き続きプロジェクト「IO_1_3」を使用します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイラをデバックモードにします。プロパティーを開き、XC8 Compiler → Option Categories → Optimizations → Debug をチェックして OK ボタンを押して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> コンパイラをデバックモードにします。プロパティーを開き、XC8 Compiler → Option Categories → Optimizations の中にある Debug と Local Code Generation をチェックして OK ボタンを押して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 「NOP()」の行にブレークポイントを打ちます。行番号の所をクリックしてください。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> Debug → Debug Project でデバッグを開始します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> タクトスイッチを押すとブレークポイントの行でプログラムが停止します。
+<span class="olradio"><input type="radio" name="p4"></span> タクトスイッチを押すとブレークポイントの行でプログラムが停止します(※1)。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> プログラムを停止した時点における RA0 と RB0 の値を確認します(変数ウォッチやマウスオーバー時のポップアップを確認)。
+<span class="olradio"><input type="radio" name="p4"></span> プログラムを停止した時点における RA0 と RB0 の値を変数ウォッチやマウスオーバー時のポップアップ(※2)で確認します。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> ブレークポイントを解除し(行番号をクリック)、Debug → Continue で実行を再開します。
 <br>
@@ -257,6 +257,25 @@ PIC のピン配置についてはデータシートの 5p 、PICKit のピン�
 <span class="olradio"><input type="radio" name="p4"></span> 指定場所にプログラムが停止した時の 「RA0の値」と「RB0の値」を記入して下さい。 
 </p>
 </div>
+
+<p>
+※1 最適化の影響でたまにブレークポイントを置いても停止しない場合があります。
+<br>
+もし停止しない場合は止めたい場所に以下のコードを挿入すると無理やり停止できます。
+</p>
+
+<pre class="wrap">
+// 止めたい場所に挿入
+while(1){
+  NOP(); // ここにブレークポイントを置く
+  NOP();
+  NOP();
+}
+</pre>
+
+<p>
+※2 マウスオーバーした時の数値を10進数表示にしたい場合は、Window メニュー → Debugging  → Watches で Watches タブを開き、 左側の一番下にある＄マークアイコンをクリックし、Decimal を選択します。
+</p>
 
 <br>
 <script>PreNext(4,3)</script>
