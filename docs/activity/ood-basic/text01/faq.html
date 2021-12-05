@@ -794,8 +794,6 @@ import greenfoot.core.TextLabel;
 import greenfoot.WorldVisitor;
 import greenfoot.util.GraphicsUtilities;
 import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class MyWorld extends World
@@ -891,20 +889,37 @@ public class MyWorld extends World
 
 
 <p>
-後は上の MyWorld 内で定義した showTextEx() メソッドを以下の様にして呼び出す。
+Actor クラスのサブクラスから上の  MyWorld の中で定義した showTextEx() メソッドを以下の様にして呼び出す。
 </p>
 
 <div class="info">
 <pre class="wrap">
 ((MyWorld)getWorld()).showTextEx( 文字列, x 座標, y 座標, サイズ, 太字(true か false ), 色 );
 
+※ 色は<a href="https://www.greenfoot.org/files/javadoc/">マニュアル</a>の Color のページを参考
+
 使用例:  ((MyWorld)getWorld()).showTextEx("hoge", 200, 200, 64, false, Color.RED );
 </pre>
 </div>
 
 <p>
-色は<a href="https://www.greenfoot.org/files/javadoc/">マニュアル</a>の Color のページを参考にする。
+MyWorld の中からは getWorld() を使わずに直接 showTextEx() メソッドを呼びだす。
 </p>
+
+<div class="info">
+<pre class="wrap">
+showTextEx( 文字列, x 座標, y 座標, サイズ, 太字(true か false ), 色 );
+
+※ 色は<a href="https://www.greenfoot.org/files/javadoc/">マニュアル</a>の Color のページを参考
+
+使用例:  showTextEx("hoge", 200, 200, 64, false, Color.RED );
+</pre>
+</div>
+
+
+
+
+
 
 </body>
 </html>
