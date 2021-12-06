@@ -3,23 +3,46 @@
 
 void main(void){
     
+    int lng = 0;
+    char data[64];
+    
     init();
     
     __delay_ms(1000); // ATP3011の初期化待ち
 
-    while(1) {
-      
-        mssp1_i2c_start();
-        mssp1_i2c_putch( ( 0x? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
-        mssp1_i2c_putch('h'); // 好きな言葉に置き換える
-        mssp1_i2c_putch('o');
-        mssp1_i2c_putch('g');
-        mssp1_i2c_putch('e');
-        mssp1_i2c_putch('.');
-        mssp1_i2c_putch('\r');
-        mssp1_i2c_stop();
+    while(1){
+        
+       int c = getch();
+       if( c != EOF && c != '\n'){
+           
+           printf("%c\r\n",c);
+           data[lng++] = (char)c;
 
-        __delay_ms(5000);
+           if( c == '\r' ){
+               
+                data[lng]='\0';
+                printf( "send: %s\r\n", data );
+
+                // 送信
+                mssp1_i2c_start();
+                mssp1_i2c_putch( ( 0x? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
+                for(int i=0; i<lng; ++i ) mssp1_i2c_putch(data[i]);
+                mssp1_i2c_stop();
+                
+                lng = 0;
+                __delay_ms(50);
+
+                // 受信
+                mssp1_i2c_start();
+                mssp1_i2c_putch( ( 0x? << 1) + ? ); // ATP3011のI2Cアドレス(0x2E, 7bit) + read指示(1)
+                for(int i=0; i<5; ++i ){
+                    c = mssp1_i2c_getch(0); // ACK を送信して受信続行 (NACKを送るまで連続読み込み)
+                    printf("%c\r\n",c);
+                }
+                c = mssp1_i2c_getch(1); //NACK を送信して受信終了
+                mssp1_i2c_stop();
+           }           
+       }
     }
 
    return;

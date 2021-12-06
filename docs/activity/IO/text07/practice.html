@@ -36,8 +36,7 @@
 <li> ATP3011 のピン配置は<a href="../text06/practice.html">こちら</a>を参照</li>
 <li> PIC 側をマスターとする</li>
 <li> I2Cのクロックは「100 KHz」とする</li>
-<li> ATP3011 のI2Cアドレスは「0x2E」固定
-<li> 5000ミリ秒おきに適当な言葉を発声する
+<li> ATP3011 のI2Cアドレスは「0x2E」とする</li>
 </ol>
 
 </div>
@@ -95,8 +94,61 @@
 </pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
-<br>
+<span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押し、以下の手順で正常に動作する事を確認して下さい。 
+</p>
+<div class="info">
+<pre class="wrap">
+(1) PIC が起動したら「# → V → エンター」の順に入力し、バージョンが表示されるのを確認する
+
+(表示例)
+#
+V
+
+send: #V
+V
+F
+1
+a
+>
+
+
+(2) 「# → J(大文字) → エンター」の順に入力するとチャイムが鳴るのを確認する
+
+(表示例)
+#
+J
+
+send: #J
+*
+*
+*
+*
+*
+
+
+(3) 「h → o → g → e → .(ドット) → エンター」の順に入力すると「ほげ」と発声するのを確認する
+
+(表示例)
+h
+o
+g
+e
+.
+
+send: hoge.
+*
+*
+*
+*
+*
+
+
+(4) 好きな音声を発生させる
+
+※ 最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+</pre>
+</div>
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main.c」を記入してください。
 </p>
 
