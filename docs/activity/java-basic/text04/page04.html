@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. ソート</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [4] コレクション</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="./page01.html">リスト</a>に含まれるアイテムをソートするためには次の様にします。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>リストのソート方法</b>
+<pre class="wrap">
+
+java.util.Collections をインポートしてから
+
+昇順でソート: Collections.sort( リスト名 )
+
+降順でソート: Collections.sort( リスト名, Collections.reverseOrder() )
+
+
+</pre>
+</div>
+
+<p>
+例は次のとおりです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1: リストのソート例</b>
+<pre class="wrap">
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+
+    	list.add( 3 );
+    	list.add( 9 );
+    	list.add( -2 );
+    	list.add( 5 );
+
+        System.out.println( "ソート実行前" );
+        System.out.println( list );
+
+        // 昇順ソート
+        System.out.println( "昇順ソート実行後" );
+        Collections.sort( list );
+        System.out.println( list );
+
+        // 降順ソート
+        System.out.println( "降順ソート実行後" );
+        Collections.sort( list, Collections.reverseOrder() );
+        System.out.println( list );
+    }
+}
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース 1 の実行結果</b>
+<pre class="wrap">
+ソート実行前
+[3, 9, -2, 5]
+昇順ソート実行後
+[-2, 3, 5, 9]
+降順ソート実行後
+[9, 5, 3, -2]
+</pre>
+</div>
+
+<p>
+ちなみにソートのアルゴリズムは Python などでも使われている<a href="https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%A3%E3%83%A0%E3%82%BD%E3%83%BC%E3%83%88">ティムソート(Timsort)</a>だそうです。
+</p>
+
+<br>
+<script>PreNext(4,4)</script>
+</body>
+</html>
