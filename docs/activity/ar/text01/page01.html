@@ -44,7 +44,7 @@ $a[n]$ ・・・ LPC 係数 (Linear Prediction Coefficient: 線形予測係数 )
 </p>
 
 <p>
-$e[i]$ ・・・正規乱数などの任意のホワイトノイズ
+$e[i]$ ・・・正規乱数などの任意のホワイトノイズ (平均 0、分散 $\sigma^2$)
 </p>
 
 <p>
@@ -108,7 +108,7 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 \]
 
 <p>
-を<b>特性多項式</b>と呼び、$x[i]$が<a href="../../acr/text01/page01.html">定常</a>であるためには<a href="../../d-filter/text01/page11.html">特性多項式の全ての根が単位円の内側にある必要</a>があります。
+を<b>特性多項式</b>と呼び、$x[i]$が<a href="../../acr/text01/page01.html">定常</a>であるためにはこの IIR フィルタが安定であること、つまり<a href="../../d-filter/text01/page11.html">特性多項式の全ての根が単位円の内側にある必要</a>があります。
 </p>
 
 <p>
@@ -128,12 +128,37 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 となります。
 </p>
 <p>
-分散と共分散の計算は少しややこしくなります。
+一方、分散と共分散の計算は少しややこしくなります。
+</p>
+<p>
+まず整数 $n$ を遅延時刻(ラグ)とおいた時に分散・共分散を $\gamma[n] = Cov \left ( x[i], x[i-n] \right )$、自己相関係数 を$\rho[n]$ とします。
 <br>
-まず $\rho[n]$ を自己相関係数としたとき、次の Yule-Walker 方程式と呼ばれる方程式を解いて $\rho[1]$ 〜 $\rho[\textrm{L}]$ を求めます($\rho[0]$ は 1 )。
+すると $x[i]$が定常過程であることから
+</p>
+
+\[
+Cov \left ( x[i-n], x[i-n] \right ) = Cov \left ( x[i], x[i] \right ) = \gamma[0]
+\]
+
+<p>
+なので
+</p>
+
+\begin{align*}
+\rho[n] &= \frac{ Cov \left ( x[i], x[i-n] \right ) }{ \sqrt{ Cov \left ( x[i], x[i] \right ) } \sqrt{ Cov \left ( x[i-n], x[i-n] \right ) } } \\
+&= \frac{\gamma[n]}{\gamma[0]}
+\end{align*}
+
+<p>
+という関係が出てきます。
+</p>
+
+<p>
+また自己相関係数 $\rho[n]$ の値は以下の Yule-Walker 方程式と呼ばれる方程式を解くことで求めることが出来ます($\rho[0]$ は 1 )。
+</p>
 
 <div class="info">
-<input type="checkbox"><b> Yule-Walker 方程式: </b>
+<input type="checkbox"><b> 自己相関係数 $\rho[n]$ を求める Yule-Walker 方程式: </b>
 
 <p>
 ※ $\rho[0] = 1$ 
@@ -152,26 +177,22 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 </div>
 
 <p>
-次に $\gamma[n] = Cov \left ( x[i], x[i-n] \right )$、ホワイトノイズの分散を $\sigma^2$ とおくと
+では準備が終わったので、まずは分散 $\gamma[0]$ を求めてみましょう。
 </p>
 
+<p>
+$\sigma^2$ をホワイトノイズの分散としたとき、$\gamma[0]$ は以下のように変形できます。
+</p>
 
 \begin{align*}
 \gamma[0] &= Cov \left ( x[i], x[i] \right ) \\
 &= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i] \right ) \\
-&= -a[1] \cdot \gamma[1] - a[2] \cdot \gamma[2] - \cdots - a[\textrm{L}] \cdot \gamma[\textrm{L}] + \sigma^2
+&= -a[1] \cdot \gamma[1] - a[2] \cdot \gamma[2] - \cdots - a[\textrm{L}] \cdot \gamma[\textrm{L}] + \sigma^2 \\
+&= -a[1] \cdot \rho[1] \cdot \gamma[0] - a[2] \cdot \rho[2] \cdot \gamma[0] - \cdots - a[\textrm{L}] \cdot \rho[\textrm{L}] \cdot \gamma[0] + \sigma^2
 \end{align*}
 
 <p>
-ここで両辺を $\gamma[0]$ で割ると
-</p>
-
-\[
-1 = -a[1] \cdot \rho[1] - a[2] \cdot \rho[2] - \cdots - a[\textrm{L}] \cdot \rho[\textrm{L}] + \frac{\sigma^2}{\gamma[0]}
-\]
-
-<p>
-となり、式を変形して
+よって
 </p>
 
 \[
@@ -180,13 +201,17 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 
 <p>
 と分散が得られます。
-<br>
-ここまで来たら共分散は漸化式
 </p>
 
-\[
-\gamma[n] = Cov \left ( x[i], x[i-n] \right ) = -a[1] \cdot \gamma[n-1] - a[2] \cdot \gamma[n-2] - \cdots - a[\textrm{L}] \cdot \gamma[n-\textrm{L}]
-\]
+<p>
+ここまで来たら共分散 $\gamma[n]$ は漸化式
+</p>
+
+\begin{align*}
+\gamma[n] &= Cov \left ( x[i], x[i-n] \right ) \\
+&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i-n] \right ) \\
+&= -a[1] \cdot \gamma[n-1] - a[2] \cdot \gamma[n-2] - \cdots - a[\textrm{L}] \cdot \gamma[n-\textrm{L}]
+\end{align*}
 
 <p>
 を使って順次求められます。
