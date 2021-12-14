@@ -111,7 +111,8 @@ $a[n]$ ・・・ LPC 係数
 
 <pre class="wrap">
 hat_x[i] = 0 ;
-for( int n = 1; n &lt= L; ++n ) hat_x[i] += -a[n] * x[i-n] ; // a[n]の符号注意
+for( int n = 1; n &lt= L; ++n ) hat_x[i] += a[n] * x[i-n] ;
+hat_x[i] *= -1;
 </pre>
 
 </div>

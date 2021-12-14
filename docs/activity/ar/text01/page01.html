@@ -83,8 +83,12 @@ $x[i]$ は確率変数になるので、信号列を生成する毎に異なる�
 <input type="checkbox"><b> L 次自己回帰モデルのプログラム表現: </b>
 
 <pre class="wrap">
-x[i] = 任意のホワイトノイズ 
-for( int n = 1; n &lt= L; ++n ) x[i] += -a[n] * x[i-n]; // a[n]の符号注意
+x[i] = 0;
+for( int n = 1; n &lt= L; ++n ) x[i] += a[n] * x[i-n] 
+x[i] *= -1;
+x[i] += e[i];
+
+※ e[i] は時刻iにおける任意のホワイトノイズ
 </pre>
 
 </div>
