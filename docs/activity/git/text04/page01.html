@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. 初期設定</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Git によるバージョン管理</a></li>
+<li>学習項目: [4] GitHub Pages</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+GitHub Pages は GitHub が提供している静的な Web ページのホスティングサービスです。
+<br>
+GitHub Pages を使うとHTMLファイルやMD(マークダウン)ファイルを使ってドキュメントを簡単に公開することが出来ます。
+<br>
+ただしPHPとかサーブレットとかを使ってバックエンドでプログラムを動かすことは出来ません。
+</p>
+
+<p>
+では GitHub Page を使うために初期設定をしてみましょう。
+<br>
+今回は MD ファイルを使う方法を説明します。
+</p>
+
+<div class="info">
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="r1"></span> Github にサインインする
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> ドキュメントを公開したいリポジトリを開くか、リポジトリを新規作成する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span> リポジトリの設定画面を開く
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  「Pages」 設定を開く
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  「Source」の「None」を「main (またはmaster)」にすると隣に「/(root)」と書いてあるフォルダ設定が現れる
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  フォルダ設定を適宜設定する。「/(root)」にした場合はリポジトリの先頭フォルダにHTMLファイルやMDファイルを置く。「/docs」にした場合は docs フォルダの中にHTMLファイルやMDファイルを置く
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  隣の「Save」ボタンを押すと「https://ユーザID.github.io/リポジトリ名/」にウェブページが公開される
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  フォルダ設定で設定した場所に index.md を作成する。Code 画面に戻り、Add file → Create new file を選択し、 index.md ( docs フォルダを設定した場合は docs/index.md )  とファイル名を指定する。次に下の編集画面に「こんにちは世界」と打ち込み、更に下の方にある「Commit」ボタンを押す
+</p>
+<p>
+※ HTML ファイルを使いたい場合はファイル名を index.html にしてください
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span>  ページを開いて「こんにちは世界」と表示されていることを確認する
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  MDファイルを使う場合は Pages の設定画面の「Choose a thema」から任意のテーマを変更できる
+</p>
+<p>
+※ テーマを変更してから実際に切り替わるまで若干時間がかかります
+<br>
+※ しばらく待ってもテーマが変わらなかったり、レイアウトが崩れる場合はページをスーパーリロードして下さい
+</p>
+<p>
+<span class="olradio"><input type="radio" name="r1"></span>  pull して index.md をプロジェクトに取り込む(プロジェクトを新規作成した場合は git clone でクローンする)
+</p>
+</div>
+</div>
+
+<p>
+あとは普通にローカルでエディタを MD ファイルを編集するだけです。
+<br>
+なおマークダウンのプレビュー機能がついているエディタを使って編集することがベターですが、GitHub の簡易エディタにもプレビュー機能が付いてますので、GitHub上で直接編集しても良いです。
+</p>
+
+<p>
+MDファイルを編集したら、あとは コミット＆プッシュすれば内容が更新されます。
+<br>
+なおコミット＆プッシュしてから内容が更新されるまで少し時間がかかりますので、更新されなかった場合はしばらく待ってからもう一度ブラウザをリロードしてください。
+</p>
+
+
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>

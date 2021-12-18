@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. マークダウン(MD)ファイル</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Git によるバージョン管理</a></li>
+<li>学習項目: [4] GitHub Pages</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="https://ja.wikipedia.org/wiki/Markdown">マークダウン(Markdown : MD)ファイル</a>は HTML ファイルのように文章の構造を記述するための<a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%BC%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E8%A8%80%E8%AA%9E">マークアップ言語</a>の一つです。
+<br>
+テキストファイル形式で、かつタグを使わずに簡単に Web ページを作ることが出来ます。
+<br>
+GitHub Pages でもMDファイルを使うことが可能です。
+<br>
+ここでは MD ファイルの文法について学びます。
+<br>
+なおホスティングサービスによってマークダウンの文法に結構違いがありますので注意して下さい。
+</p>
+
+<h3>(1) 段落</h3>
+<p>
+普通のテキスト文章を打てば良いだけですが、文章の前後に半角スペースを入れないで下さい(意図しない表示になる時があります)。
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+こんにちは世界
+</pre>
+</div>
+
+<br>
+<h3>(2) 改行</h3>
+<p>
+強制的に改行したい時は段落の後ろに半角スペースを2つ入れるか空行を段落の間に入れます。
+<br>
+ただし空行を入れた場合は段落間が1行空きます。
+</p>
+<div class="info">
+<pre class="wrap">
+(改行されない例)
+
+こんにちは
+世界
+
+(改行される例その1)
+
+こんにちは  (←半角スペースx2を後ろに追加)
+世界
+
+(改行される例その2)
+
+こんにちは
+
+世界
+
+
+</pre>
+</div>
+
+<br>
+<h3>(3) 太字</h3>
+<p>
+太字にしたい場合は段落の前後を ** で囲みます。
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+**こんにちは世界**
+</pre>
+</div>
+
+<br>
+<h3>(4) 箇条書き</h3>
+<p>
+箇条書きは段落の前に - を付けます。
+<br>
+なお - と文章の間には半角スペースを1つ入れて下さい。
+<br>
+またレベルを下げる時はレベルx2個分の半角スペースを先頭に入れてください。
+</p>
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+- レペル 0
+- レペル 0
+  - レペル 1 (半角スペース 1x2 = 2 個)
+  - レペル 1
+    - レペル 2 (半角スペース 2x2 = 4 個)
+    - レペル 2
+  - レベル 1
+- レペル 0
+</pre>
+</div>
+
+<br>
+<h3>(5) 番号付き箇条書き</h3>
+<p>
+番号付きの箇条書きの場合は段落の前に 1. を付けます。
+<br>
+なお 1. と文章の間には半角スペースを1つ入れて下さい。
+<br>
+またレベルを下げる時はレベルx3個分の半角スペースを先頭に入れてください。
+</p>
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+1. レペル 0
+1. レペル 0
+   1. レペル 1 (半角スペース 1x3 = 3 個)
+   1. レペル 1
+      1. レペル 2 (半角スペース 2x3 = 6 個)
+      1. レペル 2
+   1. レペル 1
+1. レペル 0
+</pre>
+</div>
+
+<br>
+<h3>(6) 見出し</h3>
+<p>
+# を段落の前に入れます。
+<br>
+なお # と文章の間には半角スペースを1つ入れて下さい。
+<br>
+また # の数を増やすとレベルが下がります
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+# レベル0
+
+ほげ
+
+## レベル1
+
+ふが
+
+### レベル2
+
+ぴよ
+</pre>
+</div>
+
+<br>
+<h3>(7) リンク</h3>
+<p>
+リンクは文章内に
+<br>
+[文字](アドレス)  
+<br>
+を入れると貼ることが出来ます。
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+ほげ[ふが](https://github.com/)ぴよ
+</pre>
+</div>
+
+<p>
+なおサブページにリンクを貼りたい場合はアドレスを相対アドレスにします。
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+docs/index.md から docs/fuga/hoge.md にリンクを貼る場合
+
+[ほげ](./fuga/hoge.md)
+</pre>
+</div>
+
+<br>
+<h3>(8) 画像</h3>
+<p>
+画像は画像ファイルを用意してから文章内に
+<br>
+![文字](相対アドレス)
+<br>
+を入れると貼ることが出来ます。
+<br>
+なお[文字]の部分は実際には Web ページ上に表示されません。
+</p>
+<div class="info">
+<pre class="wrap">
+(例)  
+
+docs/index.md で docs/hoge.png の画像を表示したい場合
+
+![ほげ](./hoge.png)
+</pre>
+</div>
+
+<br>
+<p>
+他にも様々な文法がありますので、必要に応じて自分で調べて下さい。
+</p>
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>
