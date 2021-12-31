@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [6] サーブレット</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2><a href="./page01.html">1. HTML</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6-1 (個人):</b> 以下のテンプレートをWebブラウザで表示してみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;    &lt;!-- ドキュメントタイプ宣言。無いと古いブラウザで表示が崩れる時がある  --&gt;
+&lt;html lang="ja"&gt;   &lt;!--  HTML文書である事を示すタグ。ja は日本語の意味 --&gt;
+
+&lt;!-- ヘッダ部 --&gt;
+&lt;head&gt; 
+&lt;meta charset="UTF-8"&gt; &lt;!-- 文字コード指定 --&gt;
+&lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;!-- ボディ部 --&gt;
+&lt;body&gt;
+ &lt;h1&gt;見出し&lt;/h1&gt; 
+ &lt;div&gt; &lt;!-- diviision(区分)。文章をブロック化する --&gt;
+  &lt;p&gt;ほげ&lt;/p&gt; &lt;!--  paragraph(段落)。段落を表す --&gt;
+  &lt;p&gt;ふが&lt;/p&gt;
+ &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_6_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_6_1」の中で新規に 1 つHTMLファイルを作ります。ファイル名を「index.html」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 上のソースを index.html の中にコピーして保存します。なお<b>文字コードは「UTF-8」にしてください</b>。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ブラウザで index.html を表示して、ソースと表示内容を見比べて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 提出物はありません。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6-2 (個人):</b> 以下のテンプレートを元に table タグで表を作ってみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+  &lt;table&gt;
+  &lt;thead&gt; &lt;!-- ヘッダ部 --&gt;
+   &lt;tr&gt; &lt;!-- table row --&gt;
+    &lt;th&gt;ヘッダ1&lt;/th&gt; &lt;!-- table header --&gt;
+    &lt;th&gt;ヘッダ2&lt;/th&gt;
+   &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt; &lt;!-- ボディ部 --&gt;
+   &lt;tr&gt;
+    &lt;td&gt;セル1&lt;/td&gt; &lt;!-- table data --&gt;
+    &lt;td&gt;セル2&lt;/td&gt;
+   &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;/table&gt;
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 演習 6-1 の続きから演習を行います。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> index.html の div ブロックの中に上のテンプレートをコピーしてください。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 表のセルの中身を適当に書き換えて保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> ブラウザで index.html を再読み込みして、ソースと表示内容を見比べて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 提出物はありません。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6-3 (個人):</b>  以下のテンプレートを元に a タグでリンクを張って下さい。
+</p>
+
+<div class="info">
+<pre class="wrap">
+  &lt;a href="アドレス"&gt;文章&lt;/a&gt;
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 演習 6-2 の続きから演習を行います。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> index.html の div ブロックの中に上のテンプレートをコピーしてください。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> a タグのアドレスと文章を適当に書き換えて保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> ブラウザで index.html を再読み込みして、リンクが張られたか確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 提出物はありません。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6-4 (個人):</b> 以下のテンプレートを元に img タグで画像を表示して下さい。
+</p>
+
+<div class="info">
+<pre class="wrap">
+  &lt;img src="./JAVABSC_6_1.(拡張子)"&gt;
+</pre>
+</div>
+
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 演習 6-3 の続きから演習を行います。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 適当なフリー画像を用意して JAVABSC_6_1.(拡張子) の名前で保存して下さい
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> index.html の div ブロックの中に上のテンプレートをコピーし、画像の拡張子を修正して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> index.html を保存して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> ブラウザで index.html を再読み込みして、ソースと表示内容を見比べて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出物はありません。
+</p>
+</div>
+
+<br>
+<script>PreNext(5,4)</script>
+</body>
+</html>
