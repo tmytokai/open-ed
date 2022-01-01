@@ -424,6 +424,72 @@ public class MyWorld extends World
 
 <br>
 <h3>
+Q. 背景を無限スクロールさせたい
+</h3>
+
+<p>
+A. 背景画像とそれを左右反転させた画像を用意して images フォルダにコピーし、座標を変化させながら getBackground().drawImage で描画する
+<br>
+例えば
+</p>
+
+<p>
+元画像 (800x450)
+<br>
+<a href="./img/back.jpeg"><img src="./img/back.jpeg" width="20%" height ="20%"></a> (クリックで拡大)
+<br>
+左右反転画像 (800x450)
+<br>
+<a href="./img/back_flop.jpeg"><img src="./img/back_flop.jpeg" width="20%" height ="20%"></a> (クリックで拡大)
+</p>
+
+<p>
+という画像を images フォルダにコピーしてから MyWorld クラスを以下の様にする。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+
+public class MyWorld extends World
+{
+    GreenfootImage back;
+    GreenfootImage back_flop;
+    int back_dx = -5; // スクロール速度(マイナスにすると左から右)
+    int back_x = 0;
+    int back_width;
+    boolean flop = false;
+
+    public MyWorld()
+    {
+        super(800, 450, 1); // 画像サイズをセットする
+        back = new GreenfootImage( "./images/back.jpeg" );
+        back_flop = new GreenfootImage( "./images/back_flop.jpeg" );
+        back_width = back.getWidth();
+    }
+
+    public void act()
+    {
+        back_x += back_dx;
+        if( back_x &gt; 0){
+            back_x -= back_width;
+            flop = !flop;
+        }
+        if( back_x &lt; -back_width ){
+            back_x += back_width;
+            flop = !flop;
+        }
+        getBackground().drawImage( flop ? back_flop : back, back_x, 0 );
+        getBackground().drawImage( flop ? back : back_flop, back_x+back_width, 0 );
+
+        showText( "back_x : "+ back_x, 100, 10 );
+    }
+}
+</pre>
+</div>
+
+<br>
+<h3>
 Q. ワールドを切り替えたときに、他のワールドで使っていた(得点とかハイスコアみたいな)フィールドの値を使いたい
 </h3>
 
