@@ -24,7 +24,7 @@ Keras を用いるとLSTMの学習も簡単に実行出来ます(ソース 1)。
 </p>
 
 <p>
-なお今回は出力層の活性化関数として softmax ではなくて linear を指定していますので、損失関数としては<a href="../../dlearning/text03/page03.html">これまで使ってきた</a>カテゴリカル・クロスエントロピーではなくて「<b>最小二乗誤差</b>」を使っています。
+なお前ページの例では出力層の活性化関数として softmax ではなくて linear を指定していますので、今回の例では損失関数として<a href="../../dlearning/text02/page04.html#loss">カテゴリカル・クロスエントロピー</a>ではなくて「<a href="https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%97%E6%B3%95">最小二乗誤差</a>(tf.keras.losses.MeanSquaredError)」を使っています。
 </p>
 
 <p>
@@ -36,7 +36,7 @@ Keras を用いるとLSTMの学習も簡単に実行出来ます(ソース 1)。
 
 <pre class="wrap">
 # 学習設定
-loss = tf.keras.losses.MeanSquaredError()
+loss = tf.keras.losses.MeanSquaredError()  # 最小二乗誤差
 opt = tf.keras.optimizers.Adam( learning_rate=r )
 model.compile(loss=loss, optimizer=opt)
     
@@ -58,24 +58,25 @@ model.fit(data_training, label_training, epochs=E, batch_size=B,  verbose=0)
 <div class="info">
 <pre class="wrap">
 # 学習設定
-loss = tf.keras.losses.MeanSquaredError()
+loss = tf.keras.losses.MeanSquaredError() # 最小二乗誤差
 opt = tf.keras.optimizers.Adam( learning_rate=r )
 model.compile(loss=loss, optimizer=opt)
 </pre>
 </div>
 
 <p>
-で学習の各種設定をしています。
+の行で学習の各種設定をしています。
+<p>
+</p>
+具体的には、最初の行(loss = 〜)で損失関数として「最小二乗誤差」を指定しています。
 <br>
-具体的には、最初の行(loss = 〜)では損失関数として「最小二乗誤差」を指定しています。
+2行目(opt = 〜)で最適化アルゴリズムとして「Adam」を指定しています。
 <br>
-2行目(opt = 〜)では最適化アルゴリズムとして「Adam」を指定しています。
-<br>
-そして最後の行(model.compile〜)でモデルのコンパイルをします。 
+そして最後の行(model.compile〜)でモデルのコンパイルをしています。 
 </p>
 
 <p>
-モデルをコンパイルしたら、あとはいつもの様に fit 関数で学習を開始します。
+モデルをコンパイルしたら、あとはいつもの様に学習データセットを与えて fit 関数で学習を開始します。
 </p>
 
 <br>

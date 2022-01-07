@@ -1,12 +1,37 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,LSTM
-from tensorflow.keras.optimizers import Adam
-import wave
+
+'''
+# CUDA を有効にしている時に「UnknownError: Fail to find the dnn implementation」というエラーが
+# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
+from tensorflow.compat.v1.keras.backend import set_session
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+set_session(sess)
+'''
+
+# (注) numpy 1.20 以降を使うとエラーが出るようです(2022年1月時点)
+# エラーが出る場合は 1.19 にダウングレードしてください
+# (anacondaを使っている場合) conda install numpy=1.19
 import numpy as np
 
-#---------------------------
-# データセット読み込み
+import wave
+
+
+# パーセプトロン/LSTMブロックの数
+N = ?    # 入力層
+K = ?    # 隠れ層(LSTMブロック)
+M = ?    # 出力層
+
+# 学習率
+r = ?
+
+# エポック数
+E = ?
+
+# バッチサイズ
+B = ?
 
 # Waveファイル読み込み関数
 def read_wavedata(classname):
@@ -38,52 +63,45 @@ for i in range(len(classnames)):
         end_pos = start_pos + int( 10*rate/1000 )
         wavedata_test.append(x[start_pos:end_pos] )
         classno_test.append(i)
-#---------------------------
-
-# パーセプトロンおよび LSTM ブロックの数
-N = ?1    # 入力層
-K = ?  # 隠れ層
-M = ?    # 出力層
-
-# 学習率
-r = ?
-
-# エポック数
-E = ?
 
 # 信号長(サンプリング周波数によって変わる)
-L = len(wavedata_training[0])
+S = len(wavedata_training[0])
 
 # 学習データセットのサイズ
-LL = len(wavedata_training)
+L = len(wavedata_training)
 
-# バッチサイズ
-B = ?
+# 学習データセットのサイズ
+L_test = len(wavedata_test)
 
 # 学習データセットを演習用のフォーマットに変換
-data_training  = tf.constant( np.array(wavedata_training).reshape(LL,L,N), dtype=tf.float32)
+data_training  = tf.constant( np.array(wavedata_training).reshape(L,S,N), dtype=tf.float32)
 label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
 
 # 今回は検証データセットは使わない
 
 # テストデータセットを演習用のフォーマットに変換
-data_test  = tf.constant( np.array(wavedata_test).reshape(len(wavedata_test),L,N), dtype=tf.float32)
+data_test  = tf.constant( np.array(wavedata_test).reshape(L_test,S,N), dtype=tf.float32)
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
+print('')
 print('N='+str(N))
 print('K='+str(K))
 print('M='+str(M))
-print('信号長='+str(L))
+print('信号長='+str(S))
 print('学習率='+str(r))
 print('エポック数='+str(E))
-print('学習データセットサイズ='+str(LL))
+print('学習データセットサイズ='+str(L))
+print('テストデータセットサイズ='+str(L_test))
 print('バッチサイズ='+str(B))
 
 # LSTMの構築
 ?
 
 # 学習設定
-?
+loss = ?
+opt = tf.keras.optimizers.Adam( learning_rate=r )
+met = ?
+model.compile(loss=loss, optimizer=opt, metrics=[met])
 
 # モデルの概要表示
 model.summary()

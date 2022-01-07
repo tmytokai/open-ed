@@ -30,27 +30,42 @@ Keras を使えば LSTM は簡単に構築できます。
 
 <pre class="wrap">
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,LSTM
+
+'''
+# CUDA を有効にしている時に「UnknownError: Fail to find the dnn implementation」というエラーが
+# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
+from tensorflow.compat.v1.keras.backend import set_session
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+set_session(sess)
+'''
+
+# (注) numpy 1.20 以降を使うとエラーが出るようです(2022年1月時点)
+# エラーが出る場合は 1.19 にダウングレードしてください
+# (anacondaを使っている場合) conda install numpy=1.19
 import numpy as np
+
 import matplotlib.pyplot as plt
 
 # パーセプトロン/LSTMブロックの数
 N = 3   # 入力層
-K = 2   # 隠れ層
+K = 2   # 隠れ層 (LSTMブロック)
 M = 1   # 出力層
 
 # 信号長
-L = 10
+S = 10
 
 # 入力信号
-x = np.random.uniform(low=-1, high=1, size=L*N)
-data  = x.reshape(1,L,N)
+x = np.random.uniform(low=-1, high=1, size=S*N)
+data  = x.reshape(1,S,N)
 
 # LSTMの構築
-model = Sequential()  
-model.add( LSTM( K, batch_input_shape=(None,L,N), return_sequences=False))  
-model.add( Dense(M, activation='linear') ) 
+model = tf.keras.Sequential()
+model.add( tf.keras.layers.Input(shape=(S,N)))
+model.add( tf.keras.layers.LSTM( K, return_sequences=False))  
+model.add( tf.keras.layers.Dense(M, activation='linear') ) 
 
 # 出力
 y = model.predict(data)
@@ -59,7 +74,7 @@ y = model.predict(data)
 model.summary()
 
 print('入力')
-plt.plot(range(L),data[0])
+plt.plot(range(S),data[0])
 plt.show()
 print('\n出力')
 print(y)
@@ -75,38 +90,39 @@ print(y)
 <pre>
 # パーセプトロン/LSTMブロックの数
 N = 3   # 入力層
-K = 2   # 隠れ層
+K = 2   # 隠れ層 (LSTMブロック)
 M = 1   # 出力層
 
 # 信号長
-L = 10
+S = 10
 </pre>
 </div>
 
 <p>
-で LSTM のユニット数や入力信号の長さを設定しています。
+でユニット数や入力信号の長さを設定しています。
 </p>
 
 <div class="info">
 <pre>
 # 入力信号
-x = np.random.uniform(low=-1, high=1, size=L*N)
-data  = x.reshape(1,L,N)
+x = np.random.uniform(low=-1, high=1, size=S*N)
+data  = x.reshape(1,S,N)
 </pre>
 </div>
 
 <p>
 の部分では入力信号を作成しています。
 <br>
-今回は -1〜1 の範囲の一様乱数を L*N(= 30) 個生成し、reshape関数を使って長さ L(=10) の信号を N(=3)個作りました。
+今回の例では -1〜1 の範囲の一様乱数を S*N = 30 個生成し、reshape関数を使って長さ S = 10 の信号を N = 3 個作りました。
 <br>
-ちなみに reshapeのカッコ内の先頭の数字 1 はデータセット数が1個という意味です。
-<br>
+ちなみに reshapeのカッコ内の先頭の数字 1 はデータセットのサイズが L = 1 という意味です。
+</p>
+<p>
 この様にして作った入力信号の例を図1に示します(※ 乱数なので実行するたびにグラフの形は変わります)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1. 入力信号の例(L=10, N=3) </b>
+<input type="checkbox"><b>図1. 入力信号の例(入力信号数 N=3, 信号長 S=10) </b>
 
 <p>　</p>
 
@@ -120,9 +136,10 @@ data  = x.reshape(1,L,N)
 <div class="info">
 <pre class="wrap">
 # LSTMの構築
-model = Sequential()  
-model.add( LSTM( K, batch_input_shape=(None,L,N), return_sequences=False))  
-model.add( Dense(M, activation='linear') ) 
+model = tf.keras.Sequential()
+model.add( tf.keras.layers.Input(shape=(S,N)))
+model.add( tf.keras.layers.LSTM( K, return_sequences=False))  
+model.add( tf.keras.layers.Dense(M, activation='linear') ) 
 
 # 出力
 y = model.predict(data)
@@ -130,57 +147,25 @@ y = model.predict(data)
 </div>
 
 <p>
-3行目で LSTMブロック のインスタンスをネットワークに追加していますが、return_sequences は LSTM の出力を全時刻において出力するか、最後の時刻の値だけを出力するかを決めるパラメータです(デフォルトは False)
+3行目の model.add( tf.keras.layers.Input〜 ) で入力層(Input)をネットワークに追加しています。
+</p>
+<p>
+4行目の model.add( tf.keras.layers.LSTM〜 ) で LSTM ブロック をネットワークに追加しています。
 <br>
-今回は return_sequences=False としていますので、最後の時刻の値だけを出力しています(図2)。
+引数の return_sequences は LSTM の出力を全時刻において出力するか、最後の時刻の値だけを出力するかを決めるパラメータです(詳しくは下で説明します)。
+</p>
+<p>
+5行目の model.add( tf.keras.layers.Dense〜 )では全結合層(Dense)のインスタンスを追加しています。
+<br>
+今回の例では活性化関数として「softmax」ではなく「linear」(線形出力)を使っていますが、もちろん softmax を使うことも可能です。
+</p>
+
+<p>
+この様にして作成したモデルの概要は次の通りです。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2. 出力信号の例(M=1, return_sequences=False の場合) </b>
-<p>
-※ 入力が乱数なので実行するたびに値は変わります。
-</p>
-<pre class="wrap">
-[[-0.05493683]]
-</pre>
-</div>
-
-<p>
-仮に return_sequences=True とすると全時刻(i=0,1,・・・,9)においてLSTMから出力がされます(図3)
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図3. 出力信号の例(M=1, return_sequences=True の場合) </b>
-<p>
-※ 入力が乱数なので実行するたびに値は変わります。
-</p>
-<pre class="wrap">
-[[[ 0.02156563]
-  [ 0.1430859 ]
-  [ 0.04868509]
-  [-0.04080052]
-  [-0.05400606]
-  [-0.0736019 ]
-  [ 0.03886629]
-  [ 0.12875266]
-  [ 0.11176284]
-  [ 0.06541518]]]
-</pre>
-</div>
-
-<p>
-また4行目では全結合層(Dense)のインスタンスを追加していますが、今回は演習において入力信号の推定問題を扱おうと思っているので、活性化関数としてこれまで使ってきた「softmax」ではなく「linear」(線形出力)を使っています。
-</p>
-<p>
-※ もちろん普通に「softmax」を使うことも可能です。
-</p>
-
-<p>
-さて、この様にして作成したモデルの概要は次の図4となります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図4. リスト1で構築した LSTM の概要</b>
+<input type="checkbox"><b>ソース 1 で構築した LSTM の概要</b>
 <pre class="wrap">
 Model: "sequential_14"
 _________________________________________________________________
@@ -197,12 +182,51 @@ Non-trainable params: 0
 </div>
 
 <p>
-こごて 1 つの LSTM ブロックへの入力は入力信号が x3、フィードバック入力が x2 の 5 つなので、LSTM ブロックの入力部のパラメータ数は 6 個(重みx5、バイアスx1)になります。
+ここで 1 つの LSTM ブロックへの入力は入力信号が N=3、フィードバック入力が K=2 の計 5 つなので、LSTM ブロックの入力部のパラメータ数は 6 個(重みx5、バイアスx1)になります。
 <br>
 同様に入力・忘却・出力ゲートのパラメータ数もそれぞれ 6 個なので、LSTMブロック 1 つのパラメータ数は 4*6 = 24 個となります。
 <br>
-従ってソース1のLSTMにはブロックが K=2 つ含まれてますので、合計 24*2 = 48 個のパラメータ数となっています。
+従ってソース1のLSTMにはブロックが K=2 つ含まれてますので、合計 24*2 = 48 個のパラメータ数となります。
 </p>
+
+<p>
+ではこのネットワークの出力を以下に示します。
+<br>
+今回の例では model.add( tf.keras.layers.LSTM〜 ) の引数で return_sequences=False としていますので最後の時刻の値だけを出力しています。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>出力信号の例(出力信号数 M=1, return_sequences=False) </b>
+<p>
+※ 入力が乱数なので実行するたびに値は変わります。
+</p>
+<pre class="wrap">
+[[-0.05493683]]
+</pre>
+</div>
+
+<p>
+仮に return_sequences=True とすると、以下のように全時刻(i=0,1,・・・,9)においてネットワークから出力がされます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>return_sequences=True とした時の出力信号の例</b>
+<p>
+※ 入力が乱数なので実行するたびに値は変わります。
+</p>
+<pre class="wrap">
+[[[ 0.02156563]
+  [ 0.1430859 ]
+  [ 0.04868509]
+  [-0.04080052]
+  [-0.05400606]
+  [-0.0736019 ]
+  [ 0.03886629]
+  [ 0.12875266]
+  [ 0.11176284]
+  [ 0.06541518]]]
+</pre>
+</div>
 
 <br>
 <script>PreNext(2,3)</script>
