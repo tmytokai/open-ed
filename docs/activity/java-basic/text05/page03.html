@@ -20,26 +20,22 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前の学習項目で学んだ<a href="../text04/page01.html">リスト</a>や<a href="../text04/page02.html">マップ</a>では<a href="../text04/page03.html">拡張 for 文</a>が使えますが、ここで学ぶ forEach 文を使うともっと簡潔に繰り返し処理を行うことが出来ます。
+<a href="../text04/page01.html">リスト</a>や<a href="../text04/page02.html">マップ</a>では<a href="../text04/page03.html">拡張 for 文</a>が使えますが、ここで学ぶ forEach 文を使うともっと簡潔に繰り返し処理を行うことが出来ます。
 </p>
 
 <p>
-forEach 文の書式は次のようになります。
+まず forEach 文の書式は次のようになります。
 </p>
 
 <div class="info">
 <input type="checkbox"> <b>forEach 文の書式</b>
 <pre class="wrap">
-(リストやマップ型の)変数名.forEach( ラムダ式 )
+変数名.forEach( ラムダ式 )
 </pre>
 </div>
 
 <p>
-具体的には次のようにして使います。
-<br>
-まずリストを使った場合を示します。
-<br>
-詳しい説明はソース内のコメントを参照して下さい。
+ではリストを使った例を示します。
 </p>
 
 <div class="info">
@@ -54,7 +50,7 @@ public class Main{
     	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
     	ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
 
-        // 一番後に要素を追加
+        // 要素を追加
     	list1.add( "hoge" );
     	list1.add( "fuga" );
     	list1.add( "piyo" );
@@ -100,7 +96,7 @@ i = 56
 <p>
 同様にマップを使った場合は次のようになります。
 <br>
-やはり詳しい説明はソース内のコメントを参照して下さい。
+マップの場合はキーと値の2つがラムダ式の引数となります。
 </p>
 
 <div class="info">
@@ -118,6 +114,7 @@ public class Main{
         map.put( "fuga", 456 );
         map.put( "piyo", 789 );
 
+        // key がキー、value が値
         // 型推論により key は String 型、value は Integer 型になる
         map.forEach( (key,value) -&gt; {
             String a = "key = " + key + ", value = " + value;

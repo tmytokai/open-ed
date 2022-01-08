@@ -20,27 +20,26 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Java の「<b>関数型インターフェース</b>」とは抽象メソッドが1つだけの抽象クラスのことで、これを使って定義した変数には関数をオブジェクト化した<b>関数オブジェクト</b>を代入出来るので大変便利です。
-<br>
-例えばイベントハンドラの定義などで良く使われますので、イベント駆動型プログラミングでは必須の機能となっています。
+Java の「<b>関数型インターフェース</b>」とは抽象メソッドが1つだけの抽象クラスのことで、これを使って定義した変数には関数をオブジェクト化した「<b>関数オブジェクト</b>」を代入出来ます。
 </p>
 
 <p>
 と言っても良く分からないと思うので、ソースコードを見ながら具体的に使い方を説明します。
 <br>
-なおこの関数型インターフェースには様々な種類がありますが、今回は Runnable と Function インターフェースについて説明します。
+なおこの関数型インターフェースには様々な種類がありますが、今回は「<b>Runnable</b>」と「<b>Function</b>」インターフェースについて説明します。
 </p>
 <p>
 まず前提として、
 </p>
 <p>
-・ Runnable インターフェースを使って定義した変数には「引数を持たない void 型の関数」(正確には関数オブジェクト)を代入できます。
+・ Runnable インターフェースを使って定義した変数には「引数を持たない void 型の関数オブジェクト」を代入できます。
 </p>
 <p>
-・ Function インターフェースを使って定義した変数には「引数が1つで戻り値を持つ関数」(正確には関数オブジェクト)を代入できます。
+・ Function インターフェースを使って定義した変数には「引数が1つで戻り値を持つ関数オブジェクト」を代入できます。
 </p>
 <p>
 例えば、Runnable インターフェースの変数 runnable と、引数が Integer 型、戻り値が String 型である Function インターフェースの変数 function はソース 1 のようにして定義します。
+なお Runnable インターフェースを使いたい時は java.lang.Runnable を、Funtion　インターフェースを使いたい時は  java.util.function.Function をインポートします。
 </p>
 
 <div class="info">
@@ -61,10 +60,6 @@ public class Main{
 </div>
 
 <p>
-Runnable インターフェースを使いたい時は java.lang.Runnable を、Funtion　インターフェースを使いたい時は  java.util.function.Function をインポートします。
-</p>
-
-<p>
 この様にして作った runnable や function には、次のソース 2 の様にして関数を代入できます。
 </p>
 
@@ -76,7 +71,7 @@ import java.util.function.Function;
  
 public class Main{
 
-    public static void myrun(){
+    public static void myrunnable(){
         System.out.println("hoge");
     }
 
@@ -89,7 +84,7 @@ public class Main{
         Runnable runnable;
         Function&lt; Integer, String &gt; function;
 
-        runnable = Main::myrun;
+        runnable = Main::myrunnable;
         function = Main::myfunction;
     }
 }
@@ -97,9 +92,9 @@ public class Main{
 </div>
 
 <p>
-上の例では runnable と function にそれぞれ myrun 関数と myfunction 関数を代入しています。
+上の例では runnable と function にそれぞれ myrunnable 関数と myfunction 関数を代入しています。
 <br>
-この runnable と function を経由して、次のソース 3 の様に myrun 関数と myfunction 関数を呼び出す事が出来ます。
+すると runnable と function を経由して次のソース 3 の様に myrunnable 関数と myfunction 関数を呼び出す事が出来ます。
 </p>
 
 <div class="info">
@@ -110,7 +105,7 @@ import java.util.function.Function;
  
 public class Main{
 
-    public static void myrun(){
+    public static void myrunnable(){
         System.out.println("hoge");
     }
 
@@ -123,12 +118,12 @@ public class Main{
         Runnable runnable;
         Function&lt; Integer, String &gt; function;
 
-        runnable = Main::myrun;
+        runnable = Main::myrunnable;
         function = Main::myfunction;
 
-        runnable.run();
+        runnable.run();  // myrunnable 関数の呼び出し
 
-        String str = function.apply( 123 );
+        String str = function.apply( 123 ); // myfunctionの呼び出し(引数は123)
         System.out.println( str );
     }
 }
@@ -136,11 +131,13 @@ public class Main{
 </div>
 
 <p>
-runnable に代入した関数を呼び出す時は .run() を使います。
+runnable に代入した関数を呼び出す時は Runnable.run メソッドを使います。
 <br>
-また function に代入した関数を呼び出す時は .apply( 値 ) を使います。
-<br>
-したがって上のソース3の結果は以下のようになります。
+また function に代入した関数を呼び出す時は Function.apply メソッドを使います。
+</p>
+
+<p>
+したがって上のソース3の結果は以下となります。
 </p>
 
 <div class="info">
@@ -164,15 +161,15 @@ import java.lang.Runnable;
  
 public class Main{
 
-    public static void myrun1(){
+    public static void myrunnable1(){
         System.out.println("hoge");
     }
 
-    public static void myrun2(){
+    public static void myrunnable2(){
         System.out.println("fuga");
     }
 
-    public static void myrun3(){
+    public static void myrunnable3(){
         System.out.println("piyo");
     }
 
@@ -180,13 +177,13 @@ public class Main{
 
         Runnable runnable;
 
-        runnable = Main::myrun1;
+        runnable = Main::myrunnable1;
         runnable.run();
 
-        runnable = Main::myrun2;
+        runnable = Main::myrunnable2; // 関数オブジェクトを再代入
         runnable.run();
 
-        runnable = Main::myrun3;
+        runnable = Main::myrunnable3; // 関数オブジェクトを再代入
         runnable.run();
     }
 }

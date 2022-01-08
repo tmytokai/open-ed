@@ -72,7 +72,11 @@ hoge=316
 
 <div class="info">
 <pre class="wrap">
-(1) System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略しないで書いたバージョン)」を function に再代入する
+(1) System.out.println( function.apply( 456 ) ); の行の下で
+
+「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 」
+
+を function に再代入する  ※ 書式は正式版でも省略版でもどちらでも可
 
 (2) 789 を apply した時の結果を表示する
 
@@ -103,47 +107,10 @@ hoge=784
 </div>
 
 <br>
-<p>
-<input type="checkbox"><b>演習 5-3 (個人):</b> <a href="./page02.html">ソース 3 </a>を修正して、次の仕様を満たすプログラムを作成しましょう。
-</p>
-
-<div class="info">
-<pre class="wrap">
-(1) System.out.println( function.apply( 456 ) ); の行の下で、「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 (省略版)」を function に再代入する
-
-(2) 789 を apply した時の結果を表示する
-
-結果:
-
-hoge
-piyo=123
-fuga
-foo=456
-hoge=784
-</pre>
-</div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> フォルダ「JAVABSC_5_3」を新規作成し、その中に移動します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> フォルダ「JAVABSC_5_3」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./page02.html">ソース 3</a>をコピーし、解答します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行します。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをしてください。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
-</p>
-</div>
-
-<br>
 <h2><a href="./page03.html">3. forEach 文</a></h2>
 
 <p>
-<input type="checkbox"><b>演習 5-4 (個人):</b> 以下のソースコードで使われている通常の for 文を forEach 文を使うように書き換えて下さい。
+<input type="checkbox"><b>演習 5-3 (個人):</b> 以下のソースコードで使われている拡張 for 文を forEach 文を使うように書き換えて下さい。
 </p>
 
 <div class="info">
@@ -152,7 +119,7 @@ import java.util.ArrayList;
 
 public class Main{
 
-    // (注意) Javaの仕様上、ラムダ式の内部ではローカル変数の値を書き換えられないので static int にしています
+    // Javaのラムダ式内ではローカル変数の値を書き換えられないので static int にしている
     static int goukei = 0;
 
     public static void main(String[] args) {
@@ -165,9 +132,7 @@ public class Main{
 
         // ここから演習
         // forEach 文を使って合計を求める
-        for( int i = 0; i &lt; list.size(); ++i ){
-            goukei += list.get(i);
-        }
+        for( int i : list ){ goukei += i; }
 
         System.out.println( goukei ); 
     }
@@ -182,55 +147,51 @@ public class Main{
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「JAVABSC_5_4」を新規作成し、その中に移動します
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「JAVABSC_5_3」を新規作成し、その中に移動します
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「JAVABSC_5_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「JAVABSC_5_3」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 上のコードをコピーして、解答します。
+<span class="olradio"><input type="radio" name="p3"></span> 上のコードをコピーして、解答します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをしてください。
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをしてください。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-5 (個人):</b> <a href="./page03.html">ソース 2</a>を修正して、キーが "fuga" 「でない」時に「その値だけを表示」するようにしましょう。
+<input type="checkbox"><b>演習 5-4 (個人):</b> <a href="./page03.html">ソース 2</a>を修正して、キーが "fuga" または値が 789 の時だけ表示するようにしましょう。
 
 <div class="info">
 <pre class="wrap">
 結果:
 
-123
-789
-
+key = fuga, value = 456
+key = piyo, value = 789
 </pre>
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」を新規作成し、その中に移動します 
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「JAVABSC_5_4」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「JAVABSC_5_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="./page03.html">ソース 2</a>をコピーし、解答します。
+<span class="olradio"><input type="radio" name="p4"></span> <a href="./page03.html">ソース 2</a>をコピーし、解答します。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。 
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。 
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをしてください。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
-
-
-
-
+<br>
 <script>PreNext(4,3)</script>
 </body>
 </html>
