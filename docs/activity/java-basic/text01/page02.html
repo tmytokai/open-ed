@@ -60,14 +60,14 @@ public class Main{
 
         str1 = "fuga"; // 代入
 
-        String str3 = str1 + str2; // 連結 ( str3 には"hogefuga"が入る )
+        String str3 = str1 + str2; // + は連結になる ( str3 には"hogefuga"が入る )
 
-        // 比較演算子も使える
-        if( str1 != "hoge" ){
-            System.out.println( "X" );
+        // 文字列の比較は == ではなくて 変数名.equals(文字列) を使う
+        if( str1.equals("fuga") ){
+            System.out.println( "str1 は fuga です" );
         }
-        if( str2 == "hoge" ){
-            System.out.println( "O" );
+        if( ! str2.equals("fuga") ){
+            System.out.println( "str2 は fuga ではありません" );
         }
     }
 }
