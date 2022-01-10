@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. サーブレット</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [6] サーブレット</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では本題に入ります。
+</p>
+
+<p>
+「<a href="https://ja.wikipedia.org/wiki/Java_Servlet">サーブレット</a>(正式名称はジャカルタ・サーブレット: Jakarta Servlet)」は<a href="https://ja.wikipedia.org/wiki/Web%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">サーブレットコンテナ</a>と呼ばれるサーバ上でJavaのプログラムを実行し、Webページの動的生成やデータ処理などのバックエンド処理をするための仕組みです。
+</p>
+
+<p>
+Java のソースコードをコンパイルして出来たクラスファイルをサーブレットコンテナにデプロイ(deploy : スクリプトや実行ファイルをサーバ上に配置して使用可能にすること)し、ブラウザやアプリでデプロイ先にアクセスすることで Java のプログラムが実行されます。
+<br>
+代表的なサーブレットコンテナは<a href="https://tomcat.apache.org/">Apache Tomcat</a>で、Apache HTTP サーバで有名な Apache ソフトウェア財団が開発しています。
+</p>
+
+<p>
+さて以下のソース1が典型的なサーブレットの例です。
+<br>
+このソースをコンパイルしてクラスファイルを作り、クラスファイルをデプロイし、ブラウザでデプロイ先にアクセスするとプログラムが実行されて結果がブラウザの画面に表示されます。
+</p>
+<p>
+ソース内にある doGet メソッドは HTTP GETメソッドを処理するメソッドです。
+<br>
+下の例では省略していますが HTTP POSTメソッドを処理する doPost もあります。
+</p>
+<p>
+あとは<a href="../text03/page01.html">ファイル出力</a>の項目でも使った PrintWriter を使って文字列を出力しています。
+<br>
+ただし今回はファイルではなくてネットワークで繋がっているブラウザに文字列が出力されます。
+<br>
+GET パラメータの取得方法など、その他詳しくはソース内のコメントを参照して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: サーブレットの例</b>
+<pre class="wrap">
+
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+
+public class ServletTest extends HttpServlet
+{
+    // HTTP GETメソッドを処理するメソッド
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException
+    {
+        // GETパラメータの name の値を取得
+        // パラメータが送信されてないときは null になる
+        String name = request.getParameter("name");
+
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter(); 
+        out.println("&lt;!DOCTYPE html&gt;");
+        out.println("&lt;html lang=\"ja\"&gt;");
+        out.println("&lt;head&gt;");
+        out.println("&lt;meta charset=\"UTF-8\"&gt;");
+        out.println("&lt;style&gt;");
+        out.println("body{");
+        out.println("background: #ffff00;");
+        out.println("}");
+        out.println("&lt;/style&gt;");
+        out.println("&lt;title&gt;タイトル&lt;/title&gt;");
+        out.println("&lt;/head&gt;");
+        out.println("&lt;body&gt;");
+        if( name == null ) out.println("&lt;p&gt;name がセットされていません&lt;/p&gt;");
+        else out.println("&lt;p&gt;name は「"+name+"」です&lt;/p&gt;");
+        out.println("&lt;/body&gt;");
+        out.println("&lt;/html&gt;");
+    }
+}
+
+</pre>
+</div>
+
+<p>
+なお実際に開発する際は生のサーブレットをそのまま使うよりも<a href="https://spring.io/projects/spring-boot">Spring Boot</a>などのフレームワークを使うことが多いです。
+</p>
+
+
+<br>
+<script>PreNext(3,4)</script>
+</body>
+</html>

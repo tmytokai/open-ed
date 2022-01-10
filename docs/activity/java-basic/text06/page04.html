@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. JSP</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [6] サーブレット</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+<a href="https://ja.wikipedia.org/wiki/JavaServer_Pages">JSP</a> (Jakarta Server Pages)はサーブレットと同様に Java のプログラムをサーバ(サーブレットコンテナ)上で動作させる仕組みなのですが、サーブレットとは異なり、PHPの様なスクリプトファイル(JSPファイル)をコンパイルしないで直接サーバにデプロイします。
+<br>
+その後ユーザーがブラウザやアプリなどでデプロイ先にアクセスするとスクリプトファイルがサーバー上でコンパイル＆実行され、実行結果がユーザーに送り返されます。
+</p>
+
+<p>
+下のソース1はJSPの例で、前ページのサーブレットの例と全く同じ動作をします。
+<br>
+サーブレットは Java のソースコード形式になっていましたが、JSP の場合は HTML の中に Java のソース(&lt;% 〜 %&gt;の部分)が埋め込まれいることが分かります。
+<br>
+また上にも書きましたが、JSPの場合はコンパイルしないで JSP ファイルを直接デプロイします。
+</p>
+
+<p>
+サーブレットと違って非常にすっきりしたソースになるので可読性は向上します。
+<br>
+ただし実行する前にコンパイル作業が必要になるのでサーバーの負荷は増えます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: JSPの例</b>
+<pre class="wrap">
+&lt;%@ page contentType="text/html; charset=UTF-8" %&gt;
+&lt;%
+  String name = request.getParameter("name");
+%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;style&gt;
+body{
+background: #ffff00;
+}
+&lt;/style&gt;
+&lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;%
+  if( name == null ) out.println("&lt;p&gt;name がセットされていません&lt;/p&gt;");
+  else out.println("&lt;p&gt;name は「"+name+"」です&lt;/p&gt;");
+%&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<br>
+<script>PreNext(4,4)</script>
+</body>
+</html>
