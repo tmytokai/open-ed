@@ -189,6 +189,7 @@ table タグに「border-collapse: collapse;」を指定する
 <br>
 th, td タグに「border: 太さ 色 solid;」を指定する
 </p>
+<p>
 <span class="olradio"><input type="radio" name="p5"></span> index.html 内で mycss.css を読み込みます。
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> ブラウザで index.html を再読み込みして、ソースと表示内容を見比べて下さい。
@@ -197,15 +198,83 @@ th, td タグに「border: 太さ 色 solid;」を指定する
 </p>
 </div>
 
-
 <br>
 <h2><a href="./page03.html">3. サーブレット</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 6-6 (個人):</b> <a href="./page03.html">ソース1</a>を修正して、次の仕様を満たすサーブレットを作成＆実行してみましょう。
+</p>
+
+<div class="info">
+<p>
+(1) name というGETパラメータで名前を送信する
+</p>
+<p>
+(2) name が null なら "&lt;p&gt;name がセットされていません&lt;/p&gt;" を出力
+</p>
+<p>
+(3) name から "hoge" なら "&lt;p&gt;ほげ&lt;/p&gt;" を出力
+</p>
+<p>
+(4) それ以外は "&lt;p&gt;ふが&lt;/p&gt;" を出力
+</p>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_6_6」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_6_6」の中で新規に 1 つソースを作ります。ファイル名を「Servlet(学籍番号).java」とします。 (例) 12345 番の学生は Servlet12345.java
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> <a href="./page03.html">ソース1</a>をコピーし、クラス名を「ServletTest」から「Servlet(学籍番号)」に変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 解答し、指示に従ってデプロイして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> ブラウザで実行結果を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 提出物はありません。
+</p>
+</div>
+
+<br>
 <h2><a href="./page04.html">4. JSP</a></h2>
 
 <br>
 <p>
-準備中
+<input type="checkbox"><b>演習 6-7 (個人):</b> <a href="./page04.html">ソース1</a>を修正して、次の仕様を満たす JSP ファイルを作成＆実行してみましょう。
 </p>
+
+<div class="info">
+<p>
+(1) color というGETパラメータで色名を送信する
+</p>
+<p>
+(2) color が null なら背景色を青(#0000ff)にする
+</p>
+<p>
+(3) color が "red" なら背景色を赤(#ff0000)にする
+</p>
+<p>
+(4) それ以外は背景色を黄色(#ffff00)にする
+</p>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_6_7」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_6_7」の中で新規に 1 つ JSP ファイルを作ります。ファイル名を「(学籍番号).jsp」とします。 (例) 12345 番の学生は 12345.jsp
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> <a href="./page03.html">ソース1</a>をコピーして解答して下さい
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 指示に従ってデプロイして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> ブラウザで実行結果を確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 提出物はありません。
+</p>
+</div>
 
 <br>
 <script>PreNext(5,4)</script>
