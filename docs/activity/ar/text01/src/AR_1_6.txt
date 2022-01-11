@@ -206,7 +206,8 @@ int main()
     const int N_out = wavefmt2.data_size / wavefmt2.block;
     double* e = ( double* )calloc( 1, (N_out+L) * sizeof(double) );
     e = e+L;
-    double* x = ( double* )calloc( 1, N_out * sizeof(double) );
+    double* x = ( double* )calloc( 1, (N_out+L) * sizeof(double) );
+    x = x+L;
     short* buf = ( short* )calloc( 1, wavefmt2.data_size );
 
     // 入力 e[i] の作成
