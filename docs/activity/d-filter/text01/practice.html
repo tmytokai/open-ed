@@ -36,16 +36,13 @@
 <br>
 
 <p>
-<input type="checkbox"><b>演習1-1 (個人):</b> 伝達関数
+<input type="checkbox"><b>演習2-1 (個人):</b> 伝達関数
 </p>
 \[
 \textrm{H}(z) = a + b \cdot z^{-n}
 \]
 <p>
-を持つフィルタの事を「ディレイフィルタ(delay filter)」と言います。
-</p>
-<p>
-<a href="./page10.html#ex5">10ページ-例 5</a>を参考にしてディレイフィルタを作り、自分の声にディレイ効果をかけてみましょう。
+を持つフィルタ、つまり<a href="./page10.html#ex5">ディレイフィルタ(delay filter)</a>を作って自分の声にディレイ効果をかけてみましょう。
 </p>
 <div class="olradio">
 <p>
@@ -55,68 +52,29 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="../../../lib/sound/recorder.html" onclick="window.open( '../../../lib/sound/recorder.html', 'recorder','width=300,height=200 ');return false;" >レコーダー</a>を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「5 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
+<span class="olradio"><input type="radio" name="p1"></span> 「3 秒以上」録音し、ダウンロードフォルダに音声ファイル( out.wav ) をダウンロードします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> out.wav を試しに再生し、もし音が小さい場合は録音し直します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> out.wav を演習フォルダに移動して「 D-FILTER-1-1.wav 」に名前を変更します。
+<span class="olradio"><input type="radio" name="p1"></span> out.wav を演習フォルダに移動して「 DF_1_1.wav 」に名前を変更します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./src/D-FILTER-1-1.cpp">テンプレートソース</a>(D-FILTER-1-1.cpp)をダウンロードします。
+<span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook を起動します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートファイルの記述に従ってプログラムを完成させて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 新規ノートブックを作って「DF_1_1」に名前を変更します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行すると「 D-FILTER-1-1-out.wav 」という  Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p1"></span> 一番上のセルに<a href="./src/DF_1_1.txt">テンプレート</a>の内容をコピーします。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> D-FILTER-1-1-out.wav を再生してディレイ効果がかかっている事を確認して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題を解いて実行するとフィルタリング前後のスペクトログラムと「 DF_1_1_out.wav 」という  Wave形式音声ファイルが出来ます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> DF_1_1_out.wav を再生して自分の声にディレイ効果がかかっている事を確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> パラメータ(a,b,delay)を色々変えると効果が色々変化することを確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 各自が指定場所に「ソースコード」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「ソースコード」、「フィルタリング前のスペクトログラム」と「フィルタリング後のスペクトログラム」を貼り付けて下さい。
 </p>
 </div>
 
 <br>
-<p>
-<input type="checkbox"><b>演習1-2 (個人):</b> 正整数 $\textrm{L}$ を有限の数とした時、伝達関数
-</p>
-\begin{align*}
-\textrm{H}(z) 
-& = \sum_{i=0}^{\textrm{L}-1} \{ h[i] \cdot z^{-i} \} \\
-& = h[0] + h[1] \cdot z^{-1} + h[2] \cdot z^{-2} + \cdots + h[\textrm{L}-1] \cdot z^{-(\textrm{L}-1)}
-\end{align*}
-<p>
-を持つフィルタの事を「<a href="../text02/page01.html">FIR フィルタ</a>」と言います。
-<br>
-FIR フィルタを使ってローパスフィルタを作り、自分の声から高周波成分を取り除いてみましょう(※)。
-</p>
-<p>
-※ FIR フィルタの詳細については次の学習項目で勉強します。
-</p>
-<div class="olradio">
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> 音声は演習 1 でサンプリングした「 D-FILTER-1-1.wav 」をそのまま使用します。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="./src/D-FILTER-1-2.cpp">テンプレートソース</a>(D-FILTER-1-2.cpp)を D-FILTER-1-1.wav と同じフォルダにダウンロードして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> テンプレートファイルの記述と<a href="../text02/page03.html">FIRローパスフィルタのインパルス応答の求め方</a>に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおフィルタ長 $\textrm{L}$ = 63、カットオフ周波数 $f_c$ = 1000 [Hz] とします。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> D-FILTER-1-2.cpp をコンパイルして実行すると「 D-FILTER-1-2-out.wav 」という  Wave形式音声ファイルが出来ます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> フィルタリング後の音声(D-FILTER-1-2-out.wav)を再生してローパス効果がかかっている事を確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 元の音声(D-FILTER-1-1.wav)のスペクトログラム画像を表示してください。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> フィルタリング後の音声(D-FILTER-1-2-out.wav)のスペクトログラム画像を表示してください。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 元の音声とフィルタリング後の音声のスペクトログラム表示を見比べて、$f_c$ [Hz] 以上の成分が減衰していることを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> カットオフ周波数 $f_c$ [Hz] を色々変えると効果が色々変化することを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 各自が指定場所に「ソースコード」「スペクトログラム画像 2 枚」を貼りつけて下さい。 
-</p>
-</div>
-
-
 <script>PreNext(13,12)</script>
 </body>
 </html>

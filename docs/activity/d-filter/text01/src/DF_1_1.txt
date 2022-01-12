@@ -20,7 +20,7 @@ def write_wavedata(name,rate,data):
         rawdata=np.array(data,dtype='int16').tobytes()
         waveout.setparams((1, 2, rate, len(rawdata), 'NONE', 'NONE'))
         waveout.writeframes(rawdata)
-    
+
 # スペクトログラム描画関数
 def plot_spectrogram(data):
     cmap = plt.get_cmap('magma')
@@ -29,36 +29,36 @@ def plot_spectrogram(data):
     plt.xlabel('sec')
     plt.ylabel('Hz')
     plt.show()
-
-x,fs,N = read_wavedata('DF_2_1.wav')
+   
+x,fs,N = read_wavedata('DF_1_1.wav')
 y = np.zeros(N)
-
-# FIR フィルタ長
-L = ?
 
 print('')
 print(f'サンプリング周波数 fs = {fs} Hz' )
 print(f'信号長 N = {N} 点' )
 print(f'再生時間 {N/fs} 秒' )
-print(f'フィルタ長 L = {L}')
 
-# 移動平均フィルタのインパルス応答の計算
-h = np.zeros(L)
-for i in range(L):
-    h[i] = ?
+# 乗算器の乗数 a と b をセット
+# a と b は負数でも可だが、|a| + |b| が 1.0 を超えないようにする
+a = ?
+b = ?
 
-# FIR フィルタ
+# 遅延素子の遅延時刻 n の計算
+# delay に遅らせる秒数をセット
+delay = ?
+n = int(delay*fs)
+
+# ディジタル線形フィルタ H(z) = a + b・z^{-n}
 # 出力信号は y[i]
 # i-n が負の場合は x[i-n] を足さない
 for i in range(N):
-    y[i] = 0
-    for n in range(L):
-        if i-n >= 0 :
-            y[i] += ?
+    y[i] = ?
+    if i-n >= 0 :
+        y[i] += ?
 
 # y[i] を wave ファイルとして保存
 print('')
-write_wavedata('DF_2_1_out.wav',fs,y)
+write_wavedata('DF_1_1_out.wav',fs,y)
 
 print('')
 print('フィルタリング前')

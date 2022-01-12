@@ -16,14 +16,14 @@ def GetAbsArg(C_abs,C_arg,A,B):
 # Waveファイル読み込み関数
 def read_wavedata(name):
     print('read: '+name)
-    wavein = wave.open(name,'r')
-    print(wavein.getparams())
-    rate = wavein.getframerate()
-    data = wavein.readframes(wavein.getnframes())
-    wavein.close()
-    return np.frombuffer(data, dtype=np.int16),rate
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
 
-x,fs = read_wavedata('SPEC_3_1.wav')
+x,fs,frames = read_wavedata('SPEC_3_1.wav')
 
 print('')
 print(f'サンプリング周波数 fs = {fs} Hz' )

@@ -34,14 +34,14 @@ E = ?
 B = ?
 
 # Waveファイル読み込み関数
-def read_wavedata(classname):
-    print('read: '+classname+'.wav')
-    wavein = wave.open(classname+'.wav','r')
-    print(wavein.getparams())
-    rate = wavein.getframerate()
-    data = wavein.readframes(wavein.getnframes())
-    wavein.close()
-    return np.frombuffer(data, dtype=np.int16),rate
+def read_wavedata(name):
+    print('read: '+name)
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
 
 # Waveファイルを読み込んで学習データセットを作成
 classnames=['a','i','u','e','o']
@@ -50,7 +50,7 @@ classno_training=[]
 wavedata_test=[]
 classno_test=[]
 for i in range(len(classnames)):
-    x,rate = read_wavedata(classnames[i]) 
+    x,rate,frames = read_wavedata(classnames[i]+'.wav') 
     # 500 msec 時点から 5 msec おきに 10 msec だけ信号を100個取り出して学習データとする
     for j in range(100):       
         start_pos = int( (500+5*j)*rate/1000 )
@@ -120,7 +120,8 @@ ls, acc = model.evaluate(data_training, label_training, verbose=0)
 ls_test, acc_test = model.evaluate(data_test, label_test, verbose=0)
 print('\n\n学習後')
 print('学習データセット　 : 損失={:0.2f}, 正解率={:0.2f}'.format(ls,acc))
-
-predict_test = model.predict(data_test[0:10])
 print('テストデータセット : 損失={:0.2f}, 正解率={:0.2f}'.format(ls_test,acc_test))
-print('')
+print('クラス別の結果')
+for i in range(len(classnames)):
+    ls_test, acc_test = model.evaluate(data_test[20*i:20*i+20], label_test[20*i:20*i+20], verbose=0)
+    print('{} : 損失={:0.2f}, 正解率={:0.2f}'.format(classnames[i],ls_test,acc_test))
