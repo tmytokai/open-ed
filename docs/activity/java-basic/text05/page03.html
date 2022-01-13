@@ -62,15 +62,13 @@ public class Main{
         // String 型リストの forEach 文
         // 型推論により str は String 型になる
         list1.forEach( str -&gt; {
-            String a = "str = "+str;
-            System.out.println( a );
+            System.out.println( "str = "+str );
         } );
 
         // Integer 型リストの forEach 文
-        // 型推論により i は Integer 型になる
-        list2.forEach( i -&gt; {
-            String a = "i = "+i;
-            System.out.println( a );
+        // 型推論により a は Integer 型になる
+        list2.forEach( a -&gt; {
+            System.out.println( "a = "+a );
         } );
 
     }
@@ -86,9 +84,9 @@ public class Main{
 str = hoge
 str = fuga
 str = piyo
-i = 12
-i = 34
-i = 56
+a = 12
+a = 34
+a = 56
 </pre>
 </div>
 
@@ -117,8 +115,7 @@ public class Main{
         // key がキー、value が値
         // 型推論により key は String 型、value は Integer 型になる
         map.forEach( (key,value) -&gt; {
-            String a = "key = " + key + ", value = " + value;
-            System.out.println( a );
+            System.out.println( "key = " + key + ", value = " + value );
         } );
     }
 }

@@ -66,10 +66,10 @@ hoge=316
 <br>
 <h2><a href="./page02.html">2. ラムダ式</a></h2>
 
+<br>
 <p>
 <input type="checkbox"><b>演習 5-2 (個人):</b> <a href="./page02.html">ソース 2 </a>を修正して、次の仕様を満たすプログラムを作成しましょう。
 </p>
-
 <div class="info">
 <pre class="wrap">
 (1) System.out.println( function.apply( 456 ) ); の行の下で
@@ -109,8 +109,9 @@ hoge=784
 <br>
 <h2><a href="./page03.html">3. forEach 文</a></h2>
 
+<br>
 <p>
-<input type="checkbox"><b>演習 5-3 (個人):</b> 以下のソースコードで使われている拡張 for 文を forEach 文を使うように書き換えて下さい。
+<input type="checkbox"><b>演習 5-3 (個人):</b> 以下のソースコードで使われている<a href="../text04/page03.html">拡張 for 文</a>を forEach 文を使うように書き換えて下さい。
 </p>
 
 <div class="info">
@@ -126,13 +127,13 @@ public class Main{
 
     	ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
 
-    	list.add( 1 );
-    	list.add( 2 );
-    	list.add( 3 );
+    	list.add( 4 );
+    	list.add( -3 );
+    	list.add( 5 );
 
         // ここから演習
         // forEach 文を使って合計を求める
-        for( int i : list ){ goukei += i; }
+        for( int a : list ){ goukei += a; }
 
         System.out.println( goukei ); 
     }
@@ -184,7 +185,7 @@ key = piyo, value = 789
 <span class="olradio"><input type="radio" name="p4"></span> <a href="./page03.html">ソース 2</a>をコピーし、解答します。
 </p>
 <p>
-(注意) 文字列の比較は == ではなく「変数名.equals(文字列)」を使って下さい
+(注意) 文字列の比較は == ではなく「<a href="../text01/page02.html">変数名.equals(文字列)</a>」を使って下さい
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。 
