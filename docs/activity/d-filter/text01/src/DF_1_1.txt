@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.signal as signal
 import wave
 
 # Waveファイル読み込み関数
