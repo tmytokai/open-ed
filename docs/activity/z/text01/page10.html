@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>10. 周期性時間領域ディジタル信号のZ変換</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Z変換</a></li>
+<li>学習項目: [1] Z変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次にZ変換と<a href="../../dft/">離散フーリエ変換 (DFT)</a>の関係について説明したいと思いますが、その準備としてここでは<a href="../../dft/text01/page01.html">周期性時間領域ディジタル信号</a>のZ変換を求めてみます。
+</p>
+
+<p>
+まず$\textrm{N}$ を有限な正の整数としたとき $f[i]$ を周期 $\textrm{N}$ の周期性時間領域ディジタル信号とします。
+<br>
+ただし $|f[i]| < \infty$ とします。
+</p>
+<p>
+また $f_1[i]$ を時刻 $i=0$ から $i=\textrm{N}-1$ までの $f[i]$ の値とします。
+<br>
+つまり $f[i]$ は
+</p>
+
+\[
+f[i] = f_1[\ i \ \textrm{mod}\ \textrm{N} \ ]
+\]
+
+<p>
+で表されます。
+<br>
+ここで mod は剰余演算(modulo)です。
+</p>
+
+<p>
+さて $f[i]$ から最初の N 個だけ信号値を取り出した信号列、つまり 
+</p>
+
+\[
+\{ f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+の Z 変換を
+</p>
+
+\[
+\textrm{F}_1(z) = \sum_{i=0}^{\textrm{N}-1} \{ f_1[i] \cdot z^{-i} \}
+\]
+
+<p>
+とします。
+<br>
+すると $f[i]$ の時刻 $i = \textrm{N}$ から $i = 2\textrm{N}-1$ まで信号値を取り出した信号列、つまり
+</p>
+
+\[
+\{ \underbrace{0, \cdots, 0}_{\textrm{N}}, f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+のZ変換は
+</p>
+
+\begin{align*}
+\sum_{i=\textrm{N}}^{2\textrm{N}-1} \{ f_1[\ i \ \textrm{mod}\ \textrm{N} \ ] \cdot z^{-i} \} 
+&= f_1[0] \cdot z^{-\textrm{N}} + f_1[1] \cdot z^{-(\textrm{N}+1)} + \cdots + f_1[\textrm{N}-1] \cdot z^{-(2\textrm{N}-1)} \\
+&= \left \{ f_1[0] + f_1[1] \cdot z^{-1} + \cdots + f_1[\textrm{N}-1] \cdot z^{-(\textrm{N}-1)} \right \} \cdot z^{-\textrm{N}} \\
+&= \textrm{F}_1(z) \cdot z^{-\textrm{N}}
+\end{align*}
+
+<p>
+になります。
+<br>
+同様に考えると、$n$ を 0 以上の整数とした時、$f[i]$ の時刻 $i = n\cdot\textrm{N}$ から $i = (n+1)\cdot\textrm{N}-1$ まで信号値を取り出した信号列のZ変換は
+
+\[
+\textrm{F}_1(z) \cdot z^{-n\cdot\textrm{N}}
+\]
+
+<p>
+となります。
+</p>
+
+<p>
+よって $f[i]$ のZ変換は
+</p>
+
+\begin{align*}
+\textrm{F}(z) &= \sum_{n=0}^\infty \left \{ \textrm{F}_1(z) \cdot z^{-n\cdot\textrm{N}} \right \} \\
+&= \textrm{F}_1(z)  \cdot \sum_{n=0}^\infty \left \{ z^{-n\cdot\textrm{N}} \right \} \\
+\end{align*}
+
+<p>
+となりますが、後の総和は初項 1、公比 $ z^{-\textrm{N}}$ の無限等比級数の和ですので、$|z^{-\textrm{N}}| < 1$ つまり $|z|>1$ のときに収束して次の式が求まります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期性時間領域ディジタル信号のZ変換</b>
+
+<p>
+$\textrm{N}$ を有限な正の整数としたとき $f[i]$ (ただし$|f[i]| < \infty$)を周期 $\textrm{N}$ の周期性時間領域ディジタル信号とする。
+<br>
+また $f_1[i]$ を時刻 $i=0$ から $i=\textrm{N}-1$ までの $f[i]$ の値とする。
+<br>
+さらに信号列
+</p>
+
+\[
+\{ f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+の Z 変換を
+</p>
+
+\[
+\textrm{F}_1(z) = \sum_{i=0}^{\textrm{N}-1} \{ f_1[i] \cdot z^{-i} \}
+\]
+
+<p>
+とする。
+</p>
+
+<p>
+$f[i]$ のZ変換を $\textrm{F}(z)$ としたとき、収束領域 $|z| > 1$ 内の $z$ に関して
+</p>
+
+\[
+\textrm{F}(z) = \textrm{F}_1(z) \cdot \frac{1}{1-z^{-\textrm{N}}}
+\]
+
+<p>
+となる。
+</p>
+
+</div>
+
+<p>
+では例を示します。
+</p>
+
+<p>
+周期 $\textrm{N} = 10$ とし、
+</p>
+
+\[
+f_1[i] = \{\ 1,\ -4,\ 3,\ -2,\ 5,\ 9,\ 3,\ -2\ ,1\ ,5\ \}
+\]
+
+<p>
+とします。
+<br>
+また今回はサンプリング周波数を $f_s = 100$ [Hz] 、サンプリング間隔を $\tau = 1/f_s = 0.01$ [秒] とします。
+<br>
+この時の $f[i]$ は図1となります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図1: 今回の例で使用する $f[i]$</b>
+<p>　</p>
+<img src="./img/page10-fig1.png" alt="">
+</div>
+
+<p>
+では $f[i]$ から $\textrm{F}(z)$ を求めてそのグラフを示そうと思いますが、そのまま $\textrm{F}(z)$ のグラフを描いても人間には分かりにくいので座標変換式
+</p>
+
+\[
+z = \textrm{e}^{ s \cdot \tau } = \textrm{e}^{ \sigma \cdot \tau } \cdot \textrm{e}^{ j \cdot w \cdot \tau }
+\]
+
+<p>
+を用いてラプラス変換 $\textrm{F}(s)$ に変換します。
+<br>
+さらに収束条件 $|z| > 1$ は $\sigma > 0$ に相当しますので、$\sigma$ を 1、 10、100 と変化させた時の絶対値 $|\textrm{F}(s)|$と偏角 $\angle \textrm{F}(s)$ のグラフを順に示します。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図2: $\sigma = 1$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page10-fig2.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page10-fig3.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: $\sigma = 10$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page10-fig4.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page10-fig5.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図4: $\sigma = 100$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page10-fig6.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page10-fig7.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="src/page10.txt">こちら</a>です。
+</p>
+
+
+<br>
+<script>PreNext(10,11)</script>
+</body>
+</html>

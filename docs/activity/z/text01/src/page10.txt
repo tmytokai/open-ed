@@ -1,0 +1,53 @@
+import numpy as np
+import math
+import cmath
+import matplotlib.pyplot as plt
+
+xsize=1000
+
+def F(sigma,w,f1,tau):
+    c = 0
+    N = len(f1)
+    for i in range(N):
+        c += f1[i] * cmath.rect(math.exp(-i*sigma*tau), -i*w*tau)
+    return c/(1-cmath.rect(math.exp(-N*sigma*tau), -N*w*tau))
+
+f1 = np.array([1,-4,3,-2,5,9,3,-2,1,5])
+N = len(f1)
+fs = 100   # サンプリング周波数
+sigma = 10
+tau = 1/fs # サンプリング間隔
+ws = fs*2*math.pi # サンプリング角周波
+wmin = -ws
+wmax = ws
+
+W = [ wmin+(wmax-wmin)*i/xsize for i in range(xsize) ]
+Z = [ F(sigma,w,f1,tau) for w in W ]
+
+plt.plot(np.r_[f1,f1,f1,f1,f1],marker='o',markersize=5,linestyle='-')
+plt.xticks(range(0,5*N,N))
+for i in range(5):
+    plt.axvline(i*N,color="gray",linestyle='dashed')
+plt.xlabel('i')
+plt.show()
+
+ticks = np.arange(-1,1.1,0.5)*ws
+labels = ['$-w_s$','$-w_s/2$','0','$w_s/2$','$w_s$']
+
+plt.plot( W,[abs(z) for z in Z])
+plt.xticks(ticks=ticks,labels=labels)
+plt.axvline(-ws/2,color="gray",linestyle='dashed')
+plt.axvline(0,color="gray",linestyle='dashed')
+plt.axvline(ws/2,color="gray",linestyle='dashed')
+plt.ylim(bottom=0)
+plt.xlabel('$w$')
+plt.show()
+
+plt.plot( W,[ cmath.phase(z) if abs(z)>0.1 else 0 for z in Z])
+plt.xticks(ticks=ticks,labels=labels)
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.axvline(-ws/2,color="gray",linestyle='dashed')
+plt.axvline(0,color="gray",linestyle='dashed')
+plt.axvline(ws/2,color="gray",linestyle='dashed')
+plt.xlabel('$w$')
+plt.show()
