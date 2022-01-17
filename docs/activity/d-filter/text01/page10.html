@@ -21,11 +21,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-フィルタの<a href="./page08.html#seri">直列結合</a>、<a href="./page08.html#para">並列結合</a>、<a href="./page09.html">フィードバック機構</a>について学びましたので、いよいよ<a href="./page07.html">基本パーツ</a>を使って複雑な伝達関数を持つフィルタのブロック図を描けるようになりました。
-</p>
-
-<p>
-ここでは伝達関数→ブロック図の変換例をいくつか紹介したいと思います。
+フィルタの<a href="./page08.html#seri">直列結合</a>、<a href="./page08.html#para">並列結合</a>、<a href="./page09.html">フィードバック機構</a>について学びましたので、いよいよ<a href="./page07.html">基本パーツ</a>を使って複雑な伝達関数を持つフィルタのブロック図を描く用意が出来ました。
+<br>
+ここでは伝達関数からブロック図への変換例をいくつか紹介したいと思います。
 <br>
 またそのプログラム表現についても紹介します。
 </p>
@@ -40,7 +38,7 @@
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と乗算器 $\textrm{H}_2(z) = b$ の<a href="./page08.html#seri">直列結合</a>と考えられますので結局乗算器 1 つだけのブロック図に変わります。
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と乗算器 $\textrm{H}_2(z) = b$ の直列結合と考えられますので結局乗算器 1 つだけのブロック図に変わります。
 </p>
 
 <p>
@@ -48,12 +46,9 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例1のブロック図: </b>
-
+<input type="checkbox"><b>例1のブロック図 </b>
 <p>　</p>
-
 <img src="./img/page10-fig1.png" alt="">
-
 </div>
 
 <p>
@@ -61,12 +56,10 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例1のプログラム表現: </b>
-
+<input type="checkbox"><b>例1のプログラム表現</b>
 <pre class="wrap">
 y[i] = (a * b) *  x[i]
 </pre>
-
 </div>
 
 <br>
@@ -79,22 +72,19 @@ y[i] = (a * b) *  x[i]
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の<a href="./page08.html#seri">直列結合</a>と考えられます
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の直列結合と考えられます
 </p>
 
 <p>
 この時のブロック図は次の通りです。
 <br>
-なお一般的に乗算器は遅延素子の後に置くことが多いのでこの図では乗算器と遅延素子の順番を入れ替えています(もちろん乗算器→遅延素子の順でも問題ないです)。
+なお乗算器は遅延素子の後に置くことが多いのでこの図では乗算器と遅延素子の順番を入れ替えています(もちろん乗算器 → 遅延素子の順でも問題ないです)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例2のブロック図: </b>
-
+<input type="checkbox"><b>例2のブロック図</b>
 <p>　</p>
-
 <img src="./img/page10-fig2.png" alt="">
-
 </div>
 
 <p>
@@ -102,17 +92,15 @@ y[i] = (a * b) *  x[i]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例2のプログラム表現: </b>
-
+<input type="checkbox"><b>例2のプログラム表現</b>
 <pre class="wrap">
 y[i] = a * x[i-1]
 </pre>
-
 </div>
 
 <br>
 <h3>
-(例3) 2 つの 1 時刻遅延素子の直列結合 = 2 時刻遅延素子
+(例3) 2 つの 1 時刻遅延素子の直列結合 (2 時刻遅延素子)
 </h3>
 
 \begin{align*}
@@ -120,7 +108,7 @@ y[i] = a * x[i-1]
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは 1時刻遅延素子 $\textrm{H}_1(z) = z^{-1}$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の<a href="./page08.html#seri">直列結合</a>と考えられますが、これを $z$ の項でまとめると伝達関数は
+という伝達関数を持つフィルタは 1 時刻遅延素子 $\textrm{H}_1(z) = z^{-1}$ と 1 時刻遅延素子 $\textrm{H}_2(z) = z^{-1}$ の直列結合になりますが、これを $z$ の項でまとめると伝達関数は
 </p>
 
 \begin{align*}
@@ -138,12 +126,9 @@ y[i] = a * x[i-1]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例 3 のブロック図: </b>
-
+<input type="checkbox"><b>例 3 のブロック図</b>
 <p>　</p>
-
 <img src="./img/page10-fig3.png" alt="">
-
 </div>
 
 <p>
@@ -151,21 +136,19 @@ y[i] = a * x[i-1]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例3 のプログラム表現: </b>
-
+<input type="checkbox"><b>例3 のプログラム表現</b>
 <pre class="wrap">
 y[i] = x[i-2]
 </pre>
-
 </div>
 
 <br>
 <h3 id="ex4">
-(例4) $n$ 個の 1 時刻遅延素子の直列結合 = $n$ 時刻遅延素子
+(例4) $n$ 個の 1 時刻遅延素子の直列結合 ($n$ 時刻遅延素子)
 </h3>
 
 <p>
-同様に遅延素子を $n$ 個の 1 時刻遅延素子を<a href="./page08.html#seri">直列結合</a>することで<b>「$n$ 時刻遅延素子」</b>を作ることが出来ます。
+同様に遅延素子を $n$ 個の 1 時刻遅延素子を直列結合することで「<b>$n$ 時刻遅延素子</b>」が作られます。
 <br>
 伝達関数は次の通りです。
 </p>
@@ -179,12 +162,9 @@ y[i] = x[i-2]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例 4 のブロック図: </b>
-
+<input type="checkbox"><b>例 4 のブロック図</b>
 <p>　</p>
-
 <img src="./img/page10-fig4.png" alt="">
-
 </div>
 
 <p>
@@ -192,17 +172,15 @@ y[i] = x[i-2]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例4 のプログラム表現: </b>
-
+<input type="checkbox"><b>例4 のプログラム表現</b>
 <pre class="wrap">
 y[i] = x[i-n]
 </pre>
-
 </div>
 
 <br>
 <h3 id="ex5">
-(例5) 直列結合と並列結合の組み合わせ
+(例5) 直列結合と並列結合の組み合わせ (ディレイフィルタ)
 </h3>
 
 \begin{align*}
@@ -210,24 +188,19 @@ y[i] = x[i-n]
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタのことを「<b>ディレイフィルタ(delay filter)</b>」といいます。
+という伝達関数を持つフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と $n$ 時刻遅延素子 $z^{-n}$ を直列結合した  $\textrm{H}_2(z) = b \cdot z^{-n}$ の並列結合となっています。
 <br>
-このフィルタは乗算器 $\textrm{H}_1(z) = a$ と 乗算器 $b$  と $n$ 時刻遅延素子 $z^{-n}$ を<a href="./page08.html#seri">直列結合</a>した  $\textrm{H}_2(z) = b \cdot z^{-n}$ の<a href="./page08.html#para">並列結合</a>となっています。
+このフィルタのことを「<b>ディレイフィルタ(delay filter)</b>」といいます。
 </p>
 
 <p>
 この時のブロック図は次の通りです。
-<br>
-$\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-n}$ が加算器で結合されています。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例5のブロック図: </b>
-
+<input type="checkbox"><b>例5のブロック図</b>
 <p>　</p>
-
 <img src="./img/page10-fig5.png" alt="">
-
 </div>
 
 <p>
@@ -236,51 +209,41 @@ $\textrm{H}_1(z) = a$ と $\textrm{H}_2(z) = b \cdot z^{-n}$ が加算器で結�
 
 <div class="info">
 <input type="checkbox"><b>例5のプログラム表現: </b>
-
 <pre class="wrap">
 y[i] = a * x[i] + b * x[i-n]
 </pre>
-
 </div>
 
 <br>
 <h3 id="ex6">
-(例6) $n$ 時刻遅延素子の並列結合
+(例6) 遅延素子+乗算器の並列結合
 </h3>
 
 \begin{align*}
-\textrm{H}(z) = z^{-2} + z^{-3}
+\textrm{H}(z) = a \cdot z^{-2} + b \cdot z^{-3}
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは 2 時刻遅延素子 $\textrm{H}_1(z) = z^{-2}$ と 3 時刻遅延素子 $\textrm{H}_2(z) = z^{-3}$ の<a href="./page08.html#para">並列結合</a>と考えられます
+という伝達関数を持つフィルタは 2 時刻遅延素子+乗算器の $\textrm{H}_1(z) = a\cdot z^{-2}$ と 3 時刻遅延素子+乗算器の $\textrm{H}_2(z) = b \cdot z^{-3}$ の並列結合と考えられます
 </p>
 
 <p>
-この時のブロック図を素直に描くと次の通りになります。
-<br>
-$\textrm{H}_1(z) = z^{-2}$ と $\textrm{H}_2(z) = z^{-3}$ が加算器で結合されています。
+このフィルタのブロック図を素直に描くと次の通りになります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例6のブロック図(素直な描き方): </b>
-
+<input type="checkbox"><b>例6のブロック図(素直な描き方)</b>
 <p>　</p>
-
 <img src="./img/page10-fig6-1.png" alt="">
-
 </div>
 
 <p>
-ただし、このままだと遅延素子が無駄に多く含まれていてもったいないので、遅延素子を一部共通化して次の様なブロック図にします。
+ただし、このままだと遅延素子が無駄に多く含まれていてもったいないので、遅延素子を一部共通化して次の様なブロック図に出来ます。
 
 <div class="info">
-<input type="checkbox"><b>例6のブロック図(遅延素子を共通化した描き方): </b>
-
+<input type="checkbox"><b>例6のブロック図(遅延素子を共通化した描き方)</b>
 <p>　</p>
-
 <img src="./img/page10-fig6-2.png" alt="">
-
 </div>
 
 <p>
@@ -288,17 +251,17 @@ $\textrm{H}_1(z) = z^{-2}$ と $\textrm{H}_2(z) = z^{-3}$ が加算器で結合�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例6のプログラム表現: </b>
+<input type="checkbox"><b>例6のプログラム表現</b>
 
 <pre class="wrap">
-y[i] =  x[i-2] + x[i-3]
+y[i] = a*x[i-2] + b*x[i-3]
 </pre>
 
 </div>
 
 <br>
 <h3 id="ex7">
-(例7) 直列結合とフィードバック機構の組み合わせ
+(例7) 遅延素子+乗算器とフィードバック機構の組み合わせ
 </h3>
 
 \begin{align*}
@@ -306,7 +269,7 @@ y[i] =  x[i-2] + x[i-3]
 \end{align*}
 
 <p>
-という伝達関数を持つフィルタは<a href="#ex2">例2</a>で考えたフィルタを<a href="./page09.html">フィードバック機構</a>の $\textrm{H}_1(z)$ にしたフィルタであると考えられます。
+という伝達関数を持つフィルタは 1 時刻遅延素子+乗算器で出来たフィルタを<a href="./page09.html">フィードバック機構</a>の $\textrm{H}_1(z)$ としたフィルタであると考えられます。
 </p>
 
 <p>
@@ -314,7 +277,7 @@ y[i] =  x[i-2] + x[i-3]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例7のブロック図: </b>
+<input type="checkbox"><b>例7のブロック図</b>
 
 <p>　</p>
 
@@ -327,7 +290,7 @@ y[i] =  x[i-2] + x[i-3]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>例7のプログラム表現: </b>
+<input type="checkbox"><b>例7のプログラム表現</b>
 
 <pre class="wrap">
 y[i] =  x[i] + a * y[i-1]

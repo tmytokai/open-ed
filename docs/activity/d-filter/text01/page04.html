@@ -21,44 +21,64 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-あるディジタル線形時不変フィルタに $x[i]$ を入力した時の出力を $y[i]$ とします。
+さて、ある線形時不変フィルタに $x[i]$ を入力した時の出力を $y[i]$ とします。
+</p>
+
+<p>
+この時、出力 $y[i]$ 、入力 $x[i]$、 インパルス応答 $h[i]$ の間には次の関係式が成り立っています。
 <br>
-この時、出力 $y[i]$ 、入力 $x[i]$ 、<a href="./page03.html">インパルス応答</a> $h[i]$ の間には次の関係式が成り立っています。
+以下の演算を「$h[i]$と$x[i]$の<b>畳込み演算 (Convolution)</b>」と呼びます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>入力 $x[i]$ とインパルス応答 $h[i]$ から出力 $y[i]$ を求められる: </b>
+<input type="checkbox"><b>畳込み演算 (Convolution)</b>
 
 \begin{align*}
 y[i]
-& = \sum_{n=0}^{\infty} \{ h[n] \cdot x[i-n] \} \} \\
+& = \sum_{n=0}^{\infty} \left \{ h[n] \cdot x[i-n] \} \right \} \\
 & = h[0]\cdot x[i] + h[1] \cdot x[i-1] + h[2] \cdot x[i-2] + \cdots
 \end{align*}
 
 </div>
 
 <p>
-上の演算のことを「$h[i]$と$x[i]$の<b>畳込み演算</b>」と呼びます。
-<br>
-ちなみに$\sum$の範囲が0から$\infty$になっていますので、実際にはプログラムで出力を計算することは出来ません(無限のforループが必要になります)。
+ちなみに上の式内の$\sum$の範囲が0から$\infty$になっていますので、実際にはプログラムで計算することは出来ません(無限のforループが必要になります)。
 </p>
 
 <p>
-また畳込み演算は<a href="../../z/">Z 変換</a>により積に変わるという性質があります。
-<br>
-例えば $y[i]$ の Z 変換を $\textrm{Y}(z)$、$x[i]$ の Z 変換を $\textrm{X}(z)$、$h[i]$ の Z 変換を $\textrm{H}(z)$ とします(ちなみに $\textrm{H}(z)$ を伝達関数と言って<a href="./page05.html">次のページ</a>で詳しく説明します)。
-<br>
-この時、上の畳み込み式の両辺を Z 変換して次の関係が出てきます。
+また畳込み演算は<a href="../../z/">Z 変換</a>により積に変わるという性質がありますので、上の畳み込み式の両辺を Z 変換することで次の式が得られます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>畳み込みの Z 変換は積に変わる: </b>
+<input type="checkbox"><b>畳み込み演算の Z 変換</b>
+
+<p>
+$\textrm{Y}(z)$ ・・・ $y[i]$ の Z 変換
+</p>
+<p>
+ $\textrm{X}(z)$ ・・・ $x[i]$ の Z 変換
+</p>
+<p>
+$\textrm{H}(z)$ ・・・ $h[i]$ の Z 変換
+</p>
+<p>
+としたとき
+</p>
 
 \begin{align*}
 \textrm{Y}(z) = \textrm{H}(z) \cdot \textrm{X}(z)
 \end{align*}
 
+<p>
+が成り立つ
+</p>
+
 </div>
+
+<p>
+この $\textrm{H}(z)$ を伝達関数と呼び、詳しくは<a href="./page05.html">次のページ</a>で説明します。
+</p>
+
 
 <br>
 <script>PreNext(4,12)</script>
