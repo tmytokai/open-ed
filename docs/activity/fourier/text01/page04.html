@@ -31,7 +31,7 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： 複素フーリエ級数展開: </b>
+<input type="checkbox"><b>定義： 複素フーリエ級数展開</b>
 
 \begin{align*}
 f(t) = \sum_{k = -\infty}^{\infty} 
@@ -60,7 +60,7 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 
 
 <div class="info">
-<input type="checkbox"><b>複素フーリエ係数の求め方: </b>
+<input type="checkbox"><b>複素フーリエ係数の求め方</b>
 
 \begin{align*}
 \textrm{C}[k] = \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
@@ -68,7 +68,6 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \}
 \textrm{dt}
-\ ,\  (k = 0, \pm 1, \pm 2, \cdots)
 \end{align*}
 
 <p>
@@ -86,7 +85,7 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 </div>
 
 <p>
-この $\textrm{C}[k]$ の計算式は<b>直交関数展開</b>という理論から導かれますが、今回のアクティビティでは触れませんので、もし興味のある人は自分で調べて下さい。
+この $\textrm{C}[k]$ の計算式は<a href="https://ja.wikipedia.org/wiki/%E5%9F%BA%E5%BA%95%E9%96%A2%E6%95%B0">直交基底展開</a>という理論から導かれますが、今回のアクティビティでは触れませんのでもし興味のある人は自分で調べて下さい。
 </p>
 
 <p>
@@ -192,86 +191,78 @@ f(t) \cdot \cos(k \cdot w_1 \cdot t)
 <br>
 <h2>参考資料: 周期性角周波数領域アナログ信号の複素フーリエ級数展開と逆離散フーリエ変換</h2>
 
-<br>
 <p>
 ※ 以下は<a href="../../d-filter/">ディジタル線形フィルタの設計</a>で使う内容なので、必要ない場合は読み飛ばして結構です。
 </p>
 
+<br>
 <p>
-$f$ が周期性時間領域ではなく、周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号の時の複素フーリエ級数展開は次のようになります。
+周期性時間領域信号ではなく、周期性角周波数領域アナログ信号 $\textrm{F}(w)$ の複素フーリエ級数展開は次の式で与えられます。
+</p>
+
+<p>
+※ 実はこの式は $f[i]$ の(両側)<a href="../../z/">Z変換</a>です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： 周期性角周波数領域アナログ信号の複素フーリエ級数展開: </b>
+<input type="checkbox"><b>定義： 周期性角周波数領域アナログ信号の複素フーリエ級数展開</b>
 
 \begin{align*}
-f(w) = \sum_{i = -\infty}^{\infty} 
+\textrm{F}(w) = \sum_{i = -\infty}^{\infty} 
 \left \{
-\textrm{C}[i] \cdot \textrm{e}^{\{-j \cdot i \cdot \textrm{T} \cdot w \}}
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau  \}}
 \right \}
 \end{align*}
 
 <p>
-$f(w)$ ・・・周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号
+$\textrm{F}(w)$ ・・・周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号
 </p>
 
 <p>
-$\textrm{C}[i]$ ・・・ $i$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+$f[i]$ ・・・ サンプリング周波数 $w_s$ [rad/秒] の時間領域(複素)ディジタル信号
 </p>
 
 <p>
-$ \textrm{T} = 2\pi/\textrm{W}$
+$ \tau = 2\pi/w_s$ ・・・ サンプリング間隔 [秒]
 </p>
 
 </div>
 
 <p>
-ここで無限個の複素フーリエ係数 $\textrm{C}[i]$ は次の式で求められます。
+ここで時間領域(複素)ディジタル信号 $f[i]$ は次の式で表される「周期性角周波数領域アナログ信号の逆離散フーリエ変換」によって求められます。
 </p>
+
 <p>
-この式の事を $f(w)$ の<b>逆離散フーリエ変換</b>と呼び、周期 $\textrm{W}$ を $\infty$ にすると通常の $f(w)$ の逆フーリエ変換に変わります。
+※ $f[i]$ が周期的な場合は<a href="../../dft/text01/page02.html">IDFT</a>になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義: 逆離散フーリエ変換: </b>
+<input type="checkbox"><b>定義: 周期性角周波数領域アナログ信号の逆離散フーリエ変換</b>
 
 \begin{align*}
-\textrm{C}[i] = \frac{1}{\textrm{W}} \int_{-\textrm{W}/2}^{\textrm{W}/2} 
+f[i] = \frac{1}{w_s} \int_{-w_s/2}^{w_s/2} 
 \left \{
-f(w) \cdot \textrm{e}^{\{j \cdot i \cdot \textrm{T} \cdot w \}} 
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right \}
 \textrm{d}w
-\ ,\  (i = 0, \pm 1, \pm 2, \cdots)
 \end{align*}
-
-<p>
-$f(w)$ ・・・周期 $\textrm{W}$ [rad/秒] の周期性角周波数領域アナログ信号
-</p>
-
-<p>
-$\textrm{C}[i]$ ・・・ $i$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
-</p>
-
-<p>
-$ \textrm{T} = 2\pi/\textrm{W}$
-</p>
 
 </div>
 
 <p>
-なお上でおこなった説明と同様に、もし $f(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
+なお上でおこなった説明と同様に、もし $\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
 </p>
 
 \begin{align*}
-\textrm{C}[i] = \frac{2}{\textrm{W}} \int_{-\textrm{W}/2}^{\textrm{W}/2} 
+f[i] = \frac{2}{w_s} \int_{0}^{w_s/2} 
 \left \{
-f(w) \cdot \cos (i \cdot \textrm{T} \cdot w )
+\textrm{F}(w) \cdot \cos (i \cdot w \cdot \tau )
 \right \}
 \textrm{d}w
 \end{align*}
 
 <p>
-となり、 $\textrm{C}[i]$ は実数の定数かつ偶関数になります。
+となり、 $f[i]$ は実数の定数かつ偶関数になります。
 </p>
 
 <br>

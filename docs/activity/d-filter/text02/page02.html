@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-最も基本的な FIR フィルタは(単純)移動平均フィルタ(Simple Moving Average Filter)です。
+最も基本的な FIR フィルタは「<b>(単純)移動平均フィルタ(Moving Average Filter)</b>」です。
 </p>
 
 <p>
@@ -29,11 +29,11 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>移動平均フィルタの出力: </b>
+<input type="checkbox"><b>移動平均フィルタの出力 </b>
 
 \begin{align*}
 y[i]
-& = \frac{ \sum_{n=0}^{\textrm{L-1}} x[i-n] }{\textrm{L}} \\
+& = \frac{ 1 }{\textrm{L}}\cdot \sum_{n=0}^{\textrm{L-1}} x[i-n] \\
 & = \sum_{n=0}^{ \textrm{L-1}} \left \{ \frac{1}{\textrm{L}} \cdot  x[i-n] \right \}
 \end{align*}
 
@@ -41,32 +41,28 @@ y[i]
 
 
 <p>
-この式は<a href="./page01.html">前ページ</a>で示した FIR フィルタの畳込み演算そのものですので、従って<a href="../text01/page03.html">インパルス応答</a>は次のようになります。
+この式は<a href="./page01.html">前ページ</a>で示した FIR フィルタの畳込み演算そのものですので、<a href="../text01/page03.html">インパルス応答</a>は次の様になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>(単純)移動平均フィルタのインパルス応答: </b>
+<input type="checkbox"><b>(単純)移動平均フィルタのインパルス応答</b>
 
 <p>
-移動平均フィルタ長として適当な正整数 $\textrm{L}$ を決める。
-</p>
-
-<p>
-この時、移動平均フィルタのインパルス応答は次の式で表される。
+正整数 $\textrm{L}$ をフィルタ長としたとき、移動平均フィルタのインパルス応答は次の式で表される。
 </p>
 
 \begin{align*}
-h[i] = \frac{1}{\textrm{L}}\ ,\  (i = 0, 1, \cdots, \textrm{L}-1 )
+h[i] = \{ \underbrace{\frac{1}{\textrm{L}}, \cdots, \frac{1}{\textrm{L}}}_{\textrm{L}}, 0, 0, \cdots \}
 \end{align*}
 
 </div>
 
 <p>
-伝達関数はインパルス応答を<a href="../../z/">Z 変換</a>して次のようになります。
+伝達関数はインパルス応答を<a href="../../z/">Z 変換</a>して次の様になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>移動平均フィルタの伝達関数: </b>
+<input type="checkbox"><b>移動平均フィルタの伝達関数</b>
 
 <p>　</p>
 
@@ -80,20 +76,20 @@ h[i] = \frac{1}{\textrm{L}}\ ,\  (i = 0, 1, \cdots, \textrm{L}-1 )
 
 
 <p>
-移動平均フィルタの<a href="../text01/page12.html">周波数特性</a>は次のようになります(※)。
+移動平均フィルタの<a href="../text01/page12.html">周波数特性</a>は次のようになります。
 <br>
-ただし式を簡単にするために今回は $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ を定義しました。
+ただし式を簡単にするために今回は $\textrm{L}$ は奇数のみとしました。
 </p>
 
 <p>
-※ この特性式の求め方はインパルス応答の遅延等を考える必要があって結構難しいので<a href="./page03.html">次ページ</a>でじっくりと説明します。
+※ この式の求め方は結構難しいので<a href="./page03.html">次ページ</a>でじっくりと説明します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>移動平均フィルタの周波数特性: </b>
+<input type="checkbox"><b>移動平均フィルタの周波数特性</b>
 
 <p>
-$\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする。
+フィルタ長 $\textrm{L}$ を奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする
 </p>
 
 \begin{align*}
@@ -115,7 +111,7 @@ $\textrm{L}$ は奇数とし、$\textrm{C} = (\textrm{L}-1)/2$ とする。
 </div>
 
 <p>
-この後<a href="./practice.html">演習</a>で確認しますが、移動平均フィルタの周波数特性はローパス特性になります。
+グラフを描くと分かりますが<b>移動平均フィルタの周波数特性はローパス特性</b>になります。
 <br>
 ただしフィルタ長 $\textrm{L}$ が短いと緩慢な減衰特性になるので、高周波ノイズをきちんと取り除きたい場合はある程度の長さにしないといけません。
 </p>

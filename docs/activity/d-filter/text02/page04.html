@@ -27,10 +27,24 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR ハイパスフィルタのインパルス応答: </b>
+<input type="checkbox"><b>FIR ハイパスフィルタのインパルス応答</b>
 
 <p>
-$\alpha$ を正規化カットオフ周波数
+$w_c$ [rad/秒] ・・・ カットオフ角周波数
+</p>
+<p>
+$w_s$ [rad/秒] ・・・サンプリング角周波数
+</p>
+<p>
+$f_c$ [Hz] ・・・カットオフ周波数
+</p>
+<p>
+$f_s$ [Hz] ・・・サンプリング周波数
+</p>
+<p>
+とする。
+<br>
+また $\alpha$ を正規化カットオフ周波数
 <p>
 
 \begin{align*}
@@ -39,20 +53,12 @@ $\alpha$ を正規化カットオフ周波数
 
 <p>
 とする。
-</p>
-
-<p>
-ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
 <br>
-また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
-</p>
-
-<p>
 さらに FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とする)、正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義する。
 </p>
 
 <p>
-この時、FIR ハイパスパスフィルタのインパルス応答は次の式で表される。
+この時、FIR ハイパスフィルタのインパルス応答は次の式で表される。
 </p>
 
 \begin{align*}
@@ -70,7 +76,7 @@ h[\textrm{C}-i] = h[\textrm{C}+i] = -\frac{\sin ( \pi \cdot i \cdot \alpha  )}{\
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR ハイパスフィルタの伝達関数: </b>
+<input type="checkbox"><b>FIR ハイパスフィルタの伝達関数</b>
 
 <p>
 $h[i]$ を上で計算した FIR ハイパスフィルタのインパルス応答とした時
@@ -89,7 +95,7 @@ $h[i]$ を上で計算した FIR ハイパスフィルタのインパルス応�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR ハイパスフィルタの周波数特性: </b>
+<input type="checkbox"><b>FIR ハイパスフィルタの周波数特性</b>
 
 <p>
 $h[i]$ を上で計算した FIR ハイパスフィルタのインパルス応答とした時

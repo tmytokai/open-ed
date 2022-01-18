@@ -37,11 +37,11 @@
 </p>
 
 <div class="info">
-<input type="checkbox"><b>非因果的なディジタルフィルタの伝達関数: </b>
+<input type="checkbox"><b>非因果的なディジタルフィルタの伝達関数</b>
 
 
 <p>
-インパルス応答が時刻 $-\infty$ から $\infty$ まであるディジタルフィルタのことを非因果的なディジタルフィルタと呼び、その伝達関数は以下で表される。
+インパルス応答が時刻 $-\infty$ から $\infty$ まであるディジタルフィルタのことを「非因果的なディジタルフィルタ」と呼び、その伝達関数は以下で表される。
 </p>
 
 \begin{align*}
@@ -54,17 +54,17 @@
 <p>
 なお上の式で $\sum$ の範囲が $-\infty$ から $\infty$ までとなっている注意してください。
 <br>
-今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼びますが、上の式のように $\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを<b>両側Z変換</b>と呼びます。
+今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼びますが、上の式のように $\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを「<b>両側Z変換</b>」と呼びます。
 </p>
 
 <p>
-さて、この伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性</a> $\textrm{H}(w)$ を求めます。
+さてこのフィルタが安定であると仮定し、伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性</a> $\textrm{H}(w)$ を求めます。
 <br>
 ここで $\tau$ [秒] は<a href="../../d-signal/text02/page01.html">サンプリング間隔</a>です。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>非因果的なディジタルフィルタの周波数特性: </b>
+<input type="checkbox"><b>非因果的なディジタルフィルタの周波数特性</b>
 
 \begin{align*}
 \textrm{H}(w) 
@@ -74,20 +74,31 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 \right \}
 \end{align*}
 
+<p>
+※ フィルタは安定であるとする
+</p>
+
 </div>
 
 <p>
-ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので、思い切って周波数特性$\textrm{H}(w)$ の位相特性は常に 0 [rad] で、振幅特性が偶関数かつ周期 $w_s$ [rad/秒] で周期的であると仮定します。
-<br>
-ここで $w_s$ [rad/秒] は<a href="../../d-signal/text02/page01.html">サンプリング角周波数</a>です。
+ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので
 </p>
 
 <p>
-すると 周波数特性 $\textrm{H}(w)$ は実関数で、かつ周期性角周波数領域アナログ信号になります(図1)。
+・ 振幅特性 $|\textrm{H}(w)|$は偶関数かつ周期 $w_s$ [rad/秒] で周期的 ※ $w_s$ [rad/秒] は<a href="../../d-signal/text02/page01.html">サンプリング角周波数</a>
+</p>
+<p>
+・ 位相特性は常に $\angle \textrm{H}(w) = 0$
+</p>
+
+<p>
+と仮定します。
+<br>
+すると 周波数特性 $\textrm{H}(w)$ は実関数かつ周期性角周波数領域アナログ信号になります(図1)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数であると仮定する: </b>
+<input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数であると仮定する</b>
 
 <p>
 　
@@ -100,14 +111,14 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 <p>
 次にインパルス応答 $h[i]$ を $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により求めます。
 <br>
-ここで $\textrm{H}(w)$ は虚数成分を含まない実関数でかつ偶関数であると仮定したので、インパルス応答 $h[i]$ も実数かつ偶関数となり、以下の式で求められます。
+ここで $\textrm{H}(w)$ は虚数成分を含まない実関数でかつ偶関数であると仮定したので、インパルス応答 $h[i]$ も実数かつ偶関数となって以下の式で求められます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>非因果的なディジタルフィルタのインパルス応答: </b>
+<input type="checkbox"><b>非因果的なディジタルフィルタのインパルス応答</b>
 
 \begin{align*}
-h[i] = \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}} 
+h[i] = \frac{2}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{H}(w) \cdot \cos ( i \cdot w \cdot \tau )
 \right \}
@@ -128,7 +139,7 @@ h[i] = \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}}
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図2： 理想的なローパス特性: </b>
+<input type="checkbox"><b>図2： 理想的なローパス特性</b>
 
 <p>
 　
@@ -147,7 +158,7 @@ $w_c$ ・・・ カットオフ角周波数、$w_c \leq w_s/2$、単位は[rad/�
 </p>
 
 \begin{align*}
-h[i] &= \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}} 
+h[i] &= \frac{2}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{H}(w) \cdot \cos (i \cdot w \cdot \tau )
 \right \}
@@ -165,13 +176,34 @@ h[i] &= \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}}
 <p>
 となります。
 <br>
-なお $i=0$ の時は $\lim_{x\rightarrow 0} \sin(x)/x = 1$ の公式を使って $h[0] = \alpha$ になります。
+なお $i=0$ の時は
+</p>
+
+\[
+\lim_{x\rightarrow 0} \frac{\sin(x)}{x} = 1
+\]
+
+<p>
+の公式より $h[0] = \alpha$ になります。
 </p>
 
 <p>
-また$f_s$ [Hz] をサンプリング周波数、$f_c$ [Hz] をカットオフ周波数とすると $\alpha = w_c/(w_s/2) = 2\pi f_c / ( 2\pi f_s /2 ) = f_c / (f_s/2)$ と変形できます。
+また $f_s$ [Hz] をサンプリング周波数、$f_c$ [Hz] をカットオフ周波数とすると
+</p>
+
+
+\begin{align*}
+\alpha &= \frac{w_c}{(w_s/2)} \\
+&= \frac{ 2\pi \cdot f_c }{ ( 2\pi\cdot f_s /2) }\\
+&= \frac{f_c}{(f_s/2)}
+\end{align*}
+
+<p>
+と変形できます。
 <br>
-すると $\alpha$ はカットオフ周波数 $f_c$ がナイキスト角周波数 $f_s/2$ の時に $\alpha = 1$ になるように正規化されていることになりますので、$\alpha$のことを「<b>正規化カットオフ周波数</b>」と言います。
+つまり $\alpha$ はカットオフ周波数 $f_c$ がナイキスト角周波数 $f_s/2$ の時に $\alpha = 1$ になるように正規化されていることになります。
+<br>
+そのため $\alpha$ のことを「<b>正規化カットオフ周波数</b>」と言います。
 </p>
 
 <p>
@@ -179,10 +211,24 @@ h[i] &= \frac{2}{w_s} \int_{0}^{\frac{w_s}{2}}
 </p>
 
 <div class="info">
-<input type="checkbox"><b>非因果的な理想ローパスフィルタのインパルス応答: </b>
+<input type="checkbox"><b>非因果的な理想ローパスフィルタのインパルス応答</b>
 
 <p>
-$\alpha$ を正規化カットオフ周波数
+$w_c$ [rad/秒] ・・・ カットオフ角周波数
+</p>
+<p>
+$w_s$ [rad/秒] ・・・サンプリング角周波数
+</p>
+<p>
+$f_c$ [Hz] ・・・カットオフ周波数
+</p>
+<p>
+$f_s$ [Hz] ・・・サンプリング周波数
+</p>
+<p>
+とする。
+<br>
+また $\alpha$ を正規化カットオフ周波数
 <p>
 
 \begin{align*}
@@ -191,11 +237,6 @@ $\alpha$ を正規化カットオフ周波数
 
 <p>
 とする。
-</p>
-<p>
-ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
-<br>
-また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
 </p>
 
 <p>
@@ -213,13 +254,15 @@ h[-i] = h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{(\pi \cdot i) }\ ,\  (i
 </div>
 
 <p>
-ただ、このままではインパルス応答が無限個存在することになってしまうので、インパルス応答を途中で打ち切って無理やり FIR フィルタにします。
-<br>
-そのためにはまず FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とします)、次に正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義し、$h[-\textrm{C}]$ から $h[\textrm{C}]$ までの $\textrm{L}$ 個のインパルス応答だけ取り出します(図3)。
+ただしこのままではインパルス応答が無限個存在することになってしまうので、インパルス応答を途中で打ち切って無理やり FIR フィルタにします。
+</p>
+
+<p>
+そのためにまず FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とします)、次に正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義し、$h[-\textrm{C}]$ から $h[\textrm{C}]$ までの $\textrm{L}$ 個のインパルス応答だけ取り出します(図3)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図3： インパルス応答を $\textrm{L}$ 個だけ取り出して無理やり FIR フィルタにする: </b>
+<input type="checkbox"><b>図3： インパルス応答を $\textrm{L}$ 個だけ取り出して無理やり FIR フィルタにする</b>
 
 <p>
 $\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
@@ -237,7 +280,7 @@ $\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
 <p>
 もちろん無理やりFIRフィルタにしたので周波数特性も変化します。
 <br>
-具体的には、$h[i]$ に $-\textrm{C}$ から $\textrm{C}$ までの範囲で両側Z変換を行って伝達関数
+具体的には $h[i]$ に $-\textrm{C}$ から $\textrm{C}$ までの範囲で両側Z変換を行って伝達関数
 </p>
 
 \begin{align*}
@@ -274,11 +317,11 @@ h[i] \cdot \left \{
 \end{align*}
 
 <p>
-最後の式にオイラー公式を適用すると、FIR フィルタの周波数特性が次のように出てきます。
+最後の式にオイラー公式を適用すると周波数特性は次のように求まります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>非因果的な FIR ローパスフィルタの周波数特性: </b>
+<input type="checkbox"><b>非因果的な FIR ローパスフィルタの周波数特性</b>
 
 <p>
 　
@@ -316,12 +359,14 @@ h[i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{(\pi \cdot i) }\ ,\  (i = 1, \c
 
 <p>
 このギブス現象を軽減させるため、普通は FIR フィルタを設計する際にハミング窓などの「<b>窓関数</b>」がインパルス応答にかけられます。
-<br>
-ただ今回のアクティビティでは窓関数は扱いませんので、必要になった時に自分で調べて下さい。
+</p>
+
+<p>
+※ 今回のアクティビティでは窓関数を扱いませんので必要になった時に自分で調べて下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図4： 非因果的な FIR ローパスフィルタの周波数特性の例: </b>
+<input type="checkbox"><b>図4： 非因果的な FIR ローパスフィルタの周波数特性の例</b>
 
 <p>
 $w_s = 2\pi$、$w_c = \pi/2$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
@@ -332,10 +377,10 @@ $w_s = 2\pi$、$w_c = \pi/2$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=
 </div>
 
 <p>
-次に因果性を満たすフィルタ(※)になるようにインパルス応答を変化させます。 
+次に因果性を満たすフィルタになるようにインパルス応答を変化させます。 
 </p>
 <p>
-※ インパルス信号を入力してからインパルス応答が出てくる普通のディジタルフィルタのことです。
+※ 「因果性を満たすフィルタ」とはインパルス信号を入力してからインパルス応答が出てくる普通のディジタルフィルタのことです。
 </p>
 <p>
 と言っても単に時刻 $\textrm{C}$ だけインパルス応答を遅延させるだけなので、結局 FIR ローパスフィルタのインパルス応答は次のようになります。
@@ -343,10 +388,24 @@ $w_s = 2\pi$、$w_c = \pi/2$、$\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=
 
 
 <div class="info">
-<input type="checkbox"><b>FIR ローパスフィルタのインパルス応答: </b>
+<input type="checkbox"><b>FIR ローパスフィルタのインパルス応答</b>
 
 <p>
-$\alpha$ を正規化カットオフ周波数
+$w_c$ [rad/秒] ・・・ カットオフ角周波数
+</p>
+<p>
+$w_s$ [rad/秒] ・・・サンプリング角周波数
+</p>
+<p>
+$f_c$ [Hz] ・・・カットオフ周波数
+</p>
+<p>
+$f_s$ [Hz] ・・・サンプリング周波数
+</p>
+<p>
+とする。
+<br>
+また $\alpha$ を正規化カットオフ周波数
 <p>
 
 \begin{align*}
@@ -355,14 +414,7 @@ $\alpha$ を正規化カットオフ周波数
 
 <p>
 とする。
-</p>
-<p>
-ここで $w_c$ [rad/秒] と $w_s$ [rad/秒] はそれぞれカットオフ角周波数、サンプリング角周波数である。
 <br>
-また $f_c$ [Hz] と $f_s$ [Hz] はそれぞれカットオフ周波数、サンプリング周波数である。
-</p>
-
-<p>
 さらに FIRフィルタ長として適当な正整数 $\textrm{L}$ を決め(ただし $\textrm{L}$ は奇数とする)、正整数 $\textrm{C} = (\textrm{L}-1)/2$ を定義する。
 </p>
 
@@ -385,7 +437,7 @@ h[\textrm{C}-i] = h[\textrm{C}+i] = \frac{\sin ( \pi \cdot i \cdot \alpha  )}{(\
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR ローパスフィルタの伝達関数: </b>
+<input type="checkbox"><b>FIR ローパスフィルタの伝達関数</b>
 
 <p>
 $h[i]$ を上で計算した FIR ローパスフィルタのインパルス応答とした時
@@ -404,7 +456,7 @@ $h[i]$ を上で計算した FIR ローパスフィルタのインパルス応�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>FIR ローパスフィルタの周波数特性: </b>
+<input type="checkbox"><b>FIR ローパスフィルタの周波数特性</b>
 
 <p>
 $h[i]$ を上で計算した FIR ローパスフィルタのインパルス応答とした時
