@@ -12,8 +12,8 @@
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: 複素フーリエ級数展開</a></li>
-<li>学習項目: [1] 複素フーリエ級数展開</li>
+<li><a href="../">アクティビティ: フーリエ級数展開</a></li>
+<li>学習項目: [1] フーリエ級数展開</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -147,16 +147,16 @@ f(-t) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
 f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \}
 \textrm{dt} \\
-(f(t) = f(-t) より) &= \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+(f(t) = f(-t)\ \text{より}) &= \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
 \left \{
 f(t) \cdot 
 \left [
 \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
 +\textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right ]
-\right \{
+\right \}
 \textrm{dt} \\
-(オイラー公式より) &= \frac{2}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+(\text{オイラー公式より}) &= \frac{2}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
 \left \{
 f(t) \cdot \cos(k \cdot w_1 \cdot t)
 \right \}
@@ -188,82 +188,6 @@ f(t) \cdot \cos(k \cdot w_1 \cdot t)
 ですので、$\textrm{C}[k]$は複素数ではなく<b>実数の定数、かつ偶関数になります</b>。
 </p>
 
-<br>
-<h2>参考資料: 周期性角周波数領域アナログ信号の複素フーリエ級数展開と逆離散フーリエ変換</h2>
-
-<p>
-※ 以下は<a href="../../d-filter/">ディジタル線形フィルタの設計</a>で使う内容なので、必要ない場合は読み飛ばして結構です。
-</p>
-
-<br>
-<p>
-周期性時間領域信号ではなく、周期性角周波数領域アナログ信号 $\textrm{F}(w)$ の複素フーリエ級数展開は次の式で与えられます。
-</p>
-
-<p>
-※ 実はこの式は $f[i]$ の(両側)<a href="../../z/">Z変換</a>です。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>定義： 周期性角周波数領域アナログ信号の複素フーリエ級数展開</b>
-
-\begin{align*}
-\textrm{F}(w) = \sum_{i = -\infty}^{\infty} 
-\left \{
-f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau  \}}
-\right \}
-\end{align*}
-
-<p>
-$\textrm{F}(w)$ ・・・周期 $w_s$ [rad/秒] の周期性角周波数領域アナログ信号
-</p>
-
-<p>
-$f[i]$ ・・・ サンプリング周波数 $w_s$ [rad/秒] の時間領域(複素)ディジタル信号
-</p>
-
-<p>
-$ \tau = 2\pi/w_s$ ・・・ サンプリング間隔 [秒]
-</p>
-
-</div>
-
-<p>
-ここで時間領域(複素)ディジタル信号 $f[i]$ は次の式で表される「周期性角周波数領域アナログ信号の逆離散フーリエ変換」によって求められます。
-</p>
-
-<p>
-※ $f[i]$ が周期的な場合は<a href="../../dft/text01/page02.html">IDFT</a>になります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>定義: 周期性角周波数領域アナログ信号の逆離散フーリエ変換</b>
-
-\begin{align*}
-f[i] = \frac{1}{w_s} \int_{-w_s/2}^{w_s/2} 
-\left \{
-\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
-\right \}
-\textrm{d}w
-\end{align*}
-
-</div>
-
-<p>
-なお上でおこなった説明と同様に、もし $\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
-</p>
-
-\begin{align*}
-f[i] = \frac{2}{w_s} \int_{0}^{w_s/2} 
-\left \{
-\textrm{F}(w) \cdot \cos (i \cdot w \cdot \tau )
-\right \}
-\textrm{d}w
-\end{align*}
-
-<p>
-となり、 $f[i]$ は実数の定数かつ偶関数になります。
-</p>
 
 <br>
 <script>PreNext(4,5)</script>
