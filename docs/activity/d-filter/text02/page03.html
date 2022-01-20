@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここでは<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>を用いて FIR ローパスフィルタを設計したいと思います。
+ここでは FIR ローパスフィルタを設計したいと思います。
 </p>
 
 <p>
@@ -36,6 +36,10 @@
 この非因果的なディジタルフィルタのインパルス応答を<a href="../../z"> Z 変換</a>して<a href="../text01/page05.html">伝達関数</a>を求めます。
 </p>
 
+<p>
+※ $\sum$ の範囲が $-\infty$ から $\infty$ まであるので両側 Z 変換になります。
+</p>
+
 <div class="info">
 <input type="checkbox"><b>非因果的なディジタルフィルタの伝達関数</b>
 
@@ -48,14 +52,7 @@
 \textrm{H}(z) 
 = \sum_{i=-\infty}^{\infty} \{ h[i] \cdot z^{-i} \}
 \end{align*}
-
 </div>
-
-<p>
-なお上の式で $\sum$ の範囲が $-\infty$ から $\infty$ までとなっている注意してください。
-<br>
-今まで考えてきたような $\sum$ の範囲が $0$ から $\infty$ までのZ変換のことを<a href="../../z/text01/page01.html">片側Z変換</a>と呼びますが、上の式のように $\sum$ の範囲が $-\infty$ から $\infty$ まであるZ変換のことを「<b>両側Z変換</b>」と呼びます。
-</p>
 
 <p>
 さてこのフィルタが安定であると仮定し、伝達関数に $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性</a> $\textrm{H}(w)$ を求めます。
@@ -73,45 +70,44 @@
 h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 \right \}
 \end{align*}
-
-<p>
-※ フィルタは安定であるとする
-</p>
-
 </div>
 
 <p>
-ここから少しトリッキーな話になりますが、どうせディジタル信号にはナイキスト角周波数よりも大きい角周波数のサイン波は含まれていませんし、因果性も無視していますので
-</p>
+この式は $h[i]$ の <a href="../../dtft/">離散時間フーリエ変換(DTFT)</a>となっている事に注目して下さい。
+</P>
 
 <p>
-・ 振幅特性 $|\textrm{H}(w)|$は偶関数かつ周期 $w_s$ [rad/秒] で周期的 ※ $w_s$ [rad/秒] は<a href="../../d-signal/text02/page01.html">サンプリング角周波数</a>
-</p>
-<p>
-・ 位相特性は常に $\angle \textrm{H}(w) = 0$
-</p>
-
-<p>
-と仮定します。
+次に $\textrm{H}(w)$ をフィルタの仕様に従って好きに設計し、$\textrm{H}(w)$ の逆離散時間フーリエ変換(IDTFT)によってインパルス応答 $h[i]$ を求めます。
 <br>
-すると 周波数特性 $\textrm{H}(w)$ は実関数かつ周期性角周波数領域アナログ信号になります(図1)。
+ただし $\textrm{H}(w)$ は周期 $w_s$ [rad/秒] の周期的な複素関数にする必要があります。
+<br>
+さらに、少しトリッキーな話になりますが、計算を簡単にするために
+</p>
+<p>
+「振幅特性 $|\textrm{H}(w)|$ は偶関数である」
+</p>
+<p>
+「位相特性 $\angle \textrm{H}(w)$ は常に 0 である」
+</p>
+<p>
+という仮定します(図1)。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図1： 周波数特性が偶関数かつ周期 $w_s$ [rad/秒] の実関数であると仮定する</b>
-
-<p>
-　
-</p>
-
+<p>　</p>
 <img src="./img/page03-fig1.png" alt="">
-
 </div>
 
 <p>
-次にインパルス応答 $h[i]$ を $\textrm{H}(w)$ の<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>により求めます。
-<br>
-ここで $\textrm{H}(w)$ は虚数成分を含まない実関数でかつ偶関数であると仮定したので、インパルス応答 $h[i]$ も実数かつ偶関数となって以下の式で求められます。
+当然ですがこの図 1 はただの例ですので、フィルタ仕様に従って自分で好きに振幅特性を決めても結構です。
+</p>
+
+<p>
+さて $\textrm{H}(w)$ は実関数でかつ偶関数であると仮定したのでインパルス応答 $h[i]$ も偶関数となり以下の式で求められます。
+</p>
+<p>
+※ この式の導出方法は<a href="../../dtft/text01/page01.html">こちら</a>
 </p>
 
 <div class="info">
@@ -123,15 +119,12 @@ h[i] = \frac{2}{w_s} \int_{0}^{w_s/2}
 \textrm{H}(w) \cdot \cos ( i \cdot w \cdot \tau )
 \right \}
 \textrm{dw}
-\ ,\  (i = 0, \pm 1, \pm 2, \cdots)
 \end{align*}
-
 </div>
 
 <p>
-当然ですが図1の $\textrm{H}(w)$ はただの例ですので、自分で好きに特性を決めても結構です。
 <br>
-今回は手始めとしてローパスフィルタを設計してみましょう。
+準備が終わりましたので、早速ローパスフィルタを設計してみましょう。
 </p>
 
 <p>
@@ -154,7 +147,7 @@ $w_c$ ・・・ カットオフ角周波数、$w_c \leq w_s/2$、単位は[rad/�
 </div>
 
 <p>
-図2の $\textrm{H}(w)$ に対して<a href="../../fourier/text01/page04.html">逆離散フーリエ変換</a>を行ってインパルス応答を求めると、
+図2の $\textrm{H}(w)$ に対するインパルス応答は
 </p>
 
 \begin{align*}
@@ -169,8 +162,8 @@ h[i] &= \frac{2}{w_s} \int_{0}^{w_s/2}
 \right \}
 \textrm{dw} \\
 &= \frac{2}{w_s} \cdot \frac{1}{ i \cdot \tau} \cdot \sin ( i \cdot w_c \cdot \tau ) \\
-(\tau = 2\pi/w_s より) &= \frac{1}{\pi \cdot i } \cdot \sin \left [ \pi \cdot i \cdot \frac{w_c}{(w_s/2)} \right ] \\
-(\alpha = \frac{w_c}{(w_s/2)} とおいて) &= \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }
+(\tau = 2\pi/w_s \ \text{より}) &= \frac{1}{\pi \cdot i } \cdot \sin \left [ \pi \cdot i \cdot \frac{w_c}{(w_s/2)} \right ] \\
+(\alpha = \frac{w_c}{(w_s/2)} \ \text{とおいて}) &= \frac{\sin ( \pi \cdot i \cdot \alpha  )}{\pi \cdot i }
 \end{align*}
 
 <p>
@@ -184,10 +177,16 @@ h[i] &= \frac{2}{w_s} \int_{0}^{w_s/2}
 \]
 
 <p>
-の公式より $h[0] = \alpha$ になります。
+の公式に $x = \pi \cdot i \cdot \alpha$ を代入することで
 </p>
 
+\[
+h[0] = \alpha
+\]
+
 <p>
+となります。
+<br>
 また $f_s$ [Hz] をサンプリング周波数、$f_c$ [Hz] をカットオフ周波数とすると
 </p>
 
@@ -280,16 +279,7 @@ $\alpha = 0.5$、$\textrm{L} = 13$、$\textrm{C}=6$ の例
 <p>
 もちろん無理やりFIRフィルタにしたので周波数特性も変化します。
 <br>
-具体的には $h[i]$ に $-\textrm{C}$ から $\textrm{C}$ までの範囲で両側Z変換を行って伝達関数
-</p>
-
-\begin{align*}
-\textrm{H}(z) 
-= \sum_{i=-\textrm{C}}^{\textrm{C}} \{ h[i] \cdot z^{-i} \}
-\end{align*}
-
-<p>
-を求めたあと $z = \textrm{e}^{j \cdot w \cdot \tau}$ を代入して<a href="../text01/page12.html">周波数特性を求めます</a>。
+具体的に計算すると周波数特性は
 </p>
 
 \begin{align*}
@@ -307,7 +297,7 @@ h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 \left \{
 h[i] \cdot \textrm{e}^{\{ -j \cdot i \cdot w \cdot \tau \}}
 \right \}  \\
-(h[i] = h[-i] なので) & = h[0] 
+(h[i] = h[-i] \ \textrm{なので}) & = h[0] 
 + \sum_{i = 1}^{\textrm{C}} 
 \left [
 h[i] \cdot \left \{ 
