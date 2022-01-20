@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. DTFT と IDTFTの定義</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
+<li>学習項目: [1] DTFT と ITDFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+周期性が無い一般的な時間領域ディジタル信号 $f[i]$ から周波数領域の複素関数であるスペクトル $\textrm{F}(w)$ を求める演算を DTFT (Discrete Time Fourier Transform: 離散時間フーリエ変換 )と言います。
+<br>
+あるいは関数 $\textrm{F}(w)$ そのものを DTFT と呼びます。
+
+<p>
+DTFT はディジタル信号版の<a href="../../ft/">フーリエ変換</a>ですが、周期性時間領域ディジタル信号の周期を無限大にしたときの<a href="../../dft">離散フーリエ変換(DFT)</a>とみなすことも出来ます。
+<br>
+DTFT の定義は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: DTFT (Discrete Time Fourier Transform: 離散時間フーリエ変換)</b>
+
+\[
+\textrm{F}(w) = \sum_{i=-\infty}^{\infty}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\]
+
+<p>
+$f[i]$ ・・・ 時間領域ディジタル信号
+</p>
+
+<p>
+$\tau$ [秒] ・・・ サンプリング間隔
+</p>
+
+</div>
+
+<p>
+ここで $w_s$ [rad/秒] をサンプリング角周波数とすると $\tau = 2\pi / w_s$ なので、$n$ を任意の整数としたとき
+</p>
+
+\begin{align*}
+\textrm{F}(w + n \cdot w_s) 
+&= \sum_{i=-\infty}^{\infty} \left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot (w + n \cdot w_s) \cdot \tau \}} 
+\right \} \\
+&= \sum_{i=-\infty}^{\infty} \left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot \textrm{e}^{\{-j \cdot i \cdot n \cdot w_s \cdot \tau \}}
+\right \} \\
+&= \sum_{i=-\infty}^{\infty} \left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot \textrm{e}^{\{-j \cdot i \cdot n \cdot 2\pi \}}
+\right \} \\
+&= \sum_{i=-\infty}^{\infty} \left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot 1
+\right \} \\
+&= \textrm{F}(w)
+\end{align*}
+
+<p>
+が成り立ちますので $\textrm{F}(w)$ は周期 $w_s$ の複素関数であることが分かります。
+</p>
+
+<p>
+一方 $\textrm{F}(w)$ から元の $f[i]$ を復元する演算を IDTFT (Inverse Discrete Time Fourier Transform: 逆離散時間フーリエ変換)と言います。
+<br>
+IDTFT の定義は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義: IDTFT(Inverse Discrete Time Fourier Transform: 逆離散時間フーリエ変換)</b>
+
+\[
+f[i] = \frac{1}{w_s} \int_{-w_s/2}^{w_s/2}
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w
+\]
+
+<p>
+$f[i]$ ・・・ 時間領域ディジタル信号
+</p>
+
+<p>
+$w_s$ [rad/秒] ・・・ サンプリング角周波数
+</p>
+
+<p>
+$\tau$ [秒] ・・・ サンプリング間隔、$\tau = 2\pi/w_s$
+</p>
+
+</div>
+
+
+<br>
+<p>
+※ 以下の話は<a href="../../d-filter/">ディジタル線形フィルタ</a>の設計で使う式なので、必要なければ読み飛ばして結構です。
+</p>
+
+<br>
+<p>
+ところでもし $\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
+</p>
+
+\begin{align*}
+f[i]
+&= \frac{1}{w_s} \int_{-w_s/2}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\
+&= \frac{1}{w_s} \int_{-w_s/2}^{0} 
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w
++
+\frac{1}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\
+&= \frac{1}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(-w) \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w
++
+\frac{1}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\
+(\textrm{F}(w) = \textrm{F}(-w)\ \text{より}) &= \frac{1}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot 
+\left [
+\textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} 
++\textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right ]
+\right \}
+\textrm{d}w \\
+(\text{オイラー公式より}) &= \frac{2}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \cos( i \cdot w \cdot \tau)
+\right \}
+\textrm{d}w \\
+
+\end{align*}
+
+<p>
+と、虚数成分が消えてただの実積分になり、しかも 
+</p>
+
+\begin{align*}
+f[-i]
+&= \frac{2}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \cos( -i \cdot w \cdot \tau)
+\right \}
+\textrm{d}w \\
+&= \frac{2}{w_s} \int_{0}^{w_s/2} 
+\left \{
+\textrm{F}(w) \cdot \cos( i \cdot w \cdot \tau )
+\right \}
+\textrm{d}w \\
+&= f[i]
+\end{align*}
+
+<p>
+ですので、<b>時間領域ディジタル信号 $f[i]$ は偶関数になります</b>。
+</p>
+
+<br>
+<script>PreNext(1,3)</script>
+</body>
+</html>
