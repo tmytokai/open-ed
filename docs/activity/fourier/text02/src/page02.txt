@@ -1,0 +1,86 @@
+import numpy as np
+import cmath
+import matplotlib.pyplot as plt
+from scipy import integrate
+
+# 元の信号
+def f(t) :
+    a = 1
+    b = -20
+    c = 10
+    d = 20
+    e = -3
+    return a*t**4 + b*t**3 + c*t**2 + d*t + e
+
+# フーリエ係数
+# 厳密解を計算するのが面倒だったので近似計算した
+def C(k,T) :
+    w1 = 2*np.pi/T
+    a = integrate.quad(
+        lambda t: f(t)*np.cos(-k*w1*t), -T/2, T/2 )[0]/T
+    b = integrate.quad(
+        lambda t: f(t)*np.sin(-k*w1*t), -T/2, T/2 )[0]/T
+    return a+b*1j
+
+# フーリエ級数
+def fourier(t,CC,T,kmax) :
+    w1 = 2*np.pi/T
+    out = 0
+    for k in range(-kmax,kmax): # 本来は無限級数であることに注意
+        out += CC[k+kmax]*cmath.rect(1,k*w1*t)
+    return out
+
+T = 2
+xsize=100
+kmax = 10
+ff = [ f(t) for t in np.arange(-T/2,T/2,T/xsize)]
+CC = [ C(k,T) for k in range(-kmax,kmax) ]
+fr = [ fourier(t,CC,T,kmax).real for t in np.arange(-T/2*5,T/2*5,T/xsize) ]
+
+# 元の信号
+plt.plot(np.arange(-T/2*5,T/2*5,T/xsize), np.r_[ff,ff,ff,ff,ff])
+plt.xticks(np.arange(-T/2*5,T/2*5+1,1))
+for i in range(-3,3):
+    plt.axvline(i*T+T/2,color="gray",linestyle='dashed')
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$f(t)$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 復元した信号
+plt.plot( np.arange(-T/2*5,T/2*5,T/xsize), fr )
+plt.xticks(np.arange(-T/2*5,T/2*5+1,1))
+for i in range(-3,3):
+    plt.axvline(i*T+T/2,color="gray",linestyle='dashed')
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$fourier(t)$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 振幅スペクトル
+w1 = 2*np.pi/T
+W = [ k*w1 for k in range(-kmax,kmax) ]
+ticks = np.arange(-kmax,kmax+1,5)*w1
+labels = ['$-10w_1$','$-5w_1$','0','$5w_1$','$10w_1$']
+for k in range(-kmax, kmax) :
+    w = k*w1
+    absc = abs(CC[k+kmax])
+    plt.plot( w,absc,color="blue",marker='o',markersize=5,linestyle='none')
+    plt.vlines( w,0,absc,color="gray",linestyles='dashed') 
+plt.xticks(ticks=ticks,labels=labels)
+plt.ylim(bottom=0)
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\|{\rm F}(w)|$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 位相スペクトル
+for k in range(-kmax,kmax) :
+    w = k*w1
+    phasec = cmath.phase(CC[k+kmax]) if abs(CC[k+kmax])>0.1 else 0
+    plt.plot( w,phasec,color="blue",marker='o',markersize=5,linestyle='none')
+    plt.vlines( w,0,phasec,color="gray",linestyles='dashed') 
+plt.xticks(ticks=ticks,labels=labels)
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\angle {\rm F}(w)$',rotation=0,labelpad=0,loc="top")
+plt.show()

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. スペクトルの例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: フーリエ級数展開</a></li>
+<li>学習項目: [2] スペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では具体例を示して視覚的にスペクトルを見てみましょう。
+</p>
+
+<p>
+まず今回は周期性時間領域アナログ信号として周期 $\textrm{T}=2$ の
+</p>
+
+\[
+f(t) = t^4 -20 \cdot t^3 + 10 \cdot t^2 + 20 \cdot t -3\ ,\ (-1 \leq t \leq 1 )
+\]
+
+<p>
+を考えます(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 例で使う $f(t)$ </b>
+<p>　</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+この $f(t)$ から求めた振幅・位相スペクトルは以下の様になります。
+<br>
+前ページで説明したように振幅・位相スペクトルは $w = k\cdot w_1$ [rad/秒] の所にだけ値があるディジタル信号になります。
+<br>
+なお今回はグラフの横軸を角周波数 $w$ [rad/秒] としていますが、横軸を周波数 $f$ [Hz] にしたり波長 [m] にする場合も実際には多いです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 振幅スペクトル</b>
+<p>　</p>
+<img src="./img/page02-fig2.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: 位相スペクトル</b>
+<p>　</p>
+<img src="./img/page02-fig3.png" alt="">
+</div>
+
+<p>
+なお複素フーリエ係数 $\textrm{C}[k]$ は共役関係にありましたので、$|\textrm{F}(w)|$ は偶関数、 $\angle \ \textrm{F}(w)$ は奇関数になります。
+<br>
+従って $ w \geq 0$ [rad/秒] 以上の領域だけをスペクトルで示すことも多いです。
+</p>
+
+<p>
+さてフーリエ級数展開を使って復元した信号は次の様になります。
+<br>
+当然ですが元の信号の波形に復元されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: フーリエ級数展開を使って復元した信号</b>
+<p>　</p>
+<img src="./img/page02-fig4.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="./src/page02.txt">こちら</a>です。
+</p>
+
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>
