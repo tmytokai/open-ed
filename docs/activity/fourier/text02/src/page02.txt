@@ -12,7 +12,7 @@ def f(t) :
     e = -3
     return a*t**4 + b*t**3 + c*t**2 + d*t + e
 
-# フーリエ係数
+# 複素フーリエ係数
 # 厳密解を計算するのが面倒だったので近似計算した
 def C(k,T) :
     w1 = 2*np.pi/T
@@ -22,7 +22,7 @@ def C(k,T) :
         lambda t: f(t)*np.sin(-k*w1*t), -T/2, T/2 )[0]/T
     return a+b*1j
 
-# フーリエ級数
+# 複素フーリエ級数
 def fourier(t,CC,T,kmax) :
     w1 = 2*np.pi/T
     out = 0

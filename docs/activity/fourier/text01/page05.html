@@ -50,16 +50,23 @@ a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
 \end{align*}
 
 <p>
-ここで 
+ここで直流成分を
 </p>
 
-\begin{align*}
-\textrm{C}[0] &= a_0 \\
-\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k\geq 1)
-\end{align*}
+\[
+a_0 = \textrm{C}[0]
+\]
 
 <p>
-と置いて代入すると次の式が得られます。
+さらに複素正弦波のパラメータを
+</p>
+
+\[
+\frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} = \textrm{C}[k] \ ,\ (k\geq 1)
+\]
+
+<p>
+と置き変えると次の式が得られます。
 </p>
 
 \begin{align*}
@@ -115,20 +122,7 @@ f(t) = \sum_{k = -\infty}^{\infty}
 \end{align*}
 
 <p>
-が求まります。
-</p>
-
-<p>
-ところで計算途中で出てきた
-</p>
-
-\begin{align*}
-\textrm{C}[0] &= a_0 \\
-\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k\geq 1)
-\end{align*}
-
-<p>
-は次の学習項目で学ぶスペクトル解析の基礎となる重要な式なので覚えておいて下さい。
+になります。
 </p>
 
 <br>
