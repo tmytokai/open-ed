@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. プログラミング</title>
+<title>3. DFT とフーリエ級数展開の関係</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
-<li>学習項目: [1] DFT と IDFT</li>
+<li>学習項目: [1] DFT</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -21,209 +21,647 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-DFTの演算中には複素数が含まれていますので、プログラミングで DFT 係数を求めるためには
+さて IDFT の式を見て<a href="../../fourier/text01/page04.html">複素フーリエ級数展開</a>
 </p>
 
 \[
-\textrm{C}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
 \]
 
 <p>
-の様にDFT係数 $\textrm{C}[k]$ を実数成分 $\textrm{A}[k]$ と虚数成分 $\textrm{B}[k]$ に分けて求めると楽です。
+を思い出した人がいると思いますが、実は
 </p>
 
 <p>
-そこでオイラー公式を使ってDFTの演算中に含まれる複素数を $\sin$ と $\cos$ の和に分解してみましょう。
-<br>
-すると $\textrm{A}[k]$ と $\textrm{B}[k]$ は次の様にして求められます。
+<b>DFT 係数は複素フーリエ係数のディジタル信号版</b>
 </p>
 
-<div class="info">
-<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ の求め方</b>
+<p>
+同様に
+</p>
+
+<p>
+<b>IDFT は複素フーリエ級数展開のディジタル信号版</b>
+</p>
+
+<p>
+に相当します。
+<br>
+ここでは DFT とフーリエ級数展開の関係について話します。
+</p>
+
+<p>
+※ 長い割に結論は上に書いた通りなので、必要無い人はこのページを飛ばして結構です。
+</p>
+
+<br>
+<h2>
+(1) DFT の導出
+</h2>
+
+<br>
+
+<p>
+まず「DFT 係数は複素フーリエ係数のディジタル信号版」の方から説明します。
+</p>
+
+<p>
+DFT を求める対象とする周期性ディジタル信号 $f[i]$ の周期を $\textrm{N}$ 点、サンプリング間隔を $\tau$ [秒]、サンプリング角周波数を $w_s = 2\pi/\tau$ [rad/秒]とします。
+<br>
+また $f[i]$ は周期 $\textrm{T} = \tau \cdot \textrm{N}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングしたとします。
+</p>
+
+<p>
+すると<a href="../../d-signal/text02/page01.html">サンプリング</a>の学習項目で説明した様に
+<p>
 
 \begin{align*}
-\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
-\left \{
-f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-\right \}
-\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
-\textrm{B}[k] &= -\frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
-\left \{
-f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-\right \}
-\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+f[i] = f( \tau \cdot i )
 \end{align*}
 
 <p>
-ここで
-</p>
-
-<p>
-$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
-</p>
-<p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</p>
-<p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</div>
-
-<p>
-このようにすると DFT の演算中に複素数が含まれなくなるので、普通に外側が $k$、内側が $i$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ を求められます。
-</p>
-
-<p>
-またプログラミング言語や表計算ソフトを使えば
+という関係式が出てきます(図1)。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>絶対値と偏角の求め方</b>
-\[
-|\textrm{C}[k]| = \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k])
-\]
-\[
-\angle \ \textrm{C}[k] = \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
-\]
-
+<input type="checkbox"><b>図1:  サンプリング例 </b>
 <p>
-※ プログラミング言語によっては $\textrm{atan2}(\textrm{A}[k],\textrm{B}[k])$ の順の場合もあります。
+$\textrm{N} = 5$ とした例
 </p>
+<img src="./img/page03-fig1.png" alt="">
 </div>
 
 <p>
-より DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \ \textrm{C}[k]$ も簡単に求められます。
+では早速 $f[i]$ をアナログ信号化した信号
 </p>
-
-
-<p>
-同様に IDFT を $\textrm{A}[k]$ と $\textrm{B}[k]$ を使って書き直すと次のようになります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ を用いた IDFT</b>
-
-\[
-f[i] = \sum_{k=0}^{\textrm{N}-1}
-\left \{
-\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
--
-\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-\right \}
-\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1)
-\]
-
-<p>
-ここで
-</p>
-<p>
-$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
-</p>
-<p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</p>
-<p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</div>
-
-<p>
-この場合は外側が $i$、内側が $k$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ から $f[i]$ を復元できます。
-</p>
-
-
-<br>
-<h3>
-(参考) 周期性時間領域ディジタル信号が複素信号の場合
-</h3>
-
-<br>
-<p>
-$f[i]$が複素信号、つまり
-</p>
-
-\[
-f[i] = a[i] + j \cdot b[i]
-\]
-
-<p>
-の場合のDFTは次のようになります
-</p>
-
-<div class="info">
-<input type="checkbox"><b>複素信号の DFT</b>
 
 \begin{align*}
-\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
-\left \{
-a[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-+
-b[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-\right \}
-\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1) \\
-\textrm{B}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
-\left \{
--a[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-+
-b[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-\right \}
-\ ,\  (k = 0, 1, 2, \cdots, \textrm{N}-1)
+f'(t) =
+\begin{cases}
+f[i] &,\ (t = \tau \cdot i) \\[5pt]
+0 &,\ \text(それ以外の時刻)
+\end{cases}
 \end{align*}
 
 <p>
-ここで
+を用いて複素フーリエ係数を求めてみましょう。
+<br>
+ところがこの $f'(t)$ の複素フーリエ係数は
 </p>
-
-<p>
-$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
-</p>
-<p>
-$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
-</p>
-<p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</p>
-<p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</div>
-
-<p>
-IDFTは次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>複素信号の IDFT</b>
 
 \begin{align*}
-a[i] &= \sum_{k=0}^{\textrm{N}-1}
+\textrm{C}[k] 
+&= \frac{1}{\textrm{T}} 
+\int_{-\textrm{T}/2}^{\textrm{T}/2} 
 \left \{
-\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
--
-\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+f'(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \}
-\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1) \\
-b[i] &= \sum_{k=0}^{\textrm{N}-1}
+\textrm{dt} \\[5pt]
+(f'(t)\ \text{は周期的なので})
+&= \frac{1}{\textrm{T}} 
+\int_{0}^{\textrm{T}} 
 \left \{
-\textrm{A}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
-+
-\textrm{B}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+f'(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \}
-\ ,\  (i = 0, 1, 2, \cdots, \textrm{N}-1) \\
+\textrm{dt} \\[5pt]
+&= 
+\frac{1}{\textrm{T}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\int_{\tau \cdot i}^{\tau \cdot i} 
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} \\[5pt]
+&= 
+\frac{1}{\textrm{T}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{ 
+f[i] \cdot \int_{\tau \cdot i}^{\tau \cdot i} \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} 
+\right \}\\[5pt]
+& = 0
 \end{align*}
 
 <p>
-ここで
+という様に結果が 0 になってしまいます。
 </p>
+ 
 <p>
-$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
+積分の幅が 0 であったことが失敗の原因でしたので、今度は図 2 の様に間隔が $\tau$ [秒]、幅が $2\epsilon$ [秒] のパルス波 $g(t)$ を $f(t)$ にかけて作成した信号に対して複素フーリエ係数を求めて最後に $\epsilon \rightarrow 0$ とすることを考えます。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>図2: パルス波 </b>
 <p>
-$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
+$\epsilon$ を微小な正の定数とする
 </p>
-<p>
-$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数、個数は $\textrm{A}[0], \textrm{A}[1], \cdots, \textrm{A}[\textrm{N}-1]$ の $\textrm{N}$ 個
-</p>
-<p>
-$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数、個数は $\textrm{B}[0], \textrm{B}[1], \cdots, \textrm{B}[\textrm{N}-1]$ の $\textrm{N}$ 個
+<img src="./img/page03-fig2.png" alt="">
 </div>
+
+<p>
+ただし $\epsilon$ が小さいとやはり積分結果がほぼ 0 になってしまうので、積分結果が 0 にならないように充分大きい正規化パラメータ $\alpha > 0$ も掛けた信号
+</p>
+
+\[
+f'(t) = \alpha \cdot f(t) \cdot g(t)
+\]
+
+<p>
+に対して複素フーリエ係数を求めます。
+</p>
+
+<p>
+すると今回は
+</p>
+
+\begin{align*}
+\textrm{C}[k] 
+&= 
+\frac{\alpha}{\textrm{T}} 
+\int_{0}^{\textrm{T}} f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} \\[5pt]
+&=
+\frac{\alpha}{\textrm{T}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{ 
+\int_{\tau \cdot i-\epsilon}^{\tau \cdot i +\epsilon} f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
+\end{align*}
+
+<p>
+が得られます。
+<br>
+ここで(本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると)<a href="https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
+<br>
+ 
+\[
+\int_{\tau \cdot i-\epsilon}^{\tau \cdot i +\epsilon} f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} \textrm{dt}
+= 2\epsilon \cdot f(\xi_i) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \xi_i \}} 
+\]
+
+<p>
+を満たす $\xi_i$ が
+</p>
+
+\begin{align*}
+\tau \cdot i - \epsilon \leq \xi_i \leq \tau \cdot i + \epsilon
+\end{align*}
+
+<p>
+の範囲に必ず存在します。
+<br>
+よってこの式を $\textrm{C}[k]$ に代入して
+</p>
+
+\[
+\textrm{C}[k] 
+= 
+\frac{\alpha}{\textrm{T}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{ 
+2\epsilon \cdot f(\xi_i) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \xi_i \}} 
+\right \}
+\]
+
+<p>
+さらに正規化パラメータ $\alpha$ は任意の正整数だったので(やや恣意的ではありますが) $\alpha = \textrm{T}/(2\epsilon\textrm{N})$ として
+</p>
+
+\[
+\textrm{C}[k] 
+= 
+\frac{1}{\textrm{N}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{ 
+f(\xi_i) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \xi_i \}} 
+\right \}
+\]
+
+<p>
+あとは $\epsilon \rightarrow 0 $ とすることで $\xi_i \rightarrow \tau \cdot i $ となりますので、
+</p>
+
+\begin{align*}
+\textrm{C}[k] 
+&= 
+\frac{1}{\textrm{N}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{ 
+f(\tau \cdot i ) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \tau \cdot i \}} 
+\right \} \\[5pt]
+(w_1\cdot \tau = 2\pi/\textrm{N}\ \text{より})
+&=
+\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\end{align*}
+
+<p>
+となり DFT 係数の計算式が導出されました。
+</p>
+
+<p>
+ところで計算途中で出てきた式を変形すると
+</p>
+
+\begin{align*}
+\textrm{C}[k] 
+&=
+\frac{\alpha}{\textrm{T}} 
+\int_{0}^{\textrm{T}} f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} \\[5pt]
+(\alpha = \textrm{T}/(2\epsilon\textrm{N})\ \text{を代入})
+&= 
+\frac{1}{\textrm{N}} 
+\int_{0}^{\textrm{T}} f(t) \cdot \left \{ \frac{g(t)}{2\epsilon}  \right \} \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} \\[5pt]
+\end{align*}
+
+<p>
+となりますが、$\epsilon \rightarrow 0$ の時 $g(t)/(2\epsilon)$ は<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">ディラックのデルタ関数</a> $\delta(t)$ を $\tau$ [秒]おきに並べた信号になります(図3)。
+<br>
+図3の様な信号の事を「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼びます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: くし型関数 </b>
+<p>　</p>
+<img src="./img/page03-fig3.png" alt="">
+</div>
+
+<p>
+つまり
+</p>
+
+\[
+f'(t) = 
+\sum_{i=-\infty}^{\infty} f(t) \cdot \delta(t - \tau \cdot i )
+\]
+
+<p>
+の様に
+</p>
+
+<p>
+「<b>$f(t)$ にくし型関数をかけて作った周期性インパルス信号 $f'(t)$ の複素フーリエ係数が DFT 係数</b>」
+</p>
+
+<p>
+ということも出来ます。
+</p>
+
+<br>
+<h2>
+(2) IDFT の導出
+</h2>
+
+<br>
+<p>
+次に「IDFT は複素フーリエ級数展開のディジタル信号版」について説明します。
+</p>
+
+<p>
+単純に考えれば DFT 係数を複素フーリエ級数展開に代入するだけで IDFT が導出される様な気がしますが、実はそうすると $f[i] = \infty$ または  $f[i] = -\infty$ または $f[i] = 0$ となって上手く行きません。
+<br>
+(1)の最後の方で述べた様に「周期性インパルス信号の複素フーリエ係数が DFT 係数」でしたので当然の話ではあるのですが、一応真面目に証明すると次の様になります。
+</p>
+
+<p>
+まず複素フーリエ級数展開に DFT 係数を代入して $f[i]$ を求めます。
+<br>
+なお $f[i]$ は周期性信号なので $i$ の範囲は $0 \leq i \leq \textrm{N}-1$ とします。
+</p>
+
+\begin{align*}
+f[i]
+= f( \tau \cdot i) 
+&= \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot i \}}
+\right \} \\[5pt]
+
+&= \sum_{k = -\infty}^{\infty} 
+\left \{
+\left [
+\frac{1}{\textrm{N}} \sum_{i'=0}^{\textrm{N}-1}
+\left \{
+f[i'] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i' \}} 
+\right \}
+\right ] 
+\cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot i \}}
+\right \}
+\end{align*}
+
+<p>
+ここで周期 $\textrm{N}$ [点] を周期 $\textrm{T}$ [秒] に変換すると $\textrm{T} = \tau \cdot \textrm{N}$ だったので
+</p>
+
+\[
+\frac{2\pi}{\textrm{N}} = \frac{2\pi\tau}{\tau \cdot \textrm{N}} = \frac{2\pi\tau}{\textrm{T}} = w_1 \cdot \tau
+\]
+
+<p>
+を代入して
+</p>
+
+\begin{align*}
+f[i]
+&= \sum_{k = -\infty}^{\infty} 
+\left \{
+\left [
+\frac{1}{\textrm{N}} \sum_{i'=0}^{\textrm{N}-1}
+\left \{
+f[i'] \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \tau \cdot i' \}} 
+\right \}
+\right ] 
+\cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot i \}}
+\right \} \\[5pt]
+
+&= 
+\sum_{i'=0}^{\textrm{N}-1}
+\left \{
+f[i'] \cdot 
+\left [
+\frac{1}{\textrm{N}} 
+\sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \tau \cdot i'\}} 
+\cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot i \}}
+\right \}
+\right ] 
+\right \}
+\\[5pt]
+
+&= 
+\sum_{i'=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot 
+\left [
+\frac{1}{\textrm{N}} 
+\sum_{k = -\infty}^{\infty} 
+\textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot (i - i') \}} 
+\right ] 
+\right \}
+\\
+
+\end{align*}
+
+<p>
+となります。
+<br>
+さて $i'$ に関する総和において、 $i' = i$ の項は
+</p>
+
+\[
+f[i'] \cdot 
+\left [
+\frac{1}{\textrm{N}} 
+\sum_{k = -\infty}^{\infty} 
+1
+\right ]
+\rightarrow \infty \ \text{または}\ -\infty \ \text{または}\ 0
+\]
+
+<p>
+となります。
+</p>
+
+<p>
+次に $i' \neq i$ の項が 0 になることを証明します。
+<br>
+$i' \neq i$ の項はこのままでは収束しませんので、一旦ラプラス変換の様に複素角周波数を導入します。
+<br>
+具体的には
+</p>
+
+\[
+j \cdot w_1 \cdot (i-i')
+\]
+
+<p>
+を
+</p>
+
+\[
+s = \sigma + j \cdot w_1 \cdot (i-i')
+\]
+
+<p>
+に置き換えて後から $\sigma \rightarrow 0$ とします。
+<br>
+すると
+</p>
+
+\begin{align*}
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\sum_{k = -\infty}^{\infty} 
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
+\right ]
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\left \{
+\sum_{k = 0}^{\infty} 
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
++
+\sum_{k = -\infty}^{0} 
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
+-1
+\right \}
+\right ] \\[5pt]
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\sum_{k = 0}^{\infty} 
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
++
+\lim_{\sigma \rightarrow 0}
+\sum_{k = 0}^{\infty} 
+\textrm{e}^{\{ -s \cdot \tau \cdot k \}} 
+-1
+\right ] \\[5pt]
+
+\end{align*}
+
+<p>
+となりますが、少しごちゃごちゃして来たので更に
+</p>
+
+\[
+z = \textrm{e}^{s \cdot \tau}
+\]
+
+<p>
+で置き換えて
+</p>
+
+\begin{align*}
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\sum_{k = -\infty}^{\infty} 
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
+\right ]
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\sum_{k = 0}^{\infty} 
+z^k
++
+\lim_{\sigma \rightarrow 0}
+\sum_{k = 0}^{\infty} 
+z^{-k}
+-1
+\right ] \\[5pt]
+
+\end{align*}
+
+
+<p>
+とします。
+<br>
+さてここで $\sigma < 0$ なら
+</p>
+
+\[
+|z| = |\textrm{e}^{ s \cdot \tau }|
+=
+\textrm{e}^{ \sigma \cdot \tau }
+< 1
+\]
+
+<p>
+$\sigma > 0$ なら
+</p>
+
+\[
+|z^{-1}| = |\textrm{e}^{\{ -s \cdot \tau \}}|
+=
+\textrm{e}^{\{ -\sigma \cdot \tau \}}
+< 1
+\]
+
+<p>
+となるので、最初の lim は $\sigma$ を負の領域内で、2番目の lim は正の領域内で 0 に近づけることにすれば無限等比級数の和が収束するので
+</p>
+
+\begin{align*}
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\sum_{k = -\infty}^{\infty} 
+\textrm{e}^{\{ s \tau \cdot k \}} 
+\right ] 
+
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\lim_{\sigma \rightarrow 0}
+\frac{1}{1-z }
++
+\lim_{\sigma \rightarrow 0}
+\frac{1}{1-z^{-1}}
+-1
+\right ] \\[5pt]
+
+(z_0 = \lim_{\sigma \rightarrow 0} z\ \text{とおいて})
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\frac{1}{1-z_0}
++
+\frac{1}{1-z_0^{-1}}
+-1
+\right ] \\[5pt]
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\frac{(1-z_0^{-1}) + (1 - z_0)}{(1-z_0)\cdot(1-z_0^{-1})}
+-1
+\right ] \\[5pt]
+
+&=
+f[i'] \cdot 
+\frac{1}{\textrm{N}} 
+\cdot
+\left [
+\frac{2-z_0^{-1}- z_0}{2-z_0^{-1}- z_0}
+-1
+\right ] \\[5pt]
+
+&= 0
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<p>
+長くなりましたが、以上より DFT 係数をそのまま複素フーリエ級数展開に代入すると $f[i] = \infty$ または  $f[i] = -\infty$ または $f[i] = 0$ となることが分かりました。
+<br>
+この様になる根本的な原因は $k$ の総和を $-\infty$ から $\infty$ の範囲で取っていた事であり、そもそも DFT 係数は周期性を持ってますので全ての $k$ に関して足し合わせる必要もありません。
+</p>
+
+<p>
+そこで $k$ の総和の範囲を $0$ から $\textrm{N}-1$ に限定した
+</p>
+
+\begin{align*}
+f[i]
+= f( \tau \cdot i) 
+&= \sum_{k = 0}^{\textrm{N}-1}
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot \tau \cdot i \}}
+\right \} \\[5pt]
+
+(w_1\cdot\tau = 2\pi/\textrm{N}\ \text{より})
+&= \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+
+\end{align*}
+
+<p>
+を IDFT として定義することにします。
+<br>
+すると DFT 係数から $f[i]$ が正しく復元出来るようになります。
+</p>
+
+<p>
+※ この証明は簡単ですしネットでいくらでも検索出来ますので省略します。
+</p>
 
 <br>
 <script>PreNext(3,5)</script>

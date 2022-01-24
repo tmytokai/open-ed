@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. DFT によるスペクトル解析</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
+<li>学習項目: [2] スペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+DFT 係数 $\textrm{C}[k]$ が周期性時間領域ディジタル信号に対するスペクトルとなりますが、$\textrm{C}[k]$ が何 [rad/秒]の角周波数のサイン波の振幅と位相を現しているか分からないという問題があります。
+<br>
+そこで以下の関係式を使って $\textrm{C}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] を結びつけます。 
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{C}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] の関係式</b>
+
+<p>
+周期性時間領域ディジタル信号 $f[i]$ の周期を $\textrm{N}$ 点、サンプリング周波数を $f_s$ [Hz]、サンプリング間隔を $\tau = 1/f_s$ [秒]、サンプリング角周波数を $w_s = 2\pi\cdot f_s = 2\pi/\tau$ [rad/秒]とする。
+<br>
+また $f[i]$ は周期 $\textrm{T} = \tau \cdot \textrm{N}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングしたとする。
+</p>
+
+<p>
+この時
+</p>
+
+\[
+w_1 = \frac{2\pi}{\textrm{T}} = \frac{2\pi}{\tau \cdot \textrm{N}} = \frac{2\pi\cdot f_s}{\textrm{N}} = \frac{w_s}{\textrm{N}}
+\]
+
+<p>
+という関係が成り立ち、かつ
+</p>
+
+\[
+w = k \cdot w_1
+\]
+
+</div>
+
+<p>
+この関係式を使って角周波数 $w$ [rad/秒] を独立変数とするスペクトル $\textrm{F}(w)$ が導出できます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期性時間領域ディジタル信号のスペクトル</b>
+
+
+\[
+\textrm{F}(w)
+=
+\begin{cases}
+\textrm{C}[k] & , \ w = k \cdot w_1 \text{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\[5pt]
+0 & , \ w \text{がそれ以外の値のとき}
+\end{cases}
+\]
+
+<p>
+$w_1$ ・・・ 基本角周波数、 単位は [rad/秒]
+</p>
+
+</div>
+
+<p>
+なお<a href="../../fourier/text02/page01.html">フーリエ級数展開の時と同様</a>に $\textrm{F}(w)$ から元の $f[i]$ を復元することも出来ますが、普通は DFT/ IFFT を使って $f[i]$ を復元しますので説明は省略します。
+</p>
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>

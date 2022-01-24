@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>5. 高速フーリエ変換 (FFT)</title>
+<title>5. DFT のプログラミング</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 離散フーリエ変換 (DFT)</a></li>
-<li>学習項目: [1] DFT と IDFT</li>
+<li>学習項目: [1] DFT</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -21,58 +21,198 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-DFT / IDFT の最大の欠点は計算量が多くて時間がかかることです。
+プログラミングで DFT / IDFT を計算する際は通常は<a href="https://ja.wikipedia.org/wiki/%E9%AB%98%E9%80%9F%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">FFT (Fast Fourier Transform : 高速フーリエ変換)</a> と IFFT (逆高速フーリエ変換) を利用します。
 <br>
-具体的な DFT / IDFT の計算量(オーダー)は次の通りです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>DFT / IDFT の計算量(オーダー)</b>
-
-<p>
-$\textrm{N}$ を周期とした時
-<p>
-
-\[
-\textrm{O}(\textrm{N}^2)
-\]
-</div>
-
-<p>
-そこで DFT を高速化した<a href="https://ja.wikipedia.org/wiki/%E9%AB%98%E9%80%9F%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">高速フーリエ変換</a>( Fast Fourier Transform, FFT )、及び高速フーリエ逆変換( Inverse Fast Fourier Transform, IFFT )が考案されました。
-</p>
-
-<p>
-FFT / IFFT は周期 $\textrm{N}$ が $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ )でないと使えないという制約はありますが、次の様に計算量が劇的に減ります。
-<br>
-もちろん計算結果は DFT / IDFT と同じです。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>FFT / IFFT の計算量(オーダー)</b>
-
-<p>
-$\textrm{N}$ を周期とした時(※)
+ただし、どうしても FFT /IFFT を使いたくない場合は
 </p>
 
 \[
-\textrm{O}(\textrm{N}\log_2\textrm{N})
+\textrm{C}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
 \]
 
 <p>
-※ ただし $\textrm{N}$ は $2$ の累乗(例えば $\textrm{N} = 2, 4, 8, 16, 32, 64, \cdots$ ) である必要がある。
+の様に DFT 係数を実数成分 $\textrm{A}[k]$ と虚数成分 $\textrm{B}[k]$ に分けてプログラミングすると楽です。
+<br>
+オイラー公式を使うと $\textrm{A}[k]$ と $\textrm{B}[k]$ は次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ の求め方</b>
+
+\begin{align*}
+\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\\[10pt]
+\textrm{B}[k] &= -\frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\end{align*}
+
+<p>
+ここで
+</p>
+
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
+</div>
+
+<p>
+このようにすると DFT の演算中に複素数が含まれなくなるので、普通に外側が $k$、内側が $i$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ を求められます。
+</p>
+
+<p>
+また次の様にして DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \ \textrm{C}[k]$ も簡単に求められます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>絶対値と偏角の求め方</b>
+\[
+|\textrm{C}[k]| = \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k])
+\]
+\[
+\angle \ \textrm{C}[k] = \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
+\]
+
+<p>
+※ プログラミング言語によっては $\textrm{atan2}(\textrm{A}[k],\textrm{B}[k])$ の順の場合もあります
 </p>
 </div>
 
 <p>
-$\textrm{N}$ が小さい時はそれ程計算速度は変わりませんが、大きくなるにつれて速度差が大きくなっていきます。
+同様に IDFT を $\textrm{A}[k]$ と $\textrm{B}[k]$ を使って書き直すと次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ を用いた IDFT</b>
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+-
+\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\]
+
+<p>
+ここで
+</p>
+<p>
+$f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタル信号
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
+</div>
+
+<p>
+この場合は外側が $i$、内側が $k$ の 2 重 for ループを作って $\textrm{A}[k]$ と $\textrm{B}[k]$ から $f[i]$ を復元できます。
+</p>
+
+
 <br>
-従って世間的には DFT / IDFT より FFT / IFFT が良く使われています。
+<h3>
+(参考) 周期性時間領域ディジタル信号が複素信号の場合
+</h3>
+
+<br>
+<p>
+$f[i]$が複素信号、つまり
+</p>
+
+\[
+f[i] = a[i] + j \cdot b[i]
+\]
+
+<p>
+の場合のDFTは次のようになります
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素信号の DFT</b>
+
+\begin{align*}
+\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+a[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+b[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\\[5pt]
+\textrm{B}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+-a[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+b[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\end{align*}
+
+<p>
+ここで
 </p>
 
 <p>
-フリーの FFT / IFFT ライブラリは沢山ありますので興味がある人は自分で調べて試して下さい。
+$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
 </p>
+<p>
+$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
+</div>
+
+<p>
+IDFTは次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素信号の IDFT</b>
+
+\begin{align*}
+a[i] &= \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+-
+\textrm{B}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\\[5pt]
+b[i] &= \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{A}[k] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
++
+\textrm{B}[k] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
+\right \}
+\end{align*}
+
+<p>
+ここで
+</p>
+<p>
+$a[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の実数成分
+</p>
+<p>
+$b[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域複素ディジタル信号 $f[i]$ の虚数成分
+</p>
+<p>
+$\textrm{A}[k]$ ・・・$k$ 番目のDFT係数の実数成分、実数の定数
+</p>
+<p>
+$\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
+</div>
 
 <br>
 <script>PreNext(5,5)</script>
