@@ -57,7 +57,7 @@ for i in range(len(classnames)):
         end_pos = start_pos + int( 10*rate/1000)
         wavedata_training.append(x[start_pos:end_pos] )
         classno_training.append(i)
-    # 502.5 msec 時点から 5 msec おきに 10 msec だけ信号を20個取り出して学習データとする
+    # 502.5 msec 時点から 5 msec おきに 10 msec だけ信号を20個取り出してテストデータとする
     for j in range(20):
         start_pos = int( (502.5+5*j)*rate/1000 )
         end_pos = start_pos + int( 10*rate/1000 )
