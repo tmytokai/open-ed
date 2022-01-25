@@ -1,0 +1,77 @@
+import numpy as np
+import math
+import cmath
+import matplotlib.pyplot as plt
+from scipy.fft import fft, ifft
+
+# 実フーリエ級数展開
+def fourier(i,C,N) :
+    out = C[0]
+    if N%2==0:
+        M = int(N/2)
+        for k in range(1,M):
+            out += 2*abs(C[k])*math.cos(k*2*math.pi/N*i+cmath.phase(C[k]))
+        out += abs(C[M])*math.cos(M*2*math.pi/N*i+cmath.phase(C[M]))
+    else:
+        M = int((N-1)/2)
+        for k in range(1,M+1):
+            out += 2*abs(C[k])*math.cos(k*2*math.pi/N*i+cmath.phase(C[k]))
+    return out.real
+
+# 元の信号
+f = [1.0, -2.0, 4.0, -1.0, 3, 5, 0, 3]
+
+N=len(f)
+fs = 1.0
+tau = 1/fs
+T = tau*N
+
+C = fft(f)/N  # N で割っているのはテキストのDFTの定義とスケールを合わせるため
+
+# あえて実フーリエ級数展開を使って逆変換
+# IFFT で逆変換したい場合は fr = ifft(C*N).real
+fr = [fourier(i,C,N) for i in range(N)]
+
+# 元の信号
+plt.plot(range(5*N), np.r_[f,f,f,f,f])
+plt.xticks(range(0,5*N,N))
+for i in range(0,5):
+    plt.axvline(i*N,color="gray",linestyle='dashed')
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$i$')
+plt.ylabel(r'$f[i]$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 復元した信号
+plt.plot(range(5*N), np.r_[fr,fr,fr,fr,fr])
+plt.xticks(range(0,5*N,N))
+for i in range(0,5):
+    plt.axvline(i*N,color="gray",linestyle='dashed')
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$IDFT[i]$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 振幅スペクトル
+w1 = 2*np.pi/T
+labels = [f'{i}'+'$w_1$' if i>0 else '0' for i in range(N)]
+for k in range(N):
+    absc = abs(C[k])
+    plt.plot( k,absc,color="blue",marker='o',markersize=5,linestyle='none')
+    plt.vlines( k,0,absc,color="gray",linestyles='dashed') 
+plt.xticks(ticks=range(N),labels=labels)
+plt.ylim(bottom=0)
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\|{\rm F}(w)|$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 位相スペクトル
+for k in range(N):
+    phasec = cmath.phase(C[k]) if abs(C[k])>0.1 else 0
+    plt.plot( k,phasec,color="blue",marker='o',markersize=5,linestyle='none')
+    plt.vlines( k,0,phasec,color="gray",linestyles='dashed') 
+plt.xticks(ticks=range(N),labels=labels)
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\angle {\rm F}(w)$',rotation=0,labelpad=0,loc="top")
+plt.show()
