@@ -95,7 +95,7 @@ $\textrm{N} = 5$ とした例
 </div>
 
 <p>
-では早速 $f[i]$ をアナログ信号化した信号
+単純に考えると $f[i]$ を直接アナログ信号化した信号
 </p>
 
 \begin{align*}
@@ -107,20 +107,24 @@ f[i] &,\ (t = \tau \cdot i) \\[5pt]
 \end{align*}
 
 <p>
-を用いて複素フーリエ係数を求めてみましょう。
+の複素フーリエ係数が DFT 係数になりそうです。
 <br>
-ところがこの $f'(t)$ の複素フーリエ係数は
+この $f'(t)$ を<a href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%83%8D%E3%83%83%E3%82%AB%E3%83%BC%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF">クロネッカーのデルタ</a> $\delta_{i,j}$ を使って表すと
+
+\[
+f'(t) = 
+\sum_{i=-\infty}^{\infty} f(t) \cdot \delta_{t,\tau \cdot i}
+= \sum_{i=-\infty}^{\infty} f[i] \cdot \delta_{t,\tau \cdot i}
+\]
+
+<p>
+となります。
+</br>
+ところがこの $f'(t)$ の複素フーリエ係数を求めると(※ <a href="../../fourier/text01/page04.html#teigi2">定義その2</a>を使用)
 </p>
 
 \begin{align*}
 \textrm{C}[k] 
-&= \frac{1}{\textrm{T}} 
-\int_{-\textrm{T}/2}^{\textrm{T}/2} 
-\left \{
-f'(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
-\right \}
-\textrm{dt} \\[5pt]
-(f'(t)\ \text{は周期的なので})
 &= \frac{1}{\textrm{T}} 
 \int_{0}^{\textrm{T}} 
 \left \{
@@ -129,10 +133,23 @@ f'(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
 \textrm{dt} \\[5pt]
 &= 
 \frac{1}{\textrm{T}} 
+\int_{0}^{\textrm{T}} 
+\left \{
 \sum_{i=0}^{\textrm{N}-1} 
-\int_{\tau \cdot i}^{\tau \cdot i} 
-f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+f[i] \cdot \delta_{t,\tau \cdot i} 
+\right \}
+\cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \textrm{dt} \\[5pt]
+&= 
+\frac{1}{\textrm{T}} 
+\sum_{i=0}^{\textrm{N}-1} 
+\left \{
+f[i] \cdot 
+\int_{0}^{\textrm{T}} 
+\delta_{t,\tau \cdot i} \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\textrm{dt} 
+\right \}
+\\[5pt]
 &= 
 \frac{1}{\textrm{T}} 
 \sum_{i=0}^{\textrm{N}-1} 
@@ -148,7 +165,7 @@ f[i] \cdot \int_{\tau \cdot i}^{\tau \cdot i} \textrm{e}^{\{-j \cdot k \cdot w_1
 </p>
  
 <p>
-積分の幅が 0 であったことが失敗の原因でしたので、今度は図 2 の様に間隔が $\tau$ [秒]、幅が $2\epsilon$ [秒] のパルス波 $g(t)$ を $f(t)$ にかけて作成した信号に対して複素フーリエ係数を求めて最後に $\epsilon \rightarrow 0$ とすることを考えます。
+計算途中で積分の幅が 0 になってしまったことが失敗の原因でしたので、今度は図 2 の様に間隔が $\tau$ [秒]、幅が $2\epsilon$ [秒] のパルス波 $g(t)$ を $f(t)$ にかけて作成した信号に対して複素フーリエ係数を求めて最後に $\epsilon \rightarrow 0$ とすることを考えます。
 </p>
 
 <div class="info">
@@ -160,29 +177,45 @@ $\epsilon$ を微小な正の定数とする
 </div>
 
 <p>
-ただし $\epsilon$ が小さいとやはり積分結果がほぼ 0 になってしまうので、積分結果が 0 にならないように充分大きい正規化パラメータ $\alpha > 0$ も掛けた信号
+つまり
 </p>
 
 \[
-f'(t) = \alpha \cdot f(t) \cdot g(t)
+f'(t) = f(t) \cdot g(t)
 \]
 
 <p>
 に対して複素フーリエ係数を求めます。
+<br>
+ただし普通に
+</p>
+
+\[
+\textrm{C}[k] 
+= 
+\frac{1}{\textrm{T}} 
+\int_{0}^{\textrm{T}} f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\]
+
+<p>
+を計算しても $\epsilon \rightarrow 0$ とすると結局のところ積分結果が 0 になってしまうので、積分結果が 0 にならないように正規化パラメータ $1/\textrm{T}$ を充分大きい正数 $\alpha > 0$ に置き換えます。
+</p>
+<p>
+※ 今回のアクティビティではたまたま $1/\textrm{T}$ としているだけで、正規化パラメータは本来は任意に設定しても良い値です
 </p>
 
 <p>
-すると今回は
+すると
 </p>
 
 \begin{align*}
 \textrm{C}[k] 
 &= 
-\frac{\alpha}{\textrm{T}} 
+\alpha
 \int_{0}^{\textrm{T}} f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \textrm{dt} \\[5pt]
 &=
-\frac{\alpha}{\textrm{T}} 
+\alpha
 \sum_{i=0}^{\textrm{N}-1} 
 \left \{ 
 \int_{\tau \cdot i-\epsilon}^{\tau \cdot i +\epsilon} f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
@@ -191,9 +224,9 @@ f'(t) = \alpha \cdot f(t) \cdot g(t)
 \end{align*}
 
 <p>
-が得られます。
+となります。
 <br>
-ここで(本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると)<a href="https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
+さてここで(本当はいろいろ条件が必要なのですが面倒なので全部条件を満たしていると考えることにすると)<a href="https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%80%A4%E3%81%AE%E5%AE%9A%E7%90%86">積分の平均値の定理</a>より
 <br>
  
 \[
@@ -218,7 +251,7 @@ f'(t) = \alpha \cdot f(t) \cdot g(t)
 \[
 \textrm{C}[k] 
 = 
-\frac{\alpha}{\textrm{T}} 
+\alpha
 \sum_{i=0}^{\textrm{N}-1} 
 \left \{ 
 2\epsilon \cdot f(\xi_i) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot \xi_i \}} 
@@ -226,7 +259,7 @@ f'(t) = \alpha \cdot f(t) \cdot g(t)
 \]
 
 <p>
-さらに正規化パラメータ $\alpha$ は任意の正整数だったので(やや恣意的ではありますが) $\alpha = \textrm{T}/(2\epsilon\textrm{N})$ として
+さらに正規化パラメータ $\alpha$ は任意の正数だったので(やや恣意的ではありますが) $\alpha = \textrm{1}/(2\epsilon\cdot\textrm{N})$ として
 </p>
 
 \[
@@ -261,19 +294,53 @@ f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}}
 
 <p>
 となり DFT 係数の計算式が導出されました。
+<br>
+なお $n$ を任意の整数とした時
+</p>
+
+\begin{align*}
+\textrm{C}[k + n \cdot \textrm{N}] 
+&= 
+\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot (k + n \cdot \textrm{N} ) \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \} \\[5pt]
+&=
+\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot ( k \cdot \frac{2\pi}{\textrm{N}}\cdot i +  2\pi \cdot n \cdot i  ) \}}
+\right \} \\[5pt]
+&=
+\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \} \\[5pt]
+&= \textrm{C}[k] 
+\end{align*}
+
+<p>
+ですので
 </p>
 
 <p>
-ところで計算途中で出てきた式を変形すると
+「<b>複素フーリエ係数は非周期的な複素領域ディジタル信号だが DFT 係数は周期的な信号(周期 $\textrm{N}$) になる</b>」
+</p>
+
+<p>
+ことに注意して下さい。
+</p>
+
+<p>
+ところで
 </p>
 
 \begin{align*}
 \textrm{C}[k] 
 &=
-\frac{\alpha}{\textrm{T}} 
+\alpha
 \int_{0}^{\textrm{T}} f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \textrm{dt} \\[5pt]
-(\alpha = \textrm{T}/(2\epsilon\textrm{N})\ \text{を代入})
+(\alpha = 1/(2\epsilon\textrm{N})\ \text{を代入})
 &= 
 \frac{1}{\textrm{N}} 
 \int_{0}^{\textrm{T}} f(t) \cdot \left \{ \frac{g(t)}{2\epsilon}  \right \} \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
@@ -281,7 +348,7 @@ f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}}
 \end{align*}
 
 <p>
-となりますが、$\epsilon \rightarrow 0$ の時 $g(t)/(2\epsilon)$ は<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">ディラックのデルタ関数</a> $\delta(t)$ を $\tau$ [秒]おきに並べた信号になります(図3)。
+という式も出てきますが、$\epsilon \rightarrow 0$ の時 $g(t)/(2\epsilon)$ は<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">ディラックのデルタ関数</a> $\delta(t)$ を $\tau$ [秒]おきに並べた信号になります(図3)。
 <br>
 図3の様な信号の事を「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼びます。
 </p>
@@ -293,46 +360,69 @@ f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}}
 </div>
 
 <p>
-つまり
+すると DFT 係数は周期性アナログ信号 $f(t)$ にくし型関数をかけて作った周期性アナログインパルス信号
 </p>
 
 \[
 f'(t) = 
 \sum_{i=-\infty}^{\infty} f(t) \cdot \delta(t - \tau \cdot i )
+= \sum_{i=-\infty}^{\infty} f[i] \cdot \delta(t - \tau \cdot i )
 \]
 
 <p>
-の様に
+に対する複素フーリエ係数だと言うことも出来ます。
 </p>
 
 <p>
-「<b>$f(t)$ にくし型関数をかけて作った周期性インパルス信号 $f'(t)$ の複素フーリエ係数が DFT 係数</b>」
+以上をまとめると次のことが言えます。
 </p>
 
+<div class="info">
+<input type="checkbox"><b>DFT 係数と複素フーリエ係数の関係</b>
+
 <p>
-ということも出来ます。
+$\delta(t)$ をディラックのデルタ関数とする。
+<br>
+周期性アナログインパルス信号
 </p>
+
+\[
+f(t) 
+= \sum_{i=-\infty}^{\infty} f[i] \cdot \delta(t - \tau \cdot i )
+\]
+
+<p>
+に対して(正規化パラメータを上手く調整した上で)求めた複素フーリエ係数が DFT 係数である。
+<br>
+ただし複素フーリエ係数は非周期的な複素領域ディジタル信号だが DFT 係数は周期的な信号(周期 $\textrm{N}$) となる。
+</p>
+
+</div>
+
 
 <br>
 <h2>
 (2) IDFT の導出
 </h2>
 
-<br>
 <p>
 次に「IDFT は複素フーリエ級数展開のディジタル信号版」について説明します。
 </p>
 
 <p>
-単純に考えれば DFT 係数を複素フーリエ級数展開に代入するだけで IDFT が導出される様な気がしますが、実はそうすると $f[i] = \infty$ または  $f[i] = -\infty$ または $f[i] = 0$ となって上手く行きません。
+こちらも単純に考えれば DFT 係数を複素フーリエ級数展開の式に代入し、復元した $f(t)$ から $f[i] = f(\tau \cdot i)$ でディジタル信号をサンプリングすれば IDFT が導出される様な気がします。
 <br>
-(1)の最後の方で述べた様に「周期性インパルス信号の複素フーリエ係数が DFT 係数」でしたので当然の話ではあるのですが、一応真面目に証明すると次の様になります。
+ところが上で述べた様に周期性アナログインパルス信号の複素フーリエ係数が DFT 係数でしたので、「<b>DFT 係数を使って求めた複素フーリエ級数展開 $f(t)$ は周期性アナログインパルス信号になる</b>」ため、$f[i] = f(\tau \cdot i ) = \pm\infty$ または 0 が出てきて上手く行きません。
+</p>
+
+<p>
+何か当たり前の様な気もしますが、一応これを真面目に証明すると次の様になります。
 </p>
 
 <p>
 まず複素フーリエ級数展開に DFT 係数を代入して $f[i]$ を求めます。
 <br>
-なお $f[i]$ は周期性信号なので $i$ の範囲は $0 \leq i \leq \textrm{N}-1$ とします。
+なお $f[i]$ は周期性信号なので $i$ の範囲は $0 \leq i \leq \textrm{N}-1$ とします (更に言うと $i$ は整数でなくて実数でも良いのですが、とりあえずここでは整数ということにしておきます)。
 </p>
 
 \begin{align*}
@@ -356,7 +446,7 @@ f[i'] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i' \}}
 \end{align*}
 
 <p>
-ここで周期 $\textrm{N}$ [点] を周期 $\textrm{T}$ [秒] に変換すると $\textrm{T} = \tau \cdot \textrm{N}$ だったので
+ここで $\textrm{T} = \tau \cdot \textrm{N}$ より
 </p>
 
 \[
@@ -422,17 +512,13 @@ f[i'] \cdot
 \sum_{k = -\infty}^{\infty} 
 1
 \right ]
-\rightarrow \infty \ \text{または}\ -\infty \ \text{または}\ 0
+= \pm\infty\ \text{または}\ 0
 \]
 
 <p>
 となります。
-</p>
-
-<p>
-次に $i' \neq i$ の項が 0 になることを証明します。
 <br>
-$i' \neq i$ の項はこのままでは収束しませんので、一旦ラプラス変換の様に複素角周波数を導入します。
+一方 $i' \neq i$ の項はこのままでは収束しませんので、一旦ラプラス変換の様に複素角周波数を導入します。
 <br>
 具体的には
 </p>
@@ -452,24 +538,15 @@ s = \sigma + j \cdot w_1 \cdot (i-i')
 <p>
 に置き換えて後から $\sigma \rightarrow 0$ とします。
 <br>
-すると
+すると $k$ に関する総和演算は
 </p>
 
 \begin{align*}
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \lim_{\sigma \rightarrow 0}
 \sum_{k = -\infty}^{\infty} 
 \textrm{e}^{\{ s \cdot \tau \cdot k \}} 
-\right ]
 
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \lim_{\sigma \rightarrow 0}
 \left \{
 \sum_{k = 0}^{\infty} 
@@ -478,14 +555,9 @@ f[i'] \cdot
 \sum_{k = -\infty}^{0} 
 \textrm{e}^{\{ s \cdot \tau \cdot k \}} 
 -1
-\right \}
-\right ] \\[5pt]
+\right \}\\[5pt]
 
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \lim_{\sigma \rightarrow 0}
 \sum_{k = 0}^{\infty} 
 \textrm{e}^{\{ s \cdot \tau \cdot k \}} 
@@ -494,8 +566,6 @@ f[i'] \cdot
 \sum_{k = 0}^{\infty} 
 \textrm{e}^{\{ -s \cdot \tau \cdot k \}} 
 -1
-\right ] \\[5pt]
-
 \end{align*}
 
 <p>
@@ -510,21 +580,11 @@ z = \textrm{e}^{s \cdot \tau}
 で置き換えて
 </p>
 
-\begin{align*}
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
+\[
 \lim_{\sigma \rightarrow 0}
 \sum_{k = -\infty}^{\infty} 
 \textrm{e}^{\{ s \cdot \tau \cdot k \}} 
-\right ]
-
-&=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
+=
 \lim_{\sigma \rightarrow 0}
 \sum_{k = 0}^{\infty} 
 z^k
@@ -533,10 +593,7 @@ z^k
 \sum_{k = 0}^{\infty} 
 z^{-k}
 -1
-\right ] \\[5pt]
-
-\end{align*}
-
+\]
 
 <p>
 とします。
@@ -563,62 +620,36 @@ $\sigma > 0$ なら
 \]
 
 <p>
-となるので、最初の lim は $\sigma$ を負の領域内で、2番目の lim は正の領域内で 0 に近づけることにすれば無限等比級数の和が収束するので
+となるので、第 1 項目の lim は $\sigma$ を負の領域内で、第 2 項目の lim は正の領域内で 0 に近づけることにすれば無限等比級数の和が収束するので
 </p>
 
 \begin{align*}
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \lim_{\sigma \rightarrow 0}
 \sum_{k = -\infty}^{\infty} 
-\textrm{e}^{\{ s \tau \cdot k \}} 
-\right ] 
-
+\textrm{e}^{\{ s \cdot \tau \cdot k \}} 
 
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \lim_{\sigma \rightarrow 0}
 \frac{1}{1-z }
 +
 \lim_{\sigma \rightarrow 0}
 \frac{1}{1-z^{-1}}
--1
-\right ] \\[5pt]
+-1 \\[5pt]
 
 (z_0 = \lim_{\sigma \rightarrow 0} z\ \text{とおいて})
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \frac{1}{1-z_0}
 +
 \frac{1}{1-z_0^{-1}}
--1
-\right ] \\[5pt]
+-1 \\[5pt]
 
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \frac{(1-z_0^{-1}) + (1 - z_0)}{(1-z_0)\cdot(1-z_0^{-1})}
--1
-\right ] \\[5pt]
+-1 \\[5pt]
 
 &=
-f[i'] \cdot 
-\frac{1}{\textrm{N}} 
-\cdot
-\left [
 \frac{2-z_0^{-1}- z_0}{2-z_0^{-1}- z_0}
--1
-\right ] \\[5pt]
+-1 \\[5pt]
 
 &= 0
 \end{align*}
@@ -628,7 +659,7 @@ f[i'] \cdot
 </p>
 
 <p>
-長くなりましたが、以上より DFT 係数をそのまま複素フーリエ級数展開に代入すると $f[i] = \infty$ または  $f[i] = -\infty$ または $f[i] = 0$ となることが分かりました。
+長くなりましたが、以上より DFT 係数をそのまま複素フーリエ級数展開に代入すると $f[i] = \pm\infty$ または 0 となることが分かりました。
 <br>
 この様になる根本的な原因は $k$ の総和を $-\infty$ から $\infty$ の範囲で取っていた事であり、そもそも DFT 係数は周期性を持ってますので全ての $k$ に関して足し合わせる必要もありません。
 </p>
@@ -662,6 +693,32 @@ f[i]
 <p>
 ※ この証明は簡単ですしネットでいくらでも検索出来ますので省略します。
 </p>
+
+<p>
+以上をまとめると次のことが言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>IDFT と複素フーリエ級数展開の関係</b>
+
+<p>
+$k$ に関する総和の範囲を $0$ 〜 $\textrm{N}-1$ に限定した複素フーリエ級数展開が IDFT である。
+</p>
+
+<p>
+なお$k$ に関する総和の範囲を通常通り $-\infty$ 〜 $\infty$ とすると周期性アナログインパルス信号
+</p>
+
+\[
+f(t) = 
+\sum_{i=-\infty}^{\infty} f[i] \cdot \delta(t - \tau \cdot i )
+\]
+
+<p>
+が復元される ($\delta(t)$ はディラックのデルタ関数)
+</p>
+
+</div>
 
 <br>
 <script>PreNext(3,5)</script>

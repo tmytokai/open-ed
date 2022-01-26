@@ -60,15 +60,15 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 
 
 <div class="info">
-<input type="checkbox"><b>複素フーリエ係数の求め方</b>
+<input type="checkbox"><b>複素フーリエ係数 $\textrm{C}[k]$ の定義 (その1)</b>
 
-\begin{align*}
+\[
 \textrm{C}[k] = \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
 \left \{
 f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \}
 \textrm{dt}
-\end{align*}
+\]
 
 <p>
 $f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
@@ -87,6 +87,104 @@ $w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/�
 <p>
 この $\textrm{C}[k]$ の計算式は<a href="https://ja.wikipedia.org/wiki/%E5%9F%BA%E5%BA%95%E9%96%A2%E6%95%B0">直交基底展開</a>という理論から導かれますが、今回のアクティビティでは触れませんのでもし興味のある人は自分で調べて下さい。
 </p>
+
+<p>
+なお積分の前についている $1/\textrm{T}$ を「<b>正規化パラメータ</b>」と言います。
+<br>
+正規化パラメータは<a href="../../spectrum/text01/page02.html">振幅スペクトル</a>のスケールを調整するパラメータであり、目的に応じて任意に設定しても良い値です。
+<br>
+そのため、このアクティビティでは $1/\textrm{T}$ としていますが文献によっては正規化パラメータの値が異なりますので注意してください。
+</p>
+
+<p>
+また $f(t)$ は周期的な信号でしたので
+</p>
+
+\begin{align*}
+\textrm{C}[k] 
+&= \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+&=
+\frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{0} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
++
+\frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+&=
+\frac{1}{\textrm{T}} \int_{\textrm{T}/2}^{\textrm{T}} 
+\left \{
+f(t+\textrm{T}) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot (t+\textrm{T}) \}} 
+\right \}
+\textrm{dt}
++
+\frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+(f(t+\textrm{T}) = f(t)\ \text{および}\ w_1\cdot \textrm{T} = 2\pi\ \text{より} )
+&=
+\frac{1}{\textrm{T}} \int_{\textrm{T}/2}^{\textrm{T}} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
++
+\frac{1}{\textrm{T}} \int_{0}^{\textrm{T}/2} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+&= \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
+
+\end{align*}
+
+<p>
+となりますので、複素フーリエ係数の定義を次の様に書くことも出来ます。
+</p>
+
+<div class="info" id="teigi2">
+<input type="checkbox"><b>複素フーリエ係数 $\textrm{C}[k]$ の定義 (その2)</b>
+
+<p>
+※ 定義その1との違いは積分範囲のみ
+</p>
+
+\[
+\textrm{C}[k] = \frac{1}{\textrm{T}} \int_{0}^{\textrm{T}} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\textrm{dt}
+\]
+
+<p>
+$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
+</p>
+
+<p>
+$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
+</p>
+
+<p>
+$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
+</p>
+
+</div>
+
 
 <p>
 ところで上で示した $\textrm{C}[k]$ の定義から $\textrm{C}[k]$ と $\textrm{C}[-k]$ は複素共役関係、つまり
