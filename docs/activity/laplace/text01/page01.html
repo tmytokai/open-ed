@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. ラプラス変換と逆ラプラス変換</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ラプラス変換</a></li>
+<li>学習項目: [1] ラプラス変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+用語などの説明については後からすることにして、まず先にラプラス変換の定義を述べます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ラプラス変換 $\textrm{F}(s)$ の定義</b>
+
+<p>
+$f(t)$ を任意の時間領域アナログ信号とする。
+<br>
+また $s$を「<b>S平面</b>」と呼ばれる複素平面上の任意の点
+</p>
+
+\[
+s = \sigma + j \cdot w
+\]
+
+<p>
+とする($\sigma$と$w$は実数)。
+<br>
+ここで $w$ [rad/秒] は角周波数を意味するので、$s$ は「<b>複素角周波数</b>」とも呼ばれる。
+</p>
+
+<p>
+この時
+</p>
+
+\[
+\textrm{F}(s) = \int_{0}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{dt}
+\]
+
+<p>
+を「<b>片側ラプラス変換</b>」と言う。
+</p>
+<p>
+また積分範囲をマイナス無限大に広げた
+</p>
+
+
+\[
+\textrm{F}(s) = \int_{-\infty}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{dt}
+\]
+
+<p>
+を「<b>両側ラプラス変換</b>」と言う。
+</p>
+
+</div>
+
+<p>
+上に示したようにラプラス変換には片側ラプラス変換と両側ラプラス変換の2種類があります。
+<br>
+ただし信号$f(t)$は時刻 0 未満の場合は $f(t)=0$ とみなすことが多いこと、両側ラプラス変換は存在しないこともままある(例えば$f(t)=a$(定数)の両側ラプラス変換はありません)ことから、通常はラプラス変換と言うと片側ラプラス変換の方を意味します。
+</p>
+<p>
+よってこのアクティビティでも特に指定が無い限りは「ラプラス変換 ＝ 片側ラプラス変換」とします。
+</p>
+
+<p>
+一方逆変換は以下の様に定義されます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 逆ラプラス変換 (Bromwich 積分版)</b>
+
+\begin{align*}
+f(t) =
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\textrm{ds}
+\end{align*}
+
+<p>
+$\textrm{F}(s)$ ・・・ ラプラス変換
+</p>
+
+<p>
+$\gamma$ ・・・ $\textrm{F}(s)$の収束領域内にある任意の実数
+</p>
+
+<p>
+$s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
+</p>
+
+</div>
+
+<p>
+逆変換の中で出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と呼ばれる複素積分となりますが、積分路を閉曲線になるように変更すると留数定理を使って以下の様に書き換えることが出来ます。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>定義： 逆ラプラス変換 (留数版)</b>
+
+<p>
+$\textrm{F}(s)$ に極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
+<br>
+この時
+</p>
+
+\begin{align*}
+f(t) =
+\sum_{i=1}^{\textrm{N}}
+\textrm{Res}_{s=s_i} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\end{align*}
+
+<p>
+$\textrm{F}(s)$ ・・・ ラプラス変換
+</p>
+
+<p>
+$s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
+</p>
+
+<p>
+$\textrm{Res}_{s=s_i} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}$ ・・・ 極(特異点) $s_i$ における留数。$n$ 位の極の場合は
+</p>
+
+\[
+\textrm{Res}_{s=s_i} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+= \frac{1}{(n-1)!}\lim_{s \rightarrow s_i}\frac{\textrm{d}^{n-1}}{\textrm{ds}^{n-1}}
+\left \{
+(s-s_i)^n \cdot \textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\]
+
+</div>
+
+<p>
+例えば $\textrm{F}(s) = 1/s^2$ の時、極は $s_1=0$ (n=2) のひとつだけなので
+</p>
+
+\begin{align*}
+f(t)
+&= 
+\textrm{Res}_{s=0} 
+\left \{
+\frac{1}{s^2} \cdot \textrm{e}^{\{s \cdot t \}}
+\right \} \\[5pt]
+&= \frac{1}{1!}\lim_{s \rightarrow 0}\frac{\textrm{d}}{\textrm{ds}}
+\left \{
+(s-0)^2 \cdot \frac{1}{s^2}  \cdot \textrm{e}^{\{s \cdot t \}}
+\right \} \\[5pt]
+&= \lim_{s \rightarrow 0}
+\left \{
+t \cdot \textrm{e}^{\{s \cdot t \}}
+\right \} \\[5pt]
+&= t
+\end{align*}
+
+<p>
+となります。
+<br>
+この $f(t)=t$ (ただし $t\geq0$) を<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%97%E9%96%A2%E6%95%B0">ランプ関数</a>と呼びますが、ランプ関数のラプラス変換は $\textrm{F}(s) = 1/s^2$ (証明は略)なので確かに逆変換が正しいことが分かります。
+</p>
+
+<p>
+なおラプラス変換/逆ラプラス変換は簡単な信号ならわざわざ計算しなくても<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を使って求められます。
+</p>
+
+<br>
+<script>PreNext(1,5)</script>
+</body>
+</html>
