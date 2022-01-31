@@ -21,7 +21,23 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-用語などの説明については後からすることにして、まず先にラプラス変換の定義を述べます。
+このアクティビティでは「<b>ラプラス変換</b>」(Laplace transform)について学びます。
+</p>
+
+<p>
+ラプラス変換の語源となった<a href="https://ja.wikipedia.org/wiki/%E3%83%94%E3%82%A8%E3%83%BC%E3%83%AB%EF%BC%9D%E3%82%B7%E3%83%A2%E3%83%B3%E3%83%BB%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9">ピエール＝シモン・ラプラス</a>は18〜19世紀のフランスの数学者で<a href="https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A7%E3%82%BC%E3%83%95%E3%83%BB%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8">フーリエ</a>より20歳程年上の人です。
+<br>
+ラプラスが現代のラプラス変換に似ている式を使って計算していたのでラプラス変換という名前がつきました。
+<br>
+ちなみに時系列的にはフーリエ級数よりも(当時はまだ名前がついてませんでしたが)ラプラス変換の方が先に発表されています。
+</p>
+
+<p>
+※ ラプラス変換という名前をつけた人は20世紀のドイツの数学者の<a href="https://en.wikipedia.org/wiki/Gustav_Doetsch">Gustav Doetsch</a>らしいです
+</p>
+
+<p>
+さて用語などの説明については後からすることにして、早速ラプラス変換の定義を述べます。
 </p>
 
 <div class="info">
@@ -30,7 +46,7 @@
 <p>
 $f(t)$ を任意の時間領域アナログ信号とする。
 <br>
-また $s$を「<b>S平面</b>」と呼ばれる複素平面上の任意の点
+また $s$を「<b>S平面</b>」(S-plane)と呼ばれる複素平面上の任意の点
 </p>
 
 \[
@@ -40,7 +56,7 @@ s = \sigma + j \cdot w
 <p>
 とする($\sigma$と$w$は実数)。
 <br>
-ここで $w$ [rad/秒] は角周波数を意味するので、$s$ は「<b>複素角周波数</b>」とも呼ばれる。
+ここで $w$ [rad/秒] は角周波数を意味するので、$s$ は「<b>複素角周波数</b>」(complex frequency)とも呼ばれる。
 </p>
 
 <p>
@@ -56,10 +72,10 @@ f(t) \cdot \textrm{e}^{\{- s \cdot t \}}
 \]
 
 <p>
-を「<b>片側ラプラス変換</b>」と言う。
+により定義される複素関数を「<b>片側ラプラス変換</b>」と言う。
 </p>
 <p>
-また積分範囲をマイナス無限大に広げた
+また積分範囲をマイナス無限大まで広げた
 </p>
 
 
@@ -72,13 +88,17 @@ f(t) \cdot \textrm{e}^{\{- s \cdot t \}}
 \]
 
 <p>
-を「<b>両側ラプラス変換</b>」と言う。
+により定義される複素関数を「<b>両側ラプラス変換</b>」と言う。
 </p>
 
 </div>
 
 <p>
-上に示したようにラプラス変換には片側ラプラス変換と両側ラプラス変換の2種類があります。
+いきなり「S平面」とか「複素角周波数」とかいう用語が出てきましたが、それについては後のページで説明しますので、とりあえず $s$ は複素数の変数だと思って下さい。
+</p>
+
+<p>
+また上に示したようにラプラス変換には片側ラプラス変換と両側ラプラス変換の2種類があります。
 <br>
 ただし信号$f(t)$は時刻 0 未満の場合は $f(t)=0$ とみなすことが多いこと、両側ラプラス変換は存在しないこともままある(例えば$f(t)=a$(定数)の両側ラプラス変換はありません)ことから、通常はラプラス変換と言うと片側ラプラス変換の方を意味します。
 </p>
@@ -88,6 +108,8 @@ f(t) \cdot \textrm{e}^{\{- s \cdot t \}}
 
 <p>
 一方逆変換は以下の様に定義されます。
+<br>
+片側、両側どちらの変換にも共通の定義です。
 </p>
 
 <div class="info">
@@ -109,7 +131,7 @@ $\textrm{F}(s)$ ・・・ ラプラス変換
 </p>
 
 <p>
-$\gamma$ ・・・ $\textrm{F}(s)$の収束領域内にある任意の実数
+$\gamma$ ・・・ $\textrm{F}(s)$の「<b>収束領域</b>」(ROC: Region Of Convergence)内にある任意の実数
 </p>
 
 <p>
@@ -119,12 +141,20 @@ $s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
 </div>
 
 <p>
-逆変換の中で出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と呼ばれる複素積分となりますが、積分路を閉曲線になるように変更すると留数定理を使って以下の様に書き換えることが出来ます。
+ここでもいきなり「収束領域」という用語が出てきましたが、それについても後のページで説明しますので、とりあえずここでは複素数 $s$ が取り得る値の範囲だと思って下さい。
+</p>
+
+<p>
+さて、逆変換の中で出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と呼ばれる複素積分となりますが、積分路を閉曲線になるように変更すると留数定理を使って以下の様に書き換えることが出来ます。
+<br>
+ただし留数を使った場合は片側ラプラス変換と両側ラプラス変換で若干式が変わります。
+<br>
+先に片側ラプラス変換の逆変換(一般的に逆ラブラス変換と呼ばれている変換です)から説明します。
 </p>
 
 
 <div class="info">
-<input type="checkbox"><b>定義： 逆ラプラス変換 (留数版)</b>
+<input type="checkbox"><b>定義： 逆(片側)ラプラス変換 (留数版)</b>
 
 <p>
 $\textrm{F}(s)$ に極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
@@ -170,7 +200,7 @@ $\textrm{Res}_{s=s_i}
 </div>
 
 <p>
-例えば $\textrm{F}(s) = 1/s^2$ の時、極は $s_1=0$ (n=2) のひとつだけなので
+例えば $\textrm{F}(s) = 1/s^2$ の時、極は $s=0$ (n=2) のひとつだけなので
 </p>
 
 \begin{align*}
@@ -198,8 +228,153 @@ t \cdot \textrm{e}^{\{s \cdot t \}}
 </p>
 
 <p>
-なおラプラス変換/逆ラプラス変換は簡単な信号ならわざわざ計算しなくても<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を使って求められます。
+※ 簡単な信号ならわざわざ計算しなくても<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を使って求められます。
 </p>
+
+<p>
+次に逆両側ラプラス変換を示します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 逆両側ラプラス変換 (留数版)</b>
+
+<p>
+$\textrm{F}(s)$ の収束領域の左側にある極(特異点)の集合を L-ROC、右側にある極(特異点)の集合を R-ROC とする。
+<br>
+この時
+</p>
+
+\begin{align*}
+f(t) =
+\begin{cases}
+\sum_{s' \in \{\text{L-ROC}\} }
+\textrm{Res}_{s'} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+&, (t \geq 0) \\[10pt]
+-\sum_{s' \in \{\text{R-ROC}\} }
+\textrm{Res}_{s'} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+&, (t < 0)
+\end{cases}
+\end{align*}
+
+<p>
+$\textrm{F}(s)$ ・・・ ラプラス変換
+</p>
+
+<p>
+$s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
+</p>
+
+<p>
+$\textrm{Res}_{s'} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}$ ・・・ 極(特異点) $s'$ における留数
+</p>
+
+</div>
+
+<p>
+上の定義から分かるように逆両側ラプラス変換の場合は極が収束領域の右にあるか左にあるかによって復元される $f(t)$ の式が変わります。
+<br>
+つまり
+</p>
+
+<p>
+<b>両側ラプラス変換を扱う場合は $\textrm{F}(s)$ だけでなく収束領域も与えられないと $f(t)$ を復元出来ない</b>
+</p>
+
+<p>
+ので注意してください。
+<br>
+例えば上と同様に $\textrm{F}(s) = 1/s^2$ の例を考えてみましょう(極は $s=0$ (n=2) のひとつ )。
+<br>
+もし収束領域が 0 よりも右側にある場合(具体的には $\sigma>0$)は上と同様に計算して
+</p>
+
+\[
+f(t) =
+\begin{cases}
+t& ,\ (t \geq 0) \\[10pt]
+0& ,\ (t < 0)
+\end{cases}
+\]
+
+<p>
+が答となります。
+<br>
+逆に収束領域が 0 よりも左側にある場合(具体的には $\sigma<0$)は、極が収束領域の右側にありますので 
+</p>
+
+\[
+f(t) =
+\begin{cases}
+0& ,\ (t \geq 0) \\[10pt]
+-t& ,\ (t < 0)
+\end{cases}
+\]
+
+
+<p>
+が答となります。
+<br>
+これは実際に両側ラプラス変換を求めると正しいことが分かります。
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= 
+\int_{-\infty}^{0} 
+\left \{
+( -t ) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+&=
+\int_{0}^{\infty}
+\left \{
+t \cdot \textrm{e}^{\{ s \cdot t \}} 
+\right \}
+\textrm{dt} \\[5pt]
+&=
+\left [
+t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right ]_{0}^{\infty}
+-
+\int_{0}^{\infty}
+\left \{
+\frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right \}
+\textrm{dt} \\[5pt]
+&=
+\left [
+t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right ]_{0}^{\infty}
+-
+\left [
+\frac{1}{s^2} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right ]_{0}^{\infty} \\[5pt]
+&=
+\lim_{t \rightarrow \infty} \left \{
+t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right \}
+-
+\lim_{t \rightarrow \infty} \left \{
+\frac{1}{s^2} \cdot \textrm{e}^{\{ s \cdot t \}}
+\right \}
++
+\frac{1}{s^2} \\[5pt]
+( \sigma < 0\ \text{なら前の2項は0に収束するので})
+&=
+\frac{1}{s^2} \\[5pt]
+\end{align*}
+
+
+
 
 <br>
 <script>PreNext(1,5)</script>
