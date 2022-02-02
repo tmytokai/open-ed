@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. ラプラス変換とフーリエ変換の関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ラプラス変換</a></li>
+<li>学習項目: [1] ラプラス変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+このページではラプラス変換とフーリエ変換の関係について述べます。
+<br>
+また説明中に前ページで出てきた「S平面」「複素角周波数」「収束領域」などの意味についても述べます。
+</p>
+
+<br>
+<h2>
+(1) ラプラス変換の導出
+</h2>
+
+<p>
+まずフーリエ変換は下の式で定義でされる複素関数でした。
+</p>
+
+\[
+\textrm{F}(w) = \int_{-\infty}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
+<p>
+さてフーリエ変換さえあれば別に無理してラプラス変換を使う必要はないという気がしますが、$f(t)$ がフーリエ変換可能であるための十分条件である
+</p>
+
+<p>
+(1) $f(t)$ は区間的に連続
+</p>
+
+(2) 絶対可積分条件
+
+\[
+\int_{-\infty}^{\infty} 
+|f(t)|
+\textrm{d}t
+< \infty
+\]
+
+<p>
+は結構厳しい制約で、ほとんどの信号(例えば直流信号 $f(t)=a$ など)は絶対可積分条件を満たさずフーリエ変換することが出来ません。
+</p>
+
+<p>
+※ 上の条件を満たさなくても超関数を用いることでフーリエ変換が存在する場合もあります(例えば sin や cos など)
+</p>
+
+<p>
+そこで $f(t)$ をそのままフーリエ変換することを諦め、$\sigma$ をある実数としたとき  $f(t) \cdot \textrm{e}^{-\sigma t}$ を代わりにフーリエ変換することにします。
+<br>
+ここで $\textrm{e}^{-\sigma t}$ は $\sigma$ の値によって以下のような変化をしますので、上手く $\sigma$ を決めてあげれば $f(t) \cdot \textrm{e}^{-\sigma t}$ が $t \rightarrow \pm \infty$ の時に 0 に収束する、つまり絶対可積分条件を満たすように出来そうです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: $\sigma$ の値による $\textrm{e}^{-\sigma t}$ の変化  </b>
+<p>　</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+具体的には、$t \geq 0$ の範囲ではある実数 $\sigma_+$ に対して $\sigma_+ < \sigma$ を満たす $\sigma$ を選んであげると  $f(t) \cdot \textrm{e}^{-\sigma t} \rightarrow 0\ ,\ (t \rightarrow \infty) $ と出来そうです。
+<br>
+同様に $t < 0$ の範囲ではある実数 $\sigma_-$ に対して $\sigma < \sigma_-$ を満たす $\sigma$ を選んであげると $f(t) \cdot \textrm{e}^{-\sigma t} \rightarrow 0\ ,\ (t \rightarrow \infty)$ と出来そうです。
+</p>
+
+<p>
+この $\sigma_+$ や $\sigma_-$ のことを「<b>収束座標</b>」(abscissa of absolute convergence)と呼び
+</p>
+
+\[
+\sigma_+ < \sigma < \sigma_-
+\]
+
+<p>
+の範囲から適当に $\sigma$ を選べば $f(t) \cdot \textrm{e}^{-\sigma t} \rightarrow 0\ ,\ (t \rightarrow \pm \infty)$ となるのでフーリエ変換可能になります。
+</p>
+
+<p>
+ただし、$f(t)$ によっては $\sigma_+ > \sigma_-$ となって適切な $\sigma$ を選べない場合があります。
+<br>
+そういう場合は $t<0$ 側を切り捨てて
+</p>
+
+
+\[
+\begin{cases}
+f(t) \cdot \textrm{e}^{-\sigma \cdot t} &, (t \geq 0) \\[10pt]
+0 &, (t < 0) \\[10pt]
+\end{cases}
+\]
+
+<p>
+をフーリエ変換することにします(先の話をすると最終的に片側ラプラス変換になります)。
+<br>
+すると $\sigma_+ < \sigma$ の範囲だけで $\sigma$ を選べるようになります。
+</p>
+
+<p>
+また、どうあがいてもフーリエ変換出来ない $f(t)$ も存在します(例えば tan)。
+</p>
+
+<p>
+※ tan は超関数を使えば出来るみたいな話をどこかで見かけた様な気がします
+</p>
+
+<p>
+とりあえずここでは都合よく $\sigma_+$ と $\sigma_-$ が見つかって、$\sigma_+ < \sigma < \sigma_-$ の範囲で適当に $\sigma$ を選んでフーリエ変換することにします。
+<br>
+ここで $\sigma$ は変数になるので、フーリエ変換は $\sigma$ と $w$ に関する複素関数
+</p>
+
+\[
+\textrm{F}(\sigma,w) = \int_{-\infty}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{-\sigma \cdot t} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
+<p>
+となります。
+<br>
+ただ、このままだと非常に見辛いので $\textrm{e}$ の項をまとめ、さらに $s = \sigma + j \cdot w$ という複素数の変数を定義して置き換えます。
+<br>
+この $s$ を「<b>複素角周波数</b>」(complex frequency)と呼び、$s$ が定義されている<a href="../../complex/">複素平面</a>のことを「<b>S 平面</b>」(S-plane)と言います。
+</p>
+
+<p>
+するとフーリエ変換は複素角周波数 $s$ に関する複素関数
+</p>
+
+\[
+\textrm{F}(s) = \int_{-\infty}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-s \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
+<p>
+つまり両側ラプラス変換になります。
+<br>
+また、上で書いたように
+</p>
+
+\[
+\begin{cases}
+f(t) \cdot \textrm{e}^{-\sigma \cdot t} &, (t \geq 0) \\[10pt]
+0 &, (t < 0) \\[10pt]
+\end{cases}
+\]
+
+<p>
+をフーリエ変換した場合は片側ラプラス変換
+</p>
+
+\[
+\textrm{F}(s) = \int_{0}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{-s \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
+<p>
+となります。
+</p>
+
+<p>
+さて両側ラプラス変換が存在するための $\sigma$ の条件は $\sigma_+ < \sigma < \sigma_-$ でした。
+<br>
+つまり $s$ はこの範囲内から選ばないと $\textrm{F}(s)$ が発散します。
+<br>
+この範囲を「<b>収束領域</b>」(ROC: Region Of Convergence)と呼びます。
+<br>
+収束領域をS平面で表したのが下の図2です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 両側ラプラス変換の収束領域</b>
+<p>$\sigma_+ < \sigma < \sigma_-$</p>
+<img src="./img/page02-fig2.png" alt="">
+</div>
+
+<p>
+また片側ラプラス変換の収束領域 $\sigma_+ < \sigma$ は以下の図3 になります(こちらが良く教科書等で見かける図です)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図3: 片側ラプラス変換の収束領域</b>
+<p>$\sigma_+ < \sigma$</p>
+<img src="./img/page02-fig3.png" alt="">
+</div>
+
+<p>
+今まではフーリエ変換 → ラプラス変換の話でしたが、今度はラプラス変換をフーリエ変換に戻す方法について説明します。
+</p>
+
+<p>
+と言っても話は簡単で、ラプラス変換 $\textrm{F}(s)$ が手に入った時に $\sigma = 0$ を $s$ に代入する、つまり $s =j \cdot w$ を $\textrm{F}(s)$ に代入するだけでフーリエ変換 $\textrm{F}(w)$ が得られます。
+</p>
+
+<p>
+ただし虚軸(直線 $\sigma = 0$) が収束領域に含まれてない場合は $f(t)$ が絶対可積分条件を満たしていない( $f(t) \cdot \textrm{e}^{-0\cdot t}$ が $t \rightarrow \pm \infty$ で収束しない)ので $\textrm{F}(w)$ は存在しない事に注意が必要です(図4)
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: ラプラス変換 → フーリエ変換に変形出来る状況</b>
+<p>　</p>
+<img src="./img/page02-fig4.png" alt="">
+</div>
+
+
+<p>
+ではここで一旦話をまとめます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ラプラス変換とフーリエ変換の関係</b>
+
+<p>
+任意の信号 $f(t)$ に対して $\sigma_+ < \sigma < \sigma_-$ の範囲で $f(t) \cdot \textrm{e}^{-\sigma t} \rightarrow 0\ ,\ (t \rightarrow \pm \infty)$ となる収束座標 $\sigma_+$ と $\sigma_-$ が存在するならば、$f(t) \cdot \textrm{e}^{-\sigma \cdot t}$ をフーリエ変換することで $f(t)$ のラプラス変換 $\textrm{F}(s)$ が求められる。
+</p>
+
+<p>
+逆に、虚軸(直線 $\sigma = 0$) が収束領域に含まれているならば、 $s = j \cdot w$ をラプラス変換 $\textrm{F}(s)$ に代入することで $f(t)$ のフーリエ変換 $\textrm{F}(w)$ が求められる。
+</p>
+
+</div>
+
+<br>
+<h2>
+(2) 逆ラプラス変換の導出
+</h2>
+
+
+<p>
+逆フーリエ変換は次の式です。
+</p>
+
+\begin{align*}
+f(t) =
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty} 
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\right \}
+\textrm{d}w
+\end{align*}
+
+
+<p>
+逆ラプラス変換も(1)と同じ様な議論で求まります。
+<br>
+つまり
+$j \cdot w = s (= \sigma + j \cdot w)$ と置き換えて代入すれば $\textrm{d}w = \textrm{d}s/j$ なので、すぐに
+</p>
+
+\begin{align*}
+f(\sigma, t) =
+\frac{1}{2\pi\cdot j}
+\int_{\sigma - j \cdot \infty}^{\sigma + j \cdot \infty}
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\textrm{d}s
+\end{align*}
+
+<p>
+となります。
+<br>
+ただし $f(t)$ は $t$ だけでなく $\sigma$ にも関する時間領域信号 $f(\sigma,t)$ となります。
+<br>
+また積分路は線分 $(\sigma - j \cdot \infty\ ,\ \sigma + j \cdot \infty)$ となります。
+</p>
+
+<p>
+次にある実数の定数 $\gamma$ を選んで変数 $\sigma$ に代入します。
+<br>
+さらに留数定理を使いたいので積分路を半径 $p (\rightarrow \infty)$ の半円 x2 になるように変更します。
+<br>
+すると、もし $\gamma$ が収束領域内にあれば $\gamma$ の値によらず復元される $f(t)$ は全て同じ信号になります(図5)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図5: 逆ラプラス変換の積分路</b>
+
+<p>
+$f(t)$ の $t \geq 0$ 側の極は収束領域(黄色の範囲)の左側、$f(t)$ の $t < 0$ 側の極は収束領域の右側にある。
+</p>
+
+<p>
+つまり半径 $p$ の赤い半円が $f(t)$ の $t \geq 0$ 側に対応する積分路、半径 $p$ の青い半円が $f(t)$ の $t < 0$ 側に対応する積分路となる。
+</p>
+
+<p>
+よって $p$ を充分大きく取れば収束領域内で任意に $\gamma$ の値を選んでも赤と青の半円内に含まれる極の組み合わせは常に同じとなる → 復元される $f(t)$ は変わらない
+</p>
+
+<img src="./img/page02-fig5.png" alt="">
+</div>
+
+<p>
+以上より逆ラプラス変換
+</p>
+
+\begin{align*}
+f(t) =
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\textrm{d}s
+\end{align*}
+
+<p>
+が導出されます。
+</p>
+
+<p>
+逆ラプラス変換から逆フーリエ変換を導くのは簡単で  $s =j \cdot w$ を逆ラプラス変換の式に代入するとそのまま逆フーリエ変換の式が導出されます。
+</p>
+
+<p>
+ただし(1)でも述べましたが虚軸(直線 $\sigma = 0$) が収束領域に含まれてない場合は $\textrm{F}(w)$ が存在しないので逆フーリエ変換も計算できません。
+</p>
+
+
+<p>
+話をまとめると次のようになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>逆ラプラス変換と逆フーリエ変換の関係</b>
+
+<p>
+$j \cdot w = s$ を逆フーリエ変換の式に代入して積分路を上手く調整すると逆ラプラス変換が求められる。
+</p>
+
+<p>
+逆に、虚軸(直線 $\sigma = 0$) が収束領域に含まれているならば、 $s =j \cdot w$ を逆ラプラス変換の式に代入することで $f(t)$ の逆フーリエ変換の式が求められる。
+</p>
+
+</div>
+
+
+
+<br>
+<script>PreNext(2,5)</script>
+</body>
+</html>

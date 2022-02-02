@@ -37,7 +37,9 @@
 </p>
 
 <p>
-さて用語などの説明については後からすることにして、早速ラプラス変換の定義を述べます。
+では早速ラプラス変換の定義を述べます。
+<br>
+いきなり「S平面」とか「複素角周波数」とかいう用語が出てきますが、それについては後のページで説明しますので、とりあえず $s$ は複素数の変数だと思って下さい。
 </p>
 
 <div class="info">
@@ -46,7 +48,7 @@
 <p>
 $f(t)$ を任意の時間領域アナログ信号とする。
 <br>
-また $s$を「<b>S平面</b>」(S-plane)と呼ばれる複素平面上の任意の点
+また $s$を「<b>S平面</b>」(S-plane)と呼ばれる複素平面上の変数
 </p>
 
 \[
@@ -64,52 +66,47 @@ s = \sigma + j \cdot w
 </p>
 
 \[
-\textrm{F}(s) = \int_{0}^{\infty} 
-\left \{
-f(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
-\right \}
-\textrm{dt}
-\]
-
-<p>
-により定義される複素関数を「<b>片側ラプラス変換</b>」と言う。
-</p>
-<p>
-また積分範囲をマイナス無限大まで広げた
-</p>
-
-
-\[
 \textrm{F}(s) = \int_{-\infty}^{\infty} 
 \left \{
 f(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
 \right \}
-\textrm{dt}
+\textrm{d}t
 \]
 
 <p>
 により定義される複素関数を「<b>両側ラプラス変換</b>」と言う。
 </p>
+<p>
+また積分範囲を0以上に限定した
+</p>
+
+
+\[
+\textrm{F}(s) = \int_{0}^{\infty} 
+\left \{
+f(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
+<p>
+により定義される複素関数を「<b>片側ラプラス変換</b>」と言う。
+</p>
+
+
 
 </div>
 
 <p>
-いきなり「S平面」とか「複素角周波数」とかいう用語が出てきましたが、それについては後のページで説明しますので、とりあえず $s$ は複素数の変数だと思って下さい。
-</p>
-
-<p>
-また上に示したようにラプラス変換には片側ラプラス変換と両側ラプラス変換の2種類があります。
+上に示したようにラプラス変換には両側ラプラス変換と片側ラプラス変換の2種類があります。
 <br>
 ただし信号$f(t)$は時刻 0 未満の場合は $f(t)=0$ とみなすことが多いこと、両側ラプラス変換は存在しないこともままある(例えば$f(t)=a$(定数)の両側ラプラス変換はありません)ことから、通常はラプラス変換と言うと片側ラプラス変換の方を意味します。
 </p>
-<p>
-よってこのアクティビティでも特に指定が無い限りは「ラプラス変換 ＝ 片側ラプラス変換」とします。
-</p>
 
 <p>
-一方逆変換は以下の様に定義されます。
+また逆変換は以下の様に定義されます。
 <br>
-片側、両側どちらの変換にも共通の定義です。
+両側、片側どちらの変換にも共通の定義です。
 </p>
 
 <div class="info">
@@ -123,7 +120,7 @@ f(t) =
 \left \{
 \textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
 \right \}
-\textrm{ds}
+\textrm{d}s
 \end{align*}
 
 <p>
@@ -147,14 +144,14 @@ $s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
 <p>
 さて、逆変換の中で出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と呼ばれる複素積分となりますが、積分路を閉曲線になるように変更すると留数定理を使って以下の様に書き換えることが出来ます。
 <br>
-ただし留数を使った場合は片側ラプラス変換と両側ラプラス変換で若干式が変わります。
+ただし留数を使った場合は両側ラプラス変換と片側ラプラス変換で若干式が変わります。
 <br>
-先に片側ラプラス変換の逆変換(一般的に逆ラブラス変換と呼ばれている変換です)から説明します。
+先に説明しやすい片側ラプラス変換の逆変換(一般に逆ラブラス変換と呼ばれている変換)から説明します。
 </p>
 
 
 <div class="info">
-<input type="checkbox"><b>定義： 逆(片側)ラプラス変換 (留数版)</b>
+<input type="checkbox"><b>定義： 逆片側ラプラス変換 (留数版)</b>
 
 <p>
 $\textrm{F}(s)$ に極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
@@ -191,7 +188,7 @@ $\textrm{Res}_{s=s_i}
 \left \{
 \textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
 \right \}
-= \frac{1}{(n-1)!}\lim_{s \rightarrow s_i}\frac{\textrm{d}^{n-1}}{\textrm{ds}^{n-1}}
+= \frac{1}{(n-1)!}\lim_{s \rightarrow s_i}\frac{\textrm{d}^{n-1}}{\textrm{d}s^{n-1}}
 \left \{
 (s-s_i)^n \cdot \textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
 \right \}
@@ -200,7 +197,7 @@ $\textrm{Res}_{s=s_i}
 </div>
 
 <p>
-例えば $\textrm{F}(s) = 1/s^2$ の時、極は $s=0$ (n=2) のひとつだけなので
+例えば $\textrm{F}(s) = 1/s^2$ の時、極は $s=0$ (n=2) のひとつだけなので逆片側ラプラス変換は
 </p>
 
 \begin{align*}
@@ -210,7 +207,7 @@ f(t)
 \left \{
 \frac{1}{s^2} \cdot \textrm{e}^{\{s \cdot t \}}
 \right \} \\[5pt]
-&= \frac{1}{1!}\lim_{s \rightarrow 0}\frac{\textrm{d}}{\textrm{ds}}
+&= \frac{1}{1!}\lim_{s \rightarrow 0}\frac{\textrm{d}}{\textrm{d}s}
 \left \{
 (s-0)^2 \cdot \frac{1}{s^2}  \cdot \textrm{e}^{\{s \cdot t \}}
 \right \} \\[5pt]
@@ -233,6 +230,8 @@ t \cdot \textrm{e}^{\{s \cdot t \}}
 
 <p>
 次に逆両側ラプラス変換を示します。
+<br>
+収束領域を考慮する必要があるので式が複雑になります。
 </p>
 
 <div class="info">
@@ -333,13 +332,13 @@ f(t) =
 \left \{
 ( -t ) \cdot \textrm{e}^{\{- s \cdot t \}} 
 \right \}
-\textrm{dt} \\[5pt]
+\textrm{d}t \\[5pt]
 &=
 \int_{0}^{\infty}
 \left \{
 t \cdot \textrm{e}^{\{ s \cdot t \}} 
 \right \}
-\textrm{dt} \\[5pt]
+\textrm{d}t \\[5pt]
 &=
 \left [
 t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
@@ -349,7 +348,7 @@ t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
 \left \{
 \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
 \right \}
-\textrm{dt} \\[5pt]
+\textrm{d}t \\[5pt]
 &=
 \left [
 t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
