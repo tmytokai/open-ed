@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>4. 収束領域と極の関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ラプラス変換</a></li>
+<li>学習項目: [1] ラプラス変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+このページでは収束領域と極の関係について述べます。
+<br>
+そのためにまずラプラス変換の部分分数展開から説明します。
+</p>
+
+<br>
+<h2>
+(1) ラプラス変換の部分分数展開
+</h2>
+
+<p>
+ラプラス変換 $\textrm{F}(s)$ はローラン展開を使って以下の様に部分分数に展開出来ます。
+</p>
+
+<p>
+※ 出来ない場合もありますがとりあえず置いときます
+</p>
+
+\[
+\textrm{F}(s) = 
+\sum_{i = 0}^{\textrm{N}-1}
+\left \{ 
+\sum_{n = 1}^{n_i} \frac{ a_{i,n} }{ (s - s_i)^{n_i-n+1}}
+\right \}
+\]
+
+<p>
+ここで $\textrm{N}$ は極の数、$s_i$ は $n_i$ 位の極、
+</p>
+
+\[
+a_{i,n} = 
+\frac{1}{(n-1)!}\lim_{s \rightarrow s_i}\frac{\textrm{d}^{n-1}}{\textrm{d}s^{n-1}}
+\left \{
+(s-s_i)^{n_i} \cdot \textrm{F}(s)
+\right \}
+\]
+
+<p>
+で、$n = n_i$ の時が $\textrm{F}(s)$ の $s_i$ における留数に相当します。
+</p>
+
+<p>
+この式だけ見ても多分意味が分からないと思うので例を示しましょう。
+<br>
+例えば
+</p>
+
+\[
+\textrm{F}(s) = \frac{1}{(s-1)^2(s^2+1)} = \frac{1}{(s-1)^2(s-j)(s+j)}
+\]
+
+<p>
+を考えます。
+<br>
+すると
+</p>
+
+\[
+\textrm{N} = 3
+\]
+\[
+\begin{cases}
+s_0 &= 1\\[5pt]
+n_0 &= 2\\[5pt]
+\end{cases}
+\]
+\[
+\begin{cases}
+s_1 &= j\\[5pt]
+n_1 &= 1\\[5pt]
+\end{cases}
+\]
+\[
+\begin{cases}
+s_2 &= -j\\[5pt]
+n_2 &= 1\\[5pt]
+\end{cases}
+\]
+
+<p>
+なので
+</p>
+
+\begin{align*}
+\textrm{F}(s) &= 
+\frac{ a_{0,1} }{ (s-1)^2 } + \frac{ a_{0,2} }{ (s-1) } \\[5pt]
+& + \frac{ a_{1,1} }{ (s-j) } \\[5pt]
+& + \frac{ a_{2,1} }{ (s+j) }
+\end{align*}
+
+<p>
+と分解でき、各係数は
+</p>
+
+\begin{align*}
+a_{0,1} &= 
+\lim_{s \rightarrow 1}
+\left \{
+(s-1)^2 \cdot \textrm{F}(s)
+\right \} \\[5pt]
+&= 
+\lim_{s \rightarrow 1}
+\frac{1}{s^2+1} = \frac{1}{2} \\[10pt]
+a_{0,2} &= 
+\lim_{s \rightarrow 1}
+\frac{\textrm{d}}{\textrm{d}s}
+\left \{
+(s-1)^2 \cdot \textrm{F}(s)
+\right \}  \\[5pt]
+&= 
+\lim_{s \rightarrow 1}
+\frac{-2s}{(s^2+1)^2} = -\frac{1}{2} \\[10pt]
+a_{1,1} &= 
+\lim_{s \rightarrow j}
+\left \{
+(s-j) \cdot \textrm{F}(s)
+\right \}  \\[5pt]
+&= 
+\lim_{s \rightarrow j}
+\frac{1}{(s-1)^2(s+j)} = \frac{1}{4} \\[10pt]
+a_{2,1} &= 
+\lim_{s \rightarrow -j}
+\left \{
+(s+j) \cdot \textrm{F}(s)
+\right \}  \\[5pt]
+&= 
+\lim_{s \rightarrow -j}
+\frac{1}{(s-1)^2(s-j)} = \frac{1}{4} 
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<p>
+※ 余裕があったら逆算して正しいかどうか確認して下さい
+</p>
+
+<br>
+<h2>
+(2) 収束領域と極の関係
+</h2>
+
+<p>
+準備中
+</p>
+
+
+
+<br>
+<script>PreNext(3,5)</script>
+</body>
+</html>
