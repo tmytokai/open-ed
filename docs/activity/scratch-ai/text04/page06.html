@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #332789;
+}
+</style>
+<title>音声認識ブロックをつくろう</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>音声認識ブロックをつくろう</h1>
+
+<div class="number"><p class="number">1</p></div><h2>音声認識ブロックをブログラミングする</h2>
+<p>
+つぎに音声を認識するためのブロックをつくります。
+先ほど作った「音声認識」ブロックの中身を次のようにプログラムしてください。
+</p>
+<img src="./img/page06-fig1.png" alt="">
+
+<p>
+このオリジナルブロックはマイクで録音した音声が認識されるまで「もし」ブロックを繰り返し、認識したらその音声を「ハイかローか」変数に入れます。
+</p>
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>音声認識ブロックをテストする</h2>
+<p>
+音声認識ブロックが正しく動くかテストしてみましょう。
+「定義 音声認識」ブロックをクリックしてマイクに向かって「ハイ」か「ロー」と話してください。
+正しく認識すると「〜だね」というメッセージが表示されます。
+</p>
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ1</p></div>
+<p>
+周りが騒がしいとうまく音声を認識してくれないかもしれません。
+その場合は「もし」ブロックの中にある
+</p>
+<img src="./img/page06-fig2.png" alt="">
+<br>
+<img src="./img/page06-fig3.png" alt="">
+<p>
+ブロックをそれぞれ
+</p>
+<img src="./img/page06-fig4.png" alt="">
+<img src="./img/page06-fig5.png" alt="">
+<p>
+に置き換えてみましょう。
+するとうまく認識するようになるかもしれません。
+このブロックは「ハイまたはローの音声である確率が80%より大きければ」ということを意味しています。
+</p>
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ2</p></div>
+<p>
+それでもうまく音声を認識しない時は、仕方ないので「調べる」メニューの中にある「〜と聞いて待つ」ブロックを使って「ハイかローか」変数に値を入れましょう。
+</p>
+
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

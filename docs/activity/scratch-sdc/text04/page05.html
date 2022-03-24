@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>右折する</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>右折する</h1>
+
+<div class="number"><p class="number">1</p></div><h2>右折用のルートを作る</h2>
+<p>
+これまで作ったプロクラムで前進と左折はうまく動くようになりましたが、右折しようとすると対向車にぶつかります。
+そこで右折用のプログラムをここで作ります。
+</p>
+
+<p>
+ただ、今の走行ルートは左まわりになっていますので、次のように「走行ルートを決める」ブロックの中身を置き換えて右まわりのルートになるようにして下さい。
+</p>
+<img src="./img/page05-fig1.png" alt="">
+
+
+<p>
+置き換えたら試しに「緑の旗」ボタンを押して実行して下さい。
+だいたいは対向車が気を利かせて止まってくれますが(多分かなり怒っています)、それでも時々対向車にぶつかると思います。
+</p>
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>「もし〜なら」ブロックの条件を考える</h2>
+<p>
+では「もし〜なら」ブロックの条件を考えてみましょう。
+</p>
+
+<p>
+対向車を検知するセンサーは「前方-右センサー」ですので、次のような表になります。
+なお直進車が優先なので、センサーの数値は前のページよりも少し遠目にしました。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「前方-右センサー」</th> <th>「仮のスピード」</th> </tr>
+</thead>
+<tbody>
+<tr> <td class="center"> 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td class="center"> 30以下、20より大<br>(近い) </td> <td class="center">20</td> </tr>
+<tr> <td class="center"> 20以下<br>(直前) </td> <td class="center">0</td> </tr>
+</tbody>
+</table>
+</div>
+
+
+<p>
+信号の時と同じ様に、この表を「もし〜ならば、でなければ」ブロックを使って置き換えると次のようになります。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「前方-右センサー」</th> <th>「仮のスピード」</th> </tr>
+</thead>
+<tbody>
+<tr> <td class="center"> 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td colspan="2">でなければ</td> </tr>
+<tr> <td class="center"> 20より大<br>(近い) </td> <td class="center">20</td> </tr>
+<tr> <td colspan="2">でなければ</td> </tr>
+<tr> <td class="center"> 情報をつかわない<br>(直前) </td> <td class="center">0</td> </tr>
+</tbody>
+</table>
+</div>
+
+
+<p><br></p>
+<div class="number"><p class="number">3</p></div><h2>表をもとにプログラミングする</h2>
+<p>
+これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
+</p>
+
+<p>
+まず「右折する」というオリジナルブロックを作ります。
+このブロックは繰り返し使いますので「画面を再描画せずに実行する」をチェックしてください。
+</p>
+<img src="./img/page05-fig2.png" alt="">
+
+<p>
+「前の車にぶつからないようにする」ブロックの中身は次のようになります。
+なお今回は"右折"という条件も必要です。
+そこで右折をあらわす条件として「ナビの方向」が2、かつ「ナビの距離」が30未満としました。
+それを除けば表の内容と「もし〜なら」ブロックの条件がまったく同じになっています。
+</p>
+<img src="./img/page05-fig3.png" alt="">
+
+<p>
+あとは「速度を決める」ブロックを次のように変更すればOKです。
+</p>
+<img src="./img/page05-fig4.png" alt="">
+
+
+<p><br></p>
+<div class="number"><p class="number">4</p></div><h2>テストして数値を調整する</h2>
+<p>
+では「緑の旗」ボタンを押してテストしてみましょう。
+</p>
+
+<p>
+もし他の車にぶつかったり、信号にひっかかったりしてゲームオーバーになる場合はセンサーなどの数値を調整(ちょうせい)してください。
+この調整作業は本物の自動運転車を作る場合でもとても大事な作業になりますので、世界中のいろんな所で本物の自動運転車を走らせてテストをしている訳ですね。
+</p>
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+「前方-左センサー」と「前方-右センサー」は車の前方しかみないので、渋滞などでカーブした先に車がいると衝突するときがあります。
+カーブの先にいる車を見つけるためには「左センサー」と「右センサー」も使う必要があります。
+「左センサー」と「右センサー」も使ってカーブの先にいる車にぶつからないようにしてみましょう。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

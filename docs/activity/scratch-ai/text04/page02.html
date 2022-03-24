@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #332789;
+}
+</style>
+<title>カードと自分の声を学習しよう</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>カードと自分の声を学習しよう</h1>
+
+<div class="number"><p class="number">1</p></div><h2>カードの画像認識データをつくろう</h2>
+<p>
+まずティーチャブル・マシンをつかってカードの画像認識データを作成します。
+</p>
+<p>
+<a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener noreferrer">https://teachablemachine.withgoogle.com/</a>
+</p>
+<p>
+ただしトランプのカード(ジョーカーを除く52枚)を全て認識させようとすると大変ですので、今回はマークは1種類だけとし、「A(エース)」「5」「10」「K(キング)」の4枚だけ使用します。これに背景画像もくわえて、次の表の5枚の画像認識をしてください。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>名前</th><th>撮るもの</th></tr>
+</thead>
+<tbody>
+<tr><td class="w20">A</td><td>A(エース)のカード</td></tr>
+<tr><td class="w20">5</td><td>5のカード</td></tr>
+<tr><td class="w20">10</td><td>10のカード</td></tr>
+<tr><td class="w20">K</td><td>K(キング)のカード</td></tr>
+<tr><td class="w20">なし</td><td>背景</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>
+カードは底を机の上に置いて動かないようにし、カメラの画像いっぱいに写すようにして撮影するとうまく認識してくれるようになります。
+またカードは動かないようにしているので、撮影する画像の数は20枚程度でOKです。
+</p>
+
+<p>
+学習(トレーニング)して、プレビューで結果を確認したらアップロードしてアドレスをメモ帳アプリなどに保存して下さい。
+</p>
+
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>自分の声の音声認識データをつくろう</h2>
+<p>
+次に自分の声の音声認識データを作成します。
+バックグラウンドノイズもくわえて、次の表の3つの音声の認識をしてください。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>名前</th><th>録音するもの</th></tr>
+</thead>
+<tbody>
+<tr><td>バックグラウンドノイズ</td><td>何も話してないときの音</td></tr>
+<tr><td>ハイ</td><td>「ハイ」の声</td></tr>
+<tr><td>ロー</td><td>「ロー」の声</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>
+「ハイ」と「ロー」の音は短いので、何も録音されてないサンプルが出来るときがあります。何も録音されてないサンプルの上にマウスを動かすとゴミ箱アイコンが表示されるので、ゴミ箱をクリックして消しましょう。
+</p>
+<img src="./img/page02-fig1.png" alt="">
+<p>
+学習(トレーニング)して、プレビューで結果を確認したらアップロードしてアドレスをメモ帳アプリなどに保存して下さい。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

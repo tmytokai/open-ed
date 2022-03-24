@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #332789;
+}
+</style>
+<title>ティーエムツー・スクラッチで画像認識</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text03">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>ティーエムツー・スクラッチで画像認識</h1>
+
+<div class="number"><p class="number">1</p></div><h2>学習データを読み込む</h2>
+<p>
+ではティーエムツー・スクラッチを使って画像認識をしてみましょう。
+そのために、以下の手順で先程アップロードしたティーチャブルマシンの画像認識の学習データを読み込みます。
+</p>
+<ol>
+<li>「画像分離モデルURL」ブロックをスクリプトエリア(画面中央の白い画面)に置きます</li>
+<img src="./img/page02-fig1.png" alt="">
+<li>中に書いてあるアドレスを先ほどメモ帳アプリにコピーした画像認識の学習データのアドレスに置き換えます。最後の「/(スラッシュ)」までコピーしないと正しく動かないので注意してください。</li>
+<li>「画像分離モデルURL」ブロックをクリックすると「緑の旗」ボタンが押された状態になるのでしばらく待ちます。読み込みが終わると「緑の旗」ボタンが元に戻ります。</li>
+<li>「画像ラベル」変数ブロックの左側のチェックボックスにチェックを入れます。</li>
+<img src="./img/page02-fig2.png" alt="">
+<li>ステージ(プログラムの実行画面)に認識された画像の名前が表示されるので「グー」「チョキ」「パー」を認識するか確認します。</li>
+<img src="./img/page02-fig3.png" alt="">
+</ol>
+
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>簡単なプログラムをつくってみよう</h2>
+<p>
+これでスクラッチを使って画像認識ができるようになりましたので、何か簡単なプログラムをつくってみましょう。
+今回は「グー」を認識したら猫に「グーだね」、それ以外の時は「グーじゃないね」と言わせてみます。
+</p>
+<ol>
+<li>ある画像が見つかると「〜の画像が見つかった」演算ブロックが「真」になりますので、これを「もし〜なら」制御ブロックと組み合わせて使います。</li>
+<img src="./img/page02-fig4.png" alt="">
+<li>よって目的のプログラムは次のようになります。</li>
+<img src="./img/page02-fig5.png" alt="">
+</ol>
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+「グー」を認識したら「グーだね」、「チョキ」を認識したら「チョキだね」、「パー」を認識したら「パーだね」、何も見つからない時は「何も無いね」と言わせてみましょう。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text03">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

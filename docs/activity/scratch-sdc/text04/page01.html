@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>とりあえず前に進む</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>とりあえず前に進む</h1>
+
+<div class="number"><p class="number">1</p></div><h2>準備</h2>
+<p>
+マニュアルで車を動かせるようになったので、次はルートの自動決定、といきたいところですが、ルートの自動決定はかなり難しいプログラミングが必要なので、まず先に速度の自動決定からつくってみましょう。
+</p>
+<p>
+ところで実行するたびにいちいちルートをマニュアルで入力するのは面倒なので、テスト用のルートをあらかじめ決めておきます。
+折角つくったのにもったいない気もしますが、「走行ルートを決める」ブロックの中身を次の図の左側のように置き換えて下さい。
+すると左まわりで同じ場所をぐるぐる回るようなルートになります。
+</p>
+<p>
+なお外した前のプロクラムは後で使いますので消さないように気を付けて下さい。
+</p>
+<img src="./img/page01-fig1.png" alt="">
+
+<p>
+さらにテスト中に信号や他の車がいると邪魔ですので、メインプログラムの「スタート」ブロックの信号と車の設定をOFFにします。
+</p>
+<img src="./img/page01-fig2.png" alt="">
+
+
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>とりあえず前進させる</h2>
+<p>
+ではとりあえず前進させるプログラムをつくってみましょう。
+まず「変数」メニューで「目標のスピード」という変数ブロックを作ります。
+</p>
+<img src="./img/page01-fig3.png" alt="">
+
+<p>
+次に「速度を決める」ブロックの中身を次のように置き換えます。
+</p>
+<img src="./img/page01-fig4.png" alt="">
+
+<p><br></p>
+<div class="number"><p class="number">3</p></div><h2>テストする</h2>
+<p>
+では「緑の旗」ボタンを押してテストしてみましょう。
+多分とんでもないことが起きると思います。
+</p>
+
+<p>
+正しく(？)動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい(シミュレータ画面は動作が重いのでプログラミングはタイトル画面でした方が良いです)。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

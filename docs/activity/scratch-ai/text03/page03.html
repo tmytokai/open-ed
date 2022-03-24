@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #332789;
+}
+</style>
+<title>ティーエムツー・スクラッチで音声認識</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text03">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>ティーエムツー・スクラッチで音声認識</h1>
+
+<div class="number"><p class="number">1</p></div><h2>学習データを読み込む</h2>
+<p>
+次はティーエムツー・スクラッチを使って音声認識をしてみましょう。
+そのために、以下の手順で先程アップロードしたティーチャブルマシンの音声認識の学習データを読み込みます。
+</p>
+<ol>
+<li>「音声分離モデルURL」ブロックをスクリプトエリア(画面中央の白い画面)に置きます</li>
+<img src="./img/page03-fig1.png" alt="">
+<li>中に書いてあるアドレスを先ほどメモ帳アプリにコピーした音声認識の学習データのアドレスに置き換えます。最後の「/(スラッシュ)」までコピーしないと正しく動かないので注意してください。</li>
+<li>「音声分離モデルURL」ブロックをクリックすると「緑の旗」ボタンが押された状態になるのでしばらく待ちます。読み込みが終わると「緑の旗」ボタンが元に戻ります。</li>
+<li>「音声ラベル」変数ブロックの左側のチェックボックスにチェックを入れます。</li>
+<img src="./img/page03-fig2.png" alt="">
+<li>ステージ(プログラムの実行画面)に認識された音声の名前が表示されるので「こんにちは」「さようなら」を認識するか確認します。</li>
+<img src="./img/page03-fig3.png" alt="">
+</ol>
+
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+ある画像が見つかると「〜の音声が聞こえた」演算ブロックが「真」になりますので、これを「もし〜なら」制御ブロックと組み合わせて使います。
+</p>
+<img src="./img/page03-fig4.png" alt="">
+<p>
+それでは画像認識の時と同じ様にして「こんにちは」を認識したら「こんにちはだね」、「さようなら」を認識したら「さよならだね」、バックグラウンド・ノイズの時は「何も無いね」と猫に言わせてみましょう。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text03">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

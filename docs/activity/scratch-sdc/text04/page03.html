@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>信号を守る</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>信号を守る</h1>
+
+<div class="number"><p class="number">1</p></div><h2>信号の情報を使う</h2>
+<p>
+次は赤信号で止まるようなプログラムを作ってみましょう。
+</p>
+
+<p>
+本物の車の場合は超高精度マップやカメラ、ライダーなどのセンサーによって信号の状態を取得しますが、このシミュレータでは「信号の距離」「信号の状態」変数ブロックで信号の状態を取得できます。
+</p>
+<img src="./img/page03-fig1.png" alt="">
+
+<p>
+「信号の距離」は次のカーブまでの距離(メートル)が取得できます。なお信号機の真下にいる場合は 0 メートルになります。
+</p>
+<p>
+「信号の状態」は青か黄色か赤かを次の数値で取得できます。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>「信号の状態」<br>の数値</th><th>内容</th></tr>
+</thead>
+<tbody>
+<tr><td class="w30">0</td><td>青</td></tr>
+<tr><td class="w30">1</td><td>黄色</td></tr>
+<tr><td class="w30">2</td><td>赤</td></tr>
+</tbody>
+</table>
+</div>
+
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>「もし〜なら」ブロックの条件を考える</h2>
+<p>
+ではまた「もし〜なら」ブロックの条件をミーシー思考を使って考えてみましょう、と言いたいところですが、いま手元にある情報は「ナビの距離」「ナビの方向」「信号の距離」「信号の状態」の4つありますので、"手元にある情報を全て、もれがないように組み合わせて条件を考え"てしまうと、とんでもなく巨大な表ができてしまいます。
+</p>
+
+<p>
+この様に手元にある情報が増えてきた場合は<b>"ミニ・マックス思考"</b>とミーシー思考を組み合わせて「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
+</p>
+
+<p>
+ミニ・マックス思考は
+<b>"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"</b>
+という方法です。
+</p>
+
+<p>
+と言ってもよく分かりませんね。
+では具体的に条件を求めていきましよう。
+</p>
+
+<p>
+まず今回の目的は"信号を守る"ことですので、"信号を守る"ことに関係ない情報は全て無視します。
+つまり"カーブが存在しない"ということにして、「ナビの距離」「ナビの方向」を使わずに「信号の距離」「信号の状態」だけ使うことにします。
+</p>
+
+<p>
+さてこれからミーシー思考を使って「信号の距離」「信号の状態」だけで条件を考えていきますが、「目標のスピード」変数ブロックに直接スピードの値を入れてしまうとカーブで道からはみ出してしまうようになりますので、「仮のスピード」変数ブロックを新しく作ってまずはそちらに値を入れることにします。
+</p>
+
+<p>
+すると表は次のようになります。
+なお「信号の距離」が20メートルより大きい時は"信号まで遠い"、20メートル以下で10メートルより大きい時は"信号に近い"、10メートル以下で0メートルより大きい時は"直前"、0メートルの時は"真下"ということにしました。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
+</thead>
+<tbody>
+
+<tr> <td class="center" rowspan="3"> 20 より大<br>(遠い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
+
+<tr> <td class="center" rowspan="3"> 20以下、10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
+<tr> </td> <td class="center">2 (赤)</td> <td class="center">30</td> </tr>
+
+<tr> <td class="center" rowspan="3"> 10以下、0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
+<tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
+
+<tr> <td class="center" rowspan="3">0<br>(真下) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
+
+</tbody>
+</table>
+</div>
+
+<p>
+0(真下)の時に「仮のスピード」を50にしてるのは、いったん交差点に入ってしまったらさっさと抜けてしまおうという意味です。
+</p>
+
+<p>
+さてこの表は結構大きくて無駄がありますし、"〜以下、〜より大"は「もし〜ならば、でなければ」ブロックを使って置き換えることが出来ますので、次のように簡単にすることが出来ます(※)。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
+</thead>
+<tbody>
+
+<tr> <td class="center"> 20 より大<br>(遠い) </td> <td class="center">情報を使わない</td> <td class="center">50</td> </tr>
+
+<tr> <td colspan="3">でなければ</td> </tr>
+
+<tr> <td class="center" rowspan="2"> 10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">でなければ<br>(青以外)</td> <td class="center">30</td> </tr>
+
+<tr> <td colspan="3">でなければ</td> </tr>
+
+<tr> <td class="center" rowspan="3"> 0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
+<tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
+
+<tr> <td colspan="3">でなければ</td> </tr>
+
+<tr> <td class="center">情報をつかわない<br>(真下)</td> <td class="center">情報をつかわない</td> <td class="center">50</td> </tr>
+</tbody>
+</table>
+</div>
+
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+なぜ※の表になるのか考えてみましょう。
+</p>
+
+
+<p><br></p>
+<div class="number"><p class="number">3</p></div><h2>表をもとにプログラミングする</h2>
+<p>
+これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
+</p>
+
+<p>
+まず「信号を守る」というオリジナルブロックを作ります。
+このブロックは繰り返し使いますので「画面を再描画せずに実行する」をチェックしてください。
+</p>
+<img src="./img/page03-fig2.png" alt="">
+
+<p>
+「信号を守る」ブロックの中身は上の表から次のようになります。
+表の内容と「もし〜なら」ブロックの条件がまったく同じになっていますね。
+</p>
+<img src="./img/page03-fig3.png" alt="">
+
+<p>
+ところで一番最後に表にないプログラムが混ざってますね。
+<br>
+(↓これ)
+</p>
+<img src="./img/page03-fig4.png" alt="">
+
+<p>
+ここが"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"というミニ・マックス思考の部分で、前のページで求めたカーブの時のスピードと、今回求めた信号の時のスピードのうちで事故るリスクが低い、つまりスピードが低い方を「目標のスピード」にセットしています。
+</p>
+
+<p>
+あとは「速度を決める」ブロックを次のように変更すればOKです。
+</p>
+<img src="./img/page03-fig5.png" alt="">
+
+<p>
+ただこのままでは実行しても信号が出ませんので、「スタート」ブロックで信号をONにするのを忘れないで下さい。
+</p>
+<img src="./img/page03-fig6.png" alt="">
+
+
+<p><br></p>
+<div class="number"><p class="number">4</p></div><h2>テストする</h2>
+<p>
+では「緑の旗」ボタンを押してテストしてみましょう。
+</p>
+
+<p>
+正しく動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい(シミュレータ画面は動作が重いのでプログラミングはタイトル画面でした方が良いです)。
+</p>
+
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>カーブで道からはみ出ないようにする</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+<div class="contents">
+
+<h1>カーブで道からはみ出ないようにする</h1>
+
+<div class="number"><p class="number">1</p></div><h2>ナビゲータの情報を使う</h2>
+<p>
+このままではカーブで道からはみ出してしまいますので、カーブ手前で減速しましょう。
+そのために「ナビゲータ」の情報を使います。
+</p>
+
+<p>
+本物の車の場合はGPSやジャイロセンサーなどによってナビゲータの情報を取得しますが、このシュミレータでは「ナビの距離」「ナビの方向」変数ブロックでナビゲータの情報を取得できます。
+</p>
+<img src="./img/page02-fig1.png" alt="">
+
+<p>
+「ナビの距離」は次のカーブまでの距離(メートル)が取得できます。
+</p>
+<p>
+「ナビの方向」は左カーブか右カーブかを次の数値で取得できます。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>「ナビの方向」<br>の数値</th><th>内容</th></tr>
+</thead>
+<tbody>
+<tr><td class="w30">0</td><td>左カーブ</td></tr>
+<tr><td class="w30">1</td><td>直進</td></tr>
+<tr><td class="w30">2</td><td>右カーブ</td></tr>
+</tbody>
+</table>
+</div>
+
+
+<p><br></p>
+<div class="number"><p class="number">2</p></div><h2>「もし〜なら」ブロックの条件を考える</h2>
+<p>
+ではナビゲータの情報を使ってどのようにプログラムをすればよいのでしょうか？
+なんとなく「もし〜なら」ブロックをつかえば出来そうな気がしますが条件がよく分かりませんね。
+</p>
+
+<p>
+ちょっと難しい話になりますが、今回の「ナビの距離」や「ナビの方向」みたいに手元にある情報がたくさんある時は<b>"ミーシー(MECE)思考"</b>という方法を使って「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
+</p>
+
+<p>
+このミーシー思考は
+<b>"手元にある情報を全て、もれがないように組み合わせて条件を考える"</b>
+という方法です。
+</p>
+<p>
+それで今回は「ナビの距離」「ナビの方向」の2つの情報から「目標のスピード」変数ブロックにセットする数字を決めます。
+そこで「ナビの距離」「ナビの方向」をもれなく組み合わせて、まず次のような表を作ります。
+なお「ナビの距離」は15メートルより大きければ"カーブまで遠い"、15メートル以下なら"カーブまで近い"と判断することにしました。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「ナビの距離」</th> <th>「ナビの方向」</th> <th>「目標のスピード」</th> </tr>
+</thead>
+<tbody>
+<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">0 (左)</td> <td class="center">50</td> </tr>
+<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">1 (直進)</td> <td class="center">50</td> </tr>
+<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">2 (右)</td> <td class="center">50</td> </tr>
+<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">0 (左) </td> <td class="center">20</td> </tr>
+<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">1 (直進) </td> <td class="center">20</td> </tr>
+<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">2 (右)</td> <td class="center">20</td> </tr>
+</tbody>
+</table>
+</div>
+
+<p>
+この表をみると「目標のスピード」変数ブロックの値を決めているのは実は「ナビの距離」だけで「ナビの方向」の情報は使っていないことが分かります。
+さらに"15 以下"は「もし〜ならば、でなければ」ブロックを使って置き換えることが出来ますので、上の表は次のように簡単にできます。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr> <th>「ナビの距離」</th><th>目標のスピード</th> </tr>
+</thead>
+<tbody>
+<tr> <td class="center"> 15 より大(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td class="center"> でなければ </td> <td class="center">20</td> </tr>
+</tbody>
+</table>
+</div>
+
+
+<p><br></p>
+<div class="number"><p class="number">4</p></div><h2>表をもとにプログラミングする</h2>
+<p>
+これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
+</p>
+
+<p>
+まず「カーブで道からはみ出さないようにする」というオリジナルブロックを作ります。
+このブロックは繰り返し使いますので「画面を再描画せずに実行する」をチェックしてください。
+</p>
+<img src="./img/page02-fig2.png" alt="">
+
+<p>
+「カーブで道からはみ出さないようにする」ブロックの中身は上の表から次のようになります。
+表の内容と「もし〜なら」ブロックの条件がまったく同じになっていますね。
+</p>
+<img src="./img/page02-fig3.png" alt="">
+
+<p>
+あとは「速度を決める」ブロックを次のように変更すればOKです。
+</p>
+<img src="./img/page02-fig4.png" alt="">
+
+
+<p><br></p>
+<div class="number"><p class="number">5</p></div><h2>テストする</h2>
+<p>
+では「緑の旗」ボタンを押してテストしてみましょう。
+今度はちゃんと動いたと思います。
+</p>
+
+<p>
+正しく動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい(シミュレータ画面は動作が重いのでプログラミングはタイトル画面でした方が良いです)。
+</p>
+
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+今回は「ナビの方向」の情報は使いませんでしたが、右カーブと左カーブでスピードを変えたいならどういう表になるか考えてみましょう(実際にプログラムしても良いですよ)。
+</p>
+
+
+</div>
+
+<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+
+</div>
+
+
+</body>
+</html>
