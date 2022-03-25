@@ -24,20 +24,25 @@ margin-left: auto;
 margin-right: auto;
 }
 
-body.seminar div.title
+body.seminar div.maintitle
 {
-margin: 0px;
-padding: 50px;
+text-align: center;
 }
 
-body.seminar svg text.title1
+body.seminar svg.maintitle
+{
+max-width: 90%;
+height: auto;
+}
+
+body.seminar svg.maintitle text.title1
 {
 font-size: 2em;
 font-weight: bold;
 fill: #e6a555;
 }
 
-body.seminar svg text.title1back
+body.seminar svg.maintitle text.title1back
 {
 font-size: 2em;
 font-weight: bold;
@@ -48,14 +53,26 @@ stroke-linecap: round;
 stroke-linejoin: round;
 }
  
-body.seminar svg text.title2
+body.seminar svg.maintitle text.title1back2
+{
+font-size: 2em;
+font-weight: bold;
+fill: white;
+stroke: white;
+stroke-width: 10px;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
+
+body.seminar svg.maintitle text.title2
 {
 font-size: 1em;
 font-weight: bold;
 fill: #e6a555;
 }
 
-body.seminar svg text.title2back
+body.seminar svg.maintitle text.title2back
 {
 font-size: 1em;
 font-weight: bold;
@@ -66,50 +83,28 @@ stroke-linecap: round;
 stroke-linejoin: round;
 }
 
-
-body.seminar div.number
+body.seminar div.heading
 {
-font-size: 1em;
-font-weight: bold;
-width: 1em;
-height: 1em;
-float: left;
-margin-right: 10px;
-background: red;
-border-radius: 5px;
-display:flex;
-align-items: center;
-justify-content: center;
+display: flex;
+padding: 0px;
+margin-bottom: 0.5em;
+line-height: 1em;
 }
 
-body.seminar p.number
+body.seminar div.heading div.number
 {
 font-size: 0.7em;
-color: white;
-}
-
-body.seminar div.challenge
-{
-color: white;
-font-size: 1em;
 font-weight: bold;
-width: 6em;
-height: 1em;
+flex-shrink: 0;
+flex-basis: 1.5em;
+height: 1.5em;
 background: red;
 border-radius: 5px;
-display:flex;
-align-items: center;
-justify-content: center;
-padding: 10px;
+text-align: center;
+line-height: 1.5em;
+margin-right: 10px;
 }
 
-
-
-body.seminar div.title
-{
-width: 100%;
-text-align: center
-}
 
 body.seminar div.menu
 {
@@ -119,14 +114,6 @@ margin-left: auto;
 margin-right: auto;
 margin-bottom: 2em;
 padding: 0px;
-}
-
-body.seminar div.menu h2
-{
-font-size: 1em;
-height: 1em;
-display:flex;
-align-items: center;
 }
 
 body.seminar div.btmenu
@@ -156,7 +143,6 @@ body.seminar div.btmenu a:hover
 {
 color: white;
 }
-
 
 body.seminar div.btback
 {
@@ -203,7 +189,6 @@ padding: 1em;
 body.seminar div.contents h1
 {
 font-size: 1.5em;
-height: 1.5em;
 margin-bottom: 1em;
 }
 
@@ -211,7 +196,6 @@ margin-bottom: 1em;
 body.seminar div.contents h2
 {
 font-size: 1em;
-height: 1em;
 display:flex;
 align-items: center;
 }
@@ -219,6 +203,7 @@ align-items: center;
 body.seminar div.contents a
 {
 color: black;
+word-break: break-all;
 }
 
 body.seminar div.contents a:hover
@@ -269,4 +254,19 @@ body.seminar div.contents li
 {
 padding-top: 1em;
 padding-bottom: 0.5em;
+}
+
+body.seminar div.contents div.challenge
+{
+color: white;
+font-size: 1em;
+font-weight: bold;
+width: 6em;
+height: 1em;
+background: red;
+border-radius: 5px;
+display:flex;
+align-items: center;
+justify-content: center;
+padding: 10px;
 }
