@@ -67,12 +67,12 @@ background: #828282;
 </div>
 
 <p>
-ではナビゲータの情報を使ってどのようにプログラムをすればよいのでしょうか？
+ではナビゲータの情報( ＝ 変数)を使ってどのようにプログラムをすればよいのでしょうか？
 なんとなく「もし〜なら」ブロックをつかえば出来そうな気がしますが条件がよく分かりませんね。
 </p>
 
 <p>
-ちょっと難しい話になりますが、今回の「ナビの距離」や「ナビの方向」みたいに手元にある情報がたくさんある時は<b>"ミーシー(MECE)思考"</b>という方法を使って「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
+ちょっと難しい話になりますが、今回の「ナビの距離」や「ナビの方向」みたいに手元にある情報がたくさんある時は<b>"ミーシー(MECE)思考"</b>というプログラミングテクニックを使って「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
 </p>
 
 <p>
@@ -92,19 +92,19 @@ background: #828282;
 <tr> <th>「ナビの距離」</th> <th>「ナビの方向」</th> <th>「目標のスピード」</th> </tr>
 </thead>
 <tbody>
-<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">0 (左)</td> <td class="center">50</td> </tr>
-<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">1 (直進)</td> <td class="center">50</td> </tr>
-<tr> <td class="center"> 15 より大 (遠い) </td> <td class="center">2 (右)</td> <td class="center">50</td> </tr>
-<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">0 (左) </td> <td class="center">20</td> </tr>
-<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">1 (直進) </td> <td class="center">20</td> </tr>
-<tr> <td class="center"> 15 以下 (近い) </td> <td class="center">2 (右)</td> <td class="center">20</td> </tr>
+<tr> <td class="center" rowspan="3"> 15 より大<br>(遠い) </td> <td class="center">0 (左)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (直進)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">2 (右)</td> <td class="center">50</td> </tr>
+<tr> <td class="center" rowspan="3"> 15 以下<br>(近い) </td> <td class="center">0 (左) </td> <td class="center">20</td> </tr>
+<tr> <td class="center">1 (直進) </td> <td class="center">20</td> </tr>
+<tr> <td class="center">2 (右)</td> <td class="center">20</td> </tr>
 </tbody>
 </table>
 </div>
 
 <p>
 この表をみると「目標のスピード」変数ブロックの値を決めているのは実は「ナビの距離」だけで「ナビの方向」の情報は使っていないことが分かります。
-さらに"15 以下"は「もし〜ならば、でなければ」ブロックを使って置き換えることが出来ますので、上の表は次のように簡単にできます。
+さらに"15 以下"の条件は「もし〜ならば、でなければ」ブロックを使って置き換えることが出来ますので、上の表は次のように簡単にできます。
 </p>
 
 <div class="table">
@@ -114,7 +114,7 @@ background: #828282;
 </thead>
 <tbody>
 <tr> <td class="center"> 15 より大(遠い) </td> <td class="center">50</td> </tr>
-<tr> <td class="center"> でなければ </td> <td class="center">20</td> </tr>
+<tr> <td class="center"> でなければ(近い) </td> <td class="center">20</td> </tr>
 </tbody>
 </table>
 </div>
@@ -127,7 +127,7 @@ background: #828282;
 </div>
 
 <p>
-これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
+これで「もし〜ならば、でなければ」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
 </p>
 
 <p>

@@ -34,12 +34,13 @@ background: #828282;
 </p>
 
 <p>
-本物の車の場合はカメラやライダーなどのセンサーによって車のまわりにある物の距離や種類や速度などを取得しますが、このシミュレータでは「左センサー」「前方-左センサー」「前方-右センサー」「右センサー」変数ブロックで車のまわりにある物の状態を取得できます。
+本物の車の場合はカメラやライダーなどのセンサーによって車のまわりにある物の距離や種類や速度などを手に入れます。
+このシミュレータでは「左センサー」「前方-左センサー」「前方-右センサー」「右センサー」の4つの変数ブロックでその方向にいる他の車までの距離(メートル)を手に入れられます。
 </p>
 <img src="./img/page04-fig1.png" alt="">
 
 <p>
-ただしこのシミュレータでは車以外のものは(今のところ)ありませんし、速度の情報も省略しているので、各センサーの情報はその方向にいる車までの距離(メートル)をあらわします。
+なお物の種類や速度などの情報は省略しています。
 </p>
 
 <p><br></p>
@@ -53,8 +54,20 @@ background: #828282;
 </p>
 
 <p>
-日本では車は左車線を走るように法律で決められていますので、使う情報は「前方-左センサー」だけになります。
+まず日本では車は左車線を走るように法律で決められていますので、使う情報は「前方-左センサー」だけです。
+</p>
+
+<p>
+<b>目的：前の車にぶつからない</b>
+<br>
+<b>必要な情報：「前方-左センサー」</b>
+<br>
+<b>必要で無い情報：その他の情報</b>
+</p>
+
+<p>
 よって信号の時と違ってとてもシンプルな表になります。
+なお「前方-左センサー」が15メートルより大きい時は"遠い"、15メートル以下で10メートルより大きい時は"近い"、10メートル以下の時は"目の前"ということにしました。
 </p>
 
 <div class="table">
@@ -65,7 +78,7 @@ background: #828282;
 <tbody>
 <tr> <td class="center"> 15 より大<br>(遠い) </td> <td class="center">50</td> </tr>
 <tr> <td class="center"> 15以下、10より大<br>(近い) </td> <td class="center">20</td> </tr>
-<tr> <td class="center"> 10以下<br>(直前) </td> <td class="center">0</td> </tr>
+<tr> <td class="center"> 10以下<br>(目の前) </td> <td class="center">0</td> </tr>
 </tbody>
 </table>
 </div>
@@ -77,14 +90,13 @@ background: #828282;
 <div class="table">
 <table>
 <thead>
-<tr> <th>「前方-左センサー」</th> <th>「仮のスピード」</th> </tr>
+<tr> <th colspan="2">「前方-左センサー」</th> <th>「仮のスピード」</th> </tr>
 </thead>
 <tbody>
-<tr> <td class="center"> 15 より大<br>(遠い) </td> <td class="center">50</td> </tr>
-<tr> <td colspan="2">でなければ</td> </tr>
-<tr> <td class="center"> 10より大<br>(近い) </td> <td class="center">20</td> </tr>
-<tr> <td colspan="2">でなければ</td> </tr>
-<tr> <td class="center"> 情報をつかわない<br>(直前) </td> <td class="center">0</td> </tr>
+<tr> <td class="center" colspan="2"> 15 より大<br>(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td colspan="3">でなければ</td> </tr>
+<tr> <td rowspan="2">　</td><td class="center"> 10より大<br>(近い) </td> <td class="center">20</td> </tr>
+<tr> <td class="center"> でなければ<br>(目の前) </td> <td class="center">0</td> </tr>
 </tbody>
 </table>
 </div>
@@ -110,6 +122,10 @@ background: #828282;
 やはり表の内容と「もし〜なら」ブロックの条件がまったく同じになっていますね。
 </p>
 <img src="./img/page04-fig3.png" alt="">
+
+<p>
+最後のミニ・マックスの部分も忘れずに作ってください(さっき作ったものをコピーすると楽です)。
+</p>
 
 <p>
 あとは「速度を決める」ブロックを次のように変更すればOKです。
