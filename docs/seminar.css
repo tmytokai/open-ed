@@ -230,6 +230,25 @@ border: solid 1px blue;
 padding: 10px;
 }
 
+body.seminar div.contents td.UL
+{
+border-right: transparent;
+border-bottom: transparent;;
+}
+
+body.seminar div.contents td.UDR
+{
+border-left: transparent;
+padding: 10px;
+}
+
+body.seminar div.contents td.U
+{
+border-top: transparent;
+}
+
+
+
 body.seminar div.contents td.w20 {
 width: 20%;
 text-align: center;
