@@ -21,8 +21,12 @@
 
 <p>
 Python の関数として自作のオペレーションを定義することができます。
+</p>
+
+<p>
+なお関数定義の前に「<a href="https://www.tensorflow.org/guide/function?hl=ja">@tf.function デコレータ</a>」を付けるとパフォーマンスが上がります。
 <br>
-ただし関数定義の前に <a href="https://www.tensorflow.org/guide/function?hl=ja">@tf.function</a> デコレータを追加する必要があります。
+ただし本家の<a href="https://www.tensorflow.org/tutorials/customization/performance?hl=ja">ガイドライン</a>に沿ってプログラムを書かないと予期しない動きをすることがあるので注意してください。
 </p>
 
 <div class="info">
@@ -37,9 +41,6 @@ Python の関数として自作のオペレーションを定義することが�
 def オペレーション名(引数)
   (演算)
   return 戻り値
-
-
-※ @tf.function デコレータを関数定義の前につけるとパフォーマンスが上がりますが、<a href="https://www.tensorflow.org/tutorials/customization/performance?hl=ja">ガイドライン</a>に沿ってプログラムを書かないと予期しない動きをすることがあるので注意
 
 </pre>
 
