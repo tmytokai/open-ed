@@ -73,7 +73,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人):</b> 演習1-3で作成した test リモートリポジトリをクローン、コミットとプッシュの流れを試しましょう。
+<input type="checkbox"><b>演習 1-4 (個人):</b> 演習1-3で作成した test リモートリポジトリをもとに、クローンとコミットとプッシュの流れを試しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -91,10 +91,28 @@ git clone (上でコピーしたアドレス)
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> ローカルリポジトリの中に「README.md」というファイルが含まれている事を確認して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span>  ローカルリポジトリ内に「hoge.txt」というテキストファイルを作成し、適当な文字列を保存し、インデックスに更新内容を一時保存してください。
+<span class="olradio"><input type="radio" name="p4"></span> ローカルリポジトリ内に「hoge.txt」というテキストファイルを作成し、適当な文字列を保存してください。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「hoge.txt」がGitから認識されているか確認して下さい。
+</p>
+<p>
+git status
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> インデックスに更新内容を一時保存してください。
 </p>
 <p>
 git add hoge.txt
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「hoge.txt」がインデックスに保存されたか確認して下さい。
+</p>
+<p>
+git status
 </p>
 <p>
 コマンドを実行します。
@@ -107,7 +125,15 @@ git commit -m "hoge.txt追加"
 <p>
 コマンドを実行します。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> リモートリポジトリに更新内容をアップロードして下さい。
+<span class="olradio"><input type="radio" name="p4"></span>  ローカルリポジトリに更新内容をコミットされたか確認して下さい。
+</p>
+<p>
+git log
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> リモートリポジトリに更新内容をプッシュして下さい。
 <p>
 git push
 </p>
@@ -117,6 +143,53 @@ git push
 <span class="olradio"><input type="radio" name="p4"></span> GitHub に戻り、「Code」ページを更新して hoge.txt が追加されていることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 「hoge.txt が表示されている画面のスクリーンショット」を取って指定した場所に貼り付けて下さい。
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-5 (個人):</b> 演習1-4で更新した test リモートリポジトリのファイルを GitHub 上で修正し、ローカルリポジトリにプルしてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 「Code」ページで「hoge.txt」をクリックします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> Edit ボタンを押し、適当に文字を修正します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> Commit changes ボタンを押してコミットします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> ローカルリポジトリ上で
+</p>
+<p>
+git pull
+</p>
+<p>
+を実行するとリモートリポジトリの更新内容が取り込まれます。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> ちゃんと更新されたか確認します。
+</p>
+<p>
+cat hoge.txt
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span>  ローカルリポジトリに更新内容をコミットして下さい。
+</p>
+<p>
+git commit -m "hoge.txt追加"
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> ログも確認します。
+<p>
+git log
+</p>
+<p>
+コマンドを実行します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 「git log」コマンドの結果をコピーして指定した場所に貼り付けて下さい。
 </div>
 
 <br>
