@@ -92,7 +92,7 @@ model.fit(data_training, label_training, epochs=E, batch_size=B,  verbose=0)
 </div>
 
 <p>
-の行では、学習用入力信号(data_training)とラベル(label_training)と<a href="../text02/page04.html#batch">エポック数(E)とバッチサイズ(B)</a>を与え、<a href="https://keras.io/api/models/model_training_apis/#fit-method">fitメソッド</a>を使ってディープラーニングを実行しています。
+の行では、<a href="../text02/page04.html#data_training">学習用入力信号</a>(data_training)と<a href="../text02/page04.html#label_training">ラベル</a>(label_training)と<a href="../text02/page04.html#batch">エポック数(E)とバッチサイズ(B)</a>を与え、<a href="https://keras.io/api/models/model_training_apis/#fit-method">fitメソッド</a>を使ってディープラーニングを実行しています。
 <br>
 なお「verbose」は詳細表示の設定で、 verbose=1 にすると学習中の途中経過が表示されます。
 </p>
@@ -109,7 +109,7 @@ ls, acc = model.evaluate(data_training, label_training, verbose=0)
 </div>
 
 <p>
-では学習後の損失(カテゴリカル・クロスエントロピー)と評価(正解率)を<a href="https://keras.io/api/models/model_training_apis/#evaluate-method">evaluateメソッド</a>を使って計算し、それぞれを変数 ls と acc に代入しています。
+では学習後の<a href="../text02/page04.html#loss">損失</a>(カテゴリカル・クロスエントロピー)と<a href="../text02/page04.html#met">評価</a>(正解率)を<a href="https://keras.io/api/models/model_training_apis/#evaluate-method">evaluateメソッド</a>を使って計算し、それぞれを変数 ls と acc に代入しています。
 </p>
 
 <br>

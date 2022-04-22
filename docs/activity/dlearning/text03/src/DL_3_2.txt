@@ -57,8 +57,8 @@ images = np.array(
     ]
 )
    
-# 画像データから学習用入力を作成
-data_training = tf.constant(images[:4].reshape(L,N), dtype=tf.float32)
+# 画像データから学習用入力信号を作成
+data_training = tf.constant(images[:L].reshape(L,N), dtype=tf.float32)
 
 # 学習用ラベル
 label_training = tf.constant(
@@ -75,16 +75,16 @@ label_training = tf.constant(
 )
 
 # 未知画像から未知入力信号を作成
-data = tf.constant(images[4].reshape(1,N), dtype=tf.float32)
+data = tf.constant(images[L].reshape(1,N), dtype=tf.float32)
 
 # 画像表示
-for i in range(4):
+for i in range(L):
     print(f'画像{i}')
     plt.imshow(images[i],cmap='gray')
     plt.show()
     
 print('未知画像')
-plt.imshow(images[4],cmap='gray')
+plt.imshow(images[L],cmap='gray')
 plt.show()
 
 print('学習用入力信号')
