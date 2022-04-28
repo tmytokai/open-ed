@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. 例1: 有限長の時間領域ディジタル信号</title>
+<title>3. Z変換とDTFTの関係</title>
 </head>
 <body>
 
@@ -21,125 +21,117 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ではZ変換の例として、まずは有限長の時間領域ディジタル信号から考えてみます。
+<a href="../../dtft">DTFT</a>はディジタル信号版<a href="../../ft">フーリエ変換</a>ですので、前ページで求めたディジタル信号版ラプラス変換
+</p>
+
+\begin{align*}
+\textrm{F}(s) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- s \cdot \tau \cdot i} \}
+\end{align*}
+
+<p>
+に $\sigma = 0$ を代入、つまりZ 変換 $\textrm{F}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入するだけですぐさま DTFT
+</p>
+
+\begin{align*}
+\textrm{F}(w) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j\cdot w \cdot \tau \cdot i} \}
+\end{align*}
+
+<p>
+が得られます。
+<br>
+
 </p>
 
 <p>
-正整数 $\textrm{L}$ を有限とし、$f[0]$から$f[\textrm{L}-1]$まで値が入っていて、残りは全て $f[i]=0, (i=\textrm{L},\textrm{L}+1,\cdots)$ である時間領域ディジタル信号が与えられたとします。
+ただし任意の $f[i]$ で Z 変換が DTFT に変換可能な訳ではなくて $f[i]$ が収束(減衰)するという条件が必要です。
+<br>
+両側 Z 変換の場合はこの収束条件が複雑になりますので、ここでは片側 Z 変換の場合における収束条件を求めましよう。
+</p>
+
+<p>
+さて片側ラプラス変換の場合
+</p>
+
+<p>
+<b>「片側ラプラス変換 $\textrm{F}(s)$ の極のうち実数部が一番大きい極を $s' = \sigma' + j \cdot w'$ とする。
+<br>
+もし $\sigma' < 0$ であるなら元のアナログ信号 $f(t)$ は収束(減衰)する。」</b>
+</p>
+
+<p>
+ということが言えました。
+<br>
+そこでこの S 平面上の点 $s'$ に対応する Z 平面上の点を $z' =\textrm{e}^{ s' \cdot \tau }$ とすると、$z'$ の絶対値は
+</p>
+
+\begin{align*}
+|z'| = \textrm{e}^{ \sigma' \cdot \tau }
+\end{align*}
+
+<p>
+ですので、ラプラス変換における収束条件 $\sigma' < 0$ は Z 変換では
+</P>
+
+\begin{align*}
+|z'| < 1
+\end{align*}
+
+<p>
+に相当します。
 <br>
 つまり
 </p>
 
-\[
-f[0], f[1], f[2], \cdots, f[\textrm{L}-1]
-\]
-
 <p>
-というディジタル信号を考えます。
+「
+<b>
+片側 Z 変換 $\textrm{F}(z)$ の極のうち絶対値が一番大きい極を $z'$ とする。
 <br>
-このとき $i$ が $\textrm{L}$ を超えると $f[i]$ は全て $0$ となるので、Z変換は以下の式の様に簡単に求まります。
+$z'$ が Z 平面上の単位円の内側にある(つまり |z'| < 1 )なら元のディジタル信号 $f[i]$ は収束(減衰)する。
+</b>
+」
 </p>
 
-\begin{align*}
-\textrm{F}(z) 
-& = \sum_{i=0}^\infty \{ f[i] \cdot z^{-i} \} \\
-& = \sum_{i=0}^{\textrm{L}-1} \{ f[i] \cdot z^{-i} \} \\
-& = f[0] + \frac{f[1]}{z} + \frac{f[2]}{z^2} + \cdots + \frac{f[\textrm{L}-1]}{z^{\textrm{L}-1}}
-\end{align*}
-
-<p>
-逆変換も簡単に求まります。
-<br>
-もし $\textrm{F}(z)$ が
-</p>
-
-\begin{align*}
-\textrm{F}(z) &= \sum_{i=0}^{\textrm{L}-1} \{ f[i] \cdot z^{-i} \} \\
-\end{align*}
-
-<p>
-の形で与えられている時、逆変換は有限長の時間領域ディジタル信号 $f[0], f[1], f[2], \cdots, f[\textrm{L}-1]$ になります。
-</p>
-
-<p>
-また収束領域は次の様になります。
-</br>
-とりあえず $z=0$ をZ変換に代入してみると
-</p>
-
-\begin{align*}
-\textrm{F}(0) = f[0] + \frac{f[1]}{0} + \frac{f[2]}{0} + \cdots + \frac{f[\textrm{L}-1]}{0}
-\rightarrow \infty
-\end{align*}
-
-<p>
-となるので $\textrm{F}(0)$ は発散します。
-<br>
-一方 $z=0$ 以外の値を代入しても発散しません。
-<br>
-つまり収束領域は
-</p>
-
-<p>
-<b>原点 $z=0$ を除く Z 平面全域</b>
-</p>
 <p>
 となります。
 <br>
-この収束領域を図で表すと以下の図1となります。
-<br>
-図1の原点 $z=0$ を除く斜め線で表した領域が収束領域です。
+もう少し簡単に言い直すと
+<p>
+「<b>
+片側 Z 変換 $\textrm{F}(z)$ の全ての極が Z 平面上の単位円の内側にあるなら元のディジタル信号 $f[i]$ は収束(減衰)する。
+</b>」
+</p>
+
+<p>
+となります。
+</p>
+<p>
+以上の議論をまとめると次の様になります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図1: 収束領域(原点$z=0$を除く斜め線の領域): </b>
+<input type="checkbox"><b>片側 Z 変換を DTFT に変換</b>
 
 <p>
-　
-</p>
-
-<img src="./img/page03-fig1.png" alt="">
-</div>
-
-<p>
-では例として $\textrm{L} = 4$、 $f[i] = \{ 1, 2, 3, 4, 0, 0, \cdots \}$ のZ変換
+片側 Z 変換 $\textrm{F}(z)$ の全ての極が Z 平面上の単位円の内側にあるなら元のディジタル信号 $f[i]$ は収束(減衰)する。
+<br>
+このとき $\textrm{F}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入することで $f[i]$ の DTFT
 </p>
 
 \[
-\textrm{F}(z) = 1 + \frac{2}{z} + \frac{3}{z^2} + \frac{4}{z^3}
+\begin{align*}
+\textrm{F}(w) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j\cdot w \cdot \tau \cdot i} \}
+\end{align*}
 \]
 
 <p>
-に対して図 1 に示した $z=1$ を代入してみましょう。
+が得られる。
+</p>
+
+</div>
+
+
 <br>
-図1を見る限り $z=1$ は収束領域に含まれていますので、$\textrm{F}(z)$ の式にそのまま $z=1$ の値を代入して
-</p>
-
-\begin{align*}
-\textrm{F}(1) = 1 + 2 + 3 +4 = 10
-\end{align*}
-
-<p>
-が求める答となります。
-</p>
-
-<p>
-同様に次は $z=j$ を代入してみましょう。
-<br>
-図1を見る限り $z=j$ も収束領域に含まれていますので、$\textrm{F}(z)$ の式にそのまま $z=j$ の値を代入して
-</p>
-
-\begin{align*}
-\textrm{F}(j) &= 1 + \frac{2}{j} + \frac{3}{j^2} + \frac{4}{j^3} \\
-&= 1 - 2 \cdot j - 3 + 4\cdot j \\
-&= -2 + 2\cdot j
-\end{align*}
-
-<p>
-が求める答となります。
-</p>
-
-
-<script>PreNext(3,11)</script>
+<script>PreNext(3,6)</script>
 </body>
 </html>

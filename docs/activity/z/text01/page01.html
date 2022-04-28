@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>1. Z変換とは</title>
+<title>1. Z変換と逆 Z 変換</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: Z変換</a></li>
+<li><a href="../">アクティビティ: Z変換と逆Z変換</a></li>
 <li>学習項目: [1] Z変換</li>
 <li><script>GetTitle()</script></li>
 </ol>
@@ -21,30 +21,52 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-Z変換は、非周期的かつ無限の長さの<a href="../../d-signal/">時間領域ディジタル信号</a> $f[i]$ に対するラプラス変換です。
-<br>
-なおZ 変換には両側 Z 変換と片側 Z 変換があるのですが今回は片側 Z 変換のみを説明します。
+Z変換は、非周期的かつ無限の長さの<a href="../../d-signal/">時間領域ディジタル信号</a> $f[i]$ に対する<a href="../../laplace/">ラプラス変換</a>です。
 </p>
 
 <p>
-さて(片側) Z 変換の定義は以下の通りになります。
+Z 変換の定義は以下の通りになります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義: (片側) Z 変換: </b>
+<input type="checkbox"><b>定義: Z 変換 </b>
 
 <p>
-$f[i]$ を非周期的かつ無限の長さの時間領域ディジタル信号とする。
+$f[i]$ を非周期的かつ無限の長さの時間領域ディジタル信号
 </p>
 
+\[
+f[i] = \{\cdots, f[-2], f[-1], f[0], f[1], f[2], \cdots\}
+\]
+
 <p>
-※ 時刻 $i$ が負の時は $f[i] = 0$とする
+とする。
 <br>
-※ 時刻 $i$ において $|f[i]| \lt \infty$ とする
+ただし時刻 $i$ において $|f[i]| \lt \infty$ とする
 </p>
 
 <p>
-$z$ を「<b>Z平面</b>」と呼ばれる複素平面上の任意の点としたとき、
+$z$ を「<b> Z 平面</b>」と呼ばれる複素平面上の任意の点としたとき、
+</p>
+
+\begin{align*}
+\textrm{F}(z) = \sum_{i=-\infty}^\infty \{ f[i] \cdot z^{-i} \}
+\end{align*}
+
+<p>
+により定義される複素関数 $\textrm{F}(z)$ を Z 平面上の「<b>両側 Z 変換</b>」という。
+</p>
+
+<p>
+特に時刻 $i$ が負の時に $f[i] = 0$ である信号
+</p>
+
+\[
+f[i] = \{\cdots, 0, 0, f[0], f[1], f[2], \cdots\}
+\]
+
+<p>
+に対する Z 変換
 </p>
 
 \begin{align*}
@@ -52,7 +74,7 @@ $z$ を「<b>Z平面</b>」と呼ばれる複素平面上の任意の点とし�
 \end{align*}
 
 <p>
-により定義される複素関数 $\textrm{F}(z)$ をZ平面上の(片側)Z変換という。
+を「<b>片側 Z 変換</b>」と言う。
 </p>
 
 </div>
@@ -62,24 +84,32 @@ $z$ を「<b>Z平面</b>」と呼ばれる複素平面上の任意の点とし�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義: (片側) 逆 Z 変換: </b>
+<input type="checkbox"><b>定義: 逆 Z 変換 (簡易版) </b>
 
 <p>
-(片側)Z変換が級数
+Z 変換が級数
 </p>
 
 \begin{align*}
-\textrm{F}(z) &= \sum_{i=0}^\infty \{ f[i] \cdot z^{-i} \} \\
-&= f[0] + f[1] \cdot z^{-1} + f[2] \cdot z^{-2} + \cdots
+\textrm{F}(z) &= \sum_{i=\infty}^\infty \{ f[i] \cdot z^{-i} \} \\
+&= \cdots + f[-2]\cdot z^2 + f[-1]\cdot z^1 + f[0] + f[1] \cdot z^{-1} + f[2] \cdot z^{-2} + \cdots
 \end{align*}
 
 <p>
-の形で与えられた時、元の非周期的かつ無限の長さの時間領域ディジタル信号は $f[0], f[1], f[2], \cdots$ となる
+の形で与えられた時、元の非周期的かつ無限の長さの時間領域ディジタル信号は
+</p>
+
+\[
+f[i] = \{\cdots, f[-2], f[-1], f[0], f[1], f[2], \cdots\}
+\]
+
+<p>
+となる
 </p>
 
 </div>
 
 <br>
-<script>PreNext(1,11)</script>
+<script>PreNext(1,6)</script>
 </body>
 </html>

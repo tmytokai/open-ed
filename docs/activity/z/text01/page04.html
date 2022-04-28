@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>4. 例2: ディジタルインパルス信号(nが0の場合)</title>
+<title>4. Z変換とDFTの関係</title>
 </head>
 <body>
 
@@ -21,92 +21,238 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ある $0$ 以上の正整数 $n$ に対し、
+次にZ変換と<a href="../../dft/">DFT</a>の関係について説明したいと思いますが、そのためには<a href="../../dft/text01/page01.html">周期性時間領域ディジタル信号</a>のZ変換について考える必要があります。
 </p>
 
-\begin{align*}
-f[i] =
-\begin{cases}
-1 & (i=n) \\ 
-0 & (i \neq n)
-\end{cases}
-\end{align*}
-
-<p>
-である信号のことを「<b>ディジタルインパルス信号</b>」といって記号 $\delta[i-n]$ で表します。
 <br>
-ここではこの $\delta[i-n]$ の Z 変換を求めてみましょう。
-</p>
+<h2>(1) 周期性時間領域ディジタル信号のZ変換</h2>
 
 <p>
-ただし $n$ が 0 かどうかで結果が変わりますので、とりあえずこのページでは $n=0$ の場合を考えます。
-</p>
-
-<p>
-$n=0$ の場合は
-</p>
-
-\begin{align*}
-\delta[i] = \{1,0,0,\cdots\}
-\end{align*}
-
-<p>
-となります。
+まず$\textrm{N}$ を有限な正の整数としたとき $f[i]$ を周期 $\textrm{N}$ の周期性時間領域ディジタル信号とします。
 <br>
-したがって Z 変換は以下の式になります。
+ただし $|f[i]| < \infty$ とします。
 </p>
-
-\begin{align*}
-\textrm{F}(z) = \sum_{i=0}^{\infty} \{ f[i] \cdot z^{-i} \} 
-& = 1 + \frac{0}{z} + \frac{0}{z^2} + \cdots
-= 1
-\end{align*}
-
 <p>
-逆変換も簡単で、もしZ変換が 
+また $f_1[i]$ を時刻 $i=0$ から $i=\textrm{N}-1$ までの $f[i]$ の値とします。
+<br>
+つまり $f[i]$ は
 </p>
 
 \[
-\textrm{F}(z) = 1
+f[i] = f_1[\ i \ \textrm{mod}\ \textrm{N} \ ]
 \]
 
 <p>
-の形で与えられている時、逆変換は $\delta[i]$ になります。
-</p>
-
-<p>
-また収束領域は次の様になります。
+で表されます。
 <br>
-上で示した様に、今回はどの様な $z$ の値を代入しても必ず $\textrm{F}(z) = 1$ となりますので
+ここで mod は<a href="https://ja.wikipedia.org/wiki/%E5%89%B0%E4%BD%99%E6%BC%94%E7%AE%97">剰余演算(modulo)</a>です。
 </p>
 
 <p>
-<b>収束領域は Z 平面全域</b>
+さて $f[i]$ から最初の N 個だけ信号値を取り出した信号列、つまり 
 </p>
+
+\[
+\{ f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+の(片側) Z 変換を
+</p>
+
+\[
+\textrm{F}_1(z) = \sum_{i=0}^{\textrm{N}-1} \{ f_1[i] \cdot z^{-i} \}
+\]
+
+<p>
+とします。
+<br>
+すると $f[i]$ の時刻 $i = \textrm{N}$ から $i = 2\textrm{N}-1$ まで信号値を取り出した信号列、つまり
+</p>
+
+\[
+\{ \underbrace{0, \cdots, 0}_{\textrm{N}}, f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+のZ変換は
+</p>
+
+\begin{align*}
+\sum_{i=\textrm{N}}^{2\textrm{N}-1} \{ f_1[\ i \ \textrm{mod}\ \textrm{N} \ ] \cdot z^{-i} \} 
+&= f_1[0] \cdot z^{-\textrm{N}} + f_1[1] \cdot z^{-(\textrm{N}+1)} + \cdots + f_1[\textrm{N}-1] \cdot z^{-(2\textrm{N}-1)} \\
+&= \left \{ f_1[0] + f_1[1] \cdot z^{-1} + \cdots + f_1[\textrm{N}-1] \cdot z^{-(\textrm{N}-1)} \right \} \cdot z^{-\textrm{N}} \\
+&= \textrm{F}_1(z) \cdot z^{-\textrm{N}}
+\end{align*}
 
 <p>
 になります。
-</p>
-
-<p>
-では試しに前ページと同様に $z=1$ と $z=-1$ の時の $\textrm{F}(z)$ の値を求めてみましょう。
 <br>
-上に書いた様に、どちらも
-</p>
+同様に考えると、$n$ を 0 以上の整数とした時、$f[i]$ の時刻 $i = n\cdot\textrm{N}$ から $i = (n+1)\cdot\textrm{N}-1$ まで信号値を取り出した信号列のZ変換は
 
 \[
-\textrm{F}(1) = 1
-\]
-
-\[
-\textrm{F}(j) = 1
+\textrm{F}_1(z) \cdot z^{-n\cdot\textrm{N}}
 \]
 
 <p>
 となります。
 </p>
 
+<p>
+よって $f[i]$ のZ変換は
+</p>
+
+\begin{align*}
+\textrm{F}(z) &= \sum_{n=0}^\infty \left \{ \textrm{F}_1(z) \cdot z^{-n\cdot\textrm{N}} \right \} \\
+&= \textrm{F}_1(z)  \cdot \sum_{n=0}^\infty \left \{ z^{-n\cdot\textrm{N}} \right \} \\
+\end{align*}
+
+<p>
+となりますが、後の総和は初項 1、公比 $ z^{-\textrm{N}}$ の無限等比級数の和ですので、$|z^{-\textrm{N}}| < 1$ つまり $|z|>1$ のときに収束して次の式が求まります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期性時間領域ディジタル信号のZ変換</b>
+
+<p>
+$\textrm{N}$ を有限な正の整数としたとき $f[i]$ (ただし$|f[i]| < \infty$)を周期 $\textrm{N}$ の周期性時間領域ディジタル信号とする。
 <br>
-<script>PreNext(4,11)</script>
+また $f_1[i]$ を時刻 $i=0$ から $i=\textrm{N}-1$ までの $f[i]$ の値とする。
+<br>
+さらに信号列
+</p>
+
+\[
+\{ f_1[0], f_1[1], \cdots, f_1[\textrm{N}-1], 0, 0, \cdots \}
+\]
+
+<p>
+の(片側) Z 変換を
+</p>
+
+\[
+\textrm{F}_1(z) = \sum_{i=0}^{\textrm{N}-1} \{ f_1[i] \cdot z^{-i} \}
+\]
+
+<p>
+とする。
+</p>
+
+<p>
+$f[i]$ のZ変換を $\textrm{F}(z)$ としたとき、収束領域 $|z| > 1$ 内の $z$ に関して
+</p>
+
+\[
+\textrm{F}(z) = \textrm{F}_1(z) \cdot \frac{1}{1-z^{-\textrm{N}}}
+\]
+
+<p>
+となる。
+</p>
+
+</div>
+
+<p>
+では例を示します。
+</p>
+
+<p>
+周期 $\textrm{N} = 10$ とし、
+</p>
+
+\[
+f_1[i] = \{\ 1,\ -4,\ 3,\ -2,\ 5,\ 9,\ 3,\ -2\ ,1\ ,5\ \}
+\]
+
+<p>
+とします。
+<br>
+また今回はサンプリング周波数を $f_s = 100$ [Hz] 、サンプリング間隔を $\tau = 1/f_s = 0.01$ [秒] とします。
+<br>
+この時の $f[i]$ は図1となります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図1: 今回の例で使用する $f[i]$</b>
+<p>　</p>
+<img src="./img/page04-fig1.png" alt="">
+</div>
+
+<p>
+では $f[i]$ から $\textrm{F}(z)$ を求めてそのグラフを示そうと思いますが、そのまま $\textrm{F}(z)$ のグラフを描いても人間には分かりにくいので座標変換式
+</p>
+
+\[
+z = \textrm{e}^{ s \cdot \tau } = \textrm{e}^{ \sigma \cdot \tau } \cdot \textrm{e}^{ j \cdot w \cdot \tau }
+\]
+
+<p>
+を用いてラプラス変換 $\textrm{F}(s)$ に変換します。
+<br>
+さらに収束条件 $|z| > 1$ は $\sigma > 0$ に相当しますので、$\sigma$ を 1、 10、100 と変化させた時の絶対値 $|\textrm{F}(s)|$と偏角 $\angle \textrm{F}(s)$ のグラフを順に示します。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図2: $\sigma = 1$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page04-fig2.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page04-fig3.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: $\sigma = 10$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page04-fig4.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page04-fig5.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図4: $\sigma = 100$ の時</b>
+<p>
+※ $w_s = 200\pi$ はサンプリング角周波数 [rad/秒]
+</p>
+<p>
+絶対値 $|\textrm{F}(s)|$
+</p>
+<img src="./img/page04-fig6.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(s)$
+</p>
+<img src="./img/page04-fig7.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="src/page04-1.txt">こちら</a>です。
+</p>
+
+<br>
+<h2>(2) Z変換とDFTの関係</h2>
+
+<p>
+準備中
+</p>
+
+<br>
+<script>PreNext(4,6)</script>
 </body>
 </html>
