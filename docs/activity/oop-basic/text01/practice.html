@@ -400,17 +400,40 @@ sc_hanako.english = 70;
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-13 (個人):</b> テキストの<a href="./page07.html">ソース 1、2</a> を実行し、オーバロードを使ってみましょう。
+<input type="checkbox"><b>演習 1-13 (個人):</b> テキストの<a href="./page07.html">ソース 1</a> で示した OLtest クラスに以下の仕様のメソッドを追加してオーバロードを試してみましょう。
 </p>
 
 <div class="info">
 <pre class="wrap">
+メソッド仕様:
+
+名前は「show」
+引数は「String a」と「int b」の2つ
+a + b を表示する
+
+Main クラス:
+
+public class Main{
+
+    public static void main(String[] args) {
+
+       OLtest ol = new OLtest();
+       ol.show();
+       ol.show( "ほげ" );
+       ol.show( 123 );
+       ol.show( 123, 456 );
+       ol.show( "ふが", 789 );
+    }
+}
+
+
 結果:
 
 引数なし
 引数は文字列クラス: ほげ
 引数は整数クラス: 12
 引数は整数クラスx2: 123-456
+ふが789
 </pre>
 </div>
 
@@ -420,7 +443,9 @@ sc_hanako.english = 70;
 <br>
 <span class="olradio"><input type="radio" name="p13"></span> フォルダ「OBSC_1_13」の中で新規に2つソースを作ります。Main クラスのファイル名を「Main.java」、 OLtest クラスのファイル名を「OLtest.java」とします
 <br>
-<span class="olradio"><input type="radio" name="p13"></span> Main クラス(ページ7の<a href="./page07.html">ソース2</a>)と OLtest クラス(ページ7の<a href="./page07.html">ソース1</a>)を作成します。
+<span class="olradio"><input type="radio" name="p13"></span> OLtest クラスをページ7の<a href="./page07.html">ソース1</a>をコピーしてから上の仕様に従って作成します。
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> Main クラスは上のソースを使用します。
 <br>
 <span class="olradio"><input type="radio" name="p13"></span> コンパイルして実行します。
 <br>
@@ -432,11 +457,18 @@ sc_hanako.english = 70;
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-14 (個人):</b> コンストラクタもオーバロード可能です。 Score クラスを書き換えて、引数なしコンストラクタと引数有りコンストラクタを使い分けてみましょう。
+<input type="checkbox"><b>演習 1-14 (個人):</b> コンストラクタもオーバロード可能です。 下の仕様に従って Score クラスに引数有りコンストラクタを追加してみましょう。
 </p>
 
 <div class="info">
 <pre class="wrap">
+引数有りコンストラクタ仕様:
+
+引数は「int a」と「int b」
+「引数有りコンストラクタ実行」と表示する
+math に a をセットする
+english に b をセットする
+
 結果:
 
 引数なしコンストラクタ実行
@@ -452,7 +484,7 @@ sc_hanako.english = 70;
 <p>
 <span class="olradio"><input type="radio" name="p14"></span> 演習 1-12 で作った「OBSC_1_12」をフォルダごと丸ごとコピーし、フォルダ名を「OBSC_1_14」に変更します。
 <br>
-<span class="olradio"><input type="radio" name="p14"></span> Score クラスを開き、引数有りコンストラクタ (ページ6の<a href="./page06.html">ソース3</a>参照)を追加します。
+<span class="olradio"><input type="radio" name="p14"></span> Score クラスを開き、上の仕様に従って引数有りコンストラクタを追加します。
 <br>
 <span class="olradio"><input type="radio" name="p14"></span> Main クラスを開き、sc_hanako インスタンスを作成する際に、以下のように引数有りコンストラクタの方を呼び出すようにします
 </p>
