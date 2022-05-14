@@ -55,13 +55,15 @@
 
 <br>
 \[
-f(t) = a \cdot \sin( w \cdot t + \phi ) = a \cdot \sin[ w \{  t - (- \phi/w) \} ]
+f(t) = a \cdot \sin( w \cdot t + \phi ) = a \cdot \sin \left [ w \left \{  t - \left(- \frac{\phi}{w} \right ) \right \} \right ]
 \]
 
 <br>
 <p>
 という公式を使うと「$\phi$ [rad]による進み・遅れ」を「秒による進み・遅れ」に変換できます。
-<br>
+</p>
+
+<p>
 以上の話をまとめたのが表1です。
 </p>
 
@@ -77,7 +79,16 @@ f(t) = a \cdot \sin( w \cdot t + \phi ) = a \cdot \sin[ w \{  t - (- \phi/w) \} 
 
 <br>
 <p>
-ところで公式 $w = 2 \pi / \textrm{T}$ より、角周波数 $w$ [rad/秒] の代わりに周期 $\textrm{T}$  [秒]を使って秒数を求めることも出来ます(表 2 )。
+ところで公式 $w = 2 \pi / \textrm{T}$ より、
+</p>
+
+<br>
+\[
+\frac{\phi}{w} = \frac{\phi}{2\pi}\cdot \textrm{T}
+\]
+
+<p>
+なので、角周波数 $w$ [rad/秒] の代わりに周期 $\textrm{T}$  [秒]を使って秒数を求めることも出来ます(表 2 )。
 <br>
 $\phi$を$2\pi$で割って$\textrm{T}$ を掛けるだけで秒数が求まるので、実用上は表 2 を使う方が便利な事が多いです。
 </p>

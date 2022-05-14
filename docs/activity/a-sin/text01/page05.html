@@ -34,19 +34,28 @@ f(t) = a \cdot \sin( w \cdot t + \phi )
 ならば、位相が反転しているサイン波の式は
 </p>
 \[
-f(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
+f'(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
 \]
 <p>
 となります。
 <br>
-なお
+ここで
 </p>
-\[
-f(t) = a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \}
-= -a \cdot \sin \{ w \cdot t + \phi) \}
-\]
+\begin{align*}
+f'(t) &= a \cdot \sin \{ w \cdot t + (\phi \pm \pi) \} \\[5pt]
+&= a \cdot \sin \{ (w \cdot t + \phi) \pm \pi \} \\[5pt]
+&= -a \cdot \sin ( w \cdot t + \phi)
+\end{align*}
 <p>
-なので「<b>位相を反転する = 振幅の符号を反転する</b>」とも言えます。
+なので
+</p>
+
+<p>
+<b>位相を反転する = 振幅の符号を反転する</b>
+</p>
+
+<p>
+とも言えます。
 </p>
 
 <p>
@@ -73,7 +82,7 @@ f(t) = 1 \cdot \sin( 2\pi \cdot t )
 <p></p>
 
 \[
-f(t) = 1 \cdot \sin( 2\pi \cdot t \pm \pi ) = -1 \cdot \sin( 2\pi \cdot t  )
+f'(t) = 1 \cdot \sin( 2\pi \cdot t \pm \pi ) = -1 \cdot \sin( 2\pi \cdot t  )
 \]
 
 <img src="./img/page05-fig2.png" alt="">
@@ -82,7 +91,7 @@ f(t) = 1 \cdot \sin( 2\pi \cdot t \pm \pi ) = -1 \cdot \sin( 2\pi \cdot t  )
 <p>
 なお、元のサイン波と位相反転したサイン波を<a href="../../a-signal/text02/page02.html">足し合わせる</a>と $f(t)=0$ となります。
 <br>
-この性質はイヤホンのノイズキャンセリング機能などに応用されています。
+この性質はイヤホンの<a href="https://ja.wikipedia.org/wiki/%E6%B6%88%E9%9F%B3%E3%82%B9%E3%83%94%E3%83%BC%E3%82%AB%E3%83%BC">ノイズキャンセリング機能</a>などに応用されています。
 </p>
 
 <br>
