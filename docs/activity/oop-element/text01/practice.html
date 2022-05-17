@@ -54,13 +54,12 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-2 (個人):</b> テキストの<a href="./page02.html">ソース1〜7</a>を実行してフィールドとメソッドの再利用を試してみましょう。
+<input type="checkbox"><b>演習 1-2 (個人):</b> テキストの<a href="./page02.html">ソース1〜5</a>を実行してフィールドとメソッドの再利用を試してみましょう。
 </p>
 <div class="info">
 <pre class="wrap">
 結果:
 
-りんごもぐもぐ
 りんごマズイ
 みかんマズイ
 </pre>
@@ -77,10 +76,6 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行し、表示結果を確認します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 更に APPLE クラスにソース 6 の mogu_mogu メソッドを追加し、Main クラスをソース 7 に置き換えます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行し、表示結果を確認します。
-<br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「実行結果」を記入して下さい。
@@ -94,6 +89,11 @@
 </p>
 <div class="info">
 <pre class="wrap">
+仕様:  
+
+Score クラスをスーパークラスとする Taro クラスと Hanako クラスをつくって利用する
+Taro クラスと Hanako クラスの中身は空
+
 結果:
 
 引数なしコンストラクタ実行
@@ -110,9 +110,9 @@
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 「OBSC_1_14」の Score.javaをコピーします。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> フォルダ「OELM_1_3」の中にTaro.java を新規作成し、Score スーパークラスを継承した Taro クラスを定義して下さい(クラスの中身は空のまま) 。
+<span class="olradio"><input type="radio" name="p3"></span> フォルダ「OELM_1_3」の中にTaro.java を新規作成し、Score スーパークラスを継承した Taro クラスを定義して下さい(クラスの中身は空) 。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Hanako.java を新規作成し、Score スーパークラスを継承した Hanako クラスを定義して下さい(クラスの中身は空のまま) 。
+<span class="olradio"><input type="radio" name="p3"></span> Hanako.java を新規作成し、Score スーパークラスを継承した Hanako クラスを定義して下さい(クラスの中身は空) 。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
 </p>
@@ -123,8 +123,8 @@ public class Main{
 
 	public static void main(String[] args) {
 
-		Taro taro = new Taro();
-                Hanako hanako = new Hanako();
+		Taro taro = new Taro();  ※ Score クラスでなくて Taro クラスのインスタンスを作成
+                Hanako hanako = new Hanako(); ※ 同様に Hanako クラスのインスタンスを作成
 
                 System.out.println( "太郎: math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average());
                 System.out.println( "花子: math = " + hanako.math+ " english = " + hanako.english + " 平均 = " +hanako.average());
@@ -134,7 +134,7 @@ public class Main{
 
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行します。Taro と Hanako クラスの中身が空っぽなのにちゃんと動作していることを確認して下さい。
+<span class="olradio"><input type="radio" name="p3"></span> コンパイルして実行します。Taro と Hanako クラスの中身が空なのにちゃんと動作していることを確認して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。
 <br>
@@ -148,6 +148,13 @@ public class Main{
 </p>
 <div class="info">
 <pre class="wrap">
+仕様:
+
+String型の name フィールドを Score クラスに追加する
+Taro クラスのコンストラクタで name に "たろう" を代入する
+Hanako クラスのコンストラクタで name に "はなこ" を代入する
+Main メソッドの表示部で name の値を表示する
+
 結果:
 
 引数なしコンストラクタ実行
@@ -168,13 +175,23 @@ name = はなこ math = 51 english = 12 平均 = 31.5
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 同様に Hanako クラスに引数無しコンストラクタ Hanako() を追加し、そのコンストラクタ内で name に文字列 "はなこ" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> Main クラスの表示部を以下に置き換えて下さい(名前のところで name を使うように置き換えてます)。
+<span class="olradio"><input type="radio" name="p4"></span> Main クラスを以下に置き換えて下さい(名前表示のところで name を使う様に変更しています)。
 </p>
 <div class="info">
 
 <pre class="wrap">
-System.out.println( "name = " + taro.name + " math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average());
-System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " english = " + hanako.english + " 平均 = " +hanako.average());
+public class Main{
+
+	public static void main(String[] args) {
+
+		Taro taro = new Taro();  ※ Score クラスでなくて Taro クラスのインスタンスを作成
+                Hanako hanako = new Hanako(); ※ 同様に Hanako クラスのインスタンスを作成
+
+                System.out.println( "name = " + taro.name + " math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average());
+                System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " english = " + hanako.english + " 平均 = " +hanako.average());
+
+	}
+}
 </pre>
 
 </div>
@@ -189,10 +206,15 @@ System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " englis
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-5 (個人):</b> 引き続き、今度は Score スーバークラスに math と english の合計点を返す total メソッドを追加してみましょう。
+<input type="checkbox"><b>演習 1-5 (個人):</b> 次に Score スーバークラスに math と english の合計点を返す total メソッドを追加してみましょう。
 </p>
 <div class="info">
 <pre class="wrap">
+仕様:
+
+Score スーバークラスに math と english の合計点を返す total メソッドを追加する
+Main メソッドから total メソッドを呼び出す
+
 結果:
 
 引数なしコンストラクタ実行
@@ -211,13 +233,23 @@ name = はなこ math = 22 english = 16 平均 = 19.0 合計 = 38
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 追加した total メソッドの中で math と english を合計値を return して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> Main クラスの表示部を以下に置き換えて下さい( total メソッドを呼び出すように置き換えてます)。 
+<span class="olradio"><input type="radio" name="p5"></span> Main クラスを以下に置き換えて下さい( total メソッドも呼び出す様に変更しています)。 
 </p>
 <div class="info">
 
 <pre class="wrap">
-System.out.println( "name = " + taro.name + " math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average() + " 合計 = " +taro.total() );
-System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " english = " + hanako.english + " 平均 = " + hanako.average()+ " 合計 = " + hanako.total());
+public class Main{
+
+	public static void main(String[] args) {
+
+		Taro taro = new Taro();  ※ Score クラスでなくて Taro クラスのインスタンスを作成
+                Hanako hanako = new Hanako(); ※ 同様に Hanako クラスのインスタンスを作成
+
+                System.out.println( "name = " + taro.name + " math = " + taro.math+ " english = " + taro.english + " 平均 = " +taro.average() + " 合計 = " +taro.total() );
+                System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " english = " + hanako.english + " 平均 = " + hanako.average()+ " 合計 = " + hanako.total());
+
+	}
+}
 </pre>
 
 </div>
@@ -226,11 +258,133 @@ System.out.println( "name = " + hanako.name + " math = " + hanako.math+ " englis
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「Score、Taro、Hanako クラスのソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「Score クラスのソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
 <br>
-<script>PreNext(3,2)</script>
+<h2><a href="./page03.html">3. オーバライド</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-6 (個人):</b> taro と hanako を Score クラスのインスタンス扱いにして実行してみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+仕様:
+
+taro と hanako を Score クラスのインスタンスにする
+
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = たろう math = 28 english = 46 平均 = 37.0 合計 = 74
+name = はなこ math = 14 english = 21 平均 = 17.5 合計 = 35
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「OELM_1_5」をフォルダ「OELM_1_6」に丸ごとコピーし、その中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> Main.java を開き、taro と hanako を Score クラスのインスタンスにします
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-7 (個人):</b> オーバライド機能を使ってみましょう
+</p>
+
+<div class="info">
+<pre class="wrap">
+仕様:
+
+HANAKO クラスで total メソッドをオーバライドして合計点を本来の2倍にする
+TARO クラスはそのまま
+
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = たろう math = 3 english = 8 平均 = 5.5 合計 = 11
+name = はなこ math = 40 english = 10 平均 = 26.5 合計 = 100
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「OELM_1_6」をフォルダ「OELM_1_7」に丸ごとコピーし、その中に移動します。 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> Hanako.java を開き、total メソッドをオーバライドして合計点の 2 倍を return するようにして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「Hanako クラスのソースコード」「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-8 (個人):</b> オーバライドとリストを組み合わせて使ってみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+仕様:  
+
+Score 型のリスト list を作成し、Taro と Hanako のインスタンスをリストに加える
+forEach とラムダ式を使ってリストに登録されているインスタンスの情報を表示する
+
+結果:
+
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = たろう math = 3 english = 8 平均 = 5.5 合計 = 11
+name = はなこ math = 40 english = 10 平均 = 26.5 合計 = 100
+
+※ 乱数を使っているので、実行するたびに結果が変わります
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> フォルダ「OELM_1_7」をフォルダ「OELM_1_8」に丸ごとコピーし、その中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> Main.java を開き、先頭に import java.util.ArrayList; を追加して下さい
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> main メソッドの中を消して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> <a href="./page03.html">ページ3のソース 8</a> を参考に Main クラスで Score クラスの<a href="../../java-basic/text04/page01.html">リスト</a> list を定義して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> list に Taro、Hanako クラスのインスタンスを new して追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> <a href="../../java-basic/text05/page03.html">forEachとラムダ式</a>を使って各インスタンスの情報を表示して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをして下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
+</p>
+</div>
+
+<br>
+<script>PreNext(4,3)</script>
 </body>
 </html>

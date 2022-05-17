@@ -43,7 +43,7 @@
 <p>
 それではソース 1 を見て下さい。
 <br>
-ソース 1では String 型と Integer 型を引数として持つ show メソッドを<a href="./page02.html">オーバロード</a>して作っています。
+ソース 1では String 型と Integer 型を引数として持つ show メソッドを<a href="../../oop-basic/text01/page07.html">オーバーロード</a>して作っています。
 </p>
 
 <div class="info">
@@ -155,8 +155,8 @@ public class Hoge{
 
    private String data;
 
-   public Hoge(String _data){
-       data = _data;
+   public Hoge(String a){
+       data = a;
    }
 
    public String get_data(){
@@ -176,8 +176,8 @@ public class Fuga{
 
    private Integer data;
 
-   public Fuga(Integer _data){
-       data = _data;
+   public Fuga(Integer a){
+       data = a;
    }
 
    public Integer get_data(){
@@ -241,7 +241,11 @@ public class Piyo&lt;T&gt;{
 <p>
 この Piyo クラスを使いたい時は次のソース 7 の様にします。
 <br>
-なおジェネリクスメソッドの時と違ってインスタンスを作る際に型を指定する必要があります(オブジェクト指向プログラミング言語によっては自動認識するものもあります)。
+なおジェネリクスメソッドの時と違ってインスタンスを作る際に型を指定する必要があります。
+</p>
+
+<p>
+※ プログラミング言語によっては型を自動認識するものもあります
 </p>
 
 <div class="info">
@@ -252,12 +256,8 @@ public class Main{
 
     public static void main(String[] args) {
 
-        var hoge = new Piyo&lt;String&gt;("hoge");
-        var fuga = new Piyo&lt;Integer&gt;(123);
-
-        // Java のバージョンによっては var を使えないので下の様に new する
-        // Piyo&lt;String&gt; hoge = new Piyo&lt;String&gt;("hoge");
-        // Piyo&lt;Integer&gt; fuga = new Piyo&lt;Integer&gt;(123);
+        Piyo&lt;String&gt; hoge = new Piyo&lt;String&gt;("hoge");
+        Piyo&lt;Integer&gt; fuga = new Piyo&lt;Integer&gt;(123);
 
         System.out.println(hoge.get_data());
         System.out.println(fuga.get_data());

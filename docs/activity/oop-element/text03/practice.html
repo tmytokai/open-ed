@@ -21,206 +21,91 @@
 
 <br>
 <h2><a href="./page01.html">1. ポリモーフィズムとは</a></h2>
-<h2><a href="./page02.html">2. アドホック多相 (オーバロード)</a></h2>
-
+<h2><a href="./page02.html">2. アドホック多相 (≒ オーバーロード)</a></h2>
+<h2><a href="./page03.html">3. 部分型多相 (≒ オーバライド)</a></h2>
 <br>
 <p>
-<a href="../../oop-basic/text01/practice.html">以前</a>演習済み
+既に演習済み
 </p>
 
 <br>
-<h2><a href="./page03.html">3. 部分型多相 (オーバライド)</a></h2>
+<h2><a href="./page04.html">4. パラメータ多相 (≒ ジェネリクス)</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-1 (個人):</b> taro と hanako を Score クラスのインスタンス扱いにして実行してみましょう。
+<input type="checkbox"><b>演習 3-1 (個人):</b> ジェネリクスメソッドを使ってみましょう
 </p>
 
 <div class="info">
 <pre class="wrap">
+仕様:
+
+Double型の 12.456 も表示する
+
 結果:
 
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-name = TARO math = 28 english = 46 平均 = 37.0 合計 = 74
-name = HANAKO math = 14 english = 21 平均 = 17.5 合計 = 35
-
-※ 乱数を使っているので、実行するたびに結果が変わります
+hoge
+123
+123.456
 </pre>
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> フォルダ「OELM_2_2」をフォルダ「OELM_3_1」に丸ごとコピーし、その中に移動します。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「OELM_3_1」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Main.java を開き、Taro taro を Score taro に書き換えます
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「OELM_3_1」の中に Main.java (<a href="./page04.html">ページ4のソース 2</a>)を作成します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Hanako hanako を Score hanako に書き換えます
+<span class="olradio"><input type="radio" name="p1"></span> 一旦コンパイルして実行します。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 実行します。
+<span class="olradio"><input type="radio" name="p1"></span> main メソッドの整数 123 を表示している行の下に、123.456 (Double 型) を表示する行を追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 実行します。 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
 </p>
 </div>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 3-2 (個人):</b> オーバライド機能を使ってみましょう
+<input type="checkbox"><b>演習 3-2 (個人):</b> ジェネリクスクラスを使ってみましょう
 </p>
 
 <div class="info">
 <pre class="wrap">
+仕様:
 
-仕様:  HANAKO の合計点を本来の2倍にする
+Piyo&lt;Double&gt; 型のインスタンス mogu を作る(初期値は 123.456)
 
 結果:
 
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-name = TARO math = 3 english = 8 平均 = 5.5 合計 = 11
-name = HANAKO math = 40 english = 10 平均 = 26.5 合計 = 100
-
+hoge
+123
+123.456
 </pre>
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_3_1」をフォルダ「OELM_3_2」に丸ごとコピーし、その中に移動します。 
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_3_2」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hanako.java を開き、Score クラスで定義されている total メソッドをオーバーライドして合計点の 2 倍を return するようにして下さい。
-</p>
-<p>
-(注) math と english は private 指定されているので getter を使って点数を取得する必要があります
-</p>
-<p>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「OELM_3_2」の中に Piyo.java と Main.java (<a href="./page04.html">ページ4のソース 6と7</a>)を作成します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 一旦コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Piyo&lt;Double&gt; 型のインスタンス mogu (初期値 123.456)を作成し、mogu.get_data() を表示する行を追加して下さい。
+<br>
 <span class="olradio"><input type="radio" name="p2"></span> 実行します。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをして下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Hanako クラスのソースコード」「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
 </p>
 </div>
 
 
-<br>
-<p>
-<input type="checkbox"><b>演習 3-3 (個人):</b> オーバライドをリストと組み合わせて見ましょう
-</p>
-
-<div class="info">
-<pre class="wrap">
-結果:
-
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-TARO
-HANAKO
-
-</pre>
-</div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> フォルダ「OELM_3_2」をフォルダ「OELM_3_3」に丸ごとコピーし、その中に移動します。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Main.java を開き、先頭に import java.util.ArrayList; を追加して下さい
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> main メソッドの中を消して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="./page03.html">ページ3のソース 8</a> を参考に Main クラスで Score クラスの<a href="../../java-basic/text04/page01.html">リスト</a> list を定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> list に Taro、Hanako クラスのインスタンスを new して追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> <a href="../../java-basic/text05/page03.html">forEachとラムダ式</a>を使って各インスタンスの名前を表示して下さい(上の実行結果を参照)。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 実行します。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
-</p>
-</div>
-
-
-<br>
-<h2><a href="./page04.html">4. パラメータ多相 (ジェネリクス)</a></h2>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 3-4 (個人):</b> ジェネリクスメソッドを使ってみましょう
-</p>
-
-<div class="info">
-<pre class="wrap">
-結果:
-
-hoge
-123
-123.456
-true
-</pre>
-</div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「OELM_3_4」を新規作成し、その中に移動します 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> フォルダ「OELM_3_4」の中に Main.java (<a href="./page04.html">ページ4のソース 2</a>)を作成します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 一旦コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> main メソッドの整数 123 を表示している行の下に、123.456 (Double 型) を表示する行を追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 更にその下に true (文字列でなくて Boolean 型) を表示する行を追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 実行します。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 3-5 (個人):</b> ジェネリクスクラスを使ってみましょう
-</p>
-
-<div class="info">
-<pre class="wrap">
-結果:
-
-hoge
-123
-123.456
-true
-</pre>
-</div>
-
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「OELM_3_5」を新規作成し、その中に移動します 
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「OELM_3_5」の中に Piyo.java と Main.java (<a href="./page04.html">ページ4のソース 6と7</a>)を作成します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 一旦コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> Piyo&lt;Double&gt; のインスタンス a (初期値 123.456)を作成し、a.get_data() を表示する行を追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> Piyo&lt;Boolean&gt; のインスタンス b (初期値 true)を作成し、b.get_data() を表示する行を追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 実行します。 
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「Main クラスのソースコード」と「実行結果」を記入して下さい。 
-</p>
-</div>
-
-
-
-<script>PreNext(4,5)</script>
+<script>PreNext(5,4)</script>
 </body>
 </html>
