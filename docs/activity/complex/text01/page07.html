@@ -127,7 +127,13 @@ z \cdot \textrm{e}^{\{j\cdot \theta\}} = |z| \cdot \textrm{e}^{\{j\cdot (\angle 
 </p>
 
 <p>
-まず任意の 2 次元ベクトル $(x,y)$ を元に複素数 $z = x + j \cdot y$ を作ります。
+まず任意の 2 次元ベクトル $(x,y)$ を元に複素数
+</p>
+\[
+z = x + y \cdot j
+\]
+<p>
+を作ります。
 <br>
 $z$ を $\theta$ だけ回転させた複素数は上で示した通りに
 </p>
@@ -139,17 +145,18 @@ $z$ を $\theta$ だけ回転させた複素数は上で示した通りに
 <p>
 となります。
 <br>
-次にこれを直交形式に変換して sin と cos を展開します。
+次にこれを直交形式に変換して sin と cos を<a href="https://ja.wikipedia.org/wiki/%E4%B8%89%E8%A7%92%E9%96%A2%E6%95%B0%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%AE%E4%B8%80%E8%A6%A7">加法定理</a>を使って展開します。
 </p>
 
 \begin{align*}
 |z| \cdot \textrm{e}^{\{j\cdot (\angle \ z+\theta) \}} 
-=& |z| \cdot \cos (\angle \ z+\theta) + j \cdot |z| \cdot \sin (\angle \ z+\theta) \\
 
-=& \left \{ |z| \cdot \cos \angle \ z \cdot \cos\theta - |z| \cdot \sin \angle \ z \cdot \sin\theta \right \} \\
-&+ j \left \{ |z| \cdot \sin \angle \ z \cdot \cos\theta + |z| \cdot \cos \angle \ z \cdot \sin\theta \right \} \\
+= & (|z| \cdot \cos (\angle \ z+\theta)) + \{ |z| \cdot \sin (\angle \ z+\theta) \} \cdot j \\[10pt]
 
-=& \left \{ x \cdot \cos\theta - y \cdot \sin\theta \right \} + j \left \{ y \cdot \cos\theta + x \cdot \sin\theta \right \} \\
+(\text{加法定理より}) = & \left \{ |z| \cdot \cos \angle \ z \cdot \cos\theta - |z| \cdot \sin \angle \ z \cdot \sin\theta \right \} \\
+& + \left \{ |z| \cdot \sin \angle \ z \cdot \cos\theta + |z| \cdot \cos \angle \ z \cdot \sin\theta \right \} \cdot j \\[10pt]
+
+=& \left \{ x \cdot \cos\theta - y \cdot \sin\theta \right \} + \left \{ y \cdot \cos\theta + x \cdot \sin\theta \right \} \cdot j\\
 \end{align*}
 
 <p>

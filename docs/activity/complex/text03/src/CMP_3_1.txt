@@ -20,7 +20,7 @@ def w_q(theta):
 def v_q(theta,u):
     return [0,0,0]
 
-# x と y の内積は np.dot(x,y)
+# x と y の内積(ドット積)は np.dot(x,y)
 # x と y のクロス積は np.cross(x,y)
 def v_dash(v,wq,vq):
     return None

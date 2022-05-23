@@ -28,7 +28,7 @@
 <input type="checkbox"><b>極形式 → 直交形式に変換</b>
 \[
 |z| \cdot \textrm{e}^{\{j\cdot \angle \ z\}} 
-= |z| \cdot \cos \angle \ z + j \cdot |z| \cdot \sin \angle \ z
+= ( |z| \cdot \cos \angle \ z ) +  ( |z| \cdot \sin \angle \ z ) \cdot j
 \]
 </div>
 
@@ -40,7 +40,7 @@
 <div class="info">
 <input type="checkbox"><b>直交形式 → 極形式に変換</b>
 \[
-z = a + j \cdot b
+z = a + b \cdot j
 \]
 <p>
 に対し、絶対値と偏角を以下のようにして求める。
@@ -49,10 +49,10 @@ z = a + j \cdot b
 |z| = \sqrt{ a^2 + b^2} \ ,\ \angle \ z = \textrm{atan2}(b,a)
 \]
 <p>
-※1 プログラミング言語や表計算ソフトによっては引数が $\textrm{atan2}(a,b)$ の場合もある
+※1 プログラミング言語や表計算ソフトによっては引数が $\textrm{atan2}(a,b)$ の場合もあります
 </p>
 <p>
-※2 言語によっては絶対値と偏角を同時に変換してくれる関数もある (例えば python の cmath.polar 関数)
+※2 言語によっては絶対値と偏角を同時に変換してくれる関数もあります (例えば python の cmath.polar 関数)
 </p>
 
 
