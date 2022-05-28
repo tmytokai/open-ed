@@ -22,7 +22,7 @@
 <p>
 GitHub Pages は GitHub が提供している静的な Web ページのホスティングサービスです。
 <br>
-GitHub Pages を使うとHTMLファイルやMD(マークダウン)ファイルを使ってドキュメントを簡単に公開することが出来ます。
+GitHub Pages を使うとHTMLファイルや<a href="https://ja.wikipedia.org/wiki/Markdown">MD(マークダウン)ファイル</a>を使ってドキュメントを簡単に公開することが出来ます。
 <br>
 ただしPHPとかサーブレットとかを使ってバックエンドでプログラムを動かすことは出来ません。
 </p>
@@ -44,11 +44,13 @@ GitHub Pages を使うとHTMLファイルやMD(マークダウン)ファイル�
 <br>
 <span class="olradio"><input type="radio" name="r1"></span>  「Pages」 設定を開く
 <br>
-<span class="olradio"><input type="radio" name="r1"></span>  「Source」の「None」を「main (またはmaster)」にすると隣に「/(root)」と書いてあるフォルダ設定が現れる
+<span class="olradio"><input type="radio" name="r1"></span>  「Source」の「None」を「main」にすると隣に「/(root)」と書いてあるフォルダ設定が現れる
 <br>
-<span class="olradio"><input type="radio" name="r1"></span>  フォルダ設定を適宜設定する。「/(root)」にした場合はリポジトリの先頭フォルダにHTMLファイルやMDファイルを置く。「/docs」にした場合は docs フォルダの中にHTMLファイルやMDファイルを置く
+<span class="olradio"><input type="radio" name="r1"></span>  そのフォルダ設定を適宜設定する。「/(root)」にした場合はリポジトリの先頭フォルダにHTMLファイルやMDファイルを置く。「/docs」にした場合は docs フォルダの中にHTMLファイルやMDファイルを置く
 <br>
 <span class="olradio"><input type="radio" name="r1"></span>  隣の「Save」ボタンを押すと「https://ユーザID.github.io/リポジトリ名/」にウェブページが公開される
+<br>
+<span class="olradio"><input type="radio" name="r1"></span>  「Thema Chooser」でテーマを設定する。「Choose a thema」ボタンを押して好きなテーマを選ぶ。
 <br>
 <span class="olradio"><input type="radio" name="r1"></span>  フォルダ設定で設定した場所に index.md を作成する。Code 画面に戻り、Add file → Create new file を選択し、 index.md ( docs フォルダを設定した場合は docs/index.md )  とファイル名を指定する。次に下の編集画面に「こんにちは世界」と打ち込み、更に下の方にある「Commit」ボタンを押す
 </p>
@@ -56,17 +58,11 @@ GitHub Pages を使うとHTMLファイルやMD(マークダウン)ファイル�
 ※ HTML ファイルを使いたい場合はファイル名を index.html にしてください
 </p>
 <p>
+※ しばらく待っても表示が変わらない場合はページをスーパーリロード(Chromeの場合はCtrl+F5)して下さい
+</p>
+<p>
 <span class="olradio"><input type="radio" name="r1"></span>  ページを開いて「こんにちは世界」と表示されていることを確認する
 <br>
-<span class="olradio"><input type="radio" name="r1"></span>  MDファイルを使う場合は Pages の設定画面の「Choose a thema」から任意のテーマを変更できる
-</p>
-<p>
-※ テーマを変更してから実際に切り替わるまで若干時間がかかります
-<br>
-※ しばらく待ってもテーマが変わらなかったり、レイアウトが崩れる場合はページをスーパーリロードして下さい
-</p>
-<p>
-<span class="olradio"><input type="radio" name="r1"></span>  pull して index.md をプロジェクトに取り込む(プロジェクトを新規作成した場合は git clone でクローンする)
 </p>
 </div>
 </div>
@@ -81,6 +77,9 @@ GitHub Pages を使うとHTMLファイルやMD(マークダウン)ファイル�
 MDファイルを編集したら、あとは コミット＆プッシュすれば内容が更新されます。
 <br>
 なおコミット＆プッシュしてから内容が更新されるまで少し時間がかかりますので、更新されなかった場合はしばらく待ってからもう一度ブラウザをリロードしてください。
+</p>
+<p>
+※ リロードしても変わらない場合はスーパーリロード(Chromeの場合はCtrl+F5)して下さい。
 </p>
 
 
