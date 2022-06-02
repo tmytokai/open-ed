@@ -10,6 +10,9 @@ z4 = None
 z5 = None
 
 # 各zの複素共役をテキストに従って求めて下さい
+#
+# (注) python の場合は conjugate 関数を使うと簡単に複素共役が求まりますが
+# 今回は使わないで計算して下さい
 
 z3asterisk = None
 z4asterisk = None
