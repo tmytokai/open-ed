@@ -96,8 +96,8 @@ def label(type,name,v,v2=0):
     name = re.sub(r'\*',r'^*',name)
     if( type == 'c' ) :
         if( v.imag == 0 ) : name = r'${0}={1:.2f}$'.format(name,v.real)
-        elif( v.real == 0 ) : name = r'${0}= {1} j\cdot {2:.2f}$'.format(name, '-' if v.imag<=0 else '',abs(v.imag))
-        else : name =  r'${0}={1:.2f} {2} j\cdot {3:.2f}$'.format(name,v.real,'-' if v.imag<=0 else '+',abs(v.imag))
+        elif( v.real == 0 ) : name = r'${0}= {1} {2:.2f} \cdot j$'.format(name, '-' if v.imag<=0 else '',abs(v.imag))
+        else : name =  r'${0}={1:.2f} {2} {3:.2f} \cdot j$'.format(name,v.real,'-' if v.imag<=0 else '+',abs(v.imag))
     if( type == 'abs' ) : name = r'$|{0}|={1:.2f}$'.format(name,v)
     if( type == 'arg' ) : name = r'$\angle {0}={1:.2f}\cdot\pi$'.format(name,v)
     if( type == 'csin' ) : 
