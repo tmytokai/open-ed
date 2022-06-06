@@ -136,10 +136,10 @@ q^*qV = q^{-1}qV =  \vec{1}V = V
 </p>
 \begin{align*}
 {\mathrm Re}[ qVq^* ] 
-&= (-v_q \cdot v)w_q - (w_q v + v_q \times v)\cdot v^*_q \\
-&= -w_q(v_q \cdot v) - w_q ( v \cdot v^*_q)  - (v_q \times v)\cdot v^*_q  \\
-({\text スカラー3重積を使って}) &= -w_q(v_q \cdot v) + w_q( v \cdot v_q)  - (v^*_q \times v_q )\cdot v \\
-&=  (v_q \times v_q )\cdot v \\
+&= (-v_q \cdot v)w_q - (w_q v + v_q \times v)\cdot v^*_q \\[10pt]
+&= -w_q(v_q \cdot v) - w_q ( v \cdot v^*_q)  - (v_q \times v)\cdot v^*_q  \\[10pt]
+({\text スカラー3重積を使って}) &= -w_q(v_q \cdot v) + w_q( v \cdot v_q)  - (v^*_q \times v_q )\cdot v \\[10pt]
+&=  (v_q \times v_q )\cdot v \\[10pt]
 &=  0
 \end{align*}
 
@@ -149,10 +149,10 @@ q^*qV = q^{-1}qV =  \vec{1}V = V
 
 \begin{align*}
 {\mathrm Im}[ qVq^* ] 
-& = (-v_q \cdot v)v^*_q + w_q(w_q v + v_q \times v) + (w_q v + v_q \times v)\times v^*_q \\
-& = (v_q \cdot v)v_q + w_q^2 v + w_q(v_q \times v) + w_q (v\times v^*_q) + v_q \times v \times v^*_q \\
-& = (v_q \cdot v)v_q + w_q^2 v + w_q(v_q \times v) + w_q (v_q\times v) - v_q \times v \times v_q \\
-({\text ベクトル3重積を使って}) & = (v_q \cdot v)v_q + w_q^2 v + 2 w_q(v_q \times v) - (v_q \cdot v_q )v + (v \cdot v_q) v_q \\
+& = (-v_q \cdot v)v^*_q + w_q(w_q v + v_q \times v) + (w_q v + v_q \times v)\times v^*_q \\[10pt]
+& = (v_q \cdot v)v_q + w_q^2 v + w_q(v_q \times v) + w_q (v\times v^*_q) + v_q \times v \times v^*_q \\[10pt]
+& = (v_q \cdot v)v_q + w_q^2 v + w_q(v_q \times v) + w_q (v_q\times v) - v_q \times v \times v_q \\[10pt]
+({\text ベクトル3重積を使って}) & = (v_q \cdot v)v_q + w_q^2 v + 2 w_q(v_q \times v) - (v_q \cdot v_q )v + (v \cdot v_q) v_q \\[10pt]
 & = 2(v_q \cdot v)v_q + (w_q^2 - |v_q|^2)v + 2 w_q ( v_q \times v)
 \end{align*}
 
@@ -236,10 +236,10 @@ v' = {\mathrm Im}[ qVq^* ] = 2(v_q \cdot v)v_q + (w_q^2 - |v_q|^2)v + 2 w_q ( v_
 実部 : $w_q = \cos \frac{\theta}{2}$
 </p>
 <p>
-虚部 : $v_q = (\sin \frac{\theta}{2} x_u\ ,\  \sin \frac{\theta}{2} y_u\ ,\  \sin \frac{\theta}{2} z_u)$
+虚部 : $v_q = \sin \frac{\theta}{2} u$
 </p>
 <p>
-※ ただし $x_u^2 + y_u^2 + z_u^2 = 1$
+※ ただし $u = (x_u,y_u,z_u)$ かつ $x_u^2 + y_u^2 + z_u^2 = 1$ とする(つまり単位ベクトル)
 </p>
 
 <p>
@@ -289,7 +289,7 @@ u = (x_u\ ,\  y_u\ ,\  z_u)
 実部 : $w_q = \cos \frac{\theta}{2}$
 </p>
 <p>
-虚部 : $v_q = \sin \frac{\theta}{2} u =  (\sin \frac{\theta}{2} x_u\ ,\  \sin \frac{\theta}{2} y_u\ ,\  \sin \frac{\theta}{2} z_u)$
+虚部 : $v_q = \sin \frac{\theta}{2} u$ 
 </p>
 <p>
 で表されるクォータニオン $q = (w_q,v_q)$ を作る。

@@ -4,23 +4,24 @@ import numpy as np
 import math
 ########### ここから↑は消さないで下さい
 
-v=[0,0,0]
+v=np.array([0,0,0])
 
 #円周率は math.pi
 theta = 0
 
 #平方根は math.sqrt 関数
-u = [0,0,0]
+u = np.array([0,0,0])
 
 # cos(x) は math.cos(x)
 def w_q(theta):
-    return 0
+    return None
 
 # sin(x) は math.sin(x)
 def v_q(theta,u):
-    return [0,0,0]
+    return None
 
 # x と y の内積(ドット積)は np.dot(x,y)
+# |x|^2 は np.dot(x,x)
 # x と y のクロス積は np.cross(x,y)
 def v_dash(v,wq,vq):
     return None
