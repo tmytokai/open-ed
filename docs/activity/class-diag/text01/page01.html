@@ -20,11 +20,12 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="https://ja.wikipedia.org/wiki/%E7%B5%B1%E4%B8%80%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E">UML</a>(Unified Modeling Lnaguage: 統一モデリング言語)とは構築するシステムの構造を分かりやすくするために作られた人工的な言語で、簡単に言うと設計書の書き方のルール、つまり書式です。
+<a href="https://ja.wikipedia.org/wiki/%E7%B5%B1%E4%B8%80%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E">UML</a>(Unified Modeling Lnaguage: 統一モデリング言語)とは構築するシステムの構造を分かりやすくモデル化するために作られた人工的な言語で、簡単に言うと設計書の書き方、つまりフォーマット(書式)です。
+</p>
+<p>
+フォーマットを組織や個人ごとにバラバラに定めていると開発者の間で全く意図が伝わらないので、1997年に<a href="https://www.omg.org/">OMG</a>というアメリカの非営利団体がフォーマットをUMLとして標準化しました。
 <br>
-書式をバラバラに定めていると開発者の間で全く意図が伝わらないので、1997年に<a href="https://www.omg.org/">OMG</a>というアメリカの非営利団体が書式をUMLとして標準化しました。
-<br>
-なお言語とは言いますが、実際には文章だけでなくて「<b>ダイアグラム</b>」と呼ばれる図形の描き方も書式として定めています。
+なお言語とは言いますが、実際には文章だけでなくて「<b>ダイアグラム</b>」と呼ばれる図形の描き方もフォーマットとして定めています。
 </p>
 
 <p>
@@ -83,7 +84,7 @@ public class FRUIT{
     private String name;
 
     public String get_name(){ return name; } // name の getter
-    public void set_name( String _name ){ name = _name; } // name の setter
+    public void set_name( String a ){ name = a; } // name の setter
 
     public FRUIT(){}  // コンストラクタ
 

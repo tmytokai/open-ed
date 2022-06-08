@@ -38,7 +38,7 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="../../oop-element/">オブジェクト指向プログラミングの三大要素</a>の演習で作成した<a href="../../oop-element/text03/practice.html">OELM_3_2</a>フォルダの中にある Score.java を開いて下さい。
+<span class="olradio"><input type="radio" name="p2"></span> <a href="../../oop-element/">オブジェクト指向プログラミングの三大要素</a>の演習で作成した<a href="../../oop-element/text02/practice.html">OELM_2_2</a>フォルダの中にある Score.java を開いて下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 任意のドローツールを起動します。
 <br>
@@ -61,13 +61,15 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p3"></span> 引き続き「OELM_3_2」のクラス図を作成します。
+<span class="olradio"><input type="radio" name="p3"></span> 引き続き「OELM_2_2」のクラス図を作成します。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 「CDIAG_1_2」をコピーして「CDIAG_1_3」に名前を変えて下さい(拡張子はドローツールによります)。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 「CDIAG_1_3」を任意のドローツールで開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Score 、Taro、Hanako の関係を示すクラス図を描いて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> Taro、Hanako の単一クラス図を描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Score と Taro、Hanako を汎化の矢印で繋いで下さい。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。
 <br>
@@ -82,66 +84,116 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 1-4 (個人):</b> テキストの例で挙げたクラス図を完成版に仕上げましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> MyWorld と ORANGE のクラス図(<a href="./page04.html">テキスト 4P目の図 3</a>)を任意のドローツールで描きます。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> <a href="./page02.html">テキスト 2P目の図 1</a>より、ORANGE は FRUIT を継承していますので、FRUIT クラスと汎化の矢印を図に追加します。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 「CDIAG_1_4」の名前で保存して下さい(拡張子はドローツールによります)。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。
-<br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「画像ファイル」を貼り付けて下さい。
-</p>
-</div>
-
-<br>
-<p>
-<input type="checkbox"><b>演習 1-5 (個人):</b> 演習1-4で作成したクラス図「CDIAG_1_4」を元にコーディングしてみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「CDIAG_1_5」を新規作成し、その中に移動します
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="./page01.html">FRUIT.java</a>、<a href="./page02.html">ORANGE.java</a>、<a href="./page04.html">MyWorld.java</a> のコードを作成します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 以下の Main.java を作って下さい。
+<input type="checkbox"><b>演習 1-4 (個人):</b> 「OELM_2_2」に集約を導入してみましょう
 </p>
 <div class="info">
+<pre class="wrap">
+仕様:
+
+MyWorld クラスを新規作成し、Taro型のインスタンスを2つ、Hanako型のインスタンスを3つフィールドとして定義する
+MyWorld クラスのコンストラクタで各インスタンスを作成し、名前を表示する
+
+結果:
+
+MyWorldのコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+name = タロー
+name = タロー
+name = ハナコ
+name = ハナコ
+name = ハナコ
+</pre>
+</div>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> フォルダ「OELM_2_2」をフォルダ「CDIAG_1_5」に丸ごとコピーし、その中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> MyWorld.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class MyWorld{
+
+	private Taro taro0;
+	private Taro taro1;
+
+	private Hanako hanako0;
+	private Hanako hanako1;
+	private Hanako hanako2;
+
+	public MyWorld() {
+
+		System.out.println("MyWorldのコンストラクタ実行");
+
+		taro0 = new Taro();
+		taro1 = new Taro();
+
+                hanako0 = new Hanako();
+                hanako1 = new Hanako();
+                hanako2 = new Hanako();
+
+                // ※
+
+                System.out.println( "name = " + taro0.get_name());
+                System.out.println( "name = " + taro1.get_name());
+
+                System.out.println( "name = " + hanako0.get_name());
+                System.out.println( "name = " + hanako1.get_name());
+                System.out.println( "name = " + hanako2.get_name());
+	}
+}
+</pre>
+
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
 <pre class="wrap">
 public class Main{
 
 	public static void main(String[] args) {
 		MyWorld myworld = new MyWorld();
-                // ※
-		myworld.get_orange0().show();
-		myworld.get_orange1().show();
-		myworld.get_orange2().show();
-		myworld.get_orange3().show();
 	}
 }
 </pre>
-</div>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをして下さい。
-<br>
-<div class="info">
-<pre class="wrap">
-結果:
 
-みかん No.0美味い
-みかん No.1美味い
-みかん No.2美味い
-みかん No.3美味い
-</pre>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「Main、MyWorld、Score、Taro、Hanakoクラスのソースコード」「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 1-5 (個人):</b> 集約のクラス図を描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 「CDIAG_1_4」のクラス図を作成します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 「CDIAG_1_2」をコピーして「CDIAG_1_5」に名前を変えて下さい(拡張子はドローツールによります)。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 「CDIAG_1_5」を任意のドローツールで開いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> MyWorld の単一クラス図を描いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> MyWorld と Taro、Hanako を集約の矢印で繋ぎ、多重度の数字を記述して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「画像ファイル」を貼り付けて下さい。
 </p>
 </div>
 
