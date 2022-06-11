@@ -44,9 +44,16 @@ Git を初めて使う場合、以下の手順で git config コマンドを使�
 <br>
 <span class="olradio"><input type="radio" name="r1"></span> git config --global user.email "メールアドレス"
 <br>
+<span class="olradio"><input type="radio" name="r1"></span> git config --global pull.rebase false
+<br>
 <span class="olradio"><input type="radio" name="r1"></span> 登録内容の確認: git config --global --list 
 </p>
 </div>
+
+<p>
+※ (4) の設定は git のバージョンが 2.27.0 以降の場合必要です。設定しないと pull 出来ません。
+</p>
+
 </div>
 
 <p>

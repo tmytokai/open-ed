@@ -51,7 +51,7 @@ git push
 <span class="olradio"><input type="radio" name="r1"></span> Bさんはプルを実行し、リモートリポジトリの更新内容をローカルリポジトリに取り込む 
 </p>
 <p>
-git pull
+git pull --no-edit
 </p>
 <p>
 すると
@@ -404,6 +404,9 @@ name?
 B 
 A
 (空行)
+
+※ BとAの後ろにスペースが入らないように注意
+※ 4行になっていることに注意
 </pre>
 <p>
 <span class="olradio"><input type="radio" name="r2"></span> git add hoge.txt
@@ -412,10 +415,10 @@ A
 <br>
 <span class="olradio"><input type="radio" name="r2"></span> git commit -m "merged A and B"
 <br>
-<span class="olradio"><input type="radio" name="r2"></span> git pull を再実行
+<span class="olradio"><input type="radio" name="r2"></span> git pull --no-edit を再実行
 </p>
 <p>
-※ この時点では他の人はリモートリポジトリを更新してないので何も起きないがプッシュする前にプルする習慣を付けるために実行する
+※ この時点では他の人はリモートリポジトリを更新してないので「Already up to date」と表示されて何も起きないがプッシュする前にプルする習慣を付けるために実行する
 </p>
 <p>
 <span class="olradio"><input type="radio" name="r2"></span> git push
