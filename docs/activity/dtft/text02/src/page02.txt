@@ -1,0 +1,71 @@
+import numpy as np
+import math
+import cmath
+import matplotlib.pyplot as plt
+from scipy.fft import fft
+
+# 実数成分
+def A(w,f,N,tau):
+    out = 0
+    for i in range(N):
+        out += f[i]*math.cos(i*w*tau)
+    return out
+
+# 虚数成分
+def B(w,f,N,tau):
+    out = 0
+    for i in range(N):
+        out += f[i]*math.sin(i*w*tau)
+    return -out
+
+# 元の信号
+f = [1.0, -2.0, 4.0, -1.0, 3, 5, 0, 3]
+
+N=len(f)
+fs = 1.0
+ws = 2*math.pi*fs
+tau = 1/fs
+T = tau*N
+
+C = fft(f)
+
+# 元の信号
+plt.plot(range(N), f)
+plt.xticks(range(0,N))
+for i in range(0,N):
+    plt.axvline(i,color="gray",linestyle='dashed')
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$i$')
+plt.ylabel(r'$f[i]$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 振幅スペクトル
+w1 = 2*np.pi/T
+labels = [f'{i}'+'$w_1$' if i>0 else '0' for i in range(N)]
+labels.append( f'$w_s$')
+absf = [math.sqrt(A(ws*i/(N*100),f,N,tau)**2 + B(ws*i/(N*100),f,N,tau)**2) for i in range(N*100)]
+plt.plot([i/(N*100) for i in range(N*100)], absf)
+for k in range(N):
+    absc = abs(C[k])
+    plt.plot( k/N,absc,color="blue",marker='o',markersize=5,linestyle='none')
+for i in range(0,N+1):
+    plt.axvline(i/N,color="gray",linestyle='dashed')
+plt.xticks(ticks=[i/N for i in range(N+1)],labels=labels)
+plt.ylim(bottom=0)
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\|{\rm F}(w)|$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 位相スペクトル
+phasef = [math.atan2(B(ws*i/(N*100),f,N,tau),A(ws*i/(N*100),f,N,tau)) for i in range(N*100)]
+plt.plot([i/(N*100) for i in range(N*100)], phasef)
+for k in range(N):
+    phasec = cmath.phase(C[k]) if abs(C[k])>0.1 else 0
+    plt.plot( k/N,phasec,color="blue",marker='o',markersize=5,linestyle='none')
+for i in range(0,N+1):
+    plt.axvline(i/N,color="gray",linestyle='dashed')
+plt.xticks(ticks=[i/N for i in range(N+1)],labels=labels)
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\angle {\rm F}(w)$',rotation=0,labelpad=0,loc="top")
+plt.show()

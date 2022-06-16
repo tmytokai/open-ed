@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. DTFT のプログラミング</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
+<li>学習項目: [1] DTFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+DTFT は無限長の非周期性時時間領域ディジタル信号に対する演算ですが、実際にはその様な信号をコンピュータで扱うのは不可能ですので、今回は時刻 $i < 0$ で $f[i]=0$、かつ有限の正整数 $\textrm{N}$ に対して $f[0]$から$f[\textrm{N}-1]$まで値が入っていて、残りは全て $f[i]=0, (i=\textrm{N},\textrm{N}+1,\cdots)$ である時間領域ディジタル信号
+</p>
+
+\[
+\cdots, 0, f[0], f[1], f[2], \cdots, f[\textrm{N}-1], 0, \cdots
+\]
+
+<p>
+に対する DTFT をプログラミングで求めます。
+</p>
+
+<p>
+この場合の DTFT は次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 有限長の時間領域ディジタル信号に対する DTFT </b>
+
+\[
+\textrm{F}(w) = \sum_{i=0}^{\text{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\]
+
+<p>
+$f[i]$ ・・・ 長さ $\text{N}$ の時間領域ディジタル信号
+</p>
+
+<p>
+$\tau$ [秒] ・・・ サンプリング間隔
+</p>
+
+</div>
+
+
+<p>
+次に<a href="../../dft/text01/page05.html">DFTのプログラミング</a>の時と同様、$\textrm{F}(w)$ を
+</p>
+
+\[
+\textrm{F}(w) = \textrm{A}(w) + \textrm{B}(w) \cdot j
+\]
+
+<p>
+の様に実数成分 $\textrm{A}(w)$ と虚数成分 $\textrm{B}(w)$ に分けます。
+</p>
+
+<p>
+※ DFT の時の引数 $k$ は整数でしたが角周波数 $w$ は実数であることに注意
+</p>
+
+<p>
+するとオイラー公式より $\textrm{A}(w)$ と $\textrm{B}(w)$ は次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{A}(w)$ と $\textrm{B}(w)$ の求め方</b>
+
+\begin{align*}
+\textrm{A}(w) &= \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \cos( i \cdot w \cdot \tau )
+\right \}
+\\[10pt]
+\textrm{B}(w) &= -\sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \sin( i \cdot w \cdot \tau )
+\right \}
+\end{align*}
+
+</div>
+
+<p>
+このようにすると DTFT の演算中に複素数が含まれなくなるので簡単に $\textrm{A}(w)$ と $\textrm{B}(w)$ を求められます。
+</p>
+
+<p>
+また次の様にして $\textrm{F}(w)$ の絶対値 $|\textrm{F}(w)|$ と偏角 $\angle \ \textrm{F}(w)$ も簡単に求められます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>絶対値と偏角の求め方</b>
+\[
+|\textrm{F}(w)| = \textrm{sqrt}(\textrm{A}(w)*\textrm{A}(w) + \textrm{B}(w)*\textrm{B}(w))
+\]
+\[
+\angle \ \textrm{F}(w) = \textrm{atan2}(\textrm{B}(w),\textrm{A}(w))
+\]
+
+<p>
+※ プログラミング言語によっては $\textrm{atan2}(\textrm{A}(w),\textrm{B}(w))$ の順の場合もあります
+</p>
+</div>
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>

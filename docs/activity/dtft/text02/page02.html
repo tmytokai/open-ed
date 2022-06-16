@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. スペクトルの例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
+<li>学習項目: [2] スペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では具体例を示して視覚的にスペクトルを見てみましょう。
+</p>
+
+<p>
+まず本来の DTFT の定義は無限級数の和ですが、それではコンピュータで計算できませんので、今回は非周期性時間領域ディジタル信号として $\textrm{N}=8$ [点]、サンプリング周波数 $f_s = 1$ [Hz]、サンプリング角周波数 $w_s = 2\pi$ [Hz]、サンプリング間隔 $\tau = 1$ [秒] として
+</p>
+
+\[
+f[i] = [1,\ -2,\ 4,\ -1,\ 3, 5, 0, 3]
+\]
+
+<p>
+ただし $i<0$ または $i \geq 8$の時 $f[i] = 0$ を考えます(図1)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 例で使う $f[i]$ ( $i<0$ 及び $i>8$ の範囲は省略) </b>
+<p>　</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+この $f[i]$ から求めた振幅・位相スペクトルは以下の様になります。
+<br>
+今回はグラフの横軸を角周波数 $w$ [rad/秒] としていますが、横軸を周波数 $f$ [Hz] にしたり波長 [m] にする場合も実際には多いです。
+<br>
+なおグラフ中の青点は DFT の値です(ただし正規化パラメータ $\textrm{N}$ をかけています)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 振幅スペクトル</b>
+<p>※1 青点は DFT の値(ただし正規化パラメータ $\textrm{N}$ をかけている)</p>
+<p>※2 $w_1$ は DFT の基本角周波数 ($w_1 = w_s/\textrm{N}$)</p>
+<img src="./img/page02-fig2.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: 位相スペクトル</b>
+<p>※1 青点は DFT の値(ただし正規化パラメータ $\textrm{N}$ をかけている)</p>
+<p>※2 $w_1$ は DFT の基本角周波数 ($w_1 = w_s/\textrm{N}$)</p>
+<img src="./img/page02-fig3.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="./src/page02.txt">こちら</a>です。
+</p>
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>

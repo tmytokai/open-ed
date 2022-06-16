@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>1. DTFT によるスペクトル解析</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
+<li>学習項目: [2] スペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<p>
+DTFT は既に角周波数 $w$ [rad/秒]を独立変数とした複素関数となっていますので、$\textrm{F}(w)$ そのものが非周期性時間領域ディジタル信号に対するスペクトルとなります。
+<br>
+よって離散的なスペクトルだった DFT と違って連続的なスペクトルとなります。
+<br>
+また DFT の様な<a href="../../dft/text02/page01.html">インデックスから角周波数への変換作業</a>も必要ありません。
+</p>
+
+<p>
+一方、DFTと違ってスペクトルのグラフが得られても元の信号の式を復元するのが難しい(積分が必要なので)というデメリットもあります。
+</p>
+
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>

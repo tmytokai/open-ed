@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>1. DTFT と IDTFTの定義</title>
+<title>1. DTFT と IDTFT</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
-<li>学習項目: [1] DTFT と ITDFT</li>
+<li>学習項目: [1] DTFT</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -21,9 +21,10 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-周期性が無い一般的な時間領域ディジタル信号 $f[i]$ から周波数領域の複素関数であるスペクトル $\textrm{F}(w)$ を求める演算を DTFT (Discrete Time Fourier Transform: 離散時間フーリエ変換 )と言います。
+周期性が無い、つまり非周期性時間領域ディジタル信号 $f[i]$ からスペクトル $\textrm{F}(w)$ を求める演算を <a href="https://ja.wikipedia.org/wiki/%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">DTFT</a> (Discrete Time Fourier Transform: 離散時間フーリエ変換 )と言います。
 <br>
-あるいは関数 $\textrm{F}(w)$ そのものを DTFT と呼びます。
+あるいは $\textrm{F}(w)$ そのものを DTFT と呼びます。
+</p>
 
 <p>
 DTFT はディジタル信号版の<a href="../../ft/">フーリエ変換</a>ですが、周期性時間領域ディジタル信号の周期を無限大にしたときの<a href="../../dft">離散フーリエ変換(DFT)</a>とみなすことも出来ます。
@@ -42,7 +43,11 @@ f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}}
 \]
 
 <p>
-$f[i]$ ・・・ 時間領域ディジタル信号
+$w$ [rad/秒] ・・・角周波数 
+</p>
+
+<p>
+$f[i]$ ・・・ 非周期性時間領域ディジタル信号
 </p>
 
 <p>
@@ -52,34 +57,42 @@ $\tau$ [秒] ・・・ サンプリング間隔
 </div>
 
 <p>
-ここで $w_s$ [rad/秒] をサンプリング角周波数とすると $\tau = 2\pi / w_s$ なので、$n$ を任意の整数としたとき
+この定義から分かるように、DTFT は無限長の非周期性時時間領域ディジタル信号 $f[i]$ を元にした無限級数の和の形になっていますので、どの様な $f[i]$ でも必ず収束するとは限らないことに注意して下さい。
+<br>
+今回は DTFT が収束する $f[i]$ だけを考えることにします。
+</p>
+
+<p>
+さてここで $w_s$ [rad/秒] をサンプリング角周波数とすると $\tau = 2\pi / w_s$ なので、$n$ を任意の整数としたとき
 </p>
 
 \begin{align*}
 \textrm{F}(w + n \cdot w_s) 
 &= \sum_{i=-\infty}^{\infty} \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot (w + n \cdot w_s) \cdot \tau \}} 
-\right \} \\
+\right \} \\[10pt]
 &= \sum_{i=-\infty}^{\infty} \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot \textrm{e}^{\{-j \cdot i \cdot n \cdot w_s \cdot \tau \}}
-\right \} \\
+\right \} \\[10pt]
 &= \sum_{i=-\infty}^{\infty} \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot \textrm{e}^{\{-j \cdot i \cdot n \cdot 2\pi \}}
-\right \} \\
+\right \} \\[10pt]
 &= \sum_{i=-\infty}^{\infty} \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} \cdot 1
-\right \} \\
+\right \} \\[10pt]
 &= \textrm{F}(w)
 \end{align*}
 
 <p>
-が成り立ちますので $\textrm{F}(w)$ は周期 $w_s$ の複素関数であることが分かります。
+が成り立ちますので $\textrm{F}(w)$ は周期 $w_s$ [rad/秒] の複素関数であることが分かります。
 </p>
 
 <p>
 一方 $\textrm{F}(w)$ から元の $f[i]$ を復元する演算を IDTFT (Inverse Discrete Time Fourier Transform: 逆離散時間フーリエ変換)と言います。
 <br>
 IDTFT の定義は以下の通りです。
+<br>
+この様に IDTFT は複素関数の積分が必要になりますので、なかなか簡単に求めることは出来ません。
 </p>
 
 <div class="info">
@@ -102,20 +115,14 @@ $w_s$ [rad/秒] ・・・ サンプリング角周波数
 </p>
 
 <p>
-$\tau$ [秒] ・・・ サンプリング間隔、$\tau = 2\pi/w_s$
+$\tau$ [秒] ・・・ サンプリング間隔
 </p>
 
 </div>
 
 
-<br>
 <p>
-※ 以下の話は<a href="../../d-filter/">ディジタル線形フィルタ</a>の設計で使う式なので、必要なければ読み飛ばして結構です。
-</p>
-
-<br>
-<p>
-ところでもし $\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数なら
+ところで $\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数の場合は
 </p>
 
 \begin{align*}
@@ -124,7 +131,7 @@ f[i]
 \left \{
 \textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right \}
-\textrm{d}w \\
+\textrm{d}w \\[10pt]
 &= \frac{1}{w_s} \int_{-w_s/2}^{0} 
 \left \{
 \textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
@@ -135,7 +142,7 @@ f[i]
 \left \{
 \textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right \}
-\textrm{d}w \\
+\textrm{d}w \\[10pt]
 &= \frac{1}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{F}(-w) \cdot \textrm{e}^{\{-j \cdot i \cdot w \cdot \tau \}} 
@@ -146,8 +153,8 @@ f[i]
 \left \{
 \textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right \}
-\textrm{d}w \\
-(\textrm{F}(w) = \textrm{F}(-w)\ \text{より}) &= \frac{1}{w_s} \int_{0}^{w_s/2} 
+\textrm{d}w \\[10pt]
+(\text{偶関数なので} \textrm{F}(w) = \textrm{F}(-w)\ \text{より}) &= \frac{1}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{F}(w) \cdot 
 \left [
@@ -155,12 +162,12 @@ f[i]
 +\textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right ]
 \right \}
-\textrm{d}w \\
+\textrm{d}w \\[10pt]
 (\text{オイラー公式より}) &= \frac{2}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{F}(w) \cdot \cos( i \cdot w \cdot \tau)
 \right \}
-\textrm{d}w \\
+\textrm{d}w
 
 \end{align*}
 
@@ -174,17 +181,27 @@ f[-i]
 \left \{
 \textrm{F}(w) \cdot \cos( -i \cdot w \cdot \tau)
 \right \}
-\textrm{d}w \\
+\textrm{d}w \\[10pt]
 &= \frac{2}{w_s} \int_{0}^{w_s/2} 
 \left \{
 \textrm{F}(w) \cdot \cos( i \cdot w \cdot \tau )
 \right \}
-\textrm{d}w \\
+\textrm{d}w \\[10pt]
 &= f[i]
 \end{align*}
 
 <p>
-ですので、<b>時間領域ディジタル信号 $f[i]$ は偶関数になります</b>。
+ですので、まとめると
+</p>
+<p>
+<b>「$\textrm{F}(w)$ が虚数成分を含まない実関数で、かつ偶関数の場合は、時間領域ディジタル信号 $f[i]$ も偶関数になる」</b>
+</p>
+<p>
+ということが分かります。
+</p>
+
+<p>
+※ この性質は<a href="../../d-filter/text02/page03.html">ディジタルフィルタの設計</a>の所で使います
 </p>
 
 <br>

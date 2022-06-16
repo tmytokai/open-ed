@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. DTFT と DFT の関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: 離散時間フーリエ変換 (DTFT)</a></li>
+<li>学習項目: [1] DTFT</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ディジタル信号の周期を無限大にしたときの DFT が DTFT であると言いましたが、DTFT から見れば DFT は前ページで求めた「長さ $\textrm{N}$ のディジタル信号に対する DTFT を N 点でサンプリング(離散化)したもの」に相当します。
+</p>
+
+<p>
+まず $\textrm{F}(w)$ は周期 $w_s$ [rad/秒]の複素関数でしたので、$k$ を 0 から $\textrm{N}-1$ までの整数として
+</p>
+
+\[
+w_k = \frac{w_s}{\text{N}} \cdot k = w_1 \cdot k
+\]
+
+<p>
+とサンプリング点 $w_k$ [rad/秒] を定義します。
+<br>
+ここで $w_1 = w_s/\textrm{N}$ は DFT の基本角周波数です。
+</p>
+
+<p>
+あとは $w_k$ を $\textrm{F}(w)$ に代入する、つまり $\textrm{F}(w)$ を $w_0$ 〜 $w_{\textrm{N}-1}$ の N 点でサンプリングすることで
+</p>
+
+\begin{align*}
+\textrm{F}(w_k) 
+& = \sum_{i=0}^{\text{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot w_k \cdot \tau \}} 
+\right \} \\[10pt]
+& = \sum_{i=0}^{\text{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot (w_s / \text{N} \cdot k) \cdot (2\pi / w_s) \}} 
+\right \} \\[10pt]
+& = \sum_{i=0}^{\text{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \} \\[10pt]
+& = \textrm{C}[k] \cdot \textrm{N}
+\end{align*}
+
+</div>
+
+
+<p>
+と( 正規化パラメータ $\textrm{N}$ をかけている事を除けば) DFT の定義式と一致します。
+</p>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
