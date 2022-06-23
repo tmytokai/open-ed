@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>3. サーブレット</title>
+<title>2. サーブレット</title>
 </head>
 <body>
 
 <nav class="brcr">
 <ol>
-<li><a href="../">アクティビティ: Java言語の基礎</a></li>
-<li>学習項目: [6] サーブレット</li>
+<li><a href="../">アクティビティ: サーブレット</a></li>
+<li>学習項目: [2] サーブレット</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,21 +20,17 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-では本題に入ります。
-</p>
-
-<p>
 「<a href="https://ja.wikipedia.org/wiki/Java_Servlet">サーブレット</a>(正式名称はジャカルタ・サーブレット: Jakarta Servlet)」は<a href="https://ja.wikipedia.org/wiki/Web%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">サーブレットコンテナ</a>と呼ばれるサーバ上でJavaのプログラムを実行し、Webページの動的生成やデータ処理などのバックエンド処理をするための仕組みです。
 </p>
 
 <p>
-Java のソースコードをコンパイルして出来たクラスファイルをサーブレットコンテナにデプロイ(deploy : スクリプトや実行ファイルをサーバ上に配置して使用可能にすること)し、ブラウザやアプリでデプロイ先にアクセスすることで Java のプログラムが実行されます。
+Java のソースコードをコンパイルして出来たクラスファイル(拡張子は.class)をサーブレットコンテナにデプロイ(deploy : スクリプトや実行ファイルをサーバ上に配置して使用可能にすること)し、ブラウザやアプリでデプロイ先にアクセスすることで Java のプログラムが実行されます。
 <br>
 代表的なサーブレットコンテナは<a href="https://tomcat.apache.org/">Apache Tomcat</a>で、Apache HTTP サーバで有名な Apache ソフトウェア財団が開発しています。
 </p>
 
 <p>
-さて以下のソース1が典型的なサーブレットの例です。
+以下のソース1が典型的なサーブレットの例です。
 <br>
 このソースをコンパイルしてクラスファイルを作り、クラスファイルをデプロイし、ブラウザでデプロイ先にアクセスするとプログラムが実行されて結果がブラウザの画面に表示されます。
 </p>
@@ -44,11 +40,13 @@ Java のソースコードをコンパイルして出来たクラスファイル
 下の例では省略していますが HTTP POSTメソッドを処理する doPost もあります。
 </p>
 <p>
-あとは<a href="../text03/page01.html">ファイル出力</a>の項目でも使った PrintWriter を使って文字列を出力しています。
+あとは<a href="../../java-basic/text03/page01.html">PrintWriter</a>を使って文字列を出力しています。
 <br>
 ただし今回はファイルではなくてネットワークで繋がっているブラウザに文字列が出力されます。
-<br>
-GET パラメータの取得方法など、その他詳しくはソース内のコメントを参照して下さい。
+</p>
+
+<p>
+GET パラメータの取得方法など、詳しくはソース内のコメントを参照して下さい。
 </p>
 
 <div class="info">
@@ -59,6 +57,7 @@ import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
+// HttpServlet クラスを継承する
 public class ServletTest extends HttpServlet
 {
     // HTTP GETメソッドを処理するメソッド
@@ -93,12 +92,7 @@ public class ServletTest extends HttpServlet
 </pre>
 </div>
 
-<p>
-なお実際に開発する際は生のサーブレットをそのまま使うよりも<a href="https://spring.io/projects/spring-boot">Spring Boot</a>などのフレームワークを使うことが多いです。
-</p>
-
-
 <br>
-<script>PreNext(3,4)</script>
+<script>PreNext(1,1)</script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. HTML</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: サーブレット</a></li>
+<li>学習項目: [1] HTMLとCSS</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Java サーブレットについて学ぶ前に<a href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language">HTML</a>と<a href="https://ja.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> について簡単に復習しましょう。
+</p>
+
+<p>
+まず始めに HTML から復習します。
+<br>
+HTMLは HyperText Markup Language の略で、マークアップ言語(文章の構造を記述する言語)の一種です。
+<br>
+HTML の最新版(2022年時点)は「HTML LS(Living Standard)」です。
+<br>
+HTML5 という呼称の方が有名ですが、HTML5 は既に廃止になっているので注意して下さい。
+</p>
+<p>
+※ ちなみに HTML LSの中身は HTML5 とだいたい同じです。
+</p>
+<p>
+さて具体的には HTML は &lt;p&gt; や &lt;div&gt; 等の「<b>HTMLタグ</b>」を使って文書構造(文章の位置とか大きさ)を指定します。
+<br>
+このHTMLタグの種類はさらに「<b>ブロックレベル要素</b>」「<b>インライン要素</b>」の2つに分かれます。
+<br>
+それぞれの特徴は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ブロックレベル要素</b>
+<p>
+・ 見出し・段落・表など、文書を一つのブロックとしてまとめる要素
+</p>
+<p>
+・ (大抵の場合は)要素の前後に改行が入る</li>
+</p>
+<p>
+・ 代表的なタグ： h1〜h6、 div、 p、 table、 ul
+</p>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>インライン要素</b>
+<p>
+・ 文章の一部として扱われる要素
+</p>
+<p>
+・ (大抵の場合は)要素の前後に改行が入らない
+</p>
+<p>
+・ 代表的なタグ： a, img, span
+</p>
+</div>
+
+<p>
+なおブロックレベル要素とインライン要素を組み合わせた時の動作は次の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ブロックレベル要素とインライン要素を組み合わせた時の動作</b>
+<p>
+・ ブロックレベル要素の中にブロックレベル要素を入れる → (大抵の場合は)レイアウトは崩れない
+</p>
+<p>
+・ ブロックレベル要素の中にインライン要素を入れる  → (大抵の場合は)レイアウトは崩れない
+</p>
+<p>
+・ インライン要素の中にブロック要素を入れる  →  (大抵の場合は)レイアウトが「<b>崩れる</b>」
+</p>
+<p>
+・ インライン要素の中にインライン要素を入れる  → (大抵の場合は)レイアウトは崩れない
+</p>
+</div>
+
+<br>
+<script>PreNext(1,2)</script>
+</body>
+</html>

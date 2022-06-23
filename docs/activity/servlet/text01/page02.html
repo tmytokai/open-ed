@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>2. CSS</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: サーブレット</a></li>
+<li>学習項目: [1] HTMLとCSS</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は CSS について復習します。
+</p>
+
+<p>
+CSS は Cascading Style Sheets の略で、文章やブロックの色とかフォントサイズとかレイアウトとかのスタイル(見た目)を決める機能です。
+<br>
+<b>スタイルシート</b>と呼んでる人も多いです。
+</p>
+
+<p>
+CSS を使うためにはまず以下の様なスタイル指定を HTML ファイル内または外部ファイルに記述します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>CSSの記法</b>
+<pre class="wrap">
+セレクタ {
+ プロパティ1:  プロパティ1の値;
+ プロパティ2:  プロパティ2の値;
+・・・
+}
+</pre>
+</div>
+
+<p>
+セレクタはスタイルを適用する対象を指定する項目で、代表的なセレクタの書き方は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>セレクタの代表的な記法</b>
+
+<p>
+* (アスタリスク) ・・・ 全ての要素を対象とする
+</p>
+
+<p>
+タグ名  ・・・ タグ名で指定した全ての要素を対象とする  (例)  p
+</p>
+
+<p>
+タグ名.クラス名  ・・・ タグ名で指定された要素で、かつクラス名が同じ全て要素を対象とする (例) p.hoge
+</p>
+
+<p>
+#ID  ・・・ ID を指定した一つだけの要素を対象とする (例)  #fuga
+</p>
+
+<p>
+※ 他にも色々な書き方があります
+</p>
+
+</pre>
+</div>
+
+<p>
+ここで出てきた「クラス名」と「ID」は似た様な使い方をしますが、
+</p>
+
+<p>
+「クラス名は複数のタグに指定できる」
+</p>
+
+<p>
+「IDはひとつの要素しか指定できない」
+</p>
+
+<p>
+という違いがあります。
+</p>
+
+<p>
+※ 間違って同じIDを複数の要素に指定しても一応動作しますが、必ずしも正常に動作するとは限りませんのでご注意下さい。
+</p>
+
+
+<p>
+では例を見てみましょう。
+<br>
+まずCSSをHTMLファイルのヘッダに直接埋め込む場合です。
+<br>
+この場合は style タグを使ってその中に CSS を書きます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>HTMLファイルのヘッダ内にCSSを書く例</b>
+<pre class="wrap">
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+ &lt;style&gt;
+  div{  /* 全ての div に適用 */
+   background: #ff0000;   /* 背景色をRGB で指定*/
+  }
+ p{ /* 全ての p に適用 */
+   color: blue;   /* 文字色を色名で指定*/
+ } 
+ p.fuga{ /* クラス名が fuga である p にのみ適用 */
+   font-size: 250%; /* 文字サイズを％で指定 */
+ } 
+ #fuga{ /* IDが fuga の要素にのみ適用 */
+   font-size: 500%;
+   color: yellow;
+ } 
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;div&gt;
+  &lt;p&gt;クラスもIDも未指定&lt;/p&gt;
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  &lt;!-- クラス名は class=〜 で指定する --&gt;
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  
+  &lt;p id="fuga"&gt;IDがfuga&lt;/p&gt;  &lt;!-- ID は id=〜 で指定する。文字色 blue は yellow に上書きされる --&gt;
+ &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+</pre>
+</div>
+
+<p>
+外部ファイルにCSSを書きたい場合は、まず以下の様なcssファイル(今回は mycss.css とします)を用意します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>外部 CSS ファイルの例 (mycss.css)</b>
+<pre class="wrap">
+div{  /* 全ての div に適用 */
+   background: #ff0000;   /* 背景色をRGB で指定*/
+}
+p{ /* 全ての p に適用 */
+   color: blue;   /* 文字色を色名で指定*/
+} 
+p.fuga{ /* クラス名が fuga である p にのみ適用 */
+   font-size: 250%; /* 文字サイズを％で指定 */
+} 
+#fuga{ /* IDが fuga の要素にのみ適用 */
+   font-size: 500%;
+   color: yellow;
+} 
+</pre>
+</div>
+
+<p>
+その後 HTML ファイルの head 内で link タグを使って CSS ファイルを読み込みます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>外部 CSS ファイルを読み込む例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+ &lt;link rel="stylesheet" href="./mycss.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+ &lt;div&gt;
+  &lt;p&gt;クラスもIDも未指定&lt;/p&gt;
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  &lt;!-- クラス名は class=〜 で指定する --&gt;
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  
+  &lt;p class="fuga"&gt;クラス名がfuga&lt;/p&gt;  
+  &lt;p id="fuga"&gt;IDがfuga&lt;/p&gt;  &lt;!-- ID は id=〜 で指定する。文字色 blue は yellow に上書きされる --&gt;
+ &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>
