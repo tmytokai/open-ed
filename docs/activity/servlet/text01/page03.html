@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>3. JavaScript</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: サーブレット</a></li>
+<li>学習項目: [1] HTMLとCSSとJS</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は JavaScript について復習します。
+<br>
+なお Java と名前が似ていますが、全く別の言語ですのでご注意下さい。
+</p>
+
+<p>
+JavaScript はクライアント側(Webブラウザやローカルアプリ等)でもサーバ側でも広く使われているオブジェクト指向言語です。
+<br>
+基本的には<a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%97%E3%83%99%E3%83%BC%E3%82%B9">プロトタイプ(インスタンス)ベース</a>のスクリプト言語ですが、<a href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%99%E3%83%BC%E3%82%B9">クラスベース</a>のスタイルでプログラミングすることも出来ます。
+</p>
+
+<br>
+<h3>1. 実行方法</h3>
+
+<p>
+さて JavaScript をWebブラウザ上で実行させるには HTML ファイルに直接コードを埋め込むか、外部ファイルにコードを書いて HTML ファイルから読み込みます。
+<br>
+まずコードをHTMLファイルに直接埋め込んで実行される例を見てみましょう。
+<br>
+この場合は script タグを使ってその中に JavaScript のコードを書きます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>HTMLファイルにJavaScriptのコードを書く例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;script&gt;
+    console.log("hoge"); // コンソールにログを表示
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+<p>
+上のHTMLファイルを表示したあと、デバッグツールのコンソールを開くと「hoge」という文字列が表示されます。
+</p>
+
+<p>
+script タグはヘッダも含めて HTML ファイルの中のどこにも配置できますが、コードは読み込まれた順に実行されます。
+<br>
+例えば以下はヘッダの中でログを表示させる例です。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ヘッダにJavaScriptのコードを書く例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+  &lt;script&gt;
+    console.log("ほげ");
+  &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;script&gt;
+    console.log("hoge"); // コンソールにログを表示
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+<p>
+上のコードを実行するとコンソールに「ほげ(改行)hoge」と表示されます。
+</p>
+
+<br>
+<h3>2. 変数</h3>
+
+<p>
+JavaScript は変数の型を自動認識しますので、プログラマーが int とか string とかを指定する必要はありません。
+<br>
+具体的には変数は
+</p>
+
+<p>
+let 変数名 (= 初期値);
+</p>
+
+<p>
+で定義します。
+</p>
+
+<p>
+※ 昔は let でなくて var を使って変数を定義してましたが、バグの元になりやすいので var は使わない方が良いです。
+</p>
+
+<p>
+では以下の例を実行して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>変数の例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;script&gt;
+    let a = 1;
+    let b = 2;
+    let c = a+b;
+    console.log(c);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+<p>
+するとコンソールに「3」と表示されます。
+</p>
+
+<br>
+<h3>3. 関数</h3>
+
+<p>
+関数は
+</p>
+
+<p>
+function 関数名(引数){中身}
+</p>
+
+<p>
+で定義します。
+<br>
+例えば以下の例を実行して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>関数の例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+  &lt;script&gt;
+    function show(a){  // 関数定義
+      console.log(a);
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;script&gt;
+    let a = 1;
+    let b = 2;
+    let c = a+b;
+    show(c); // 関数呼び出し
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+<p>
+上の例ではヘッダの中で show 関数を定義し、body の中でその関数を呼び出しています。
+</p>
+
+<p>
+また関数はラムダ式を使って
+</p>
+
+<p>
+let 関数名 = (引数) =&gt; { 中身}
+</p>
+
+<p>
+と定義することも出来ます。
+<br>
+例えば以下の例を実行して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>関数の例(ラムダ式の場合)</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+  &lt;script&gt;
+    let show = (a) =&gt; {  // ラムダ式で関数定義
+      console.log(a);
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;script&gt;
+    let a = 1;
+    let b = 2;
+    let c = a+b;
+    show(c); // 関数呼び出し
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+
+<p>
+function を使う方法もラムダ式を使う方法もどちらも良く使いますので、両方覚えておいて下さい。
+</p>
+
+<br>
+<h3>4. DOM</h3>
+
+<p>
+<a href="https://ja.wikipedia.org/wiki/Document_Object_Model">DOM</a>(Document Object Model: ドキュメント・オブジェクト・モデル)は p や div などの要素をオブジェクト(ノードと言います)化して JavaScript の中で操作するための技術です。
+<br>
+動的なページを作成したい時は必須の技術です。
+</p>
+
+<p>
+DOMを利用してある要素をオブジェクト化する方法には色々ありますが、一番簡単なのは要素にIDを付けて
+</p>
+
+<p>
+let 変数(オブジェクト)名 = document.getElementById(ID);
+</p>
+
+<p>
+を実行することです。
+<br>
+例えば以下の例を実行して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>DOMの例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;input type="text" value="ほげ" id="text1"&gt;
+  &lt;script&gt;
+      let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
+      console.log(text1.value); // text1 の value プロパティを表示
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>
+上のコードを実行すると ID に "text1" が指定されているテキストボックスの値(value)がコンソールに表示されます。
+</p>
+
+<br>
+<h3>5. イベント処理</h3>
+
+<p>
+イベント処理とは、「ボタンを押した」とか「テキストボックスの値を変えた」等のイベントが起きた際に「<b>イベントハンドラー</b>」と呼ばれる処理を実行させる機能のことです。
+</p>
+
+<p>
+イベント処理をさせるためには、事前に DOM のオブジェクトで生じる各種イベントとイベントハンドラーを結びつける必要があります。
+<br>
+そのためには次の様にします。
+</p>
+
+<p>
+オブジェクト名.addEventListener( イベント名, イベントハンドラ名 );
+</p>
+
+<p>
+では例を実行してみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>イベントハンドラーの例</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;input type="text" value="ほげ" id="text1"&gt;
+  &lt;input type="button" value="押してください" id="button1"&gt;
+  &lt;script&gt;
+      // 関数としてイベントハンドラ showText を定義
+      function showText1(){ 
+          let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
+          console.log(text1.value); // text1 の value プロパティを表示
+      }
+
+      let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
+
+      // クリック(click)イベントをイベントハンドラ showText1 と結びつける
+      button1.addEventListener( "click", showText1 ); 
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>
+ボタン(button1)を押すたびにテキストボックス(text1)の内容がコンソールに表示されます。
+</p>
+
+<p>
+またイベントハンドラは関数ではなくてラムダ式を使って直接
+</p>
+
+<p>
+オブジェクト名.addEventListener( イベント名, () =&gt; { 中身 } );
+</p>
+
+<p>
+で定義することが出来ます。
+<br>
+例えば上の例をラムダ式を使って書き直すと以下の様になります。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>イベントハンドラーの例(ラムダ式を使った場合)</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;input type="text" value="ほげ" id="text1"&gt;
+  &lt;input type="button" value="押してください" id="button1"&gt;
+  &lt;script&gt;
+      let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
+
+      // クリック(click)イベントのイベントハンドラをラムダ式で直接定義
+      button1.addEventListener( "click", () =&gt; {
+          let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
+          console.log(text1.value); // text1 の value プロパティを表示
+      } );
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>
+function を使う方法もラムダ式を使う方法もどちらも良く使いますので、両方覚えておいて下さい。 
+</p>
+
+<br>
+<h3>6. 外部JavaScriptファイルの読み込み</h3>
+
+<p>
+外部にJavaScriptファイルを用意し、それを読み込ませて実行するには
+</p>
+
+<p>
+&lt;script src=ファイル名&gt;&lt;/script&gt;
+</p>
+
+<p>
+とします。
+<br>
+では例を見てみましょう。
+</p>
+
+<p>
+まず外部JavaScriptファイルとして以下のファイル(名前は myjs.js )を作成します(上の例のscriptの中と同じ内容です)。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>外部JavaScriptの例(myjs.js)</b>
+<pre class="wrap">
+let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
+
+// クリック(click)イベントのイベントハンドラをラムダ式で直接定義
+button1.addEventListener( "click", () =&gt; {
+    let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
+    console.log(text1.value); // text1 の value プロパティを表示
+} );
+</pre>
+</div>
+
+<p>
+HTMLファイルは次の様にします。
+<br>
+myjs.js と同じ場所に作成して下さい。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>外部JavaScriptの例(外部JavaScriptファイルの読み込み)</b>
+<pre class="wrap">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt; 
+ &lt;meta charset="UTF-8"&gt;
+ &lt;title&gt;タイトル&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;input type="text" value="ほげ" id="text1"&gt;
+  &lt;input type="button" value="押してください" id="button1"&gt;
+  &lt;script src="./myjs.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>
+この様に、JavaScriptのコードを外部に保存すると HTML ファイルがスッキリ見やすくなるメリットがあります。
+<br>
+また外部JavaScriptファイルを共通ライブラリとして使うことも出来るようになります。
+</p>
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
