@@ -43,7 +43,7 @@ JavaScript はクライアント側(Webブラウザやローカルアプリ等)�
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>HTMLファイルにJavaScriptのコードを書く例</b>
+<input type="checkbox"> <b>ソース 1: HTMLファイルにJavaScriptのコードを書く例</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -63,7 +63,13 @@ JavaScript はクライアント側(Webブラウザやローカルアプリ等)�
 </div>
 
 <p>
-上のHTMLファイルを表示したあと、デバッグツールのコンソールを開くと「hoge」という文字列が表示されます。
+上のHTMLファイルを表示したあと、デバッグツールのコンソールを開くと
+</p>
+<p>
+hoge
+</p>
+<p>
+という文字列が表示されます。
 </p>
 
 <p>
@@ -73,7 +79,7 @@ script タグはヘッダも含めて HTML ファイルの中のどこにも配�
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>ヘッダにJavaScriptのコードを書く例</b>
+<input type="checkbox"> <b>ソース 2: ヘッダにJavaScriptのコードを書く例</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -96,7 +102,15 @@ script タグはヘッダも含めて HTML ファイルの中のどこにも配�
 </div>
 
 <p>
-上のコードを実行するとコンソールに「ほげ(改行)hoge」と表示されます。
+上のコードを実行するとコンソールに
+</p>
+<p>
+ほげ
+<br>
+hoge
+</p>
+<p>
+と表示されます。
 </p>
 
 <br>
@@ -125,7 +139,7 @@ let 変数名 (= 初期値);
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>変数の例</b>
+<input type="checkbox"> <b>ソース 3: 変数の例</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -169,7 +183,7 @@ function 関数名(引数){中身}
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>関数の例</b>
+<input type="checkbox"> <b>ソース 4: 関数の例 (function を使う場合)</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -215,7 +229,7 @@ let 関数名 = (引数) =&gt; { 中身}
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>関数の例(ラムダ式の場合)</b>
+<input type="checkbox"> <b>ソース 5: 関数の例 (ラムダ式を使う場合)</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -270,7 +284,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>DOMの例</b>
+<input type="checkbox"> <b>ソース 6: DOMの例</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -298,17 +312,17 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 <h3>5. イベント処理</h3>
 
 <p>
-イベント処理とは、「ボタンを押した」とか「テキストボックスの値を変えた」等のイベントが起きた際に「<b>イベントハンドラー</b>」と呼ばれる処理を実行させる機能のことです。
+イベント処理とは、「ボタンを押した」とか「テキストボックスの値を変えた」等のイベントが起きた際に「<b>イベントリスナー</b>」又は「<b>イベントハンドラー</b>」と呼ばれる処理を実行させる機能のことです。
 </p>
 
 <p>
-イベント処理をさせるためには、事前に DOM のオブジェクトで生じる各種イベントとイベントハンドラーを結びつける必要があります。
+イベント処理をさせるためには、事前に DOM のオブジェクトで生じる各種イベントとイベントリスナー(ハンドラー)を結びつける必要があります。
 <br>
 そのためには次の様にします。
 </p>
 
 <p>
-オブジェクト名.addEventListener( イベント名, イベントハンドラ名 );
+オブジェクト名.addEventListener( イベント名, イベントリスナー名 );
 </p>
 
 <p>
@@ -316,7 +330,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>イベントハンドラーの例</b>
+<input type="checkbox"> <b>ソース 7: イベントリスナーの例</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -329,7 +343,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
   &lt;input type="text" value="ほげ" id="text1"&gt;
   &lt;input type="button" value="押してください" id="button1"&gt;
   &lt;script&gt;
-      // 関数としてイベントハンドラ showText を定義
+      // 関数としてイベントリスナー showText を定義
       function showText1(){ 
           let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
           console.log(text1.value); // text1 の value プロパティを表示
@@ -337,7 +351,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 
       let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
 
-      // クリック(click)イベントをイベントハンドラ showText1 と結びつける
+      // クリック(click)イベントをイベントリスナー showText1 と結びつける
       button1.addEventListener( "click", showText1 ); 
   &lt;/script&gt;
 &lt;/body&gt;
@@ -350,7 +364,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 </p>
 
 <p>
-またイベントハンドラは関数ではなくてラムダ式を使って直接
+またイベントリスナーは関数ではなくてラムダ式を使って直接
 </p>
 
 <p>
@@ -364,7 +378,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>イベントハンドラーの例(ラムダ式を使った場合)</b>
+<input type="checkbox"> <b>ソース 8: イベントリスナーの例(ラムダ式を使った場合)</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -379,7 +393,7 @@ let 変数(オブジェクト)名 = document.getElementById(ID);
   &lt;script&gt;
       let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
 
-      // クリック(click)イベントのイベントハンドラをラムダ式で直接定義
+      // クリック(click)イベントのイベントリスナーをラムダ式で直接定義
       button1.addEventListener( "click", () =&gt; {
           let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
           console.log(text1.value); // text1 の value プロパティを表示
@@ -417,11 +431,11 @@ function を使う方法もラムダ式を使う方法もどちらも良く使�
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>外部JavaScriptの例(myjs.js)</b>
+<input type="checkbox"> <b>ソース 9: 外部JavaScriptの例(myjs.js)</b>
 <pre class="wrap">
 let button1 = document.getElementById("button1"); // ID が button1 である要素を button1 オブジェクト(ノード)として取得
 
-// クリック(click)イベントのイベントハンドラをラムダ式で直接定義
+// クリック(click)イベントのイベントリスナーをラムダ式で直接定義
 button1.addEventListener( "click", () =&gt; {
     let text1 = document.getElementById("text1"); // ID が text1 である要素を text1 オブジェクト(ノード)として取得
     console.log(text1.value); // text1 の value プロパティを表示
@@ -436,7 +450,7 @@ myjs.js と同じ場所に作成して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>外部JavaScriptの例(外部JavaScriptファイルの読み込み)</b>
+<input type="checkbox"> <b>ソース 10: 外部JavaScriptの例(外部JavaScriptファイルの読み込み)</b>
 <pre class="wrap">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
