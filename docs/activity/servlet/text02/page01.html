@@ -30,23 +30,45 @@ Java のソースコードをコンパイルして出来たクラスファイル
 </p>
 
 <p>
-以下のソース1が典型的なサーブレットの例です。
+例えば以下のソース1が典型的なサーブレットです。
 <br>
-このソースをコンパイルしてクラスファイルを作り、クラスファイルをデプロイし、ブラウザでデプロイ先にアクセスするとプログラムが実行されて結果がブラウザの画面に表示されます。
-</p>
-<p>
-ソース内にある doGet メソッドは HTTP GETメソッドを処理するメソッドです。
-<br>
-下の例では省略していますが HTTP POSTメソッドを処理する doPost もあります。
-</p>
-<p>
-あとは<a href="../../java-basic/text03/page01.html">PrintWriter</a>を使って文字列を出力しています。
-<br>
-ただし今回はファイルではなくてネットワークで繋がっているブラウザに文字列が出力されます。
+このソースをコンパイルしてクラスファイルを作り、クラスファイルと設定ファイルから「<b>WAR (Web Archive Resources）ファイル</b>」を作成し、WAR ファイルをデプロイし、ブラウザでサーバにアクセスするとプログラムが実行され、実行結果がブラウザの画面に表示されます。
 </p>
 
 <p>
-GET パラメータの取得方法など、詳しくはソース内のコメントを参照して下さい。
+※ ちなみに WAR ファイルの中身はただの zip 形式ファイルです
+</p>
+
+<p>
+さてソース内にある doGet メソッドはサーバがリクエストを受けた際に「<b>HTTP GETメソッド</b>」を処理するためのメソッドです。
+<br>
+下の例では省略していますが HTTP POSTメソッドを処理する doPost メソッドもあります。
+</p>
+
+<p>
+HTTP GETメソッドは HTTP 通信を行う際に、送信したいパラメータとその値を ? 記号と &amp; 記号を使って
+</p>
+
+<p>
+https://hoge.com/index.html?hoge=piyo&amp;fuga=hogera
+</p>
+
+<p>
+みたいにURL の後にくっつけてサーバにドキュメントをリクエストする方式です。
+<br>
+この例では hoge.com 上で動いてるサーバに対して index.html というドキュメントをリクエストする際に、 hoge というパラメータの値として piyo、fuga というパラメータに対しては hogera という値をサーバに送っています。
+</p>
+
+<p>
+※ 長いデータや他人に見られたくないデータは HTTP POST メソッドを使ってサーバに送ります。HTTP POST メソッドについて詳しくは自分で調べて下さい。
+</p>
+
+<p>
+この様にしてブラウザから送られてきたパラメータの値はサーブレットではソース 1 の様に HttpServletRequest.getParameter メソッドを使って取得出来ます。
+<br>
+ソース1の残りの部分は<a href="../../java-basic/text03/page01.html">PrintWriter</a>を使って HTML ドキュメントを出力しているだけです。
+<br>
+出力された HTML ドキュメントはネットワークを経由してそのままリクエストを行なったブラウザに送られます。
 </p>
 
 <div class="info">
@@ -65,13 +87,13 @@ public class ServletTest extends HttpServlet
     throws IOException, ServletException
     {
         // GETパラメータの name の値を取得
-        // パラメータが送信されてないときは null になる
+        // パラメータが送信されてないときは変数 name に null が入る
         String name = request.getParameter("name");
 
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter(); 
         out.println("&lt;!DOCTYPE html&gt;");
-        out.println("&lt;html lang=\"ja\"&gt;");
+        out.println("&lt;html lang=\"ja\"&gt;");  // ダブルクオーテーションは\マークでエスケープすること
         out.println("&lt;head&gt;");
         out.println("&lt;meta charset=\"UTF-8\"&gt;");
         out.println("&lt;style&gt;");
