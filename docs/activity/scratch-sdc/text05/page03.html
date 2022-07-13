@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>3. Q学習で走行ルートを決める</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page02.html">前のページ</a></div>
+<div class="btback"><a href="./page04.html">次のページ</a></div>
+
+<div class="contents">
+
+<h1>3. Q学習で走行ルートを決める</h1>
+
+<p>
+ではこの「Q学習」を使って走行ルートを決めてみましょう。
+そのためにまず「環境」「エージェント」「状況」「行動」「報酬」を明確にしておく必要があります。
+</p>
+
+<p>
+まず「環境」「エージェント」に関しては簡単で
+</p>
+
+<p>
+「環境」 ＝ マップ (ルート選択画面)
+</p>
+
+<p>
+「エージェント」 ＝ 車 (緑の四角)
+</p>
+
+<p>
+となります。
+</p>
+<img src="./img/page03-fig1.png" alt="">
+
+<p>
+次に「状況」に関しては前ページの例では分岐点としましたが、今回はもう少しプログラミングらしく
+</p>
+
+<p>
+「状況」 ＝ マップの座標
+</p>
+
+<p>
+とします。座標は車がマップのどの位置に示すかを表す数値の組で、横方向の位置を「X座標」、縦方向の位置を「Y座標」といいます。マップの一番左の列のX座標は1で右に行くにつれて数字が増えます。またマップの一番下の行のY座標は1で上に行くに連れて数字が増えます。
+</p>
+<img src="./img/page03-fig2.png" alt="">
+
+
+<p>
+次に「行動」に関しては前ページの例と同様に
+</p>
+
+<p>
+「行動」 ＝ 方向を選んで移動する
+</p>
+
+<p>
+となります。なおプログラミングの都合から移動方向には次の数値を割り当てることにします。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>移動する方向</th><th>数値</th></tr>
+</thead>
+<tbody>
+<tr><td class="w30">上</td><td class="w30">1</td></tr>
+<tr><td class="w30">左</td><td class="w30">2</td></tr>
+<tr><td class="w30">下</td><td class="w30">3</td></tr>
+<tr><td class="w30">右</td><td class="w30">4</td></tr>
+</tbody>
+</table>
+</div>
+
+
+
+<p>
+また、移動した際にもらえる「報酬」のルールは次の様にします。
+</p>
+
+<p>
+ルール1： 道から外れたら -100 点
+</p>
+
+<p>
+ルール2： ゴールにたどり着いたら +100 点
+</p>
+
+<p>
+ルール3： 一度通った場所に戻ったら -100 点
+</p>
+
+<p>
+ルール4： 道の上なら -1 点
+</p>
+
+<p>
+さてルール1〜3については納得できると思いますがルール4の意味が分からないかもしれませんね。それでは逆に移動後に道の上なら +1 点としたらどうなるか考えてみましょう。この場合はなるべく多く道の上を進んだ方がたくさん報酬がもらえる訳ですからエージェントはわざと遠回りしてゴールを目指すルートを選んでしまいます。よってなるべく最短距離でゴールに到達するようにペナルティを与えています。
+</p>
+
+<p>
+それでは実際にシミュレータを動かして座標と報酬を確認してみましょう。まず
+</p>
+<img src="../text02/img/page02-fig1.png" alt="">
+<br>
+<img src="../text02/img/page02-fig3.png" alt="">
+
+<p>
+の順にブロックを押してルート選択画面を開いて下さい。次に
+</p>
+<img src="./img/page03-fig3.png" alt="">
+
+<p>
+の様に「X座標」「Y座標」「報酬」ブロックにチェックを入れてそれらの数値を表示して下さい。あとは
+</p>
+<img src="../text02/img/page02-fig5.png" alt="">
+
+<p>
+ブロックを適当に押して、車(緑の四角)が動くと「X座標」「Y座標」「報酬」の数値がどう変化するのか確認して下さい。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page02.html">前のページ</a></div>
+<div class="btback"><a href="./page04.html">次のページ</a></div>
+
+</div>
+
+
+</body>
+</html>
