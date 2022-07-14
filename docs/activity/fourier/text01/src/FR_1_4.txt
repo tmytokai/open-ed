@@ -1,4 +1,6 @@
 %matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
 import cmp
 import math
 #ここから↑は消さないで下さい
@@ -26,6 +28,11 @@ C4_a=None   # C[4]の絶対値
 C4_phi=None # C[4]の偏角
 
 ########### ここから↓は消さないで下さい
+t = np.linspace(0, 8, 100)
+y = C0+2*C1_a*np.cos(1*w1*t+C1_phi)+2*C2_a*np.cos(2*w1*t+C2_phi)+2*C3_a*np.cos(3*w1*t+C3_phi)+2*C4_a*np.cos(4*w1*t+C4_phi)
+plt.plot(t, y, label="f(t)")
+plt.show()
+
 cmp.init(
     shape=(9,2),
     hsize=4.5,

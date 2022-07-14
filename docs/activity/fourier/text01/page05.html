@@ -123,7 +123,108 @@ f(t) = \sum_{k = -\infty}^{\infty}
 
 <p>
 になります。
+<br>
+以上をまとめると次の事が言えます。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>実フーリエ級数展開 → 複素フーリエ級数展開に変換</b>
+
+<p>
+ある周期性時間領域アナログ信号 $f(t)$ が
+</p>
+
+\[
+f(t) 
+= a_0 + \sum_{k=1}^{\infty}
+\left \{
+a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
+\right \} 
+\]
+
+<p>
+と実フーリエ級数展開できるとき、複素フーリエ係数は次の式で求められる。
+<br>
+ただし $k \geq 1$ とする。
+</p>
+
+<p>
+\begin{align*}
+\textrm{C}[0] &= a_0 \\[5pt]
+\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \\[5pt]
+\textrm{C}[-k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{-j \cdot \phi_k \}}
+\end{align*}
+
+<p>
+こうやって求めた複素フーリエ係数を使って $f(t)$ は
+</p>
+
+\begin{align*}
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+<p>
+と複素フーリエ級数展開することもできる。
+</p>
+
+
+</div>
+
+<p>
+逆に複素フーリエ級数展開から実フーリエ級数展開に変換するには次のようにします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ級数展開 → 実フーリエ級数展開に変換</b>
+
+<p>
+ある周期性時間領域アナログ信号 $f(t)$ が
+</p>
+
+\begin{align*}
+f(t) = \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+<p>
+と複素フーリエ級数展開できるとき、実フーリエ級数のパラメータは次の式で求められる。
+<br>
+ただし $k \geq 1$ とする。
+</p>
+
+<p>
+\begin{align*}
+a_0 &= \textrm{C}[0] \\[5pt]
+a_k & = 2 \cdot |\textrm{C}[k]| \\[5pt]
+\phi_k &= \angle \textrm{C}[k]
+\end{align*}
+
+<p>
+こうやって求めたパラメータを使って $f(t)$ は
+</p>
+
+\[
+f(t) 
+= a_0 + \sum_{k=1}^{\infty}
+\left \{
+a_k \cdot \cos (k \cdot w_1 \cdot t + \phi_k)
+\right \} 
+\]
+
+<p>
+と実フーリエ級数展開することもできる。
+</p>
+
+
+</div>
+
+
+
 
 <br>
 <script>PreNext(5,5)</script>
