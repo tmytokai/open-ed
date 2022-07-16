@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>4. Q値の配列の作成</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page03.html">前のページ</a></div>
+<div class="btback"><a href="./page05.html">次のページ</a></div>
+
+<div class="contents">
+
+<h1>4. Q値の配列の作成</h1>
+
+<div class="heading">
+  <div class="number">1</div>
+  <span>Q 値とは？</span>
+</div>
+
+
+<p>
+さてQ学習は車(エージェント)がある座標(状況)においてマップ(環境)からもらえる報酬が最大となる様な方向(行動)をトライ＆エラーを繰り返しながら学習していくアルゴリズムでした。具体的にはある座標で車がある方向を進んだらどれだけ報酬が貰えるのだろうかという予測値をQ学習は学習します。この報酬の予測値のことを「Q値」といいます。つまりQ学習はトライ＆エラーを繰り返しながらQ値を更新していくアルゴリズムだとも言えます。
+</p>
+
+<p>
+さてこうなると Q 値を記録する場所を用意する必要が出てきます。通常のプログラミング言語では「配列」というテクニックを使ってQ値を記録するのですが、残念ながら Scratch では配列を使うことが出来ません。
+</p>
+
+<p>
+そこで今回はリストを使って「Q値の配列(もどき)」を作ってみたいと思います。ただしリストを使った配列の作り方は複雑な数式が必要ですし、今回のセミナーの目的ともズレてますので、ここではブロックの並べ方を示すだけに留めておきたいと思います。
+</p>
+
+<br>
+<div class="heading">
+  <div class="number">2</div>
+  <span>Q値の配列を初期化する</span>
+</div>
+
+<p>
+まずQ値の配列の元になる「Q値の配列」をリストとして作成します。
+</p>
+<img src="./img/page04-fig1.png" alt="">
+
+<p>
+この「Q値の配列」を初期化して配列を作るプログラムは次の様になります。「Q値の配列を初期化する」ブロックをブロック定義から作って下さい。なおこのブロックは1度しか実行しませんので「画面を再描画せずに実行する」はチェックしてもしなくても結構です。
+</p>
+<img src="./img/page04-fig2.png" alt="">
+
+<br>
+<div class="heading">
+  <div class="number">3</div>
+  <span>Q値をセットする</span>
+</div>
+
+<p>
+次は「Q値をセットする」ブロックをブロック定義から作ります。なおこのブロックは繰り返し実行されますので「画面を再描画せずに実行する」は必ずチェックして下さい。また「+」と「*」を間違わない様に気をつけてください。
+</p>
+<img src="./img/page04-fig3.png" alt="">
+
+<br>
+<div class="heading">
+  <div class="number">4</div>
+  <span>Q値を求める</span>
+</div>
+
+<p>
+次にある座標である行動をした時のQ値を求めるブロックを作成します。
+まず「Q値」という変数を作成します。
+</p>
+<img src="./img/page04-fig4.png" alt="">
+
+<p>
+次に「Q値を求める」ブロックをブロック定義から作ります。なおこのブロックは繰り返し実行されますので「画面を再描画せずに実行する」は必ずチェックして下さい。また「+」と「*」を間違わない様に気をつけてください。
+</p>
+<img src="./img/page04-fig5.png" alt="">
+
+<br>
+<div class="heading">
+  <div class="number">5</div>
+  <span>動作確認</span>
+</div>
+
+<p>
+では上で作った3つのブロックの動作確認をしましょう。
+</p>
+
+<p>
+まず「スタート」ブロックを押してシミュレータをスタートします。
+</p>
+<img src="../text02/img/page02-fig1.png" alt="">
+
+<p>
+次に「Q値の配列を初期化する」ブロックを押してから「Q値の配列」の中身を表示して下さい。「マップの幅」x「マップの高さ」x4の長さで値が全て0のリスト(幅と高さが9の場合は9x9x4=324)が出来ていればOKです。
+</p>
+<img src="./img/page04-fig6.png" alt="">
+
+<p>
+次に「Q値をセットする」ブロックをコード画面にひとつだけ配置して引数を次のように入力してからブロックを押して下さい。
+</p>
+<img src="./img/page04-fig7.png" alt="">
+
+<p>
+このブロックは
+</p>
+<p>
+<b>車がX座標が1、Y座標が2の場所にいる時に下に移動(行動=3)した時のQ値を4にセットする</b>
+</p>
+<p>
+という意味になります。
+</p>
+
+<p>
+次に「Q値を求める」ブロックをコード画面にひとつだけ配置して引数を次のように入力してからブロックを押して下さい。
+</p>
+<img src="./img/page04-fig8.png" alt="">
+<p>
+このブロックは
+</p>
+<p>
+<b>車がX座標が1、Y座標が2の場所にいる時に下に移動(行動=3)した時のQ値を求めて変数「Q値」に入れる</b>
+</p>
+<p>
+という意味ですので、変数「Q値」の値が4となっていれば正常に動作しています。
+</p>
+<img src="./img/page04-fig9.png" alt="">
+
+<p>
+うまく動きましたらX座標、Y座標、行動、Q値の数値を色々変えてもきちんと動作するか確認して下さい。
+</p>
+
+</div>
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page02.html">前のページ</a></div>
+<div class="btback"><a href="./page04.html">次のページ</a></div>
+
+</div>
+
+
+</body>
+</html>
