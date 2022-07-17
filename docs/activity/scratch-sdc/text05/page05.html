@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #828282;
+}
+</style>
+<title>5. 次の行動を決める</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page04.html">前のページ</a></div>
+<div class="btback"><a href="./page06.html">次のページ</a></div>
+
+<div class="contents">
+
+<h1>5. 次の行動を決める</h1>
+
+<p><br></p>
+<div class="heading">
+  <div class="number">1</div>
+  <span>次の行動を決める</span>
+</div>
+
+
+<p>
+Q値を記録する配列を作成しましたので、今度はQ値を元に車の次の行動を決めてみましょう。
+</p>
+
+<p>
+まず「行動」という変数と「Q値の最大値」という変数を作成します。
+</p>
+<img src="./img/page05-fig1.png" alt="">
+<br>
+<img src="./img/page05-fig2.png" alt="">
+
+<p>
+次に「次の行動を決める」ブロックをブロック定義から作ります。なおこのブロックは繰り返し実行されますので「画面を再描画せずに実行する」は必ずチェックして下さい。
+</p>
+<img src="./img/page05-fig3.png" alt="">
+
+<p>
+このブロックは上→左→下→左の行動順にQ値を求めて、Q値が最大になる行動を「行動」変数に入れるという動作をしています。
+</p>
+
+
+<p><br></p>
+<div class="heading">
+  <div class="number">2</div>
+  <span>動作確認</span>
+</div>
+
+<p>
+ではこのブロックの動作確認をしましょう。まず動作確認用のテストプログラムを作成します。
+</p>
+<img src="./img/page05-fig4.png" alt="">
+
+<p>
+車の現在地点の上方向(行動=1)のQ値を10にセットしてから「次の行動を決める」ブロックを実行しますので、変数「行動」と「Q値の最大値」の値が次の様になっていれば正常に動作しています。
+</p>
+<img src="./img/page05-fig5.png" alt="">
+
+<p>
+うまく動きましたら「Q値をセットする」の行動とQ値の数値を色々変えるとどの様に変数「行動」と「Q値の最大値」の値が変化するのか試して下さい。
+</p>
+
+<p><br></p>
+<div class="challenge"><p>チャレンジ</p></div>
+<p>
+今回は上→左→下→左の順に行動のQ値を比較していましたので、もし同じQ値の行動が2つ以上ある場合は必ず上→左→下→左の優先順で選択してしまいます。本格的なQ学習では同じ値の行動が2つ以上ある場合はランダムに行動を選択しますので、その様にプログラムを改造してみましょう。
+</p>
+
+
+</div>
+
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
+<div class="btback"><a href="./page04.html">前のページ</a></div>
+<div class="btback"><a href="./page06.html">次のページ</a></div>
+
+</div>
+
+
+</body>
+</html>
