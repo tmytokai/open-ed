@@ -9,237 +9,134 @@ body.seminar{
 background: #828282;
 }
 </style>
-<title>3. 信号を守る</title>
+<title>3. Q学習で走行ルートを決める</title>
 </head>
 <body class="seminar">
 
 <div class="container">
 
-<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
 <div class="btback"><a href="./page02.html">前のページ</a></div>
 <div class="btback"><a href="./page04.html">次のページ</a></div>
 
 <div class="contents">
 
-<h1>3. 信号を守る</h1>
-
-<div class="heading">
-  <div class="number">1</div>
-  <span>信号の情報を使う</span>
-</div>
+<h1>3. Q学習で走行ルートを決める</h1>
 
 <p>
-次は赤信号で止まるようなプログラムを作ってみましょう。
+ではこの「Q学習」を使って走行ルートを決めてみましょう。
+そのためにまず「環境」「エージェント」「状況」「行動」「報酬」を明確にしておく必要があります。
 </p>
 
 <p>
-本物の車の場合は超高精度3Dマップやカメラなどのセンサーによって信号の状態を取得しますが、このシミュレータでは「信号の距離」「信号の状態」変数ブロックで信号の状態を取得できます。
+まず「環境」「エージェント」に関しては簡単で
+</p>
+
+<p>
+「環境」 ＝ マップ (ルート選択画面)
+</p>
+
+<p>
+「エージェント」 ＝ 車 (緑の四角)
+</p>
+
+<p>
+となります。
 </p>
 <img src="./img/page03-fig1.png" alt="">
 
 <p>
-「信号の距離」は次のカーブまでの距離(メートル)が取得できます。なお信号機の真下にいる場合は 0 メートルになります。
-</p>
-<p>
-「信号の状態」は青か黄色か赤かを次の数値で取得できます。
-</p>
-
-<div class="table">
-<table>
-<thead>
-<tr><th>「信号の状態」<br>の数値</th><th>内容</th></tr>
-</thead>
-<tbody>
-<tr><td class="w30">0</td><td>青</td></tr>
-<tr><td class="w30">1</td><td>黄色</td></tr>
-<tr><td class="w30">2</td><td>赤</td></tr>
-</tbody>
-</table>
-</div>
-
-
-<p><br></p>
-<div class="heading">
-  <div class="number">2</div>
-  <span>「もし〜なら」ブロックの条件を考える</span>
-</div>
-
-<p>
-ではまた「もし〜なら」ブロックの条件をミーシー思考を使って考えてみましょう、と言いたいところですが、いま手元にある情報( ＝ 変数 )は「ナビの距離」「ナビの方向」「信号の距離」「信号の状態」の4つまで増えました。
-なのでさっきと同じような表をつくろうとするととんでもなく巨大なものができてしまいます。
+次に「状況」に関しては前ページの例では分岐点としましたが、今回はもう少しプログラミングらしく
 </p>
 
 <p>
-この様に手元にある情報が増えてきた場合は<b>"ミニ・マックス思考"</b>というプログラミングテクニックと先ほどのミーシー思考を組み合わせて「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
+「状況」 ＝ マップの座標
 </p>
 
 <p>
-ミニ・マックス思考は
-<b>"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"</b>
-という方法です。
-</p>
-
-<p>
-と言ってもよく分かりませんね。
-では具体的に条件を求めていきましよう。
-</p>
-
-<p>
-まずこのページでつくるプログラムの目的は"信号を守る"ことですので、"信号を守る"ことに関係ない情報は全て無視します。
-つまり"カーブは存在しない"ということにし、「ナビの距離」「ナビの方向」を使わないで「信号の距離」「信号の状態」だけ使って先ほどのような表をつくります。
-</p>
-
-<p>
-<b>目的：信号を守る</b>
-<br>
-<b>必要な情報：「信号の距離」「信号の状態」</b>
-<br>
-<b>必要で無い情報：「ナビの距離」「ナビの方向」</b>
-<br>
-</p>
-
-<p>
-また「目標のスピード」変数ブロックに直接スピードの値を入れてしまうとカーブのときにまた道からはみ出してしまうので、「仮のスピード」という名前の変数ブロックを新しく作って、とりあえずその変数に値を入れることにします。
-</p>
-<img src="./img/page03-fig7.png" alt="">
-
-<p>
-すると表は次のようになります。
-なお「信号の距離」が20メートルより大きい時は"信号まで遠い"、20メートル以下で10メートルより大きい時は"信号に近い"、10メートル以下で0メートルより大きい時は"直前"、0メートルの時は"真下"ということにしました。
-</p>
-
-<div class="table">
-<table>
-<thead>
-<tr> <th>「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
-</thead>
-<tbody>
-
-<tr> <td class="center" rowspan="3"> 20 より大<br>(遠い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
-
-<tr> <td class="center" rowspan="3"> 20以下、10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
-<tr> </td> <td class="center">2 (赤)</td> <td class="center">30</td> </tr>
-
-<tr> <td class="center" rowspan="3"> 10以下、0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
-<tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
-
-<tr> <td class="center" rowspan="3">0<br>(真下) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
-
-</tbody>
-</table>
-</div>
-
-<p>
-0(真下)の時に「仮のスピード」を50にしてるのは、いったん交差点に入ってしまったらさっさと抜けてしまおうという意味です。
-</p>
-
-<p>
-さてこの表は結構大きくて無駄がありますし、"〜以下、〜より大"は「もし〜ならば、でなければ」ブロックを使って置き換えることが出来ますので、次のように簡単にすることが出来ます。
-</p>
-
-<div class="table">
-<table>
-<thead>
-<tr> <th colspan="3">「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
-</thead>
-<tbody>
-<tr> <td class="center" colspan="3"> 20 より大<br>(遠い) </td> <td class="center">情報を使わない</td> <td class="center">50</td> </tr>
-
-<tr> <td class="UL">　</td> <td class="UDR" colspan="4">でなければ</td> </tr>
-
-<tr> <td class="U" rowspan="7">　</td> <td class="center" colspan="2" rowspan="2"> 10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">でなければ<br>(青以外)</td> <td class="center">30</td> </tr>
-
-<tr> <td class="UL">　</td> <td class="UDR" colspan="3">でなければ</td> </tr>
-
-<tr>  <td class="U" rowspan="5">　</td> <td class="center" rowspan="3"> 0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
-<tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
-
-<tr> <td class="center">でなければ<br>(真下)</td> <td class="center">情報をつかわない</td> <td class="center">50</td> </tr>
-</tbody>
-</table>
-</div>
-
-
-<p><br></p>
-<div class="challenge"><p>チャレンジ</p></div>
-<p>
-なぜこの表になるのか考えてみましょう。
-</p>
-
-
-<p><br></p>
-<div class="heading">
-  <div class="number">3</div>
-  <span>表をもとにプログラミングする</span>
-</div>
-
-<p>
-これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
-</p>
-
-<p>
-まず「信号を守る」というオリジナルブロックを作ります。
-このブロックは繰り返し使いますので「画面を再描画せずに実行する」をチェックしてください。
+とします。座標は車がマップのどの位置に示すかを表す数値の組で、横方向の位置を「X座標」、縦方向の位置を「Y座標」といいます。マップの一番左の列のX座標は1で右に行くにつれて数字が増えます。またマップの一番下の行のY座標は1で上に行くに連れて数字が増えます。
 </p>
 <img src="./img/page03-fig2.png" alt="">
 
+
 <p>
-「信号を守る」ブロックの中身は上の表から次のようになります。
-表の内容と「もし〜なら」ブロックの条件がまったく同じになっていますね。
+次に「行動」に関しては前ページの例と同様に
+</p>
+
+<p>
+「行動」 ＝ 方向を選んで移動する
+</p>
+
+<p>
+となります。なおプログラミングの都合から移動方向には次の数値を割り当てることにします。
+</p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>移動する方向</th><th>数値</th></tr>
+</thead>
+<tbody>
+<tr><td class="w30">上</td><td class="w30">1</td></tr>
+<tr><td class="w30">左</td><td class="w30">2</td></tr>
+<tr><td class="w30">下</td><td class="w30">3</td></tr>
+<tr><td class="w30">右</td><td class="w30">4</td></tr>
+</tbody>
+</table>
+</div>
+
+
+
+<p>
+また、移動した際にもらえる「報酬」のルールは次の様にします。
+</p>
+
+<p>
+ルール1： 道から外れたら -100 点
+</p>
+
+<p>
+ルール2： ゴールにたどり着いたら +100 点
+</p>
+
+<p>
+ルール3： 一度通った場所に戻ったら -100 点
+</p>
+
+<p>
+ルール4： 道の上なら -1 点
+</p>
+
+<p>
+さてルール1〜3については納得できると思いますがルール4の意味が分からないかもしれませんね。それでは逆に移動後に道の上なら +1 点としたらどうなるか考えてみましょう。この場合はなるべく多く道の上を進んだ方がたくさん報酬がもらえる訳ですからエージェントはわざと遠回りしてゴールを目指すルートを選んでしまいます。よってなるべく最短距離でゴールに到達するようにペナルティを与えています。
+</p>
+
+<p>
+それでは実際にシミュレータを動かして座標と報酬を確認してみましょう。まず
+</p>
+<img src="../text02/img/page02-fig1.png" alt="">
+<br>
+<img src="../text02/img/page02-fig3.png" alt="">
+
+<p>
+の順にブロックを押してルート選択画面を開いて下さい。次に
 </p>
 <img src="./img/page03-fig3.png" alt="">
 
 <p>
-ところで一番最後に表にないプログラムが混ざってますね。
-<br>
-(↓これ)
+の様に「X座標」「Y座標」「報酬」ブロックにチェックを入れてそれらの数値を表示して下さい。あとは
 </p>
-<img src="./img/page03-fig4.png" alt="">
+<img src="../text02/img/page02-fig5.png" alt="">
 
 <p>
-ここが"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"というミニ・マックス思考の部分で、前のページで求めたカーブの時のスピードと、今回求めた信号の時のスピードのうちで事故るリスクが低い、つまりスピードが低い方を「目標のスピード」にセットしています。
+ブロックを適当に押して、車(緑の四角)が動くと「X座標」「Y座標」「報酬」の数値がどう変化するのか確認して下さい。
 </p>
-
-<p>
-あとは「速度を決める」ブロックを次のように変更すればOKです。
-</p>
-<img src="./img/page03-fig5.png" alt="">
-
-<p>
-ただこのままでは実行しても信号が出ませんので、「スタート」ブロックで信号をONにするのを忘れないで下さい。
-</p>
-<img src="./img/page03-fig6.png" alt="">
-
-
-<p><br></p>
-<div class="heading">
-  <div class="number">4</div>
-  <span>テストする</span>
-</div>
-
-<p>
-では「緑の旗」ボタンを押してテストしてみましょう。
-</p>
-
-<p>
-正しく動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい(シミュレータ画面は動作が重いのでプログラミングはタイトル画面でした方が良いです)。
-</p>
-
 
 </div>
 
-<div class="btback"><a href="../#text04">メニューへ戻る</a></div>
+<div class="btback"><a href="../#text05">メニューへ戻る</a></div>
 <div class="btback"><a href="./page02.html">前のページ</a></div>
 <div class="btback"><a href="./page04.html">次のページ</a></div>
-
 
 </div>
 
