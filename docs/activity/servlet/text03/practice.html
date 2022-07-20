@@ -35,13 +35,16 @@ Web アプリ仕様：
 (1) color というGETパラメータで色名を送信する
 </p>
 <p>
-(2) color が null なら背景色を青(#0000ff)にする
+(2) color が送られていない場合(null)は背景色を白(#ffffff)にする
 </p>
 <p>
-(3) color が "red" なら背景色を赤(#ff0000)にする
+(3) color が "red" なら背景色を赤(#ff0000)にする  <b>(注意) Java の場合文字列の比較は == ではなくて 変数名.equals(文字列) を使うこと </b>
 </p>
 <p>
-(4) それ以外は背景色を黄色(#ffff00)にする
+(4) それ以外の文字列が送られた場合は背景色を黄色(#ffff00)にする
+</p>
+<p>
+(5) name パラメータの処理に関してはソース1のままとする
 </p>
 </div>
 
@@ -49,7 +52,7 @@ Web アプリ仕様：
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> フォルダ「SERV_3_1」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> フォルダ「SERV_3_1」の中で新規に 1 つ JSP ファイルを作ります。ファイル名を「myjsp.jsp」とします。
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「SERV_3_1」の中で新規に 1 つ JSP ファイルを作ります。ファイル名を「JspTest.jsp」とします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="./page01.html">ソース1</a>をコピーして解答して下さい
 <br>
