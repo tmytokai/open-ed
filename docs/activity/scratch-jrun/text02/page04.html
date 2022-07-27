@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../seminar.css">
+<style>
+body.seminar{
+background: #FFA500;
+}
+</style>
+<title>4. 落下させる</title>
+</head>
+<body class="seminar">
+
+<div class="container">
+
+<div class="btback"><a href="../#text02">メニューへ戻る</a></div>
+<div class="btback"><a href="./page03.html">前のページ</a></div>
+<div class="btback"><a href="./page05.html">次のページ</a></div>
+
+<div class="contents">
+
+<h1>4. 落下させる</h1>
+
+<p>
+次に恐竜が高い場所にいるときに、下に向かって落下させるプログラムを作ります。
+</p>
+
+<p>
+まず使用する変数を先に作っておきましょう。
+変数メニューから「重力加速度」、「地面にふれている」、「地面の位置」、「落ちる速さ」という変数を作って下さい。
+</p>
+<img src="./img/page04-fig1.png" alt="">
+
+<p>
+次に、「旗を押されたとき」ブロックをもう一つ追加してこのプログラムを作成します。
+</p>
+<p>
+<b>(注意) 前ページで作成したアニメーションのプログラムはそのままにしておいてください。</b>
+</p>
+<img src="./img/page04-fig2.png" alt="">
+
+<p>
+このプログラムでは地球の重力をシミュレートしています。
+理科の授業で習ったように何か物を持ち上げて手をパッとはなすと、物は最初はゆっくり落ちるのですが、だんだん落ちる速さが早くなって行きます。落ちる速さが早くなる割合のことを"重力加速度"といいます。
+</p>
+<p>
+そこでこのプログラムでも変数「落ちる速さ」の値を最初 0 にしておき、「ずっと」ブロックの中で変数「重力加速度」の値だけ少しずつ変数「落ちる速さ」の値を増やしています。
+するとフワッとした感じで恐竜が落ちるようになります。
+</p>
+
+<p>
+作成したら旗ボタンを押して動作確認して下さい。
+</p>
+
+<p>
+ただこのままではいつまでも恐竜は落ち続けるので、地面に着いたら止まるようにします。
+上のプログラムを次のように変更してください。
+</p>
+<img src="./img/page04-fig3.png" alt="">
+
+<p>
+変数「地面にふれている」が"no"のときは上のプログラムと同じ様にして恐竜は落下するのですが、もし恐竜の縦方向の位置が変数「地面の位置」の値よりも下になった場合は変数「地面にふれている」を"yes"にして落下を止めるという内容になっています。
+</p>
+
+<p>
+では変更したら旗ボタンを押して動作確認して下さい。
+</p>
+
+
+</div>
+
+<div class="btback"><a href="../#text02">メニューへ戻る</a></div>
+<div class="btback"><a href="./page03.html">前のページ</a></div>
+<div class="btback"><a href="./page05.html">次のページ</a></div>
+
+</div>
+
+
+</body>
+</html>
