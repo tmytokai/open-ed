@@ -21,22 +21,20 @@ void main(void){
        // パルス幅 = TOSC * prescale * (CCPR4L:DC4B1:DC4B0) 秒
 
        if( RB0 == 0 ){
-          // Timer6 ON
-          T6CONbits.TMR6ON = 1 ;
-
           // オクターブ3のド = 131 Hz
           // PWM 周期 = 7.6 msec, パルス幅 = 3.8 msec
           PR6 = ? ;
           CCPR4L = ? ;
           CCP4CONbits.DC4B1 = ? ;
           CCP4CONbits.DC4B0 = ? ;
+
+          // CCP4/RA4 を出力モードにすると PWM 出力を開始する
+          TRISA = TRISA & 0b11101111;
         }
 	else{
-          // Timer6 OFF
-          T6CONbits.TMR6ON = 0 ;
+          // CCP4/RA4 を入力モードにすると PWM 出力が止まる
+          TRISA = TRISA | 0b00010000 ;
         }
-
-       __delay_ms(100);
     }
 
    return;
