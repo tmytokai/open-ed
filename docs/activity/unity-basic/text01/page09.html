@@ -44,7 +44,7 @@
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> ヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「OYA」、Position を (1,1,0) 、rotation を (0,0,45)にし、<a href="./page06.html">HAKO Material</a>を使って赤色にする
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 同様にヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「KO」、Position を (0,0,0) 、rotation を (0,0,0)にし、<a href="./page06.html">HAKO2 Material</a>を使って赤色にする
+<span class="olradio"><input type="radio" name="p1"></span> 同様にヒエラルキー右クリック → 3D Object → Cube で立方体を新規作成し、名前を「KO」、Position を (0,0,0) 、rotation を (0,0,0)にし、<a href="./page06.html">HAKO2 Material</a>を使って青色にする
 <br>
 </p>
 </div>
@@ -119,7 +119,7 @@
 <p>
 まず OYA の Position を (1,1,0) 、rotation を (0,0,45) に戻し、ヒエラルキーの KO をクリックして KO の Positoin と Rotation を表示して下さい(図3)。
 <br>
-最初 KO を作った時は Position を (0,0,0) 、rotation を (0,0,0)にしたはずなのに良く分からない数字になっていると思います。
+最初 KO を作った時は Position を (0,0,0) 、rotation を (0,0,0)にしたはずなのに異なる数値になっていると思います。
 </p>
 
 <p>
@@ -129,22 +129,44 @@
 <img src="./img/page09-fig3.png" alt="">
 
 <p>
-なぜ KO の Position や rotation が上の様な数字になったかについては、OYA の Position を (0,0,0) 、Rotation を (0,0,0) にし、Scene 画面を見ると分かりやすいと思います(図4)。
-<br>
-図4の様に、KO は OYA を基準にして見ると x軸方向で $-\sqrt{2}=-1.41421$ の位置にあり、Z 軸を中心に -45 度回転していることが分かります。
+この様な数値になった理由はこの値が OYA を親とするローカル座標系内の数値を表しているからです。
 </p>
 
 <p>
-<b>図4. OYA(赤) から見た KO(青) の座標と回転角度</b>
+では OYA を親とするローカル座標系はどの様なものなのか実際に見てみましょう。
+<br>
+まずシーンビューやゲームビューのタグがある下のツールバーの中から「Global」と書いてあるメニューを見つけ、「Local」に変更します(図4)。
+</p>
+
+<p>
+<b>図4. ローカル座標系への表示切替</b>
 </p>
 
 <img src="./img/page09-fig4.png" alt="">
 
-<br>
 <p>
-ではまた OYA の Position や Rotation を適当に変更して下さい。
+その後ヒエラルキーで OYA を選択し、操作ツールの移動ツール(十字架の様なアイコン)をクリックすると OYA の上に矢印が 3 本表示されますが、シーンギズモの矢印と方向がズレている事が分かります(図5)。
 <br>
-OYA と KO は指定した場所に一緒に移動しますが、KO の Position や Rotation は 図3 の値のままであることが分かります。
+シーンギズモの矢印の方向がワールド座標系の XYZ 軸、OYA に付いている矢印がローカル座標系の XYZ 軸の方向となります。
+<br>
+また OYA に付いている矢印の中心がローカル座標系の原点になります。
+</p>
+
+<p>
+<b>図5. ローカル座標系の表示</b>
+</p>
+<img src="./img/page09-fig5.png" alt="">
+
+<p>
+図5 より、KO は OYA を親とするローカル座標系の X 軸(見辛いですが赤い矢印の方向)に関して原点から $-\sqrt{2}=-1.41421$ の位置にあり、さらにローカル座標系の Z 軸(青い矢印)を中心として -45 度回転していることが分かります。
+</p>
+
+<p>
+なおローカル座標系は親のワールド座標系に依らないことに注意して下さい。
+<br>
+例えば OYA の Position や Rotation を適当に変更してみましょう。
+<br>
+すると OYA と KO は指定した場所に一緒に移動しますが、KO の Position や Rotation は 図3 の数値のままであることが分かります。
 </p>
 
 <p>
