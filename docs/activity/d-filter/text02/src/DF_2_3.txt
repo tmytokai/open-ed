@@ -1,41 +1,33 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 周波数特性(振幅特性)の計算
-double H( const double w )
-{
-    // サンプリング周波数 [Hz]
-    const double fs = ? ;  
+fs = 22050 # サンプリング周波数 [Hz]
+N = 200 # データ数
 
-    // FIR フィルタ長
-    const int L = ? ;
+# 周波数特性(振幅特性)の計算
+def H(w):
+    
+    # FIR フィルタ長
+    L = ?
 
-    const int C = ? ;
+    # 総和の回数
+    C = ?
 
-    // サンプリング間隔(秒)
-    const double tau = ?;
+    # サンプリング間隔(秒)
+    tau = ?
 
-    // out は関数の出力
-    double out = ?;
-    for( int i = 1; i <=C; ++i ){
-        out += ?;
-    }
+    # out は関数の出力
+    out = ?
+    for i in range(1,int(C)+1):
+        # cos 関数は math.cos()
+        out += ?
+        
+    return math.fabs(out)
 
-    return out;
-}
-
-int main()
-{
-    const double fs = 22050;
-    const int N = 200;
-    const double wmax = M_PI*fs;
-    FILE* f = fopen( "DF_2_3-4.csv", "wb");
-    for( int i = 0; i <N ; ++i ){
-        double w = wmax*i/N;
-        fprintf( f, "%lf, %lf\n", w/(2*M_PI), H(w) );
-    }
-    fclose(f);
-
-    return 0;
-}
+wmax = math.pi*fs
+with open('./DF_2_3and4.csv', 'w') as f:
+    writer = csv.writer(f)
+    for i in range(N):
+        w = wmax*i/N
+        writer.writerow([w/(2*math.pi),H(w)])

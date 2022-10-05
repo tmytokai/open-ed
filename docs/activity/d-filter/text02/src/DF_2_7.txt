@@ -1,55 +1,46 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 周波数特性(振幅特性)の計算
-double H( const double w, const double* h, const int L, const int C, const double fs )
-{
-    // サンプリング間隔(秒)
-    double tau = ?;
+fs = 22050 # サンプリング周波数 [Hz]
+N = 200 # データ数
 
-    // out は関数の出力
-    double out = ?;
-    for( int i = 1; i <=C; ++i ){
-        out += ?;
-    }
+# カットオフ周波数 [Hz]
+fc = ?
 
-    return out;
-}
+# 正規化カットオフ周波数
+alpha = ?
 
-int main()
-{
-    // サンプリング周波数 [Hz]
-    const double fs = ? ;
+# FIR フィルタ長
+L = ?
+    
+# インパルス応答
+h = np.zeros(L)
 
-    // カットオフ周波数 [Hz]
-    const double fc = ? ;
+# FIR ローパスまたはハイパスフィルタのインパルス応答の計算
+# 円周率は math.pi 、sin 関数は math.sin() を使用する
+C = int((L-1)/2)
+h[C] = ?
+for i in range(1,int(C)+1):
+    h[C-i] = h[C+i] = ?
 
-    // 正規化カットオフ周波数
-    const double alpha = ? ;
+# 周波数特性(振幅特性)の計算
+def H(w):
+    
+    # サンプリング間隔(秒)
+    tau = ?
 
-    // FIR フィルタ長
-    const int L = ? ;
+    # out は関数の出力
+    out = ?
+    for i in range(1,int(C)+1):
+        # cos 関数は math.cos()
+        out += ?
+        
+    return math.fabs(out)
 
-    // インパルス応答
-    double h[L];
-
-    // FIR ローパスまたはハイパスフィルタのインパルス応答の計算
-    // 円周率は M_PI を使用する
-    const int C = (L-1)/2;
-    h[C] = ? ;
-    for( int i = 1; i <= ? ; ++i ){
-        h[C-i] = h[C+i] = ? ;
-    }
-
-    const int N = 200;
-    const double wmax = M_PI*fs;
-    FILE* f = fopen( "DF_2_7-8-11.csv", "wb");
-    for( int i = 0; i <N ; ++i ){
-        double w = wmax*i/N;
-        fprintf( f, "%lf, %lf\n", w/(2*M_PI), H(w,h,L,C,fs) );
-    }
-    fclose(f);
-
-    return 0;
-}
+wmax = math.pi*fs
+with open('./DF_2_7and8and11.csv', 'w') as f:
+    writer = csv.writer(f)
+    for i in range(N):
+        w = wmax*i/N
+        writer.writerow([w/(2*math.pi),H(w)])
