@@ -53,7 +53,7 @@ print(f'カットオフ周波数 fc = {fc} Hz')
 print(f'正規化カットオフ周波数 alpha = {alpha}')
 print(f'フィルタ長 L = {L}')
 
-# FIR ローパスのインパルス応答の計算
+# FIR ハイパスフィルタのインパルス応答の計算
 # 円周率は math.pi 、sin 関数は math.sin() を使用する
 C = int((L-1)/2)
 h[C] = ?
@@ -71,7 +71,7 @@ for i in range(N):
 
 # y[i] を wave ファイルとして保存
 print('')
-write_wavedata('DF_2_5_out.wav',fs,y)
+write_wavedata('DF_2_9_out.wav',fs,y)
 
 print('')
 print('フィルタリング前')

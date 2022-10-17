@@ -141,23 +141,18 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DF_2_5」を新規作成し、その中に移動します 
+<span class="olradio"><input type="radio" name="p5"></span> 新規ノートブックを作って「DF_2_5」に名前を変更します。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「DF_2_5」の中に main.cpp を作成します
+<span class="olradio"><input type="radio" name="p5"></span> サンプル音声として演習2-1で使用した「 DF_2_1.wav 」を用います。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> main.cpp を開き、ファイルの中身を<a href="./src/DF_2_5.txt">テンプレート</a>の内容に置き換えて下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 一番上のセルに<a href="./src/DF_2_5.txt">テンプレート</a>の内容をコピーします。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> <a href="../../../lib/sound/trumpet_22k_mono.wav">サンプル音声</a>(trumpet_22k_mono.wav)をソースと同じフォルダにダウンロードします。
+<span class="olradio"><input type="radio" name="p5"></span> 穴埋め問題を解いて下さい。カットオフ周波数を $f_c$ = 1000 [Hz] 、フィルタ長を $\textrm{L}$ = 63 とします。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> テンプレートファイルの記述に従って ? の部分を上から穴埋めしてプログラムを完成させて下さい。なおサンプリング周波数は $f_s = 22050$ [Hz]、フィルタ長は $\textrm{L}$ = 63、カットオフ周波数は $f_c$ = 1000 [Hz] とします。
+<span class="olradio"><input type="radio" name="p5"></span> 実行するとフィルタリング前後のスペクトログラムと「 DF_2_5_out.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行すると「 DF_2_5-9.wav 」という Wave形式音声ファイルが出来ます。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(演習2-1参照、名前は任意)、スペクトログラムを確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> フィルタリング後の音声(DF_2_5-9.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、高周波数成分が減衰していることを確認して下さい。 
-<br>
-<span class="olradio"><input type="radio" name="p5"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p5"></span> フィルタリング前後の Wave ファイルを聴き比べたり、スペクトログラムを比較したりして、高周波成分が減衰していることを確認して下さい。 
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」、「フィルタリング前のスペクトログラム」、「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
@@ -258,17 +253,19 @@
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p9"></span> フォルダ「DF_2_5」を「DF_2_9」にコピーします
+<span class="olradio"><input type="radio" name="p9"></span> 新規ノートブックを作って「DF_2_9」に名前を変更します。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> main.cpp を開いて FIR ローパスフィルタのインパルス応答を FIR ハイパスフィルタのインパルス応答に置き換えます。パラメータは $\textrm{L} = 63$、$f_c = 3000$ [Hz]、$f_s = 22050$ [Hz] とします。※ fc の値が異なるので注意
+<span class="olradio"><input type="radio" name="p5"></span> サンプル音声として演習2-1で使用した「 DF_2_1.wav 」を用います。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> コンパイルして実行すると「 DF_2_5-9.wav 」という Wave形式音声ファイルが出来ます。
+<span class="olradio"><input type="radio" name="p5"></span> 一番上のセルに<a href="./src/DF_2_9.txt">テンプレート</a>の内容をコピーします。 
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> 元の音声(trumpet_22k_mono.wav)を演奏し、スペクトログラム画像を作成し(演習2-1参照、名前は任意)、スペクトログラムを確認して下さい。 
+<span class="olradio"><input type="radio" name="p9"></span> 穴埋め問題を解いて下さい。カットオフ周波数を $f_c$ = 3000 [Hz] 、フィルタ長を $\textrm{L}$ = 63 とします。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span> フィルタリング後の音声(DF_2_5-9.wav)を演奏し、スペクトログラム画像を作成し(名前は任意)、低周波数成分が減衰していることを確認して下さい。 
+<span class="olradio"><input type="radio" name="p9"></span> 実行するとフィルタリング前後のスペクトログラムと「 DF_2_9_out.wav 」という Wave形式音声ファイルが出来ます。
 <br>
-<span class="olradio"><input type="radio" name="p9"></span>  指定場所に「main.cpp」「元の音声のスペクトログラム画像」と「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
+<span class="olradio"><input type="radio" name="p9"></span> フィルタリング前後の Wave ファイルを聴き比べたり、スペクトログラムを比較したりして、高周波成分が減衰していることを確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に「ソースコード」、「フィルタリング前のスペクトログラム」、「フィルタリング後の音声のスペクトログラム画像」を貼りつけて下さい。 
 </p>
 </div>
 
