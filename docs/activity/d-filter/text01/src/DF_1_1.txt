@@ -53,7 +53,7 @@ n = int(delay*fs)
 for i in range(N):
     y[i] = ?
     if i-n >= 0 :
-        y[i] += ?
+        y[i] = ?
 
 # y[i] を wave ファイルとして保存
 print('')
