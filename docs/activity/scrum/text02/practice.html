@@ -73,18 +73,17 @@
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 代表者は端末を開いてリモートリポジトリを clone します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者は<a href="./dot.gitignore">設定ファイル</a>( gitignore ファイル )をダウンロードしてローカルリポジトリの中に保存して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリ内にある .gitignore (もし無ければ作成して下さい。先頭のドットを忘れずに)を開き、<a href="./gitignore.txt">テンプレート</a>の内容をファイルの下部にコピーして上書き保存して下さい。
 <p>
-※ gitignore ファイル内に名前が書いてあるファイルは git の管理外に置かれます
+※ .gitignore は git の管理から外すファイルを指定する設定ファイルです
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore をリポジトリに追加して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore を add/commit して下さい。
 </p>
 <pre class="wrap">
-mv dot.gitignore .gitignore
 git add .gitignore
 git status
-git commit -m "gitignore 追加"
+git commit -m "gitignore 更新"
 git push
 
 ※ git push でIDとパスワードを聞かれたら入力して下さい
