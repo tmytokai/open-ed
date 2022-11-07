@@ -1,146 +1,90 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+import wave
 
-#ifndef M_PI
-#define M_PI 3.1415926535
-#endif
+# Waveファイル読み込み関数
+def read_wavedata(name):
+    print('read: '+name)
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
 
-// 標準的な WAVE ヘッダ ( 44 byte )
-typedef struct
-{
-    char riff[ 4 ];             // = "RIFF"
-    unsigned int total_size;    // 全体サイズ
-    char fmt[ 8 ];              // "WAVEfmt "
-    unsigned int fmt_size;      // fmt チャンクサイズ
-    unsigned short  format;     // フォーマットの種類
-    unsigned short  channel;    // チャンネル
-    unsigned int   rate;        // サンプリングレート
-    unsigned int   avgbyte;     // rate * block
-    unsigned short  block;      // channels * bit / 8
-    unsigned short  bit;        // ビット数
-    char data[ 4 ];             // = "data"
-    unsigned int data_size;     // data チャンクサイズ
-} WAVEFORMAT;
-
-int main()
-{
-    FILE * fin = fopen( "trumpet_22k_mono.wav", "rb" );
-    if( !fin ){
-        fprintf( stderr, "ファイルオープンに失敗しました\n" );
-        exit(EXIT_FAILURE);
-    }
-
-    WAVEFORMAT wavefmt;
-    size_t ret = fread( &wavefmt, 1, sizeof( WAVEFORMAT ) - 8, fin );
-    if( ret != sizeof( WAVEFORMAT ) -8 ){
-       fprintf( stderr, "ヘッダが壊れています\n" );
-       exit(EXIT_FAILURE);
-    }
-
-    // data までスキップ
-    size_t pos = sizeof( WAVEFORMAT ) - 8;
-    while( pos < 200 && ( wavefmt.data[0] != 'd' || wavefmt.data[1] != 'a' ) ){
-        fseek( fin, pos++, SEEK_SET );
-        ret = fread( wavefmt.data, 1, 4, fin );
-    }
-    ret = fread( &wavefmt.data_size, 1, sizeof( unsigned int ), fin );
-    wavefmt.fmt_size = 16;
-
-    if( wavefmt.data[ 0 ] != 'd' || wavefmt.data[ 1 ] != 'a' ){
-        fprintf( stderr, "ヘッダが壊れています\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt.channel != 1 ){
-        fprintf( stderr, "ステレオ音声は使用できません\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt.bit != 16 ){
-        fprintf( stderr, "8bit音声は使用できません\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt.rate != 22050 ){
-        fprintf( stderr, "サンプリング周波数が 22050 Hzでありません\n" );
-        exit(EXIT_FAILURE);
-    }
-
-    fprintf( stderr,"fmt_size = %d\n", wavefmt.fmt_size );
-    fprintf( stderr,"channel = %d\n", wavefmt.channel );
-    fprintf( stderr,"rate = %d\n", wavefmt.rate );
-    fprintf( stderr,"avgbyte = %d\n", wavefmt.avgbyte );
-    fprintf( stderr,"block = %d\n", wavefmt.block );
-    fprintf( stderr,"bit = %d\n", wavefmt.bit );   
-    fprintf( stderr,"data_size = %d\n", wavefmt.data_size );
-
-    short* buf = ( short* )malloc( 2 * 1024 * 1024 );
-    ret = fread( buf , 1, wavefmt.data_size, fin );
-    fclose( fin );
-
-    size_t lng = wavefmt.data_size / wavefmt.block;
-    fprintf( stderr,"length = %d\n", (int)lng);
-
-    double* x_tmp = ( double* )malloc( lng * 2 * sizeof(double) );
-    memset( x_tmp, 0, lng * 2 * sizeof(double) );
-    double *x = x_tmp + lng;
-    for( int i = 0; i < lng; ++i ) x[i] = (double)buf[i];
-
-    double* y = ( double* )malloc( lng * sizeof(double) );
-    memset( y, 0, lng * sizeof(double) );
-
-    double z[256] = {0};
-
-    //----------------------------------------------
-    // ここから穴埋め開始
-
-    // サンプリング周波数 [Hz]
-    const double fs = ?;  
-
-    // x[i] を fs [Hz] で 5 秒間サンプリングした音声のディジタル信号とする
-    // i の範囲は 0 <= i < N となる
-    const int N = 5 * fs; // 5 [秒] * fs [Hz]
-
-    // カットオフ周波数 [Hz]
-    const double fc = ? ;
-
-    // カットオフ角周波数 [rad/秒]
-    // 円周率は M_PI を使用する
-    const double wc = ? ;
-
-    // サンプリング間隔 [秒]
-    const double tau = ? ;
-
-    // IIR フィルタ次数 (今回は 1 次)
-    const int L = 1;
-
-    // 1次 IIR フィルタ係数を計算
-    // 円周率は M_PI を使用する
-    double a[2] = {0};
-    double b[2] = {0};
-    a[1] = ? ;
-    b[0] = ? ;
-    b[1] = ? ;
-
-    // L 次 IIR フィルタ
-    // 出力信号は y[i]
-    // z[n] は n 時刻前の☆の値
-    for( int i = 0; i < N; ++i ){
-        ?
-    }
-
-    // ここまで
-    //----------------------------------------------
-
-    FILE* fout = fopen( "DF_3_1-6.wav", "wb" );
-    if( !fout ){
-        fprintf( stderr, "ファイルオープンに失敗しました\n" );
-        exit(EXIT_FAILURE);
-    }
-    for( int i = 0; i < lng; ++i ) buf[i] = (short)(y[i]*0.8);
-
-    fwrite( &wavefmt, 1, sizeof( WAVEFORMAT ), fout );
-    fwrite( buf, 1, wavefmt.data_size , fout );
-    fclose( fout );
+# Waveファイル書き込み関数
+def write_wavedata(name,rate,data):
+    print('write: '+name)
+    with wave.open( name, 'wb') as waveout:
+        rawdata=np.array(data,dtype='int16').tobytes()
+        waveout.setparams((1, 2, rate, len(rawdata), 'NONE', 'NONE'))
+        waveout.writeframes(rawdata)
     
-    return 0;
-}
+# スペクトログラム描画関数
+def plot_spectrogram(data):
+    cmap = plt.get_cmap('magma')
+    plt.specgram(data/32768,Fs=fs,NFFT=512,scale='dB',mode='magnitude',vmax=0,vmin=-120,cmap=cmap)
+    plt.colorbar()
+    plt.xlabel('sec')
+    plt.ylabel('Hz')
+    plt.show()
+
+x,fs,N = read_wavedata('DF_3_1.wav')
+y = np.zeros(N)
+
+# 遅延素子(＝バッファ)
+z = np.zeros(255)
+
+# カットオフ周波数 [Hz]
+fc = ?
+
+# カットオフ角周波数 [rad/秒]
+# 円周率は math.pi を使用する
+wc = ?
+
+# IIR フィルタ次数
+L = ?
+
+# サンプリング間隔 [秒]
+# サンプリング周波数は fs
+tau = ?
+
+# IIRフィルタ係数
+a = np.zeros(L+1)
+b = np.zeros(L+1)
+
+print('')
+print(f'サンプリング周波数 fs = {fs} Hz' )
+print(f'信号長 N = {N} 点' )
+print(f'再生時間 {N/fs} 秒' )
+print(f'カットオフ周波数 fc = {fc} Hz')
+print(f'カットオフ角周波数 wc = {wc} rad/秒')
+print(f'フィルタ次数 L = {L}')
+print(f'サンプリング間隔 tau = {tau} 秒')
+
+# IIR ローパスまたはハイパスフィルタのフィルタ係数の計算
+# exp は math.exp() を使用する
+a[1] = ?
+b[0] = ?
+b[1] = ?
+
+# 1 次 IIR フィルタ
+# 出力信号は y[i]
+# z[n] は n 時刻前の☆の値
+for i in range(N):
+    z[0] = ?
+    y[i] = ?
+    z[1] = ?
+
+# y[i] を wave ファイルとして保存
+print('')
+write_wavedata('DF_3_1_out.wav',fs,y)
+
+print('')
+print('フィルタリング前')
+plot_spectrogram(x)
+
+print('')
+print('フィルタリング後')
+plot_spectrogram(y)
