@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+
+        // キーボードから文字列読み込み
+        String str = ?
+
+        // str と文字列 "hoge" を比較する
+        if( ? ){
+            System.out.println( "OK" );
+        }
+        else{
+            System.out.println( "NG" );
+        }
+    }
+}
