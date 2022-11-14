@@ -1,0 +1,90 @@
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+import wave
+
+# Waveファイル読み込み関数
+def read_wavedata(name):
+    print('read: '+name)
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
+
+# Waveファイル書き込み関数
+def write_wavedata(name,rate,data):
+    print('write: '+name)
+    with wave.open( name, 'wb') as waveout:
+        rawdata=np.array(data,dtype='int16').tobytes()
+        waveout.setparams((1, 2, rate, len(rawdata), 'NONE', 'NONE'))
+        waveout.writeframes(rawdata)
+    
+# スペクトログラム描画関数
+def plot_spectrogram(data):
+    cmap = plt.get_cmap('magma')
+    plt.specgram(data/32768,Fs=fs,NFFT=512,scale='dB',mode='magnitude',vmax=0,vmin=-120,cmap=cmap)
+    plt.colorbar()
+    plt.xlabel('sec')
+    plt.ylabel('Hz')
+    plt.show()
+
+x,fs,N = read_wavedata('DF_3_1.wav')
+y = np.zeros(N)
+
+# 遅延素子(＝バッファ)
+z = np.zeros(255)
+
+# カットオフ周波数 [Hz]
+fc = ?
+
+# カットオフ角周波数 [rad/秒]
+# 円周率は math.pi を使用する
+wc = ?
+
+# IIR フィルタ次数
+L = ?
+
+# サンプリング間隔 [秒]
+# サンプリング周波数は fs
+tau = ?
+
+# IIRフィルタ係数
+a = np.zeros(L+1)
+b = np.zeros(L+1)
+
+print('')
+print(f'サンプリング周波数 fs = {fs} Hz' )
+print(f'信号長 N = {N} 点' )
+print(f'再生時間 {N/fs} 秒' )
+print(f'カットオフ周波数 fc = {fc} Hz')
+print(f'カットオフ角周波数 wc = {wc} rad/秒')
+print(f'フィルタ次数 L = {L}')
+print(f'サンプリング間隔 tau = {tau} 秒')
+
+# IIR ローパスまたはハイパスフィルタのフィルタ係数の計算
+# exp は math.exp() を使用する
+a[1] = ?
+b[0] = ?
+b[1] = ?
+
+# 1 次 IIR フィルタ
+# 出力信号は y[i]
+# z[n] は n 時刻前の☆の値
+for i in range(N):
+    z[0] = ?
+    y[i] = ?
+    z[1] = ?
+
+# y[i] を wave ファイルとして保存
+print('')
+write_wavedata('DF_3_6_out.wav',fs,y)
+
+print('')
+print('フィルタリング前')
+plot_spectrogram(x)
+
+print('')
+print('フィルタリング後')
+plot_spectrogram(y)

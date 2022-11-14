@@ -1,57 +1,53 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-int main()
-{
-    double z[256] = {0};
+fs = 22050
+N = int(fs*0.01)
 
-    // サンプリング周波数 [Hz]
-    const double fs = ? ;
+# デジタルインパルス信号 {1,0,0,0,0,....}
+x = np.zeros(N)
+x[0]=1
 
-    const int N = (int)(0.01 * fs); // 0.01 [秒] * fs [Hz]
+# インパルス応答
+h = np.zeros(N)
 
-    // デジタルインパルス信号 {1,0,0,0,0,....}
-    double x[ N ] = {0};
-    x[0] = 1;
+# 遅延素子(＝バッファ)
+z = np.zeros(255)
 
-    // 入力信号をデジタルインパルス信号とすると出力信号 y[i] はインパルス応答 h[i] になる
-    // なおインパルス応答 h[i] はアナログインパルス応答 h(t) を fs [Hz] でサンプリングした後にτを掛けた値とほぼ一致する
-    double y[ N ] = {0};
+# カットオフ周波数 [Hz]
+fc = ?
 
-    // カットオフ周波数 [Hz]
-    const double fc = ? ;
+# カットオフ角周波数 [rad/秒]
+# 円周率は math.pi を使用する
+wc = ?
 
-    // カットオフ角周波数 [rad/秒]
-    // 円周率は M_PI を使用する
-    const double wc = ? ;
+# IIR フィルタ次数
+L = ?
 
-    // サンプリング間隔 [秒]
-    const double tau = ? ;
+# サンプリング間隔 [秒]
+# サンプリング周波数は fs
+tau = ?
 
-    // IIR フィルタ次数 (今回は 1 次)
-    const int L = 1;
+# IIRフィルタ係数
+a = np.zeros(L+1)
+b = np.zeros(L+1)
 
-    // 1次 IIR フィルタ係数を計算
-    // 円周率は M_PI を使用する
-    double a[2] = {0};
-    double b[2] = {0};
-    a[1] = ? ;
-    b[0] = ? ;
-    b[1] = ? ;
+# IIR ローパスまたはハイパスフィルタのフィルタ係数の計算
+# DF_3_1 参照
+a[1] = ?
+b[0] = ?
+b[1] = ?
 
-    // L 次 IIR フィルタのインパルス応答
-    // z[n] は n 時刻前の☆の値
-    for( int i = 0; i < N; ++i ){
-        ?
-    }
+# 1 次 IIR フィルタ
+# DF_3_1 参照
+# ただし出力 y[i] をインパルス応答 h[i] に置き換える
+for i in range(N):
+    z[0] = ?
+    h[i] = ?
+    z[1] = ?
 
-    // インパルス応答をcsvファイルに出力
-    FILE* f = fopen( "DF_3_3-8.csv", "wb");
-    for( int i = 0; i < N ; ++i ){
-        fprintf( f, "%d, %lf\n", i, y[i] );
-    }
-    fclose(f);
-
-    return 0;
-}
+with open('./DF_3_3and8.csv', 'w') as f:
+    writer = csv.writer(f)
+    for i in range(N):
+        writer.writerow([i,h[i]])
