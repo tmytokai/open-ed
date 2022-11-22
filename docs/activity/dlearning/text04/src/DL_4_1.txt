@@ -13,12 +13,9 @@ set_session(sess)
 
 import numpy as np
 import matplotlib.pyplot as plt
-
-#---------------------------
-# データセット読み込み
-
 from tensorflow.keras.datasets import cifar10
 
+# データセット読み込み
 # (images_training, classno_training) は訓練に用いるデータセットで計 50,000 組
 # (images_test, classno_test) はテストに用いるデータセットで計 10,000 組
 # images〜 は 32x32,24bit カラー画像 (画素値 0〜255)
@@ -26,7 +23,6 @@ from tensorflow.keras.datasets import cifar10
 
 (images_training, classno_training), (images_test, classno_test) = cifar10.load_data()
 classnames=['airplane  ','automobile','bird      ','cat       ','deer      ','dog       ','frog      ','horse     ','ship      ','truck     ']
-#---------------------------
 
 images_training = images_training / 255.0  # 0〜1の範囲に正規化
 images_test = images_test / 255.0  # 0〜1の範囲に正規化
@@ -56,15 +52,45 @@ label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M)
 data_test = images_test # 画像データをそのまま入力する
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
+# 注意(2022年11月時点) 画像フォーマットが 「channels_first, (3,32, 32)」と表示された場合、GPUを使って計算しないと
+# 「〜 op currently only supports the NHWC tensor format on the CPU. 」というエラーが出て動かないらしい
+print(f'画像フォーマット: '+tf.keras.backend.image_data_format() + f', {images_test[0].shape}')
+
 print(f'学習率={r}')
 print(f'エポック数={E}')
 print(f'学習データセットサイズ={L}')
 print(f'バッチサイズ={B}')
 
 # CNNの構築
-# テキストを参考にする
-?
+model = tf.keras.Sequential()
+
+# 入力層: rows = 32、 cols = 32、Cin = 3 ※ 入力画像は R・G・B の 3 チャンネル
+model.add( ? )
+
+# 第1層: 畳み込み層、Cout = 6、kernel_size = 5、 activation='tanh'
+model.add( ? )
+
+# 第2層: プーリング層(平均値)、pool_size = 2
+model.add( ? )
+
+# 第3層: 畳み込み層、Cout = 16、kernel_size = 5、 activation='tanh'
+model.add( ? )
+
+# 第4層: プーリング層(平均値)、pool_size = 2
+model.add( ? )
+
+# 第5層: 平坦化層
+model.add( ? )
+
+# 第6層: 全結合層、 K = 120、 activation='tanh'
+model.add( ? )
+
+# 第7層: 全結合層、 K = 84、 activation='tanh'
+model.add( ? )
+
+# 出力層: 全結合層、 M = 10、 activation='softmax' ※ 出力は各クラスに属する確率 
+model.add( ? )
 
 # 学習設定以下はMLPの時と全く同じ内容なので、DL_3_3からコピーする
-# ただし fit 関数の verbose を 1 にする (動いてるかどうか分からないので)
+# ただし model.fit 関数の verbose を 1 にする (動いてるかどうか分からないので)
 ?

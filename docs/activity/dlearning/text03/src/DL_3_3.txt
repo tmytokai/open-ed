@@ -1,20 +1,15 @@
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-
-#---------------------------
-# データセット読み込み
-
 from tensorflow.keras.datasets import mnist
 
+# データセット(MNIST)読み込み
 # (images_training, classno_training) は学習データセットで計 60,000 組
 # (images_test, classno_test) はテストデータセットで計 10,000 組
 # images〜 は 28x28, 8bit モノクロ画像 (画素値 0〜255)
 # classno〜 はそれぞれの画像が属するクラス番号 (0〜9の計10クラス)
-
 (images_training, classno_training), (images_test, classno_test) = mnist.load_data()
 classnames=['0','1','2','3','4','5','6','7','8','9']
-#---------------------------
 
 images_training = images_training / 255.0  # 0〜1の範囲に正規化
 images_test = images_test / 255.0  # 0〜1の範囲に正規化
@@ -46,6 +41,7 @@ label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M)
 data_test = tf.constant(images_test.reshape(images_test.shape[0],N), dtype=tf.float32)
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
+print(f'画像フォーマット: '+tf.keras.backend.image_data_format() + f', {images_test[0].shape}')
 print(f'N={N}')
 print(f'K={K}')
 print(f'M={M}')
@@ -89,7 +85,10 @@ print('')
 # 参考までにテストデータの先頭 10 データに対する予測値を表示
 for i in range( 10 ): 
     print(f'\nテスト画像{i}')
-    plt.imshow(images_test[i],cmap='gray')
+    if tf.keras.backend.image_data_format() == 'channels_first' and images_test[0].ndim == 3:
+        plt.imshow(images_test[i].transpose(1,2,0),cmap='gray')
+    else:
+        plt.imshow(images_test[i],cmap='gray')
     plt.show()
     print('正解='+classnames[int(classno_test[i])])
     print('予測='+classnames[int(np.argmax(predict_test[i]))])

@@ -31,11 +31,11 @@ CNN は基本的には MLP と同じくフィードフォワード型のニュ�
 
 <br>
 <h3>
-1. 入力層: <a href="https://keras.io/api/layers/core_layers/input/">Inputクラス</a>)
+1. 入力層: <a href="https://keras.io/api/layers/core_layers/input/">Inputクラス</a>
 </h3>
 
 <p>
-入力層の使い方は<a href="../text03/page02.html">MNP の時</a>と同じですが、CNN では他チャンネル画像を入力するので引数の指定の仕方が変わります。
+入力層の使い方は<a href="../text03/page02.html">MNP の時</a>と同じですが、CNN では多チャンネル画像を入力するので引数の指定の仕方が変わります。
 </p>
 
 <div class="info">
@@ -46,6 +46,8 @@ tf.keras.Input(shape=(rows,cols,Cin,))
 
 <p>
 引数 に画像のサイズ(rows,cols)と入力画像のチャンネル数 Cin を指定します。
+<br>
+Cin の後ろのカンマをよく入れ忘れるのでご注意下さい。
 </p>
 
 
@@ -70,6 +72,23 @@ tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size),  activation='活性化�
 activation では活性化関数を指定します。
 <br>
 活性化関数としては 'tanh' (<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">双曲線正接</a>)や 'relu' (<a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>)などがよく使われています。
+</p>
+
+<p>
+なお前ページの様にカーネルやバイアスの初期値を指定したい場合はそれぞれ
+</p>
+
+<p>
+kernel_initializer=tf.keras.initializers.Constant(カーネルの初期値)
+</p>
+<p>
+bias_initializer=tf.keras.initializers.Constant(バイアスの初期値)
+</p>
+
+<p>
+で指定します。
+<br>
+詳しくは前ページのソース1を参照して下さい。
 </p>
 
 <br>
@@ -126,7 +145,7 @@ tf.keras.layers.Dropout( rate )
 </div>
 
 <p>
-「<a href="https://ja.wikipedia.org/wiki/%E9%81%8E%E5%89%B0%E9%81%A9%E5%90%88">過学習</a>(オーバーフィッティング)」、つまり実際のデータに適合していないモデルになることを防ぐための層です。
+「<a href="https://ja.wikipedia.org/wiki/%E9%81%8E%E5%89%B0%E9%81%A9%E5%90%88">過学習</a>(過剰適合、オーバーフィッティングとも言います)」、つまり実際のデータに適合していないモデルになることを防ぐための層です。
 <br>
 学習の際に rate で指定した確率に従ってランダムにデータを 0 にセットします。
 </p>
