@@ -33,6 +33,8 @@
 <pre class="wrap">
 結果:
 
+(注) 実行環境により表示が若干異なる場合があります
+
 入出力例外発生: java.io.FileNotFoundException: hoge.txt (No such file or directory)
 </pre>
 </div>
@@ -62,6 +64,8 @@
 <pre class="wrap">
 結果:
 
+(注) 実行環境により表示が若干異なる場合があります
+
 ※ hoge.txt と fuga.txt を追加した後
 
 入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
@@ -72,7 +76,7 @@
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> 演習 2-1 で作った「JAVABSC_2_1」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_2」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> try の hoge.txt をオープンしている行の「下」に以下の 2 行を追加します。
+<span class="olradio"><input type="radio" name="p2"></span> Main.java を開き、try 処理部の hoge.txt をオープンしている行の「下」に以下の 2 行を追加します。
 </p>
 <div class="info">
 <pre class="wrap">
@@ -110,10 +114,14 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <pre class="wrap">
 結果:
 
-0を入力すると
+(注) 実行環境により表示が若干異なる場合があります
+
+※ 0を入力すると
+
 算術例外発生: java.lang.ArithmeticException: / by zero
 
-1を入力すると
+※ 1を入力すると
+
 入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
 </pre>
 </div>
@@ -123,7 +131,7 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 演習 2-2 で作った「JAVABSC_2_2」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_3」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> try 文が書いてある行と hoge.txt をオープンしている行の間に以下の処理を追加します。
+<span class="olradio"><input type="radio" name="p3"></span>  Main.java を開き、try 文が書いてある行と hoge.txt をオープンしている行の間に以下の処理を追加します。
 </p>
 <div class="info">
 <ul>
@@ -146,8 +154,59 @@ FileReader in3 = new FileReader( "piyo.txt" );
 <h2><a href="./page03.html">3. finally</a></h2>
 
 <p>
-演習無し
+<input type="checkbox"><b>演習 2-4 (個人):</b> finallyを試してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+(注) 実行環境により表示が若干異なる場合があります
+
+※ 0を入力すると
+
+算術例外発生: java.lang.ArithmeticException: / by zero
+OK
+
+※ 1を入力すると
+
+1
+入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
+OK
+
+※ piyo.txtを追加してから 1を入力すると
+
+1
+OK
+
+</pre>
+</div>
+
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 「JAVABSC_2_3」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_4」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Main.java を開き、catch 処理部 の下に以下の finally 処理部を追加します。
+</p>
+<div class="info">
+<p>
+"OK" と表示
+</p>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルと実行をし、0 を入力したら算術例外(0除算)、0 以外を入力したら入出力例外(piyo.txtが無い)が起きたあとに OK と表示される事を確認して下さい
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 「JAVABSC_2_3」フォルダに空の piyo.txt ファイルを追加して実行し、OK とだけ表示される事を確認して下さい
+</p>
+<p>
+※ piyo.txt を追加するコマンド: touch piyo.txt
+</p>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 
 <script>PreNext(4,3)</script>
