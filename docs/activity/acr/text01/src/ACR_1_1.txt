@@ -1,73 +1,40 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma2 : 分散
-double nrand( double mu, double sigma2 )
-{
-    // Box-Muller 法を使用
-    double sigma = sqrt(sigma2);
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
+# 自己相関関数 R[n] を求める関数
+# f[i] は信号、N は信号長
+def ACR( n, f, N ):
+    R = 0
+    for i in range(N):
+        R += ?
+    R /= ?
+    return R
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    double out = 0;
-    for( int i = 0; i < N; ++i ){
-        out += ?;
-    };
-    out /= ? ;
+N = 10000 # 信号長
+Nout = 20 # グラフに表示する点数
+f = np.zeros(N) # 信号値
+R = np.zeros(Nout)  # 自己相関関数値
 
-    return out;
-}
+# 信号値をセット
+# sin は math.sin、cos は math.cos、円周率は math.pi を使用する
+for i in range(N):
+    f[i] = ?
 
-int main()
-{
-    const int N = 10000;  // 生成する点数
-    const int Nout = 20;  // グラフに表示する点数
-    double f[N];
-    double R[Nout];
+# 雑音として正規乱数 N(0,1)を加える
+for i in range(N):
+    f[i] += np.random.normal()
 
-    // 元の信号値をセット
-    // 円周率は M_PI
-    for(int i=0;i < N; ++i ){
-        f[i] = ?;
-    }
+# 自己相関関数値を求める
+for n in range(Nout):
+    R[n] = ACR( n, f, N )
 
-    // 雑音を加える
-    for(int i=0;i < N; ++i ){
-        f[i] += ?;
-    }
+with open('./ACR_1_1_f.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,f[i]])
 
-    // 自己相関関数を求める
-    for(int n=0; n < Nout; ++n ){
-        R[n] = ACR( n, f, N );
-    }
-
-    FILE* file = fopen( "ACR_1_1_f.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,f[i] );
-    }
-    fclose(file);
-
-    file = fopen( "ACR_1_1_R.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,R[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
-    
+with open('./ACR_1_1_R.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,R[i]])
