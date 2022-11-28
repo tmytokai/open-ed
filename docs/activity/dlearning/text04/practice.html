@@ -39,7 +39,10 @@ CNN とディープラーニングの仕様は以下の通りです。
 <div class="info">
 <b>仕様:</b>
 <p>
-(1) いわゆる「<a href="https://en.wikipedia.org/wiki/LeNet">LeNet-5</a>」を作る
+(1) 画像フォーマットは channels_last (縦、横、チャンネル数) とする
+</p>
+<p>
+(2) いわゆる「<a href="https://en.wikipedia.org/wiki/LeNet">LeNet-5</a>」を作る
 </p>
 <p>
 入力層: rows = 32、 cols = 32、Cin = 3  ※ 入力画像は R・G・B の 3 チャンネル
@@ -61,7 +64,7 @@ CNN とディープラーニングの仕様は以下の通りです。
 出力層: 全結合層、 M = 10、 activation='softmax' ※ 出力は各クラスに属する確率
 </p>
 <p>
-(2) 学習率は r = 0.001、エポック数は E = 10、バッチサイズは B = 512 とする
+(3) 学習率は r = 0.001、エポック数は E = 10、バッチサイズは B = 512 とする
 </p>
 </pre>
 
@@ -72,8 +75,12 @@ CNN とディープラーニングの仕様は以下の通りです。
 <span class="olradio"><input type="radio" name="p1"></span> Jupyter Notebook で「DL_4_1」というノートブックを作ります 
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> <a href="./src/DL_4_1.txt">テンプレートスクリプト</a>をノートブックにコピーして下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> DL_3_3 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
+</p>
+<p>
+(注意) テンプレートは channels_last 設定用になっていますので、channels_first 設定になっている場合は設定を変更して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> テキストと DL_3_3 を参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 実行して下さい。
 <br>
@@ -89,9 +96,9 @@ CNN とディープラーニングの仕様は以下の通りです。
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> 「DL_4_1」を「DL_4_2」にコピーします
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> テストデータセットの正解率が75％を超えるようにCNNの構造を変更したり、ドロップアウト層を加えたり、学習尻、エポック数、バッチサイズ等を変更したり等の工夫をして下さい。
+<span class="olradio"><input type="radio" name="p3"></span> テストデータセットの正解率が70％を超えるようにCNNの構造を変更したり、ドロップアウト層を加えたり、学習尻、エポック数、バッチサイズ等を変更したり等の工夫をして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」と「学習前の学習データセットの損失、正解率」、「学習後の学習データセットの損失、正解率」、「学習後のテストデータセットの損失、正解率」を貼り付けて下さい。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ソース」、「学習後のテストデータセットの損失・正解率」を貼り付けて下さい。
 </p>
 </div>
 

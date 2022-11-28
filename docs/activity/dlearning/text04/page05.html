@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
 <title>5. KerasによるCNNの構築</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-CNN は基本的には MLP と同じくフィードフォワード型のニューラルネットワークですのでモデルとしてSequential モデルを使います。
+CNN は基本的には MLP と同じくフィードフォワード型のニューラルネットワークですのでモデルとして<a href="https://keras.io/api/models/sequential/">Sequential モデル</a>を使います。
 <br>
 その後 add メソッドを使って各層を順々に積み重ねて作成します。
 </p>
@@ -35,19 +36,47 @@ CNN は基本的には MLP と同じくフィードフォワード型のニュ�
 </h3>
 
 <p>
-入力層の使い方は<a href="../text03/page02.html">MNP の時</a>と同じですが、CNN では多チャンネル画像を入力するので引数の指定の仕方が変わります。
+入力層の基本的な使い方は<a href="../text03/page02.html">MLP の時</a>と同じですが、CNN では多チャンネル画像を入力するので引数の指定の仕方が変わります。
 </p>
 
 <div class="info">
 <pre class="wrap">
-tf.keras.Input(shape=(rows,cols,Cin,))
+(チャンネル・ラストの場合)  tf.keras.Input(shape=(rows,cols,Cin,))
+
+または
+
+(チャンネル・ファーストの場合)  tf.keras.Input(shape=(Cin,rows,cols,))
+
+rows: 入力画像の縦サイズ
+cols: 入力画像の横サイズ
+Cin:  入力画像のチャンネル数
 </pre>
 </div>
 
 <p>
-引数 に画像のサイズ(rows,cols)と入力画像のチャンネル数 Cin を指定します。
+引数 shape の値の並びは keras の設定によって変わります。
+</p>
+
+<p>
+keras は「縦、横、チャンネル数」の順にデータが並んでいるチャンネル・ラスト・フォーマットの画像と「チャンネル数、縦、横」の順にデータが並んでいるチャンネル・ファースト・フォーマットの画像を両方扱うことができ、それらのモードは keras の設定によって切り替えることが出来ます。
+</p>
+
+<p>
+現在の設定がどちらなのかは
+</p>
+
+<p>
+print( tf.keras.backend.image_data_format() )
+</p>
+
+<p>
+で確認することが出来ます。
 <br>
-Cin の後ろのカンマをよく入れ忘れるのでご注意下さい。
+channels_last と表示されたらチャンネル・ラスト、channels_first と表示されたらチャンネル・ファーストになります。
+</p>
+
+<p>
+この設定を変更する方法については検索して調べて下さい。
 </p>
 
 
@@ -63,13 +92,14 @@ Cin の後ろのカンマをよく入れ忘れるのでご注意下さい。
 <div class="info">
 <pre class="wrap">
 tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size),  activation='活性化関数' )
+
+Cout : 出力画像のチャンネル数
+kernel_size: カーネルのサイズ
 </pre>
 </div>
 
 <p>
-引数 Cout はこの層から出力される画像のチャンネル数、kernel_size はカーネルのサイズです。
-<br>
-activation では活性化関数を指定します。
+引数 activation では活性化関数を指定します。
 <br>
 活性化関数としては 'tanh' (<a href="https://ja.wikipedia.org/wiki/%E5%8F%8C%E6%9B%B2%E7%B7%9A%E9%96%A2%E6%95%B0">双曲線正接</a>)や 'relu' (<a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>)などがよく使われています。
 </p>
@@ -86,7 +116,7 @@ bias_initializer=tf.keras.initializers.Constant(バイアスの初期値)
 </p>
 
 <p>
-で指定します。
+という引数で指定します。
 <br>
 詳しくは前ページのソース1を参照して下さい。
 </p>
@@ -107,13 +137,89 @@ bias_initializer=tf.keras.initializers.Constant(バイアスの初期値)
 (最大値)  tf.keras.layers.MaxPooling2D( (pool_size, pool_size) )
 
 (平均値)  tf.keras.layers.AveragePooling2D( (pool_size, pool_size) )
+
+pool_size: 窓のサイズ
 </pre>
 </div>
 
 <p>
 というクラスがそれぞれの層に相当します。
 <br>
-なお引数 pool_size は窓のサイズで、入力した画像が 1/pool_size 倍になって出力されます。
+窓のサイズ(pool_size)を指定することで入力画像が 1/pool_size 倍になって出力されます。
+</p>
+
+<p>
+例えば<a href="./page02.html">2ページ目</a>と同様に rows = cols = 4 として入力画像を以下の 4x4 行列 data で与えます。
+</p>
+
+<p>
+\[
+{\rm data} = 
+\begin{bmatrix}
+1, & 2, & 3, & 0 \\
+2, & 0, & 1, & 2 \\
+0, & 1, & 2, & 0 \\
+0, & 0, & 3, & 1 \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+pool_size = 2 とすると、出力画像は入力画像の 1/2 倍となるので、2x2 行列
+</p>
+<p>
+\[
+y = 
+\begin{bmatrix}
+y_{00}, & y_{01} \\
+y_{10}, & y_{11} \\
+\end{bmatrix}
+\]
+</p>
+
+<p>
+となります。
+<br>
+この時、$y$ の左上の画素値 $y_{00}$ は以下のようにして求まります。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>図1. $y_{00}$を求める MaxPooling2D 処理 (pool_size = 2 )</b>
+
+<p>
+data の黄色の部分の画素に対して MaxPooling2D 処理を行い、$y_{00}$ (赤い部分)の画素値を求めている
+</p>
+
+<img src="./img/page05-fig1.png" alt="">
+</div>
+
+<p>
+同様に $y$ の右上の画素値 $y_{01}$ は以下のようにして求まります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2. $y_{01}$を求める MaxPooling2D 処理 (pool_size = 2 )</b>
+
+<p>
+data の黄色の部分の画素に対して MaxPooling2D 処理を行い、$y_{01}$ (赤い部分)の画素値を求めている
+</p>
+
+<img src="./img/page05-fig2.png" alt="">
+</div>
+
+<p>
+この処理を繰り返して最終的な $y$ は次のようになります。
+</p>
+
+<p>
+\[
+y = 
+\begin{bmatrix}
+2, & 3 \\
+1, & 3 \\
+\end{bmatrix}
+\]
 </p>
 
 <br>
@@ -130,7 +236,7 @@ tf.keras.layers.Flatten()
 <p>
 は平坦化、つまり入力画像をチャンネルに関係なく全て1次元配列に変換して出力する層です。
 <br>
-全結合層 (<a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>)などに接続する前に使わます。
+全結合層 (<a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>)などに接続する前に使われます。
 </p>
 
 <br>
@@ -141,14 +247,34 @@ tf.keras.layers.Flatten()
 <div class="info">
 <pre class="wrap">
 tf.keras.layers.Dropout( rate )
+
+rate: ドロップ率(0〜1)
 </pre>
 </div>
 
 <p>
 「<a href="https://ja.wikipedia.org/wiki/%E9%81%8E%E5%89%B0%E9%81%A9%E5%90%88">過学習</a>(過剰適合、オーバーフィッティングとも言います)」、つまり実際のデータに適合していないモデルになることを防ぐための層です。
 <br>
-学習の際に rate で指定した確率に従ってランダムにデータを 0 にセットします。
+学習の際に引数 rate で指定した確率に従ってランダムにデータを 0 にセットします。
 </p>
+
+<br>
+<h3>
+6. 全結合層: <a href="https://keras.io/api/layers/core_layers/dense/">Denseクラス</a>
+</h3>
+
+<div class="info">
+<pre class="wrap">
+tf.keras.layers.Dense(M, activation='活性化関数')
+
+M: ユニット(パーセプトロン)数
+</pre>
+</div>
+
+<p>
+使い方は<a href="../text03/page02.html">MLP の時</a>と同じですので説明は省略します。
+</p>
+
 
 <br>
 <script>PreNext(5,6)</script>
