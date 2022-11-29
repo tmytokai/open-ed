@@ -1,65 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma2 : 分散
-double nrand( double mu, double sigma2 )
-{
-    // Box-Muller 法を使用
-    double sigma = sqrt(sigma2);
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
+# 自己相関関数 R[n] を求める関数
+# 演習 1-1 からコピーする
+?
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    // 演習 1-1 の内容をコピーする
-}
+N = 10000 # 信号長
+Nout = 20 # グラフに表示する点数
+f = np.zeros(N) # 信号値
+R = np.zeros(Nout)  # 自己相関関数値
 
-int main()
-{
-    const int N = 10000;
-    const int Nout = 20;
-    double f[N];
-    double R[Nout];
+# 信号値はすべての時刻で f[i] = 0
 
-    // 元の信号値は0
-    for(int i=0;i < N; ++i ){
-        f[i] = 0 ;
-    }
+# 雑音として正規乱数 N(-2,9)を加える
+# loc : 平均
+# scale : 標準偏差 = 分散の平方根
+for i in range(N):
+    f[i] += np.random.normal(loc=?,scale=?)
 
-    // 雑音を加える
-    for(int i=0;i < N; ++i ){
-        f[i] += ?;
-    }
+# 自己相関関数値を求める
+for n in range(Nout):
+    R[n] = ACR( n, f, N )
 
-    for(int n=0; n < Nout; ++n ){
-        R[n] = ACR( n, f, N );
-    }
+with open('./ACR_1_2_f.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,f[i]])
 
-    FILE* file = fopen( "ACR_1_2_f.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,f[i] );
-    }
-    fclose(file);
-
-    file = fopen( "ACR_1_2_R.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,R[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
-    
+with open('./ACR_1_2_R.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,R[i]])

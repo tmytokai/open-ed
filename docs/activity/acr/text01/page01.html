@@ -223,7 +223,7 @@ f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]
 \]
 
 <p>
-ここで $e[i]$ は各時刻毎に独立な平均 0、分散 1 の正規乱数とする。
+ここで $e[i]$ は各時刻毎に独立な平均 $\mu = 0$、分散 $\sigma^2 = 1$ の正規乱数とする。
 </p>
 
 <p>
@@ -232,8 +232,8 @@ f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]
 
 \begin{align*}
 \textrm{E}(f[i]) 
-&= \textrm{E}( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] ) \\
-&= \textrm{E} ( e[i] ) + 3 \cdot \textrm{E} ( e[i-1] )  + 2 \cdot \textrm{E} ( e[i-2] ) \\
+&= \textrm{E}( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] ) \\[5pt] 
+&= \textrm{E} ( e[i] ) + 3 \cdot \textrm{E} ( e[i-1] )  + 2 \cdot \textrm{E} ( e[i-2] ) \\[5pt] 
 &= 0
 \end{align*}
 
@@ -243,25 +243,54 @@ f[i] = e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2]
 
 \begin{align*}
 Cov \left ( f[i], f[i+n] \right ) 
-&= \textrm{E} \left \{ \left( f[i] - \textrm{E}(f[i]) \right ) \cdot \left( f[i+n] - \textrm{E}(f[i+n]) \right ) \right \} \\
-&= \textrm{E} \left \{ \left( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] \right ) \cdot \left( e[i+n] + 3 \cdot e[i+n-1] + 2 \cdot e[i+n-2] \right ) \right \} \\
-&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+n] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n]   \right ) \\
-&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+n-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-1] \right ) \\
-&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+n-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-2] \right ) \\
+&= \textrm{E} \left \{ \left( f[i] - \textrm{E}(f[i]) \right ) \cdot \left( f[i+n] - \textrm{E}(f[i+n]) \right ) \right \} \\[5pt] 
+&= \textrm{E} \left \{ \left( e[i] + 3 \cdot e[i-1] + 2 \cdot e[i-2] \right ) \cdot \left( e[i+n] + 3 \cdot e[i+n-1] + 2 \cdot e[i+n-2] \right ) \right \} \\[5pt] 
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+n] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n]   \right ) \\[5pt] 
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+n-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-1] \right ) \\[5pt] 
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+n-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+n-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+n-2] \right ) \\[5pt] 
 \end{align*}
 
 <p>
-$e[i]$ は時刻毎に独立なので $i \neq j$ の時 $ \textrm{E} \left ( e[i] \cdot e[j] \right ) = 0$
-<br>
+ここで $i$ と $j$ を 0 以上の任意の整数とした時
+</p>
+
+\begin{align*}
+\textrm{E}( e[i] \cdot e[j] )
+&= \textrm{E} \left \{ (e[i] - \mu)\cdot(e[j]-\mu) +\mu\cdot e[i] + \mu \cdot e[j] - \mu^2 \right \} \\[5pt] 
+&= \textrm{E} \left \{ (e[i] - \mu)\cdot(e[j]-\mu) \right \} + \mu^2
+\end{align*}
+
+<p>
+となるので、 $i = j$ の時は
+</p>
+
+\[
+\textrm{E}( e[i] \cdot e[j] ) = \sigma^2 + \mu^2 = 1
+\]
+
+<p>
+$i \neq j$ の時は各時刻毎に独立であることから
+</p>
+
+\[
+\textrm{E}( e[i] \cdot e[j] ) = 0
+\]
+
+
+<p>
+となる。
+</p>
+
+<p>
 よって$n=0$ の時
 </p>
 
 \begin{align*}
 Cov \left ( f[i], f[i] \right ) 
-&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i]   \right ) \\
-&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\
-&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-2] \right ) \\
-&= 1 + 9 + 4\\
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i]   \right ) \\[5pt] 
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\[5pt] 
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-2] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-2] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-2] \right ) \\[5pt] 
+&= 1 + 9 + 4\\[5pt] 
 &= 14
 \end{align*}
 
@@ -271,10 +300,10 @@ $n=1$ の時
 
 \begin{align*}
 Cov \left ( f[i], f[i+1] \right ) 
-&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+1] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1]   \right ) \\
-&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\
-&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\
-&= 3 + 6 \\
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+1] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1]   \right ) \\[5pt] 
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\[5pt] 
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i-1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i-1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i-1] \right ) \\[5pt] 
+&= 3 + 6 \\[5pt] 
 &= 9
 \end{align*}
 
@@ -284,9 +313,9 @@ $n=2$ の時
 
 \begin{align*}
 Cov \left ( f[i], f[i+2] \right ) 
-&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+2] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2]   \right ) \\
-&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\
-&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+2] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2]   \right ) \\[5pt] 
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\[5pt] 
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i] \right ) \\[5pt] 
 &= 2
 \end{align*}
 
@@ -296,9 +325,9 @@ $n=3$ の時
 
 \begin{align*}
 Cov \left ( f[i], f[i+3] \right ) 
-&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+3] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+3]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+3]   \right ) \\
-&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+2] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2] \right ) \\
-&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\
+&= 1 \cdot \textrm{E} \left( e[i] \cdot e[i+3] )   \right ) + 3 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+3]   \right ) + 2 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+3]   \right ) \\[5pt] 
+&+ 3 \cdot \textrm{E} \left( e[i] \cdot e[i+2] ) \right ) + 9 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+2] \right ) + 6 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+2] \right ) \\[5pt] 
+&+ 2 \cdot \textrm{E} \left( e[i] \cdot e[i+1] ) \right ) + 6 \cdot \textrm{E} \left ( e[i-1] \cdot e[i+1] \right ) + 4 \cdot \textrm{E} \left ( e[i-2] \cdot e[i+1] \right ) \\[5pt] 
 &= 0
 \end{align*}
 

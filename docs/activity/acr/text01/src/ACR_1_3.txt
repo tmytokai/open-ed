@@ -1,60 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 一様乱数 U(a,b)の出力
-double urand( double a, double b )
-{
-    return a + (b-a)*(double)rand()/RAND_MAX;
-}
+# 自己相関関数 R[n] を求める関数
+# 演習 1-1 からコピーする
+?
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    // 演習 1-1 の内容をコピーする
-}
+N = 10000 # 信号長
+Nout = 20 # グラフに表示する点数
+f = np.zeros(N) # 信号値
+R = np.zeros(Nout)  # 自己相関関数値
 
-int main()
-{
-    const int N = 10000;
-    const int Nout = 20;
-    double f[N];
-    double R[Nout];
+# 信号値はすべての時刻で f[i] = 0
 
-    // 元の信号値は0
-    for(int i=0;i < N; ++i ){
-        f[i] = 0 ;
-    }
+# 雑音として一様乱数 U( -1, 5 ) を加える
+# low : 下限
+# high : 上限
+for i in range(N):
+    f[i] += np.random.uniform(low=?,high=?)
 
-    // 雑音を加える
-    for(int i=0;i < N; ++i ){
-        f[i] += ?;
-    }
+# 自己相関関数値を求める
+for n in range(Nout):
+    R[n] = ACR( n, f, N )
 
-    for(int n=0; n < Nout; ++n ){
-        R[n] = ACR( n, f, N );
-    }
+with open('./ACR_1_3_f.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,f[i]])
 
-    FILE* file = fopen( "ACR_1_3_f.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,f[i] );
-    }
-    fclose(file);
-
-    file = fopen( "ACR_1_3_R.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <Nout ; ++i ){
-        fprintf( file, "%d,%lf\n", i,R[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
-    
+with open('./ACR_1_3_R.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(Nout):
+        writer.writerow([i,R[i]])
