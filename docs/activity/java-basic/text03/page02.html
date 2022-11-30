@@ -61,9 +61,14 @@ public class Main{
 </p>
 
 <p>
-一度オープンすれば、あとは reader.readLine() でファイルの1行分を文字列として読み込む事が出来ます。
+一度オープンすれば、あとは reader.readLine() でファイルの先頭から順に1行分を文字列として読み込む事が出来ます。
 <br>
-なお、ファイルの終わり(EOF)にたどり着くと reader.readLine() は null を返します(上の例では while のループから抜けます)。
+上の例では文字列型変数 line に読み込んだ文字列を代入しそのまま println で画面表示しています。
+</p>
+<p>
+なお、ファイルの終わり(EOF)にたどり着くと reader.readLine() は null を返します。
+<br>
+上の例では line に null が代入されたら while のループから抜けるようにしてあります。
 </p>
 
 <p>

@@ -34,19 +34,14 @@
 
 (2) 同様にキーボードから整数を入力して int b に代入する
 
-(3) 以下の文字列を hoge.txt に出力する
-
-aは(aの数値)
-bは(bの数値)
-足すと(a+bの値)です
+(3) 結果を fuga.txt に出力する
 
 結果:
 
-実行してキーボードから 12 と 23 を入力すると hoge.txt の内容は次のようになる
+実行してキーボードから 12 と 23 を入力すると fuga.txt の内容は次のようになる
 
-aは12
-bは23
-足すと35です
+足し算
+12足す23は35
 </pre>
 </div>
 
@@ -75,15 +70,19 @@ bは23
 
 <div class="info">
 <pre class="wrap">
-(1) hoge.txt を作成し、行を分けて整数を3つ保存する
+(1) fuga.txt を作成し、行を分けて整数を3つ保存する
 
-(2) hoge.txt を読み込んで、3つの数字の合計値を画面に出力する
+(2) fuga.txt を読み込んで、3つの数字の合計値を画面に出力する
 
-※ 変数 line には文字列が入っているので、int 型整数に文字列を変換するためには Integer.parseInt( line ) とする
+※ ソース内の変数 line は文字型なのに注意。文字列を整数値に変換して int 型変数 a に代入するには 
+
+int a = Integer.parseInt( line ) 
+
+の様に書く
 
 結果:
 
-hoge.txt の中身が
+fuga.txt の中身が
 
 12
 34
@@ -101,8 +100,12 @@ hoge.txt の中身が
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」の中に hoge.txt を新規作成して任意の整数を3行入力して保存します。なお<b>最後の数字の後に改行を入れるとエラーが出るので最後は改行を入れないでください</b>。
-<br>
+<span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」の中に fuga.txt を新規作成して任意の整数を3行入力して保存します。
+</p>
+<p>
+<b>(注) 最後の数字の後に改行を入れるとエラーが出るので最後行は改行しないでください</b>
+</p>
+<p>
 <span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> <a href="./page02.html">ソース1</a>をコピーし、解答します。
