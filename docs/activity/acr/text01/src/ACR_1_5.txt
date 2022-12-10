@@ -1,66 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// DFT
-void DFT( const double* f, double* A, double* B, const int N )
-{
-    ?
-}
+N = 32 # 信号長
+f = np.zeros(N) # 信号値
+R = np.zeros(N)  # 自己相関関数値
 
-// IDFT
-void IDFT( const double* A, const double* B, double* f, const int N )
-{
-    ?
-}
+# 信号値をセット
+# sin は math.sin、cos は math.cos、円周率は math.pi を使用する
+for i in range(N):
+    # 演習 1-4 で入力した式をコピーする
+    f[i] = ?
 
-int main()
-{
-    const int N = 45;
-    double f[N];
-    double A[N];
-    double B[N];
-    double P[N];
-    double R[N];
+# 自己相関関数値を求める
 
-    for(int i=0;i < N; ++i ){
-        // 演習 1-4 で入力した式をコピーする
-        f[i] = ? ;
-    }
+# 信号値 f の FFT を求めてフーリエ係数 C に代入する
+# FFT 関数は np.fft.fft
+C = ?
 
-    // 信号をDFT
-    DFT(f,A,B,N);
+# フーリエ係数 C の絶対値を求めて自乗してパワースペクトル P に代入する
+P = np.abs(C)**2
 
-    // パワースペクトルを求める
-    for( int k = 0; k < N; ++k ){
-        P[k] = ? ;
-    }
+# パワースペクトル P の IFFT を求めて自己相関関数 R に代入する
+# IFFT 関数は np.fft.ifft
+R = ?
 
-    // パワースペクトルをIDFT
-    memset( B, 0, sizeof(double)*N ); // 虚数成分 B[k] をゼロクリアして再利用する
-    IDFT(P,B,R,N);
+# 自己相関関数 R の実数成分だけ取り出して大きさ調整
+R = R.real / N
 
-    FILE* file = fopen( "ACR_1_5_P.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d,%lf\n", i,P[i] );
-    }
-    fclose(file);
+with open('./ACR_1_5_P.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,f'{P[i]:.4f}'])
 
-    file = fopen( "ACR_1_5_R.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d,%lf\n", i,R[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
-    
+with open('./ACR_1_5_R.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,R[i]])

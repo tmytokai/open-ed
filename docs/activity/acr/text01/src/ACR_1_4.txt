@@ -1,50 +1,31 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    // 演習 1-1 の内容をコピーする
-}
+# 自己相関関数 R[n] を求める関数
+# f[i] は信号、N は信号長
+def ACR( n, f, N ):
+    # 演習 1-1 の内容をコピーする
 
-int main()
-{
-    const int N = 45;
-    double f[N];
-    double R[N];
+N = 32 # 信号長
+f = np.zeros(N) # 信号値
+R = np.zeros(N)  # 自己相関関数値
 
-    // 信号値をセット
-    // 円周率は M_PI
-    for(int i=0;i < N; ++i ){
-        f[i] = ? ;
-    }
+# 信号値をセット
+# cos は math.cos、円周率は math.pi を使用する
+for i in range(N):
+    f[i] = ?
 
-    // 自己相関関数を求める
-    for(int n=0; n < N; ++n ){
-        R[n] = ACR( n, f, N );
-    }
+# 自己相関関数値を求める
+for n in range(N):
+    R[n] = ACR( n, f, N )
 
-    FILE* file = fopen( "ACR_1_4_f.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d,%lf\n", i,f[i] );
-    }
-    fclose(file);
+with open('./ACR_1_4_f.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,f[i]])
 
-    file = fopen( "ACR_1_4_R.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d,%lf\n", i,R[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
-    
+with open('./ACR_1_4_R.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,R[i]])
