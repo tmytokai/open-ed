@@ -21,12 +21,10 @@
 
 <p>
 <a href="./page01.html">リスト</a>を使って繰り返し処理する場合は、ただの for 文を使うよりも「<b>拡張 for 文</b>」を使う方が便利です。
-<br>
-ちなみに<a href="./page02.html">マップ</a>でも拡張 for 文は使えますが、マップの場合は<a href="../text05/page03.html">forEach 文</a>を使う方が便利です。
 </p>
 
 <p>
-さてリストにおける拡張 for 文の文法は以下の通りです。
+リストにおける拡張 for 文の文法は以下の通りです。
 </p>
 
 <div class="info">
@@ -44,7 +42,7 @@ for( 型名 変数 : リスト名 )
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>ソース 1: 拡張 for 文の使用例</b>
+<input type="checkbox"> <b>ソース 1: リストにおける拡張 for 文の使用例</b>
 <pre class="wrap">
 import java.util.ArrayList;
 
@@ -79,6 +77,56 @@ fuga
 piyo
 </pre>
 </div>
+
+<p>
+なお<a href="./page02.html">マップ</a>でも拡張 for 文は使えますが、若干文法が難しいのでこのあと勉強する<a href="../text05/page03.html">forEach 文</a>を使う方が便利です。
+<br>
+参考までにマップでの拡張 for 文の使用例を以下に示します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 2: マップにおける拡張 for 文の使用例</b>
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+        // マップ定義
+    	HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+        // 要素を追加
+        map.put( "hoge", 123 );
+        map.put( "fuga", 456 );
+        map.put( "piyo", 789 );
+
+        // 拡張 for 文
+        for( var entry : map.entrySet()) {
+            System.out.println( entry.getKey() );
+            System.out.println( entry.getValue() );
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+実行すると for 内で定義した Entry 型変数 entry に map のキーと値が先頭から順番に入って表示されます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 2 の実行結果</b>
+<pre class="wrap">
+hoge
+123
+fuga
+456
+piyo
+789
+</pre>
+</div>
+
+
 
 <br>
 <script>PreNext(3,4)</script>
