@@ -35,7 +35,7 @@
 
 \begin{align*}
 x[i]
-& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + e[i] \\
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} + e[i] \\[5pt]
 & = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] \\
 \end{align*}
 
@@ -76,19 +76,31 @@ $x[i]$ は確率変数になるので、信号列を生成する毎に異なる�
 <p>
 要するにホワイトノイズ $e[i]$ を入力すると確率変数 $x[i]$ が出力される<a href="../../d-filter/text03/page01.html">標準形 L 次 IIR フィルタ</a>となります。
 <br>
-ただし後段フィードフォワード部の IIRフィルタ係数は b[0] = 1 で残りは b[n] = 0 なので、プログラム表現は以下の通りに簡略化されます。
+ただしこのアクティビティでは入力信号は x[i] ではなく任意のホワイトノイズ e[i] (平均 0、分散 $\sigma^2$)、出力信号が y[i] ではなくて x[i] という違いがあるのでご注意ください。
+</p>
+
+<p>
+さて後段フィードフォワード部の IIRフィルタ係数は b[0] = 1 で残りは b[n] = 0 なので、プログラム表現は以下の通りに簡略化されます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b> L 次自己回帰モデルのプログラム表現: </b>
+<input type="checkbox"><b> L 次自己回帰モデルのプログラム表現 (C言語): </b>
+
+<p>
+z[n] を n 時刻前の☆の位置における値とする
+</p>
 
 <pre class="wrap">
-x[i] = 0;
-for( int n = 1; n &lt= L; ++n ) x[i] += a[n] * x[i-n] 
-x[i] *= -1;
-x[i] += e[i];
+// 前段フィードバック部
+// e[i] は時刻iにおける任意のホワイトノイズ
+z[0] = e[i] ;
+for( int n = 1; n &lt= L; ++n ) z[0] += -a[n] * z[n] ;
 
-※ e[i] は時刻iにおける任意のホワイトノイズ
+// 後段フィードフォワード部
+x[i] = z[0] ;
+
+// バッファシフト
+for( int n = L; n &gt= 1; --n ) z[n] = z[n-1] ;
 </pre>
 
 </div>
@@ -112,7 +124,7 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 \]
 
 <p>
-を<b>特性多項式</b>と呼び、$x[i]$が<a href="../../acr/text01/page01.html">定常</a>であるためにはこの IIR フィルタが安定であること、つまり<a href="../../d-filter/text01/page11.html">特性多項式の全ての根が単位円の内側にある必要</a>があります。
+を<b>特性多項式</b>と呼び、$x[i]$が<a href="../../acr/text01/page01.html">定常</a>であるためにはこの IIR フィルタが安定であること、つまり<a href="../../d-filter/text01/page11.html">特性多項式の全ての根(＝伝達関数の極)がZ平面上の単位円の内側にある必要</a>があります。
 </p>
 
 <p>
@@ -132,7 +144,7 @@ z^{\textrm{L}} + a[1] \cdot z^{\textrm{L}-1} + a[2] \cdot z^{\textrm{L}-2} + \cd
 となります。
 </p>
 <p>
-一方、分散と共分散の計算は少しややこしくなります。
+一方、分散・共分散の計算は少しややこしくなります。
 </p>
 <p>
 まず整数 $n$ を遅延時刻(ラグ)とおいた時に分散・共分散を $\gamma[n] = Cov \left ( x[i], x[i-n] \right )$、自己相関係数 を$\rho[n]$ とします。
@@ -149,7 +161,7 @@ Cov \left ( x[i-n], x[i-n] \right ) = Cov \left ( x[i], x[i] \right ) = \gamma[0
 </p>
 
 \begin{align*}
-\rho[n] &= \frac{ Cov \left ( x[i], x[i-n] \right ) }{ \sqrt{ Cov \left ( x[i], x[i] \right ) } \sqrt{ Cov \left ( x[i-n], x[i-n] \right ) } } \\
+\rho[n] &= \frac{ Cov \left ( x[i], x[i-n] \right ) }{ \sqrt{ Cov \left ( x[i], x[i] \right ) } \sqrt{ Cov \left ( x[i-n], x[i-n] \right ) } } \\[5pt]
 &= \frac{\gamma[n]}{\gamma[0]}
 \end{align*}
 
@@ -158,7 +170,9 @@ Cov \left ( x[i-n], x[i-n] \right ) = Cov \left ( x[i], x[i] \right ) = \gamma[0
 </p>
 
 <p>
-また自己相関係数 $\rho[n]$ の値は以下の Yule-Walker 方程式と呼ばれる方程式を解くことで求めることが出来ます($\rho[0]$ は 1 )。
+また自己相関係数 $\rho[n]$ の値は以下の<a href="https://ja.wikipedia.org/wiki/%E8%87%AA%E5%B7%B1%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB#AR%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E8%A8%88%E7%AE%97">Yule-Walker 方程式</a>と呼ばれる方程式を解くことで求めることが出来ます($\rho[0]$ は 1 )。
+<br>
+なおこのページでは次数 L と LPC 係数 $a[n]$ は既知としたことに注意してください。
 </p>
 
 <div class="info">
@@ -170,10 +184,10 @@ Cov \left ( x[i-n], x[i-n] \right ) = Cov \left ( x[i], x[i] \right ) = \gamma[0
 
 \[
 \begin{array}{rrrrrc}
-\rho[0]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[2]\cdot a[3] & +\cdots & +\rho[\textrm{L}-1]\cdot a[\textrm{L}] & =-\rho[1] \\
-\rho[1]\cdot a[1] & +\rho[0]\cdot a[2] & +\rho[1]\cdot a[3] & +\cdots & +\rho[\textrm{L}-2]\cdot a[\textrm{L}] & =-\rho[2] \\
-\rho[2]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[0]\cdot a[3] & +\cdots & +\rho[\textrm{L}-3]\cdot a[\textrm{L}] & =-\rho[3] \\
- &  & \vdots &  &  &  \\
+\rho[0]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[2]\cdot a[3] & +\cdots & +\rho[\textrm{L}-1]\cdot a[\textrm{L}] & =-\rho[1] \\[5pt]
+\rho[1]\cdot a[1] & +\rho[0]\cdot a[2] & +\rho[1]\cdot a[3] & +\cdots & +\rho[\textrm{L}-2]\cdot a[\textrm{L}] & =-\rho[2] \\[5pt]
+\rho[2]\cdot a[1] & +\rho[1]\cdot a[2] & +\rho[0]\cdot a[3] & +\cdots & +\rho[\textrm{L}-3]\cdot a[\textrm{L}] & =-\rho[3] \\[5pt]
+ &  & \vdots &  &  &  \\[5pt]
 \rho[\textrm{L}-1]\cdot a[1] & +\rho[\textrm{L}-2]\cdot a[2] & +\rho[\textrm{L}-3]\cdot a[3] & +\cdots & +\rho[0]\cdot a[\textrm{L}] & =-\rho[\textrm{L}] \\
 \end{array}
 \]
@@ -181,7 +195,7 @@ Cov \left ( x[i-n], x[i-n] \right ) = Cov \left ( x[i], x[i] \right ) = \gamma[0
 </div>
 
 <p>
-では準備が終わったので、まずは分散 $\gamma[0]$ を求めてみましょう。
+さて上の Yule-Walker 方程式により自己相関係数の値が求まりましたので、まずは分散 $\gamma[0]$ の方から求めてみましょう。
 </p>
 
 <p>
@@ -189,9 +203,9 @@ $\sigma^2$ をホワイトノイズの分散としたとき、$\gamma[0]$ は以
 </p>
 
 \begin{align*}
-\gamma[0] &= Cov \left ( x[i], x[i] \right ) \\
-&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i] \right ) \\
-&= -a[1] \cdot \gamma[1] - a[2] \cdot \gamma[2] - \cdots - a[\textrm{L}] \cdot \gamma[\textrm{L}] + \sigma^2 \\
+\gamma[0] &= Cov \left ( x[i], x[i] \right ) \\[5pt]
+&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i] \right ) \\[5pt]
+&= -a[1] \cdot \gamma[1] - a[2] \cdot \gamma[2] - \cdots - a[\textrm{L}] \cdot \gamma[\textrm{L}] + \sigma^2 \\[5pt]
 &= -a[1] \cdot \rho[1] \cdot \gamma[0] - a[2] \cdot \rho[2] \cdot \gamma[0] - \cdots - a[\textrm{L}] \cdot \rho[\textrm{L}] \cdot \gamma[0] + \sigma^2
 \end{align*}
 
@@ -212,8 +226,8 @@ $\sigma^2$ をホワイトノイズの分散としたとき、$\gamma[0]$ は以
 </p>
 
 \begin{align*}
-\gamma[n] &= Cov \left ( x[i], x[i-n] \right ) \\
-&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i-n] \right ) \\
+\gamma[n] &= Cov \left ( x[i], x[i-n] \right ) \\[5pt]
+&= Cov \left ( -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}] + e[i] , x[i-n] \right ) \\[5pt]
 &= -a[1] \cdot \gamma[n-1] - a[2] \cdot \gamma[n-2] - \cdots - a[\textrm{L}] \cdot \gamma[n-\textrm{L}]
 \end{align*}
 

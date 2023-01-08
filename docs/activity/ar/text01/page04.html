@@ -21,27 +21,27 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-今まで LPC 係数 $a[n]$ の値は既知であるとしましたが、実際には未知ですので<a href="./page01.html"> 1 ページ目</a>で出てきた Yule-Walker 方程式を解いて値を推定する必要があります。
+これまでのページでは LPC 係数 $a[n]$ の値は既知であるとしましたが、実際には未知ですので<a href="./page01.html"> 1 ページ目</a>で出てきた Yule-Walker 方程式を解いて値を推定する必要があります。
 <br>
-ただし1 ページ目の方程式は
+ただし 1 ページ目では Yule-Walker 方程式を解く目的は
 </p>
 <p>
-$a[n]$ が既知であるときに自己相関係数 $\rho[n]$ を求めるための方程式
+「LPC 係数 $a[n]$ が既知であるときに自己相関係数 $\rho[n]$ を求める」
 </p>
 <p>
-でしたが、今回は
+ことでしたが、今回は
 </p>
-<b>未知である自己相関係数 $\rho[n]$ を<a href="../../acr/">標本自己相関関数</a>に置き換えて $a[n]$ の推定値 $\hat{a}[n]$ を求めるための方程式</b>
+「<b>未知である自己相関係数 $\rho[n]$ を<a href="../../acr/">標本自己相関関数</a>に置き換えた上で LPC 係数 $a[n]$ の推定値 $\hat{a}[n]$ を求める</b>」
 </p>
 <p>
-になります。
+ことが目的になります。
 </p>
 <p>
 なお次数 L の値も未知なので本当ならば <a href="https://ja.wikipedia.org/wiki/%E8%B5%A4%E6%B1%A0%E6%83%85%E5%A0%B1%E9%87%8F%E8%A6%8F%E6%BA%96">AIC</a> 等の方法を用いて L の値も決定する必要がありますが、今回は L は既知であるとします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： LPC 係数 $a[n]$ の推定値  $\hat{a}[n]$ を求める Yule-Walker 方程式: </b>
+<input type="checkbox"><b>定義： LPC 係数の推定値  $\hat{a}[n]$ を求める Yule-Walker 方程式: </b>
 
 <p>
 ※ 次数 L は既知とする
@@ -49,11 +49,11 @@ $a[n]$ が既知であるときに自己相関係数 $\rho[n]$ を求めるた�
 
 \[
 \begin{array}{rrrrrc}
-R[0]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[2]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-1]\cdot \hat{a}[\textrm{L}] & =-R[1] \\
-R[1]\cdot \hat{a}[1] & +R[0]\cdot \hat{a}[2] & +R[1]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-2]\cdot \hat{a}[\textrm{L}] & =-R[2] \\
-R[2]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[0]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-3]\cdot \hat{a}[\textrm{L}] & =-R[3] \\
- &  & \vdots &  &  &  \\
-R[\textrm{L}-1]\cdot \hat{a}[1] & +R[\textrm{L}-2]\cdot \hat{a}[2] & +R[\textrm{L}-3]\cdot \hat{a}[3] & +\cdots & +R[0]\cdot \hat{a}[\textrm{L}] & =-R[\textrm{L}] \\
+R[0]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[2]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-1]\cdot \hat{a}[\textrm{L}] & =-R[1] \\[5pt]
+R[1]\cdot \hat{a}[1] & +R[0]\cdot \hat{a}[2] & +R[1]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-2]\cdot \hat{a}[\textrm{L}] & =-R[2] \\[5pt]
+R[2]\cdot \hat{a}[1] & +R[1]\cdot \hat{a}[2] & +R[0]\cdot \hat{a}[3] & +\cdots & +R[\textrm{L}-3]\cdot \hat{a}[\textrm{L}] & =-R[3] \\[5pt]
+ &  & \vdots &  &  &  \\[5pt]
+R[\textrm{L}-1]\cdot \hat{a}[1] & +R[\textrm{L}-2]\cdot \hat{a}[2] & +R[\textrm{L}-3]\cdot \hat{a}[3] & +\cdots & +R[0]\cdot \hat{a}[\textrm{L}] & =-R[\textrm{L}] 
 \end{array}
 \]
 
@@ -79,7 +79,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <p>
 ただし Yule-Walker 方程式は<b>テプリッツ(Toeplitz)行列</b>という特殊な形をしているので、次に示す<b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム</b>を使って高速に計算することが可能です。
 <br>
-さらにレビンソン・ダービン・アルゴリズムは計算途中で<b>PARCOR(パーコール)係数</b>と呼ばれる重要なパラメータも同時に計算してくれるというメリットがあります。
+さらにレビンソン・ダービン・アルゴリズムは計算途中でホワイトノイズの分散の推定値と<b>PARCOR(パーコール)係数</b>と呼ばれる重要なパラメータも同時に計算してくれるというメリットがあります。
 </p>
 
 <p>
@@ -90,7 +90,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <input type="checkbox"><b>レビンソン・ダービン(Levinson-Durbin)・アルゴリズム: </b>
 
 <p>
-変数 hat_a[n] に Yule-Walker 推定値 $\hat{a}[n]$ の値が入る
+変数 hat_a[n] に LPC 係数の推定値 $\hat{a}[n]$ の値が入る
 </p>
 
 <div class="olradio"> 
@@ -99,7 +99,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 標本自己相関関数 R[0] 〜 R[L] を計算する
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> 変数 e に R[0] を代入
+<span class="olradio"><input type="radio" name="LD"></span> 変数 e に R[0] を代入 ※ e はホワイトノイズの分散の推定値
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 W に R[1] を代入
 <br>
@@ -119,7 +119,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> e = e * ( 1 - P[n]*P[n] ) と更新
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> W = R[n+1] + $\sum_{i=1}^{n}$ { hat_a[i] * R[n+1-i] } と更新
+<span class="olradio"><input type="radio" name="LD"></span> n+1 &lt;= L なら W = R[n+1] + $\sum_{i=1}^{n}$ { hat_a[i] * R[n+1-i] } と更新
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> n のループを抜ける
 </p>

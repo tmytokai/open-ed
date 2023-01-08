@@ -30,10 +30,8 @@
 さらに時刻 $i$ において、時刻 $i-1$ までの信号値は既に観測して入手済であるとします。
 <br>
 この入手済の観測値のことを「<b>実現値</b>」と呼びます。
-</p>
-
-<p>
-※ $x[i]$ は確率変数なので新しい信号列を生成する度に異なる実現値が出てくることに注意
+<br>
+なお $x[i]$ は確率変数なので新しい信号列を生成する度に異なる実現値が出てくることに注意してください。
 </p>
 
 <p>
@@ -55,7 +53,7 @@ $x[i]$ は L 次自己回帰モデルに従って生成されている
 
 \begin{align*}
 \hat{x}[i]
-& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
+& = -\sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\[5pt]
 & = -a[1] \cdot x[i-1] -a[2] \cdot x[i-2] - \cdots -a[\textrm{L}] \cdot x[i-\textrm{L}]
 \end{align*}
 
@@ -78,7 +76,7 @@ $a[n]$ ・・・ LPC 係数
 \]
 
 <p>
-となっていることに注目して下さい。
+となっています。
 </p>
 
 <p>
@@ -97,13 +95,13 @@ $a[n]$ ・・・ LPC 係数
 </div>
 
 <p>
-要するに $x[i-1]$ を入力すると次の時刻の信号値 $x[i]$ の線形予測値 $\hat{x}[i]$ が出力される<a href="../../d-filter/text02/page01.html">FIR フィルタ</a>となります。
+要するに 1 時刻前の実現値 $x[i-1]$ を入力すると現在時刻の線形予測値 $\hat{x}[i]$ が出力される<a href="../../d-filter/text02/page01.html">FIR フィルタ</a>となります。
 <br>
 よってプログラム表現は次の通りになります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>L 次線形予測モデルのプログラム表現: </b>
+<input type="checkbox"><b>L 次線形予測モデルのプログラム表現 (C言語): </b>
 
 <p>
 実現値 $x[i]$ は時刻 i が負の時は 0 とする
@@ -111,8 +109,7 @@ $a[n]$ ・・・ LPC 係数
 
 <pre class="wrap">
 hat_x[i] = 0 ;
-for( int n = 1; n &lt= L; ++n ) hat_x[i] += a[n] * x[i-n] ;
-hat_x[i] *= -1;
+for( int n = 1; n &lt= L; ++n ) if( i-n &gt= 0 ) hat_x[i] += -a[n] * x[i-n] ;
 </pre>
 
 </div>

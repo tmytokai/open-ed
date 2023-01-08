@@ -21,7 +21,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-次に時刻 $i$ の時に $x[i]$ を観測して実現値を手に入れたとします。
+次に時刻 $i$ の時に信号を観測して実現値 $x[i]$ を手に入れたとします。
 <br>
 すると実現値 $x[i]$ とその線形予測値 $\hat{x}[i]$の差分から時刻 $i$ で付加されたホワイトノイズ $e[i]$ の値を予測できます。
 </p>
@@ -42,8 +42,8 @@ $x[i]$ まで実現値を入手済みとする
 
 \begin{align*}
 \hat{e}[i] 
-& = x[i] - \hat{x}[i] \\
-& = x[i] + \sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \} \\
+& = x[i] - \hat{x}[i] \\[5pt]
+& = x[i] + \sum_{n=1}^{\textrm{L}} \{ a[n] \cdot x[i-n] \} \}
 \end{align*}
 
 <p>
@@ -84,7 +84,7 @@ $a[n]$ ・・・ LPC 係数
 </p>
 
 <div class="info">
-<input type="checkbox"><b>L 次線形予測誤差のプログラム表現: </b>
+<input type="checkbox"><b>L 次線形予測誤差のプログラム表現 (C言語): </b>
 
 <p>
 実現値 $x[i]$ は時刻 i が負の時は 0 とする
@@ -92,7 +92,7 @@ $a[n]$ ・・・ LPC 係数
 
 <pre class="wrap">
 hat_e[i] = x[i] ;
-for( int n = 1; n &lt= L; ++n ) hat_e[i] += a[n] * x[i-n] ;
+for( int n = 1; n &lt= L; ++n ) if( i-n >= 0 ) hat_e[i] += a[n] * x[i-n] ;
 </pre>
 </div>
 

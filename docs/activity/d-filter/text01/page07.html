@@ -103,10 +103,10 @@ y[i] = \sum_{n = 0}^{\infty} \{ h[n] \cdot x[i-n] \} = a \cdot x[i]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>乗算器のプログラム表現</b>
+<input type="checkbox"><b>乗算器のプログラム表現  (C言語):</b>
 
 <pre class="wrap">
-y[i] = a * x[i]
+y[i] = a * x[i] ;
 </pre>
 </div>
 
@@ -158,10 +158,10 @@ y[i] = \sum_{n = 0}^{\infty} \{ h[n] \cdot x[i-n] \} = x[i-1]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>遅延素子のプログラム表現</b>
+<input type="checkbox"><b>遅延素子のプログラム表現  (C言語): </b>
 
 <pre class="wrap">
-y[i] = x[i-1]
+y[i] = x[i-1] ;
 </pre>
 </div>
 
@@ -206,15 +206,15 @@ y[i] = \sum_{n=0}^{\textrm{M}-1} x_n[i]
 </p>
 
 <div class="info">
-<input type="checkbox"><b>加算器のプログラム表現</b>
+<input type="checkbox"><b>加算器のプログラム表現  (C言語): </b>
 
 <p>
 x[ n ][ i ] を n 番目の入力信号の時刻 i における値とすると
 </p>
 
 <pre class="wrap">
-y[i] = 0;
-for( int n = 0; n &lt M; ++n ) y[i] += x[ n ][ i ]
+y[i] = 0 ;
+for( int n = 0; n &lt M; ++n ) y[i] += x[ n ][ i ] ;
 </pre>
 </div>
 

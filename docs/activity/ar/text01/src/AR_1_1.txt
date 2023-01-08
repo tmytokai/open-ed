@@ -1,66 +1,41 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma2 : 分散
-double nrand( double mu, double sigma2 )
-{
-    // Box-Muller 法を使用
-    double sigma = sqrt(sigma2);
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
+L = 4 # 次数
+N = 100 # 信号長
+a = np.zeros(L+1) # LPC 係数
+z = np.zeros(L+1) # IIRフィルタの遅延素子(＝バッファ)
+x = np.zeros(N) # 信号値
 
+# 自己回帰モデル
+def AR():
+    
+    for i in range(N):
+        
+        # 前段フィードバック部
+        # 入力は正規乱数 N(0,1)
+        z[0] = np.random.normal()
+        for n in range(1,L+1):
+            z[0] += ?
+        
+        # 後段フィードフォワード部
+        x[i] = ?
+        
+        # バッファシフト
+        for n in range(L,0,-1):
+            z[n] = ?
 
-// 自己回帰モデル
-void AR( double *x, // 出力信号列 x[i]
-         const double *e, // 入力信号列 e[i]
-         const double *a, // LPC 係数
-         const int L, // 次数
-         const int N  // 信号長
-){
-    for( int i=0;i < N; ++i ){
-        x[i] = ? ;
-        for( int n = 1; n <= L; ++n ){
-            x[i] += ? ;  // (注意) -1 はループを抜けてから掛けているので必要ない
-        }
-        x[i] *= -1;
-        x[i] += ? ;
-    }
-}
+# LPC 係数を入力
+a[1] = ?
+a[2] = ?
+a[3] = ?
+a[4] = ?
 
+# 自己回帰モデルにより信号値をセット
+AR()
 
-int main()
-{
-    const int L = ? ; // 次数
-    const int N = 100; // 信号長
-
-    const double a[L+1] = { 0, ?, ?, ?, ? };  // LPC 係数
-
-    double e[N]={0}; // ホワイトノイズの信号列
-
-    double X[N+L]={0};
-    double *x = X+L; // 出力信号列
-
-    // ホワイトノイズをセットする
-    for( int i = 0; i < N; ++i ){
-        e[i] = ? ;
-    }
-
-    // 自己回帰モデル
-    AR( x, e, a, L, N );
-
-    FILE* file = fopen( "AR_1_1_x.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d, %lf\n", i, x[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
+with open('./AR_1_1_x.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,x[i]])

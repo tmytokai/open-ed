@@ -1,81 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+import numpy as np
+import math
+import csv
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma2 : 分散
-double nrand( double mu, double sigma2 )
-{
-    // Box-Muller 法を使用
-    double sigma = sqrt(sigma2);
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
+L = 4 # 次数
+N = 100 # 信号長
+a = np.zeros(L+1) # LPC 係数
+z = np.zeros(L+1) # IIRフィルタの遅延素子(＝バッファ)
+x = np.zeros(N) # 信号値
+hat_x = np.zeros(N) # 線形予測値
 
+# 自己回帰モデル
+# 演習 1-1 からコピー
+def AR():
+    ?
 
-// 自己回帰モデル
-void AR( double *x, // 出力信号列 x[i]
-         const double *e, // 入力信号列 e[i]
-         const double *a, // LPC 係数
-         const int L, // 次数
-         const int N  // 信号長
-){
-    // 演習1-1の内容をコピーする
-}
+# 線形予測モデル
+def LinearPrediction():
+    
+    for i in range(N):
+        hat_x[i] = 0
+        for n in range(1,L+1):
+            if i-n >= 0:
+                hat_x[i] += ?
 
+# LPC 係数を入力
+# 演習 1-1 からコピー
+?
 
-// 線形予測モデル
-void LinearPrediction( double *hat_x, // 線形予測値 hat_x[i]
-         const double *x, // 信号列 x[i]
-         const double *a, // LPC 係数
-         const int L, // 次数
-         const int N  // 信号長
-){
-    for( int i=0;i < N; ++i ){
-        hat_x[i] = ? ;
-        for( int n = 1; n <= L; ++n ){
-            hat_x[i] += ? ;  // (注意) -1 はループを抜けてから掛けているので必要ない
-        }
-        hat_x[i] *= -1;
-    }
-}
+# 自己回帰モデルにより信号値をセット
+AR()
 
+# 線形予測モデルにより線形予測値を求める
+LinearPrediction()
 
-int main()
-{
-    const int L = ? ; // 次数
-    const int N = 100; // 信号長
-
-    const double a[L+1] = { 0, ?, ?, ?, ? };  // LPC 係数
-
-    double e[N]={0}; // ホワイトノイズの信号列
-
-    double X[N+L]={0};
-    double *x = X+L; // 出力信号列
-
-    double hat_x[N]={0}; // 線形予測値
-
-    // ホワイトノイズをセットする
-    for( int i = 0; i < N; ++i ){
-        e[i] = ? ;
-    }
-
-    // 自己回帰モデル
-    AR( x, e, a, L, N );
-
-    // 線形予測モデル
-    LinearPrediction( hat_x, x, a, L, N );
-
-    FILE* file = fopen( "AR_1_2_hat_x.csv", "wb");
-    if( file == NULL ){
-        printf( "ファイルを開けません");
-        exit(1);
-    }
-    for( int i = 0; i <N ; ++i ){
-        fprintf( file, "%d, %lf\n", i, hat_x[i] );
-    }
-    fclose(file);
-
-    return 0;
-}
+with open('./AR_1_2_hat_x.csv', 'w') as ff:
+    writer = csv.writer(ff)
+    for i in range(N):
+        writer.writerow([i,hat_x[i]])

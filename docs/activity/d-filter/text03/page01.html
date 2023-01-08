@@ -148,7 +148,7 @@ $a[0]$〜$a[\textrm{L}]$ 及び$b[0]$〜$b[\textrm{L}]$  を「<b>IIRフィル�
 </p>
 
 <div class="info">
-<input type="checkbox"><b>標準形 L 次 IIR フィルタのプログラム表現: </b>
+<input type="checkbox"><b>標準形 L 次 IIR フィルタのプログラム表現 (C言語): </b>
 
 <p>
 z[n] を n 時刻前の☆の位置における値とする
@@ -156,15 +156,15 @@ z[n] を n 時刻前の☆の位置における値とする
 
 <pre class="wrap">
 // 前段フィードバック部
-z[0] = x[i];
-for( int n = 1; n &lt= L; ++n ) z[0] += a[n] * z[n];
+z[0] = x[i] ;
+for( int n = 1; n &lt= L; ++n ) z[0] += a[n] * z[n] ;
 
 // 後段フィードフォワード部
-y[i] = 0;
-for( int n = 0; n &lt= L; ++n ) y[i] += b[n] * z[n];
+y[i] = 0 ;
+for( int n = 0; n &lt= L; ++n ) y[i] += b[n] * z[n] ;
 
 // バッファシフト
-for( int n = L; n &gt= 1; --n ) z[n] = z[n-1];
+for( int n = L; n &gt= 1; --n ) z[n] = z[n-1] ;
 </pre>
 
 </div>
