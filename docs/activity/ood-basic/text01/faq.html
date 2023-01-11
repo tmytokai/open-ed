@@ -20,6 +20,46 @@
 <h2><script>GetTitle()</script></h2>
 
 <h3>
+Q. act メソッドの中でマウスの座標やクリックした時のボタン番号、カーソルの下にいるアクターを取得したい
+</h3>
+
+<p>
+A. MouseInfo クラスを使うと出来ます。
+</p>
+
+<div class="info">
+<pre class="wrap">
+        // マウスが World 外にある時は null になるので注意
+        MouseInfo minfo = Greenfoot.getMouseInfo();
+        if( minfo != null ){
+
+            // マウス座標取得
+            int x = minfo.getX();
+            int y = minfo.getY();
+            getWorld().showText( "x="+x+",y="+y, 100, 50 );
+            
+            // マウスボタンのクリック時に押したボタン番号を取得
+            // クリックした時だけ数値が入る。押しっぱなしの時やボタンを離した時は 0 になるので注意
+            int button = minfo.getButton();
+            if( button != 0 ){            
+                getWorld().showText( "button="+button, 100, 100 );
+            }
+
+            // マウスを動かした時にカーソルの下にいるアクターを取得
+            // マウスを動かしてない時は null になるので注意
+            Actor actor = minfo.getActor();
+            if (actor != null){
+                getWorld().showText( "actor="+actor.getClass().getName(), 100, 150 );
+            }
+           
+        }
+</pre>
+</div>
+
+
+
+
+<h3>
 Q. act メソッドの中で何かの条件を満たした時、他のオブジェクトでは無く自分自身を削除したい
 </h3>
 
