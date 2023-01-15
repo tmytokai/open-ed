@@ -11,11 +11,7 @@ sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
 
-# (注) numpy 1.20 以降を使うとエラーが出るようです(2022年1月時点)
-# エラーが出る場合は 1.19 にダウングレードしてください
-# (anacondaを使っている場合) conda install numpy=1.19
 import numpy as np
-
 import matplotlib.pyplot as plt
 
 # パーセプトロン/LSTMブロックの数

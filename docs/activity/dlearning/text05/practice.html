@@ -25,7 +25,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-1 (個人):</b> Keras を使ってLSTMを作ってみましょう。
+<input type="checkbox"><b>演習 5-1 (個人):</b> Keras を使って3層LSTMを作ってみましょう。
 </p>
 
 <div class="olradio">
@@ -45,7 +45,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-2 (個人):</b> LSTMを用いてサイン波の予測をしてみましょう。
+<input type="checkbox"><b>演習 5-2 (個人):</b> 3層LSTMを用いてサイン波の予測をしてみましょう。
 <br>
 LSTMとディープラーニングの仕様は以下の通りです。
 </p>
@@ -60,17 +60,18 @@ LSTMとディープラーニングの仕様は以下の通りです。
 </p>
 <p>
 (3) 出力層のパーセプトロン数は M = 1
-<p>
-(4) 入力信号はサイン波に一様乱数を加えたものとする
 </p>
 <p>
-(5) ラベルは1時刻後の入力信号の値とする(詳しくはテンプレート内のコメントを参照)
+(4) 信号長は S = 25
 </p>
 <p>
-(6) 信号長は S = 25 とする
+(5) 学習率は r = 0.001、エポック数は E = 50、バッチサイズは B = 32
 </p>
 <p>
-(7) 学習率は r = 0.001、エポック数は E = 50、バッチサイズは B = 32 とする
+(6) 入力信号はサイン波に一様乱数を加えたものとする
+</p>
+<p>
+(7) ラベルは1時刻後の入力信号の値とする(詳しくはテンプレート内のコメントを参照)
 </p>
 <p>
 (8) 出力層の活性化関数は「linear」、損失関数は「tf.keras.losses.MeanSquaredError()」、評価関数は無しとする
@@ -87,7 +88,7 @@ LSTMとディープラーニングの仕様は以下の通りです。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> DL_5_1 とテキストを参考にしながらスクリプトファイル内の ? の部分を穴埋めして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 実行して下さい。青いグラフがLSTMへの入力信号、赤いグラフがLSTMの出力です。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 指定場所に「ソース」と「学習前のグラフ」、「学習後のグラフ」を貼り付けて下さい。
 </p>
@@ -95,7 +96,7 @@ LSTMとディープラーニングの仕様は以下の通りです。
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-3 (個人):</b> LSTMを用いて音声認識をしてみましょう。
+<input type="checkbox"><b>演習 5-3 (個人):</b> 3層LSTMを用いて音声認識をしてみましょう。
 <br>
 LSTMとディープラーニングの仕様は以下の通りです。
 </p>
