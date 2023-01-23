@@ -1,0 +1,51 @@
+import tensorflow as tf
+
+'''
+# CUDA を有効にしている時に「UnknownError: Fail to find the dnn implementation」というエラーが
+# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
+from tensorflow.compat.v1.keras.backend import set_session
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+config.log_device_placement = True
+sess = tf.compat.v1.Session(config=config)
+set_session(sess)
+'''
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+pltimg=True
+
+# パーセプトロン/LSTMブロックの数
+N = 3   # 入力層 = 入力信号の個数
+K = 2   # 隠れ層 (LSTMブロック)
+M = 1   # 出力層
+
+# 信号長
+S = 10
+
+# 入力信号
+x = np.random.uniform(low=-1, high=1, size=S*N)
+data  = x.reshape(1,S,N)
+
+# LSTMの構築
+model = tf.keras.Sequential()
+model.add( tf.keras.layers.Input(shape=(S,N)))
+model.add( tf.keras.layers.LSTM( K, return_sequences=False))  
+model.add( tf.keras.layers.Dense(M, activation='linear') ) 
+
+# 出力
+y = model.predict(data)
+
+# モデルの概要表示
+model.summary()
+
+print('入力')
+plt.plot(range(S),data[0])
+if pltimg == True:
+    plt.show()
+else:
+    plt.savefig('data.png')
+    
+print('\n出力')
+print(y)

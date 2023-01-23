@@ -14,6 +14,8 @@ set_session(sess)
 import numpy as np
 import matplotlib.pyplot as plt
 
+pltimg=True
+
 # パーセプトロン/LSTMブロックの数
 N = ?    # 入力層
 K = ?    # 隠れ層 (LSTMブロック)
@@ -35,11 +37,13 @@ B = ?
 Td = 100  # サイン波の周期
 i = np.arange(Td*2) # 2回振動させる
 x = np.sin(2*np.pi/Td*i) + np.random.uniform(low=-0.1, high=0.1, size=Td*2)
-print('元のサイン波')
-plt.figure(figsize=(8, 8), dpi=50)
-plt.ylim(-1.2,1.2)
-plt.plot(range(0, len(x)), x)
-plt.show()
+
+if pltimg == True:
+    print('元のサイン波')
+    plt.figure(figsize=(8, 8), dpi=50)
+    plt.ylim(-1.2,1.2)
+    plt.plot(range(0, len(x)), x)
+    plt.show()
 
 # 元の信号から学習データセットを作成
 # まず時刻 0 において x[0]〜x[S-1] を入力信号とし、x[S]をそのラベルとする
@@ -69,10 +73,12 @@ def show_data(data,label,i):
     plt.show()
 
 print('データセットサイズ L = '+str(L))
-print('例として No.0 と No.12 のデータを表示')
-print('')
-show_data(data_training,label_training,0)
-show_data(data_training,label_training,12)
+
+if pltimg == True:
+    print('例として No.0 と No.12 のデータを表示')
+    print('')
+    show_data(data_training,label_training,0)
+    show_data(data_training,label_training,12)
 
 # 今回は検証データセットとテストデータセットは使わない
 
@@ -85,17 +91,20 @@ show_data(data_training,label_training,12)
 model.summary()
 
 # 結果の表示関数
-def show_result(x,predict):
+def show_result(x,predict,file):
     plt.figure(figsize=(8, 8), dpi=50)
     plt.ylim(-1.2,1.2)
     plt.plot(range(0, len(x)), x)
     plt.plot(range(S-1, len(predict)+S-1), predict, color="r")
-    plt.show()
+    if pltimg == True:
+        plt.show()
+    else:
+        plt.savefig(file)
     
 # 学習前の状態
 print('\n学習前')
 predict = model.predict(data_training)
-show_result(x,predict)
+show_result(x,predict,'before.png')
 
 # ディープラーニング実行
 ?
@@ -103,4 +112,4 @@ show_result(x,predict)
 # 学習後の状態
 print('\n\n学習後')
 predict = model.predict(data_training)
-show_result(x,predict)
+show_result(x,predict,'after.png')
