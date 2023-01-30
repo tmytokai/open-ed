@@ -98,13 +98,21 @@ IDTFT の定義は以下の通りです。
 <div class="info">
 <input type="checkbox"><b>定義: IDTFT(Inverse Discrete Time Fourier Transform: 逆離散時間フーリエ変換)</b>
 
-\[
-f[i] = \frac{1}{w_s} \int_{-w_s/2}^{w_s/2}
+\begin{align*}
+f[i] &= 
+\frac{1}{w_s} \int_{-w_s/2}^{w_s/2}
 \left \{
 \textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
 \right \}
-\textrm{d}w
-\]
+\textrm{d}w \\[10pt]
+(\text{$F(w)$は周期的なので})
+&= 
+\frac{1}{w_s} \int_{0}^{w_s}
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\
+\end{align*}
 
 <p>
 $f[i]$ ・・・ 時間領域ディジタル信号

@@ -1,0 +1,71 @@
+import numpy as np
+import math
+import cmath
+import matplotlib.pyplot as plt
+
+xsize=1000
+
+def DTFT(w,f,tau):
+    c = 0
+    N = len(f)
+    for i in range(N):
+        c += f[i] * cmath.rect(1, -i*w*tau)
+    return c
+
+f = np.array([1,-4,3,-2,5,9,3,-2,1,5])
+N = len(f)
+fs = 100   # サンプリング周波数
+tau = 1/fs # サンプリング間隔
+ws = fs*2*math.pi # サンプリング角周波
+wmin = -ws
+wmax = ws
+
+W = [ wmin+(wmax-wmin)*i/xsize for i in range(xsize) ]
+F = [ DTFT(w,f,tau)/N for w in W ]
+
+Wk=np.arange(0,1,1/N)*ws
+C = [ DTFT(w,f,tau)/N for w in Wk ]
+
+plt.plot(np.r_[f,np.zeros(3*N)],marker='o',markersize=5,linestyle='-')
+plt.xticks(range(0,5*N,N))
+for i in range(5):
+    plt.axvline(i*N,color="gray",linestyle='dashed')
+plt.xlabel('i')
+plt.show()
+
+ticks = np.arange(-1,1.1,0.5)*ws
+labels = ['$-w_s$','$-w_s/2$','0','$w_s/2$','$w_s$']
+
+plt.plot( W,[abs(i) for i in F])
+plt.plot( Wk,[abs(i) for i in C],marker='o',markersize=5,linestyle='')
+plt.xticks(ticks=ticks,labels=labels)
+plt.axvline(-ws/2,color="gray",linestyle='dashed')
+plt.axvline(0,color="gray",linestyle='dashed')
+plt.axvline(ws/2,color="gray",linestyle='dashed')
+plt.ylim(bottom=0)
+plt.xlabel('$w$')
+plt.show()
+
+plt.plot( W,[ cmath.phase(i) for i in F])
+plt.plot( Wk,[cmath.phase(i) for i in C],marker='o',markersize=5,linestyle='')
+plt.xticks(ticks=ticks,labels=labels)
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.axvline(-ws/2,color="gray",linestyle='dashed')
+plt.axvline(0,color="gray",linestyle='dashed')
+plt.axvline(ws/2,color="gray",linestyle='dashed')
+plt.xlabel('$w$')
+plt.show()
+
+# IDFT
+f2 = [0]*N*4
+for i in range(N*4):
+    for k in range(N):
+        f2[i] += C[k]*cmath.rect(1, k*2*math.pi/N*i)
+f2 = [i.real for i in f2]
+
+plt.plot(f2,marker='o',markersize=5,linestyle='-')
+plt.xticks(range(0,5*N,N))
+for i in range(5):
+    plt.axvline(i*N,color="gray",linestyle='dashed')
+plt.xlabel('i')
+plt.show()

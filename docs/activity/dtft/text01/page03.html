@@ -21,25 +21,119 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ディジタル信号の周期を無限大にしたときの DFT が DTFT であると言いましたが、DTFT から見れば DFT は前ページで求めた「長さ $\textrm{N}$ のディジタル信号に対する DTFT を N 点でサンプリング(離散化)したもの」に相当します。
+$f[i]$ が周期 N の周期的なディジタル信号のときは $f[i]$ をそのまま DTFT すれば DFT になりそうな気がしますが、$f[i]$ は収束しない(振動する)のでそのまま DTFT を求めても発散します。
+<br>
+という訳で、DTFT と DFT の関係を考えるためには少し工夫が必要です。
 </p>
+
+<p>
+結論から言うと次のことが言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>DTFT と DFT の関係</b>
+
+<p>
+$f[i]$ を周期 N の周期的なディジタル信号とする。
+<br>
+$f[i]$ の先頭から N 個分だけ値を取り出して作った長さ N のディジタル信号
+</p>
+\[
+[f[0],f[1],\cdots,f[\textrm{N}-1],0,0,\cdots]
+\]
+<p>
+に対する DTFT を $\textrm{F}(w)$ としたとき、 $\textrm{F}(w)/\textrm{N}$ を $w_s/\text{N}$ (rad/秒) おきにサンプリング(離散化)した値が DFT 係数 になる。
+<br>
+すなわち
+</p>
+
+\[
+\textrm{C}[k] = \frac{1}{\textrm{N}} \cdot \textrm{F}\left ( \frac{w_s}{\text{N}} \cdot k \right ) 
+\ ,\ (k=0,1,\cdots,\textrm{N}-1)
+\]
+
+</p>
+
+</div>
 
 <p>
 まず $\textrm{F}(w)$ は周期 $w_s$ [rad/秒]の複素関数でしたので、$k$ を 0 から $\textrm{N}-1$ までの整数として
 </p>
 
 \[
-w_k = \frac{w_s}{\text{N}} \cdot k = w_1 \cdot k
+w_k = \frac{w_s}{\text{N}} \cdot k
 \]
 
 <p>
 とサンプリング点 $w_k$ [rad/秒] を定義します。
 <br>
-ここで $w_1 = w_s/\textrm{N}$ は DFT の基本角周波数です。
+ここで $w_s/\textrm{N}$ はサンプリング間隔を意味します。
 </p>
 
 <p>
-あとは $w_k$ を $\textrm{F}(w)$ に代入する、つまり $\textrm{F}(w)$ を $w_0$ 〜 $w_{\textrm{N}-1}$ の N 点でサンプリングすることで
+次にこのサンプリング点上で $\textrm{F}(w)$ をサンプリングした信号を $\textrm{F}'(w)$ とすると、
+</p>
+
+\[
+\textrm{F}'(w)
+=
+\frac{w_s}{\textrm{N}} 
+\cdot
+\sum_{k=0}^{\textrm{N}-1} \ \textrm{F}(w) \cdot \delta(w - w_k )
+\]
+
+<p>
+となります。
+<br>
+ここで $\delta(t)$ は<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">ディラックのデルタ関数</a> です。
+<br>
+また(やや恣意的な気もしますが)ゲインを調整するためサンプリング間隔 $w_s/\textrm{N}$ をかけています。
+<p>
+※ 何故いきなりデルタ関数が出てくるのか不思議な人は<a href="../../dft/text01/page03.html">こちら</a>や<a href="../../z/text01/page02.html">こちら</a>の話を参照してください。
+</p>
+
+<p>
+次にこの $\textrm{F}'(w)$ に対して IDTFT を計算して $f'[i]$ を求めます。
+<br>
+すると
+</p>
+
+\begin{align*}
+f'[i] &= 
+\frac{1}{w_s} \int_{0}^{w_s}
+\left \{
+\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\[10pt]
+&=
+\frac{1}{\textrm{N}} \int_{0}^{w_s}
+\left \{
+\sum_{k=0}^{\textrm{N}-1} \ \textrm{F}(w) \cdot \delta(w - w_k )
+\cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\[10pt]
+&=
+\frac{1}{\textrm{N}}
+\sum_{k=0}^{\textrm{N}-1} 
+\int_{0}^{w_s}
+\left \{
+\textrm{F}(w) \cdot \delta(w - w_k )
+\cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\[10pt]
+(\text{デルタ関数の性質より})
+&=
+\frac{1}{\textrm{N}}
+\sum_{k=0}^{\textrm{N}-1} 
+\left \{
+\textrm{F}(w_k)
+\cdot \textrm{e}^{\{j \cdot i \cdot w_k \cdot \tau \}} 
+\right \}
+\\[10pt]
+\end{align*}
+
+<p>
+となりますが、ここで
 </p>
 
 \begin{align*}
@@ -56,14 +150,102 @@ f[i] \cdot \textrm{e}^{\{-j \cdot i \cdot (w_s / \text{N} \cdot k) \cdot (2\pi /
 \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
 \right \} \\[10pt]
-& = \textrm{C}[k] \cdot \textrm{N}
+& = \textrm{N} \cdot \textrm{C}[k]
 \end{align*}
 
 </div>
 
+<p>
+という関係が出てきました。
+<br>
+この関係を上の式に代入すれば
+</p>
+
+\begin{align*}
+f'[i] 
+&= 
+\frac{1}{w_s} \int_{0}^{w_s}
+\left \{
+\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot i \cdot w \cdot \tau \}} 
+\right \}
+\textrm{d}w \\[10pt]
+&= 
+\sum_{k=0}^{\textrm{N}-1} 
+\left \{
+\textrm{C}[k]
+\cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \} \\[10pt]
+&= f[i]
+\end{align*}
 
 <p>
-と( 正規化パラメータ $\textrm{N}$ をかけている事を除けば) DFT の定義式と一致します。
+となるので、$\textrm{F}'(w)$ を IDTFT して求めた $f'[i]$ は周期的な信号であり、かつ DFT 係数 $\text{C}[k]$ を IDFT して求めた f[i] と一致していることが分かります。
+</p>
+
+<p>
+では例を示します。
+</p>
+
+<p>
+$f[i]$ を周期 $\textrm{N} = 10$ の周期的なディジタル信号とし、先頭 N=10 個の値を
+</p>
+
+\[
+\{\ 1,\ -4,\ 3,\ -2,\ 5,\ 9,\ 3,\ -2\ ,1\ ,5\ \}
+\]
+
+<p>
+とします。
+<br>
+またサンプリング周波数を $f_s = 100$ [Hz] 、つまりサンプリング角周波数を $w_s = 200\pi$ [rad/秒] とします。
+<br>
+この時、 $f[i]$ の先頭 N = 10個からなる信号 は図1となります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図1: $f[i]$ の先頭 N = 10個からなる信号のグラフ</b>
+<p>　</p>
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<p>
+図1の信号の DTFT を $\textrm{F}(w)$ としたとき、 $\textrm{F}(w)/\textrm{N}$ の絶対値と偏角のグラフは以下の図2となります。
+<br>
+なお図中のオレンジの点はサンプリング点、つまり DFT 係数 $\text{C}[k]$ です。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図2: 図1の信号の DTFT を N で割ったグラフ </b>
+<p>
+※ オレンジの点はサンプリング点 ( = DFT 係数)
+</p>
+<p>
+絶対値 $|\textrm{F}(w)|/\textrm{N}$
+</p>
+<img src="./img/page03-fig2-1.png" alt="">
+<p>
+偏角 $\angle \textrm{F}(w)/\textrm{N}$
+</p>
+<img src="./img/page03-fig2-2.png" alt="">
+</div>
+
+<p>
+図2のオレンジの点を DFT 係数 $\text{C}[k]$ として IDFT して求めたグラフが次の図3です。
+<br>
+この様に図3は図1を周期的にしたグラフとなっていることが分かります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: IDFT の結果 </b>
+<p>　</p>
+<img src="./img/page03-fig3.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="src/page03.txt">こちら</a>です。
 </p>
 
 <br>
