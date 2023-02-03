@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>5. ラプラス変換の例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: ラプラス変換</a></li>
+<li>学習項目: [1] ラプラス変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>
+(例1) デルタ関数(インパルス信号) $\delta(t)$
+</h2>
+
+<p>
+デルタ関数(インパルス信号) $\delta(t)$ の片側ラプラス変換は
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= \int_{0}^{\infty} 
+\left \{
+\delta(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{d}t \\[10pt]
+(\text{デルタ関数の性質より}) 
+&= \textrm{e}^{0} \\[10pt]
+&= 1
+\end{align*}
+
+<p>
+となります。
+<br>
+極は無いので、収束領域は S 平面全域になります。
+</p>
+
+<br>
+<h2>
+(例2) 複素正弦波 $\textrm{e}^{\{j \cdot w_1 \cdot t \}}$
+</h2>
+
+<p>
+<a href="../../complex/text02/page02.html">複素正弦波</a>
+</p>
+
+\[
+f(t) = \textrm{e}^{\{j \cdot w_1 \cdot t \}}
+\]
+
+<p>
+の片側ラプラス変換は
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= \int_{0}^{\infty} 
+\left \{
+\textrm{e}^{\{j \cdot w_1 \cdot t \}} \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\int_{0}^{\infty} 
+\left \{
+\textrm{e}^{  ( j \cdot w_1 -s ) \cdot t } 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{  ( j \cdot w_1 -s ) \cdot t } }{  j \cdot w_1 -s }
+\right ]^a_0 \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\frac{ \textrm{e}^{  ( j \cdot w_1 -s ) \cdot a } }{  j \cdot w_1 -s }
++
+\frac{1}{s - j \cdot w_1} \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\frac{ \textrm{e}^{  -\sigma \cdot a } \cdot \textrm{e}^{  j (w_1 -w ) \cdot a } }{  j \cdot w_1 -s }
++
+\frac{1}{s - j \cdot w_1} \\[10pt]
+\end{align*}
+
+<p>
+ここで $s \ne j\cdot w_1$ かつ $\sigma > 0$ としたとき、上の第1項は 0 に収束するので
+</p>
+
+\[
+\textrm{F}(s)  =\frac{1}{s - j \cdot w_1}
+\]
+
+<p>
+となります。
+<br>
+極は $s = j\cdot w_1$ ひとつなので収束座標は 0、収束領域は $\sigma >0$ です。
+</p>
+
+<br>
+<h2>
+(例3) $f(t)=1$
+</h2>
+
+<p>
+$f(t)=1$ は例2で $w_1=0$ とした場合なので
+</p>
+
+\[
+\textrm{F}(s)  =\frac{1}{s}
+\]
+
+<p>
+となります。
+<br>
+極は $s = 0$ 、収束座標は 0、収束領域は $\sigma >0$ です。
+</p>
+
+
+
+
+<br>
+<h2>
+(例4) 三角関数 $\cos (w_1 \cdot t)$  と $\sin(w_1 \cdot t)$
+</h2>
+
+
+<p>
+例2で求めた $\textrm{e}^{\{j \cdot w_1 \cdot t \}}$ の片側ラプラス変換を変形すると
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= \frac{1}{s - j \cdot w_1} \\[10pt]
+&= \frac{s + j \cdot w_1}{s^2 + w_1^2} \\[10pt]
+&= 
+\frac{s}{s^2 + w_1^2}
++
+j \cdot \frac{w_1}{s^2 + w_1^2} \\[10pt]
+\end{align*}
+
+<p>
+となりますが、<a href="../../complex/text01/page04.html">オイラー公式</a>を考慮すると $f(t) = \cos (w_1 \cdot t)$ の片側ラプラス変換は
+</p>
+
+\[
+\textrm{F}(s) = \frac{s}{s^2 + w_1^2}
+\]
+
+<p>
+$f(t) = \sin (w_1 \cdot t)$ の片側ラプラス変換は
+</p>
+
+\[
+\textrm{F}(s) = \frac{w_1}{s^2 + w_1^2}
+\]
+
+<p>
+となります。
+<br>
+また
+</p>
+
+\[
+s^2 + w_1^2 = (s - j \cdot w_1)(s + j \cdot w_1)
+\]
+
+<br>
+なので極は $s = \pm j\cdot w_1$ 、収束座標は 0、収束領域は $\sigma >0$ です。
+</p>
+
+
+<br>
+<h2>
+(例5) 単一パルス
+</h2>
+
+<p>
+$a > 0$ を有限な値とした時、単一パルス
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+0 \ & t <0 \\[10pt]
+1 \ & 0 \leq t \leq a \\[10pt]
+0 & t > a
+\end{cases}
+\]
+
+<p>
+の片側ラプラス変換は以下の様に普通に求められます。
+</p>
+
+\begin{align*}
+\textrm{F}(s) 
+&= \int_{0}^{a}
+\left \{
+\textrm{e}^{\{- s \cdot t \}}
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\left [
+\frac{\textrm{e}^{\{- s \cdot t \}}}{-s} 
+\right ]^a_0 \\[10pt]
+&= 
+\frac{1 - \textrm{e}^{\{- s \cdot a \} }}{s}
+\end{align*}
+
+<p>
+ちなみに $s=0$ の時はロピタルの定理を使って
+</p>
+
+\[
+\textrm{F}(0) = \frac{ a \cdot \textrm{e}^0 }{1} = a
+\]
+
+<p>
+となりますので、極無し、収束領域は S 平面全域になります。
+</p>
+
+<br>
+<h2>
+(例6) 指数減衰 $\textrm{e}^{ \{ -a \cdot t \} }$
+</h2>
+
+<p>
+指数減衰
+</p>
+
+\[
+f(t) =  \textrm{e}^{ \{ -a \cdot t \} } \cdot u(t)
+\]
+
+<p>
+(ただし$a > 0$ かつ $t \geq 0$)の片側ラプラス変換は以下の様になります。
+</p>
+
+
+\begin{align*}
+\textrm{F}(w) 
+&= 
+\int_{0}^{\infty} 
+\left \{
+\textrm{e}^{\{ - a \cdot t \}} \cdot  \textrm{e}^{\{- s t \}} 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\int_{0}^{\infty} 
+\left \{
+\textrm{e}^{\{ (-a-s) \cdot t \}}
+\right \}
+\textrm{d}t \\[10pt]
+\\[10pt]
+
+\end{align*}
+
+<p>
+これは例2で $j \cdot w1 = -a$ に置き換えた式となっていますので、
+</P>
+
+\[
+\textrm{F}(w) = \frac{ 1 }{  s + a }
+\]
+
+<p>
+となります。
+</p>
+
+<br>
+極は $s = -a$ ひとつなので、収束座標は -a、収束領域は $\sigma > -a$ です。
+</p>
+
+<br>
+<h2>
+(例7) 単位ステップ関数
+</h2>
+
+<p>
+単位ステップ関数
+</p>
+
+\[
+u(t)=
+\begin{cases}
+0 \ & t < 0 \\[10pt]
+1 & t \geq 0
+\end{cases}
+\]
+
+<p>
+の片側ラプラス変換は例3の $f(t)=1$ の片側ラプラス変換と同等です。
+<br>
+よって
+</p>
+
+\[
+\textrm{F}(s)  =\frac{1}{s}
+\]
+
+<p>
+となります。
+<br>
+極は $s = 0$ 、収束座標は 0、収束領域は $\sigma >0$ です。
+</p>
+
+
+<br>
+<h2>
+(例8) 正弦波の指数減衰 $\sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -a \cdot t \} }$
+</h2>
+
+<p>
+正弦波の指数減衰
+</p>
+
+\[
+f(t) = \sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -a \cdot t \} }
+\]
+
+<p>
+(ただし $\sigma > 0$、$t \geq 0$)はオイラー公式より
+</p>
+
+\begin{align*}
+f(t)
+&= \frac{\textrm{e}^{ \{ j \cdot w_1 \cdot t - a \cdot t \}} - \textrm{e}^{ \{ -j \cdot w_1 \cdot t - a \cdot t \} } } { 2 \cdot j } \\[10pt]
+&= \frac{\textrm{e}^{ \{ j \cdot (w_1 - a/j) \cdot t \}} - \textrm{e}^{ \{ -j \cdot (w_1 \cdot t + a/j) \cdot t \} } } { 2 \cdot j } \\[10pt]
+\end{align*}
+
+<p>
+となりますので、後は例2と同様にして片側ラプラス変換は
+</p>
+
+
+\begin{align*}
+\textrm{F}(w) 
+&=
+\frac{1}{2\cdot j}
+\left \{
+\frac{1}{s-j\cdot (w_1 - a/j)}
+-
+\frac{1}{s+j\cdot (w_1 + a/j)}
+\right \}
+\\[10pt]
+&=
+\frac{1}{2\cdot j}
+\frac{(s+a+j\cdot w_1) - (s+a-j\cdot w_1)}{ (s+a-j\cdot w_1) \cdot (s+a+j\cdot w_1) } \\[10pt]
+&=
+\frac{w_1}{(s+a)^2+w_1^2}
+\end{align*}
+
+<p>
+となります。
+<br>
+極は $s = -a \pm j \cdot w_1$ なので、収束座標は -a、収束領域は $\sigma > -a$ です。
+</p>
+
+
+
+<br>
+<h2>
+(例9) 時刻 0 から始まって $n$ 回振動したら 0 になる正弦波
+</h2>
+
+<p>
+正弦波 $\sin(w_1\cdot t)$ の周期を $\textrm{T} = 2\pi/w_1$ [秒] とします。
+<br>
+$n$ を 1 以上の整数としたとき次の信号を考えます。
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+0 & t < 0 \\[10pt]
+\sin(w_1\cdot t) \ & 0 \leq t \leq n\cdot \textrm{T} \\[10pt]
+0 & t > n\cdot \textrm{T}
+\end{cases}
+\]
+
+<p>
+例えば、$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]の場合は次のグラフになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: $f(t)$ のグラフ例</b>
+
+<p>
+$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]
+</p>
+
+<img src="./img/page05-fig1.png" alt="">
+</div>
+
+<p>
+次に普通の正弦波の式(ただし $t \geq 0$)
+</p>
+
+\[
+g(t) = \sin(w_1\cdot t) \ ,\ (t \geq 0)
+\]
+
+<p>
+および $g(t)$ を $n\cdot \textrm{T}$ 秒だけ右にシフトした式
+</p>
+
+\[
+h(t) = 
+\begin{cases}
+0 & t \leq n\cdot \textrm{T} \\[10pt]
+\sin(w_1\cdot t) \  & t > n\cdot \textrm{T}
+\end{cases}
+\]
+
+<p>
+を考えます(図2、3)。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: $g(t)$ のグラフ例</b>
+<p>
+$w_1 = 4\pi$ [rad/秒]
+</p>
+<img src="./img/page05-fig2.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: $h(t)$ のグラフ例</b>
+<p>
+$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]
+</p>
+<img src="./img/page05-fig3.png" alt="">
+</div>
+
+<p>
+ここで
+</p>
+
+\[
+f(t) = g(t) - h(t)
+\]
+
+<p>
+なので、$f(t)$ の片側ラプラス変換は $g(t)$ の片側ラプラス変換から $h(t)$ の片側ラプラス変換を引いた式となります。
+</p>
+
+<p>
+さて $g(t)$ のラプラス変換は例4より
+</p>
+
+\[
+\textrm{G}(s) = \frac{w_1}{s^2 + w_1^2}
+\]
+
+<p>
+です。
+<br>
+また $h(t)$ は $g(t)$ を $n\cdot \textrm{T}$ [秒] だけ右シフトした式なので、そのラプラス変換は
+</p>
+
+\[
+\textrm{H}(s) = \frac{w_1}{s^2 + w_1^2}\cdot \textrm{e}^{  \{ - n \cdot \textrm{T} \cdot s \} } 
+\]
+
+<p>
+となります。
+<br>
+よって $f(t)$ のラプラス変換は
+<p>
+
+\[
+\textrm{F}(s) 
+=
+\textrm{G}(s) - \textrm{H}(s) 
+=
+\frac{w_1}{s^2 + w_1^2} \cdot \left ( 1 - \textrm{e}^{  \{ - n \cdot \textrm{T} \cdot s \} } \right )
+\]
+
+<p>
+です。
+</p>
+
+<p>
+なお $s = \pm j \cdot w_1$ の時はロピタルの定理より
+</p>
+
+\begin{align*}
+\textrm{F}(\pm j\cdot w_1) 
+&=
+\lim_{s \rightarrow \pm j\cdot w_1}
+\frac{w_1}{2s} \cdot \left ( n \cdot \textrm{T} \cdot \textrm{e}^{  \{ - n \cdot \textrm{T} \cdot s \} } \right ) \\[10pt]
+&= 
+\pm
+\frac{1}{2 \cdot j} \cdot \left ( n \cdot \textrm{T} \cdot \textrm{e}^{ \{ \mp j \cdot n \cdot 2 \pi \} } \right ) \\[10pt]
+&= 
+\mp \frac{j \cdot n \cdot \textrm{T}}{2}
+\end{align*}
+
+
+<p>
+となりますので、極無し、収束領域は S 平面全域になります。 
+</p>
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>

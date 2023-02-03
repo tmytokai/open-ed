@@ -167,9 +167,95 @@ $s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
 </p>
 
 <p>
-さて、逆変換の中で出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と呼ばれる複素積分となりますが、積分路を閉曲線になるように変更すると留数定理を使って以下の様に書き換えることが出来ます。
+なお逆ラプラス変換は不連続関数に対しては一意な変換になりません(つまり $f(t)$ が不連続関数の場合、そのラプラス変換 $\textrm{F}(s)$ を逆変換しても $f(t)$ に戻らないときがある)。
 <br>
-ただし留数を使った場合は両側ラプラス変換と片側ラプラス変換で若干式が変わります。
+ただし工学的にはさほど問題にはならないので、この件に関してはあまり深く立ち入らないことにします。
+</p>
+
+<p>
+さて、上の逆変換の式中に出てきた積分は<a href="https://en.wikipedia.org/wiki/Inverse_Laplace_transform">Bromwich 積分</a>と言いますが、 Bromwich 積分は
+どんな $\textrm{F}(s)$ に対しても適用出来る訳ではないことに注意が必要です。
+<br>
+Bromwich 積分を行うためには
+</p>
+
+\[
+\lim_{|s|\rightarrow \infty} |\textrm{F}(s)| \rightarrow 0
+\]
+
+<p>
+という条件が必要です。
+</p>
+
+<p>
+この条件を満たさない簡単な例としてはデルタ関数 $\delta(t)$ のラプラス変換 $\textrm{F}(s) = 1$ があります。
+<br>
+この式に対して Bromwich 積分をしても
+</p>
+
+\begin{align*}
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\left \{
+1 \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\textrm{d}s
+&=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{\{s \cdot t \}} }{t}
+\right ]_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\\[10pt]
+&=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\left \{
+\frac{ \textrm{e}^{ (\gamma+j\cdot p) \cdot t } - \textrm{e}^{ (\gamma-j\cdot p) \cdot t } }{t}
+\right \}
+\\[10pt]
+
+&=
+\frac{ \textrm{e}^{ \gamma \cdot t } }{ \pi \cdot t}
+\lim_{p \rightarrow \infty}
+\left \{
+\frac{ \textrm{e}^{ j\cdot p \cdot t } - \textrm{e}^{ -j \cdot p\cdot t } }{2\cdot j}
+\right \}
+\\[10pt]
+
+&=
+\frac{ \textrm{e}^{ \gamma \cdot t } }{ \pi \cdot t}
+\lim_{p \rightarrow \infty}
+\sin(p\cdot t )
+\\[10pt]
+
+\end{align*}
+
+<p>
+の様に sin の項が含まれるため振動状態になります。
+</p>
+
+<p>
+同様にデルタ関数の微分  $\textrm{d}\delta(t)/\textrm{d}t$ のラプラス変換である $\textrm{F}(s) = s$ も上の条件を満たさないので Bromwich 積分を適用出来ません(計算は簡単なので略)。
+<br>
+ちなみに制御工学の話になりますが $\textrm{F}(s) = s$ を伝達関数とするフィルタは「プロパーでない」と呼ばれ、信号 $x(t)$ を入力すると $\textrm{d}x(t)/\textrm{d}t$ が出力される微分フィルタとなります。
+<br>
+パルス波を入力するとインパルス信号が出力されるというなかなか不思議な動作をする、理論的にはありえますが実現することは不可能なフィルタです。
+<br>
+興味がある人は「プロパーな伝達関数」で検索してください。
+</p>
+
+<p>
+一方、「有理式で表すことが出来て分母の多項式の次数が分子の多項式の次数よりも大きい」ラプラス変換(工学で良く利用される信号のラプラス変換はこの形になることが多いです)は Bromwich 積分が可能です。
+<br>
+この場合、詳しくは次のページで説明しますが、積分路を閉曲線になるように変更することで留数定理を使って以下の様に書き換えることが出来ます。
+<br>
+よってこれ以降は逆変換を考える時はその様なラプラス変換のみを考えることにします。
+</p>
+
+<p>
+なお留数を使った場合は両側ラプラス変換と片側ラプラス変換で若干式が変わりますので注意してください。
 <br>
 先に説明しやすい片側ラプラス変換の逆変換(一般に逆ラブラス変換と呼ばれている変換)から説明します。
 </p>
@@ -179,7 +265,9 @@ $s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
 <input type="checkbox"><b>定義： 逆片側ラプラス変換 (留数版)</b>
 
 <p>
-$\textrm{F}(s)$ に極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
+$\textrm{F}(s)$ は有理式で表すことが出来、かつ分母の多項式の次数が分子の多項式の次数よりも大きいとする。
+<br>
+また極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
 <br>
 この時
 </p>
@@ -310,7 +398,7 @@ $\textrm{Res}_{s'}
 </p>
 
 <p>
-<b>両側ラプラス変換を扱う場合は $\textrm{F}(s)$ だけでなく収束領域も与えられないと $f(t)$ を復元出来ない</b>
+<b>両側ラプラス変換を扱う場合は $\textrm{F}(s)$ だけでなく収束領域も与えられないと $f(t)$ を復元出来ない (一意に逆変換が定まらない)</b>
 </p>
 
 <p>
