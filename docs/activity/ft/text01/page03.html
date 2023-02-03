@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>3. フーリエ変換の例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: フーリエ変換</a></li>
+<li>学習項目: [1] フーリエ変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2>
+(例1) デルタ関数(インパルス信号) $\delta(t)$
+</h2>
+
+<p>
+超関数であるデルタ関数(インパルス信号) $\delta(t)$ のフーリエ変換は
+</p>
+
+\begin{align*}
+\textrm{F}(w) 
+&= \int_{-\infty}^{\infty} 
+\left \{
+\delta(t) \cdot \textrm{e}^{\{- j \cdot w \cdot t \}}
+\right \}
+\textrm{d}t \\[10pt]
+(\text{デルタ関数の性質より}) 
+&= \textrm{e}^{0} \\[10pt]
+&= 1
+\end{align*}
+
+<p>
+です。
+</p>
+
+<br>
+<h2>
+(例2) 複素正弦波 $\textrm{e}^{\{j \cdot w_1 \cdot t \}}$
+</h2>
+
+<p>
+<a href="../../complex/text02/page02.html">複素正弦波</a>
+</p>
+
+\[
+f(t) = \textrm{e}^{\{j \cdot w_1 \cdot t \}}
+\]
+
+<p>
+は $|f(t)| = 1$ なので絶対可積分ではありませんが、超関数であるデルタ関数を使えばフーリエ変換を求められます。
+<br>
+具体的には
+</p>
+
+\begin{align*}
+\textrm{F}(w) 
+&= \int_{-\infty}^{\infty} 
+\left \{
+\textrm{e}^{\{ j \cdot w_1 \cdot t \}} \cdot \textrm{e}^{\{- j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\int_{-\infty}^{\infty} 
+\left \{
+\textrm{e}^{  j \cdot ( w_1 -w ) \cdot t } 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{  j ( w_1 - w ) \cdot t } }{  j \cdot ( w_1 - w ) }
+\right ]^a_{-a} \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\left \{
+\frac{ \textrm{e}^{  j \cdot ( w_1 -w ) \cdot a } }{  j ( w_1 -w) }
+-
+\frac{ \textrm{e}^{ -j \cdot ( w_1 -w ) \cdot a } }{  j ( w_1 -w) } 
+\right \} \\[10pt]
+&= 
+2\pi\cdot
+\lim_{a \rightarrow \infty}
+\left \{
+\frac{ 1 }{  \pi \cdot ( w - w_1) }
+\cdot
+\frac{ \textrm{e}^{  j \cdot ( w -w_1 ) \cdot a } - \textrm{e}^{  j \cdot ( w - w_1 ) \cdot a } }{  2\cdot j  }
+\right \} \\[10pt]
+&= 
+2\pi\cdot
+\lim_{a \rightarrow \infty}
+\left \{
+\frac{ \sin \{ ( w-w_1) \cdot a \} }{  \pi \cdot ( w - w_1) } 
+\right \} \\[10pt]
+(\text{デルタ関数の定義より}) &= 
+2\pi\cdot \delta( w - w_1 ) \\[10pt]
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<br>
+<h2>
+(例3) $f(t)=1$
+</h2>
+
+\[
+f(t)=1
+\]
+
+<p>
+は絶対可積分ではありませんが、超関数であるデルタ関数を使えばフーリエ変換を求められます。
+<br>
+具体的には例2で $w_1=0$ とした場合なので
+</p>
+
+\[
+\textrm{F}(w) = 2\pi\cdot\delta(w)
+\]
+
+<p>
+となります。
+<br>
+ちなみにこれは $2\pi\cdot\delta(w)$ を逆フーリエ変換することでも証明できます。
+<br>
+具体的には次の通りです。
+</p>
+
+\begin{align*}
+f(t)
+&=
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty} 
+\left \{
+2\pi\cdot\ \delta(w) \cdot \textrm{e}^{\{ j \cdot w \cdot t \}}
+\right \}
+\textrm{d}w \\[10pt]
+(\text{デルタ関数の性質より}) 
+&= \textrm{e}^{0} \\[10pt]
+&= 1
+\end{align*}
+
+
+
+<br>
+<h2>
+(例4) 三角関数 $\cos (w_1 \cdot t)$  と $\sin(w_1 \cdot t)$
+</h2>
+
+<p>
+cos と sin は絶対可積分ではありませんが、超関数であるデルタ関数を使うとフーリエ変換を求められます。
+<br>
+まず cos の方ですが
+</p>
+
+\[
+f(t) = \cos (w_1 \cdot t) = \frac{ \textrm{e}^{ \{ j \cdot w_1 \cdot t \} } + \textrm{e}^{\{ -j \cdot w_1 \cdot t \} } }{2}
+\]
+
+<p>
+なので、例2より
+</p>
+
+\[
+\textrm{F}(w) = \pi \cdot \{ \delta(w-w_1) + \delta(w+w_1) \}
+\]
+
+<p>
+がすぐ求まります。
+</p>
+<p>
+同様に sin については
+</p>
+
+\[
+f(t) = \sin (w_1 \cdot t) = \frac{ \textrm{e}^{ \{ j \cdot w_1 \cdot t \} } - \textrm{e}^{\{ -j \cdot w_1 \cdot t \} } }{2\cdot j}
+\]
+
+<p>
+なので、例2より
+</p>
+
+\[
+\textrm{F}(w) = \frac{\pi}{j} \cdot \{ \delta(w-w_1) - \delta(w+w_1) \}
+\]
+
+<p>
+です。
+</p>
+
+<br>
+<h2>
+(例5) 単一パルス
+</h2>
+
+<p>
+$a > 0$ を有限な値とした時、単一パルス
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+0 \ & t <0 \\[10pt]
+1 \ & 0 \leq t \leq a \\[10pt]
+0 & t > a
+\end{cases}
+\]
+
+<p>
+はもちろん絶対可積分なので普通にフーリエ変換が求められます。
+</p>
+
+\begin{align*}
+\textrm{F}(w) 
+&= \int_{0}^{a}
+\left \{
+\textrm{e}^{\{- j \cdot w \cdot t \}}
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\left [
+\frac{\textrm{e}^{\{- j \cdot w \cdot t \}}}{-j\cdot w} 
+\right ]^a_0 \\[10pt]
+&= 
+\frac{1 - \textrm{e}^{\{- j \cdot w \cdot a \} }}{j\cdot w}
+\end{align*}
+
+<p>
+ちなみに $w=0$ の時はロピタルの定理を使って
+</p>
+
+\[
+\textrm{F}(0) = \frac{j\cdot a \cdot \textrm{e}^0 }{j} = a
+\]
+
+<p>
+です。
+</p>
+
+<br>
+<h2>
+(例6) 指数減衰 $\textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)$
+</h2>
+
+<p>
+$\sigma > 0$とし、$u(t)$ を単位ステップ関数
+</p>
+
+\[
+u(t)=
+\begin{cases}
+0 \ & t < 0 \\[10pt]
+1 & t \geq 0
+\end{cases}
+\]
+
+<p>
+とした時、指数減衰
+</p>
+
+\[
+f(t) =  \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)
+\]
+
+<p>
+はもちろん絶対可積分なので普通にフーリエ変換が求められます。
+</p>
+
+
+\begin{align*}
+\textrm{F}(w) 
+&= \int_{-\infty}^{\infty} 
+\left \{
+\textrm{e}^{\{ - \sigma \cdot t \}} \cdot u(t) \cdot  \textrm{e}^{\{- j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\int_{0}^{\infty} 
+\left \{
+\textrm{e}^{  -( \sigma + j \cdot w ) \cdot t } 
+\right \}
+\textrm{d}t \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{  -( \sigma + j \cdot w ) \cdot t } }{  -( \sigma + j \cdot w ) }
+\right ]^a_{0} \\[10pt]
+&= 
+\lim_{a \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{  - \sigma \cdot a } \cdot \textrm{e}^{  - j \cdot w \cdot a } }{   -( \sigma + j \cdot w ) }
+\right ]
++
+\frac{ 1 }{  \sigma + j \cdot w }
+\\[10pt]
+
+\end{align*}
+
+<p>
+ここで $\sigma > 0$ より、上の第1項は0に収束するので
+</P>
+
+\[
+\textrm{F}(w) = \frac{ 1 }{  \sigma + j \cdot w }
+\]
+
+<p>
+となります。
+</p>
+
+
+<br>
+<h2>
+(例7) 単位ステップ関数
+</h2>
+
+<p>
+単位ステップ関数
+</p>
+
+\[
+u(t)=
+\begin{cases}
+0 \ & t < 0 \\[10pt]
+1 & t \geq 0
+\end{cases}
+\]
+
+<p>
+のフーリエ変換は例 6 で $\sigma \rightarrow 0$ とすることで
+</p>
+
+\[
+\textrm{F}(w) = \frac{ 1 }{  j \cdot w }
+\]
+
+<p>
+となります。
+<br>
+ただし $w=0$ の時は発散するので $w \ne 0$ の範囲だけで考える必要があります。
+</p>
+
+<p>
+(別解)
+</p>
+
+<p>
+フーリエ変換の性質より
+</p>
+
+\[
+\frac{\textrm{d}}{\textrm{d}t}\ u(t)
+\]
+
+<p>
+のフーリエ変換は
+</p>
+
+\[
+j\cdot w \cdot \textrm{F}(w)
+\]
+
+<p>
+で、
+</p>
+
+\[
+\frac{\textrm{d}}{\textrm{d}t}\ u(t) = \delta(t)
+\]
+
+<p>
+なので、両辺をフーリエ変換すると例1より
+</p>
+
+\[
+j\cdot w \cdot \textrm{F}(w) = 1
+\]
+
+<p>
+よって
+</p>
+
+\[
+\textrm{F}(w) = \frac{ 1 }{  j \cdot w }
+\]
+
+<p>
+となります。
+</p>
+
+
+
+<br>
+<h2>
+(例8) 正弦波の指数減衰 $\sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)$
+</h2>
+
+<p>
+ある信号 $f(t)$ のフーリエ変換を $\textrm{F}(w)$、別の信号 $g(t)$ のフーリエ変換を $\textrm{G}(w)$ とします。
+<br>
+すると畳み込みの定理より $h(t) = f(t)\cdot g(t)$ のフーリエ変換は
+</p>
+
+\begin{align*}
+\textrm{H}(w)
+&= 
+\frac{1}{2\pi} \cdot \left ( \textrm{F} * \textrm{G} \right ) (w) \\[10pt]
+&=
+\frac{1}{2\pi} \cdot 
+\int^{\infty}_{-\infty}
+\textrm{F}(\xi) \cdot \textrm{G} (w-\xi) \ \textrm{d}\xi
+\end{align*}
+
+<p>
+となります。
+<br>
+ここで特に
+</p>
+
+\[
+\textrm{G} (w) = \delta( w + a)
+\]
+
+<p>
+の時は
+</p>
+
+\begin{align*}
+\textrm{H}(w) 
+&=
+\frac{1}{2\pi} \cdot 
+\int^{\infty}_{-\infty}
+\textrm{F}(\xi) \cdot \delta (w+a-\xi) \ \textrm{d}\xi \\[10pt]
+&=
+\frac{1}{2\pi} \cdot 
+\int^{\infty}_{-\infty}
+\textrm{F}(\xi) \cdot \delta (\xi - (w+a)) \ \textrm{d}\xi \\[10pt]
+&=
+\frac{\textrm{F}(w+a)}{2\pi}
+\end{align*}
+
+<p>
+よって例4と例6から正弦波の指数減衰
+</p>
+
+\[
+f(t) = \sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)
+\]
+
+<p>
+は(ただし $\sigma > 0$ )
+</p>
+
+\begin{align*}
+\textrm{F}(w)
+&=
+\frac{\pi}{2\pi \cdot j}\cdot
+\left \{
+\frac{1}{\sigma + j\cdot (w-w_1)}
+-
+\frac{1}{\sigma + j\cdot (w+w_1)}
+\right \} \\[10pt]
+&=
+\frac{1}{2j}\cdot
+\frac{ (\sigma + j\cdot  w + j\cdot w_1) - (\sigma + j\cdot w - j\cdot w_1) }
+{ (\sigma + j\cdot w - j\cdot w_1)\cdot (\sigma + j\cdot  w + j\cdot w_1 ) }
+\\[10pt]
+&=
+\frac{1}{2j}\cdot
+\frac{ 2\cdot j\cdot w_1 }{ (\sigma + j\cdot w)^2 + w_1^2 }
+\\[10pt]
+&=
+\frac{ w_1 }{ (\sigma + j\cdot w)^2 + w_1^2 }
+\\[10pt]
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<br>
+<h2>
+(例9) 時刻 0 から始まって $n$ 回振動したら 0 になる正弦波
+</h2>
+
+<p>
+正弦波 $\sin(w_1\cdot t)$ の周期を $\textrm{T} = 2\pi/w_1$ [秒] とします。
+<br>
+$n$ を 1 以上の整数としたとき次の信号を考えます。
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+0 & t < 0 \\[10pt]
+\sin(w_1\cdot t) \ & 0 \leq t \leq n\cdot \textrm{T} \\[10pt]
+0 & t > n\cdot \textrm{T}
+\end{cases}
+\]
+
+<p>
+例えば、$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]の場合は次のグラフになります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: $f(t)$ のグラフ例</b>
+
+<p>
+$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]
+</p>
+
+<img src="./img/page03-fig1.png" alt="">
+</div>
+
+<p>
+今回考える $f(t)$ は例5で考えた単一パルス(ただし$a = n\cdot \textrm{T}$)を sin にかけた式になっていますので、例8と同様にデルタ関数の畳込み演算を利用できます。
+<br>
+具体的には例4と例5より
+</p>
+
+\begin{align*}
+\textrm{F}(w)
+&=
+\frac{\pi}{2\pi\cdot j}\cdot
+\left \{
+\frac{1-\textrm{e}^{\{- j \cdot (w-w_1) \cdot n\cdot \textrm{T} \} }}{j\cdot (w-w_1)}
+-
+\frac{1-\textrm{e}^{\{- j \cdot (w+w_1) \cdot n\cdot \textrm{T} \} }}{j\cdot (w+w_1)}
+\right \} \\[10pt]
+&=
+\frac{1}{2\cdot j}\cdot
+\left \{
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ j \cdot w_1 \cdot n\cdot \textrm{T} \} } }{j\cdot (w-w_1)}
+-
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ -j \cdot w_1 \cdot n\cdot \textrm{T} \} } }{j\cdot (w+w_1)}
+\right \} \\[10pt]
+(\text{$w_1 = 2\pi/\textrm{T}$より})&=
+\frac{1}{2\cdot j}\cdot
+\left \{
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ j \cdot 2 \pi \cdot n \} } }{j\cdot (w-w_1)}
+-
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ -j \cdot 2 \pi \cdot n \} } }{j\cdot (w+w_1)}
+\right \} \\[10pt]
+(\text{$n$は整数だから})&=
+\frac{1}{2\cdot j}\cdot
+\left \{
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot 1 }{j\cdot (w-w_1)}
+-
+\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot 1 }{j\cdot (w+w_1)}
+\right \} \\[10pt]
+&=
+\frac{1}{2\cdot j}\cdot
+\left \{
+\frac{ 1 }{j\cdot (w-w_1)}
+-
+\frac{ 1 }{j\cdot (w+w_1)}
+\right \}
+\cdot
+\left (
+1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
+\right )
+\\[10pt]
+
+&=
+\frac{1}{-2}\cdot
+\left \{
+\frac{ (w+w_1) - (w-w_1) }{(w-w_1)\cdot (w+w_1)}
+\right \}
+\cdot
+\left (
+1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
+\right )
+\\[10pt]
+
+&=
+\left \{
+\frac{w_1}{-w^2+w_1^2}
+\right \}
+\cdot
+\left (
+1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
+\right )
+\\[10pt]
+
+\end{align*}
+
+<p>
+となります。
+<br>
+なお $w = \pm w_1$ の時はロピタルの定理より
+<p>
+
+\begin{align*}
+\textrm{F}(\pm w_1) 
+&=
+\lim_{w \rightarrow \pm w_1}
+\frac{w_1}{-2w} \cdot \left ( j \cdot n \cdot \textrm{T} \cdot \textrm{e}^{  \{ - j \cdot n \cdot \textrm{T} \cdot w \} } \right ) \\[10pt]
+
+&= 
+\mp
+\frac{1}{2} \cdot \left ( j \cdot n \cdot \textrm{T} \cdot \textrm{e}^{ \{ \mp j \cdot n \cdot 2 \pi \} } \right ) \\[10pt]
+
+&= 
+\mp \frac{j \cdot n \cdot \textrm{T}}{2}
+\end{align*}
+
+<p>
+です。
+</p>
+
+
+<br>
+<script>PreNext(3,3)</script>
+</body>
+</html>
