@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. フーリエ変換とフーリエ級数展開の関係</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: フーリエ変換</a></li>
+<li>学習項目: [1] フーリエ変換</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+フーリエ変換はテキストなどでは<a href="../../fourier/">フーリエ級数展開</a>の周期 $\textrm{T}$ [秒]を無限大するという操作をした物と説明されることが多いのですが、厳密に言えば周期をいくら大きくしたところでフーリエ級数展開の式で出てきた総和記号 $\Sigma$ がフーリエ変換の積分記号 $\int$ に置き換わることはありません。
+<br>
+実は「周波数領域内でフーリエ変換にくし型関数をかけてインパルス信号列化する」という行為がフーリエ変換とフーリエ級数展開を結びつけるための本質的な操作となります。
+<br>
+このページではそれについて詳しく説明します。
+</p>
+
+<br>
+<h2>
+(1) フーリエ変換から複素フーリエ係数を導出
+</h2>
+
+<p>
+$f(t)$ が周期 $\textrm{T}$ [秒] の周期的なアナログ信号のとき、 $f(t)$ をフーリエ変換するだけでそのまま複素フーリエ係数が求まりそうな気がしますが、$f(t)$ は絶対可積分条件を満たさないので一般的な意味でのフーリエ変換は存在しません。
+</p>
+
+<p>
+※ このページを読み進めて行くと分かりますが、デルタ関数の様な超関数の使用を許せばフーリエ変換が存在する場合もあります。
+</p>
+
+<p>
+そこで $f(t)$ 全体をフーリエ変換することは諦め、以下の窓関数
+</p>
+
+\[
+g(t) = 
+\begin{cases}
+0 \ & t < -\frac{\textrm{T}}{2} \\[10pt]
+1 \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
+0 & t > \frac{\textrm{T}}{2}
+\end{cases}
+\]
+
+<p>
+を $f(t)$ にかけ、$f(t)$ から 1 周期分だけ切り出した信号 $f(t)\cdot g(t)$ を代わりにフーリエ変換することにします(図1)。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図1: 窓関数 $g(t)$</b>
+<p>$\textrm{T}$ [秒] は周期</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+
+<p>
+すると $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ から $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ を求めることが出来ます。
+<br>
+具体的には次のことが言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>フーリエ変換から複素フーリエ係数を導出する</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+<br>
+また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
+<br>
+さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+</p>
+
+<p>
+$k$ を任意の整数としたとき、 $\textrm{F}(w)/\textrm{T}$ を $k \cdot w_1$ [rad/秒] おきにサンプリングした値は $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ と一致する。
+<br>
+すなわち
+</p>
+
+\[
+\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 )
+\]
+
+</div>
+
+
+<p>
+この証明は簡単で、まず基本周波数 $w_1$ [rad/秒]をサンプリング間隔として $\textrm{F}(w)$ をサンプリングしてディジタル信号列 $\textrm{F}( k \cdot w_1)$ を作ります。
+</p>
+
+<p>
+よって $f(t) \cdot g(t)$ のフーリエ変換より
+</p>
+
+\begin{align*}
+\textrm{F}( k \cdot w_1) 
+& = 
+\int_{-\infty}^{\infty}
+\left \{
+f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \} 
+\textrm{d}t \\[10pt]
+& = 
+\int_{-\textrm{T}/2}^{\textrm{T}/2}
+\left \{
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+\right \} 
+\textrm{d}t \\[10pt]
+(\text{複素フーリエ係数の定義より})& = \textrm{T} \cdot \textrm{C}[k]
+\end{align*}
+
+</div>
+
+<p>
+なので
+</p>
+
+<p>
+\[
+\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 )
+\]
+</p>
+
+
+<p>
+という関係が導かれます。
+</p>
+
+<br>
+<h2>
+(2) 逆フーリエ変換から複素フーリエ級数展開(=$f(t)$)を導出
+</h2>
+
+<p>
+次は $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ を逆変換して複素フーリエ級数展開、つまり $f(t)$ を求めてみます。
+<br>
+ただしそのまま逆フーリエ変換しても単に $f(t)\cdot g(t)$ が復元するだけなので、次のように少しだけ手間をかけます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>逆フーリエ変換から複素フーリエ級数展開($=f(t)$)を導出する</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+<br>
+また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
+<br>
+さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+</p>
+<p>
+$k$ を任意の整数としたとき、 $\textrm{F}(w)$ にサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] と $w_1$ 間隔のくし型関数をかけて作った
+</p>
+
+\[
+\textrm{F}'(w)
+=
+\frac{2\pi}{\textrm{T}}
+\cdot 
+\textrm{F}(w) 
+\cdot
+\sum_{k=-\infty}^{\infty} \ \delta(w - k \cdot w_1 )
+\]
+
+<p>
+の逆フーリエ変換は $f(t)$ の複素フーリエ級数展開と一致する。
+<br>
+すなわち
+</p>
+
+\[
+f(t)
+=
+\sum_{k=-\infty}^{\infty}
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+=
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+\left \{
+\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w
+\]
+
+</div>
+
+<p>
+こちらの証明はやや難解です。
+</p>
+
+<p>
+まずサンプリング間隔 $w_1$ [rad/秒] おきに<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">デルタ関数</a> $\delta(t)$ を並べた信号
+</p>
+
+\[
+\textrm{comb}_{w_1}(w) = \sum_{k=-\infty}^{\infty} \delta(w-k\cdot w_1)
+\]
+
+<p>
+を考えます。
+<br>
+この信号は「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼ばれます。
+</p>
+
+<p>
+次に $\textrm{F}(w)$ にこのくし型関数をかけて作った信号を
+</p>
+
+\[
+\textrm{F}'(w)
+=
+\frac{2\pi}{\textrm{T}}
+\cdot
+\textrm{F}(w) \cdot 
+\sum_{k=-\infty}^{\infty} \ \delta(w - k \cdot w_1 )
+\]
+
+<p>
+とすると、この$\textrm{F}'(w)$ は $\textrm{F}(w)$ をサンプリングして作成したインパルス信号列となります。
+<br>
+なお最終的に複素フーリエ係数とゲインを合わせるため、サンプリング間隔 $w_1 = 2\pi/\textrm{T}$ を全体にかけています。
+</p>
+
+<p>
+※ 何故ここでいきなりくし型関数をかけてるのか不思議な人がいるかもしませんが、詳しく説明するにはサンプリングの理論から説明しないと駄目なので、とりあえず今回はサンプリングというのはそういうものだと思ってください。興味があるひとは<a href="../../dft/text01/page03.html">こちら</a>や<a href="../../z/text01/page02.html">こちら</a>の話なども参考にしてください。
+</p>
+
+<p>
+次にこの $\textrm{F}'(w)$ に対して逆フーリエ変換を計算して $f'(t)$ を求めます。
+<br>
+すると
+</p>
+
+\begin{align*}
+f'(t) &= 
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+\left \{
+\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w \\[10pt]
+&=
+\frac{1}{\textrm{T}}
+\cdot \int_{-\infty}^{\infty}
+\left \{
+\textrm{F}(w) \cdot
+\sum_{k=-\infty}^{\infty} \  \delta(w - k \cdot w_1 )
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w \\[10pt]
+&=
+\frac{1}{\textrm{T}}
+\cdot \sum_{k=-\infty}^{\infty}
+\int_{-\infty}^{\infty}
+\left \{
+\textrm{F}(w) \cdot 
+\delta(w - k \cdot w_1 )
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w \ \text{← 注目} \\[10pt]
+(\text{デルタ関数の性質より})
+&=
+\frac{1}{\textrm{T}}
+\cdot \sum_{k=-\infty}^{\infty}
+\left \{
+\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\\[10pt]
+(\text{$\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 )$ を代入})
+&= 
+\sum_{k=-\infty}^{\infty}
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \} \\[10pt]
+&= f(t)
+\end{align*}
+
+<p>
+となるので、インパルス信号列 $\textrm{F}'(w)$ の逆フーリエ変換は $f(t)$ の複素フーリエ級数展開と一致します。
+<br>
+言い換えれば周期的な信号 $f(t)$ のフーリエ変換はインパルス信号列 $\textrm{F}'(w)$ です。
+</p>
+
+<p>
+※ 最初の方で周期的な信号のフーリエ変換は一般的な意味では存在しないと書きましたが、デルタ関数の使用を許せばフーリエ変換を求めることが可能になります
+</p>
+
+<p>
+この様に
+</p>
+
+<p>
+<b>非周期的なアナログ信号のフーリエ変換に対して周波数領域内でくし型関数をかけてインパルス信号列化すると時間領域では周期的な信号に変わる</b>
+</p>
+
+<p>
+という性質がありますので覚えておいてください。
+<br>
+同様に
+<p>
+
+<p>
+<b>(周期的か非周期的を問わず)アナログ信号に対して時間領域内でくし型関数をかけてインパルス信号列化すると周波数領域内でフーリエ変換は周期的になる</b>
+</p>
+
+<p>
+という性質もあります。
+<br>
+これについてはここでは説明しないので、興味があったら<a href="../../z/text01/page02.html">こちら</a>を参考にしてください。
+</p>
+
+<p>
+ところで上の式中で「←注目」と書いた行でフーリエ変換の式中の積分記号 $\int$ が フーリエ級数展開の式中の総和記号 $\Sigma$ に置き換わっていることに着目してください。
+<br>
+この事から「周波数領域内でフーリエ変換にくし型関数をかけてインパルス信号列化する」という行為がフーリエ変換とフーリエ級数展開を結びつけるための本質的な操作だということが分かります。
+</p>
+
+
+<br>
+<h2>
+(3) 複素フーリエ係数からフーリエ変換を導出
+</h2>
+
+<p>
+今度は逆に$f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ から $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ を求めてみましょう。
+<br>
+結論は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ係数からフーリエ変換を導出する</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+<br>
+また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
+<br>
+さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+</p>
+
+<p>
+$f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ に対して<a href="https://ja.wikipedia.org/wiki/Sinc%E9%96%A2%E6%95%B0">sinc</a>補間(理想ローパスフィルタ処理)をおこなうと $\textrm{F}(w)$ になる。
+<br>
+すなわち
+</p>
+
+\[
+\textrm{F}(w)  = \textrm{T} \cdot 
+\sum_{k=-\infty}^{\infty}
+\textrm{C}[k] \cdot 
+\textrm{sinc} \frac{ (w - k \cdot w_1) \cdot \textrm{T} }{2} 
+\]
+
+</div>
+
+
+<p>
+まず (2) で示したように周期的な信号 $f(t)$ を逆フーリエ変換するとインパルス信号列 $\textrm{F}'(w)$ になります。
+<br>
+また $f(t)$ に図1で示した窓関数 $g(t)$ をかけて作った信号が $f(t)\cdot g(t)$ でした。
+<br>
+さらに(証明は省略しますが) $g(t)$ の逆フーリエ変換は
+</p>
+
+\[
+\textrm{G}(w) = \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
+\]
+
+<p>
+です。
+</p>
+
+<p>
+よって $\textrm{F}(w)$ は(式中の * は畳み込み積分)
+</p>
+
+\begin{align*}
+\textrm{F}(w) & = \frac{1}{2\pi} \cdot (\textrm{F}' * \textrm{G})(w) \\[10pt]
+
+
+&=
+\int_{-\infty}^{\infty}
+\frac{1}{\textrm{T}}
+\cdot 
+\textrm{F}(\xi) 
+\cdot
+\sum_{k=-\infty}^{\infty} \ \delta(\xi - k \cdot w_1 )
+\cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
+
+&=
+\int_{-\infty}^{\infty}
+\sum_{k=-\infty}^{\infty} 
+\
+\frac{1}{\textrm{T}}
+\cdot 
+\textrm{F}(k \cdot w_1) 
+\cdot
+ \delta(\xi - k \cdot w_1 )
+\cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
+
+
+&=
+\int_{-\infty}^{\infty}
+\sum_{k=-\infty}^{\infty}
+\textrm{C}[k] \cdot \delta(\xi - k \cdot w_1 ) \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
+
+&=
+\sum_{k=-\infty}^{\infty}
+\int_{-\infty}^{\infty}
+\textrm{C}[k] \cdot \delta(\xi - k \cdot w_1 ) \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
+
+&=
+\textrm{T} \cdot 
+\sum_{k=-\infty}^{\infty}
+\textrm{C}[k] \cdot 
+\int_{-\infty}^{\infty}
+\delta(\xi - k \cdot w_1 ) \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
+
+&=
+\textrm{T} \cdot 
+\sum_{k=-\infty}^{\infty}
+\textrm{C}[k] \cdot 
+\textrm{sinc} \frac{ (w - k \cdot w_1) \cdot \textrm{T} }{2} 
+
+\end{align*}
+
+<p>
+で求まります。
+</p>
+
+<p>
+参考までに簡単な例を示しましょう。
+</p>
+
+\[
+f(t) = \sin (w1\cdot t )
+\]
+
+<p>
+の時、複素フーリエ係数はオイラー公式より
+</p>
+
+\[
+\begin{cases}
+\textrm{C}[1] = \frac{1}{2j} \\[10pt]
+\textrm{C}[-1] = -\frac{1}{2j} \\[10pt]
+\textrm{C}[k] = 0 \ (k \ne \pm1)
+\end{cases}
+\]
+
+<p>
+です。
+</p>
+
+<p>
+一方、
+</p>
+
+\[
+f(t) \cdot g(t) = 
+\begin{cases}
+0 \ & t < -\frac{\textrm{T}}{2} \\[10pt]
+\sin(w1\cdot t) \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
+0 & t > \frac{\textrm{T}}{2}
+\end{cases}
+\]
+
+<p>
+のフーリエ変換は(証明は省略しますが)
+</p>
+
+\[
+\textrm{F}(w) 
+=
+\frac{\textrm{T}}{2j} \cdot \textrm{sinc} \frac{ (w - w_1) \cdot \textrm{T} }{2} 
+-
+\frac{\textrm{T}}{2j} \cdot \textrm{sinc} \frac{ (w + w_1) \cdot \textrm{T} }{2} 
+\]
+
+<p>
+です。
+<br>
+よって
+</p>
+
+\[
+\textrm{F}(w) 
+=
+\textrm{T} \cdot \textrm{C}[1] \cdot \textrm{sinc} \frac{ (w - w_1) \cdot \textrm{T} }{2} 
++
+\textrm{T} \cdot \textrm{C}[-1] \cdot \textrm{sinc} \frac{ (w + w_1) \cdot \textrm{T} }{2} 
+\]
+
+<p>
+であることが分かります。
+</p>
+
+<br>
+<h2>
+(4) 複素フーリエ級数展開から逆フーリエ変換($=f(t)\cdot g(t)$)を導出 
+</h2>
+
+<p>
+最後に $f(t)$ の複素フーリエ級数展開から逆フーリエ変換、つまり $f(t)\cdot g(t)$ を求めてみます。
+<br>
+これは非常に簡単です。
+</p>
+
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ級数展開から逆フーリエ変換($=f(t)\cdot g(t)$)を導出する</b>
+
+<p>
+$f(t)$ の複素フーリエ級数展開を求め、複素フーリエ係数 $\textrm{C}[k]$ から (3) で挙げた sinc 補間を適用して $\textrm{F}(w)$ を復元する。
+<br>
+あとは$\textrm{F}(w)$ に対して逆フーリエ変換をすれば $f(t)\cdot g(t)$ が出てくる。
+</p>
+
+</div>
+
+
+<br>
+<script>PreNext(2,3)</script>
+</body>
+</html>
