@@ -1,0 +1,137 @@
+import numpy as np
+import math
+import cmath
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import mpl_toolkits.mplot3d as mplot3d
+
+figsize=10
+dpi=100
+
+fdash = 5  # 正弦波の周波数 [Hz]
+wdash = 2*math.pi*fdash # 正弦波の角周波数 [rad/秒]
+
+'''
+# 正弦波の指数減衰
+a = 1 # 減衰パラメータ
+
+def f(t) :
+    return np.sin(wdash*t)*np.exp(-a*t)
+
+def F(sigma, w, ax):
+    
+    # 極の描画
+    if ax is not None:
+        line= mplot3d.art3d.Line3D([-a,-a],[wdash,wdash],[0,maxF],color='red',linestyle='dashed')
+        ax.add_line(line)
+        ax.scatter3D([-a],[wdash],[0],zorder=10,color='red',s=100)
+        line= mplot3d.art3d.Line3D([-a,-a],[-wdash,-wdash],[0,maxF],color='red',linestyle='dashed')
+        ax.add_line(line)
+        ax.scatter3D([-a],[-wdash],[0],zorder=10,color='red',s=100)
+
+    s = sigma + w * 1j
+    return wdash/((s+a)*(s+a)+wdash*wdash)
+
+def Fw(w):
+    return F(0,w,None)
+
+'''
+# 時刻 0 から始まって n 回振動したら 0 になる正弦波
+T = 1/fdash
+n = 5 # 振動回数
+    
+def f(t) :
+    return np.sin(wdash*t) if t <= n*T else 0
+
+def F(sigma, w, ax):
+    s = sigma + w * 1j
+    return wdash/(s*s+wdash*wdash)*(1-np.exp(-n*T*sigma)*(np.cos(-n*T*w)+np.sin(-n*T*w)*1j) )
+
+def Fw(w):
+    if w == wdash:
+        return -n * T/2
+    if w == -wdash:
+        return n * T/2
+    return F(0,w,None)
+
+
+maxt = 8
+mint = 0
+tickt = 1
+maxf = 1.1
+minf = -1.1
+
+maxsigma = 2
+minsigma = -maxsigma
+ticksigma = 1
+maxw = 3*wdash
+minw = -maxw
+maxF = 3
+minF = -0.25
+
+maxFw = 0.6
+minFw = 0
+
+# 時間領域信号
+t = np.arange(mint,maxt,0.01)
+plt.plot(t, [f(i) for i in t])
+plt.xticks(np.arange(mint,maxt+0.1,tickt))
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$f(t)$',rotation=0,labelpad=0,loc="top")
+plt.xlim(mint,maxt)
+plt.ylim(minf,maxf)
+plt.show()
+
+# S平面上の振幅スペクトル
+plt.figure( figsize=(figsize, figsize), dpi=dpi )
+ax = plt.axes(projection='3d')
+ax.set_xlim3d(minsigma,maxsigma)
+ax.set_ylim3d(minw,maxw)
+ax.set_zlim3d(minF,maxF)
+ax.grid(False)
+bkcolor='lightgray'
+ax.xaxis.pane.set_edgecolor(bkcolor)
+ax.xaxis.pane.set_facecolor(bkcolor)
+ax.xaxis.line.set_color(bkcolor)
+ax.yaxis.pane.set_edgecolor(bkcolor)
+ax.yaxis.pane.set_facecolor(bkcolor)
+ax.yaxis.line.set_color(bkcolor)
+ax.zaxis.pane.set_facecolor(bkcolor)
+
+ax.text(x=maxsigma+0.7,y=0,z=-0.08,s=r'$w$')
+for i in range(int(minw/wdash-0.5),int(maxw/wdash+0.5)+1):
+    line= mplot3d.art3d.Line3D([minsigma,maxsigma],[i*wdash,i*wdash],[0,0],color='black',linestyle='dashed')
+    ax.add_line(line)
+    label= '0' if i == 0 else str(i)+r'$w_1$'
+    ax.text(x=maxsigma,y=i*wdash + (0 if i != 3 else -8),z=-0.2,s=label)
+    
+ax.text(x=0,y=minw-14,z=0,s=r'$\sigma$')
+for i in range(minsigma,maxsigma+1,ticksigma):
+    line= mplot3d.art3d.Line3D([i,i],[minw,maxw],[0,0],color='black',linestyle='dashed')
+    ax.add_line(line)
+    ax.text(x=i,y=minw-8,z=0,s=str(i))
+
+ax.text(x=maxsigma,y=maxw+1,z=maxF*1.1,s=r'$|\rm{F}(s)|$')
+
+ax.set_xticks([])
+ax.set_yticks([])
+ax.set_zticks(np.arange(0,maxF+0.1,0.5))
+
+sigma, w = np.meshgrid(np.linspace(minsigma,maxsigma,100), np.linspace(minw,maxw,100))
+absF = np.clip( abs( F(sigma, w, ax) ), 0, maxF )
+ax.plot_wireframe(sigma, w, absF, rstride=1, cstride=1, color='blue', alpha = 0.2)
+
+ax.view_init(elev=15, azim=-10)
+plt.show()
+
+# 振幅スペクトル
+w = np.linspace(minw,maxw,500)
+plt.xlim(minw,maxw)
+plt.ylim(minFw,maxFw)
+plt.plot(w,[abs(Fw(i)) for i in w])
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\|{\rm F}(w)|$',rotation=0,labelpad=0,loc="top")
+ticks = [ i for i in range(int(minw/wdash),int(maxw/wdash)+1) ]
+plt.xticks(ticks=[i*wdash for i in ticks],labels=[ '0' if i == 0 else str(i)+r'$w_1$' for i in ticks])
+plt.show()
