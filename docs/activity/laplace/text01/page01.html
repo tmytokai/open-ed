@@ -36,6 +36,10 @@
 ※ ラプラス変換という名前をつけた人は20世紀のドイツの数学者の<a href="https://en.wikipedia.org/wiki/Gustav_Doetsch">Gustav Doetsch</a>らしいです
 </p>
 
+<p>
+ちなみに長くて細かい話が続くので、時間が無い人は定義のところだけ読めば十分です。
+</p>
+
 <br>
 <h1>
 (1) ラプラス変換
@@ -75,13 +79,13 @@ s = \sigma + j \cdot w
 \[
 |f(t)| \leq 
 \begin{cases}
-\textrm{M}_+ \cdot \textrm{e}^{k_+\cdot t} &,\ (t \geq 0) \\[10pt]
-\textrm{M}_-\cdot \textrm{e}^{k_-\cdot t} &,\ (t < 0)
+\textrm{M}_-\cdot \textrm{e}^{k_-\cdot t} &\ (t < 0) \\[10pt]
+\textrm{M}_+ \cdot \textrm{e}^{k_+\cdot t} &\ (t \geq 0) 
 \end{cases}
 \]
 
 <p>
-を満たすある実数の定数 $\textrm{M}_+$ と $\textrm{M}_-$ と $k_+$ と $k_-$ が存在するならば $f(t)$ のラプラス変換は存在して
+を満たすある実数の定数 $\textrm{M}_+$ と $\textrm{M}_-$ と $k_+$ と $k_-$ が存在するならば $f(t)$ のラプラス変換は存在し(※ 十分条件)、
 </p>
 
 
@@ -113,32 +117,85 @@ f(t) \cdot \textrm{e}^{\{- s \cdot t \}}
 により定義される複素関数を「<b>片側ラプラス変換</b>」と言う。
 </p>
 
+<p>
+なお片側ラプラス変換を考える場合は条件 $|f(t)| \leq \textrm{M}_-\cdot \textrm{e}^{k_-\cdot t}$ については考慮しなくても良い。
+<br>
+また片側ラプラス変換は単位ステップ関数
+</p>
+
+\[
+u(t)=
+\begin{cases}
+0 \ & t < 0 \\[10pt]
+1 & t \geq 0
+\end{cases}
+\]
+
+<p>
+を使えば以下の両側ラプラス変換とみなすことも出来る。
+</p>
+
+\[
+\textrm{F}(s) = \int_{-\infty}^{\infty} 
+\left \{
+f(t) \cdot u(t) \cdot \textrm{e}^{\{- s \cdot t \}} 
+\right \}
+\textrm{d}t
+\]
+
 </div>
 
 <p>
-この様にラプラス変換には両側ラプラス変換と片側ラプラス変換の2種類があります。
+なお基本的な信号のラプラス変換はラプラス変換表( <a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E6%80%A7%E8%B3%AA%E4%B8%80%E8%A6%A7%E8%A1%A8">片側</a>、<a href="https://en.wikipedia.org/wiki/Two-sided_Laplace_transform#Table_of_selected_bilateral_Laplace_transforms">両側</a> )に載っているのでいちいち計算しなくても良いです。
+</p>
+
+<p>
+さて、両側／片側ラプラス変換にはいくつか注意点があります。
+</p>
+
+<p>
+1番目の注意点は、ラプラス変換には両側ラプラス変換と片側ラプラス変換の2種類がありますので文献によってどちらの変換を表してるのか気にする必要があることです。
 <br>
-ただし工学的に使う信号$f(t)$は時刻 0 未満の場合は $f(t)=0$ とみなすことが多く、しかも両側ラプラス変換が存在しないことも良くあることから、通常はラプラス変換と言うと片側ラプラス変換の方を意味します。
+ただし工学的に使う信号は時刻 0 未満の場合は $f(t)=0$ とみなすことが多いので、単にラプラス変換と言えば片側ラプラス変換のことを意味する場合が多いです。
 </p>
 
 <p>
-例えば $f(t)=1$ の両側ラプラス変換はありませんが、片側ラプラス変換は $\textrm{F}(s)=1/s$ になります(導出は<a href="./page05.html">こちら</a>参照)。
-</p>
-
-<p>
-また上で挙げたラプラス変換の存在条件は十分条件なので、これを満たさなくても<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">デルタ関数</a>みたいな超関数や<a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0">ガンマ関数</a>みたいな特殊関数を用いることで変換が存在する場合もあります。
-</p>
-
-<p>
-例えばディラックのデルタ関数は $t=0$ の時に $\infty$ になりますが、両側・片側ラプラス変換はどちらも $\textrm{F}(s) = 1$ になります(導出は<a href="./page05.html">こちら</a>参照)。
+2番目の注意点は、フーリエ変換は存在しても両側／片側どちらか、または両方のラプラス変換は存在しない信号があることです。
 <br>
-また $f(t) = 1/\sqrt{t}$ も $t=0$ の時に $\infty$ になりますが、<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を見ると片側ラプラス変換は存在して
+例えばフーリエ変換</a>や片側ラプラス変換は存在するけど両側ラプラス変換が存在しない信号の例として以下のものがあります。
+</p>
+
+<p>
+※ <a href="https://dsp.stackexchange.com/questions/53875/can-a-fourier-transform-exist-even-if-the-j-omega-axis-is-not-in-the-region-of">こちら</a>のサイトによるとフーリエ変換にデルタ関数や不連続点が含まれていると両側ラプラス変換出来ないらしいです。
+</p>
+
+\begin{align*}
+f(t) &= \textrm{e}^{j \cdot w' \cdot t} \\[20pt]
+f(t) &= \sin( w' \cdot t ) \\[20pt]
+f(t) &= \cos( w' \cdot t ) \\[20pt]
+f(t) &= \textrm{sinc}( w' \cdot t ) \\[20pt]
+f(t) &= 1 \\[20pt]
+f(t) &= \textrm{sign}(t) \qquad \text{※ 符号関数} \\[20pt]
+\end{align*}
+
+<p>
+またフーリエ変換は存在するけど両側／片側の両方ともラプラス変換が存在しない例としては $f(t) = 1/t$ が有名です。
+<br>
+ちなみにフーリエ変換は $-j \cdot \pi \cdot \textrm{sign}(w)$です(証明は<a href="https://math.stackexchange.com/questions/1033870/does-the-fourier-transform-exist-for-ft-1-t">こちら</a>などを参照)。
+</p>
+
+<p>
+3番目の注意点は、上で挙げたラプラス変換の存在条件は十分条件なので、条件を満たさなくても<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">デルタ関数</a>みたいな超関数や<a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%83%B3%E3%83%9E%E9%96%A2%E6%95%B0">ガンマ関数</a>みたいな特殊関数を用いることで変換が存在する場合があることです。
+<br>
+例えばディラックのデルタ関数は $t=0$ の時に $\infty$ になりますが、両側・片側ラプラス変換はどちらも $\textrm{F}(s) = 1$ になります。
+<br>
+同様に $f(t) = 1/\sqrt{t}$ も $t=0$ の時に $\infty$ になりますが片側ラプラス変換は(両側は無し)
 </p>
 \[
 \textrm{F}(s) = \frac{\Gamma(1/2)}{\sqrt{s}} = \sqrt{\frac{\pi}{s}}
 \]
 <p>
-になります(ちなみに $f(t) = 1/t$ のラプラス変換はありません)。
+になります。
 </p>
 
 <br>
@@ -159,14 +216,14 @@ f(t) \cdot \textrm{e}^{\{- s \cdot t \}}
 </p>
 
 <div class="info">
-<input type="checkbox"><b>定義： 逆ラプラス変換 (Bromwich 積分版)</b>
+<input type="checkbox"><b>定義： 逆ラプラス変換 (Bromwich 積分)</b>
 
 \[
 \lim_{|s|\rightarrow \infty} |\textrm{F}(s)| = 0
 \]
 
 <p>
-が一様に成り立つならばラプラス変換 $\textrm{F}(s)$ の逆ラプラス変換は存在して
+が一様に成り立つならばラプラス変換 $\textrm{F}(s)$ の逆ラプラス変換は存在し(十分条件)、
 </p>
 
 \begin{align*}
@@ -206,112 +263,33 @@ $s$ ・・・ 複素角周波数、$s = \sigma + j \cdot w$
 ここでもいきなり「収束領域」という用語が出てきましたが、それについても次のページで説明しますので、とりあえずここでは複素数 $s$ が取り得る値の範囲だと思って下さい。
 </p>
 
+
 <p>
-なお逆ラプラス変換は $f(t)$ が連続的な信号でない場合は一意な変換にはなりません。
+とは言え、真面目に上の Bromwich 積分をするのは結構手間がかかるので、実用的には<a href="https://ja.wikipedia.org/wiki/%E7%95%99%E6%95%B0#%E7%95%99%E6%95%B0%E5%AE%9A%E7%90%86">留数定理</a>を使って手っ取り早く逆ラプラス変換を計算することが多いです。
 <br>
-つまり $f(t)$ が有限個の点で不連続である信号の場合、$\textrm{F}(s)$ を逆変換しても元の $f(t)$ に戻らない場合があります。
+なお留数定理を適用するためには少なくとも1つ以上極が必要になりますが、工学で良く利用されている信号のラプラス変換は
+</p>
+<p>
+<b><a href="https://ja.wikipedia.org/wiki/%E6%9C%89%E7%90%86%E9%96%A2%E6%95%B0">有理式</a>で表すことが出来て、かつ分母の多項式の次数が分子の多項式の次数よりも大きい</b>
+</p>
+
+<p>
+場合であることが多く、その種類のラプラス変換ならば必ず極が1つ以上存在してかつ逆変換の存在条件も満たすので留数定理を適用することが出来ます。
 <br>
-例えば $f(t) = 1$ の片側ラプラス変換は $\textrm{F}(s) = 1/s$ ですが、
+そこで今回のアクティビティでは(デルタ関数などの特殊な場合を除いて)この条件を満たす信号だけを今後扱うことにします。
 </p>
 
-\[
-f(t) = 
-\begin{cases}
-1 \ & (t < 1) \\[10pt]
-0 & (t = 1) \\[10pt]
-1 & (t > 1)
-\end{cases}
-\]
-
 <p>
-の片側ラプラス変換も $\textrm{F}(s) = 1/s$ ですので、逆ラプラス変換してもどちらが元の信号なのか分かりません。
+さて留数定理を使った場合は両側ラプラス変換と片側ラプラス変換で若干式が変わりますので、先に説明しやすい片側ラプラス変換の逆変換から説明します。
 <br>
-ただし工学的には不連続な信号はさほど問題にはならないことが多いので、不連続点が少ない方の信号を逆ラプラス変換の結果として適当に選んだりします。
-<br>
-よって今回はこの件に関してあまり深く立ち入らないことにします。
-</p>
-
-<p>
-さて、上で挙げた逆ラプラス変換の存在条件は十分条件なので、これを満たさなくても逆変換が存在する場合があります。
-</p>
-
-<p>
-例えば $\textrm{F}(s) = 1$ (デルタ関数のラプラス変換)は明らかに存在条件を満たしてませんが、以下の様にして Bromwich 積分により逆変換を計算できます。
-</p>
-
-\begin{align*}
-\frac{1}{2\pi\cdot j}
-\lim_{p \rightarrow \infty}
-\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
-\left \{
-1 \cdot \textrm{e}^{\{s \cdot t \}}
-\right \}
-\textrm{d}s
-&=
-\frac{1}{2\pi\cdot j}
-\lim_{p \rightarrow \infty}
-\left [
-\frac{ \textrm{e}^{\{s \cdot t \}} }{t}
-\right ]_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
-\\[10pt]
-&=
-\frac{1}{2\pi\cdot j}
-\lim_{p \rightarrow \infty}
-\left \{
-\frac{ \textrm{e}^{ (\gamma+j\cdot p) \cdot t } - \textrm{e}^{ (\gamma-j\cdot p) \cdot t } }{t}
-\right \}
-\\[10pt]
-
-&=
-\frac{ \textrm{e}^{ \gamma \cdot t } }{ \pi \cdot t}
-\lim_{p \rightarrow \infty}
-\left \{
-\frac{ \textrm{e}^{ j\cdot p \cdot t } - \textrm{e}^{ -j \cdot p\cdot t } }{2\cdot j}
-\right \}
-\\[10pt]
-
-&=
-\textrm{e}^{ \gamma \cdot t } \cdot 
-\lim_{p \rightarrow \infty}
-\frac{ \sin(p\cdot t ) }{ \pi \cdot t } \\[10pt]
-&=
-\textrm{e}^{ \gamma \cdot t } \cdot \delta(t) \\[10pt]
-&=
-\textrm{e}^{ 0 } \cdot \delta(t) \\[10pt]
-&=
-\delta(t)
-\\[10pt]
-
-\end{align*}
-
-<p>
-一方、デルタ関数の微分 $f(t) = \textrm{d}\delta(t)/\textrm{d}t$ のラプラス変換である $\textrm{F}(s) = s$ も上の条件を満たしていませんが、こちらに関しては Bromwich 積分して元の $f(t)$ を求めることは(調べた限り)出来ないみたいです。
-</p>
-<p>
-※ デルタ関数の微分は $-\delta(t)$ と $+\delta(t)$ が同時存在するという謎の信号なので当然と言われればそうですが。
-</p>
-
-<p>
-ところで、真面目に Bromwich 積分をするのは結構手間がかかるので、実用的には<a href="https://ja.wikipedia.org/wiki/%E7%95%99%E6%95%B0#%E7%95%99%E6%95%B0%E5%AE%9A%E7%90%86">留数定理</a>を使って手っ取り早く計算することが多いです。
-<br>
-ただし留数定理を適用するためには少なくとも1つ以上極が必要になります。
-</p>
-
-<p>
-ただ、工学で良く利用されている信号のラプラス変換は「有理式で表すことが出来て、分母の多項式の次数が分子の多項式の次数よりも大きい」形であることが多く、その種類のラプラス変換ならば極が1つ以上存在して逆変換の存在条件も満たすので、留数定理を適用することが出来ます。
-</p>
-
-<p>
-なお留数を使った場合は両側ラプラス変換と片側ラプラス変換で若干式が変わります。
-<br>
-先に説明しやすい片側ラプラス変換の逆変換(一般に逆ラブラス変換と呼ばれている変換)から説明します。
+一般に逆ラブラス変換と呼ばれている変換です。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>定義： 逆片側ラプラス変換 (留数定理版)</b>
 
 <p>
-$\textrm{F}(s)$ は有理式で表すことが出来て、かつ分母の多項式の次数が分子の多項式の次数よりも大きいとする。
+$\textrm{F}(s)$ は $s$ の<a href="https://ja.wikipedia.org/wiki/%E6%9C%89%E7%90%86%E9%96%A2%E6%95%B0">有理式</a>で表すことが出来て、かつ分母の多項式の次数が分子の多項式の次数よりも大きいとする。
 <br>
 また極(特異点)が $s_1, s_2, \cdots, s_\textrm{N}$ の N 個あるとする。
 <br>
@@ -382,13 +360,13 @@ t \cdot \textrm{e}^{\{s \cdot t \}}
 <p>
 となります。
 <br>
-この $f(t)=t$ (ただし $t\geq0$) を<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%97%E9%96%A2%E6%95%B0">ランプ関数</a>と呼びますが、ランプ関数のラプラス変換は<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を見ると $\textrm{F}(s) = 1/s^2$ なので確かに逆変換が正しいことが分かります。
+この $f(t)=t$ (ただし $t\geq0$) を<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%83%97%E9%96%A2%E6%95%B0">ランプ関数</a>と呼びますが、ランプ関数の片側ラプラス変換は<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B#%E5%A4%89%E6%8F%9B%E8%A1%A8">ラプラス変換表</a>を見ると $\textrm{F}(s) = 1/s^2$ なので確かに逆変換が正しいことが分かります。
 </p>
 
 <p>
 次は逆両側ラプラス変換について説明します。
 <br>
-こちらは収束領域を考慮する必要があるので式が複雑になります。
+こちらは収束領域を考慮し、しかも $t$ が 0 以上が負かで場合分けをする必要があるので式が複雑になります。
 </p>
 
 <div class="info">
@@ -406,18 +384,18 @@ $\textrm{F}(s)$ は有理式で表すことが出来て、かつ分母の多項�
 \begin{align*}
 f(t) =
 \begin{cases}
-\sum_{s' \in \{\text{L-ROC}\} }
-\textrm{Res}_{s'} 
-\left \{
-\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
-\right \}
-&, (t \geq 0) \\[10pt]
 -\sum_{s' \in \{\text{R-ROC}\} }
 \textrm{Res}_{s'} 
 \left \{
 \textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
 \right \}
-&, (t < 0)
+&\ (t < 0) \\[15pt]
+\sum_{s' \in \{\text{L-ROC}\} }
+\textrm{Res}_{s'} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+&\ (t \geq 0) 
 \end{cases}
 \end{align*}
 
@@ -441,9 +419,13 @@ $\textrm{Res}_{s'}
 </div>
 
 <p>
-上の定義から分かるように逆両側ラプラス変換の場合は極が収束領域の右にあるか左にあるかによって復元される $f(t)$ の式が大幅に変わります。
+さて Bromwich 積分を使う場合にしろ、留数定理を使うにしろ、逆ラプラス変換にはいくつか注意点があります。
+</p>
+
+<p>
+1番目の注意点は、上の定義から分かるように逆両側ラプラス変換の場合は極が収束領域の右にあるか左にあるかによって復元される $f(t)$ の式が大幅に変わることです。
 <br>
-言い換えると
+言い換えれば
 </p>
 
 <p>
@@ -457,14 +439,14 @@ $\textrm{Res}_{s'}
 <p>
 例えば上の逆片側変換と同様に $\textrm{F}(s) = 1/s^2$ の例を考えてみましょう(極は $s=0$ (n=2) のひとつ )。
 <br>
-もし収束領域が 0 よりも右側にある場合($\sigma>0$)は極が収束領域の左側にあるので、上と同様に計算して
+もし収束領域が 0 よりも右側にある場合は極が収束領域の左側にあるので、片側ラプラス変換を行うことと同じになって
 </p>
 
 \[
 f(t) =
 \begin{cases}
-t& ,\ (t \geq 0) \\[10pt]
-0& ,\ (t < 0)
+0&\ (t < 0)  \\[10pt]
+t&\ (t \geq 0)
 \end{cases}
 \]
 
@@ -477,16 +459,14 @@ t& ,\ (t \geq 0) \\[10pt]
 \[
 f(t) =
 \begin{cases}
-0& ,\ (t \geq 0) \\[10pt]
--t& ,\ (t < 0)
+-t&\ (t < 0) \\[10pt]
+0 &\ (t \geq 0) 
 \end{cases}
 \]
 
 
 <p>
-が答となります。
-<br>
-これは実際に両側ラプラス変換を求めると正しいことが分かります。
+が答となりますが、参考までにこの場合の両側ラプラス変換を求めると
 </p>
 
 \begin{align*}
@@ -536,7 +516,183 @@ t \cdot \frac{1}{s} \cdot \textrm{e}^{\{ s \cdot t \}}
 \frac{1}{s^2} \\[5pt]
 \end{align*}
 
+<p>
+なので、確かに正しい事が分かります。
+</p>
 
+<p>
+2番目の注意点は、逆ラプラス変換は $f(t)$ が連続的な信号でない場合は一意な変換にはならないことです。
+<br>
+つまり $f(t)$ が有限個の点で不連続である信号の場合、$\textrm{F}(s)$ を逆変換しても元の $f(t)$ に戻らない場合があります。
+<br>
+例えば $f(t) = 1$ の片側ラプラス変換は $\textrm{F}(s) = 1/s$ ですが、
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+1 \ & (t < 1) \\[10pt]
+0 & (t = 1) \\[10pt]
+1 & (t > 1)
+\end{cases}
+\]
+
+<p>
+の片側ラプラス変換も $\textrm{F}(s) = 1/s$ ですので、逆ラプラス変換してもどちらが元の信号だったのか分かりません。
+<br>
+ただし工学的には不連続な信号はさほど問題にはならないことが多いので、不連続点が少ない方の信号を逆ラプラス変換の結果として適当に選んだりします。
+<br>
+よって今回はこの件に関してあまり深く立ち入らないことにします。
+</p>
+
+<p>
+3番目の注意点は、Bromwich 積分のところで挙げた逆ラプラス変換の存在条件は十分条件なので、これを満たさなくても逆変換が存在する場合があることです。
+<br>
+例えば $\textrm{F}(s) = 1$ (デルタ関数のラプラス変換)は明らかに存在条件を満たしてませんが、以下の様にして Bromwich 積分により逆変換を計算できます。
+</p>
+
+\begin{align*}
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\left \{
+1 \cdot \textrm{e}^{\{s \cdot t \}}
+\right \}
+\textrm{d}s
+&=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\left [
+\frac{ \textrm{e}^{\{s \cdot t \}} }{t}
+\right ]_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\\[10pt]
+&=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\left \{
+\frac{ \textrm{e}^{ (\gamma+j\cdot p) \cdot t } - \textrm{e}^{ (\gamma-j\cdot p) \cdot t } }{t}
+\right \}
+\\[10pt]
+
+&=
+\frac{ \textrm{e}^{ \gamma \cdot t } }{ \pi \cdot t}
+\lim_{p \rightarrow \infty}
+\left \{
+\frac{ \textrm{e}^{ j\cdot p \cdot t } - \textrm{e}^{ -j \cdot p\cdot t } }{2\cdot j}
+\right \}
+\\[10pt]
+
+&=
+\textrm{e}^{ \gamma \cdot t } \cdot 
+\lim_{p \rightarrow \infty}
+\frac{ \sin(p\cdot t ) }{ \pi \cdot t } \\[10pt]
+&=
+\textrm{e}^{ \gamma \cdot t } \cdot \delta(t) \\[10pt]
+&=
+\textrm{e}^{ 0 } \cdot \delta(t) \\[10pt]
+&=
+\delta(t)
+\\[10pt]
+
+\end{align*}
+
+<p>
+一方、デルタ関数の微分 $f(t) = \textrm{d}\delta(t)/\textrm{d}t$ のラプラス変換である $\textrm{F}(s) = s$ も逆ラプラス変換の存在条件を満たしていませんがデルタ関数を含んでいるので何となく逆ラプラス変換できそうな気がします。
+<br>
+ところがこちらに関しては Bromwich 積分して元の $f(t)$ を求めることは(調べた限り)出来ないみたいです。
+</p>
+
+<p>
+※ デルタ関数の微分は $-\delta(t)$ と $+\delta(t)$ が同時存在するという謎の信号なので当然と言われればそうですが。
+</p>
+
+<p>
+4番目の注意点は、極が1つも無い場合は逆フーリエ変換が存在しても逆ラプラス変換は存在しない場合があることです。
+</p>
+
+<p>
+この条件については調べても良く分からなかったのですが、多分フーリエ変換は存在するけどラプラス変換が存在しない信号($f(t)=1/t$ とか)のフーリエ変換を次の例の様に無理やりラプラス変換とみなした関数については逆ラプラス変換が存在しないのでは無いかと思います。
+<br>
+例えば
+</p>
+
+\[
+\textrm{F}(s) = -j \cdot \pi \cdot \textrm{sign}(w)
+\]
+
+<p>
+の逆ラプラス変換は存在しないことを背理法を使って証明してみましょう($\textrm{F}(s)$ の式内には $s$ の実数成分 $\delta$ が含まれていなことに注意してください)。
+</p>
+
+<p>
+まず極が含まれてないので適当に実数 $\gamma$ を選んで Bromwich 積分を計算します。
+</p>
+
+\begin{align*}
+f(t) &=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{\gamma-j\cdot p}^{\gamma+j\cdot p} 
+\left \{
+\textrm{F}(s) \cdot \textrm{e}^{\{s \cdot t \}}
+\right \} 
+\textrm{d}s \\[10pt]
+(s'= s-\gamma \text{と置き換えて})
+&=
+\frac{1}{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{-j\cdot p}^{j\cdot p} 
+\left \{
+\textrm{F}(s'+\gamma) \cdot \textrm{e}^{\{(s'+\gamma) \cdot t \}}
+\right \} 
+\textrm{d}s' \\[10pt]
+
+&=
+\frac{ \textrm{e}^{\{\gamma \cdot t\}} }{2\pi\cdot j}
+\lim_{p \rightarrow \infty}
+\int_{-j\cdot p}^{j\cdot p} 
+\left \{
+\textrm{F}(s'+\gamma) \cdot \textrm{e}^{\{s' \cdot t \}}
+\right \} 
+\textrm{d}s' \\[10pt]
+
+(s'= j \cdot w{と置き換えて})
+&=
+\frac{ \textrm{e}^{\{\gamma \cdot t\}} }{2\pi}
+\lim_{p \rightarrow \infty}
+\int_{-p}^{p} 
+\left \{
+\textrm{F}(j \cdot w+\gamma) \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\right \} 
+\textrm{d}w \\[10pt]
+
+
+&=
+\frac{ \textrm{e}^{\{\gamma \cdot t\}} }{2\pi}
+\lim_{p \rightarrow \infty}
+\int_{-p}^{p} 
+\left \{
+-j \cdot \pi \cdot \textrm{sign}(t) \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\right \} 
+\textrm{d}w \\[10pt]
+
+
+\end{align*}
+
+<p>
+最後の積分は単に $f(t) = 1/t$ に戻す逆フーリエ変換の式なので、よって
+</p>
+
+\begin{align*}
+(\textrm{続き})&=
+\textrm{e}^{\{\gamma \cdot t\}}
+\cdot
+\frac{1}{t}
+\end{align*}
+
+<p>
+となりますが、$\gamma$ をどう選んでも両側／片側ラプラス変換どちらも出来ないという矛盾が生じましたので、逆ラプラス変換は存在しないことが分かりました。
+</p>
 
 
 <br>
