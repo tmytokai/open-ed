@@ -21,32 +21,88 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-フーリエ変換はテキストなどでは<a href="../../fourier/">フーリエ級数展開</a>の周期 $\textrm{T}$ [秒]を無限大するという操作をした物と説明されることが多いのですが、厳密に言えば周期をいくら大きくしたところでフーリエ級数展開の式で出てきた総和記号 $\Sigma$ がフーリエ変換の積分記号 $\int$ に置き換わることはありません。
-<br>
-実は「周波数領域内でフーリエ変換にくし型関数をかけてインパルス信号列化する」という行為がフーリエ変換とフーリエ級数展開を結びつけるための本質的な操作となります。
-<br>
-このページではそれについて詳しく説明します。
+フーリエ変換はテキストなどでは<a href="../../fourier/">複素フーリエ級数展開</a>の周期 $\textrm{T}$ [秒]を無限大にした物と説明されることが多いのですが、真面目に考えるとそれ程単純な話ではありません。
+</p>
+
+<p>
+複素フーリエ級数展開とフーリエ変換、及びその元となる周期的なアナログ信号と非周期的なアナログ信号の間の関係は意外に複雑で、その関係を相関図にして示したのが図1です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 複素フーリエ級数展開とフーリエ変換の相関図</b>
+
+<p>
+準備中
+</p>
+
+</div>
+
+<p>
+図1に示した関係について以下でじっくり説明して行きたいと思います。
 </p>
 
 <br>
 <h2>
-(1) フーリエ変換から複素フーリエ係数を導出
+(1) 非周期的なアナログ信号 → 周期的なアナログ信号
 </h2>
 
 <p>
-$f(t)$ が周期 $\textrm{T}$ [秒] の周期的なアナログ信号のとき、 $f(t)$ をフーリエ変換するだけでそのまま複素フーリエ係数が求まりそうな気がしますが、$f(t)$ は絶対可積分条件を満たさないので一般的な意味でのフーリエ変換は存在しません。
+まず基本となる「非周期的なアナログ信号 → 周期的なアナログ信号」の経路から説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 非周期的なアナログ信号 → 周期的なアナログ信号</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
 </p>
 
 <p>
-※ このページを読み進めて行くと分かりますが、デルタ関数の様な超関数の使用を許せばフーリエ変換が存在する場合もあります。
-</p>
-
-<p>
-そこで $f(t)$ 全体をフーリエ変換することは諦め、以下の窓関数
+i を整数とし、$f(t)$ を $i \cdot \textrm{T}$ [秒] だけずらした信号を無限に足し合わせた
 </p>
 
 \[
-g(t) = 
+f_{pd}(t) = \sum_{i=-\infty}^{\infty} \ f(t - i \cdot \textrm{T})
+\]
+
+<p>
+※ pd は periodic(周期的) の略です。
+</p>
+
+<p>
+は周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]  の周期的な時間領域アナログ信号となる。
+</p>
+
+</div>
+
+<p>
+もちろん信号の長さが無限の時は周期的な信号を作れませんので、今回は $\textrm{T}$ は有限の範囲内だけで考えることにします。
+</p>
+
+
+<br>
+<h2>
+(2) 周期的なアナログ信号 → 非周期的なアナログ信号
+</h2>
+
+<p>
+次は(1)の逆の経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期的なアナログ信号 → 非周期的なアナログ信号</b>
+
+<p>
+$f_{pd}(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+</p>
+
+
+<p>
+さらに矩形状の窓関数
+</p>
+
+\[
+\textrm{rect}(t) = 
 \begin{cases}
 0 \ & t < -\frac{\textrm{T}}{2} \\[10pt]
 1 \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
@@ -55,38 +111,67 @@ g(t) =
 \]
 
 <p>
-を $f(t)$ にかけ、$f(t)$ から 1 周期分だけ切り出した信号 $f(t)\cdot g(t)$ を代わりにフーリエ変換することにします(図1)。
+※ rect は rectangle(矩形) の略です。
 </p>
 
-<br>
-<div class="info">
-<input type="checkbox"><b>図1: 窓関数 $g(t)$</b>
-<p>$\textrm{T}$ [秒] は周期</p>
-<img src="./img/page02-fig1.png" alt="">
+<p>
+を定義する。
+</p>
+
+<p>
+$f_{pd}(t)$ に $\textrm{rect}(t)$ をかけた信号
+</p>
+
+
+\[
+f(t)
+=
+f_{pd}(t) \cdot \textrm{rect}(t)
+=
+\begin{cases}
+0 \ & t < -\frac{\textrm{T}}{2} \\[10pt]
+f_{pd}(t) \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
+0 & t > \frac{\textrm{T}}{2}
+\end{cases}
+\]
+
+
+<p>
+は $f_{pd}(t)$ から  1 周期分だけ切り出した長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号となる。
+</p>
+
 </div>
 
+<p>
+なお、いきなり周期 $\textrm{T}$ が無限大の状況を考えると色々問題が生じますので、とりあえず今のところは $\textrm{T}$ は有限の範囲内だけで考えることにします(一番最後に $\textrm{T} \rightarrow \infty$ の場合について少しだけ触れます)。
+</p>
+
+<br>
+<h2>
+(3) フーリエ変換 → 複素フーリエ係数
+</h2>
 
 <p>
-すると $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ から $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ を求めることが出来ます。
-<br>
-具体的には次のことが言えます。
+では本題の一つである「フーリエ変換 → 複素フーリエ係数」の経路について説明します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>フーリエ変換から複素フーリエ係数を導出する</b>
+<input type="checkbox"><b> フーリエ変換 → 複素フーリエ係数</b>
 
 <p>
-$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
 <br>
-また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
-<br>
-さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
 </p>
 
 <p>
-$k$ を任意の整数としたとき、 $\textrm{F}(w)/\textrm{T}$ を $k \cdot w_1$ [rad/秒] おきにサンプリングした値は $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ と一致する。
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
 <br>
-すなわち
+また $\textrm{C}[k]$ を $f_{pd}(t)$ から求めた複素フーリエ係数とする。
+</p>
+
+<p>
+この時、複素フーリエ係数とフーリエ変換には次の関係が成り立つ。
 </p>
 
 \[
@@ -95,13 +180,20 @@ $k$ を任意の整数としたとき、 $\textrm{F}(w)/\textrm{T}$ を $k \cdot
 
 </div>
 
-
 <p>
-この証明は簡単で、まず基本周波数 $w_1$ [rad/秒]をサンプリング間隔として $\textrm{F}(w)$ をサンプリングしてディジタル信号列 $\textrm{F}( k \cdot w_1)$ を作ります。
+要するに
 </p>
 
 <p>
-よって $f(t) \cdot g(t)$ のフーリエ変換より
+<b>$\textrm{C}[k]$ は $\textrm{F}(w)$ を $w_1$ おきにサンプリングし $\textrm{T}$で割って作ったディジタル信号列</b>
+</p>
+
+<p>
+ということです。
+</p>
+
+<p>
+これは複素フーリエ係数の定義を使って次の様に簡単に証明することが出来ます。
 </p>
 
 \begin{align*}
@@ -109,7 +201,7 @@ $k$ を任意の整数としたとき、 $\textrm{F}(w)/\textrm{T}$ を $k \cdot
 & = 
 \int_{-\infty}^{\infty}
 \left \{
-f(t) \cdot g(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
+f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}} 
 \right \} 
 \textrm{d}t \\[10pt]
 & = 
@@ -123,236 +215,447 @@ f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
 
 </div>
 
-<p>
-なので
-</p>
-
-<p>
-\[
-\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 )
-\]
-</p>
-
-
-<p>
-という関係が導かれます。
-</p>
 
 <br>
 <h2>
-(2) 逆フーリエ変換から複素フーリエ級数展開(=$f(t)$)を導出
+(4) フーリエ変換 → インパルス列
 </h2>
 
 <p>
-次は $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ を逆変換して複素フーリエ級数展開、つまり $f(t)$ を求めてみます。
+次はもう一つの本題である「複素フーリエ係数 → フーリエ変換」の経路について説明したいところなのですが、こちらは簡単に説明することが出来ません。
 <br>
-ただしそのまま逆フーリエ変換しても単に $f(t)\cdot g(t)$ が復元するだけなので、次のように少しだけ手間をかけます。
+そこで「インパルス列」という信号を新たに導入して「フーリエ変換 → インパルス列」の経路について先に説明します。
+</p>
+
+<p>
+なお、突然「インパルス列」という謎の用語が出てきましたが、これについて詳しく説明するためにはサンプリング理論の話をイチからしないといけないので今回はあまり深く立ち入らないことにします。
+<br>
+興味のある人はインパルス列について自分で調べてください。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>逆フーリエ変換から複素フーリエ級数展開($=f(t)$)を導出する</b>
+<input type="checkbox"><b> フーリエ変換 → インパルス列</b>
 
 <p>
-$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
 <br>
-また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
 <br>
-さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
-</p>
-<p>
-この時 $\textrm{F}(w)$ にサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] と $w_1$ 間隔のくし型関数をかけて作った
+さらに周波数領域内でサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] おきに<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">デルタ関数</a> $\delta(t)$ をくし(櫛)上に並べた信号
 </p>
 
 \[
-\textrm{F}'(w)
-=
-\frac{2\pi}{\textrm{T}}
-\cdot 
-\textrm{F}(w) 
-\cdot
-\sum_{k=-\infty}^{\infty} \ \delta(w - k \cdot w_1 )
+\textrm{comb}(w) = \sum_{k=-\infty}^{\infty} \delta(w-k\cdot w_1)
 \]
 
 <p>
-の逆フーリエ変換は $f(t)$ の複素フーリエ級数展開と一致する。
+※ comb はくしの英文です。
+</p>
+
+<p>
+を定義する。
 <br>
-すなわち
+この信号は「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼ばれる。
+</p>
+
+<p>
+この時、$\textrm{F}(w)$ にくし型関数 $\textrm{comb}(w)$ をかけて作った信号
+</p>
+
+\begin{align*}
+\textrm{F}_{imp}(w)
+&=
+\textrm{F}(w) \cdot  \textrm{comb}(w) \\[10pt]
+&=
+\textrm{F}(w) \cdot 
+\sum_{k=-\infty}^{\infty} \ \delta(w - k \cdot w_1 ) \\[10pt]
+&=
+\sum_{k=-\infty}^{\infty} \ \textrm{F}(k \cdot w_1) \cdot  \delta(w - k \cdot w_1 )
+
+\end{align*}
+
+<p>
+※ imp は impulse の略です。
+</p>
+
+<p>
+のことを「<b>$\textrm{F}(w)$ をサンプリングして生成したインパルス列</b>」と呼ぶ。
+</p>
+
+</div>
+
+<p>
+ここでサンプリング間隔を $w_1 = 2\pi/\textrm{T}$ [rad/秒] としていますので、サンプリング角周波数は $\textrm{T}$ [秒]、ナイキスト角周波数は $\textrm{T}$/2 [秒]となります。
+</p>
+
+<p>
+※ ちょっとややこしいのですが、周波数領域内でサンプリングしているのでサンプリング／ナイキスト角周波数の単位は [秒] になります。
+</p>
+
+<p>
+よって $f(t)$ が $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ の範囲で帯域制限されていれば $\textrm{F}(w)$ をサンプリングする際にエイリアシングが生じない訳ですが、都合の良いことに $f(t)$ はそうなる様に定義したので、今回のサンプリングでエイリアシングは生じてないということが分かります。
+</p>
+
+
+<br>
+<h2>
+(5) 複素フーリエ係数 → インパルス列
+</h2>
+
+<p>
+(3)と(4) から即座に次の事が言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 複素フーリエ係数 → インパルス列</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+<br>
+更に $\textrm{F}(w)$ をサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] でサンプリングして生成したインパルス列を $\textrm{F}_{imp}(w)$ とする。
+</p>
+
+<p>
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+<br>
+また $\textrm{C}[k]$ を $f_{pd}(t)$ から求めた複素フーリエ係数とする。
+</p>
+
+<p>
+この時、次の関係が成り立つ。
 </p>
 
 \[
-f(t)
+\textrm{F}_{imp}(w)
 =
-\sum_{k=-\infty}^{\infty}
-\left \{
-\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
-\right \}
-=
-\frac{1}{2\pi}
-\int_{-\infty}^{\infty}
-\left \{
-\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}w
+\sum_{k=-\infty}^{\infty} \ \textrm{T} \cdot \textrm{C}[k] \cdot \delta(w - k \cdot w_1 )
+\]
+
+</div>
+
+<br>
+<h2>
+(6) インパルス列 → 複素フーリエ係数
+</h2>
+
+<p>
+(5) の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> インパルス列 → 複素フーリエ係数</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+<br>
+更に $\textrm{F}(w)$ をサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] でサンプリングして生成したインパルス列を $\textrm{F}_{imp}(w)$ とする。
+</p>
+
+<p>
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+<br>
+また $\textrm{C}[k]$ を $f_{pd}(t)$ から求めた複素フーリエ係数とする。
+</p>
+
+<p>
+すると次の関係が成り立つ。
+</p>
+
+
+\[
+\textrm{C}[k] = \frac{ \textrm{F}_{imp}(k\cdot w_1) }{ \textrm{T} \cdot \delta(0) }
 \]
 
 </div>
 
 <p>
-こちらの証明はやや難解です。
-</p>
-
-<p>
-まずサンプリング間隔 $w_1$ [rad/秒] おきに<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%A9%E3%83%83%E3%82%AF%E3%81%AE%E3%83%87%E3%83%AB%E3%82%BF%E9%96%A2%E6%95%B0">デルタ関数</a> $\delta(t)$ を並べた信号
-</p>
-
-\[
-\textrm{comb}_{w_1}(w) = \sum_{k=-\infty}^{\infty} \delta(w-k\cdot w_1)
-\]
-
-<p>
-を考えます。
-<br>
-この信号は「<b><a href="https://ja.wikipedia.org/wiki/%E3%81%8F%E3%81%97%E5%9E%8B%E9%96%A2%E6%95%B0">くし型関数</a></b>」と呼ばれます。
-</p>
-
-<p>
-次に $\textrm{F}(w)$ にこのくし型関数をかけて作った信号を
-</p>
-
-\[
-\textrm{F}'(w)
-=
-\frac{2\pi}{\textrm{T}}
-\cdot
-\textrm{F}(w) \cdot 
-\sum_{k=-\infty}^{\infty} \ \delta(w - k \cdot w_1 )
-\]
-
-<p>
-とすると、この$\textrm{F}'(w)$ は $\textrm{F}(w)$ をサンプリングして作成したインパルス信号列となります。
-<br>
-なお最終的に複素フーリエ係数とゲインを合わせるため、サンプリング間隔 $w_1 = 2\pi/\textrm{T}$ を全体にかけています。
-</p>
-
-<p>
-※ 何故ここでいきなりくし型関数をかけてるのか不思議な人がいるかもしませんが、詳しく説明するにはサンプリングの理論から説明しないと駄目なので、とりあえず今回はサンプリングというのはそういうものだと思ってください。興味があるひとは<a href="../../dft/text01/page03.html">こちら</a>や<a href="../../z/text01/page02.html">こちら</a>の話なども参考にしてください。
-</p>
-
-<p>
-次にこの $\textrm{F}'(w)$ に対して逆フーリエ変換を計算して $f'(t)$ を求めます。
-<br>
-すると
-</p>
-
-\begin{align*}
-f'(t) &= 
-\frac{1}{2\pi}
-\int_{-\infty}^{\infty}
-\left \{
-\textrm{F}'(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}w \\[10pt]
-&=
-\frac{1}{\textrm{T}}
-\cdot \int_{-\infty}^{\infty}
-\left \{
-\textrm{F}(w) \cdot
-\sum_{k=-\infty}^{\infty} \  \delta(w - k \cdot w_1 )
-\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}w \\[10pt]
-&=
-\frac{1}{\textrm{T}}
-\cdot \sum_{k=-\infty}^{\infty}
-\int_{-\infty}^{\infty}
-\left \{
-\textrm{F}(w) \cdot 
-\delta(w - k \cdot w_1 )
-\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}w \ \text{← 注目} \\[10pt]
-(\text{デルタ関数の性質より})
-&=
-\frac{1}{\textrm{T}}
-\cdot \sum_{k=-\infty}^{\infty}
-\left \{
-\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
-\right \}
-\\[10pt]
-(\text{$\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 )$ を代入})
-&= 
-\sum_{k=-\infty}^{\infty}
-\left \{
-\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
-\right \} \\[10pt]
-&= f(t)
-\end{align*}
-
-<p>
-となるので、インパルス信号列 $\textrm{F}'(w)$ の逆フーリエ変換は $f(t)$ の複素フーリエ級数展開と一致します。
-<br>
-言い換えれば周期的な信号 $f(t)$ のフーリエ変換はインパルス信号列 $\textrm{F}'(w)$ です。
-</p>
-
-<p>
-※ 最初の方で周期的な信号のフーリエ変換は一般的な意味では存在しないと書きましたが、デルタ関数の使用を許せばフーリエ変換を求めることが可能になります
-</p>
-
-<p>
-この様に
-</p>
-
-<p>
-<b>非周期的なアナログ信号のフーリエ変換に対して周波数領域内でくし型関数をかけてインパルス信号列化すると時間領域では周期的な信号に変わる</b>
-</p>
-
-<p>
-という性質がありますので覚えておいてください。
-<br>
-同様に
-<p>
-
-<p>
-<b>(周期的か非周期的を問わず)アナログ信号に対して時間領域内でくし型関数をかけてインパルス信号列化すると周波数領域内でフーリエ変換は周期的になる</b>
-</p>
-
-<p>
-という性質もあります。
-<br>
-これについてはここでは説明しないので、興味があったら<a href="../../z/text01/page02.html">こちら</a>を参考にしてください。
-</p>
-
-<p>
-ところで上の式中で「←注目」と書いた行でフーリエ変換の式中の積分記号 $\int$ が フーリエ級数展開の式中の総和記号 $\Sigma$ に置き換わっていることに着目してください。
-<br>
-この事から「周波数領域内でフーリエ変換にくし型関数をかけてインパルス信号列化する」という行為がフーリエ変換とフーリエ級数展開を結びつけるための本質的な操作だということが分かります。
+$\delta(0)$ で割ってる部分がイメージしにくいのですが、要するに $\textrm{T} \cdot \textrm{C}[k] \cdot \delta(w - k \cdot w_1 )$ からデルタ関数を取り除いて $\textrm{T}$ で割れば $\textrm{C}[k]$ になるということです。
 </p>
 
 
 <br>
 <h2>
-(3) 複素フーリエ係数からフーリエ変換を導出
+(7) インパルス列 → 周期的なアナログ信号
 </h2>
 
 <p>
-今度は逆に$f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ から $f(t)\cdot g(t)$ のフーリエ変換 $\textrm{F}(w)$ を求めてみましょう。
-<br>
-結論は次の通りです。
+次に(4)で定義したインパルス列を逆フーリエ変換することで(1)で定義した周期的なアナログ信号が復元されることについて説明します。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>複素フーリエ係数からフーリエ変換を導出する</b>
+<input type="checkbox"><b> インパルス列 → 周期的なアナログ信号</b>
 
 <p>
-$f(t)$ を周期 $\textrm{T}$ [秒] の周期的なアナログ信号とする。
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
 <br>
-また $w_1 = 2\pi/\textrm{T}$ [rad/秒] を基本角周波数とする。
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
 <br>
-さらに $f(t)$ に図1の窓関数をかけた信号 $f(t)\cdot g(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+更に $\textrm{F}(w)$ をサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] でサンプリングして生成したインパルス列を $\textrm{F}_{imp}(w)$ とする。
 </p>
 
 <p>
-$f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ に対して<a href="https://ja.wikipedia.org/wiki/Sinc%E9%96%A2%E6%95%B0">sinc</a>補間(理想ローパスフィルタ処理)をおこなうと $\textrm{F}(w)$ になる。
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+</p>
+
+<p>
+このとき
+</p>
+
+\[
+w_1 \cdot \textrm{F}_{imp}(w)
+\]
+
+<p>
+を逆フーリエ変換することで  $f_{pd}(t)$ が復元される。
+</p>
+
+</div>
+
+<p>
+逆に言えば $f_{pd}(t)$ のフーリエ変換は $w_1  \cdot \textrm{F}_{imp}(w) $ だということです。
+</p>
+
+<p>
+では証明してみましょう。
+</p>
+
+<p>
+とりあえず $w_1 \cdot \textrm{F}_{imp}(w)$ の逆フーリエ変換を計算してみます。
+<br>
+すると
+</p>
+
+\begin{align*}
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+\left \{
+w_1 \cdot \textrm{F}_{imp}(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w
+
+&=
+\int_{-\infty}^{\infty}
+\left \{
+\frac{w_1}{2\pi}
+\cdot 
+\sum_{k=-\infty}^{\infty} \ \textrm{F}( k \cdot w_1) \cdot  \delta(w - k \cdot w_1 )
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w \\[10pt]
+
+(w_1 = 2\pi/\textrm{T} \text{を代入})
+&=
+\int_{-\infty}^{\infty}
+\left \{
+\frac{1}{\textrm{T}}
+\cdot 
+\sum_{k=-\infty}^{\infty} \ \textrm{F}( k \cdot w_1) \cdot \delta(w - k \cdot w_1 )
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w \\[10pt]
+
+(\text{積分と総和を入れ替え})
+&=
+\sum_{k=-\infty}^{\infty}
+\left [
+\frac{1}{\textrm{T}}
+\cdot 
+\textrm{F}( k \cdot w_1) \cdot 
+\int_{-\infty}^{\infty}
+\left \{
+\delta(w - k \cdot w_1 )
+\cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\textrm{d}w 
+\right ]
+\\[10pt]
+
+(\text{デルタ関数の性質より})
+&=
+\sum_{k=-\infty}^{\infty}
+\left \{
+\frac{1}{\textrm{T}}
+\cdot 
+\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\\[10pt]
+
+(\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 ) \text{を代入})
+&= \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \} \\[10pt]
+
+(\text{複素フーリエ級数展開なので})
+&= f_{pd}(t) 
+\end{align*}
+
+<p>
+となります。
+</p>
+
+<br>
+<h2>
+(8) 周期的なアナログ信号 → インパルス列
+</h2>
+
+<p>
+(7) から即座に次の事が言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> 周期的なアナログ信号 → インパルス列</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+<br>
+更に $\textrm{F}(w)$ をサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] でサンプリングして生成したインパルス列を $\textrm{F}_{imp}(w)$ とする。
+</p>
+
+<p>
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+</p>
+
+<p>
+この時
+</p>
+
+\[
+\frac{ 1 }{ w_1 } \cdot f_{pd}(t)
+\]
+
+<p>
+をフーリエ変換することで $\textrm{F}_{imp}(w)$ が得られる。
+</p>
+
+</div>
+
+<p>
+さて(7)と(8)の話から
+</p>
+
+<p>
+<b>非周期的なアナログ信号のフーリエ変換をインパルス列化すると時間領域では周期的なアナログ信号になる</b>
+</p>
+
+<p>
+という法則があることが分かります。
+<br>
+同様に
+</p>
+
+<p>
+<b>(周期的か非周期的を問わず)アナログ信号をインパルス列化するとフーリエ変換は周期的になる</b>
+</p>
+
+<p>
+という法則もあるのですが、これについてはここでは詳しく説明しないので、興味があったら<a href="../../z/text01/page02.html">こちら</a>を参考にしてください。
+</p>
+
+
+
+<br>
+<h2>
+(9) インパルス列 → フーリエ変換
+</h2>
+
+<p>
+次は「インパルス列 → フーリエ変換」の経路について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b> インパルス列 → フーリエ変換</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+<br>
+更に $\textrm{F}(w)$ をサンプリング間隔 $w_1 = 2\pi/\textrm{T}$ [rad/秒] でサンプリングして生成したインパルス列を $\textrm{F}_{imp}(w)$ とする。
+</p>
+
+<p>
+この時 $\textrm{F}(w)$ は $w_1 \cdot \textrm{F}_{imp}(w)$ と
+</p>
+
+\[
+\textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} = \textrm{T} \cdot \frac{ \sin \left ( w \cdot \textrm{T} \right ) }{\left ( w \cdot \textrm{T} \right )}
+\]
+
+<p>
+の畳み込み演算により求まる。
+<br>
+ここで sinc は<a href="https://ja.wikipedia.org/wiki/Sinc%E9%96%A2%E6%95%B0">非正規化 sinc 関数</a>である。
+<br>
+すなわち
+</p>
+
+\begin{align*}
+\textrm{F}(w) 
+&= 
+\frac{1}{2\pi} \cdot
+\left (
+w_1 \cdot \textrm{F}_{imp}(w) * \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
+\right ) \\[10pt]
+\end{align*}
+
+<p>
+※ 式中の * は畳み込み積分です。
+</p>
+
+
+</div>
+
+<p>
+この関係は $\textrm{F}_{imp}(w)$ に対して理想ローパスフィルタ処理を行う処理、つまり (2) で時間領域内で行っている処理を周波数領域内で考えることで証明できます。
+</p>
+
+<p>
+(証明は省略しますが) $\textrm{rect}(t)$ のフーリエ変換は
+</p>
+
+\[
+\textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
+\]
+
+<p>
+ですので、この式と $f_{pd}(t)$ のフーリエ変換である $w_1 \cdot \textrm{F}_{imp}(w)$ を畳み込めば $f(t) = f_{pd}(t) \cdot \textrm{rect}(t)$ のフーリエ変換 $\textrm{F}(w)$ が出てきます。
+<br>
+なお(4)で説明したように $\textrm{F}(w)$ をサンプリングして $\textrm{F}_{imp}(w)$ を作る際にエイリアシングは生じてませんので、この畳み込み演算により $\textrm{F}(w)$は完全復元されます。
+</p>
+
+<br>
+<h2>
+(10) 複素フーリエ係数 → フーリエ変換
+</h2>
+
+<p>
+これで準備が整いましたので、いよいよ残った本題である「複素フーリエ係数 → フーリエ変換」の経路について説明します。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ係数 → フーリエ変換</b>
+
+<p>
+$f(t)$ を $ -\textrm{T}/2 \leq t \leq \textrm{T}/2$ 以外の時刻は 0 である長さ $\textrm{T}$ [秒]の非周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ のフーリエ変換を $\textrm{F}(w)$ とする。
+</p>
+
+<p>
+同様に $f_{pd}(t)$ を $f(t)$ をもとにして作った周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] の周期的な時間領域アナログ信号とする。
+<br>
+また $\textrm{C}[k]$ を $f_{pd}(t)$ から求めた複素フーリエ係数とする。
+</p>
+
+<p>
+この時、 $\textrm{C}[k]$ に対して sinc 補間(理想ローパスフィルタ処理)をおこなうと $\textrm{F}(w)$ が得られる。
 <br>
 すなわち
 </p>
@@ -366,38 +669,26 @@ $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ に対して<a href="https://
 
 </div>
 
-
 <p>
-まず (2) で示したように周期的な信号 $f(t)$ を逆フーリエ変換するとインパルス信号列 $\textrm{F}'(w)$ になります。
+この証明は(9)の畳み込み演算の続きを計算すると出来ます。
 <br>
-また $f(t)$ に図1で示した窓関数 $g(t)$ をかけて作った信号が $f(t)\cdot g(t)$ でした。
-<br>
-さらに(証明は省略しますが) $g(t)$ の逆フーリエ変換は
-</p>
-
-\[
-\textrm{G}(w) = \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
-\]
-
-<p>
-です。
-</p>
-
-<p>
-よって $\textrm{F}(w)$ は(式中の * は畳み込み積分)
+ではやってみましょう。
 </p>
 
 \begin{align*}
-\textrm{F}(w) & = \frac{1}{2\pi} \cdot (\textrm{F}' * \textrm{G})(w) \\[10pt]
 
+\textrm{F}(w)
+&=
+\frac{1}{2\pi} \cdot
+\left (
+w_1 \cdot \textrm{F}_{imp}(w) * \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
+\right ) \\[10pt]
 
 &=
+\frac{1}{2\pi} \cdot
 \int_{-\infty}^{\infty}
-\frac{1}{\textrm{T}}
-\cdot 
-\textrm{F}(\xi) 
-\cdot
-\sum_{k=-\infty}^{\infty} \ \delta(\xi - k \cdot w_1 )
+w_1 \cdot
+\textrm{F}_{imp}(\xi) 
 \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
 \ \textrm{d}\xi \\[10pt]
 
@@ -405,35 +696,45 @@ $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ に対して<a href="https://
 \int_{-\infty}^{\infty}
 \sum_{k=-\infty}^{\infty} 
 \
-\frac{1}{\textrm{T}}
-\cdot 
+\frac{w_1}{2\pi} \cdot
 \textrm{F}(k \cdot w_1) 
 \cdot
  \delta(\xi - k \cdot w_1 )
 \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
 \ \textrm{d}\xi \\[10pt]
 
+(w_1 = 2\pi/\textrm{T} \text{を代入})
+&=
+\int_{-\infty}^{\infty}
+\sum_{k=-\infty}^{\infty} 
+\
+\frac{1}{\textrm{T}} \cdot
+\textrm{F}(k \cdot w_1) 
+\cdot
+ \delta(\xi - k \cdot w_1 )
+\cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi \\[10pt]
 
+(\textrm{C}[k] = \frac{1}{\textrm{T}} \cdot \textrm{F} ( k \cdot w_1 ) \text{を代入})
 &=
 \int_{-\infty}^{\infty}
 \sum_{k=-\infty}^{\infty}
 \textrm{C}[k] \cdot \delta(\xi - k \cdot w_1 ) \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
 \ \textrm{d}\xi \\[10pt]
 
-&=
-\sum_{k=-\infty}^{\infty}
-\int_{-\infty}^{\infty}
-\textrm{C}[k] \cdot \delta(\xi - k \cdot w_1 ) \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
-\ \textrm{d}\xi \\[10pt]
-
+(\text{積分と総和を入れ替え})
 &=
 \textrm{T} \cdot 
 \sum_{k=-\infty}^{\infty}
+\left [
 \textrm{C}[k] \cdot 
 \int_{-\infty}^{\infty}
-\delta(\xi - k \cdot w_1 ) \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
-\ \textrm{d}\xi \\[10pt]
+\delta(\xi - k \cdot w_1 ) \cdot \textrm{T} \cdot \textrm{sinc} \frac{ (w - \xi) \cdot \textrm{T} }{2} 
+\ \textrm{d}\xi 
+\right ]
+\\[10pt]
 
+(\text{デルタ関数の性質より})
 &=
 \textrm{T} \cdot 
 \sum_{k=-\infty}^{\infty}
@@ -443,15 +744,15 @@ $f(t)$ の複素フーリエ係数 $\textrm{C}[k]$ に対して<a href="https://
 \end{align*}
 
 <p>
-で求まります。
+と求まりました。
 </p>
 
 <p>
-参考までに簡単な例を示しましょう。
+ここで参考までに簡単な例を示しましょう。
 </p>
 
 \[
-f(t) = \sin (w1\cdot t )
+f_{pd}(t) = \sin (w_1\cdot t )
 \]
 
 <p>
@@ -475,10 +776,10 @@ f(t) = \sin (w1\cdot t )
 </p>
 
 \[
-f(t) \cdot g(t) = 
+f(t) = f_{pd}(t) \cdot \textrm{rect}(t) = 
 \begin{cases}
 0 \ & t < -\frac{\textrm{T}}{2} \\[10pt]
-\sin(w1\cdot t) \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
+\sin(w_1\cdot t) \ & -\frac{\textrm{T}}{2} \leq t \leq \frac{\textrm{T}}{2} \\[10pt]
 0 & t > \frac{\textrm{T}}{2}
 \end{cases}
 \]
@@ -513,29 +814,64 @@ f(t) \cdot g(t) =
 であることが分かります。
 </p>
 
+
 <br>
 <h2>
-(4) 複素フーリエ級数展開から逆フーリエ変換($=f(t)\cdot g(t)$)を導出 
+(11) $\textrm{T} \rightarrow \infty$ の場合
 </h2>
 
+
 <p>
-最後に $f(t)$ の複素フーリエ級数展開から逆フーリエ変換、つまり $f(t)\cdot g(t)$ を求めてみます。
+だいぶ長くなりましたが、最後に $\textrm{T} \rightarrow \infty$ の場合についてちょっとだけ考えてみたいと思います。
 <br>
-これは非常に簡単です。
+まず $\textrm{rect}(t)$ のフーリエ変換は $\textrm{T} \rightarrow \infty$ の時次のように変わります。
 </p>
 
 
-<div class="info">
-<input type="checkbox"><b>複素フーリエ級数展開から逆フーリエ変換($=f(t)\cdot g(t)$)を導出する</b>
+\begin{align*}
+\lim_{\textrm{T} \rightarrow \infty} 
+\textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2}
+&= 
+\lim_{\textrm{T} \rightarrow \infty} 
+\textrm{T} \cdot \textrm{sinc} \left ( \pi \cdot \frac{w}{2\pi} \cdot T \right ) \\[10pt]
+&= 
+\delta \left ( \frac{w}{2\pi} \right ) \\[10pt]
+&= 
+2\pi \cdot \delta (w)
+\end{align*}
 
 <p>
-$f(t)$ の複素フーリエ級数展開を求め、複素フーリエ係数 $\textrm{C}[k]$ から (3) で挙げた sinc 補間を適用して $\textrm{F}(w)$ を復元する。
-<br>
-あとは$\textrm{F}(w)$ に対して逆フーリエ変換をすれば $f(t)\cdot g(t)$ が出てくる。
+よって(9)の畳み込み演算は次のように変わります。
 </p>
 
-</div>
+\begin{align*}
+\lim_{\textrm{T} \rightarrow \infty} 
+\textrm{F}(w) 
+&=
+\lim_{\textrm{T} \rightarrow \infty} 
 
+\frac{1}{2\pi} \cdot
+\left (
+w_1 \cdot \textrm{F}_{imp}(w) * \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
+\right ) \\[10pt]
+
+&=
+\int_{-\infty}^{\infty}
+\lim_{\textrm{T} \rightarrow \infty} 
+w_1 \cdot \textrm{F}_{imp}(\xi) 
+\cdot \delta(\xi - w)
+\ \textrm{d}\xi \\[10pt]
+
+&=
+\lim_{\textrm{T} \rightarrow \infty} w_1 \cdot \textrm{F}_{imp}(w)  \\[10pt]
+
+\end{align*}
+
+<p>
+つまり $\textrm{T} \rightarrow \infty$ の場合 $f(t)$ と $f_{pd}(t)$ のフーリエ変換が一致します。
+<br>
+ここから良く言われている「非周期的な $f_{pd}(t)$ の周期を無限大にすると周期的な $f(t)$ になる」という理屈が出てくる訳ですが、厳密に言えば $\textrm{T}$をいくら大きくしたところで周期的な $f_{pd}(t)$ が非周期的になる訳では無いことには注意が必要です。
+</p>
 
 <br>
 <script>PreNext(2,3)</script>
