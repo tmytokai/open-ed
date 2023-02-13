@@ -822,9 +822,95 @@ f(t) = f_{pd}(t) \cdot \textrm{rect}(t) =
 
 
 <p>
-だいぶ長くなりましたが、最後に $\textrm{T} \rightarrow \infty$ の場合についてちょっとだけ考えてみたいと思います。
+だいぶ長くなりましたが、最後に 何故「$\textrm{T} \rightarrow \infty$ にすると非周期的な $f_{pd}(t)$ が周期的な $f(t)$ に変わる」かについて説明します。
 <br>
-まず $\textrm{rect}(t)$ のフーリエ変換は $\textrm{T} \rightarrow \infty$ の時次のように変わります。
+なお有限の範囲では $\textrm{T}$ をいくら大きくしたところで周期的な $f_{pd}(t)$ が非周期的になる訳では無いことには注意してください。
+</p>
+
+<p>
+<b>1. 複素フーリエ級数展開を使った説明</b>
+</p>
+
+<p>
+まず一般的なテキストでよく引用されている説明から示します。
+<br>
+$f_{pd}(t)$ の複素フーリエ級数展開は
+</p>
+
+\begin{align*}
+f_{pd}(t)
+&= \sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \} \\[10pt]
+
+&= 
+\sum_{k=-\infty}^{\infty}
+\left \{
+\frac{1}{\textrm{T}}
+\cdot 
+\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\\[10pt]
+
+&= 
+\frac{1}{2\pi} \cdot 
+\sum_{k=-\infty}^{\infty}
+\left \{
+w_1 \cdot 
+\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\\[10pt]
+
+\end{align*}
+
+<p>
+と変形できますが、$w_1 = 2\pi/\textrm{T}$ はサンプリング間隔で $\textrm{T} \rightarrow \infty$ の時 $w_1 \rightarrow 0$ になりますので、最後の級数は<a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%9E%E3%83%B3%E5%92%8C">リーマン和</a>となります。
+<br>
+よって $\textrm{T} \rightarrow \infty$ の時に総和は<a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%9E%E3%83%B3%E7%A9%8D%E5%88%86">リーマン積分</a>(普通の積分)に置き換えれますので
+</p>
+
+\begin{align*}
+\lim_{\textrm{T} \rightarrow \infty} 
+f_{pd}(t)
+
+&= 
+\lim_{\textrm{T} \rightarrow \infty} 
+\frac{1}{2\pi} \cdot 
+\sum_{k=-\infty}^{\infty}
+\left \{
+w_1 \cdot 
+\textrm{F}(k\cdot w_1) \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}} 
+\right \}
+\\[10pt]
+
+&= 
+\frac{1}{2\pi} \cdot 
+\int_{-\infty}^{\infty}
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}} 
+\right \}
+\\[10pt]
+
+(\text{逆フーリエ変換の定義なので})
+&= 
+f(t)
+
+\end{align*}
+
+
+<p>
+となります。
+</p>
+
+
+<br>
+<p>
+<b>2. フーリエ変換の極限を使った説明</b>
+</p>
+
+<p>
+矩形の窓関数 $\textrm{rect}(t)$ のフーリエ変換は $\textrm{T} \rightarrow \infty$ の時次のようになります。
 </p>
 
 
@@ -841,37 +927,63 @@ f(t) = f_{pd}(t) \cdot \textrm{rect}(t) =
 \end{align*}
 
 <p>
-よって(9)の畳み込み演算は次のように変わります。
+よって(10)より
 </p>
 
 \begin{align*}
 \lim_{\textrm{T} \rightarrow \infty} 
 \textrm{F}(w) 
+
+&= 
+\lim_{\textrm{T} \rightarrow \infty} 
+\textrm{T} \cdot 
+\sum_{k=-\infty}^{\infty}
+\textrm{C}[k] \cdot 
+\textrm{sinc} \frac{ (w - k \cdot w_1) \cdot \textrm{T} }{2} \\[10pt]
+
+&= 
+\sum_{k=-\infty}^{\infty}
+\lim_{\textrm{T} \rightarrow \infty} \textrm{C}[k] \cdot 
+\lim_{\textrm{T} \rightarrow \infty} 
+\textrm{T} \cdot 
+\textrm{sinc} \frac{ (w - k \cdot w_1) \cdot \textrm{T} }{2} \\[10pt]
+
+
+&=
+\sum_{k=-\infty}^{\infty}
+\lim_{\textrm{T} \rightarrow \infty} 
+2\pi \cdot \textrm{C}[k] \cdot  \delta (w - k \cdot w_1) \\[10pt]
+
+(\textrm{(5)より})
 &=
 \lim_{\textrm{T} \rightarrow \infty} 
-
-\frac{1}{2\pi} \cdot
-\left (
-w_1 \cdot \textrm{F}_{imp}(w) * \textrm{T} \cdot \textrm{sinc} \frac{ w \cdot \textrm{T} }{2} 
-\right ) \\[10pt]
-
-&=
-\int_{-\infty}^{\infty}
-\lim_{\textrm{T} \rightarrow \infty} 
-w_1 \cdot \textrm{F}_{imp}(\xi) 
-\cdot \delta(\xi - w)
-\ \textrm{d}\xi \\[10pt]
-
-&=
-\lim_{\textrm{T} \rightarrow \infty} w_1 \cdot \textrm{F}_{imp}(w)  \\[10pt]
-
+w_1 \cdot 
+\textrm{F}_{imp}(w) \\[10pt]
 \end{align*}
 
 <p>
-つまり $\textrm{T} \rightarrow \infty$ の場合 $f(t)$ と $f_{pd}(t)$ のフーリエ変換が一致します。
-<br>
-ここから良く言われている「非周期的な $f_{pd}(t)$ の周期を無限大にすると周期的な $f(t)$ になる」という理屈が出てくる訳ですが、厳密に言えば $\textrm{T}$をいくら大きくしたところで周期的な $f_{pd}(t)$ が非周期的になる訳では無いことには注意が必要です。
+つまり $\textrm{T} \rightarrow \infty$ の場合 $f(t)$ と $f_{pd}(t)$ のフーリエ変換が一致するので $f_{pd}(t)$ は $f(t)$ になります。
 </p>
+
+<br>
+<p>
+<b>(補足) 超関数のフーリエ変換</b>
+</p>
+
+<p>
+上の2番目の説明の最後でフーリエ変換が一致するから $f_{pd}(t)$ と $f(t)$ は一致すると書きましたが、これは結構乱暴な話で、真面目に書くなら超関数のフーリエ変換は全単射だからと前置きする必要があります。
+<br>
+工学的にはそこまで気にする必要も無いのですが、折角なので超関数のフーリエ変換についてここで補足しておきます。
+</p>
+
+<p>
+※ 私は数学者ではないので数学的に変なところがあってもご容赦ください。
+</p>
+
+<p>
+以下準備中
+</p>
+
 
 <br>
 <script>PreNext(2,3)</script>
