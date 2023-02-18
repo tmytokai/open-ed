@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
 <script src="../../../mathjax.js"></script>
-<title>3. フーリエ変換の例</title>
+<title>3. 超関数のフーリエ変換</title>
 </head>
 <body>
 
@@ -20,608 +20,217 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+前ページの説明の方で「フーリエ変換が一致するから $f_{pd}(t)$ と $f(t)$ は一致する」と書きましたが、これは結構乱暴な話で本来なら超関数のフーリエ変換の収束について考慮する必要があります。
 <br>
-<h2>
-(例1) デルタ関数(インパルス信号) $\delta(t)$
-</h2>
-
-<p>
-超関数であるデルタ関数(インパルス信号) $\delta(t)$ のフーリエ変換は
+折角なので工科系学生向けに超関数のフーリエ変換とその収束性についてここで補足しておきます。
+<br>
+なお実用的にはこのページに書いてある内容を気にする必要も無いので、興味がない人はこのページを飛ばしても問題ないです。
 </p>
-
-\begin{align*}
-\textrm{F}(w) 
-&= \int_{-\infty}^{\infty} 
-\left \{
-\delta(t) \cdot \textrm{e}^{\{- j \cdot w \cdot t \}}
-\right \}
-\textrm{d}t \\[10pt]
-(\text{デルタ関数の性質より}) 
-&= \textrm{e}^{0} \\[10pt]
-&= 1
-\end{align*}
-
 <p>
-です。
+※ 私は数学者ではないので数学的に変なところがあってもご容赦ください。
 </p>
 
 <br>
 <h2>
-(例2) 複素正弦波 $\textrm{e}^{\{j \cdot w_1 \cdot t \}}$
+(1) ルベーグ積分
 </h2>
 
 <p>
-<a href="../../complex/text02/page02.html">複素正弦波</a>
-</p>
-
-\[
-f(t) = \textrm{e}^{\{j \cdot w_1 \cdot t \}}
-\]
-
-<p>
-は $|f(t)| = 1$ なので絶対可積分ではありませんが、超関数であるデルタ関数を使えばフーリエ変換を求められます。
+今まで特に説明してませんでしたが、フーリエ変換で使っている積分は<a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%83%9E%E3%83%B3%E7%A9%8D%E5%88%86">リーマン積分</a>(みなさんが普段使ってる積分)ではなくて「<b><a href="https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%99%E3%83%BC%E3%82%B0%E7%A9%8D%E5%88%86">ルベーグ積分</a></b>」と呼ばれる積分です。
 <br>
-具体的には
+工学で良く使われる普通の関数に対してはリーマン積分を使ってもルベーグ積分を使ってもフーリエ変換の結果は同じなので、普段はどちらの積分を使ってるのか気にする必要はあまり無いですが、今回のように超関数のフーリエ変換の収束の話をする場合はどうしてもルベーグ積分の話を持ち出す必要が出てきます。
 </p>
-
-\begin{align*}
-\textrm{F}(w) 
-&= \int_{-\infty}^{\infty} 
-\left \{
-\textrm{e}^{\{ j \cdot w_1 \cdot t \}} \cdot \textrm{e}^{\{- j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}t \\[10pt]
-&= 
-\int_{-\infty}^{\infty} 
-\left \{
-\textrm{e}^{  j \cdot ( w_1 -w ) \cdot t } 
-\right \}
-\textrm{d}t \\[10pt]
-&= 
-\lim_{a \rightarrow \infty}
-\left [
-\frac{ \textrm{e}^{  j ( w_1 - w ) \cdot t } }{  j \cdot ( w_1 - w ) }
-\right ]^a_{-a} \\[10pt]
-&= 
-\lim_{a \rightarrow \infty}
-\left \{
-\frac{ \textrm{e}^{  j \cdot ( w_1 -w ) \cdot a } }{  j ( w_1 -w) }
--
-\frac{ \textrm{e}^{ -j \cdot ( w_1 -w ) \cdot a } }{  j ( w_1 -w) } 
-\right \} \\[10pt]
-&= 
-2\pi\cdot
-\lim_{a \rightarrow \infty}
-\left \{
-\frac{ 1 }{  \pi \cdot ( w - w_1) }
-\cdot
-\frac{ \textrm{e}^{  j \cdot ( w -w_1 ) \cdot a } - \textrm{e}^{  j \cdot ( w - w_1 ) \cdot a } }{  2\cdot j  }
-\right \} \\[10pt]
-&= 
-2\pi\cdot
-\lim_{a \rightarrow \infty}
-\left \{
-\frac{ \sin \{ ( w-w_1) \cdot a \} }{  \pi \cdot ( w - w_1) } 
-\right \} \\[10pt]
-(\text{デルタ関数の定義より}) &= 
-2\pi\cdot \delta( w - w_1 ) \\[10pt]
-\end{align*}
 
 <p>
-となります。
+※ ちなみに確率論で使ってる積分も基本的にはルベーグ積分です。
 </p>
 
+<p>
+では早速ルベーグ積分について簡単に説明します。
 <br>
-<h2>
-(例3) $f(t)=1$
-</h2>
-
-\[
-f(t)=1
-\]
+まず $t$ を実数とし、その関数 $f(t)$ が「<a href="https://ja.wikipedia.org/wiki/%E5%8F%AF%E6%B8%AC%E9%96%A2%E6%95%B0">可測関数</a>」であるとします。
+</p>
 
 <p>
-は絶対可積分ではありませんが、超関数であるデルタ関数を使えばフーリエ変換を求められます。
+※ 実際には $t$ は実数、あるいは $n$ 次元ユークリッド空間上の点でなくても、大きさを測れる集合(可測集合と言います)なら何でも良いです。ただ可測集合とか可測関数とかについて説明するとかなり長くなるので今回は $t$ は実数と限定します。
+</p>
+
+<p>
+いきなり謎の専門用語が出てきましたが、とりあえず
+</p>
+
+<p>
+<b>$f(t)$ は可測関数である ＝ $f(t)$はルベーグ積分をする資格がある関数である</b>
+</p>
+
+<p>
+という意味だととって下さって結構です。
 <br>
-具体的には例2で $w_1=0$ とした場合なので
+なおリーマン積分と同じで $f(t)$ をルベーグ積分したら結果が無限大に発散することがありますので、資格があるからといってもルベーグ積分可能かどうかは別の話であることに注意して下さい。
+</p>
+
+<p>
+さて $f(t)$ が可測関数であるとき、そのルベーグ積分を次の様に記述します。
 </p>
 
 \[
-\textrm{F}(w) = 2\pi\cdot\delta(w)
+\int_{E}\ f(t) \cdot \textrm{d}\mu(t)
 \]
 
 <p>
-となります。
+ここで $E$ は積分領域で、$\textrm{d}\mu(t)$ から $\textrm{d}$ を取り除いた $\mu(t)$ のことを「<a href="https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%99%E3%83%BC%E3%82%B0%E6%B8%AC%E5%BA%A6">ルベーグ測度</a>」と呼びます。
 <br>
-ちなみにこれは $2\pi\cdot\delta(w)$ を逆フーリエ変換することでも証明できます。
-<br>
-具体的には次の通りです。
+また謎の専門用語が出てきましたが、
 </p>
 
-\begin{align*}
-f(t)
-&=
-\frac{1}{2\pi}
-\int_{-\infty}^{\infty} 
-\left \{
-2\pi\cdot\ \delta(w) \cdot \textrm{e}^{\{ j \cdot w \cdot t \}}
-\right \}
-\textrm{d}w \\[10pt]
-(\text{デルタ関数の性質より}) 
-&= \textrm{e}^{0} \\[10pt]
-&= 1
-\end{align*}
-
-
-
-<br>
-<h2>
-(例4) 三角関数 $\cos (w_1 \cdot t)$  と $\sin(w_1 \cdot t)$
-</h2>
-
 <p>
-cos と sin は絶対可積分ではありませんが、超関数であるデルタ関数を使うとフーリエ変換を求められます。
-<br>
-まず cos の方ですが
+<b>ルベーグ測度 ＝ ある区間の長さを測るためのものさしみたいな関数</b>
 </p>
 
-\[
-f(t) = \cos (w_1 \cdot t) = \frac{ \textrm{e}^{ \{ j \cdot w_1 \cdot t \} } + \textrm{e}^{\{ -j \cdot w_1 \cdot t \} } }{2}
-\]
-
 <p>
-なので、例2より
+という意味だととって下さって結構です。
 </p>
 
-\[
-\textrm{F}(w) = \pi \cdot \{ \delta(w-w_1) + \delta(w+w_1) \}
-\]
-
 <p>
-がすぐ求まります。
-</p>
-<p>
-同様に sin については
+※ ものさしにもセンチメートルやインチを測るものさしがあるように、ルベーグ測度以外にも長さを測る関数(測度関数と言います)は色々あります。例えば確率論で出てくる確率密度関数も測度関数のひとつです。ただ説明が長くなるので今回はルベーグ測度に限定します。
 </p>
 
-\[
-f(t) = \sin (w_1 \cdot t) = \frac{ \textrm{e}^{ \{ j \cdot w_1 \cdot t \} } - \textrm{e}^{\{ -j \cdot w_1 \cdot t \} } }{2\cdot j}
-\]
-
 <p>
-なので、例2より
-</p>
-
-\[
-\textrm{F}(w) = \frac{\pi}{j} \cdot \{ \delta(w-w_1) - \delta(w+w_1) \}
-\]
-
-<p>
-です。
-</p>
-
-<br>
-<h2>
-(例5) 単一パルス
-</h2>
-
-<p>
-$a > 0$ を有限な値とした時、単一パルス
-</p>
-
-\[
-f(t) = 
-\begin{cases}
-0 \ & t <0 \\[10pt]
-1 \ & 0 \leq t \leq a \\[10pt]
-0 & t > a
-\end{cases}
-\]
-
-<p>
-はもちろん絶対可積分なので普通にフーリエ変換が求められます。
-</p>
-
-\begin{align*}
-\textrm{F}(w) 
-&= \int_{0}^{a}
-\left \{
-\textrm{e}^{\{- j \cdot w \cdot t \}}
-\right \}
-\textrm{d}t \\[10pt]
-&= 
-\left [
-\frac{\textrm{e}^{\{- j \cdot w \cdot t \}}}{-j\cdot w} 
-\right ]^a_0 \\[10pt]
-&= 
-\frac{1 - \textrm{e}^{\{- j \cdot w \cdot a \} }}{j\cdot w}
-\end{align*}
-
-<p>
-ちなみに $w=0$ の時はロピタルの定理を使って
-</p>
-
-\[
-\textrm{F}(0) = \frac{j\cdot a \cdot \textrm{e}^0 }{j} = a
-\]
-
-<p>
-です。
-</p>
-
-<br>
-<h2>
-(例6) 指数減衰 $\textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)$
-</h2>
-
-<p>
-$\sigma > 0$とし、$u(t)$ を単位ステップ関数
-</p>
-
-\[
-u(t)=
-\begin{cases}
-0 \ & t < 0 \\[10pt]
-1 & t \geq 0
-\end{cases}
-\]
-
-<p>
-とした時、指数減衰
-</p>
-
-\[
-f(t) =  \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)
-\]
-
-<p>
-はもちろん絶対可積分なので普通にフーリエ変換が求められます。
-</p>
-
-
-\begin{align*}
-\textrm{F}(w) 
-&= \int_{-\infty}^{\infty} 
-\left \{
-\textrm{e}^{\{ - \sigma \cdot t \}} \cdot u(t) \cdot  \textrm{e}^{\{- j \cdot w \cdot t \}} 
-\right \}
-\textrm{d}t \\[10pt]
-&= 
-\int_{0}^{\infty} 
-\left \{
-\textrm{e}^{  -( \sigma + j \cdot w ) \cdot t } 
-\right \}
-\textrm{d}t \\[10pt]
-&= 
-\lim_{a \rightarrow \infty}
-\left [
-\frac{ \textrm{e}^{  -( \sigma + j \cdot w ) \cdot t } }{  -( \sigma + j \cdot w ) }
-\right ]^a_{0} \\[10pt]
-&= 
-\lim_{a \rightarrow \infty}
-\left [
-\frac{ \textrm{e}^{  - \sigma \cdot a } \cdot \textrm{e}^{  - j \cdot w \cdot a } }{   -( \sigma + j \cdot w ) }
-\right ]
-+
-\frac{ 1 }{  \sigma + j \cdot w }
-\\[10pt]
-
-\end{align*}
-
-<p>
-ここで $\sigma > 0$ より、上の第1項は0に収束するので
+もっとも記法だけ見せられても
 </P>
 
+<ul>
+<li>それで結局どうやって計算するの？</li>
+<li>リーマン積分で充分じゃないの？何かメリットあるの？</a>
+</ul>
+
+<p>
+という疑問が出てきたと思うので、ルベーグ積分のメリットを計算例とともに示したいと思います。
+</p>
+
+<br>
+<h3>
+メリット 1. リーマン積分を使ってルベーグ積分できる(ときもある)
+</h3>
+
+<p>
+$f(t)$のリーマン積分の求め方は「積分領域を垂直方向に分割し、分割した面積を足し合わせる」でした。
+<br>
+一方、$f(t)$のルベーグ積分の求め方は「積分領域を"<b>水平方向に</b>"分割し、分割した面積を足し合わせる」です。
+</p>
+
+<p>
+よって、本来なら真面目に検討する必要がありますが、ざっくり言ってしまうと分割する方向が違うだけなので、
+</p>
+
+<p>
+<b>もし$f(t)$がリーマン積分可能なら「リーマン積分の計算結果 ＝ ルベーグ積分の計算結果」</b>
+</p>
+
+<p>
+が言えます。
+<br>
+ところで工学で良く使われる普通の関数は可測関数で、しかもリーマン積分可能なのでルベーグ積分と同一視することができます。
+<br>
+特に積分領域 $E$ が実数直線上の閉区間 $[a,b]$ 、または開区間 $(a,b)$ の場合、ルベーグ積分は
+</p>
+
 \[
-\textrm{F}(w) = \frac{ 1 }{  \sigma + j \cdot w }
+\int_a^b\ f(t) \textrm{d}t
 \]
 
 <p>
-となります。
+と完全にリーマン積分と同じ形式に変わります。
+<br>
+つまり通常の用途なら、詐欺みたいな話ですが
+</p>
+
+<p>
+<b>「これからルベーグ積分を行う」と宣言してから、しれっとリーマン積分をする</b>
+</p>
+
+<p>
+と、それがルベーグ積分になります。
+<br>
+この様に「説明が面倒くさい割に結局使うのはリーマン積分」という背景があるので、ルベーグ積分について全く触れない工科系科目が多いわけですね。
+</p>
+
+<p>
+では一応具体例をあげましょう。
+<br>
+$f(t)$ を
+</p>
+
+\[
+f(t) = 1
+\]
+
+<p>
+とし、積分領域を閉区間 $[-1,1]$ とします。
+<br>
+このとき$f(t)$ のルベーグ積分を計算すると
+</p>
+
+\[
+\int_0^1\ f(t) \textrm{d}t = [t]_{-1}^1 = 2
+\]
+
+<p>
+になります。
 </p>
 
 
 <br>
-<h2>
-(例7) 単位ステップ関数
-</h2>
+<h3>
+メリット 2. リーマン積分出来ない関数もルベーグ積分なら出来る(こともある)
+</h3>
 
 <p>
-単位ステップ関数
-</p>
-
-\[
-u(t)=
-\begin{cases}
-0 \ & t < 0 \\[10pt]
-1 & t \geq 0
-\end{cases}
-\]
-
-<p>
-のフーリエ変換は例 6 で $\sigma \rightarrow 0$ とすることで
-</p>
-
-\[
-\textrm{F}(w) = \frac{ 1 }{  j \cdot w }
-\]
-
-<p>
-となります。
+メリットの2番目はリーマン積分出来ない関数に対してもルベーグ積分が出来る(こともある)です。
 <br>
-ただし $w=0$ の時は発散するので $w \ne 0$ の範囲だけで考える必要があります。
+これについて説明するには「ほとんどいたるところで」という概念についてまず話す必要があります。
 </p>
 
 <p>
-(別解)
+ある2つの可測関数 $f(t)$ と $g(t)$ が可算個の不連続点(正確には測度 0 の集合)を除けば $f(t) = g(t)$ となっている状況を
 </p>
 
 <p>
-フーリエ変換の性質より
+<b>ほとんどいたるところで $f(t) = g(t)$</b>
 </p>
-
-\[
-\frac{\textrm{d}}{\textrm{d}t}\ u(t)
-\]
 
 <p>
-のフーリエ変換は
+と言います。
 </p>
-
-\[
-j\cdot w \cdot \textrm{F}(w)
-\]
+<p>
+※ almost everywhere の頭文字を取って「$f(t) = g(t)$ a.e.」と言う時もあります。
+</p>
 
 <p>
-で、
-</p>
-
-\[
-\frac{\textrm{d}}{\textrm{d}t}\ u(t) = \delta(t)
-\]
-
-<p>
-なので、両辺をフーリエ変換すると例1より
-</p>
-
-\[
-j\cdot w \cdot \textrm{F}(w) = 1
-\]
-
-<p>
-よって
-</p>
-
-\[
-\textrm{F}(w) = \frac{ 1 }{  j \cdot w }
-\]
-
-<p>
-となります。
-</p>
-
-
-
+ところで、説明は省きますがルベーグ積分をする時には可算個の不連続点は無視できるという特徴があるので(注意:リーマン積分は無視できない！)、もし「ほとんどいたるところで $f(t) = g(t)$」でかつルベーグ積分可能なら、$f(t)$と$g(t)$のルベーグ積分は同じ値になります。
 <br>
-<h2>
-(例8) 正弦波の指数減衰 $\sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)$
-</h2>
-
-<p>
-ある信号 $f(t)$ のフーリエ変換を $\textrm{F}(w)$、別の信号 $g(t)$ のフーリエ変換を $\textrm{G}(w)$ とします。
+この意味で「ほとんどいたるところで $f(t) = g(t)$」であることを「<b>$f(t)$ と $g(t)$ は同値である</b>」と言うこともあります。
 <br>
-すると畳み込みの定理より $h(t) = f(t)\cdot g(t)$ のフーリエ変換は
-</p>
-
-\begin{align*}
-\textrm{H}(w)
-&= 
-\frac{1}{2\pi} \cdot \left ( \textrm{F} * \textrm{G} \right ) (w) \\[10pt]
-&=
-\frac{1}{2\pi} \cdot 
-\int^{\infty}_{-\infty}
-\textrm{F}(\xi) \cdot \textrm{G} (w-\xi) \ \textrm{d}\xi
-\end{align*}
-
-<p>
-となります。
+そして $f(t)$ と同値である関数を全て一つにまとめた集合の事を「<b>同値類 $[f]$</b>」と言います。
 <br>
-ここで特に
+なお特に誤解の無い状況では同値類 $[f]$ を $f(t)$ で表すこともあります。
 </p>
-
-\[
-\textrm{G} (w) = \delta( w + a)
-\]
 
 <p>
-の時は
-</p>
-
-\begin{align*}
-\textrm{H}(w) 
-&=
-\frac{1}{2\pi} \cdot 
-\int^{\infty}_{-\infty}
-\textrm{F}(\xi) \cdot \delta (w+a-\xi) \ \textrm{d}\xi \\[10pt]
-&=
-\frac{1}{2\pi} \cdot 
-\int^{\infty}_{-\infty}
-\textrm{F}(\xi) \cdot \delta (\xi - (w+a)) \ \textrm{d}\xi \\[10pt]
-&=
-\frac{\textrm{F}(w+a)}{2\pi}
-\end{align*}
-
-<p>
-よって例4と例6から正弦波の指数減衰
-</p>
-
-\[
-f(t) = \sin(w_1 \cdot t) \cdot \textrm{e}^{ \{ -\sigma \cdot t \} } \cdot u(t)
-\]
-
-<p>
-は(ただし $\sigma > 0$ )
-</p>
-
-\begin{align*}
-\textrm{F}(w)
-&=
-\frac{\pi}{2\pi \cdot j}\cdot
-\left \{
-\frac{1}{\sigma + j\cdot (w-w_1)}
--
-\frac{1}{\sigma + j\cdot (w+w_1)}
-\right \} \\[10pt]
-&=
-\frac{1}{2j}\cdot
-\frac{ (\sigma + j\cdot  w + j\cdot w_1) - (\sigma + j\cdot w - j\cdot w_1) }
-{ (\sigma + j\cdot w - j\cdot w_1)\cdot (\sigma + j\cdot  w + j\cdot w_1 ) }
-\\[10pt]
-&=
-\frac{1}{2j}\cdot
-\frac{ 2\cdot j\cdot w_1 }{ (\sigma + j\cdot w)^2 + w_1^2 }
-\\[10pt]
-&=
-\frac{ w_1 }{ (\sigma + j\cdot w)^2 + w_1^2 }
-\\[10pt]
-\end{align*}
-
-<p>
-となります。
-</p>
-
+さて、ある $f(t)$ があって、この関数に対してはリーマン積分が出来ないとします。
 <br>
-<h2>
-(例9) 時刻 0 から始まって $n$ 回振動したら 0 になる正弦波
-</h2>
-
-<p>
-正弦波 $\sin(w_1\cdot t)$ の周期を $\textrm{T} = 2\pi/w_1$ [秒] とします。
+一方「ほとんどいたるところで $f(t) = g(t)$」となる $g(t)$ があって、この $g(t)$ に対してはリーマン積分が出来るとします。
 <br>
-$n$ を 1 以上の整数としたとき次の信号を考えます。
+よって、また詐欺みたいな話になりますが、ルベーグ積分を前提にすると $f(t)$ と $g(t)$ は同値ですので、$f(t)$ のルベーグ積分は $g(t)$ のルベーグ積分(＝リーマン積分)で求められます。
 </p>
 
-\[
-f(t) = 
-\begin{cases}
-0 & t < 0 \\[10pt]
-\sin(w_1\cdot t) \ & 0 \leq t \leq n\cdot \textrm{T} \\[10pt]
-0 & t > n\cdot \textrm{T}
-\end{cases}
-\]
-
 <p>
-例えば、$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]の場合は次のグラフになります。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>図1: $f(t)$ のグラフ例</b>
-
-<p>
-$w_1 = 4\pi$ [rad/秒]、$\textrm{T} = 1/2$[秒]、$n = 2$ [回]
-</p>
-
-<img src="./img/page03-fig1.png" alt="">
-</div>
-
-<p>
-今回考える $f(t)$ は例5で考えた単一パルス(ただし$a = n\cdot \textrm{T}$)を sin にかけた式になっていますので、例8と同様にデルタ関数の畳込み演算を利用できます。
-<br>
-具体的には例4と例5より
-</p>
-
-\begin{align*}
-\textrm{F}(w)
-&=
-\frac{\pi}{2\pi\cdot j}\cdot
-\left \{
-\frac{1-\textrm{e}^{\{- j \cdot (w-w_1) \cdot n\cdot \textrm{T} \} }}{j\cdot (w-w_1)}
--
-\frac{1-\textrm{e}^{\{- j \cdot (w+w_1) \cdot n\cdot \textrm{T} \} }}{j\cdot (w+w_1)}
-\right \} \\[10pt]
-&=
-\frac{1}{2\cdot j}\cdot
-\left \{
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ j \cdot w_1 \cdot n\cdot \textrm{T} \} } }{j\cdot (w-w_1)}
--
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ -j \cdot w_1 \cdot n\cdot \textrm{T} \} } }{j\cdot (w+w_1)}
-\right \} \\[10pt]
-(\text{$w_1 = 2\pi/\textrm{T}$より})&=
-\frac{1}{2\cdot j}\cdot
-\left \{
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ j \cdot 2 \pi \cdot n \} } }{j\cdot (w-w_1)}
--
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot \textrm{e}^{ \{ -j \cdot 2 \pi \cdot n \} } }{j\cdot (w+w_1)}
-\right \} \\[10pt]
-(\text{$n$は整数だから})&=
-\frac{1}{2\cdot j}\cdot
-\left \{
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot 1 }{j\cdot (w-w_1)}
--
-\frac{ 1- \textrm{e}^{ \{ -j \cdot w \cdot n\cdot \textrm{T} \} } \cdot 1 }{j\cdot (w+w_1)}
-\right \} \\[10pt]
-&=
-\frac{1}{2\cdot j}\cdot
-\left \{
-\frac{ 1 }{j\cdot (w-w_1)}
--
-\frac{ 1 }{j\cdot (w+w_1)}
-\right \}
-\cdot
-\left (
-1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
-\right )
-\\[10pt]
-
-&=
-\frac{1}{-2}\cdot
-\left \{
-\frac{ (w+w_1) - (w-w_1) }{(w-w_1)\cdot (w+w_1)}
-\right \}
-\cdot
-\left (
-1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
-\right )
-\\[10pt]
-
-&=
-\left \{
-\frac{w_1}{-w^2+w_1^2}
-\right \}
-\cdot
-\left (
-1- \textrm{e}^{ \{ -j \cdot n\cdot \textrm{T} \cdot w \} }
-\right )
-\\[10pt]
-
-\end{align*}
-
-<p>
-となります。
-<br>
-なお $w = \pm w_1$ の時はロピタルの定理より
-<p>
-
-\begin{align*}
-\textrm{F}(\pm w_1) 
-&=
-\lim_{w \rightarrow \pm w_1}
-\frac{w_1}{-2w} \cdot \left ( j \cdot n \cdot \textrm{T} \cdot \textrm{e}^{  \{ - j \cdot n \cdot \textrm{T} \cdot w \} } \right ) \\[10pt]
-
-&= 
-\mp
-\frac{1}{2} \cdot \left ( j \cdot n \cdot \textrm{T} \cdot \textrm{e}^{ \{ \mp j \cdot n \cdot 2 \pi \} } \right ) \\[10pt]
-
-&= 
-\mp \frac{j \cdot n \cdot \textrm{T}}{2}
-\end{align*}
-
-<p>
-です。
+以下準備中
 </p>
 
 
 <br>
-<script>PreNext(3,3)</script>
+<script>PreNext(3,4)</script>
 </body>
 </html>
