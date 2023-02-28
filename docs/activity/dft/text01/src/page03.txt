@@ -1,0 +1,102 @@
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from scipy import integrate
+from scipy.fft import fft, ifft
+
+figsize=10
+dpi=100
+
+T = 1
+w1 = 2*math.pi/T
+N = 9
+tau = 1/N
+
+print(f'T={T}')
+print(f'w1={w1}')
+print(f'N={N}')
+print(f'tau={tau}')
+    
+# 元の信号
+def f_original(t) :
+    return np.sin(w1*t)+0.5*np.sin(3*w1*t - np.pi/8)+0.2*np.sin(4*w1*t + np.pi/4)
+
+# C[k](近似解)
+def C(k) :
+    a = integrate.quad(
+        lambda t: f_original(t)*np.cos(-k*w1*t), -T/2, T/2 )[0]/T
+    b = integrate.quad(
+        lambda t: f_original(t)*np.sin(-k*w1*t), -T/2, T/2 )[0]/T
+    return a+b*1j
+
+# C_imp[k]
+def C_imp(k):
+    out = 0;
+    for i in range(N):
+        out += f_original(i*tau)*(np.cos(-k*2*np.pi/N*i)+np.sin(-k*2*np.pi/N*i)*1j)
+    return out/T
+
+# 信号の復元
+def f_restored(t):
+    out = 0
+    for i in range(N):
+        tmp = 1
+        for k in range((int)((N-1)/2)+1):
+            tmp += 2*np.cos(k*w1*(t-i*tau))
+        out += f_original(i*tau)*tmp
+    return out/N
+
+def draw_f():
+    plt.plot([i*tau for i in range(2*N)],np.r_[f,f],marker='o',markersize=5,linestyle='',color='black')
+    plt.xticks(np.arange(mint,maxt+0.1,tickt))
+    plt.axvline(T,color="gray",linestyle='dashed')
+    plt.axhline(0,color="gray",linestyle='dashed')
+    plt.xlabel(r'$t$')
+    plt.ylabel(r'$f(t)$',rotation=0,labelpad=0,loc="top")
+    plt.xlim(mint,maxt)
+    plt.ylim(miny,maxy)
+    plt.show()
+    
+def draw_spec(maxc, ylabel):
+    plt.xlim(mink,maxk)
+    plt.ylim(minC,maxc)
+    plt.xlabel(r'$k$')
+    plt.ylabel(ylabel,rotation=0,labelpad=0,loc="top")
+    tmp = N/2
+    plt.xticks(ticks=[-tmp-N,-tmp,0,tmp,tmp+N],labels=[ r'$-3{\rm N}/2$', r'$-{\rm N}/2$', '0', r'${\rm N}/2$',r'$3{\rm N}/2$'])
+    plt.axvline(-tmp-N,color="gray",linestyle='dashed')
+    plt.axvline(-tmp,color="gray",linestyle='dashed')
+    plt.axvline(tmp,color="gray",linestyle='dashed')
+    plt.axvline(tmp+N,color="gray",linestyle='dashed')
+    plt.show()
+
+maxt = 2*T
+mint = 0
+tickt = 0.2
+maxy = 2
+miny = -maxy
+
+maxk = 2*N
+mink = -maxk
+minC = 0
+maxC = 0.6
+maxCimp = maxC/tau
+
+f = [f_original( i * tau ) for i in range(N)]
+
+# 時間領域信号
+t = np.arange(mint,maxt,0.01)
+plt.plot(t, [f_original(i) for i in t],color='blue')
+draw_f()
+
+# 振幅スペクトル
+plt.plot([k for k in range(mink,maxk)], [abs(C(k)) for k in range(mink,maxk)],marker='o',markersize=5,linestyle='',color='blue')
+draw_spec(maxC,r'$\|{\rm C}[k]|$')
+
+plt.plot([k for k in range(mink,maxk)], [abs(C_imp(k)) for k in range(mink,maxk)],marker='o',markersize=5,linestyle='',color='red')
+draw_spec(maxCimp,r'$|{\rm C}_{imp}[k]|$')
+
+# 復元信号
+t = np.arange(mint,maxt,0.01)
+plt.plot(t, [f_restored(i) for i in t],color='red')
+draw_f()

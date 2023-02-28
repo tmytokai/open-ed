@@ -21,106 +21,51 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="../../dtft">DTFT</a>はディジタル信号版<a href="../../ft">フーリエ変換</a>ですので、前ページで求めたディジタル信号版ラプラス変換
+準備中
 </p>
 
-\begin{align*}
-\textrm{F}(s) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- s \cdot \tau \cdot i} \}
-\end{align*}
-
-<p>
-に $\sigma = 0$ を代入、つまりZ 変換 $\textrm{F}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入するだけですぐさま DTFT
-</p>
-
-\begin{align*}
-\textrm{F}(w) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j\cdot w \cdot \tau \cdot i} \}
-\end{align*}
-
-<p>
-が得られます。
 <br>
-
-</p>
-
-<p>
-ただし任意の $f[i]$ で Z 変換が DTFT に変換可能な訳ではなくて $f[i]$ が収束(減衰)するという条件が必要です。
-<br>
-両側 Z 変換の場合はこの収束条件が複雑になりますので、ここでは片側 Z 変換の場合における収束条件を求めましよう。
-</p>
+<h2>
+() 両側 Z 変換 $\textrm{F}(z)$ → $\textrm{DTFT}(w)$
+</h2>
 
 <p>
-さて片側ラプラス変換の場合
-</p>
-
-<p>
-<b>「片側ラプラス変換 $\textrm{F}(s)$ の極のうち実数部が一番大きい極を $s' = \sigma' + j \cdot w'$ とする。
-<br>
-もし $\sigma' < 0$ であるなら元のアナログ信号 $f(t)$ は収束(減衰)する。」</b>
-</p>
-
-<p>
-ということが言えました。
-<br>
-そこでこの S 平面上の点 $s'$ に対応する Z 平面上の点を $z' =\textrm{e}^{ s' \cdot \tau }$ とすると、$z'$ の絶対値は
-</p>
-
-\begin{align*}
-|z'| = \textrm{e}^{ \sigma' \cdot \tau }
-\end{align*}
-
-<p>
-ですので、ラプラス変換における収束条件 $\sigma' < 0$ は Z 変換では
-</P>
-
-\begin{align*}
-|z'| < 1
-\end{align*}
-
-<p>
-に相当します。
-<br>
-つまり
-</p>
-
-<p>
-「
-<b>
-片側 Z 変換 $\textrm{F}(z)$ の極のうち絶対値が一番大きい極を $z'$ とする。
-<br>
-$z'$ が Z 平面上の単位円の内側にある(つまり |z'| < 1 )なら元のディジタル信号 $f[i]$ は収束(減衰)する。
-</b>
-」
-</p>
-
-<p>
-となります。
-<br>
-もう少し簡単に言い直すと
-<p>
-「<b>
-片側 Z 変換 $\textrm{F}(z)$ の全ての極が Z 平面上の単位円の内側にあるなら元のディジタル信号 $f[i]$ は収束(減衰)する。
-</b>」
-</p>
-
-<p>
-となります。
-</p>
-<p>
-以上の議論をまとめると次の様になります。
+DTFTはディジタル信号版<a href="../../ft">フーリエ変換</a>に相当しますので、両側 Z 変換 $\textrm{F}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入するだけですぐさま DTFT が得られます。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>片側 Z 変換を DTFT に変換</b>
+<input type="checkbox"><b>両側 Z 変換 $\textrm{F}(z)$ → $\textrm{DTFT}(w)$ </b>
 
 <p>
-片側 Z 変換 $\textrm{F}(z)$ の全ての極が Z 平面上の単位円の内側にあるなら元のディジタル信号 $f[i]$ は収束(減衰)する。
+$f[i]$ の両側 Z 変換を $\textrm{F}(z)$ とする。
+</p>
+
+<p>
+この時、$\textrm{F}(z)$ に対して
+</p>
+
+\[
+z = \textrm{e}^{ j \cdot w \cdot \tau }
+\]
+
+<p>
+を代入すると $f[i]$ の DTFT が得られる。
 <br>
-このとき $\textrm{F}(z)$ に $z = \textrm{e}^{ j \cdot w \cdot \tau }$ を代入することで $f[i]$ の DTFT
+すなわち
 </p>
 
 \[
 \begin{align*}
-\textrm{F}(w) = \sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j\cdot w \cdot \tau \cdot i} \}
+\textrm{DTFT}(w) &= 
+\left .
+\textrm{F}(z)
+\right |_{z = \textrm{e}^{ j \cdot w \cdot \tau}} \\[10pt]
+&=
+\left .
+\sum_{i=-\infty}^\infty \{ f[i] \cdot z^{-i} \}
+\right |_{z = \textrm{e}^{ j \cdot w \cdot \tau}} \\[10pt]
+&=
+\sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j \cdot \cdot i \cdot w \cdot \tau} \}
 \end{align*}
 \]
 
@@ -130,6 +75,60 @@ $z'$ が Z 平面上の単位円の内側にある(つまり |z'| < 1 )なら元
 
 </div>
 
+<br>
+<h2>
+() $\textrm{DTFT}(w)$ → 両側 Z 変換 $\textrm{F}(z)$
+</h2>
+
+<p>
+()の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>$\textrm{DTFT}(w)$ → 両側 Z 変換 $\textrm{F}(z)$</b>
+
+<p>
+$f[i]$ の DTFT を $\textrm{DTFT}(w)$ とする。
+</p>
+
+<p>
+この時、$\textrm{DTFT}(w)$ に対して
+</p>
+
+\[
+\textrm{e}^{ j \cdot w \cdot \tau } = z
+\]
+
+<p>
+という置き換えをすると $f[i]$ の両側 Z 変換が得られる。
+<br>
+すなわち
+</p>
+
+\[
+\begin{align*}
+\textrm{F}(z) &= 
+\left .
+\textrm{DTFT}(w)
+\right |_{\textrm{e}^{ j \cdot w \cdot \tau } = z} \\[10pt]
+&=
+\left .
+\sum_{i=-\infty}^\infty \{ f[i] \cdot \textrm{e}^{- j \cdot \cdot i \cdot w \cdot \tau} \}
+\right |_{\textrm{e}^{ j \cdot w \cdot \tau } = z} \\[10pt]
+&=
+\sum_{i=-\infty}^\infty \{ f[i] \cdot z^{-i} \}
+\end{align*}
+\]
+
+<p>
+が得られる。
+</p>
+
+</div>
+
+<p>
+補足は特にありません。
+</p>
 
 <br>
 <script>PreNext(3,6)</script>
