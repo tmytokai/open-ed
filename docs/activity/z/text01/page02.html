@@ -21,11 +21,11 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-前のページで述べた様に
+前のページでは Z 変換は<a href="../../laplace">ラプラス変換</a>のディジタル信号版と書きましたが、より正確に言えば
 </p>
 
 <p>
-<b>両側 Z 変換は<a href="../../laplace">両側ラプラス変換</a>のディジタル信号版</b>
+<b>両側 Z 変換は両側ラプラス変換のディジタル信号版</b>
 </p>
 
 <p>
@@ -125,7 +125,7 @@ f_{imp}(t)
 </h2>
 
 <p>
-先に進む前に(1)の逆経路について書いておきます。
+先に進む前に<a href="#1">(1)</a>の逆経路について書いておきます。
 <br>
 いわゆる<a href="https://en.wikipedia.org/wiki/Sinc_filter">sincフィルター</a>です。
 </p>
@@ -250,11 +250,10 @@ f(i\cdot \tau) \cdot
 \end{align*}
 
 <p>
-<p>
 (注) 積分と無限級数は普通は入れ替え出来ないことに注意して下さい。デルタ関数の無限級数に関しては <a href="https://en.wikipedia.org/wiki/Poisson_summation_formula">ポアソン和公式</a>により積分と交換可能になっています。
 </p>
 
-
+<p>
 数学的には以上で証明が終わりなのですが、インパルス列はデルタ関数を含んでいるので、そのラプラス変換を求めるときに何をしてるのかピンとこないという人がいるかもしれません。
 <br>
 そこで以下では厳密な話は脇に置いといて、インパルス列のラプラス変換の求め方について感覚的、イメージ的に補足説明したいと思います。 
@@ -440,7 +439,7 @@ f(i\cdot\tau)
 </h2>
 
 <p>
-(3)の逆経路です。
+<a href="#3">(3)</a>の逆経路です。
 </p>
 
 <div class="info">
@@ -471,6 +470,8 @@ f_{imp}(t)
 \cdot \textrm{comb}(t)
 \]
 
+<p>
+ここで $\gamma$ は $\textrm{F}_{imp}(s)$ の収束領域(ROC)内にある任意の実数である。
 </div>
 
 <p>
@@ -663,7 +664,7 @@ f_{imp}(t) \cdot \textrm{e}^{- s \cdot t} \ \textrm{d}t \\[10pt]
 </h2>
 
 <p>
-(5)の逆経路ですが、直通ルートは実はありません。
+<a href="#5">(5)</a>の逆経路ですが、直通ルートは実はありません。
 </p>
 
 <p>
@@ -695,7 +696,10 @@ $f(t)$ を非周期的な時間領域のアナログ信号とする。
 </p>
 
 \[
-f[i] = f_{imp}( i \cdot \tau ) = f( i \cdot \tau )
+f[i] 
+= \frac{f_{imp}( i \cdot \tau )}{\delta(0)} 
+= \frac{f(i\cdot \tau) \cdot \delta(0) }{\delta(0)} 
+= f( i \cdot \tau )
 \]
 
 <p>
@@ -705,7 +709,7 @@ f[i] = f_{imp}( i \cdot \tau ) = f( i \cdot \tau )
 </div>
 
 <p>
-当たり前な気がしますが、$f_{imp}(t)$ をサンプリングすることは結局 $f(t)$ をサンプリングすることと同じ意味になります。
+$\delta(0)$ で割るというところがちょっと分かりにくいのですが、要するにデルタ関数を取り除けというだけのことなので、結局は $f(t)$ をサンプリングすることと同じ意味になります。
 </p>
 
 
@@ -715,7 +719,7 @@ f[i] = f_{imp}( i \cdot \tau ) = f( i \cdot \tau )
 </h2>
 
 <p>
-(7) の逆経路です。
+<a href="#7">(7)</a> の逆経路です。
 </p>
 
 <div class="info">
@@ -767,12 +771,16 @@ f_{imp}(t)
 </div>
 
 <p>
-要するに定義そのままなのですが、この式は<a href="#3">(3)の経路</a>の結果を変形するだけで導出できます。
+要するに定義そのままなのですが、この式は<a href="#3">(3)</a>の結果を変形するだけで導出できます。
 <br>
 具体的には
 </p>
 
-<b>両側ラプラス変換 $\textrm{F}_{imp}(s)$ に含まれる $\textrm{e}^{ s \cdot \tau }$ の項を $z$ に置き換えて、さらに $f(i\cdot \tau)$ を $f[i]$ に置き換えると両側 Z 変換になる</b>
+<p>
+<b>1. $f(i\cdot \tau)$ を $f[i]$ に置き換える</b>
+</p>
+<p>
+<b>2. $\textrm{e}^{ s \cdot \tau }$ を $z$ に置き換える</b>
 </p>
 
 <p>
@@ -800,7 +808,7 @@ z =
 </p>
 
 <p>
-一方 $z = \textrm{e}^{ s \cdot \tau }$ を変形すると
+ところで $z = \textrm{e}^{ s \cdot \tau }$ を変形すると
 </p>
 
 \[
@@ -812,20 +820,20 @@ s = \frac{1}{\tau}\cdot\ln(z)
 </p>
 
 <p>
-よってある関数に含まれる $\textrm{e}^{ s \cdot \tau }$ の項を $z$ で置き換えるということはこの写像をその関数に代入することを意味しますが、そもそも複素対数関数は<a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E4%BE%A1%E9%96%A2%E6%95%B0">無限多価関数</a>ですので、通常はこの写像を関数に代入することは出来ません。
+よってある関数に含まれる $\textrm{e}^{ s \cdot \tau }$ の項を $z$ で置き換えるということはこの写像をその関数に代入することを意味しますが、そもそも複素対数関数は<a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E4%BE%A1%E9%96%A2%E6%95%B0">無限多価関数</a>ですので、通常はこの写像を関数に代入しても実用性に欠けることが多いです。
 </p>
 
 <p>
-ところが $\textrm{F}_{imp}(s)$ は S 平面の角周波数軸に関して周期 $w_s$ の周期的な信号でした。
+ところが $\textrm{F}_{imp}(s)$ は S 平面の角周波数軸に関して周期 $w_s$ の周期的な信号でしたので、$\textrm{F}_{imp}(s)$ に関して言えば主値のみを考えるだけで充分です。
 <br>
-よって $\textrm{F}_{imp}(s)$ に関して言えば主値のみを考える、つまり S 平面上の帯状領域 $-w_s/2 \leq w \leq w_s/2$ に $w$ の帯域を制限して考えるだけで充分ということになります(図2)。
+つまり S 平面上の帯状領域 $-w_s/2 \leq w \leq w_s/2$ に $w$ の帯域を制限して考えるだけで良いということです(図2)。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>図2: $\textrm{F}_{imp}(s)$ は S 平面上で $w$ に関し周期 $w_s$ で周期的 </b>
 
 <p>
-$\textrm{F}_{imp}(s)$ は主値のみだけで考えてOK
+$\textrm{F}_{imp}(s)$ は主値のみだけ考えても充分
 </p>
 
 <img src="./img/page02-fig2.png" alt="">
@@ -833,7 +841,7 @@ $\textrm{F}_{imp}(s)$ は主値のみだけで考えてOK
 
 
 <p>
-よってこの写像は($z=0$を除けば)全単射となりますので、S 平面と Z 平面の関係は図3にまとめられます。
+よってこの写像は(Z平面の原点 $z=0$ を除けば)全単射となりますので、S 平面と Z 平面の関係は図3にまとめられます。
 <br>
 </p>
 
@@ -841,7 +849,7 @@ $\textrm{F}_{imp}(s)$ は主値のみだけで考えてOK
 <input type="checkbox"><b>図3: S平面とZ平面の関係 </b>
 
 <p>
-S 平面と Z 平面上の点は($z=0$を除けば) 1 対 1 で対応づけられる
+S 平面と Z 平面上の点は(Z平面の原点 $z=0$を除けば) 1 対 1 で対応づけられる
 </p>
 
 <img src="./img/page02-fig3.png" alt="">
@@ -853,8 +861,83 @@ S 平面と Z 平面上の点は($z=0$を除けば) 1 対 1 で対応づけら�
 </h2>
 
 <p>
-準備中
+<a href="#9">(9)</a>の逆経路です。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>両側 Z 変換 $\textrm{F}(z)$ → 非周期的なディジタル信号 $f[i]$</b>
+
+<p>
+両側 Z 変換 $\textrm{F}(z)$ の逆 Z 変換 は以下の式で表される。 
+</p>
+
+\[
+f[i] =
+\frac{1}{2\pi\cdot j}
+\oint_{C}
+\left \{
+\textrm{F}(z) \cdot z^{i-1}
+\ \textrm{d}z
+\right \}
+\]
+
+<p>
+ここで積分路 $C$ は $\textrm{F}(z)$ の収束領域(ROC)内にある任意の周回路である。
+</p>
+
+</div>
+
+<p>
+これも定義のままですが、<a href="#3">(4)</a>と<a href="#7">(7)</a>の結果から以下の様にして導くことが出来ます。
+</p>
+
+\begin{align*}
+f[i]
+&= \frac{f_{imp}(i \cdot \tau) }{\delta(0)} \\[10pt]
+&=
+\tau \cdot
+\frac{1}{2\pi\cdot j}
+\int_{\gamma-j\cdot \frac{w_s}{2}}^{\gamma+j\cdot \frac{w_s}{2}} 
+\left \{
+\textrm{F}_{imp}(s) \cdot \textrm{e}^{\{s \cdot i \cdot \tau \}}
+\right \}
+\ \textrm{d}s \\[10pt]
+\end{align*}
+
+<p>
+ここで
+</p>
+
+\[
+z = \textrm{e}^{ s \cdot \tau }
+\]
+
+<p>
+で置き換えると
+</p>
+
+\[
+\frac{\textrm{d} z}{z} = \tau \cdot \textrm{d} s
+\]
+
+<p>
+で、かつ積分路は Z 平面上では $\textrm{F}(z)$ の収束領域(ROC)内にある任意の周回路に変わるので
+</p>
+
+\[
+f[i] =
+\frac{1}{2\pi\cdot j}
+\oint_{C}
+\left \{
+\textrm{F}(z) \cdot z^{i-1}
+\ \textrm{d}z
+\right \}
+\]
+
+<p>
+が得られる。
+</p>
+
 
 <br>
 <h2 id="11">
@@ -902,7 +985,7 @@ $f(t)$ を非周期的な時間領域のアナログ信号とする。
 </div>
 
 <p>
-<a href="#9">(9)の経路</a>とほとんど同じことを言ってますが、今回は $f[i]$ ではなく $\textrm{F}_{imp}(s)$ から $\textrm{F}(z)$ を求める方法について述べてます。
+<a href="#9">(9)</a>とほとんど同じことを言ってますが、ここでは $f[i]$ ではなく $\textrm{F}_{imp}(s)$ から $\textrm{F}(z)$ を求める方法について述べてます。
 </p>
 
 <br>
@@ -912,7 +995,7 @@ $f(t)$ を非周期的な時間領域のアナログ信号とする。
 
 
 <p>
-(11)の逆経路ですが、既に図3で示している様に $z = \textrm{e}^{ s \cdot \tau}$ を $\textrm{F}(z)$ に代入するだけです。
+<a href="#11">(11)</a>の逆経路です。
 </p>
 
 <div class="info">
@@ -957,7 +1040,7 @@ z = \textrm{e}^{ s \cdot \tau}
 </div>
 
 <p>
-ここまで来たら補足することは特に無いです。
+単に $z = \textrm{e}^{ s \cdot \tau}$ を $\textrm{F}(z)$ に代入してるだけです。
 </p>
 
 

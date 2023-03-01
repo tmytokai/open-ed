@@ -80,8 +80,39 @@ f[i] = \{\cdots, 0, 0, f[0], f[1], f[2], \cdots\}
 </div>
 
 <p>
-一方、$\textrm{F}(z)$ から $f[i]$ を求める逆変換を解くためには<a href="https://ja.wikipedia.org/wiki/%E7%95%99%E6%95%B0">留数</a>を使った積分が必要なので結構難しいのですが、もし $\textrm{F}(z)$ が級数の形で与えられているなら以下の様に簡単に求めることが出来ます。
+逆 Z 変換の定義は次の通りです。
+<br>
+両側・片側共通の定義になります。
 </p>
+
+<div class="info">
+<input type="checkbox"><b>定義: 逆 Z 変換</b>
+
+<p>
+両側/片側 Z 変換 $\textrm{F}(z)$ の逆 Z 変換 は以下の式で表される。 
+</p>
+
+\[
+f[i] =
+\frac{1}{2\pi\cdot j}
+\oint_{C}
+\left \{
+\textrm{F}(z) \cdot z^{i-1}
+\ \textrm{d}z
+\right \}
+\]
+
+<p>
+ここで積分路 $C$ は $\textrm{F}(z)$ の収束領域(ROC)内にある任意の周回路である。
+</p>
+
+</div>
+
+
+<p>
+これをまともに解こうとすると<a href="https://ja.wikipedia.org/wiki/%E7%95%99%E6%95%B0#%E7%95%99%E6%95%B0%E5%AE%9A%E7%90%86">留数定理</a>を使う必要があるので結構難しいのですが、もし $\textrm{F}(z)$ が級数の形で与えられているなら以下の様に簡単に求めることが出来ます。
+</p>
+
 
 <div class="info">
 <input type="checkbox"><b>定義: 逆 Z 変換 (簡易版) </b>
