@@ -21,9 +21,9 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-周期性時間領域ディジタル信号 $f[i]$ のスペクトルを求めるためには「<b>DFT (Discrete Fourier Transform: 離散フーリエ変換 )</b>」というテクニックを使います。
+周期性時間領域ディジタル信号 $f[i]$ のスペクトルを求めるためには「<a href="https://ja.wikipedia.org/wiki/%E9%9B%A2%E6%95%A3%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E5%A4%89%E6%8F%9B">DFT (Discrete Fourier Transform: 離散フーリエ変換 )</a>」というテクニックを使います。
 <br>
-具体的には以下で定義される「<b>DFT係数</b> $\textrm{C}[k]$ 」を求める演算の事を DFT と言います。
+具体的には以下で定義される「<b>DFT係数</b>」を求める演算の事を DFT と言います。
 </p>
 
 <div class="info">
@@ -34,14 +34,14 @@ $k$ を任意の整数とした時
 </p>
 
 \[
-\textrm{C}[k] = \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{DFT}[k] = \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
 \right \}
 \]
 
 <p>
-$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数、複素数の定数
+$\textrm{DFT}[k]$ ・・・$k$ 番目のDFT係数、複素数の定数
 </p>
 
 <p>
@@ -55,16 +55,16 @@ $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタ�
 <br>
 正規化パラメータは<a href="../../spectrum/text01/page02.html">振幅スペクトル</a>のスケールを調整するパラメータであり、目的に応じて任意に設定しても良い値です。
 <br>
-そのため、このアクティビティでは $1/\textrm{N}$ としていますが文献によっては正規化パラメータの値が異なりますので注意してください。
+このアクティビティでは $1/\textrm{N}$ としていますが文献によっては正規化パラメータの値が異なりますので注意してください。
 </p>
 
 
 <p>
-さてこの DFT 係数 $\textrm{C}[k]$ は周期 $\textrm{N}$ の周波数領域ディジタル信号であり、$n$ を任意の整数とした時
+さてこの DFT 係数は周期 $\textrm{N}$ の周波数領域ディジタル信号であり、$n$ を任意の整数とした時
 </p>
 
 \[
-\textrm{C}[k] = \textrm{C}[k + n \cdot \textrm{N}]
+\textrm{DFT}[k] = \textrm{DFT}[k + n \cdot \textrm{N}]
 \]
 
 <p>
@@ -74,7 +74,7 @@ $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタ�
 </p>
 
 \[
-\textrm{C}[k] = \textrm{C}^{*}[-k] = \textrm{C}^{*}[-k + n \cdot \textrm{N}]
+\textrm{DFT}[k] = \textrm{DFT}^{*}[-k]
 \]
 
 <p>
@@ -82,13 +82,13 @@ $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタ�
 </p>
 
 \[
-\ \textrm{C}^{*}[k] = \textrm{C}[-k] = \textrm{C}[-k + n \cdot \textrm{N}]
+\ \textrm{DFT}^{*}[k] = \textrm{DFT}[-k]
 \]
 
 <p>
 が成り立ちます。
 <br>
-よって DFT 係数は $k = 0$ から最初の $\textrm{N}/2$ 個だけ値を求めれば全ての $k$ に対する DFT 係数が求まります。
+これら2つの性質により、DFT 係数は $k = 0$ から最初の $\textrm{N}/2$ 個だけ値を求めれば全ての $k$ に対する DFT 係数が求まります。
 </p>
 
 <p>
@@ -96,7 +96,7 @@ $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタ�
 </p>
 
 <p>
-逆に DFT 係数 $\textrm{C}[k]$ から元の $f[i]$ を復元する演算を「<b>IDFT (Inverse Discrete Fourier Transform: 逆離散フーリエ変換)</b>」と言います。
+逆に DFT 係数 から元の $f[i]$ を復元する演算を「<b>IDFT (Inverse Discrete Fourier Transform: 逆離散フーリエ変換)</b>」と言います。
 <br>
 IDFT の定義は以下の通りです。
 </p>
@@ -104,10 +104,15 @@ IDFT の定義は以下の通りです。
 <div class="info">
 <input type="checkbox"><b>定義: IDFT(Inverse Discrete Fourier Transform: 逆離散フーリエ変換)</b>
 
+<p>
+$i$ を任意の整数とした時
+</p>
+
+
 \[
 f[i] = \sum_{k=0}^{\textrm{N}-1}
 \left \{
-\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\textrm{DFT}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
 \right \}
 \]
 
@@ -116,7 +121,7 @@ $f[i]$ ・・・ 周期 $\textrm{N}$ [点] の周期性時間領域ディジタ�
 </p>
 
 <p>
-$\textrm{C}[k]$ ・・・$k$ 番目のDFT係数、DFT係数、複素数の定数
+$\textrm{DFT}[k]$ ・・・$k$ 番目のDFT係数、複素数の定数
 </p>
 
 </div>

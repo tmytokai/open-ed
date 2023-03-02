@@ -259,7 +259,7 @@ f( i \cdot \tau )
 </h2>
 
 <p>
-先に進む前に(1)の逆経路について書いておきます。
+先に進む前に<a href="#1">(1)</a>の逆経路について書いておきます。
 </p>
 
 <div class="info">
@@ -292,12 +292,12 @@ w_1 &= \frac{w_s}{\textrm{N}}
 
 \begin{align*}
 \tau \cdot  
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
 &=
 \tau \cdot  
 \left \{
 1 + 
-\sum_{k=0}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=1}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 2 \cdot \cos ( k \cdot w_1 \cdot t )
 \right \}
 \end{align*}
@@ -317,7 +317,7 @@ f(t)
 f_{imp}(t) * 
 \left \{
 \tau \cdot
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
 \right \}
 \\[10pt]
 &=
@@ -327,7 +327,7 @@ f_{imp}(t) *
 f(i \cdot \tau)  \cdot 
 \left \{
 1 + 
-\sum_{k=0}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=1}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 2 \cdot \cos ( k \cdot w_1 \cdot (t - i \cdot \tau))
 \right \}
 \right ]
@@ -344,14 +344,14 @@ f(i \cdot \tau)  \cdot
 </p>
 
 <p>
-詳しくは<a href="#6">(6)の経路</a>で説明しますが、インパルス列を元の信号に復元するためには周波数領域で複素フーリエ係数の $-\lfloor \frac{\textrm{N}-1}{2} \rfloor$ から $\lfloor \frac{\textrm{N}-1}{2} \rfloor$ 番目だけ切り出したあと $\tau$ をかけるという、いわゆる理想ローパスフィルタ処理を行います。
+詳しくは<a href="#6">(6)の経路</a>で説明しますが、インパルス列を元の信号に復元するためには周波数領域で複素フーリエ係数の $-\lfloor \frac{\textrm{N}}{2} \rfloor$ から $\lfloor \frac{\textrm{N}}{2} \rfloor$ 番目だけ切り出したあと $\tau$ をかけるという、いわゆる理想ローパスフィルタ処理を行います。
 <br>
 この切り出し処理を複素フーリエ級数展開すると
 </p>
 
 \begin{align*}
 \tau \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
 \end{align*}
 
 <p>
@@ -368,7 +368,7 @@ f(t)
 f_{imp}(t) * 
 \left \{
 \tau \cdot
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
 \right \}
 \\[10pt]
 
@@ -377,7 +377,7 @@ f_{imp}(t) *
 \frac{1}{\textrm{N}} \cdot  
 \int_{0}^{\textrm{T}}
 f_{imp}(\xi) \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 \ \textrm{e}^{j\cdot k\cdot w_1 \cdot (t-\xi)} 
 \ \textrm{d}\xi \\[10pt]
 
@@ -387,7 +387,7 @@ f_{imp}(\xi) \cdot
 \int_{0}^{\textrm{T}}
 \sum_{i=-\infty}^{\infty}  f( i \cdot \tau ) \cdot \delta(\xi - i \cdot \tau )
 \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
  \ \textrm{e}^{j\cdot k\cdot w_1 \cdot (t-\xi)} 
 \ \textrm{d}\xi \\[10pt]
 
@@ -397,7 +397,7 @@ f_{imp}(\xi) \cdot
 \int_{0}^{\textrm{T}}
 \sum_{i=0}^{\textrm{N}-1}  f( i \cdot \tau ) \cdot \delta(\xi - i \cdot \tau )
 \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
  \ \textrm{e}^{j\cdot k\cdot w_1 \cdot (t-\xi)} 
 \ \textrm{d}\xi \\[10pt]
 
@@ -410,7 +410,7 @@ f_{imp}(\xi) \cdot
 \int_{0}^{\textrm{T}}
 \delta(\xi - i \cdot \tau )
 \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 \ \textrm{e}^{j\cdot k\cdot w_1 \cdot (t-\xi)} 
 \ \textrm{d}\xi
 \right \}
@@ -423,7 +423,7 @@ f_{imp}(\xi) \cdot
 \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f(i \cdot \tau)  \cdot 
-\sum_{k=-\lfloor \frac{\textrm{N}-1}{2} \rfloor}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 \ \textrm{e}^{j\cdot k\cdot w_1 \cdot (t - i \cdot \tau)}
 \right \} \\[10pt]
 
@@ -435,7 +435,7 @@ f(i \cdot \tau)  \cdot
 f(i \cdot \tau)  \cdot 
 \left \{
 1 + 
-\sum_{k=0}^{\lfloor \frac{\textrm{N}-1}{2} \rfloor} 
+\sum_{k=1}^{\lfloor \frac{\textrm{N}}{2} \rfloor} 
 2 \cdot \cos ( k \cdot w_1 \cdot (t - i \cdot \tau))
 \right \}
 \right ]
@@ -455,7 +455,7 @@ f(i \cdot \tau)  \cdot
 </p>
 
 \[
-f(t) = \sin( w_1 \cdot t ) + 0.5 \cdot \sin( 3 \cdot w_1 \cdot t - \pi/8) + 0.2 \cdot \sin( 4 \cdot w_1 \cdot t + \pi/4)
+f(t) = 0.5 + \sin( w_1 \cdot t ) + 0.5 \cdot \sin( 3 \cdot w_1 \cdot t - \pi/8) + 0.2 \cdot \sin( 4 \cdot w_1 \cdot t + \pi/4)
 \]
 
 <p>
@@ -925,7 +925,7 @@ f(i \cdot \tau ) \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \c
 </h2>
 
 <p>
-(3)の逆経路です。
+<a href="#3">(3)</a>の逆経路です。
 </p>
 
 <div class="info">
@@ -936,7 +936,7 @@ $f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$
 <br>
 また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
 <br>
-さらに $\textrm{C}_{imp}[k]$ を $f_{imp}(t)$ の複素フーリエ係数とする。
+さらに $f_{imp}(t)$ の複素フーリエ係数 を $\textrm{C}_{imp}[k]$ とする。
 </p>
 
 <p>
@@ -1067,7 +1067,7 @@ f_{imp}(t)
 </h2>
 
 <p>
-DFTの話に行く前に、$f(t)$ の複素フーリエ係数と $f_{imp}(t)$ の複素フーリエ係数の関係を見てみましょう。
+次は周期的なアナログ信号 $f(t)$ の複素フーリエ係数をインパルス列の複素フーリエ係数 $f_{imp}(t)$ に変換します。
 </p>
 
 <div class="info">
@@ -1076,13 +1076,13 @@ DFTの話に行く前に、$f(t)$ の複素フーリエ係数と $f_{imp}(t)$ �
 <p>
 $f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
 <br>
-さらに $\textrm{C}[k]$ を $f(t)$ の複素フーリエ係数とする。
+さらに$f(t)$ の複素フーリエ係数を $\textrm{C}[k]$ とする。
 </p>
 
 <p>
 また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
 <br>
-さらに $\textrm{C}_{imp}[k]$ を $f_{imp}(t)$ の複素フーリエ係数とする。
+さらに$f_{imp}(t)$ の複素フーリエ係数を $\textrm{C}_{imp}[k]$ とする。
 </p>
 
 <p>
@@ -1179,7 +1179,7 @@ f(t) \cdot \textrm{comb}(t)
 </p>
 
 \[
-f(t) = \sin( w_1 \cdot t ) + 0.5 \cdot \sin( 3 \cdot w_1 \cdot t - \pi/8) + 0.2 \cdot \sin( 4 \cdot w_1 \cdot t + \pi/4)
+f(t) = 0.5 + \sin( w_1 \cdot t ) + 0.5 \cdot \sin( 3 \cdot w_1 \cdot t - \pi/8) + 0.2 \cdot \sin( 4 \cdot w_1 \cdot t + \pi/4)
 \]
 
 <p>
@@ -1238,9 +1238,446 @@ $f(t)$ の複素フーリエ級数(の振幅成分)は図9となります。
 (6) 複素フーリエ係数 $\textrm{C}_{imp}[k]$ → 複素フーリエ係数 $\textrm{C}[k]$
 </h2>
 
-<br>
 <p>
-以下準備中
+<a href="#5">(5)</a>の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ係数 $\textrm{C}_{imp}[k]$ → 複素フーリエ係数 $\textrm{C}[k]$</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
+<br>
+さらに $\textrm{C}[k]$ を $f(t)$ の複素フーリエ係数とする。
+</p>
+
+<p>
+また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
+<br>
+さらに $\textrm{C}_{imp}[k]$ を $f_{imp}(t)$ の複素フーリエ係数とする。
+</p>
+
+<p>
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
+</p>
+
+<p>
+ここで
+</p>
+
+\[
+g[k] 
+=
+\begin{cases}
+\tau & -\lfloor \frac{\textrm{N}}{2} \rfloor \leq k \leq  \lfloor \frac{\textrm{N}}{2} \rfloor \\[10pt]
+0 & \text{それ以外}
+\end{cases}
+\]
+
+<p>
+※ $\lfloor\rfloor$ は<a href="https://ja.wikipedia.org/wiki/%E5%BA%8A%E9%96%A2%E6%95%B0%E3%81%A8%E5%A4%A9%E4%BA%95%E9%96%A2%E6%95%B0">床関数</a>
+</p>
+
+<p>
+としたとき、$\textrm{C}[k]$ は以下の式で表される。 
+</p>
+
+\[
+\textrm{C}[k]
+=
+\textrm{C}_{imp}[k] \cdot g[k]
+\]
+
+</div>
+
+<p>
+つまり $\textrm{C}_{imp}[k]$ の $-\lfloor \frac{\textrm{N}}{2} \rfloor$ から $\lfloor \frac{\textrm{N}}{2} \rfloor$ 番目までを切り出したあと $\tau$ をかけるという、いわゆる理想ローパスフィルタ処理を行います。 
+<br>
+上で示した図9と図10を見比べると理解しやすいと思います。
+</p>
+
+<p>
+なお切り出し処理 $g[k]$ に対して複素フーリエ級数展開をすると
+</p>
+
+\begin{align*}
+\tau \cdot 
+\sum_{k=-\lfloor \frac{\textrm{N}}{2} \rfloor}^{\lfloor \frac{\textrm{N}}{2} \rfloor} \ \textrm{e}^{j\cdot k\cdot w_1 \cdot t}
+\end{align*}
+
+<p>
+となりますので、$f_{imp}[i]$ にこの関数を畳み込み演算をすると $f[i]$ が復元します(詳しくは<a href="#2">(2)</a>を参照して下さい)。
+</p>
+
+<br>
+<h2 id="7">
+(7) 周期的なインパルス列 $f_{imp}(t)$ → 周期的なディジタル信号 $f[i]$
+</h2>
+
+<p>
+ではディジタル領域に入っていきます
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期的なインパルス列 $f_{imp}(t)$ → 周期的なディジタル信号 $f[i]$</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
+</p>
+
+<p>
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
+</p>
+
+<p>
+この時、$f_{imp}(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒] でサンプリングして生成したディジタル信号 $f[i]$ は
+</p>
+
+\[
+f[i] 
+= \frac{f_{imp}( i \cdot \tau )}{\delta(0)} 
+= \frac{f(i\cdot \tau) \cdot \delta(0) }{\delta(0)} 
+= f( i \cdot \tau )
+\]
+
+<p>
+となる。
+</p>
+
+</div>
+
+<p>
+$\delta(0)$ で割るというところがちょっと分かりにくいのですが、要するにデルタ関数を取り除けというだけのことなので、結局は $f(t)$ をサンプリングすることと同じ意味になります。
+</p>
+
+
+<br>
+<h2 id="8">
+(8) 周期的なディジタル信号 $f[i]$ → 周期的なインパルス列 $f_{imp}(t)$
+</h2>
+
+<p>
+<a href="#7">(7)</a> の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期的なディジタル信号 $f[i]$ → 周期的なインパルス列 $f_{imp}(t)$</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
+</p>
+
+<p>
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
+</p>
+
+<p>
+この時
+</p>
+
+\begin{align*}
+f_{imp}(t)
+&= \sum_{i=-\infty}^{\infty}  f[i] \cdot \delta(t - i \cdot \tau ) \\[10pt]
+&= 
+\sum_{i=0}^{\textrm{N-1}} 
+\left \{
+f[i]
+\cdot \sum_{a=-\infty}^{\infty} \delta( t - (a \cdot \textrm{N} + i) \cdot \tau )
+\right \}
+\end{align*}
+
+</div>
+
+<p>
+要するにくし型フィルタの係数として $f[i]$ を使うだけです。
+</p>
+
+<br>
+<h2 id="9">
+(9) 周期的なディジタル信号 $f[i]$ → DFT係数 $\textrm{DFT}[k]$
+</h2>
+
+<p>
+これで準備が整ったので、DFT 係数を導出してみましょう。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>周期的なディジタル信号 $f[i]$ → DFT係数 $\textrm{DFT}[k]$</b>
+
+<p>
+$k$ を任意の整数とした時、周期的なディジタル信号 $f[i]$ の DFT 係数は以下の式で得られる。
+</p>
+
+\[
+\textrm{DFT}[k] = \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\left \{
+f[i] \cdot \textrm{e}^{\{-j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\]
+</div>
+
+<p>
+要するに定義そのままなのですが、この式は<a href="#3">(3)</a>の結果を変形するだけで導出できます。
+<br>
+具体的には
+</p>
+
+<p>
+<b>1. $f(i\cdot \tau)$ を $f[i]$ に置き換える</b>
+</p>
+<p>
+<b>2. $\tau$ をかける</b>
+</p>
+
+<p>
+です。
+</p>
+
+<p>
+※ 正規化パラメータは任意なので $\tau$ をかける必要は特に無いのですが、前ページの定義と式を合わせるために今回はかけています。
+</p>
+
+<br>
+<h2 id="10">
+(10) DFT係数 $\textrm{DFT}[k]$ → 周期的なディジタル信号 $f[i]$
+</h2>
+
+<p>
+<a href="#9">(9)</a>の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>DFT係数 $\textrm{DFT}[k]$ → 周期的なディジタル信号 $f[i]$</b>
+
+<p>
+$i$ を任意の整数とした時、DFT係数 $\textrm{DFT}[k]$ の IDFT は以下の式で得られる。
+</p>
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{DFT}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\]
+
+</div>
+
+<p>
+これも定義のままですが、<a href="#4">(4)</a>と<a href="#7">(7)</a>の結果から以下の様にして導くことが出来ます。
+</p>
+
+\begin{align*}
+f[i]
+&= \frac{f_{imp}(i \cdot \tau) }{\delta(0)} \\[10pt]
+&=
+\tau \cdot
+\sum_{k=0}^{\textrm{N-1}} 
+\left \{
+\textrm{C}_{imp}[k]
+\cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot i \cdot \tau \}}  
+\right \} \\[10pt]
+
+(w_1 = 2\pi/(\textrm{N}\cdot \tau) \text{より})
+&=
+\tau \cdot
+\sum_{k=0}^{\textrm{N-1}} 
+\left \{
+\textrm{C}_{imp}[k]
+\cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+
+
+\end{align*}
+
+<p>
+ここで<a href="#9">(9)</a>より
+</p>
+
+\[
+\textrm{DFT}[k] = \tau \cdot \textrm{C}_{imp}[k] 
+\]
+
+<p>
+なので
+</p>
+
+\[
+f[i] = \sum_{k=0}^{\textrm{N}-1}
+\left \{
+\textrm{DFT}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\right \}
+\]
+
+
+<br>
+<h2 id="11">
+(11) DFT係数 $\textrm{DFT}[k]$ → 複素フーリエ係数 $\textrm{C}_{imp}[k]$
+</h2>
+
+<p>
+最後に残った経路です。
+</p>
+
+<div class="info">
+<input type="checkbox">両側ラプラス変換 $\textrm{F}_{imp}(s)$ → 両側 Z 変換 $\textrm{F}(z)$</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
+<br>
+さらに $f_{imp}(t)$ の複素フーリエ係数 を $\textrm{C}_{imp}[k]$ とする。
+</p>
+
+<p>
+また $f_{imp}(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒] でサンプリングして生成した非周期的なディジタル信号 を $f[i]$ とする。
+</p>
+
+<p>
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
+</p>
+
+<p>
+この時、$\textrm{C}_{imp}[k]$ に対して
+</p>
+
+\[
+f(i\cdot\tau) = f[i]
+\]
+
+<p>
+という置き換えをし、さらに $\tau$ をかけることで $f[i]$ の DFT 係数 $\textrm{DFT}[k]$ が得られる。
+<br>
+すなわち
+</p>
+
+\[
+\textrm{DFT}[k]
+=
+\tau \cdot
+\left .
+\textrm{C}_{imp}[k]
+\right |_{f(i\cdot\tau) = f[i]} \\[10pt]
+\]
+
+</div>
+
+<p>
+<a href="#9">(9)</a>とほとんど同じことを言ってますが、ここでは $f[i]$ ではなく $\textrm{C}_{imp}[k]$ から $\textrm{DFT}[k]$ を求める方法について述べてます。
+</p>
+
+<br>
+<h2 id="12">
+(12) 複素フーリエ係数 $\textrm{C}_{imp}[k]$ → DFT係数 $\textrm{DFT}[k]$
+</h2>
+
+
+<p>
+<a href="#11">(11)</a>の逆経路です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>複素フーリエ係数 $\textrm{C}_{imp}[k]$ → DFT係数 $\textrm{DFT}[k]$</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的な時間領域アナログ信号とする。
+<br>
+また $f(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒]で サンプリングして生成した周期的なインパルス列を $f_{imp}(t)$  とする。
+<br>
+さらに $f_{imp}(t)$ の複素フーリエ係数 を $\textrm{C}_{imp}[k]$ とする。
+</p>
+
+<p>
+また $f_{imp}(t)$ をサンプリング間隔 $\tau$ [秒]、サンプリング角周波数 $w_s = 2\pi/\tau$ [rad/秒] でサンプリングして生成した非周期的なディジタル信号 を $f[i]$ とする。
+<br>
+さらに $f[i]$ の DFT 係数を $\textrm{DFT}[k]$ とする。
+</p>
+
+<p>
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
+</p>
+
+<p>
+この時、$\textrm{DFT}[k]$ に対して
+</p>
+
+\[
+f[i] = f(i\cdot\tau)
+\]
+
+<p>
+という置き換えをし、さらに $1/\tau$ をかけることで $f_{imp}(t)$ の複素フーリエ係数 を $\textrm{C}_{imp}[k]$ が得られる。
+<br>
+すなわち
+</p>
+
+\[
+\textrm{C}_{imp}[k]
+=
+\frac{1}{\tau} \cdot
+\left .
+\textrm{DFT}[k]
+\right |_{f[i] = f(i\cdot\tau)} \\[10pt]
+\]
+
+</div>
+
+<p>
+特に補足は無いです。
 </p>
 
 

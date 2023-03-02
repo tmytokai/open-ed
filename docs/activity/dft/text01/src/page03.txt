@@ -19,7 +19,7 @@ print(f'tau={tau}')
     
 # 元の信号
 def f_original(t) :
-    return np.sin(w1*t)+0.5*np.sin(3*w1*t - np.pi/8)+0.2*np.sin(4*w1*t + np.pi/4)
+    return 0.5+np.sin(w1*t)+0.5*np.sin(3*w1*t - np.pi/8)+0.2*np.sin(4*w1*t + np.pi/4)
 
 # C[k](近似解)
 def C(k) :
@@ -41,7 +41,7 @@ def f_restored(t):
     out = 0
     for i in range(N):
         tmp = 1
-        for k in range((int)((N-1)/2)+1):
+        for k in range(1,(int)(N/2)+1):
             tmp += 2*np.cos(k*w1*(t-i*tau))
         out += f_original(i*tau)*tmp
     return out/N

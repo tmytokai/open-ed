@@ -42,18 +42,34 @@
 
 <p>
 ということも言えそうです。
-<p>
+</p>
 
 <p>
 それを示すためここでは<a href="../../fourier/text01/page03.html">実フーリエ級数展開</a>をディジタル化して $f[i]$ を直流成分、基本波、有限個の高調波の和に分解してみましょう。
 </p>
 
 <p>
-まず周期性ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング周波数を $f_s$ [Hz]、サンプリング間隔を $\tau = 1/f_s$ [秒]とします。
+まず周期性ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング周波数を $f_s$ [Hz]、サンプリング角周波数を $w_s = 2\pi \cdot f_s$ [rad/秒]、サンプリング間隔を $\tau = 1/f_s$ [秒]とします。
+</p>
+
+<p>
+またこの $f[i]$ は周期 $\textrm{T}$ [秒]、基本角周波数 $w_1$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングして作成したとします。
 <br>
-また $f[i]$ は周期 $\textrm{T} = \tau \cdot \textrm{N}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングして作成したとします。
-<br>
-さらに $f(t)$ に含まれる基本波・高調波を
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+w_1 &= \frac{w_s}{\textrm{N}}
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとします。
+</p>
+
+</p>
+さらに $f(t)$ に含まれる基本波および第 $k$ 高調波を
 </p>
 
 \[
@@ -61,28 +77,34 @@ f_k(t) = a_k \cdot \cos ( k \cdot w_1 \cdot t + \phi_k)
 \]
 
 <p>
-とします。
-<br>
-この時、周期性ディジタル信号 $f[i]$ に含まれる基本波・高調波は $f_k(t)$ をサンプリングして作成した<a href="../../d-sin/">ディジタルサイン波</a>
+とすると、周期性ディジタル信号 $f[i]$ に含まれる基本波および第 $k$ 高調波は $f_k(t)$ をサンプリングして作成した<a href="../../d-sin/">ディジタルサイン波</a>
 </p>
 
 \begin{align*}
-f_k[i] &= f(\tau \cdot i) \\[5pt]
-&= a_k \cdot \cos \left ( k \cdot w_1 \cdot \tau \cdot i + \phi_k \right ) \\[5pt]
-&= a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\tau \cdot \textrm{N}} \cdot \tau \cdot i + \phi_k \right ) \\[5pt]
-&= a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\textrm{N}} \cdot i + \phi_k \right ) \\[5pt]
+f_k[i] &= f_k(i \cdot \tau) \\[5pt]
+
+&= a_k \cdot \cos \left ( k \cdot w_1 \cdot i \cdot \tau + \phi_k \right ) \\[10pt]
+
+(w_1 = 2\pi/(\textrm{N}\cdot \tau) \text{より})
+&= a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\textrm{N} \cdot \tau} \cdot i \cdot \tau + \phi_k \right ) \\[10pt]
+
+&= a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\textrm{N}} \cdot i + \phi_k \right ) \\[105pt]
 \end{align*}
 
-</p>
-となります(直流成分は $f_0[i] = a_0$ )。
+<p>
+となります。
 <br>
+ちなみに直流成分は $f_0[i] = a_0$ です。
+</p>
+
+<p>
 ただしアナログ信号 $f(t)$ に含まれる高調波は無限個ありましたが、サンプリングすると<a href="../../d-signal/text02/page02.html">ナイキスト周波数</a>より高い周波数の高調波は<a href="../../d-signal/text02/page03.html">エイリアシング</a>となって低周波域に折り返されるため、ディジタル信号 $f[i]$ に含まれる高調波は有限個となります。
 <br>
 具体的には $k = \textrm{N}/2$ の時に
 </p>
 
 \[
-k \cdot w_1 = \frac{\textrm{N}}{2} \cdot w_1 = 2\pi \cdot \frac{f_s}{2} = \text{ナイキスト角周波数}
+k \cdot w_1 = \frac{\textrm{N}}{2} \cdot \frac{w_s}{\textrm{N}}= 2\pi \cdot \frac{f_s}{2} = \text{ナイキスト角周波数}
 \]
 
 <p>
@@ -105,7 +127,7 @@ k \cdot w_1 = \frac{\textrm{N}}{2} \cdot w_1 = 2\pi \cdot \frac{f_s}{2} = \text{
 </p>
 
 <p>
-と M をおいた時
+この時
 </p>
 
 \begin{align*}
@@ -188,12 +210,12 @@ $\phi_k$ ・・・第 $k$ 高調波($k=1$の時は基本波)の初期位相、�
 <input type="checkbox"><b>周期 N が奇数の場合</b>
 
 <p>
-$\textrm{C}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = (\textrm{N}-1)/2$ としたとき
+$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = (\textrm{N}-1)/2$ としたとき
 </p>
 
 \begin{align*}
-\textrm{C}[0] &= a_0 \\[5pt]
-\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M})
+\textrm{DFT}[0] &= a_0 \\[5pt]
+\textrm{DFT}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M})
 \end{align*}
 
 </div>
@@ -203,13 +225,13 @@ $\textrm{C}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = (\textrm{N}-
 <input type="checkbox"><b>周期 N が偶数の場合</b>
 
 <p>
-$\textrm{C}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = \textrm{N}/2$ としたとき
+$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = \textrm{N}/2$ としたとき
 </p>
 
 \begin{align*}
-\textrm{C}[0] &= a_0 \\[5pt]
-\textrm{C}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M}-1) \\[5pt]
-\textrm{C}[M] &= a_\textrm{M} \cdot \textrm{e}^{\{j \cdot \phi_\textrm{M} \}}
+\textrm{DFT}[0] &= a_0 \\[5pt]
+\textrm{DFT}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M}-1) \\[5pt]
+\textrm{DFT}[M] &= a_\textrm{M} \cdot \textrm{e}^{\{j \cdot \phi_\textrm{M} \}}
 \end{align*}
 
 </div>
