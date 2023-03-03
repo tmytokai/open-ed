@@ -1205,25 +1205,37 @@ f(t) = 0.5 + \sin( w_1 \cdot t ) + 0.5 \cdot \sin( 3 \cdot w_1 \cdot t - \pi/8) 
 </div>
 
 <p>
-$f(t)$ の複素フーリエ級数(の振幅成分)は図9となります。
+$f(t)$ の複素フーリエ係数(の振幅成分)は図9となります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図9: $f(t)$ の複素フーリエ級数の振幅成分 $|\textrm{C}[k]|$</b>
+<input type="checkbox"><b>図9: $f(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}[k]|$</b>
 
-<p>　</p>
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=9$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 4$
+</p>
 
 <img src="./img/page03-fig9.png" alt="">
 </div>
 
 <p>
-一方 $f_{imp}(t)$ の複素フーリエ級数(の振幅成分)は図10となります。
+一方 $f_{imp}(t)$ の複素フーリエ係数(の振幅成分)は図10となります。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>図10: $f_{imp}(t)$ の複素フーリエ級数の振幅成分 $|\textrm{C}_{imp}[k]|$</b>
+<input type="checkbox"><b>図10: $f_{imp}(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}_{imp}[k]|$</b>
 
-<p>　</p>
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=9$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 4$
+</p>
 
 <img src="./img/page03-fig10.png" alt="">
 </div>
@@ -1272,30 +1284,31 @@ w_1 &= \frac{w_s}{\textrm{N}}
 </p>
 
 <p>
-ここで
+さらに $\lfloor\rfloor$ を<a href="https://ja.wikipedia.org/wiki/%E5%BA%8A%E9%96%A2%E6%95%B0%E3%81%A8%E5%A4%A9%E4%BA%95%E9%96%A2%E6%95%B0">床関数</a>とした時、パルス上の窓関数
 </p>
 
 \[
-g[k] 
+\textrm{rect}[k] 
 =
 \begin{cases}
+0 & k \lt -\lfloor \frac{\textrm{N}}{2} \rfloor \\[10pt]
 \tau & -\lfloor \frac{\textrm{N}}{2} \rfloor \leq k \leq  \lfloor \frac{\textrm{N}}{2} \rfloor \\[10pt]
-0 & \text{それ以外}
+0 & t \gt \lfloor \frac{\textrm{N}}{2} \rfloor \\[10pt]
 \end{cases}
 \]
 
 <p>
-※ $\lfloor\rfloor$ は<a href="https://ja.wikipedia.org/wiki/%E5%BA%8A%E9%96%A2%E6%95%B0%E3%81%A8%E5%A4%A9%E4%BA%95%E9%96%A2%E6%95%B0">床関数</a>
+を定義する。
 </p>
 
 <p>
-としたとき、$\textrm{C}[k]$ は以下の式で表される。 
+<b>サンプリング時にエイリアシングが発生していなければ</b>、$f(t)$ の複素フーリエ級数は以下の式で表される。
 </p>
 
 \[
 \textrm{C}[k]
 =
-\textrm{C}_{imp}[k] \cdot g[k]
+\textrm{C}_{imp}[k] \cdot \textrm{rect}[k] 
 \]
 
 </div>
@@ -1307,7 +1320,7 @@ g[k]
 </p>
 
 <p>
-なお切り出し処理 $g[k]$ に対して複素フーリエ級数展開をすると
+さて窓関数 $\textrm{rect}[k]$ に対して複素フーリエ級数展開をすると
 </p>
 
 \begin{align*}
@@ -1318,6 +1331,150 @@ g[k]
 <p>
 となりますので、$f_{imp}[i]$ にこの関数を畳み込み演算をすると $f[i]$ が復元します(詳しくは<a href="#2">(2)</a>を参照して下さい)。
 </p>
+
+<p>
+なお上で書いたようにサンプリング時にエイリアシングが発生してると復元に失敗します。
+<br>
+では図9、図10と同じ信号でサンプリング周期 $\textrm{N}$ を 9 よりも小さくした場合の失敗例を見てみましょう。
+</p>
+
+<p>
+まず $\textrm{N}=7$ とした場合の $f(t)$ の複素フーリエ係数(の振幅成分)は図11となります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図11: $f(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}[k]|$</b>
+
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=7$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 3$
+</p>
+
+<img src="./img/page03-fig11.png" alt="">
+</div>
+
+<p>
+$\pm \textrm{N}/2 = \pm 3.5$ の位置がナイキスト角周波数に相当しますので明らかにエイリアシングが生じます。
+<br>
+実際 $f_{imp}(t)$ の複素フーリエ係数(の振幅成分)は図12となりますので窓関数 $\textrm{rect}[k]$ を使って復元することは出来ないことが分かります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図12: $f_{imp}(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}_{imp}[k]|$</b>
+
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=7$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 3$
+</p>
+
+<img src="./img/page03-fig12.png" alt="">
+</div>
+
+<p>
+では $\textrm{N} = 8$ なら大丈夫かと言われると実はこの場合も上手く行きません。
+<br>
+$\textrm{N}=8$ とした場合の $f(t)$ の複素フーリエ係数(の振幅成分)は図13となります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図13: $f(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}[k]|$</b>
+
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=8$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 4$
+</p>
+
+<img src="./img/page03-fig13.png" alt="">
+</div>
+
+<p>
+この様に$\textrm{N}$ が偶数でかつ $f(t)$ に含まれているサイン波の最大角周波数がナイキスト角周波数と一致しているとサンプリングした時に $\textrm{C}_{imp}\left [ \pm \frac{\textrm{N}}{2} \right ]$ の値が
+</p>
+
+\begin{align*}
+\textrm{C}_{imp} \left [ \pm \frac{\textrm{N}}{2} \right ] 
+&=
+\frac{1}{\tau}
+\sum_{n=-\infty}^\infty
+\textrm{C}\left [ \pm \frac{\textrm{N}}{2} - n\cdot \textrm{N} \right ]  \\[10pt]
+
+&= 
+\frac{1}{\tau} \cdot \left ( 
+\textrm{C}\left [ \frac{\textrm{N}}{2} \right ] + \textrm{C}\left [ -\frac{\textrm{N}}{2} \right ]  
+\right ) \\[10pt]
+&= 
+\frac{1}{\tau} \cdot \left ( 
+\textrm{C}\left [ \frac{\textrm{N}}{2} \right ] + \textrm{C}^* \left [ \frac{\textrm{N}}{2} \right ] 
+\right ) \\[10pt]
+&= 
+\frac{2}{\tau} \cdot \left | \textrm{C}\left [ \frac{\textrm{N}}{2} \right ] \right | 
+\cdot \cos \left ( \angle \textrm{C}\left [ \frac{\textrm{N}}{2} \right ] \right )
+\end{align*}
+
+<p>
+となり、虚数成分がキャンセルされて消滅します。
+<br>
+実際今回の例で計算してみると
+</p>
+
+\begin{align*}
+\textrm{C}_{imp}[\pm 4] 
+
+&= 
+\frac{1}{\tau} \cdot \left ( 
+\textrm{C}[4] + \textrm{C}[-4]
+\right ) \\[10pt]
+
+&= 
+8 \cdot \left ( 
+0.1 \cdot \textrm{e}^{-j \cdot \pi/4 } + 0.1 \cdot \textrm{e}^{j \cdot \pi/4 }
+\right ) \\[10pt]
+
+&= 1.6 \cdot \cos (-\pi/4) \\[10pt]
+
+&\simeq 1.13
+
+\end{align*}
+
+<p>
+で、$\textrm{C}_{imp}[k]$ (の振幅成分)は図14となります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図14: $f_{imp}(t)$ の複素フーリエ係数の振幅成分 $|\textrm{C}_{imp}[k]|$</b>
+
+<p>
+周期: $\textrm{T}=1$ [秒]
+</p>
+
+<p>
+サンプリング周期: $\textrm{N}=8$ [点]、$\lfloor \frac{\textrm{N}}{2} \rfloor = 4$
+</p>
+
+<img src="./img/page03-fig14.png" alt="">
+</div>
+
+<p>
+振幅成分だけ見ると図13と図14は似てる感じがしますが、実際には
+</p>
+
+\[
+\textrm{C}_{imp}[\pm 4] \neq \frac{1}{\tau} \cdot \textrm{C}[\pm 4] 
+\]
+
+<p>
+ですので、窓関数 $\textrm{rect}[k]$ を使って $\textrm{C}_{imp}[\pm 4]$ を切り出したところで $\textrm{C}[\pm 4]$ を復元出来ないことが分かります。
+</p>
+
 
 <br>
 <h2 id="7">
