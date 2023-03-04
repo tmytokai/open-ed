@@ -27,7 +27,7 @@
 </p>
 
 \[
-\textrm{C}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
+\textrm{DFT}[k] = \textrm{A}[k] + j \cdot \textrm{B}[k]
 \]
 
 <p>
@@ -40,12 +40,12 @@
 <input type="checkbox"><b>$\textrm{A}[k]$ と $\textrm{B}[k]$ の求め方</b>
 
 \begin{align*}
-\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{A}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
 \\[10pt]
-\textrm{B}[k] &= -\frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{B}[k] &= -\frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 f[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
@@ -70,17 +70,17 @@ $\textrm{B}[k]$ ・・・$k$ 番目のDFT係数の虚数成分、実数の定数
 </p>
 
 <p>
-また次の様にして DFT 係数 $\textrm{C}[k]$ の絶対値 $|\textrm{C}[k]|$ と偏角 $\angle \ \textrm{C}[k]$ も簡単に求められます。
+また次の様にして DFT 係数の絶対値と偏角も簡単に求められます。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>絶対値と偏角の求め方</b>
-\[
-|\textrm{C}[k]| = \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k])
-\]
-\[
-\angle \ \textrm{C}[k] = \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
-\]
+
+\begin{align*}
+|\textrm{DFT}[k]| &= \textrm{sqrt}(\textrm{A}[k]*\textrm{A}[k] + \textrm{B}[k]*\textrm{B}[k])
+\\[10pt]
+\angle \ \textrm{DFT}[k] &= \textrm{atan2}(\textrm{B}[k],\textrm{A}[k])
+\end{align*}
 
 <p>
 ※ プログラミング言語によっては $\textrm{atan2}(\textrm{A}[k],\textrm{B}[k])$ の順の場合もあります
@@ -143,14 +143,14 @@ f[i] = a[i] + j \cdot b[i]
 <input type="checkbox"><b>複素信号の DFT</b>
 
 \begin{align*}
-\textrm{A}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{A}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 a[i] \cdot \cos( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 +
 b[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 \right \}
 \\[5pt]
-\textrm{B}[k] &= \frac{1.0}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
+\textrm{B}[k] &= \frac{1}{\textrm{N}} \sum_{i=0}^{\textrm{N}-1}
 \left \{
 -a[i] \cdot \sin( k \cdot \frac{2\pi}{\textrm{N}} \cdot i )
 +

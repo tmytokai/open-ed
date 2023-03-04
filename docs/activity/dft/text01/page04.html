@@ -42,18 +42,16 @@
 
 <p>
 ということも言えそうです。
+<br>
+ここでは $f[i]$ を直流成分、基本波、有限個の高調波の和に分解してみましょう。
 </p>
 
 <p>
-それを示すためここでは<a href="../../fourier/text01/page03.html">実フーリエ級数展開</a>をディジタル化して $f[i]$ を直流成分、基本波、有限個の高調波の和に分解してみましょう。
+まず周期性ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング間隔を $\tau$ [秒]、サンプリング角周波数を $w_s = 2\pi /\tau$ [rad/秒]、サンプリング周波数を $f_s = 1/\tau$ [Hz] とします。
 </p>
 
 <p>
-まず周期性ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング周波数を $f_s$ [Hz]、サンプリング角周波数を $w_s = 2\pi \cdot f_s$ [rad/秒]、サンプリング間隔を $\tau = 1/f_s$ [秒]とします。
-</p>
-
-<p>
-またこの $f[i]$ は周期 $\textrm{T}$ [秒]、基本角周波数 $w_1$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングして作成したとします。
+またこの $f[i]$ は周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] である未知の周期性アナログ信号 $f(t)$ からサンプリングして作成したとします。
 <br>
 なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
 </p>
@@ -68,8 +66,8 @@ w_1 &= \frac{w_s}{\textrm{N}}
 が成り立つ正整数 $\textrm{N}$ があるとします。
 </p>
 
-</p>
-さらに $f(t)$ に含まれる基本波および第 $k$ 高調波を
+<p>
+さらに未知のアナログ信号 $f(t)$ に含まれる基本波および第 $k$ 高調波を
 </p>
 
 \[
@@ -81,7 +79,7 @@ f_k(t) = a_k \cdot \cos ( k \cdot w_1 \cdot t + \phi_k)
 </p>
 
 \begin{align*}
-f_k[i] &= f_k(i \cdot \tau) \\[5pt]
+f_k[i] &= f_k(i \cdot \tau) \\[10pt]
 
 &= a_k \cdot \cos \left ( k \cdot w_1 \cdot i \cdot \tau + \phi_k \right ) \\[10pt]
 
@@ -94,11 +92,21 @@ f_k[i] &= f_k(i \cdot \tau) \\[5pt]
 <p>
 となります。
 <br>
+また $\textrm{T}_k = \textrm{N}/k$ と定義すると $\textrm{T}_k$ [点] は第 $k$ 高調波の周期となりますので、この $\textrm{T}_k$ を使って
+</p>
+
+\[
+f_k[i] = a_k \cdot \cos \left ( \frac{2\pi}{\textrm{T}_k} \cdot i + \phi_k \right )
+\]
+
+<p>
+と $f_k[i] $ を表すことも出来ます。
+<br>
 ちなみに直流成分は $f_0[i] = a_0$ です。
 </p>
 
 <p>
-ただしアナログ信号 $f(t)$ に含まれる高調波は無限個ありましたが、サンプリングすると<a href="../../d-signal/text02/page02.html">ナイキスト周波数</a>より高い周波数の高調波は<a href="../../d-signal/text02/page03.html">エイリアシング</a>となって低周波域に折り返されるため、ディジタル信号 $f[i]$ に含まれる高調波は有限個となります。
+なおアナログ信号 $f(t)$ に含まれる高調波は無限個ありましたが、サンプリングすると<a href="../../d-signal/text02/page02.html">ナイキスト周波数</a>より高い周波数の高調波は<a href="../../d-signal/text02/page03.html">エイリアシング</a>となって低周波域に折り返されるため、ディジタル信号 $f[i]$ に含まれる高調波は有限個となります。
 <br>
 具体的には $k = \textrm{N}/2$ の時に
 </p>
@@ -108,7 +116,7 @@ k \cdot w_1 = \frac{\textrm{N}}{2} \cdot \frac{w_s}{\textrm{N}}= 2\pi \cdot \fra
 \]
 
 <p>
-となるので、高調波の個数 M は$\textrm{N}/2$ を超えない最大の整数になります。
+となるので、$k$ の最大値は $\textrm{N}/2$ を超えない最大の整数になります。
 </p>
 
 <p>
@@ -119,11 +127,7 @@ k \cdot w_1 = \frac{\textrm{N}}{2} \cdot \frac{w_s}{\textrm{N}}= 2\pi \cdot \fra
 <input type="checkbox"><b>周期性時間領域ディジタル信号の実フーリエ級数展開</b>
 
 <p>
-周期 N が奇数の場合 : $\textrm{M} = (\textrm{N}-1)/2$
-</p>
-
-<p>
-周期 N が偶数の場合 : $\textrm{M} = \textrm{N}/2$
+$\lfloor\rfloor$ を<a href="https://ja.wikipedia.org/wiki/%E5%BA%8A%E9%96%A2%E6%95%B0%E3%81%A8%E5%A4%A9%E4%BA%95%E9%96%A2%E6%95%B0">床関数</a>とする。
 </p>
 
 <p>
@@ -132,51 +136,20 @@ k \cdot w_1 = \frac{\textrm{N}}{2} \cdot \frac{w_s}{\textrm{N}}= 2\pi \cdot \fra
 
 \begin{align*}
 f[i]
-&= \sum_{k=0}^{\textrm{M}} f_k[i] \\[5pt]
-&= a_0 + \sum_{k=1}^{\textrm{M}}
+&= \sum_{k=0}^{ \lfloor \frac{\textrm{N}}{2} \rfloor } f_k[i] \\[5pt]
+&= a_0 + \sum_{k=1}^{ \lfloor \frac{\textrm{N}}{2} \rfloor }
 \left \{
 a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\textrm{N}} \cdot i + \phi_k \right )
 \right \} \\
 \end{align*}
 
 <p>
-$f[i]$ ・・・ 周期 N [点] の周期性時間領域ディジタル信号
-</p>
-<p>
-$a_0$・・・ 直流成分、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
-</p>
-<p>
-$a_k$・・・第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
-</p>
-<p>
-$\phi_k$ ・・・第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の<u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
-</p>
-</div>
-
-<p>
-ところで $\textrm{T}_k = \textrm{N}/k$ と定義すると $\textrm{T}_k$ [点] は第 $k$ 高調波の周期となります。
-<br>
-この $\textrm{T}_k$ を使って実フーリエ級数展開を定義する事も可能です。
-</p>
-
-<div class="info">
-<input type="checkbox"><b>周期性時間領域ディジタル信号の実フーリエ級数展開 (周期を使うバージョン)</b>
-
-<p>
-周期 N が奇数の場合 : $\textrm{M} = (\textrm{N}-1)/2$
-</p>
-
-<p>
-周期 N が偶数の場合 : $\textrm{M} = \textrm{N}/2$
-</p>
-
-<p>
-と M をおいた時
+または
 </p>
 
 \begin{align*}
 f[i]
-&= a_0 + \sum_{k=1}^{\textrm{M}}
+&= a_0 + \sum_{k=1}^{ \lfloor \frac{\textrm{N}}{2} \rfloor }
 \left \{
 a_k \cdot \cos \left ( \frac{2\pi}{\textrm{T}_k} \cdot i + \phi_k \right )
 \right \}
@@ -192,49 +165,142 @@ $a_0$・・・ 直流成分、実数の<u>定数</u>、範囲は実数全体、�
 $a_k$・・・第 $k$ 高調波($k=1$の時は基本波)の振幅、実数の<u>定数</u>、範囲は実数全体、単位は扱う信号の種類による (ボルトとかアンペアとか度とか etc.)
 </p>
 <p>
-$\textrm{T}_k$・・・第 $k$ 高調波($k=1$の時は基本波)の周期、$\textrm{T}_k = \textrm{N}/k$、単位は [点]
-</p>
-<p>
 $\phi_k$ ・・・第 $k$ 高調波($k=1$の時は基本波)の初期位相、実数の<u>定数</u>、範囲は $-\pi \leq \phi \leq \pi$、単位は [rad]
 </p>
+<p>
+$\textrm{T}_k$・・・第 $k$ 高調波($k=1$の時は基本波)の周期、$\textrm{T}_k = \textrm{N}/k$、単位は [点]
+</p>
 </div>
+
 
 
 <p>
 ここで各成分のパラメータ($a_0$、$a_k$、$\phi_k$) と DFT 係数は<a href="../../fourier/text01/page05.html">複素フーリエ係数の時</a>と全く同じ関係が成り立っています。
 <br>
-ただし最後の M 番目の高調波の計算方法が周期 N が偶数か奇数かにより異なりますので注意して下さい。
+ただし最後の高調波の計算方法が周期 $\textrm{N}$ が偶数か奇数かにより異なりますので注意して下さい。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>周期 N が奇数の場合</b>
+<input type="checkbox"><b>周期 $\textrm{N}$ が奇数の場合</b>
 
 <p>
-$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = (\textrm{N}-1)/2$ としたとき
+$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数としたとき
+</p>
+
+\[
+a_0 = \textrm{DFT}[0]
+\]
+
+<p>
+および $k = 1, \cdots, \left \lfloor \frac{\textrm{N}}{2} \right \rfloor$ で
 </p>
 
 \begin{align*}
-\textrm{DFT}[0] &= a_0 \\[5pt]
-\textrm{DFT}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M})
+a_k & = 2 \cdot |\textrm{DFT}[k]| \\[5pt]
+\phi_k &= \angle \textrm{DFT}[k]
 \end{align*}
+
 
 </div>
 
 <br>
 <div class="info">
-<input type="checkbox"><b>周期 N が偶数の場合</b>
+<input type="checkbox"><b>周期 $\textrm{N}$ が偶数の場合</b>
 
 <p>
-$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数とし、 $\textrm{M} = \textrm{N}/2$ としたとき
+$\textrm{DFT}[k]$ を $k$ 番目の DFT 係数としたとき
+</p>
+
+\[
+a_0 = \textrm{DFT}[0]
+\]
+
+<p>
+および $k = 1, \cdots, \left \lfloor \frac{\textrm{N}}{2} \right \rfloor -1$ で
 </p>
 
 \begin{align*}
-\textrm{DFT}[0] &= a_0 \\[5pt]
-\textrm{DFT}[k] &= \frac{a_k}{2} \cdot \textrm{e}^{\{j \cdot \phi_k \}} \ ,\ (k = 1, \cdots, \textrm{M}-1) \\[5pt]
-\textrm{DFT}[M] &= a_\textrm{M} \cdot \textrm{e}^{\{j \cdot \phi_\textrm{M} \}}
+a_k & = 2 \cdot |\textrm{DFT}[k]| \\[5pt]
+\phi_k &= \angle \textrm{DFT}[k]
 \end{align*}
 
+<p>
+また $k = \left \lfloor \frac{\textrm{N}}{2} \right \rfloor$ の時
+</p>
+
+\begin{align*}
+a_k & = \textrm{DFT}[k] \\[5pt]
+\phi_k &= 0
+\end{align*}
+
+
 </div>
+
+<p>
+では例をあげましょう。
+<br>
+まず図1 で示される周期が $\textrm{N}=8$ [点] の信号 $f[i]$ が与えられたとします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1:  $f[i]$ のグラフ</b>
+
+<p>
+周期: $\textrm{N}=8$ [点]
+</p>
+
+<img src="./img/page04-fig1.png" alt="">
+</div>
+
+<p>
+この信号のDFT係数を求めると次の様になります。
+</p>
+
+\begin{align*}
+\textrm{DFT}[0] &= 5 \\[10pt]
+\textrm{DFT}[1] &= 3 \cdot \textrm{e}^{ j \cdot \pi/4}  \\[10pt]
+\textrm{DFT}[2] &= 2 \cdot \textrm{e}^{-j \cdot \pi/4}  \\[10pt]
+\textrm{DFT}[3] &= 1 \cdot \textrm{e}^{ j \cdot \pi/2}  \\[10pt]
+\textrm{DFT}[4] &= -6 \\[10pt]
+\textrm{DFT}[5] &= 1 \cdot \textrm{e}^{-j \cdot \pi/2}  \\[10pt]
+\textrm{DFT}[6] &= 2 \cdot \textrm{e}^{ j \cdot \pi/4}  \\[10pt]
+\textrm{DFT}[7] &= 3 \cdot \textrm{e}^{-j \cdot \pi/4}  \\[10pt]
+\end{align*}
+
+<p>
+よって $f[i]$ の実フーリエ級数展開は
+</p>
+
+\begin{align*}
+f[i] &= 5 \\[10pt]
+&+ 6 \cdot \textrm{cos}\left ( 1 \cdot \frac{2\pi}{8} \cdot i + \frac{\pi}{4} \right ) \\[10pt]
+&+ 4 \cdot \textrm{cos}\left ( 2 \cdot \frac{2\pi}{8} \cdot i - \frac{\pi}{4} \right ) \\[10pt]
+&+ 2 \cdot \textrm{cos}\left ( 3 \cdot \frac{2\pi}{8} \cdot i + \frac{\pi}{2} \right ) \\[10pt]
+&- 6 \cdot \textrm{cos}\left ( 4 \cdot \frac{2\pi}{8} \cdot i + 0 \right ) \\[10pt]
+\end{align*}
+
+<p>
+で、このグラフは図2となります。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2:  $f[i]$ の実フーリエ級数展開のグラフ</b>
+
+<p>
+周期: $\textrm{N}=8$ [点]
+</p>
+
+<img src="./img/page04-fig2.png" alt="">
+</div>
+
+<p>
+この様にきちんと復元されました。
+</p>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="./src/page04.txt">こちら</a>です。
+</p>
+
 
 <br>
 <script>PreNext(4,5)</script>

@@ -22,18 +22,31 @@
 
 
 <p>
-DFT 係数 $\textrm{C}[k]$ が周期性時間領域ディジタル信号に対するスペクトルとなりますが、$\textrm{C}[k]$ が何 [rad/秒]の角周波数のサイン波の振幅と位相を現しているか分からないという問題があります。
+DFT 係数が周期性時間領域ディジタル信号に対するスペクトルとなりますが、$\textrm{DFT}[k]$ が何 [rad/秒]の角周波数のサイン波の振幅と位相を表しているか分からないという問題があります。
 <br>
-そこで以下の関係式を使って $\textrm{C}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] を結びつけます。 
+そこで以下の関係式を使って $\textrm{DFT}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] を結びつけます。 
 </p>
 
 <div class="info">
-<input type="checkbox"><b>$\textrm{C}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] の関係式</b>
+<input type="checkbox"><b>$\textrm{DFT}[k]$ のインデックス $k$ と角周波数 $w$ [rad/秒] の関係式</b>
 
 <p>
-周期性時間領域ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング周波数を $f_s$ [Hz]、サンプリング間隔を $\tau = 1/f_s$ [秒]、サンプリング角周波数を $w_s = 2\pi\cdot f_s = 2\pi/\tau$ [rad/秒]とする。
+周期性時間領域ディジタル信号 $f[i]$ の周期を $\textrm{N}$ [点]、サンプリング間隔を $\tau$ [秒]、サンプリング角周波数を $w_s = 2\pi/\tau$ [rad/秒]、サンプリング周波数を $f_s = 1/\tau$ [Hz]とする。
+</p>
+
+<p>
+またこの $f[i]$ は周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] である未知の周期性アナログ信号 $f(t)$ からサンプリングして作成したとする。
 <br>
-また $f[i]$ は周期 $\textrm{T} = \tau \cdot \textrm{N}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期性アナログ信号 $f(t)$ からサンプリングしたとする。
+なお今回は話を簡単にするために周期 $\textrm{T}$ [秒]はサンプリング間隔 $\tau$ [秒]で割り切れる数であるとして
+</p>
+
+\begin{align*}
+\textrm{N} & = \frac{\textrm{T}}{\tau} \\[10pt]
+\textrm{T} & = \textrm{N}\cdot \tau \\[10pt]
+\end{align*}
+
+<p>
+が成り立つ正整数 $\textrm{N}$ があるとする。
 </p>
 
 <p>
@@ -41,7 +54,7 @@ DFT 係数 $\textrm{C}[k]$ が周期性時間領域ディジタル信号に対�
 </p>
 
 \[
-w_1 = \frac{2\pi}{\textrm{T}} = \frac{2\pi}{\tau \cdot \textrm{N}} = \frac{2\pi\cdot f_s}{\textrm{N}} = \frac{w_s}{\textrm{N}}
+w_1 = \frac{2\pi}{\textrm{T}} = \frac{2\pi}{\textrm{N}\cdot \tau} = \frac{w_s}{\textrm{N}}
 \]
 
 <p>
@@ -66,7 +79,7 @@ w = k \cdot w_1
 \textrm{F}(w)
 =
 \begin{cases}
-\textrm{C}[k] & , \ w = k \cdot w_1 = k \cdot \frac{w_s}{\textrm{N}} \text{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\[5pt]
+\textrm{DFT}[k] & , \ w = k \cdot w_1 = k \cdot \frac{w_s}{\textrm{N}} \text{ [rad/秒] のとき}\  (k = 0, \pm 1, \pm 2, \cdots) \\[10pt]
 0 & , \ w \text{がそれ以外の値のとき}
 \end{cases}
 \]
@@ -82,7 +95,7 @@ $w_1$ ・・・ 基本角周波数、 単位は [rad/秒]
 </p>
 
 <p>
-「<b>$w_1 = w_s/\textrm{N}$ の整数倍の角周波数の所だけスペクトル値が定まり、それ以外の角周波数におけるスペクトル値は $0$</b>」
+<b>基本角周波数 $w_1$ の整数倍の角周波数の所だけスペクトル値が定まり、それ以外の角周波数におけるスペクトル値は $0$</b>
 </p>
 
 <p>
@@ -90,11 +103,7 @@ $w_1$ ・・・ 基本角周波数、 単位は [rad/秒]
 </p>
 
 <p>
-逆に元の周期性時間領域ディジタル信号 $f[i]$ の式が分からないけど近似計算などを使って $\textrm{F}(w)$ は得られたという状況を考えます。
-<br>
-その場合は IDFT を使って直接 $[i]$ を復元したり、<a href="../text01/page04.html">前の学習項目で示した変換式</a>から実フーリエ級数展開を使って元の $f[i]$ を復元することが出来ます。
-<br>
-具体的に言うと次の様になります。
+逆にスペクトル $\textrm{F}(w)$ から IDFT を使って直接 $[i]$ を復元することも出来ます。
 </p>
 
 <div class="info">
@@ -109,7 +118,7 @@ $w_1$ ・・・ 基本角周波数、 単位は [rad/秒]
 \[
 f[i] = \sum_{k=0}^{\textrm{N}-1}
 \left \{
-\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
+\textrm{DFT}[k] \cdot \textrm{e}^{\{j \cdot k \cdot \frac{2\pi}{\textrm{N}} \cdot i \}} 
 \right \}
 = \sum_{k=0}^{\textrm{N}-1}
 \left \{
@@ -120,69 +129,6 @@ f[i] = \sum_{k=0}^{\textrm{N}-1}
 <p>
 によって $f[i]$ を復元出来る。
 </p>
-
-<p>
-または $f[i]$ に含まれる直流成分や高調波成分のパラメータを求め、実フーリエ級数展開
-</p>
-
-\[
-f[i]
-= a_0 + \sum_{k=1}^{\textrm{M}}
-\left \{
-a_k \cdot \cos \left ( k \cdot \frac{2\pi}{\textrm{N}} \cdot i + \phi_k \right )
-\right \}
-\]
-
-<p>
-を使って $f[i]$ を復元することも出来る。
-<br>
-ただし
-</p>
-
-<p>
-周期 N が奇数の場合 : $\textrm{M} = (\textrm{N}-1)/2$
-</p>
-
-<p>
-周期 N が偶数の場合 : $\textrm{M} = \textrm{N}/2$
-</p>
-
-<p>
-とし、各パラメータは次の式で求められる。
-</p>
-
-<p>
-直流成分：
-<br>
-　$a_0 = \textrm{C}[0] = \textrm{F}(0)$
-</p>
-
-<p>
-基本波：
-<br>
-　振幅 ・・・ $a_1 = 2 \cdot |\textrm{C}[1]| = 2 \cdot |\textrm{F}(1\cdot w_1)|$
-<br>
-　初期位相 ・・・ $\phi_1 = \angle \textrm{C}[1] = \angle \textrm{F}(1\cdot w_1)$
-</p>
-
-<p>
-第 $k$ 高調波：
-<br>
-　振幅 ・・・ $a_k = 2 \cdot |\textrm{C}[k]| = 2 \cdot |\textrm{F}(k\cdot w_1)|$
-<br>
-　初期位相 ・・・ $\phi_k = \angle \textrm{C}[k] = \angle \textrm{F}(k\cdot w_1)$
-</p>
-
-
-<p>
-($\textrm{N}$ が偶数の場合のみ) 第 $\textrm{M}$ 高調波：
-<br>
-　振幅 ・・・ $a_\textrm{M} = |\textrm{C}[\textrm{M}]| = |\textrm{F}(\textrm{M}\cdot w_1)|$
-<br>
-　初期位相 ・・・ $\phi_\textrm{M} = \angle \textrm{C}[\textrm{M}] = \angle \textrm{F}(\textrm{M}\cdot w_1)$
-</p>
-
-
 
 </div>
 
