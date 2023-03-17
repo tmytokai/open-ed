@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<script src="../../../mathjax.js"></script>
+<title>2. スペクトルの例</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: フーリエ変換</a></li>
+<li>学習項目: [2] スペクトル解析</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では具体例を示して視覚的にスペクトルを見てみましょう。
+</p>
+
+<p>
+まず今回は周期性時間領域アナログ信号として
+</p>
+
+\[
+f(t) = 
+\begin{cases}
+0 & \ ( t \lt 0 ) \\[10pt]
+t^4 -20 \cdot t^3 + 10 \cdot t^2 + 20 \cdot t -3 & (-1 \leq t \leq 1 ) \\[10pt]
+0 & \ ( t \gt 0 ) \\
+\end{cases}
+\]
+
+<p>
+を考えます(図1)。
+<br>
+ちなみにこれは<a href="../../fourier/text02/page02.html">複素フーリエ級数のスペクトル例</a>で取り上げた周期的な信号から1周期分だけ取り出した信号となっていますので、複素フーリエ級数のスペクトルと対比しながら説明していきたいと思います。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図1: 例で使う $f(t)$ </b>
+<p>　</p>
+<img src="./img/page02-fig1.png" alt="">
+</div>
+
+<p>
+この $f(t)$ から求めた振幅・位相スペクトルは以下の様になります。
+<br>
+今回はグラフの横軸を角周波数 $w$ [rad/秒] としていますが、横軸を周波数 $f$ [Hz] にしたり波長 [m] にする場合も実際には多いです。
+</p>
+
+<p>
+またグラフの横軸の $w_1$ はこの $f(t)$ を周期 $\textrm{T}$ [秒]の周期的な信号とみなした時の基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒] です。
+<br>
+さらに赤点は $w_1$ [rad/秒]おきにサンプリングした点です。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図2: 振幅スペクトル</b>
+<p>　</p>
+<img src="./img/page02-fig2.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図3: 位相スペクトル</b>
+<p>　</p>
+<img src="./img/page02-fig3.png" alt="">
+</div>
+
+<p>
+参考までに、上のグラフを描画したプログラムは<a href="./src/page02.txt">こちら</a>です。
+</p>
+
+<p>
+さて<a href="../../fourier/text02/page02.html">複素フーリエ級数のスペクトル例</a>で示したスペクトルを図4と5に再掲しますので、上のスペクトルと見比べて下さい。
+<br>
+確かに $f(t)$ を周期化すると振幅及び位相スペクトルがサンプリングされてディジタル化していることが分かります。
+</p>
+
+<p>
+ただし振幅スペクトルに関しては、<a href="../text01/page02.html">こちら</a>に書いたように周期 $\textrm{T}=2$ の分だけ掛けたり割ったりしてスケールが変わりますので注意してください。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>図4: 複素フーリエ級数のときの振幅スペクトル (再掲)</b>
+<p>　</p>
+<img src="../../fourier/text02/img/page02-fig2.png" alt="">
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図5: 複素フーリエ級数のときの位相スペクトル (再掲)</b>
+<p>　</p>
+<img src="../../fourier/text02/img/page02-fig3.png" alt="">
+</div>
+
+
+<br>
+<script>PreNext(2,2)</script>
+</body>
+</html>

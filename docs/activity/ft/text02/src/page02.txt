@@ -1,0 +1,84 @@
+import numpy as np
+import cmath
+import matplotlib.pyplot as plt
+from scipy import integrate
+
+figsize=7
+dpi=100
+
+T = 2
+
+# 元の信号
+def f(t) :
+    a = 1
+    b = -20
+    c = 10
+    d = 20
+    e = -3
+    if t < -T/2:
+        return 0
+    if t > T/2:
+        return 0
+    return a*t**4 + b*t**3 + c*t**2 + d*t + e
+
+# フーリエ変換 (近似計算)
+def F(w) :
+    a = integrate.quad(
+        lambda t: f(t)*np.cos(-w*t), -T/2, T/2 )[0]
+    b = integrate.quad(
+        lambda t: f(t)*np.sin(-w*t), -T/2, T/2 )[0]
+    return a+b*1j
+
+maxt = (T/2)*3
+mint = -maxt
+tickt = 1
+
+w1 = (2*np.pi/T)
+kmax = 10
+maxw = w1*kmax
+minw = -maxw
+tickw = w1*5
+
+t = np.arange(mint,maxt,0.01)
+w = np.arange(minw,maxw,0.01)
+
+FF = [F(i) for i in w]
+
+# 元の信号
+plt.figure( figsize=(figsize, figsize), dpi=dpi )
+plt.plot(t, [f(i) for i in t])
+plt.xticks(np.arange(mint,maxt+0.1,tickt))
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.axvline(T/2,color="gray",linestyle='dashed')
+plt.axvline(-T/2,color="gray",linestyle='dashed')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$f(t)$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 振幅スペクトル
+plt.figure( figsize=(figsize, figsize), dpi=dpi )
+plt.plot(w, [abs(i) for i in FF] )
+for k in range(-kmax, kmax) :
+    tmpw = k*w1
+    tmpc = F(tmpw)
+    absc = abs(tmpc)
+    plt.plot( tmpw,absc,color="red",marker='o',markersize=5,linestyle='none')
+plt.xticks(np.arange(minw,maxw+0.1,tickw),labels= ['$-10w_1$','$-5w_1$','0','$5w_1$','$10w_1$'])
+plt.ylim(bottom=0)
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\|{\rm F}(w)|$',rotation=0,labelpad=0,loc="top")
+plt.show()
+
+# 位相スペクトル
+plt.figure( figsize=(figsize, figsize), dpi=dpi )
+plt.plot(w, [cmath.phase(i) if abs(i) > 0.1 else 0 for i in FF] )
+for k in range(-kmax,kmax) :
+    tmpw = k*w1
+    tmpc = F(tmpw)
+    phasec = cmath.phase(tmpc) if abs(tmpc)>0.1*T else 0
+    plt.plot( tmpw,phasec,color="red",marker='o',markersize=5,linestyle='none')
+plt.xticks(np.arange(minw,maxw+0.1,tickw),labels= ['$-10w_1$','$-5w_1$','0','$5w_1$','$10w_1$'])
+plt.axhline(0,color="gray",linestyle='dashed')
+plt.xlabel(r'$w$')
+plt.ylabel(r'$\angle {\rm F}(w)$',rotation=0,labelpad=0,loc="top")
+plt.show()
