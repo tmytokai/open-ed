@@ -22,16 +22,32 @@
 
 <p>
 <a href="./page02.html">フーリエの定理</a>を<a href="../../complex/">複素正弦波</a>を使って書き直すと次のような級数になります。
+<br>
+この式を $f(t)$ の<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E7%B4%9A%E6%95%B0">複素フーリエ級数展開</a>といいます。
 </p>
-<p>
-この式を「<b>複素フーリエ級数展開</b>」といいます。
-</p>
+
 <p>
 何故フーリエの定理からこの式が出てくるのかについては<a href="./page05.html">次のページ</a>で説明します。
 </p>
 
 <div class="info">
 <input type="checkbox"><b>定義： 複素フーリエ級数展開</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的かつ区分的に連続で滑らかな時間領域アナログ信号とする。 
+</p>
+
+<p>
+また $\textrm{C}[k]$ を $f(t)$ の $k$ 番目の複素フーリエ係数とする。
+</p>
+
+<p>
+※ $\textrm{C}[k]$ の計算方法についてはこのすぐ下で説明します。
+</p>
+
+<p>
+時刻 $t$ において $f(t)$ が連続ならば、以下の無限級数が収束して複素フーリエ級数展開という。
+</p>
 
 \begin{align*}
 f(t) = \sum_{k = -\infty}^{\infty} 
@@ -40,27 +56,63 @@ f(t) = \sum_{k = -\infty}^{\infty}
 \right \}
 \end{align*}
 
-<p>
-$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
-</p>
-
-<p>
-$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の<u>定数</u>、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
-</p>
-
-<p>
-$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
-</p>
-
 </div>
 
 <p>
-上の式に出てきた無限個の複素フーリエ係数 $\textrm{C}[k]$ は次の式で求められます。
+なお「区分的に連続で滑らかである」信号とは
+</p>
+
+<ul>
+<li>不連続点が 0 個もしくは有限個しか含まれていない</li>
+<li>不連続点以外の区間では連続</li>
+<li>不連続点以外の区間で導関数 $f'(t)$ が存在して連続</li>
+<li>不連続点の両端で導関数 $f'(t)$ の極限が存在して有限</li>
+</ul>
+
+<p>
+という意味で、(例外はありますけど)工学で良く扱う信号は大体その様な性質を持っています。
+</p>
+
+<p>
+一方、もし $f(t)$ に不連続な点が含まれるときは次の事が言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 不連続点における複素フーリエ級数展開</b>
+
+<p>
+時刻 $t$ において $f(t)$ が不連続ならば、複素フーリエ級数展開は右極限 $f(t+0)$ と 左極限 $f(t-0)$ の平均に収束する。
+<br>
+つまり
+</p>
+
+\begin{align*}
+\frac{ f(t+0) + f(t-0) }{2}
+=
+\sum_{k = -\infty}^{\infty} 
+\left \{
+\textrm{C}[k] \cdot \textrm{e}^{\{j \cdot k \cdot w_1 \cdot t \}}
+\right \}
+\end{align*}
+
+</div>
+
+
+<p>
+さて上の式に出てきた複素フーリエ係数 $\textrm{C}[k]$ は次の式で求められます。
+<br>
+この複素フーリエ係数 $\textrm{C}[k]$ の計算式は<a href="https://ja.wikipedia.org/wiki/%E5%9F%BA%E5%BA%95%E9%96%A2%E6%95%B0">直交基底展開</a>という理論から導かれますが、今回のアクティビティでは触れませんのでもし興味のある人は自分で調べて下さい。
 </p>
 
 
 <div class="info">
 <input type="checkbox"><b>複素フーリエ係数 $\textrm{C}[k]$ の定義 (その1)</b>
+
+<p>
+$f(t)$ を周期 $\textrm{T}$ [秒]、基本角周波数 $w_1 = 2\pi/\textrm{T}$ [rad/秒]の周期的かつ区分的に連続で滑らかな時間領域アナログ信号とする。 
+<br>
+$k$ を任意の整数としたとき、以下の積分を $k$ 番目の複素フーリエ係数という。
+</p>
 
 \[
 \textrm{C}[k] = \frac{1}{\textrm{T}} \int_{-\textrm{T}/2}^{\textrm{T}/2} 
@@ -70,23 +122,7 @@ f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
 \textrm{dt}
 \]
 
-<p>
-$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
-</p>
-
-<p>
-$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
-</p>
-
-<p>
-$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
-</p>
-
 </div>
-
-<p>
-この $\textrm{C}[k]$ の計算式は<a href="https://ja.wikipedia.org/wiki/%E5%9F%BA%E5%BA%95%E9%96%A2%E6%95%B0">直交基底展開</a>という理論から導かれますが、今回のアクティビティでは触れませんのでもし興味のある人は自分で調べて下さい。
-</p>
 
 <p>
 なお積分の前についている $1/\textrm{T}$ を「<b>正規化パラメータ</b>」と言います。
@@ -171,43 +207,29 @@ f(t) \cdot \textrm{e}^{\{-j \cdot k \cdot w_1 \cdot t \}}
 \textrm{dt}
 \]
 
-<p>
-$f(t)$ ・・・周期 $\textrm{T}$ [秒] の周期性時間領域アナログ信号
-</p>
-
-<p>
-$\textrm{C}[k]$ ・・・ $k$番目の複素フーリエ係数、複素数の定数、個数は $\cdots,\textrm{C}[-1], \textrm{C}[0], \textrm{C}[1], \textrm{C}[2], \cdots$ の無限個
-</p>
-
-<p>
-$w_1$ ・・・ 基本角周波数、$w_1 = 2\pi/\textrm{T}$、単位は [rad/秒]
-</p>
-
 </div>
 
 
 <p>
-ところで上で示した $\textrm{C}[k]$ の定義から $\textrm{C}[k]$ と $\textrm{C}[-k]$ は複素共役関係、つまり
+ところで上で示した $\textrm{C}[k]$ の定義から $\textrm{C}[k]$ と $\textrm{C}[-k]$ は複素共役関係となっています。
+<br>
+つまり
 </p>
-
-<div class="info">
 
 \begin{align*}
 \textrm{C}[k] = \textrm{C}^{*}[-k]
 \end{align*}
 
 <p>
-または
+あるいは
 </p>
 
 \begin{align*}
 \textrm{C}^{*}[k] = \textrm{C}[-k]
 \end{align*}
 
-</div>
-
 <p>
-となることが分かりますので、実は $k=0,1,2,\cdots$ に対応する複素フーリエ係数さえ
+が成り立ちますので、実は $k=0,1,2,\cdots$ に対応する複素フーリエ係数さえ
 求めれば $k=-1,-2,\cdots$ に対応する複素フーリエ係数は求める必要がありません。
 </p>
 

@@ -97,11 +97,14 @@ $\textrm{F}(w)$ の $w$ [rad/秒]は角周波数なので、要するに $f(t)$ 
 <input type="checkbox"><b>定義： 逆フーリエ変換(フーリエ逆変換)</b>
 
 <p>
-$\textrm{F}(w)$ を $f(t)$ のフーリエ変換とするとき、以下の積分を逆フーリエ変換(フーリエ逆変換)と言う。
+$\textrm{F}(w)$ を $f(t)$ のフーリエ変換とする。
+<br>
+時刻 $t$ において $f(t)$ が連続ならば、以下の積分が収束して逆フーリエ変換(フーリエ逆変換)と言う。
 </p>
 
 \[
-f(t) =
+f(t)
+=
 \frac{1}{2\pi}
 \int_{-\infty}^{\infty}
 \left \{
@@ -112,6 +115,32 @@ f(t) =
 
 </div>
 
+<p>
+なお $f(t)$ に不連続な点が含まれるときは次の事が言えます。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>定義： 不連続点における逆フーリエ変換(フーリエ逆変換)</b>
+
+<p>
+時刻 $t$ において $f(t)$ が不連続ならば、逆フーリエ変換は右極限 $f(t+0)$ と 左極限 $f(t-0)$ の平均に収束する。
+<br>
+つまり
+</p>
+
+\[
+\frac{ f(t+0) + f(t-0) }{2}
+=
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+\left \{
+\textrm{F}(w) \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+\right \}
+\ \textrm{d}w
+\]
+
+
+</div>
 
 
 <br>
