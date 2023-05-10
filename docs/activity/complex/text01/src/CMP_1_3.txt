@@ -21,3 +21,4 @@ cmp.plot_c((
     ('z4',z4),
     ('z5',z5),
 ))
+cmp.savefig("result.png")
