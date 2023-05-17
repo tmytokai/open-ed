@@ -29,3 +29,4 @@ cmp.plot_c((
     ('z4*',z4asterisk),
     ('z5*',z5asterisk),
 ))
+cmp.savefig("result.png")
