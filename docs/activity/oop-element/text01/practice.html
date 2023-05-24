@@ -366,15 +366,31 @@ name = はなこ math = 40 english = 10 平均 = 26.5 合計 = 100
 <p>
 <span class="olradio"><input type="radio" name="p8"></span> フォルダ「OELM_1_7」をフォルダ「OELM_1_8」に丸ごとコピーし、その中に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p8"></span> Main.java を開き、先頭に import java.util.ArrayList; を追加して下さい
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> main メソッドの中を消して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> <a href="./page03.html">ページ3のソース 8</a> を参考に Main クラスで Score クラスの<a href="../../java-basic/text04/page01.html">リスト</a> list を定義して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> list に Taro、Hanako クラスのインスタンスを new して追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p8"></span> <a href="../../java-basic/text05/page03.html">forEachとラムダ式</a>を使って各インスタンスの情報を表示して下さい。
+<span class="olradio"><input type="radio" name="p8"></span> Main.java を開き、以下の内容に置き換えてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+
+	public static void main(String[] args) {
+
+            ArrayList&lt;Score&gt; list = ?
+            list.add( ? );
+            list.add( ? );
+
+            list.forEach( i -&gt;
+                System.out.println( "name = " + ?.name + " math = " + ?.math+ " english = " + ?.english + " 平均 = " +?.average() + " 合計 = " +?.total() )
+                );
+	}
+}
+</pre>
+
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> <a href="./page03.html">ページ3のソース 8</a> 及び <a href="../../java-basic/text05/page03.html">forEachとラムダ式</a>を参考に ? の部分を正しいコードに置き換えてください。
 <br>
 <span class="olradio"><input type="radio" name="p8"></span> 実行します。
 <br>
