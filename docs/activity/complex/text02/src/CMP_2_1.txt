@@ -17,3 +17,4 @@ def z_arg(t):
 ########### ここから↓は消さないで下さい
 cmp.init(cxlim=(-6,6), cylim=(-6,6))
 cmp.plot_csignal('z',z_abs,z_arg,5)
+cmp.savefig("result.png")
