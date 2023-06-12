@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [3] シーケンス図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h2><a href="./page01.html">1. シーケンス図</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-1 (個人):</b> 以下の仕様のプログラムを実行しましょう
+</p>
+<div class="info">
+<pre class="wrap">
+仕様:
+
+Taro は客
+Hanako はゲーム屋
+Taro は Hanako に Game を注文する
+Hanako が Souko から Game を取り出す
+Hanako は Taro に Game を渡す
+Taro は Game で遊ぶ
+
+結果:
+
+楽しい
+</pre>
+</div>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> フォルダ「CDIAG_3_1」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Taro.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Taro{
+
+    private Game game;
+
+    public Taro(){
+        Hanako hanako = new Hanako();
+        game = hanako.chumon();
+        game.asobu();
+    }
+}
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Hanako.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Hanako{
+
+    private Souko souko = new Souko();
+
+    public Game chumon(){
+        return souko.toridasu();
+    }
+}
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Souko.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Souko{
+
+    private Game game = new Game();
+
+    public Game toridasu(){
+        return game;
+    }
+}
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Game.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Game{
+
+    public void asobu(){
+        System.out.println( "楽しい" );
+    }
+}
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args) {
+		Taro taro = new Taro();
+	}
+}
+</pre>
+
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 実行します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 提出物はありません。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-2 (個人):</b> 「演習3-1」のクラス図を描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 任意のドローツールを起動します。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「演習3_1」のクラス図を描いてください。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「CDIAG_3_2」の名前で保存して下さい拡張子はドローツールによります)。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> チーム内で答え合わせをし、クラス図を画像ファイルとして保存してください。 
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「画像ファイル」を貼り付けて下さい。 
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 3-3 (個人):</b> 「演習3-1」のシーケンス図を描いてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 任意のドローツールを起動します。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「演習3_1」を実行した際のシーケンス図を描いてください。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「CDIAG_3_3」の名前で保存して下さい拡張子はドローツールによります)。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> チーム内で答え合わせをし、シーケンス図を画像ファイルとして保存してください。 
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「画像ファイル」を貼り付けて下さい。 
+</p>
+</div>
+
+<br>
+<script>PreNext(2,1)</script>
+</body>
+</html>
