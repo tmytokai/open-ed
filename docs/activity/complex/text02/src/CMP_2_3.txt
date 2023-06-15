@@ -13,3 +13,4 @@ z_w = None     # 角周波数
 ########### ここから↓は消さないで下さい
 cmp.init()
 cmp.plot_csin('z',z_a,z_phi,z_w)
+cmp.savefig("result.png")
