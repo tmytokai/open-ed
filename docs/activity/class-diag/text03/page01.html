@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>1. シーケンス図</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: クラス図とオブジェクト図</a></li>
+<li>学習項目: [3] シーケンス図</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+ここではシーケンス図について説明します。
+</p>
+
+<p>
+以下準備中
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 1 : Taro クラス </b>
+<pre class="wrap">
+public class Taro{
+
+    private SmartPhone sumaho;
+
+    public Taro(){
+        SmartPhone sumaho = new SmartPhone();
+        sumaho.ijiru();
+    }
+}
+</pre>
+</div>
+
+<br>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : SmartPhone クラス </b>
+<pre class="wrap">
+public class SmartPhone{
+
+    public void ijiru(){
+         System.out.println( "楽しい" );
+   }
+}
+</pre>
+</div>
+
+<br>
+
+<div class="info">
+<input type="checkbox"><b>ソース 3 : Main クラス </b>
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args) {
+		Taro taro = new Taro();
+	}
+}
+</pre>
+</div>
+
+
+<p>
+<input type="checkbox"><b>図1　シーケンス図の例</b>
+</p>
+<img src="./img/page01-fig1.png" alt="">
+
+<br>
+<script>PreNext(1,1)</script>
+</body>
+</html>
