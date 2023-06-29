@@ -20,11 +20,19 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-ここではシーケンス図について説明します。
+ここでは<a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3">シーケンス図</a>について説明します。
 </p>
 
 <p>
-以下準備中
+シーケンス図はオブジェクト(インスタンス)間の<a href="../../oop-basic/text01/page05.html">メッセージパッシング</a>(メソッド呼び出し)を時系列で表現する図です。
+<br>
+シーケンス図を描くと処理の流れが視覚的に分かりやすくなるので、バグの混入を防いだり、デバッグが楽になったりするというメリットがあります。
+</p>
+
+<p>
+では簡単な例を示しながらシーケンス図の描き方について説明します。
+<br>
+まず以下の「Taro」クラスと「SmartPhone」クラスが次のように定義されているとします。
 </p>
 
 <div class="info">
@@ -36,7 +44,8 @@ public class Taro{
 
     public Taro(){
         SmartPhone sumaho = new SmartPhone();
-        sumaho.ijiru();
+        System.out.println( "残量 = " + sumaho.get_battery() + "％" );
+        sumaho.poweroff();
     }
 }
 </pre>
@@ -49,14 +58,22 @@ public class Taro{
 <pre class="wrap">
 public class SmartPhone{
 
-    public void ijiru(){
-         System.out.println( "楽しい" );
-   }
+    private int battery = 0;
+
+    public int get_battery(){
+         return battery;
+    }
+
+    public void poweroff(){
+        System.out.println( "電源OFF" );
+    }
 }
 </pre>
 </div>
 
-<br>
+<p>
+このとき「Main」クラスで Taro クラスのインスタンス「taro」を作成します。
+</p>
 
 <div class="info">
 <input type="checkbox"><b>ソース 3 : Main クラス </b>
@@ -70,11 +87,77 @@ public class Main{
 </pre>
 </div>
 
+<p>
+すると taro はコンストラクタの中で SmartPhone クラスのインスタンス「sumaho」を作成して get_battery メソッドと poweroff メソッドを呼び出します。
+<br>
+実行結果は以下になります。
+</p>
 
+<div class="info">
+<input type="checkbox"><b>実行結果</b>
+<pre class="wrap">
+残量 = 0％
+電源OFF
+</pre>
+</div>
+
+<p>
+以上の処理の流れをシーケンス図で表したのが次の図1となります。
+</p>
+
+<div class="info">
 <p>
 <input type="checkbox"><b>図1　シーケンス図の例</b>
 </p>
 <img src="./img/page01-fig1.png" alt="">
+</div>
+
+<p>
+一番上にある四角とその下に付いている破線を「ライフライン」と呼び、あるクラスのオブジェクト(インスタンス)が存在する期間を表します(図2)。
+</p>
+
+<div class="info">
+<p>
+<input type="checkbox"><b>図2　ライフライン</b>
+</p>
+<img src="./img/page01-fig2.png" alt="">
+</div>
+
+<p>
+ライフラインの破線上にある小さい四角を「実行仕様」と呼び、オブジェクト(インスタンス)が実行されている期間を表します(図3)。
+</p>
+
+<div class="info">
+<p>
+<input type="checkbox"><b>図3　実行仕様</b>
+</p>
+<img src="./img/page01-fig3.png" alt="">
+</div>
+
+<p>
+あるオブジェクト(インスタンス)の実行仕様から他のオブジェクト(インスタンス)の実行仕様をつないでいる矢印を「メッセージ」と呼び、実線の矢印を「同期」(メソッド呼び出し)、破線の矢印を「応答」と呼びます(図4)。
+<br>
+またメッセージの上に書いてあるコメントを「メッセージ名」と呼びます。
+</p>
+
+<div class="info">
+<p>
+<input type="checkbox"><b>図4　同期と応答</b>
+</p>
+<img src="./img/page01-fig4.png" alt="">
+</div>
+
+<p>
+今回の例では get_battery メソッドを呼び出した時のメッセージ名にはメソッドの名前(get_battery)、その応答のメッセージ名にはフィールド名(battery)を書いていますが、メッセージ名の書き方に決まりは無いので言葉を使って書くこともあります。
+<br>
+また poweroff メソッドは void 型なので応答メッセージはありませんが、この場合は破線矢印の記述を省略する場合もあります。
+</p>
+
+<p>
+以上が基本的なシーケンス図の描き方の説明になりますが、条件分岐(alt)・ループ処理(Loop)などの制御処理もシーケンス図で表すことが出来ます。
+<br>
+制御処理については今回は触れませんので、興味があれば自分で調べてください。
+</p>
 
 <br>
 <script>PreNext(1,1)</script>
