@@ -82,3 +82,5 @@ cmp.plot_synth( 'f3', ((C3_a,C3_phi,3*w1),(C3_a,-C3_phi,-3*w1)), sec=8, imag=Fal
 cmp.plot_csin('z4',C4_a,C4_phi,4*w1,axno=10)
 cmp.plot_csin('z-4',C4_a,-C4_phi,-4*w1,axno=11)
 cmp.plot_synth( 'f4', ((C4_a,C4_phi,4*w1),(C4_a,-C4_phi,-4*w1)), sec=8, imag=False, axno=12)
+
+cmp.savefig("result.png")
