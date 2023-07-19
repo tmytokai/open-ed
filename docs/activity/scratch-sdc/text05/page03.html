@@ -38,8 +38,23 @@ background: #828282;
 <img src="./img/page03-fig1.png" alt="">
 
 <p>
-「信号の距離」は次のカーブまでの距離(メートル)が取得できます。なお信号機の真下にいる場合は 0 メートルになります。
+「信号の距離」は次のカーブまでの距離(メートル)が取得できます。
 </p>
+
+<div class="table">
+<table>
+<thead>
+<tr><th>「信号の距離」<br>の数値</th><th>内容</th></tr>
+</thead>
+<tbody>
+<tr><td class="w30">10000</td><td>しばらく信号が無い</td></tr>
+<tr><td class="w30">1〜9999</td><td>信号までの距離(メートル)</td></tr>
+<tr><td class="w30">0</td><td>信号の真下にいる</td></tr>
+</tbody>
+</table>
+</div>
+
+
 <p>
 「信号の状態」は青か黄色か赤かを次の数値で取得できます。
 </p>
@@ -70,12 +85,12 @@ background: #828282;
 </p>
 
 <p>
-この様に手元にある情報が増えてきた場合は<b>"ミニ・マックス思考"</b>というプログラミングテクニックと先ほどのミーシー思考を組み合わせて「もし〜なら」ブロックの条件を考えるのが常套(じょうとう)手段になります。
+この様に手元にある情報が増えてきた場合は<b>"ミニ・マックス思考"</b>というプログラミングテクニックと先ほどのミーシー思考を組み合わせて「もし〜なら」ブロックの条件を考えるのが常套手段になります。
 </p>
 
 <p>
 ミニ・マックス思考は
-<b>"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"</b>
+<b>"情報を分割し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用する"</b>
 という方法です。
 </p>
 
@@ -105,7 +120,6 @@ background: #828282;
 
 <p>
 すると表は次のようになります。
-なお「信号の距離」が20メートルより大きい時は"信号まで遠い"、20メートル以下で10メートルより大きい時は"信号に近い"、10メートル以下で0メートルより大きい時は"直前"、0メートルの時は"真下"ということにしました。
 </p>
 
 <div class="table">
@@ -115,19 +129,18 @@ background: #828282;
 </thead>
 <tbody>
 
-<tr> <td class="center" rowspan="3"> 20 より大<br>(遠い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
-
-<tr> <td class="center" rowspan="3"> 20以下、10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center" rowspan="3"> 10 より大<br>(遠い) </td> 
+     <td class="center">0 (青)</td> <td class="center">50</td> </tr>
 <tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
-<tr> </td> <td class="center">2 (赤)</td> <td class="center">30</td> </tr>
+<tr> <td class="center">2 (赤)</td> <td class="center">30</td> </tr>
 
-<tr> <td class="center" rowspan="3"> 10以下、0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
+<tr> <td class="center" rowspan="3"> 10以下、0より大<br>(直前) </td> 
+     <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">10</td> </tr>
 <tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
 
-<tr> <td class="center" rowspan="3">0<br>(真下) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center" rowspan="3">0<br>(真下) </td> 
+     <td class="center">0 (青)</td> <td class="center">50</td> </tr>
 <tr> <td class="center">1 (黄色)</td> <td class="center">50</td> </tr>
 <tr> <td class="center">2 (赤)</td> <td class="center">50</td> </tr>
 
@@ -146,33 +159,25 @@ background: #828282;
 <div class="table">
 <table>
 <thead>
-<tr> <th colspan="3">「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
+<tr> <th colspan="2">「信号の距離」</th> <th>「信号の状態」</th> <th>「仮のスピード」</th> </tr>
 </thead>
 <tbody>
-<tr> <td class="center" colspan="3"> 20 より大<br>(遠い) </td> <td class="center">情報を使わない</td> <td class="center">50</td> </tr>
 
-<tr> <td class="UL">　</td> <td class="UDR" colspan="4">でなければ</td> </tr>
-
-<tr> <td class="U" rowspan="7">　</td> <td class="center" colspan="2" rowspan="2"> 10より大<br>(近い) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<td class="center" colspan="2" rowspan="2"> 10より大<br>(近い) </td> 
+     <td class="center">0 (青)</td> <td class="center">50</td> </tr>
 <tr> <td class="center">でなければ<br>(青以外)</td> <td class="center">30</td> </tr>
 
 <tr> <td class="UL">　</td> <td class="UDR" colspan="3">でなければ</td> </tr>
 
-<tr>  <td class="U" rowspan="4">　</td> <td class="center" rowspan="3"> 0より大<br>(直前) </td> <td class="center">0 (青)</td> <td class="center">50</td> </tr>
-<tr> <td class="center">1 (黄色)</td> <td class="center">30</td> </tr>
+<tr>  <td class="U" rowspan="4">　</td> <td class="center" rowspan="3"> 0より大<br>(直前) </td> 
+     <td class="center">0 (青)</td> <td class="center">50</td> </tr>
+<tr> <td class="center">1 (黄色)</td> <td class="center">10</td> </tr>
 <tr> <td class="center">2 (赤)</td> <td class="center">0</td> </tr>
 
 <tr> <td class="center">でなければ<br>(真下)</td> <td class="center">情報をつかわない</td> <td class="center">50</td> </tr>
 </tbody>
 </table>
 </div>
-
-
-<p><br></p>
-<div class="challenge"><p>チャレンジ</p></div>
-<p>
-なぜこの表になるのか考えてみましょう。
-</p>
 
 
 <p><br></p>
@@ -184,6 +189,11 @@ background: #828282;
 <p>
 これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
 </p>
+
+<p>
+※ 走行画面は動作が重いので、プログラミングはストップボタンを押してからタイトル画面でしてください。
+</p>
+
 
 <p>
 まず「信号を守る」というオリジナルブロックを作ります。
@@ -205,7 +215,7 @@ background: #828282;
 <img src="./img/page03-fig4.png" alt="">
 
 <p>
-ここが"情報を分割(ぶんかつ)し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用(さいよう)する"というミニ・マックス思考の部分で、前のページで求めたカーブの時のスピードと、今回求めた信号の時のスピードのうちで事故るリスクが低い、つまりスピードが低い方を「目標のスピード」にセットしています。
+ここが"情報を分割し、違う条件のもとでリスクが高い値をいくつか求めて、その中から一番リスクが低い値を採用する"というミニ・マックス思考の部分で、前のページで求めたカーブの時のスピードと、今回求めた信号の時のスピードのうちで事故るリスクが低い、つまりスピードが低い方を「目標のスピード」にセットしています。
 </p>
 
 <p>
@@ -231,19 +241,6 @@ background: #828282;
 
 <p>
 正しく動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい。
-</p>
-
-<p>
-※ 走行画面は動作が重いのでプログラミングはタイトル画面でした方が良いです。
-</p>
-
-<p><br></p>
-<div class="challenge"><p>チャレンジ</p></div>
-<p>
-マップの右端に長い直線道路があります。「走行ルートを決める」ブロックの中身をこのルートを通ってゴールに到着するように変更してみましょう。
-</p>
-<p>
-次にこの直線道路を高速道路とみなし、「カーブで道からはみ出さないようにする」ブロックと「信号を守る」ブロックの中身も変更して、信号がしばらく先まで無い場合はスピードを100まで上げるようなプログラムを作ってみましょう。
 </p>
 
 

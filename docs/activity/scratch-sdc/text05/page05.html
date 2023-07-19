@@ -34,7 +34,7 @@ background: #828282;
 </p>
 
 <p>
-ただ、今の走行ルートは左まわりになっていますので、次のように「走行ルートを決める」ブロックの中身を置き換えて右まわりのルートになるようにして下さい。
+ただ、今の走行ルートは半時計回りになっていますので、次のように「走行ルートを決める」ブロックの中身を置き換えて時計回りのルートに変更して下さい。
 </p>
 <img src="./img/page05-fig1.png" alt="">
 
@@ -79,9 +79,16 @@ background: #828282;
 <tr> <th>「ナビの方向」</th><th>「ナビの距離」</th> <th>「前方-右センサー」</th> <th>「仮のスピード」</th> </tr>
 </thead>
 <tbody>
-<tr><td class="center" rowspan="3">2(右折)</td><td class="center" rowspan="3">30未満</td> <td class="center"> 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td class="center" rowspan="3">2(右折)</td>
+     <td class="center" rowspan="3">30未満</td> 
+     <td class="center"> 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
 <tr> <td class="center"> 30以下、20より大<br>(近い) </td> <td class="center">20</td> </tr>
 <tr> <td class="center"> 20以下<br>(目の前) </td> <td class="center">0</td> </tr>
+
+<tr> <td class="center" colspan="2">それ以外
+     <td class="center">情報を使わない</td> <td class="center">50</td> </tr>
+
+
 </tbody>
 </table>
 </div>
@@ -93,22 +100,23 @@ background: #828282;
 
 <div class="table">
 <table>
+<thead>
+<tr> <th colspan="2">「ナビの方向」</th><th>「ナビの距離」</th> <th colspan="2">「前方-右センサー」</th> <th>「仮のスピード」</th> </tr>
+</thead>
 <tbody>
-<tr> <td class="UL">　</td> <td class="UDR"  colspan="4"> もし「ナビの方向」が2<br>かつ「ナビの距離」が30未満ならば </td> </tr>
-<tr> <td class="U" rowspan="5">　</td> <td class="center" colspan="2">「前方-右センサー」</td> <td class="center">「仮のスピード」</td> </tr>
-<tr> <td class="center" colspan="2" > 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
+<tr> <td class="center" colspan ="2" rowspan="4">2(右折)</td>
+     <td class="center" rowspan="4">30未満</td> 
+     <td class="center" colspan="2" > 30 より大<br>(遠い) </td> <td class="center">50</td> </tr>
 <tr> <td class="UL">　</td> <td class="UDR"  colspan="3">でなければ</td> </tr>
 <tr> <td class="U" rowspan="2">　</td>  <td class="center"> 20より大<br>(近い) </td> <td class="center">20</td> </tr>
 <tr> <td class="center"> でなければ<br>(目の前) </td> <td class="center">0</td> </tr>
+
+<tr> <td class="center" colspan="3">でなければ</td> <td class="center" colspan="2">情報をつかわない</td>  <td class="center">50</td> </tr>
+
+
 </tbody>
 </table>
 </div>
-
-<p><br></p>
-<div class="challenge"><p>チャレンジ</p></div>
-<p>
-なぜこの表になるのか考えてみましょう。
-</p>
 
 
 <p><br></p>
@@ -119,6 +127,10 @@ background: #828282;
 
 <p>
 これで「もし〜なら」ブロックの条件が分かりましたので早速プログラミングしてみましょう。
+</p>
+
+<p>
+※ 走行画面は動作が重いので、プログラミングはストップボタンを押してからタイトル画面でしてください。
 </p>
 
 <p>
@@ -152,23 +164,6 @@ background: #828282;
 <p>
 では「緑の旗」ボタンを押してテストしてみましょう。
 正しく動いたら「ストップ」ボタンを押してタイトル画面に戻って下さい。
-</p>
-
-<p>
-※ 走行画面は動作が重いのでプログラミングはタイトル画面でした方が良いです。
-</p>
-
-<p>
-もし他の車にぶつかったり、赤信号にひっかかったりしてゲームオーバーになる場合はセンサーなどの数値を調整してください。
-この調整作業は本物の自動運転車を作る場合でもとても大事な作業になりますので、世界中のいろんな所で本物の自動運転車を走らせてテストをしている訳ですね。
-</p>
-
-<p><br></p>
-<div class="challenge"><p>チャレンジ</p></div>
-<p>
-「前方-左センサー」と「前方-右センサー」は車の前方しかみないので、渋滞などでカーブした先に車が停まっていると衝突するときがあります。
-カーブの先にいる車を見つけるためには「左センサー」と「右センサー」も使う必要があります。
-「左センサー」と「右センサー」も使ってカーブの先で停車している車にぶつからないようにしてみましょう。
 </p>
 
 </div>
