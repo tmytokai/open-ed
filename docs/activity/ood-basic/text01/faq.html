@@ -144,16 +144,42 @@ Q. 画像の大きさを変更したい
 </h3>
 
 <p>
-A. 一回だけで良いなら getImage().scale メソッドで幅と高さを変更できます
+A. 親クラスが World クラスか Actor クラスかでやり方が変わります。
+</p>
+
+<p>
+親クラスが World クラスで、背景画像の大きさを変えたい場合はコンストラクタの中で getBackground().scale メソッドで幅と高さを変更できます。
+<br>
+例えば次のようにします。
+</p>
 
 <div class="info">
 <pre class="wrap">
-getImage().scale( 120, 30 );
+getBackground().scale( 100, 100 );
+</pre>
+</div>
+
+
+<p>
+親クラスが Actor クラスで、自画像の大きさを変えたい場合はコンストラクタの中で getImage().scale メソッドで幅と高さを変更できます。
+<br>
+ただしデフォルトではコンストラクタが無いので追加します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+
+この例ではクラス名を hoge としているので適宜変更する
+
+public hoge()
+{
+    getImage().scale( 100, 100 );
+}
 </pre>
 </div>
 
 <p>
-ただし、次の様に act メソッドの中で繰り返し getImage().scale を呼び出すと画像が崩れて変になります。
+ただし act メソッドの中で繰り返し大きさを変更したい場合、次の様に getImage().scale を繰り返し呼び出すと画像が崩れて変になります。
 </p>
 
 <div class="info">
@@ -205,6 +231,7 @@ public class hoge extends Actor
     public void act() 
     {
         GreenfootImage img = new GreenfootImage(img_bkup);
+        // (注意) scale で画像サイズを変更してから setImage すること
         img.scale( width++,height++ );
         setImage(img);
     }
@@ -213,7 +240,7 @@ public class hoge extends Actor
 </div>
 
 <p>
-なお次の様に setImage メソッドを呼んでから getImage().scale を呼ぶと当たり判定が変になるので気をつけて下さい → <a href="https://www.greenfoot.org/topics/56022/0">理由</a>
+なお次の様に setImage メソッドで画像をセットしてから scale で大きさを変更すると当たり判定が変になるので気をつけて下さい → <a href="https://www.greenfoot.org/topics/56022/0">理由</a>
 </p>
 
 <div class="info">
@@ -236,6 +263,7 @@ public class hoge extends Actor
     public void act() 
     {
         GreenfootImage img = new GreenfootImage(img_bkup);
+        // (注意) setImage してから scale で画像サイズを変更すると当たり判定が変になる
         setImage(img);
         getImage().scale( width++,height++ );
     }
