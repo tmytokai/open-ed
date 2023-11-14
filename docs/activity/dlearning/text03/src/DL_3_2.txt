@@ -1,6 +1,8 @@
-import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+# matplotlib は tensorslow の前でimportすること
+# ※ バージョンによっては後でインスールするとエラー出る
+import tensorflow as tf
 
 np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
