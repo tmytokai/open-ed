@@ -1,0 +1,32 @@
+\noindent \textbf{【出題意図】}
+
+\bigskip
+\noindent 元のアナログサイン波の角周波数と時間領域ディジタルサイン波の周期からサンプリング周波数を求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\bigskip
+\noindent 周期 $\textrm{T}_d$ が大きいとグラフは横方向で伸び、小さいと横方向で縮む
+
+\bigskip
+\noindent 本来は時間領域ディジタルサイン波に「角周波数」「周波数」は無いが、サンプリング周波数 $f_s$ [Hz] が与えられている場合は以下のように無理矢理定義できる
+
+\bigskip
+\noindent 秒に換算した周期 ・・・ $\textrm{T} = \textrm{T}_d \cdot \tau$ [秒]
+
+\bigskip
+\noindent 時間領域ディジタルサイン波の周波数・・・ $f = \frac{1}{\textrm{T}_d\cdot\tau} = \frac{f_s}{\textrm{T}_d}$ [Hz]
+
+\bigskip
+\noindent 時間領域ディジタルサイン波の角周波数 ・・・ $w = 2\pi \cdot f = 2 \pi \cdot \frac{f_s}{\textrm{T}_d}$ [rad/秒]
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\bigskip
+\noindent 重要事項の $f_s = \frac{w}{2\pi}\cdot \textrm{T}_d = \frac{3\pi}{2\pi}\cdot 8 = 12$ [Hz] より求まる。
