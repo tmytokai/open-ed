@@ -99,7 +99,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 標本自己相関関数 R[0] 〜 R[L] を計算する
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> 変数 e に R[0] を代入 ※ e はホワイトノイズの分散の推定値
+<span class="olradio"><input type="radio" name="LD"></span> 変数 E に R[0] を代入 ※ E はホワイトノイズの分散の推定値
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> 変数 W に R[1] を代入
 <br>
@@ -107,7 +107,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> hat_a[1] 〜 hat_a[n]　の値を tmp_a[1] 〜 tmp_a[n] にバックアップ
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> 変数 P[n] (PARCOR 係数)に W/e を代入
+<span class="olradio"><input type="radio" name="LD"></span> 変数 P[n] (PARCOR 係数)に W/E を代入
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> hat_a[n] に -P[n] を代入
 <br>
@@ -117,7 +117,7 @@ $R[n]$ ・・・ 実現値 $x[i]$ から求めた<a href="../../acr/">標本自�
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> i のループを抜ける
 <br>
-<span class="olradio"><input type="radio" name="LD"></span> e = e * ( 1 - P[n]*P[n] ) と更新
+<span class="olradio"><input type="radio" name="LD"></span> E = E * ( 1 - P[n]*P[n] ) と更新
 <br>
 <span class="olradio"><input type="radio" name="LD"></span> n+1 &lt;= L なら W = R[n+1] + $\sum_{i=1}^{n}$ { hat_a[i] * R[n+1-i] } と更新
 <br>

@@ -2,40 +2,30 @@ import numpy as np
 import math
 import csv
 
-L = 4 # 次数
-N = 50000 # 信号長
-a = np.zeros(L+1) # LPC 係数
-z = np.zeros(L+1) # IIRフィルタの遅延素子(＝バッファ)
-x = np.zeros(N) # 信号値
-hat_a = np.zeros(L+1) # LPC 係数の推定値
-e = 0 # ホワイトノイズの分散の推定値
-
 # 自己相関関数 R[n] を求める関数
 # 自己相関関数の演習で作成した ACR 関数の中身をコピーする
 def ACR( n, f, N ):
-    ?
+?
+
 
 # 自己回帰モデル
 # 演習 1-1 からコピー
-def AR():
-    ?
+def AR(a,e):
+?
+
 
 # レビンソン・ダービン(Levinson-Durbin)・アルゴリズム
-def Levinson():
-    global hat_a
-    global e
+def Levinson(x,L):
     
-    R = np.zeros(L+1) # 自己相関関数
-    P = np.zeros(L+1) # PARCOR 係数
+    N = x.size
     
-    # hat_a を 0 クリア
-    hat_a = np.zeros(L+1)
-    
-    # 標本自己相関関数を計算
-    for n in range(L+1):
-        R[n] = ACR( n, x, N )
-   
-    e = ?
+    E = 0 # ホワイトノイズの分散の推定値
+    P = np.zeros(L+1) # PARCOR 係数   
+
+    hat_a = np.zeros(L+1) # LPC 係数の推定値をゼロクリアする
+    R = [ACR(n,x,N) for n in range(L+1)] # 標本自己相関関数 R[n] を求める
+
+    E = ?
     W = ?
     for n in range(1,L+1):
         tmp_a = hat_a.copy()
@@ -43,22 +33,30 @@ def Levinson():
         hat_a[n] = ?
         for i in range(1,n):
             hat_a[i] = ?
-        e = ?
+        E = ?
         if n+1 <= L:
             W = ?
             for i in range(1,n+1):
                 W += ?
+
+    return hat_a,E
+
+L = 4 # 次数
+N = 50000 # 信号長
+a = np.zeros(L+1) # LPC 係数
+e = np.array([ np.random.normal(0,1) for i in range(N)]) # 入力は正規乱数 N(0,1)
 
 # 真の LPC 係数を入力
 # 演習 1-1 からコピー
 ?
 
 # 自己回帰モデルにより信号値をセット
-AR()
+x = AR(a,e)
 
-# レビンソン・ダービン(Levinson-Durbin)・アルゴリズムにより LPC 係数の推定値を求める
-Levinson()
+# レビンソン・ダービン(Levinson-Durbin)・アルゴリズムにより
+# LPC 係数の推定値 hat_a と分散の推定値 E を求める
+hat_a,E = Levinson(x,L)
 
 for i in range(1,L+1):
     print( f'a[{i}]={a[i]:5.02f},  hat_a[{i}]={hat_a[i]:5.02f}')
-print(f'分散の推定値 = {e:.02f}')
+print(f'分散の推定値 = {E:.02f}')

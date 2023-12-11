@@ -1,254 +1,116 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+import numpy as np
+import matplotlib.pyplot as plt
+import wave
+import math
 
-// 出力する声の高さ [Hz]
-// 自分の声の特性にあわせて適宜調整する
-const int VOICEFREQ = ?;
+pltimg=True
 
-// 正規乱数 N( mu, sigma^2)の出力
-// mu : 平均
-// sigma2 : 分散
-double nrand( double mu, double sigma2 )
-{
-    // Box-Muller 法を使用
-    double sigma = sqrt(sigma2);
-    double x = sqrt( -2*log( (double)rand()/RAND_MAX ) ) * cos( 2*M_PI*rand()/RAND_MAX ) ;
-    return mu + sigma*x;
-}
+# 出力する声の高さ [Hz]
+# 自分の声の特性にあわせて適宜調整する(100〜400程度)
+VOICEFREQ = ?
 
-// 自己回帰モデル
-void AR( double *x, // 出力信号列 x[i]
-         const double *e, // 入力信号列 e[i]
-         const double *a, // LPC 係数
-         const int L, // 次数
-         const int N  // 信号長
-){
-    // 演習1-1の内容をコピーする
-    ?
-}
+# 自己相関関数 R[n] を求める関数
+# 自己相関関数の演習で作成した ACR 関数の中身をコピーする
+def ACR( n, f, N ):
+?
 
-// 自己相関 R[n]
-double ACR( const int n, const double* f, const int N )
-{
-    // 自己相関の演習で作成した ACR 関数の中身をコピーする
-    ?
-}
+# 自己回帰モデル
+# 演習 1-1 からコピー
+def AR(a,e):
+?
 
-// レビンソン・ダービン(Levinson-Durbin)・アルゴリズム
-// x[i] を入力して hat_a[L] を計算する
-void Levinson( double *x, double *hat_a, const int N, const int L )
-{
-    // 演習1-4の内容をコピーする
-    ?
-}
+# レビンソン・ダービン(Levinson-Durbin)・アルゴリズム
+# 演習 1-4 からコピー
+def Levinson(x,L):
+?
 
-const int L = 120; // 次数
-const double VOICELNG = 1.5; // 声の長さ(秒)
-const double RMS = 3500; // 出力全体の音量(RMS)
-const double STARTPOS = 1.0;  // wave ファイルの読み込み開始位置 (秒)
-const double DURATION = 0.5;  // wave ファイルの読み込みサイズ (秒)
-const double PULSEAMP = 500.0; // パルス信号の大きさ
-const double PULSEWIDTH = 100.0; // ハルス信号の幅
-const double SIGMA2 = (PULSEAMP*PULSEAMP)/10.0; // 正規乱数の分散
 
-struct VOICE
-{
-    char file[64];
-    short *buf;
-    double *x;
-    double *hat_a;
-};
+# Waveファイル読み込み関数
+def read_wavedata(name):
+    print('read: '+name)
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
 
-// 標準 WAVE ヘッダ ( 44 byte )
-struct WAVEFORMAT
-{
-    char riff[ 4 ];             // = "RIFF"
-    unsigned int total_size;    // 全体サイズ
-    char fmt[ 8 ];              // "WAVEfmt "
-    unsigned int fmt_size;      // fmt チャンクサイズ
-    unsigned short  format;     // フォーマットの種類
-    unsigned short  channel;    // チャンネル
-    unsigned int   rate;        // サンプリングレート
-    unsigned int   avgbyte;     // rate * block
-    unsigned short  block;      // channels * bit / 8
-    unsigned short  bit;        // ビット数
-    char data[ 4 ];             // = "data"
-    unsigned int data_size;     // data チャンクサイズ
-};
+# Waveファイル書き込み関数
+def write_wavedata(name,rate,data):
+    print('write: '+name)
+    with wave.open( name, 'wb') as waveout:
+        rawdata=np.array(data,dtype='int16').tobytes()
+        waveout.setparams((1, 2, rate, len(rawdata), 'NONE', 'NONE'))
+        waveout.writeframes(rawdata)
 
-short* read_wav( const char* file, WAVEFORMAT *wavefmt )
-{
-    FILE * fin = fopen( file, "rb" );
-    if( !fin ){
-        fprintf( stderr, "ファイルオープンに失敗しました\n" );
-        exit(EXIT_FAILURE);
-    }
+# 音量ノーマライズ関数
+def normalize_wave(rms,data):
+    r = 0;
+    for i in range(data.size):
+        r += data[i]**2
+    r = math.sqrt(r/data.size)
+    gain = rms/r
+    print(f'RMS = {r:.02f}, gain = {gain:.02f}')
+    for i in range(data.size):
+        data[i] *= gain
 
-    // フォーマット取得
-    size_t ret = fread( wavefmt, 1, sizeof( WAVEFORMAT ) - 8, fin );
+# スペクトログラム描画関数
+def plot_spectrogram(data,file):
+    cmap = plt.get_cmap('magma')
+    plt.specgram(data/32768,Fs=fs,NFFT=512,scale='dB',mode='magnitude',vmax=0,vmin=-120,cmap=cmap)
+    plt.colorbar()
+    plt.xlabel('sec')
+    plt.ylabel('Hz')
+    if pltimg == True:
+        plt.show()
+    else:
+        plt.savefig(file)
 
-    if( ret != sizeof( WAVEFORMAT ) -8 ){
-       fprintf( stderr, "ヘッダが壊れています\n" );
-       exit(EXIT_FAILURE);
-    }
-    if( wavefmt->riff[ 0 ] != 'R' || wavefmt->riff[ 1 ] != 'I' ){
-        fprintf( stderr, "Wave ファイルではありません\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt->channel != 1 ){
-        fprintf( stderr, "ステレオ音声は使用できません\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt->rate < 11025*2 ){
-        fprintf( stderr, "サンプリング周波数が低いです\n" );
-        exit(EXIT_FAILURE);
-    }
-    if( wavefmt->bit != 16 ){
-        fprintf( stderr, "8bit音声は使用できません\n" );
-        exit(EXIT_FAILURE);
-    }
+L = 120 # 次数
+VOICELNG = 1.5 # 声ひとつ分の長さ(秒)
+RMS = 3500 # 出力音声の音量(RMS)
+STARTPOS = 1.0 # wave ファイルの読み込み開始位置 (秒)
+DURATION = 0.5 # wave ファイルの読み込みサイズ (秒)
+AMP = 500.0 # 三角波の大きさ
+SIGMA = AMP/4.0  # ノイズの標準偏差
 
-    // data までスキップ
-    size_t pos = sizeof( WAVEFORMAT ) - 8;
-    while( pos < 200 && ( wavefmt->data[0] != 'd' || wavefmt->data[1] != 'a' ) ){
-        fseek( fin, pos++, SEEK_SET );
-        ret = fread( wavefmt->data, 1, 4, fin );
-    }
+files = ['a','i','u','e','o']
+fs = 0
+hat_as = []
 
-    if( wavefmt->data[ 0 ] != 'd' || wavefmt->data[ 1 ] != 'a' ){
-        fprintf( stderr, "データがありません\n" );
-        exit(EXIT_FAILURE);
-    }
+# 各音声の LPC 係数を推定
+for file in files:
+    voice,fs,N = read_wavedata(file+'.wav')
+    duration = N/fs
+    print(f'duration={duration:.02f} sec')
+    if (duration < STARTPOS + DURATION ):
+        raise Exception('録音時間が短いです')
+    voice = voice[int(STARTPOS*fs):int((STARTPOS+DURATION)*fs)].astype(np.float64)
+    hat_a,E = Levinson(voice,L)
+    hat_as.append(hat_a)
+    
+# 入力パルス音 e[i] (周期 T [点] の三角波) の作成
+e = np.zeros(int(VOICELNG*fs))
+T = int( float(fs)/VOICEFREQ )  # 周期
+for i in range(e.size):
+    e[i] = -AMP/2 + AMP/T*(i%T) + np.random.normal(0,SIGMA)
 
-    // データサイズを取得
-    ret = fread( &wavefmt->data_size, 1, sizeof( unsigned int ), fin );
+# e[i] を自己回帰モデルに入力してxを出力
+x = []
+for hat_a in hat_as:
+    tmpx = AR(hat_a,e)
+    normalize_wave(RMS,tmpx)
+    x = np.r_[x,tmpx]
 
-    const double duration = (double)wavefmt->data_size / wavefmt->avgbyte;
-    if( duration < STARTPOS + DURATION ){
-        fprintf( stderr, "録音時間が短いです\n" );
-        exit(EXIT_FAILURE);
-    }
+normalize_wave(RMS,e)
 
-    // フォーマット再設定
-    wavefmt->fmt_size = 16;
-    wavefmt->data_size = (unsigned int)( DURATION * wavefmt->avgbyte );
-    wavefmt->total_size = sizeof( WAVEFORMAT ) + wavefmt->data_size - 8;
+write_wavedata('AR_1_6_e.wav',fs,e)
+write_wavedata('AR_1_6_x.wav',fs,x)
 
-    // STARTPOS 秒から DURATION 秒間のデータ読み込み
-    short* buf = ( short* )calloc( 1, wavefmt->data_size );
-    fseek( fin, (unsigned int)(STARTPOS * wavefmt->avgbyte), SEEK_CUR );
-    ret = fread( buf, 1, wavefmt->data_size, fin );
-    if( ret != wavefmt->data_size ){
-       fprintf( stderr, "データの読み込みに失敗しました\n" );
-       exit(EXIT_FAILURE);
-    }
+print('')
+print('入力')
+plot_spectrogram(e,'AR_1_6_e.png')
 
-    fclose( fin );
-
-    return buf;
-}
-
-void save_wav( const char* file, const WAVEFORMAT* wavefmt, const short* buf )
-{
-    FILE* fout = fopen( file, "wb" );
-    if( !fout ){
-        fprintf( stderr, "%s のオープンに失敗しました\n", file );
-        exit(EXIT_FAILURE);
-    }
-    fwrite( wavefmt, 1, sizeof( WAVEFORMAT ), fout );
-    fwrite( buf, 1, wavefmt->data_size , fout );
-    fclose( fout );
-    fprintf( stderr, "save to %s\n", file);
-}
-
-int main()
-{
-    // テンプレート音声読み込み
-    VOICE voice[] ={
-        { "a.wav", NULL, NULL, NULL },
-        { "i.wav", NULL, NULL, NULL },
-        { "u.wav", NULL, NULL, NULL },
-        { "e.wav", NULL, NULL, NULL },
-        { "o.wav", NULL, NULL, NULL },
-    };
-    const unsigned int voice_size = sizeof(voice)/sizeof(VOICE);
-
-    WAVEFORMAT wavefmt;
-    for( int i = 0; i < voice_size; ++i ){
-        voice[i].buf = read_wav( voice[i].file, &wavefmt );
-    }
-
-    fprintf( stderr,"次数 L = %d\n", L);
-
-    const int f_s = wavefmt.rate;
-    fprintf( stderr,"サンプリング周波数 %d [Hz]\n", wavefmt.rate );
-
-    const int N = wavefmt.data_size / wavefmt.block;
-    fprintf( stderr,"信号長 N = %d\n", N);
-
-    for( int i = 0; i < voice_size; ++i ){
-        voice[i].x = (double*)calloc( 1, N*sizeof(double) );
-        voice[i].hat_a = (double*)calloc( 1, (L+1)*sizeof(double) );
-        for( int i2 = 0; i2 < N; ++i2 ) voice[i].x[i2] = (double)voice[i].buf[i2];
-    }
-
-    // 各音声の LPC 係数を推定
-    for( int i = 0; i < voice_size; ++i ){
-        Levinson( voice[i].x, voice[i].hat_a, N, L );
-    }
-
-    WAVEFORMAT wavefmt2 = wavefmt;
-    const int duration = (int)(f_s*VOICELNG);
-    wavefmt2.data_size = (unsigned int)( voice_size * duration * wavefmt2.block );
-    wavefmt2.total_size = sizeof( WAVEFORMAT ) + wavefmt2.data_size - 8;
-    const int N_out = wavefmt2.data_size / wavefmt2.block;
-    double* e = ( double* )calloc( 1, (N_out+L) * sizeof(double) );
-    e = e+L;
-    double* x = ( double* )calloc( 1, (N_out+L) * sizeof(double) );
-    x = x+L;
-    short* buf = ( short* )calloc( 1, wavefmt2.data_size );
-
-    // 入力 e[i] の作成
-    // 周期 T [点] のパルス(三角波)とする
-    const int T = (int)( f_s/ VOICEFREQ ); // 周期
-    fprintf( stderr, "声の周波数 %d [Hz] -> 周期 T = %d [点]\n", VOICEFREQ, T );
-    for( int i = 0; i< N_out; i+=T ){
-        for( int i2 = 0 ; i2 < PULSEWIDTH; ++i2 ){
-            if( i+i2 < N_out ){
-                e[i+i2] = (double)PULSEAMP*i2/PULSEWIDTH-PULSEAMP/2;
-            }
-        }
-    }
-
-    // ノイズ付加
-    for( int i = 0; i < N_out; ++i ){
-        e[i] += nrand(0,SIGMA2);
-    }
-
-    // e[i] を自己回帰モデルに入力
-    for( int i = 0; i < voice_size; ++i ){
-        AR( x+duration*i, e+duration*i, voice[i].hat_a, L, duration );
-    }
-
-    // 音量ノーマライズ
-    for( int i = 0; i < voice_size; ++i ){
-        double rms = 0;
-        for( int i2 = 0; i2 < duration; ++i2 ) rms += x[duration*i+i2] * x[duration*i+i2];
-        rms = sqrt( rms/N );
-        double gain = RMS/rms;
-        fprintf( stderr,"RMS[%d] = %lf, gain = %lf\n", i, rms, gain);
-        for( int i2 = 0; i2 < duration; ++i2 ) x[duration*i+i2] *= gain;
-    }
-
-    for( int i = 0; i < N_out; ++i ) buf[i] = (short)x[i];
-    save_wav( "AR_1_6_x.wav", &wavefmt2, buf );
-
-    for( int i = 0; i < N_out; ++i ) buf[i] = (short)e[i];
-    save_wav( "AR_1_6_e.wav", &wavefmt2, buf );
-
-    // free は省略
-
-    return 0;
-}
+print('')
+print('出力')
+plot_spectrogram(x,'AR_1_6_x.png')

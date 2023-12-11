@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import wave
+
+pltimg=True
+
+# Waveファイル読み込み関数
+def read_wavedata(name):
+    print('read: '+name)
+    with wave.open(name,'r') as wavein:
+        print(wavein.getparams())
+        rate = wavein.getframerate()
+        nframes = wavein.getnframes()
+        data = wavein.readframes(wavein.getnframes())
+    return np.frombuffer(data, dtype=np.int16),rate,nframes
+    
+# スペクトログラム描画関数
+def plot_spectrogram(data,file):
+    cmap = plt.get_cmap('magma')
+    plt.specgram(data/32768,Fs=fs,NFFT=512,scale='dB',mode='magnitude',vmax=0,vmin=-120,cmap=cmap)
+    plt.colorbar()
+    plt.xlabel('sec')
+    plt.ylabel('Hz')
+    if pltimg == True:
+        plt.show()
+    else:
+        plt.savefig(file)
+
+files = ['a','i','u','e','o']
+
+for file in files:
+    x,fs,N = read_wavedata(file+'.wav')
+    plot_spectrogram(x,file+'.png')
