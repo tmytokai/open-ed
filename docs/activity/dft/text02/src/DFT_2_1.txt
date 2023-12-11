@@ -23,12 +23,12 @@ def read_wavedata(name):
         data = wavein.readframes(wavein.getnframes())
     return np.frombuffer(data, dtype=np.int16),rate,nframes
 
-x,fs,frames = read_wavedata('DFT_3_1.wav')
+x,fs,frames = read_wavedata('DFT_2_1.wav')
 
 print('')
 print(f'サンプリング周波数 fs = {fs} Hz' )
 
-# DFT_3_1.wav の start_sec 秒時点から dulation 秒間だけ音声信号を切り出してディジタル信号 f[i] を作成する
+# DFT_2_1.wav の start_sec 秒時点から dulation 秒間だけ音声信号を切り出してディジタル信号 f[i] を作成する
 # 上手くグラフが表示されない時は適宜 start_sec を調整する
 start_sec = 0.5
 dulation = 0.05
