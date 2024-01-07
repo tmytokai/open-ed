@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# matplotlib は tensorslow の前でimportすること
+# ※ バージョンによっては後でインスールするとエラー出る
 import tensorflow as tf
 
 '''
@@ -10,9 +14,6 @@ config.log_device_placement = True
 sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 pltimg=True
 

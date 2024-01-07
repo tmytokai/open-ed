@@ -29,21 +29,9 @@ Keras を使えば LSTM は簡単に構築できます。
 <input type="checkbox"><b>ソース 1: Keras で (3層)LSTM を構築する例</b>
 
 <pre class="wrap">
-import tensorflow as tf
-
-'''
-# CUDA を有効にしている時に「UnknownError: Fail to find the dnn implementation」というエラーが
-# 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
-from tensorflow.compat.v1.keras.backend import set_session
-config = tf.compat.v1.ConfigProto()
-config.gpu_options.allow_growth = True
-config.log_device_placement = True
-sess = tf.compat.v1.Session(config=config)
-set_session(sess)
-'''
-
 import numpy as np
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 # パーセプトロン/LSTMブロックの数
 N = 3   # 入力層 = 入力信号の個数

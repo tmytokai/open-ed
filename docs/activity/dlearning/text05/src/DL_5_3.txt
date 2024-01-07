@@ -1,5 +1,6 @@
+import numpy as np
+import wave
 import tensorflow as tf
-
 '''
 # CUDA を有効にしている時に「UnknownError: Fail to find the dnn implementation」というエラーが
 # 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
@@ -10,10 +11,6 @@ config.log_device_placement = True
 sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
-
-import numpy as np
-import wave
-
 
 # パーセプトロン/LSTMブロックの数
 N = ?    # 入力層
