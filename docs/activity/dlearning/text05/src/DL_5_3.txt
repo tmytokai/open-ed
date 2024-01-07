@@ -11,11 +11,7 @@ sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
 
-# (注) numpy 1.20 以降を使うとエラーが出るようです(2022年1月時点)
-# エラーが出る場合は 1.19 にダウングレードしてください
-# (anacondaを使っている場合) conda install numpy=1.19
 import numpy as np
-
 import wave
 
 
@@ -45,9 +41,9 @@ def read_wavedata(name):
 
 # Waveファイルを読み込んで学習データセットを作成
 classnames=['a','i','u','e','o']
-wavedata_training=[]
+wavedata_training=np.array([])
 classno_training=[]
-wavedata_test=[]
+wavedata_test=np.array([])
 classno_test=[]
 for i in range(len(classnames)):
     x,rate,frames = read_wavedata(classnames[i]+'.wav') 
@@ -55,13 +51,19 @@ for i in range(len(classnames)):
     for j in range(100):       
         start_pos = int( (500+5*j)*rate/1000 )
         end_pos = start_pos + int( 10*rate/1000)
-        wavedata_training.append(x[start_pos:end_pos] )
+        if i == 0 and j == 0:
+            wavedata_training = np.array( x[start_pos:end_pos] ).reshape(1,end_pos-start_pos,1)
+        else:
+            wavedata_training = np.append( wavedata_training, x[start_pos:end_pos].reshape(1,end_pos-start_pos,1), axis = 0)
         classno_training.append(i)
     # 502.5 msec 時点から 5 msec おきに 10 msec だけ信号を20個取り出してテストデータとする
     for j in range(20):
         start_pos = int( (502.5+5*j)*rate/1000 )
         end_pos = start_pos + int( 10*rate/1000 )
-        wavedata_test.append(x[start_pos:end_pos] )
+        if i == 0 and j == 0:
+            wavedata_test = np.array( x[start_pos:end_pos] ).reshape(1,end_pos-start_pos,1)
+        else:
+            wavedata_test = np.append( wavedata_test, x[start_pos:end_pos].reshape(1,end_pos-start_pos,1), axis = 0)
         classno_test.append(i)
 
 # 信号長(サンプリング周波数によって変わる)
@@ -74,13 +76,13 @@ L = len(wavedata_training)
 L_test = len(wavedata_test)
 
 # 学習データセットを演習用のフォーマットに変換
-data_training  = tf.constant( np.array(wavedata_training).reshape(L,S,N), dtype=tf.float32)
+data_training  = tf.constant( wavedata_training, dtype=tf.float32)
 label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
 
 # 今回は検証データセットは使わない
 
 # テストデータセットを演習用のフォーマットに変換
-data_test  = tf.constant( np.array(wavedata_test).reshape(L_test,S,N), dtype=tf.float32)
+data_test  = tf.constant( wavedata_test, dtype=tf.float32)
 label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
 print('')
