@@ -69,7 +69,7 @@ S = len(wavedata_training[0])
 # 学習データセットのサイズ
 L = len(wavedata_training)
 
-# 学習データセットのサイズ
+# テストデータセットのサイズ
 L_test = len(wavedata_test)
 
 # 学習データセットを演習用のフォーマットに変換
