@@ -25,24 +25,34 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-1 (個人):</b> <a href="./page01.html">ソース 3</a>を修正して、次の仕様を満たすプログラムを作成しましょう。
+<input type="checkbox"><b>演習 5-1 (個人):</b> 関数型インターフェースを使ってみましょう。
 </p>
 
 <div class="info">
 <pre class="wrap">
+import java.util.function.Function;
+ 
+public class Main{
 
-(1) Integer 型変数 a を引数に持ち、文字列 "hoge=" + (a-5) を返す関数 
+    // 文字列 "hoge=" + (a-5) を返す関数 Main::hoge を作成してください
+    public static String hoge( Integer a ){
+        return ?
+    }
 
-public static String hoge( Integer a )
+    public static void main(String[] args) {
 
-を追加する
+        Function&lt; Integer, String &gt; function;
 
-(2) メインメソッドの System.out.println( str ); の行の下で関数オブジェクト function に関数 hoge を再代入し、 321 を引数にして function.apply した時の結果を表示する
+        // 関数型インターフェース function に関数 Main::hoge を代入してください
+        function = ?
+
+        // 321 を引数にして function を呼び出し、その結果を表示してください
+        System.out.println( function.apply( ? ) ); 
+    }
+}
 
 結果:
 
-hoge
-piyo=123
 hoge=316
 </pre>
 </div>
@@ -53,7 +63,7 @@ hoge=316
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> フォルダ「JAVABSC_5_1」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> <a href="./page01.html">ソース3</a>をコピーし、解答します。
+<span class="olradio"><input type="radio" name="p1"></span> 上のコードをコピーして、解答します。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> コンパイルして実行します。 
 <br>
@@ -68,25 +78,30 @@ hoge=316
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-2 (個人):</b> <a href="./page02.html">ソース 2 </a>を修正して、次の仕様を満たすプログラムを作成しましょう。
+<input type="checkbox"><b>演習 5-2 (個人):</b> ラムダ式を使ってみましょう。
 </p>
 <div class="info">
 <pre class="wrap">
-(1) System.out.println( function.apply( 456 ) ); の行の下で
+import java.util.function.Function;
+ 
+public class Main{
 
-「a を引数に持ち文字列 "hoge=" + (a-5) を返すラムダ式 」
+    public static void main(String[] args) {
 
-を function に再代入する  ※ 書式は正式版でも省略版でもどちらでも可
+        Function&lt; Integer, String &gt; function;
 
-(2) 789 を引数にしてfunction.apply した時の結果を表示する
+        // a を引数に持ち文字列 "hoge=" + (a+1) を返すラムダ式を関数型インターフェースに代入してください
+        // 正式版でも省略版でもどちらでも可です
+        function = ?
+
+       // 789 を引数にして function を呼び出し、その結果を表示してください
+        System.out.println( function.apply( ? ) );
+    }
+}
 
 結果:
 
-hoge
-piyo=123
-fuga
-foo=456
-hoge=784
+hoge=790
 </pre>
 </div>
 
@@ -96,7 +111,7 @@ hoge=784
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_5_2」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> <a href="./page02.html">ソース 2</a>をコピーし、解答します。
+<span class="olradio"><input type="radio" name="p2"></span> 上のコードをコピーして、解答します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> コンパイルして実行します。 
 <br>
@@ -111,7 +126,7 @@ hoge=784
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-3 (個人):</b> 以下のソースコードで使われている<a href="../text04/page03.html">拡張 for 文</a>を forEach 文を使うように書き換えて下さい。
+<input type="checkbox"><b>演習 5-3 (個人):</b> リスト + forEach + ラムダ式を使ってみましょう。
 </p>
 
 <div class="info">
@@ -120,20 +135,21 @@ import java.util.ArrayList;
 
 public class Main{
 
-    // Javaのラムダ式内ではローカル変数の値を書き換えられないので static int にしている
-    static int goukei = 0;
+    // (注) Javaのラムダ式はローカル変数の値を書き換えられないので static int で定義しています
+    static private int goukei;
 
     public static void main(String[] args) {
 
-    	ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
-
+    	ArrayList&lt; Integer &gt; list = new ArrayList&lt; Integer &gt;();
     	list.add( 4 );
     	list.add( -3 );
     	list.add( 5 );
 
-        // ここから演習
-        // forEach 文を使って合計を求める
-        for( int a : list ){ goukei += a; }
+        // forEach 文をラムダ式を使って list に収められている数値の合計を求めてください
+        // ラムダ式の引数は a とします
+        // ラムダ式は正式版でも省略版でもどちらでも可です        
+        goukei = 0;
+        list.forEach( ? );
 
         System.out.println( goukei ); 
     }
@@ -165,14 +181,36 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-4 (個人):</b> <a href="./page03.html">ソース 2</a>を修正して、キーが "fuga" または値が 789 の時だけ表示するようにしましょう。
+<input type="checkbox"><b>演習 5-4 (個人):</b> マップ + forEach + ラムダ式を使ってみましょう。
 
 <div class="info">
 <pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+
+    public static void main(String[] args) {
+
+    	HashMap&lt; String, Integer &gt; map = new HashMap&lt; String, Integer &gt;();
+        map.put( "札幌", 12 );
+        map.put( "函館", 34 );
+        map.put( "旭川", 56 );
+        map.put( "釧路", 34 );
+
+        // key がキー、value が値です
+        // value が34であるkeyを全て表示してください
+        map.forEach( (key,value) -&gt; {
+            if( ? ){
+              System.out.println( ? );
+            }
+        } );
+    }
+}
+
 結果:
 
-key = fuga, value = 456
-key = piyo, value = 789
+函館
+釧路
 </pre>
 </div>
 
@@ -182,12 +220,8 @@ key = piyo, value = 789
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> フォルダ「JAVABSC_5_4」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> <a href="./page03.html">ソース 2</a>をコピーし、解答します。
-</p>
-<p>
-(注意) 文字列の比較は == ではなく「<a href="../text01/page02.html">変数名.equals(文字列)</a>」を使って下さい
-</p>
-<p>
+<span class="olradio"><input type="radio" name="p4"></span> 上のコードをコピーして、解答します。
+<br>
 <span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。 
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをしてください。 
