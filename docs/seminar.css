@@ -168,6 +168,20 @@ display: block;
 padding: 10px;
 }
 
+body.seminar div.btback2
+{
+font-size: 1em;
+font-weight: bold;
+margin-bottom: 10px;
+position: relative;
+border: 2px solid #0040FF;
+border-radius: 15px;
+background-color: gray;
+display: inline-block;
+color: black;
+padding: 10px;
+}
+
 body.seminar div.btback a:hover
 {
 color: white;
@@ -202,7 +216,7 @@ align-items: center;
 
 body.seminar div.contents a
 {
-color: black;
+color: blue;
 word-break: break-all;
 }
 
