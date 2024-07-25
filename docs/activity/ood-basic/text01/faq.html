@@ -20,6 +20,42 @@
 <h2><script>GetTitle()</script></h2>
 
 <h3>
+Q. StrideシナリオをJavaシナリオに変更したい
+</h3>
+
+<p>
+A. クラス名を右クリックして「Convert to Java」を選択します。
+</p>
+
+
+<br>
+<h3>
+Q. テキストボックスを表示して文字列を入力したい。
+</h3>
+
+<p>
+A. Greenfoot.ask メソッドを使います。
+<br>
+なおテキストボックスを表示している間は動作が停止します。
+</p>
+
+<div class="info">
+<pre class="wrap">
+<b>z を押したら「好きな食べ物は？」を表示し、入力した文字列を画面に表示する例</b>
+
+public void act()
+{
+     if( Greenfoot.isKeyDown( "z" ) ){
+         String answer = Greenfoot.ask( "好きな食べ物は？" );
+         getWorld().showText( answer, 100, 50 );
+     }
+ }
+</pre>
+</div>
+
+
+<br>
+<h3>
 Q. act メソッドの中でマウスの座標やクリックした時のボタン番号、カーソルの下にいるアクターを取得したい
 </h3>
 
