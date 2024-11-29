@@ -4,23 +4,20 @@
 \noindent サイン波を含む式を変形して時間領域複素正弦波を含む式を求めることができるかどうかを確かめる問題である。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{1em}
-\noindent \textbf{【重要事項】}
-
 \medskip
 \noindent ・ 時間領域アナログサイン波はオイラー公式を用いて2つの時間領域複素正弦波の和に分解できる
 
 \medskip
-\noindent \mbox{(sin 版)}
+\noindent \mbox{(サイン波として sin を使う場合)}
 
 \[
 a \cdot \sin ( w \cdot t + \phi )
-=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
-+  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\pi/2) \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
+=  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{-j (\phi-\frac{\pi}{2}) \}} \right \} \cdot \textrm{e}^{\{-j \cdot w \cdot t \}}
++  \left \{ \frac{a}{2} \cdot \textrm{e}^{\{j (\phi-\frac{\pi}{2} \}} \right \} \cdot \textrm{e}^{\{j \cdot w \cdot t \}}
 \]
 
 \medskip
-\noindent \mbox{(cos 版)}
+\noindent \mbox{(サイン波として cos を使う場合))}
 
 \[
 a \cdot \cos ( w \cdot t + \phi )
@@ -29,13 +26,13 @@ a \cdot \cos ( w \cdot t + \phi )
 \]
 
 \bigskip
-\noindent  $a$・・・振幅
+\noindent  $a$・・・アナログサイン波の振幅
 
 \bigskip
-\noindent $w$ ・・・角周波数、単位は [rad/秒]
+\noindent $w$ ・・・アナログサイン波の角周波数、単位は [rad/秒]
 
 \bigskip
-\noindent $\phi$ ・・・初期位相、単位は [rad]
+\noindent $\phi$ ・・・アナログサイン波の初期位相、単位は [rad]
 
 \bigskip
 
@@ -46,7 +43,7 @@ a \cdot \cos ( w \cdot t + \phi )
 \bigskip
 
 \[
-\{2 \cos (wt) \}^2 = 
+\{2 \cdot \cos (w \cdot t) \}^2 = 
 \left [ \textrm{e}^{\{-j \cdot w \cdot t \}} 
 + \textrm{e}^{\{j \cdot w \cdot t \}} 
 \right ]^2
