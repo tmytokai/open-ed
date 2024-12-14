@@ -1087,8 +1087,146 @@ showTextEx( 文字列, x 座標, y 座標, サイズ, 太字(true か false ), �
 </div>
 
 
+<br>
+<h3>
+Q. キャラの当たり判定を小さくしたい
+</h3>
 
+<p>
+A. 当たり判定を持っていないガワと当たり判定を持っている本体を作って同時に動かす。
+</p>
 
+<p>
+まずActorの子クラスとして次の様に「ガワ(Gawa)」「本体(Hontai)」「敵(Teki)」を用意する(画像は適当)。
+</p>
+
+<p>
+<img src="./img/atari1.png">
+</p>
+
+<p>
+ガワ(Gawa)は次の様に何もしない。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+
+public class Gawa extends Actor
+{
+    public void act() 
+    {
+    }    
+}
+</pre>
+</div>
+
+<p>
+敵(Teki)も今回は動かさないので何もしない。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+
+public class Teki extends Actor
+{
+    public void act() 
+    {
+    }    
+}
+</pre>
+</div>
+
+<p>
+MyWorldクラスでは本体(Hontai)と敵(Teki)を addObject し、setActOrder 関数を使って本体(Hontai)よりもガワ(Gawa)の表示が下になるようにする。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+
+public class MyWorld extends World
+{
+    public MyWorld()
+    {    
+        super(600, 400, 1); 
+        
+        addObject( new Hontai(), 100, 200 );
+        addObject( new Teki(), 200, 200 );
+        setActOrder(Gawa.class, Hontai.class);
+    }
+}
+</pre>
+</div>
+
+<p>
+最後に本体(Hontai)のactの中でガワ(Gawa)を作って同時に動かす。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import greenfoot.*;
+
+public class Hontai extends Actor
+{
+    Gawa gawa = null;
+    
+    public Hontai()
+    {
+        // 当たり判定の大きさを調整
+        getImage().scale( 10, 10 );
+        // デバッグが終わったら 255 を 0 にして本体を透明にする
+        getImage().setTransparency(255);
+    }
+
+    public void act() 
+    {
+        int x = getX();
+        int y = getY();
+        if( Greenfoot.isKeyDown( "left" ) ){
+            setLocation( x-1,y );
+        }
+        if( Greenfoot.isKeyDown( "right" ) ){
+            setLocation( x+1,y );
+        }
+        if( Greenfoot.isKeyDown( "up" ) ){
+            setLocation( x,y-1 );
+        }
+        if( Greenfoot.isKeyDown( "down" ) ){
+            setLocation( x,y+1 );
+        }
+        
+        if(gawa == null){
+            gawa = new Gawa();
+            gawa.getImage().scale( 200, 200 );
+            getWorld().addObject(gawa,0,0);
+        }
+        gawa.setLocation(getX(),getY());
+        
+        Actor teki = getOneIntersectingObject( Teki.class );
+        if( teki != null){
+            getWorld().showText( "ATARI", 100, 50 );
+        }
+        else{
+            getWorld().showText( "", 100, 50 );
+        }
+    }
+}
+</pre>
+</div>
+
+<p>
+実行すると下の図の様にガワ(Gawa)の部分が敵(Teki)と当たっても反応しなくなる。
+<br>
+当たり判定の大きさはコンストラクタの中にあるgetImage().scale関数で調整する。
+<br>
+デバッグが終わったらgetImage().setTransparency関数の数字を 0 にして本体(Hontai)を透明にする。
+</p>
+
+<p>
+<img src="./img/atari2.png">
+</p>
 
 
 </body>
