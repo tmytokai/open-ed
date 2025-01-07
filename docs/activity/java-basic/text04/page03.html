@@ -31,7 +31,7 @@
 <input type="checkbox"> <b>リストにおける拡張 for 文の文法</b>
 <pre class="wrap">
 
-for( 型名 変数 : リスト名 )
+for( var 変数 : リスト名 )
   繰り返し内容
 }
 </pre>
@@ -48,8 +48,9 @@ import java.util.ArrayList;
 
 public class Main{
     public static void main(String[] args) {
+
         // リスト定義
-    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    	var list = new ArrayList&lt;String&gt;();
 
         // 一番後に要素を追加
     	list.add( "hoge" );
@@ -57,8 +58,8 @@ public class Main{
     	list.add( "piyo" );
 
         // 拡張 for 文
-        for( String str : list ){
-            System.out.println( str );
+        for( var i : list ){
+            System.out.println( i );
         }
     }
 }
@@ -66,7 +67,7 @@ public class Main{
 </div>
 
 <p>
-実行すると for 内で定義した String 型変数 str に list の要素が先頭から順番に入って表示されます。
+実行すると for 内で定義した変数 i に list の要素が先頭から順番に入って表示されます。
 </p>
 
 <div class="info">
@@ -79,9 +80,21 @@ piyo
 </div>
 
 <p>
-なお<a href="./page02.html">マップ</a>でも拡張 for 文は使えますが、若干文法が難しいのでこのあと勉強する<a href="../text05/page03.html">forEach 文</a>を使う方が便利です。
-<br>
-参考までにマップでの拡張 for 文の使用例を以下に示します。
+<a href="./page02.html">マップ</a>でも同様にして拡張 for 文を使えます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>マップにおける拡張 for 文の文法</b>
+<pre class="wrap">
+
+for( var 変数 : マップ名.entrySet() )
+  繰り返し内容
+}
+</pre>
+</div>
+
+<p>
+ただし変数には「キー」と「値」が含まれるので、それぞれを以下の例の様にして取り出す必要があります。
 </p>
 
 <div class="info">
@@ -93,7 +106,7 @@ public class Main{
     public static void main(String[] args) {
 
         // マップ定義
-    	HashMap<String, Integer> map = new HashMap<String, Integer>();
+    	var map = new HashMap&ltString, Integer&gt();
 
         // 要素を追加
         map.put( "hoge", 123 );
@@ -101,9 +114,10 @@ public class Main{
         map.put( "piyo", 789 );
 
         // 拡張 for 文
-        for( var entry : map.entrySet()) {
-            System.out.println( entry.getKey() );
-            System.out.println( entry.getValue() );
+        for( var i : map.entrySet() ) {
+            System.out.println( "キー ：" + i.getKey() );
+            System.out.println( "値 ：" + i.getValue() );
+            System.out.println();
         }
     }
 }
@@ -111,18 +125,20 @@ public class Main{
 </div>
 
 <p>
-実行すると for 内で定義した Entry 型変数 entry に map のキーと値が先頭から順番に入って表示されます。
+実行すると for 内で定義した変数 i に map のキーと値が先頭から順番に入って表示されます。
 </p>
 
 <div class="info">
 <input type="checkbox"> <b>ソース 2 の実行結果</b>
 <pre class="wrap">
-hoge
-123
-fuga
-456
-piyo
-789
+キー ：hoge
+値 ：123
+
+キー ：fuga
+値 ：456
+
+キー ：piyo
+値 ：789
 </pre>
 </div>
 
