@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Java言語の基礎</a></li>
-<li>学習項目: [5] 関数型インターフェースとラムダ式</li>
+<li>学習項目: [5] ラムダ式</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,7 +20,7 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-<a href="../text04/page01.html">リスト</a>や<a href="../text04/page02.html">マップ</a>では<a href="../text04/page03.html">拡張 for 文</a>が使えますが、ここで学ぶ forEach 文を使うともっと簡潔に繰り返し処理を行うことが出来ます。
+<a href="../text04/page01.html">リスト</a>や<a href="../text04/page02.html">マップ</a>などのコレクションに対しては<a href="../text04/page03.html">拡張 for 文</a>が使えますが、ここで学ぶ forEach 文とラムダ式と組み合わせるともっと簡潔に繰り返し処理を行うことが出来ます。
 </p>
 
 <p>
@@ -47,8 +47,8 @@ public class Main{
     public static void main(String[] args) {
 
         // リスト定義
-    	ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();
-    	ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+    	var list1 = new ArrayList&lt;String&gt;();
+    	var list2 = new ArrayList&lt;Integer&gt;();
 
         // 要素を追加
     	list1.add( "hoge" );
@@ -105,7 +105,7 @@ import java.util.HashMap;
 public class Main{
     public static void main(String[] args) {
         // マップ定義
-    	HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+    	var map = new HashMap&lt;String, Integer&gt;();
 
         // 要素を追加
         map.put( "hoge", 123 );

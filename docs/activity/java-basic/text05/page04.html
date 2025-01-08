@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Java言語の基礎</a></li>
-<li>学習項目: [5] 関数型インターフェースとラムダ式</li>
+<li>学習項目: [5] ラムダ式</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -20,9 +20,175 @@
 <h2><script>GetTitle()</script></h2>
 
 <p>
-準備中
+StreamAPI はコレクションから作成したストリーム(データの流れ)に対して何かしらの処理をするためのAPIで、ラムダ式はこの StreamAPI と相性が良いので組み合わせて使用することが多いです。
 </p>
 
+<p>
+StreamAPI の文法は以下の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>StreamAPIの文法</b>
+<pre class="wrap">
+
+リストの場合： リスト名.stream().中間操作.終端操作
+
+マップの場合： マップ名.entrySet().stream().中間操作.終端操作
+</pre>
+</div>
+
+<p>
+「中間操作」部ではソートやフィルタリングなどの中間処理を行います。
+<br>
+また「終端操作」部では繰り返し処理や集計、平均計算、再リスト化などの最終処理をおこないます。
+</p>
+
+<p>
+今回は色々ある中間操作のうち、フィルタリングをおこなう「filter」について取り扱います。
+<br>
+また終端操作として繰り返しをおこなう「forEach」について取り扱います。
+</p>
+
+<p>
+では具体的な例を見てみましょう。
+<br>
+以下の例では StreamAPI を使わずにリストに含まれる要素の中で15より大きい値を出力しています。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 1: StreamAPIを使わないで 15 より大きい値を出力</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var list = new ArrayList&lt;Integer&gt();
+    	list.add( 10 );
+    	list.add( 20 );
+    	list.add( 30 );
+
+        for( var i : list ){
+            if( i &gt; 15 ) System.out.println( i );
+        }
+    }
+}
+
+実行結果：
+
+20
+30
+
+</pre>
+</div>
+
+<p>
+これと同じ処理を StreamAPI を使って書くと次のようになります。
+<br>
+中間操作部で値が15より大きい要素だけフィルタリングして取り出し、終端操作部で繰り返し処理を行っています。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 2: StreamAPIを使って 15 より大きい値を出力</b>
+<pre class="wrap">
+import java.util.ArrayList;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var list = new ArrayList&lt;Integer&gt;();
+    	list.add( 10 );
+    	list.add( 20 );
+    	list.add( 30 );
+        
+        list.stream()
+            .filter( i-&gt; i&gt;15 ) // 中間操作
+            .forEach( i-&gt;System.out.println( i ) ); // 終端操作
+    }
+}
+
+実行結果：
+
+20
+30
+
+</pre>
+</div>
+
+<p>
+
+<p>
+次はマップでの StreamAPI の使用例を見てみましょう。
+</p>
+
+<p>
+まず以下の例では StreamAPI を使わないでマップからキーが「札幌」である要素の値を出力しています。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース 3: StreamAPIを使わずにキーが「札幌」である要素の値を出力</b>
+<pre class="wrap">
+
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var map = new HashMap&lt;String, Integer&gt;();
+        map.put( "函館", 1 );
+        map.put( "札幌", 2 );
+        map.put( "旭川", 3 );
+
+        for( var i : map.entrySet() ){
+            if( i.getKey().equals("札幌") ){
+                System.out.println( "key = " + i.getKey() + ", value = " + i.getValue() );
+            }
+        }
+    }
+}
+
+実行結果：
+
+key = 札幌, value = 2
+
+</pre>
+</div>
+
+<p>
+これと同じ処理を StreamAPI を使って書くと次のようになります。
+<br>
+中間操作部でキーが「札幌」である要素だけフィルタリングして取り出し、終端操作部で繰り返し処理を行っています。
+</p>
+
+
+<div class="info">
+<input type="checkbox"> <b>ソース 4: StreamAPIを使ってキーが「札幌」である要素の値を出力</b>
+<pre class="wrap">
+
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var map = new HashMap&lt;String, Integer&gt;();
+        map.put( "函館", 1 );
+        map.put( "札幌", 2 );
+        map.put( "旭川", 3 );
+
+        map.entrySet().stream()
+            .filter( i -&gt; i.getKey().equals("札幌") ) // 中間操作
+            .forEach( i -&gt; System.out.println( "key = " + i.getKey() + ", value = " + i.getValue() ) ); // 終端操作
+    }
+}
+
+実行結果：
+
+key = 札幌, value = 2
+
+</pre>
+</div>
+
+<br>
 <br>
 <script>PreNext(4,4)</script>
 </body>

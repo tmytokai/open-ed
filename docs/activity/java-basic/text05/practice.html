@@ -12,7 +12,7 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: Java言語の基礎</a></li>
-<li>学習項目: [5] 関数型インターフェースとラムダ式</li>
+<li>学習項目: [5] ラムダ式</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
@@ -140,7 +140,7 @@ public class Main{
 
     public static void main(String[] args) {
 
-    	ArrayList&lt; Integer &gt; list = new ArrayList&lt; Integer &gt;();
+    	var list = new ArrayList&lt; Integer &gt;();
     	list.add( 4 );
     	list.add( -3 );
     	list.add( 5 );
@@ -182,6 +182,7 @@ public class Main{
 <br>
 <p>
 <input type="checkbox"><b>演習 5-4 (個人):</b> マップ + forEach + ラムダ式を使ってみましょう。
+</p>
 
 <div class="info">
 <pre class="wrap">
@@ -191,7 +192,7 @@ public class Main{
 
     public static void main(String[] args) {
 
-    	HashMap&lt; String, Integer &gt; map = new HashMap&lt; String, Integer &gt;();
+    	var map = new HashMap&lt; String, Integer &gt;();
         map.put( "札幌", 12 );
         map.put( "函館", 34 );
         map.put( "旭川", 56 );
@@ -231,13 +232,57 @@ public class Main{
 </div>
 
 <br>
-<h2><a href="./page04.html">4. streamAPI</a></h2>
+<h2><a href="./page04.html">4. StreamAPI</a></h2>
 
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-5 (個人):</b> 準備中
+<input type="checkbox"><b>演習 5-5 (個人):</b> StreamAPIを使って「値が30以上かつ40以下の都市名」を表示してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+
+    public static void main(String[] args) {
+
+    	var map = new HashMap&lt; String, Integer &gt;();
+        map.put( "札幌", 12 );
+        map.put( "函館", 34 );
+        map.put( "旭川", 56 );
+        map.put( "釧路", 34 );
+
+        // 値が30以上かつ40以下の都市名を表示して下さい
+        map.entrySet().stream()
+            .filter( i -&gt; ? &amp;&amp; ? ) // 中間操作
+            .forEach( i -&gt; System.out.println( ? ) ); // 終端操作
+    }
+}
+
+結果:
+
+函館
+釧路
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 
 <br>
