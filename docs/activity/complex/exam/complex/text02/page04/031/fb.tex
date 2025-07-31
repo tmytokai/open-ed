@@ -1,0 +1,39 @@
+\noindent \textbf{【出題意図】}
+
+\bigskip
+\noindent サイン波を含む式を変形して時間領域複素正弦波を含む式を求めることができるかどうかを確かめる問題である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【重要事項】}
+
+\medskip
+\noindent 時間領域アナログサイン波同士の計算はオイラー公式を用いて2つの時間領域複素正弦波の和に分解することで計算や証明が楽になることが多い。
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\noindent \textbf{【解説】}
+
+\bigskip
+
+\begin{align*}
+& 
+\log_e \left \{
+4 \cdot \cos(\pi/2 \cdot t) - 2 \cdot \textrm{e}^{ \{j \cdot \pi/2 \cdot t\} }
+\right \} \\
+& = 
+\log_e \left \{
+  \frac{4}{2} \cdot \textrm{e}^{\{-j \cdot 0 \}} \cdot \textrm{e}^{\{-j \cdot \pi/2 \cdot t \}} 
++ \frac{4}{2} \cdot \textrm{e}^{\{ j \cdot 0 \}} \cdot \textrm{e}^{\{ j \cdot \pi/2 \cdot t \}} 
+- 2 \cdot \textrm{e}^{\{ j \cdot \pi/2 \cdot t \}} 
+\right \} \\
+& =
+\log_e \left \{
+  2 \cdot \textrm{e}^{\{-j \cdot \pi/2 \cdot t \}} 
+\right \} \\
+& = \log_e 2 -j \cdot \frac{\pi}{2} \cdot t 
+\end{align*}
+
+
