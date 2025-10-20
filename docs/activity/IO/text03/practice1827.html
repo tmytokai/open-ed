@@ -31,9 +31,9 @@
 <b>仕様:</b>
 </p>
 <ol>
-<li>ANC1(=RC1)をアナログ入力にする</li>
-<li>ANC1 に可変抵抗を接続する</li>
-<li>1000ミリ秒ごとにA/D変換をおこない、シリアル通信を使ってAD変換の結果を取得する。</li>
+<li>AN1(= RA1, 18ピン) をアナログ入力にする</li>
+<li>AN1 に可変抵抗を接続する</li>
+<li>1000ミリ秒ごとにA/D変換を繰り返す</li>
 </ol>
 </div>
 <div class="olradio">
@@ -44,9 +44,17 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> main.c を開いて例3を有効にします。
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 仕様に従って setup 関数と run 関数の内容を書き換えます。
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、ADC機能(USE_ADC) のコメントアウトを解除します。 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Modules/adc.c を開いてコメントに従って設定します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_3_1.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
@@ -59,34 +67,31 @@
 <pre class="wrap">
 <b>ピン配置設定・回路接続方法:</b>
 
-01: VDD(3.3V)
-02: RA5
-03: RA4
-04: MCLR/VPP -- PICKit の 1: NMCLR ※ プルアップ抵抗不要
-05: RC5
-06: RC4
-07: RC3
-08: RC6
-09: RC7
-10: RB7
+1: RA2
+2: RA3
+3: RA4
+4: MCLR/VPP -- PICkit の 1: NMCLR
+5: VSS -- GND
+6: RB0 (GPIO入力) -- タクトスイッチ
+7: RB1
+8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
+9: RB3
 
-11: RB6
-12: RB5/Tx -- RN-42 の J2-7 : Rx
-13: RB4/Rx -- RN-42 の J2-6 : Tx
-14: RC2
-15: (*)RC1/ANC1 -- 可変抵抗の中央ピン
-16: RC0 (GPIO出力) -- LED
-17: RA2 (GPIO入力) -- タクトスイッチ ※ プルアップ抵抗不要
-18: ICSPCLK(PGC) -- PICKit の 5: PGC
-19: ICSPDAT(PGD  -- PICKit の 4: PGD
-20: VSS(GND)
-
+10: RB4
+11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V
+15: RA6
+16: RA7
+17: RA0 (GPIO出力) -- LED
+(*)18: AN1 (ADC) -- 可変抵抗の中央ピン
 </pre>
 </div>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> テスターでPICに入力される電圧を測定し、以下の「AD変換対応表」を完成させて指定場所に記載して下さい。 
+<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「adc.c」と「main.c」を記入し、テスターで測定して以下の「AD変換対応表」を完成させて下さい。 
 </p>
 
 <br>
