@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>9. 型推論</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [1] HelloWorld</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+Java言語には他のオブジェクト指向言語と同様に「型推論」機能が備わっています。
+</p>
+
+<p>
+具体的には変数を定義する際に、型を指定する代わりに「var」と書くことで型指定を省略可能です。
+<br>
+ただし、初期値を代入することでコンパイラが型を推論するので、初期値の代入が必要です。
+</p>
+
+<p>
+例えば次のソース1を見てください。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: 型推論の簡単な例</b>
+
+<pre class="wrap">
+public class Main{
+    public static void main(String[] args) {
+        
+        // 型推論を使わない場合
+        int a = 1;
+        System.out.println( a );
+
+        // 型推論を使う場合
+        var b = 1;
+        System.out.println( b );
+    }
+}
+</pre>
+
+</div>
+
+<p>
+この例では変数 b を定義する際に 1 を初期値として代入してますので、bは自動的にint型となります。
+</p>
+
+<p>
+型推論は
+</p>
+
+<ul>
+<li>コーディングが楽になる</li>
+<li>コードの見た目がスッキリする</li>
+</ul>
+
+<p>
+というメリットがありますが、その反面
+</p>
+
+<ul>
+<li>どんな型に推論されたのかが分かりにくい</li>
+<li>型を推論できない場合はコンパイルエラーになる(例えばnullを代入したときなど)</li>
+</ul>
+
+<p>
+というデメリットもあります。
+<br>
+よって型推論を使用する際はどんな型に推論されたのか常に意識しておかないと思わぬ不具合に見舞われますので注意が必要です。
+</p>
+
+</div>
+
+<br>
+<script>PreNext(9,9)</script>
+</body>
+</html>
