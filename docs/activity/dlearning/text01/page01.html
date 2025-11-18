@@ -65,11 +65,16 @@
 <pre class="wrap">
 import tensorflow as tf
 
+print(tf.__version__) # Tensorflowのバージョン表示
+print(tf.keras.__version__) # Kerasのバージョン表示
+
 A = tf.constant( 123.0, dtype=tf.float32 )
 
 tf.print( A )
 
 # 表示結果
+# 2.19.0
+# 3.10.0
 # 123
 </pre>
 </div>

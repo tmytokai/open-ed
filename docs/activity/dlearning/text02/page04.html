@@ -523,10 +523,19 @@ print(f'x={x.numpy()}');
 print(f'y={y.numpy()}');
 print('')
 
+
+# Keras 3 の場合はこちら
 opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
 #opt = tf.keras.optimizers.SGD( learning_rate=0.1 ) # SGD を使いたい場合はこちら
 for i in range(50):  # 学習を50回繰り返す
-    opt.minimize(lambda: loss(), [x,y])  #学習を1回実施。lambda は損失関数の名前、[x,y]は学習対象の変数
+  with tf.GradientTape() as tape:
+    gradient = tape.gradient(loss(),[x,y]) # 勾配計算
+    opt.apply(gradient,[x,y])  #学習を1回実施、[x,y]は学習対象の変数
+
+# Keras 2 の場合はこちら
+#opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
+#for i in range(50):  # 学習を50回繰り返す
+#    opt.minimize(lambda: loss(), [x,y])  #学習を1回実施。lambda は損失関数の名前、[x,y]は学習対象の変数
     
 print('学習結果')
 print(f'損失={loss()}');
@@ -661,13 +670,26 @@ l_{\rm (B*k+B-1)0}\ ,  & \cdots &,\  l_{\rm (B*k+B-1)(M-1)} \\
 <input type="checkbox"><b>ソース 2: ディープラーニングの実行</b>
 
 <pre class="wrap">
+
+# Keras 3 の場合はこちら
 opt = tf.keras.optimizers.Adam( learning_rate=r )
 for e in range(E):
     for k in range(int(L/B)):
         print(f'\repoch {e} batch {k}', end='')
         data_training_k = data_training[B*k:B*k+B]
         label_training_k = label_training[B*k:B*k+B]
-        opt.minimize(lambda: loss(data_training_k,label_training_k), [w_h,b_h,w_o,b_o])
+        with tf.GradientTape() as tape:
+          gradient = tape.gradient(loss(data_training_k,label_training_k),[w_h,b_h,w_o,b_o])
+          opt.apply(gradient,[w_h,b_h,w_o,b_o])
+
+# Keras 2 の場合はこちら
+#opt = tf.keras.optimizers.Adam( learning_rate=r )
+#for e in range(E):
+#    for k in range(int(L/B)):
+#        print(f'\repoch {e} batch {k}', end='')
+#        data_training_k = data_training[B*k:B*k+B]
+#        label_training_k = label_training[B*k:B*k+B]
+#        opt.minimize(lambda: loss(data_training_k,label_training_k), [w_h,b_h,w_o,b_o])
 
 ※1 r : 学習率
 ※2 E : エポック数
