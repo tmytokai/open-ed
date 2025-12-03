@@ -33,8 +33,8 @@ import java.io.IOException;
 public class Main{
     public static void main(String[] args) {
         try {
-            BufferedReader reader = new BufferedReader( new FileReader( "hoge.txt" ) );
-            String line;
+            var reader = new BufferedReader( new FileReader( "hoge.txt" ) );
+            var line = "";
             while( (line = reader.readLine()) != null ){
                 System.out.println( line );
             }
@@ -49,7 +49,7 @@ public class Main{
 </div>
 
 <p>
-上の例では BufferedReader 〜と書いてあるやたら長い行でファイルを読み込みモードでオープンしています。
+上の例では new BufferedReader 〜と書いてあるやたら長い行でファイルを読み込みモードでオープンしています。
 <br>
 今回は hoge.txt をオープンして reader という名前で変数(インスタンス)を作成しています。
 </p>

@@ -42,9 +42,9 @@ import java.io.IOException;
 public class Main{
     public static void main(String[] args) {
        try {
-            PrintWriter writer = new PrintWriter( new BufferedWriter( new FileWriter( "hoge.txt" ) ) );
-            int a = 1;
-            int b = 2;
+            var writer = new PrintWriter( new BufferedWriter( new FileWriter( "hoge.txt" ) ) );
+            var a = 1;
+            var b = 2;
             writer.println( "足し算" );
             writer.println( a + "足す" + b + "は" + (a+b) );
             writer.close();
@@ -58,7 +58,7 @@ public class Main{
 </div>
 
 <p>
-上の例では PrintWriter 〜と書いてあるやたら長い行でファイルを書き込みモードでオープンしています。
+上の例では new PrintWriter 〜と書いてあるやたら長い行でファイルを書き込みモードでオープンしています。
 <br>
 今回は hoge.txt をオープンして writer という名前で変数(インスタンス)を作成しています。
 </p>

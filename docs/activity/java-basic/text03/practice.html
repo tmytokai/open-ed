@@ -30,11 +30,11 @@
 
 <div class="info">
 <pre class="wrap">
-(1) <a href="../text01/page04.html">キーボードから整数を入力</a>して int a に代入する
+(1) <a href="../text01/page04.html">キーボードから整数を入力</a>して変数 a に代入する
 
 ※ java.util.Scanner を import するのを忘れないこと
 
-(2) 同様にキーボードから整数を入力して int b に代入する
+(2) 同様にキーボードから整数を入力して変数 b に代入する
 
 (3) 結果を fuga.txt に出力する
 
@@ -76,9 +76,10 @@
 
 (2) fuga.txt を読み込んで、3つの数字の合計値を画面に出力する
 
-※ ソース内の変数 line は文字型なのに注意。文字列を整数値に変換して int 型変数 a に代入するには 
+※ 変数 line は文字型なのでそのまま足し算すると文字列の連結になるので注意。
+文字列を整数値に変換するには 
 
-int a = Integer.parseInt( line ) 
+Integer.parseInt( line ) 
 
 の様に書く
 
@@ -105,7 +106,7 @@ fuga.txt の中身が
 <span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」の中に fuga.txt を新規作成して任意の整数を3行入力して保存します。
 </p>
 <p>
-<b>(注) 最後の数字の後に改行を入れるとエラーが出るので最後行は改行しないでください</b>
+<b>(注) 最後の行の後に改行を入れるとエラーが出るので最後の行は改行しないでください</b>
 </p>
 <p>
 <span class="olradio"><input type="radio" name="p2"></span> フォルダ「JAVABSC_3_2」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
