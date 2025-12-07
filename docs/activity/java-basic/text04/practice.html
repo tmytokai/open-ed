@@ -24,7 +24,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-1 (個人):</b> 以下のソースコードで定義されている String 型のリスト list の 0 番目と 2 番目の要素を連結した文字列を String 型の変数 str に代入して表示してみましょう。
+<input type="checkbox"><b>演習 4-1 (個人):</b> 以下のソースコードで定義されている String 型のリスト list の 0 番目と 2 番目の要素を連結した文字列を変数 str に代入して表示しましょう。
 </p>
 
 <div class="info">
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class Main{
     public static void main(String[] args) {
 
-    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    	var list = new ArrayList&lt;String&gt;();
 
     	list.add( "hoge" );
     	list.add( "fuga" );
@@ -44,7 +44,7 @@ public class Main{
 
         // ここから演習
         // ? を置き換える
-        String str = ? ;
+        var str = ? ;
         System.out.println(str);
     }
 }
@@ -85,7 +85,7 @@ import java.util.ArrayList;
 public class Main{
     public static void main(String[] args) {
 
-    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    	var list = new ArrayList&lt;String&gt;();
 
     	list.add( "hoge" );
     	list.add( "fuga" );
@@ -95,7 +95,7 @@ public class Main{
 
         // ここから演習
         // ? を置き換える
-        int last = ? ; // list.size()を使って最後の要素の位置を求める
+        var last = ? ; // list.size()を使って最後の要素の位置を求める
         System.out.println( list.get( last ) );
     }
 }
@@ -136,7 +136,7 @@ import java.util.ArrayList;
 public class Main{
     public static void main(String[] args) {
 
-    	ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    	var list = new ArrayList&lt;String&gt;();
 
     	list.add( "hoge" );
     	list.add( "fuga" );
@@ -146,8 +146,8 @@ public class Main{
 
         // ここから演習
         // ? を置き換える
-        int last = ? ; // list.size()を使って最後の要素の位置を求める
-        for( int i=last; i>=0; --i ){
+        var last = ? ; // list.size()を使って最後の要素の位置を求める
+        for( var i=last; i>=0; --i ){
                 System.out.println( ? );
         }
     }
@@ -180,11 +180,49 @@ hoge
 </div>
 
 <br>
+<p>
+<input type="checkbox"><b>演習 4-4 (個人):</b> リストから要素を削除してみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+2
+piyo
+hoge
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 「JAVABSC_4_3」をフォルダごとコピーし、フォルダ名を「JAVABSC_4_4」とします。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> Main.java を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> list.add の行の後に "fuga" を削除する処理を追加します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+<br>
+<br>
+<b>以下修正中</b>
+<br>
+<br>
+
+<br>
 <h2><a href="./page02.html">2. マップ(HashMap)</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-4 (個人):</b> 以下のソースコードで定義されているマップ map のキーは科目名、値は得点を表しています。"英語"と"数学"の得点の合計を求めて表示して下さい。
+<input type="checkbox"><b>演習 4-? (個人):</b> 以下のソースコードで定義されているマップ map のキーは科目名、値は得点を表しています。"英語"と"数学"の得点の合計を求めて表示して下さい。
 </p>
 
 <div class="info">
@@ -237,7 +275,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-5 (個人):</b> 以下のソースコードで定義されているマップ map にループ内で3回キー(文字列)と値(整数)の組を<a href="../text01/page04.html">キーボードから読み込んで</a> map に追加し、それらを表示して下さい。
+<input type="checkbox"><b>演習 4-? (個人):</b> 以下のソースコードで定義されているマップ map にループ内で3回キー(文字列)と値(整数)の組を<a href="../text01/page04.html">キーボードから読み込んで</a> map に追加し、それらを表示して下さい。
 </p>
 
 <div class="info">
@@ -298,7 +336,7 @@ piyo
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-6 (個人):</b> 以下のソースコードで使われている通常の for 文を拡張 for 文を使うように書き換えて下さい。
+<input type="checkbox"><b>演習 4-? (個人):</b> 以下のソースコードで使われている通常の for 文を拡張 for 文を使うように書き換えて下さい。
 </p>
 
 <div class="info">
@@ -354,7 +392,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-7 (個人):</b> Integer 型のリストに -10 から 10 までの<a href="../text01/page08.html">整数の乱数</a>を20個追加し、それらを昇順ソートしてみましょう。
+<input type="checkbox"><b>演習 4-? (個人):</b> Integer 型のリストに -10 から 10 までの<a href="../text01/page08.html">整数の乱数</a>を20個追加し、それらを昇順ソートしてみましょう。
 </p>
 
 <div class="info">
