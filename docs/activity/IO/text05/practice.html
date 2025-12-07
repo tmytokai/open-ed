@@ -30,7 +30,7 @@
 <p>
 <b>仕様:</b>
 <ol>
-<li>INT (6ピン) にタクトスイッチを接続する</li>
+<li>RA2 をINT ピンとしてタクトスイッチを接続する</li>
 <li>プログラムを実行すると int 型変数 count の値を表示し続ける</li>
 <li>タクトスイッチを押すと INT 割り込みが生じて count の値が 1 増える</li>
 <li>INT 割り込みを行うタイミングは「立ち下がり」とする(※)</li>
@@ -49,19 +49,7 @@
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、INT割り込み(USE_RB0INT)のコメントアウトを解除します。 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Modlules/rb0int.c を開いてコメントに従って設定します。 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_5_1_isr.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開いて例6を有効にします。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
@@ -74,34 +62,35 @@
 <pre class="wrap">
 <b>ピン配置設定・回路接続方法:</b>
 
-1: RA2
-2: RA3
-3: CCP4 (PWM) -- 圧電スピーカ
-4: MCLR/VPP -- PICkit の 1: NMCLR
-5: VSS -- GND
-(*)6: RB0/INT (GPIO入力/INT割り込み) -- タクトスイッチ ※ 実際には回路に変更はありません
-7: RB1
-8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
-9: CCP1 (PWM) -- オシロスコープ
+01: VDD(3.3V)
+02: RA5
+03: (*)RA4/PWM2 -- 圧電スピーカ ※ 配線済
+04: MCLR/VPP -- PICKit の 1: NMCLR ※ プルアップ抵抗不要
+05: RC5
+06: RC4
+07: RC3
+08: RC6
+09: RC7
+10: RB7/PWM1 -- オシロスコープ
 
-10: RB4
-11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
-12: ICSPCLK -- PICkit の 5: PGC
-13: ICSPDAT -- PICkit の 4: PGD
-14: VDD -- 3.3V
-15: RA6
-16: RA7
-17: RA0 (GPIO出力) -- LED
-18: AN1 (ADC) -- 可変抵抗の中央ピン
+11: RB6
+12: RB5/Tx -- RN-42 の J2-7 : Rx
+13: RB4/Rx -- RN-42 の J2-6 : Tx
+14: RC2
+15: RC1/ANC1 -- 可変抵抗の中央ピン
+16: RC0 (GPIO出力) -- LED
+(*)17: RA2/INT -- タクトスイッチ ※ 実際には回路に変更はありません
+18: ICSPCLK(PGC) -- PICKit の 5: PGC
+19: ICSPDAT(PGD  -- PICKit の 4: PGD
+20: VSS(GND)
+
 </pre>
 </div>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 指定場所に「rb0int.c」と「main.c」と「isr.c」を記入してください。
+<span class="olradio"><input type="radio" name="p1"></span> 提出物はありません。
 </p>
-
-</div>
 
 <br>
 <p>
@@ -112,12 +101,10 @@
 <b>仕様:</b>
 </p>
 <ol>
-<li>タイマーとして 16bit タイマーの Timer1 を使う</li>
-<li>Timer1 の動作クロックは FOSC/4 = 1 MHz とする</li>
-<li>Timer1 の prescale は x8 とする</li>
-<li>プログラムを実行すると int 型変数 count の値を表示し続ける</li>
-<li>500 ミリ秒毎にタイマー割り込みが生じて count の値が 1 増える</li>
-<li>タクトスイッチを押すと INT 割り込みが生じて count の値が 0 にリセットされる</li>
+<li>タイマー1と3を使う</li>
+<li>プログラムを実行すると count1 と count3 の値を表示し続ける</li>
+<li>100 ミリ秒毎にタイマー1の割り込みが生じて count1 の値が 1 増える</li>
+<li>500 ミリ秒毎にタイマー3の割り込みが生じて count3 の値が 1 増える</li>
 </ol>
 
 </div>
@@ -127,49 +114,32 @@
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> プロジェクト IO_5_1 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
+<span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> setting.h を開き、一旦全ての機能をオフにします。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> シリアル通信(USE_UART)、INT 割り込み(USE_RB0INT)、Timer 1 割り込み(USE_TIMER1)のコメントアウトを解除します。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Modlules/timer.c を開きます。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> Timer 1 を使うので、Timer 1 の初期化関数( void init_timer1( void )をコメントに従って設定します。 
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_2_main.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_5_2_isr.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
+<span class="olradio"><input type="radio" name="p2"></span> main.c を開いて例7を有効にします。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 回路には変更ありません。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 指定場所に「timer.c」と「main.c」と「isr.c」を記入してください。
+<span class="olradio"><input type="radio" name="p2"></span> 提出物はありません。
 </p>
 
 </div>
 
 <br>
+<br>
 <p>
-<input type="checkbox"><b>(追加課題) 演習 5-3 (個人PC):</b> コンペア割り込みとタイマー割り込みを組み合わせて PWM 出力をしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 5-3 (個人PC):</b> タイマー割り込みを使ってLEDを点灯させてみましょう。
 </p>
 <div class="info">
 <p>
 <b>仕様:</b>
 </p>
 <ol>
-<li>コンペア出力モジュールとして CCP1 を使用する</li>
-<li>CCP1 の出力ピンは 9 pin とする</li>
-<li>CCP1 に接続するタイマーとして Timer1 を使う ※ コンペアモードではTimer1しか接続できません</li>
-<li>Timer1 の動作クロックは FOSC/4 = 1 MHz とする</li>
-<li>Timer1 の prescale は x8 とする</li>
-<li>タクトスイッチを離している時は PWM周期 16 ミリ秒、パルス幅 8 ミリ秒</li>
-<li>タクトスイッチを押している時は PWM周期 8 ミリ秒、パルス幅 6 ミリ秒</li>
+<li>タイマー1だけを使う(タイマー3の設定をコメントアウトする)</li>
+<li>RC0に接続されているLEDを使用する</li>
+<li>500 ミリ秒点灯 → 500ミリ秒消灯を繰り返す</li>
 </ol>
 
 </div>
@@ -181,32 +151,127 @@
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
+<span class="olradio"><input type="radio" name="p3"></span> main.c を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> setting.h を開き、一旦全ての機能をオフにします。
+<span class="olradio"><input type="radio" name="p3"></span> 仕様に従って main.c の内容を書き換えます。run関数の内容は以下の内容としてください。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> デジタル入力(USE_INPUT)、タイマー 1 割り込み(USE_TIMER1)、コンペア割り込み(USE_CCP1_COMPARE) のコメントアウトを解除します。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Modlules/timer.c の設定は演習 5-2 のままです。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> Modlules/ccp_compare.c を開きます。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> CCP1 を使うので、CCP1 の初期化関数( void init_ccp1_compare( void )をコメントに従って設定します。 
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> main.c を開き、ファイルの中身を<a href="./src/IO_5_3_main.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_5_3_isr.txt">テンプレート</a>の内容に置き換えて下さい。
-<br>
-<span class="olradio"><input type="radio" name="p3"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
-<br>
+<div class="info">
+<pre class="wrap">
+void run(void) 
+{
+    while(1);   
+    return;
+}
+</pre>
+</div>
 <span class="olradio"><input type="radio" name="p3"></span> 回路には変更ありません。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「ccp_compare.c」と「main.c」と「isr.c」を記入してください。
+<span class="olradio"><input type="radio" name="p3"></span> 指定場所に「作成したソースコード」を記入してください。
+</p>
+</div>
+
+
+<br>
+<br>
+<p>
+<input type="checkbox"><b>演習 5-4 (個人PC):</b> INT割り込みとタイマー割り込みを組み合わせてみましょう。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li>タイマー3を使う(タイマー1の処理部はそのまま)</li>
+<li>プログラムを実行すると count3 の値を表示し続ける</li>
+<li>100 ミリ秒毎にタイマー3の割り込みが生じて count3 の値が 1 増える</li>
+<li>タクトスイッチを押すと INT 割り込みが生じて count3 の値が 0 にリセットされる</li>
+</ol>
+
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> プロジェクト「IO_5_2」を「IO_5_3」にコピーします(プロジェクト名を右クリックして Copy を選択)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> プロジェクト IO_5_2 を閉じます(プロジェクト名を右クリックして Close を選択)。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> main.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 仕様に従って main.c の内容を書き換えます。run関数の内容は以下の内容としてください。
+<br>
+<div class="info">
+<pre class="wrap">
+void run(void) 
+{
+    while(1){
+        printf("count3= %d\r\n",count3);
+        __delay_ms(1000);        
+    }  
+    return;
+}
+</pre>
+</div>
+<span class="olradio"><input type="radio" name="p4"></span> 回路には変更ありません。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「作成したソースコード」を記入してください。
 </p>
 
 </div>
+
+<br>
+<br>
+<p>
+<input type="checkbox"><b>演習 5-5 (個人PC):</b> アラームを作ってみましょう。
+</p>
+<div class="info">
+<p>
+<b>仕様:</b>
+</p>
+<ol>
+<li>PWM2につながっている圧電スピーカーを使う</li>
+<li>アラームがOFFのときにタクトスイッチを押すとINT割り込みが生じてアラームがONになる</li>
+<li>アラームがONになるとLEDが点滅しはじめて3秒後にブザー(PWM周期7600μ秒、PWM幅3800μ秒)が鳴る</li>
+<li>アラームがONのときにタクトスイッチを押すとINT割り込みが生じてアラームがOFFになる</li>
+<li>アラームがOFFになるとLEDか消えて点滅が止まる。もしブザーが鳴ってたら音が止まる</li>
+</ol>
+
+</div>
+<div class="olradio">
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> プロジェクト「IO_5_3」を「IO_5_4」にコピーします(プロジェクト名を右クリックして Copy を選択)。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> プロジェクト IO_5_3 を閉じます(プロジェクト名を右クリックして Close を選択)。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> main.c を開きます。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 仕様に従って main.c の内容を書き換えます。run関数の内容は以下の内容としてください。
+<br>
+<div class="info">
+<pre class="wrap">
+void run(void) 
+{
+    pwm2(7600,0);
+    while(1);   
+    return;
+}
+</pre>
+</div>
+<span class="olradio"><input type="radio" name="p5"></span> 回路には変更ありません。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 書き込みボタンを押して正常に動作する事を確認して下さい。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「作成したソースコード」を記入してください。
+</p>
+
+</div>
+
 
 <br>
 <script>PreNext(2,1)</script>
