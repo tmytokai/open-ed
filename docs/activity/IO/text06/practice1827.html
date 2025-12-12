@@ -12,31 +12,29 @@
 <nav class="brcr">
 <ol>
 <li><a href="../">アクティビティ: 入出力インターフェース</a></li>
-<li>学習項目: [7] I2C</li>
+<li>学習項目: [6] SPI</li>
 <li><script>GetTitle()</script></li>
 </ol>
 </nav>
 
 <h2><script>GetTitle()</script></h2>
 
-<br>
-<h2><a href="./page01.html">1. I2C とは</a></h2>
 
+<br>
+<h2><a href="./page01.html">1. SPI とは</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 7-1 (個人PC):</b> I2C 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
+<input type="checkbox"><b>演習 6-1 (個人PC):</b> SPI 通信で音声合成 LSI (ATP3011F1-PU)に文字列を送信し、任意の音声を出力をしてみましょう。プログラムの仕様は以下の通りです。
 </p>
 <div class="info">
 <p>
 <b>仕様 : </b>
 
 <ol>
-<li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を I2C 経由で使用する</li>
+<li>「音声合成ＬＳＩ　ＡＴＰ３０１１ (ATP3011F1-PU)」を SPI 経由で使用する</li>
 <li> PIC 側をマスターとする</li>
-<li> ATP3011 のI2Cアドレスは「0x2E」とする</li>
-<li> RC3を「SDA」とする</li>
-<li> RC4を「SCL」とする</li>
+<li> SPI のモードは「MODE0」、ビットオーダーは「MSBFIRST」、クロックは「1 MHz」とする</li>
 </ol>
 
 </div>
@@ -57,18 +55,19 @@
 <tr>
 <td class="center">2</td>
 <td class="center">Rx</td>
-<td rowspan="2"class="center" > <b>UART 接続用ピン</b> </td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
 <td class="center">3</td>
 <td class="center">Tx</td>
+<td class="center">未接続</td>
 </tr>
 
 <tr>
 <td class="center">4</td>
 <td class="center">SMOD0</td>
-<td rowspan="2" class="yellow"> 通信モードの設定<br>SMOD0=0、SMOD1=0 → SPI(MODE0)<br>SMOD0=0、SMOD1=1 → I2C<br>SMOD0=1、SMOD1=1 → UART</td>
+<td rowspan="2"> 通信モードの設定<br>SMOD0=0、SMOD1=0 → SPI(MODE0)<br>SMOD0=0、SMOD1=1 → I2C</td>
 </tr>
 <tr>
 <td class="center">5</td>
@@ -211,7 +210,7 @@
 <tr>
 <td class="center">27</td>
 <td class="center">SDA</td>
-<td rowspan="2"class="yellowcenter" > <b>I2C 接続用ピン</b><br><br>要プルアップ抵抗(5KΩ程度) </td>
+<td rowspan="2"class="center" > <b>I2C 接続用ピン</b><br><br>要プルアップ抵抗(5KΩ程度) </td>
 </tr>
 <tr>
 <td class="center">28</td>
@@ -222,65 +221,25 @@
 
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_6_1」を「IO_7_1」にコピーします(プロジェクト名を右クリックして Copy を選択)。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト「IO_5_2」または「IO_5_3」を「IO_6_1」にコピーします(プロジェクト名を右クリックして Copy を選択)。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_6_1 を閉じます(プロジェクト名を右クリックして Close を選択)。
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクト IO_5_2 または IO_5_3 を閉じます(プロジェクト名を右クリックして Close を選択)。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> (もし開きっぱなしになっていたら) 前のプロジェクトで開いていたソースを全て閉じます。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> main.c を開いて例9を有効にします。
+<span class="olradio"><input type="radio" name="p1"></span> (IDEのバージョンによっては) プロジェクトのプロパティを開き、そのまま「Apply」ボタンを押して設定ファイルを更新します。※ 通常は自動で設定ファイルが更新されますが、バージョンによってはバグのため自動更新されないようです
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 仕様に従って main.c の内容を書き換えます。run関数の内容は以下の内容としてください。
+<span class="olradio"><input type="radio" name="p1"></span> setting.h を開き、一旦全ての機能をオフにします。
 <br>
-<div class="info">
-<pre class="wrap">
-void run(void) 
-{
-    int lng = 0;
-    char data[64];
-    
-    __delay_ms(100); // 子機の初期化待ち(時間は適当)
-
-    while(1){
-        
-       int c = getch();
-       if( c != EOF && c != '\n'){
-           
-           printf("%c",c);
-           data[lng++] = (char)c;
-
-           if( c == '\r' ){
-                data[lng]='\0';
-                printf( "\r\nsend: %s\r\n", data );
-
-                // 送信
-                i2c_start();
-                i2c_putch( ( 0x2E &lt;&lt; 1) + 0 ); // ATP3011のI2Cアドレス(0x2E, 7bit) + write指示(0)
-                for(int i=0; i &lt; lng; ++i ) i2c_putch(data[i]);
-                i2c_stop();                
-                
-                __delay_ms(50);
-
-                lng = 5; // 5文字受信
-                
-                // 受信
-                i2c_start();
-                i2c_putch( ( 0x2E &lt;&lt; 1) + 1 ); // ATP3011のI2Cアドレス(0x2E, 7bit) + read指示(1)
-                for(int i=0; i &lt; lng-1; ++i ) data[i] = i2c_getch(0); // ACK を送信して受信続行
-                data[lng-1] = i2c_getch(1); // 最後にNACK を送信して受信終了
-                i2c_stop();
-                
-                data[lng]='\0';
-                printf( "recv: %s\r\n", data );
-                lng = 0;
-           }           
-       }
-    }
-}
-</pre>
-</div>
+<span class="olradio"><input type="radio" name="p1"></span> シリアル通信(USE_UART)、SPI(USE_MSSP1_SPI) のコメントアウトを解除します。 
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> ATP3011を「I2C」モードに変更します。
+<span class="olradio"><input type="radio" name="p1"></span> Modlules/mssp_spi.c を開き、内容を確認します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> main.c を開き、ファイルの中身を<a href="./src/IO_6_1_main.txt">テンプレート</a>の内容に置き換えて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> isr.c を開き、ファイルの中身を<a href="./src/IO_6_1_isr.txt">テンプレート</a>の内容に置き換えて下さい ※ isr 関数の中身を空にしています
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 穴埋め問題になっていますので、プログラム内のコメントを参考に？のところを正しい内容に修正してください。
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 回路を作成します。
 </p>
@@ -293,27 +252,25 @@ void run(void)
 <pre class="wrap">
 <b>ピン配置設定・回路接続方法:</b>
 
-01: VDD(3.3V)
-02: RA5
-03: (*)RA4/PWM2 -- 圧電スピーカ ※ 配線済
-04: MCLR/VPP -- PICKit の 1: NMCLR ※ プルアップ抵抗不要
-05: RC5
-(*)06: RC4/SCL -- ATP3011 の 28 : SCL ※要プルアップ抵抗
-(*)07: RC3/SDA -- ATP3011 の 27 : SDA ※要プルアップ抵抗
-(*)08: RC6 ※ ジャンパケーブルを外す
-(*)09: RC7 ※ ジャンパケーブルを外す
-10: RB7/PWM1 -- オシロスコープ
+1: RA2
+2: RA3
+3: CCP4 (PWM) -- 圧電スピーカ
+4: MCLR/VPP -- PICkit の 1: NMCLR
+5: VSS -- GND
+6: RB0/INT (GPIO入力/INT割り込み) -- タクトスイッチ
+(*)7: SDI1 (SPI) -- ATP3011 の 18 : SDO
+8: Rx (UART) -- RN-42 の J2-6 : TX (UART)
+9: CCP1 (PWM) -- オシロスコープ
 
-11: RB6
-12: RB5/Tx -- RN-42 の J2-7 : Rx
-13: RB4/Rx -- RN-42 の J2-6 : Tx
-14: RC2
-15: RC1/ANC1 -- 可変抵抗の中央ピン
-16: RC0 (GPIO出力) -- LED
-17: RA2/INT -- タクトスイッチ
-18: ICSPCLK(PGC) -- PICKit の 5: PGC
-19: ICSPDAT(PGD  -- PICKit の 4: PGD
-20: VSS(GND)
+(*)10: SCK1 (SPI) -- ATP3011 の 19 : SCK
+11: Tx (UART) -- RN-42 の J2-7 : RX (UART)
+12: ICSPCLK -- PICkit の 5: PGC
+13: ICSPDAT -- PICkit の 4: PGD
+14: VDD -- 3.3V
+(*)15: SDO1 (SPI) -- ATP3011 の 17 : SDI
+(*)16: RA7/CS (SPI) -- ATP3011 の 16 : CS
+17: RA0 (GPIO出力) -- LED
+18: AN1 (ADC) -- 可変抵抗の中央ピン
 </pre>
 </div>
 <p>
@@ -321,36 +278,61 @@ void run(void)
 </p>
 <div class="info">
 <pre class="wrap">
-(1) PIC が起動したら「# → V → エンター」の順に入力し、バージョンが表示されるのを確認する
+(1) PIC が起動したら「@を数回入力 → # → V → エンター → @を数回入力」の順に入力し、バージョンが表示されるのを確認する
 
 (表示例)
-#V
-send: #V
-recv: VF1a>
+dummy(ff) : >
+dummy(ff) : >
+#(23) : >
+V(56) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : V
+dummy(ff) : F
+dummy(ff) : 1
+dummy(ff) : a
+dummy(ff) : >
+dummy(ff) : >
 
-(2) 「# → J(大文字) → エンター」の順に入力するとチャイムが鳴るのを確認する
+
+(2) 「@を数回入力 → # → J(大文字) → エンター → @を数回入力」の順に入力するとチャイムが鳴るのを確認する
 
 (表示例)
-#J
-send: #J
-recv: *****
+dummy(ff) : >
+dummy(ff) : >
+#(23) : >
+J(4a) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : >
+dummy(ff) : >
 
-(3) 「h → o → g → e → .(ドット) → エンター」の順に入力すると「ほげ」と発声するのを確認する
+
+(3) 「@を数回入力 → h → o → g → e → .(ドット) → エンター → @を数回入力」の順に入力すると「ほげ」と発声するのを確認する
 
 (表示例)
-hoge.
-send: hoge.
-recv: *****
+dummy(ff) : >
+dummy(ff) : >
+h(68) : >
+o(6f) : >
+g(67) : >
+e(65) : >
+.(2e) : >
+enter(d) : >
+dummy(ff) : *
+dummy(ff) : >
+dummy(ff) : >
+
 
 (4) 好きな音声を発生させる
 
 ※ 最後に '.'(ドット) エンター('\r')を送らないと発声しないので注意
+
 </pre>
 </div>
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> 指定場所に「main.c」を記入してください。
 </p>
-
 
 <br>
 <script>PreNext(2,1)</script>

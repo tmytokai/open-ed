@@ -76,6 +76,15 @@ text-align:center;
 border: 1px solid #000000;
 }
 
+td.yellowcenter{
+padding: 10px;
+vertical-align:middle;
+text-align:center;
+border: 1px solid #000000;
+background-color: yellow
+}
+
+
 td.left{
 padding: 10px;
 vertical-align:middle;
