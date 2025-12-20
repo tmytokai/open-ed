@@ -413,11 +413,63 @@ public class Main{
 </p>
 </div>
 
+
 <br>
+<p>
+<input type="checkbox"><b>演習 4-9 (個人):</b> 値が 10 の都市名だけ表示するように穴埋めをしてください。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var map = new HashMap&ltString, Integer&gt();
+
+        map.put( "函館", 10 );
+        map.put( "札幌", 25 );
+        map.put( "旭川", 10 );
+        map.put( "釧路", 10 );
+        map.put( "小樽", 50 );
+        map.put( "稚内", 90 );
+
+        System.out.println(map);
+
+        for( var i : ?) {
+            if( ? == 10 ){
+                System.out.println( ? );
+            }
+        }
+    }
+}
+
+結果:
+
+{函館=10, 札幌=25, 稚内=90, 小樽=50, 釧路=10, 旭川=10}
+函館
+釧路
+旭川
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> フォルダ「JAVABSC_4_9」を新規作成し、その中に移動します
 <br>
-<b>以下準備中</b>
+<span class="olradio"><input type="radio" name="p9"></span> フォルダ「JAVABSC_4_9」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
 <br>
+<span class="olradio"><input type="radio" name="p9"></span> 上のコードをコピーして、解答します。
 <br>
+<span class="olradio"><input type="radio" name="p9"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 
 <br>
@@ -425,7 +477,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 4-? (個人):</b> Integer 型のリストに -10 から 10 までの<a href="../text01/page08.html">整数の乱数</a>を20個追加し、それらを昇順ソートしてみましょう。
+<input type="checkbox"><b>演習 4-10 (個人):</b> Integer 型のリストに -10 から 10 までの<a href="../text01/page08.html">整数の乱数</a>を20個追加し、それらを「昇順」でソートしてみましょう。
 </p>
 
 <div class="info">
@@ -469,21 +521,114 @@ public class Main{
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_4_7」を新規作成し、その中に移動します
+<span class="olradio"><input type="radio" name="p10"></span> フォルダ「JAVABSC_4_10」を新規作成し、その中に移動します
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_4_7」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
+<span class="olradio"><input type="radio" name="p10"></span> フォルダ「JAVABSC_4_10」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 上のコードをコピーして、解答します。
+<span class="olradio"><input type="radio" name="p10"></span> 上のコードをコピーして、解答します。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> コンパイルして実行します。
+<span class="olradio"><input type="radio" name="p10"></span> コンパイルして実行します。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをしてください。
+<span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをしてください。
 <br>
-<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p10"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
 <br>
-<script>PreNext(5,4)</script>
+<p>
+<input type="checkbox"><b>演習 4-11 (個人):</b> String 型のリストに対して「降順」でソートした結果を見てみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var list = new ArrayList&ltString&gt();
+    	list.add( "baba" );
+    	list.add( "egasira" );
+    	list.add( "chiba" );
+    	list.add( "degawa" );
+    	list.add( "abe" );
+
+        System.out.println( "ソート実行前" );
+        System.out.println( list );
+
+        // 降順ソート実行
+        ?
+
+        System.out.println( "降順ソート実行後" );
+        System.out.println( list );
+    }
+}
+
+結果:
+
+ソート実行前
+[baba, egasira, chiba, degawa, abe]
+降順ソート実行後
+[egasira, degawa, chiba, baba, abe]
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p11"></span> フォルダ「JAVABSC_4_11」を新規作成し、その中に移動します
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> フォルダ「JAVABSC_4_11」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> コンパイルして実行します。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> チーム内で答え合わせをしてください。
+<br>
+<span class="olradio"><input type="radio" name="p11"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+<br>
+<h2><a href="./page05.html">5. 入れ子構造</a></h2>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 4-12 (個人):</b> <a href="./page05.html">ソース1</a>を修正して、2組の鈴木さんの身長を表示するプログラムを作成しましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+151
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p12"></span> フォルダ「JAVABSC_4_12」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> フォルダ「JAVABSC_4_12」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> <a href="./page05.html">ソース1</a>をコピーし、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+
+<br>
+<script>PreNext(6,5)</script>
 </body>
 </html>
