@@ -105,9 +105,7 @@ Java 以外のプログラミング言語でも似たような書き方をする
 </div>
 
 <p>
-なお<b>引数の型やラムダ式の戻り値の型を指定する必要はありません</b>。
-<br>
-この機能を「<b>型推論</b>」と呼びます。
+なお型推論が行われるので引数の型を指定する必要はありません(varも不要)</b>。
 </p>
 
 <p>
@@ -207,15 +205,13 @@ public class Main{
 </p>
 
 <p>
-ので気をつけて下さい(ソース 4参考)。
+ので気をつけて下さい(ソース 4)。
 </p>
 
 <div class="info">
-<input type="checkbox"> <b>ソース4: ラムダ式内でローカル変数を使うとコンパイルエラーが起きる</b>
+<input type="checkbox"> <b>ソース4: ラムダ式内でローカル変数にアクセスするとコンパイルエラーが起きる</b>
 <p>
-※ <a href="../../oop-basic/text01/page02.html">フィールド</a>にはアクセス可能
-<br>
-※ final が付いていればローカル変数も参照可能
+※ final が付いていればローカル変数もアクセス可能
 </p>
 <pre class="wrap">
 import java.lang.Runnable;
@@ -233,7 +229,31 @@ public class Main{
 </pre>
 </div>
 
+<p>
+ちなみに、このアクティビティの学習範囲外になりますが<a href="../../oop-basic/text01/page02.html">クラスフィールド</a>にはアクセス可能です(ソース5)。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース5: クラスフィールドにはアクセス可能</b>
+<p>
+
+<pre class="wrap">
+import java.lang.Runnable;
+ 
+public class Hoge{
+
+    int a = 0;
+
+    public void test(){
+        Runnable runnable;
+        runnable = () -> a = 1; // コンパイル通る
+    }
+}
+</pre>
+</div>
+
+
 <br>
-<script>PreNext(2,4)</script>
+<script>PreNext(2,5)</script>
 </body>
 </html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. スレッド</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: Java言語の基礎</a></li>
+<li>学習項目: [5] ラムダ式</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+スレッドはひとつのプログラム内で複数の処理を同時並行的に実行するための仕組みで、スレッドの処理内容を書く際にラムダ式が使われることが多いです。
+<br>
+ここではJavaでスレッドを利用する方法について学びます。
+</p>
+
+<p>
+まず最初にスレッドを作成します。
+<br>
+ラムダ式を使ってこのスレッド内で実行する処理内容を書きます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>スレッド作成</b>
+<pre class="wrap">
+var スレッド名 = new Thread( ()-&gt;{
+    処理内容
+    });
+
+</pre>
+</div>
+
+<p>
+次に作成したスレッドを実行します。
+<br>
+するとスレッドがいま動いているプログラム(メインスレッド)とは別に並行して動き始めます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>スレッド実行</b>
+<pre class="wrap">
+スレッド名.start()
+</pre>
+</div>
+
+<p>
+実行したスレッドの処理が終了するのを待ちたい時は次のように書きます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>スレッドが終了するまで待つ</b>
+<pre class="wrap">
+スレッド名.join()
+</pre>
+</div>
+
+<p>
+ではスレッドを使った例を示します。
+</p>
+
+<p>
+次のソース1を実行するとスレッドが2つ(thread1とthread2)作られます。
+<br>
+thread1は0.1秒おきに"thread1"と表示します。
+<br>
+一方thread2は0.5秒おきに"thread2"と表示します。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース1: スレッドの例</b>
+<pre class="wrap">
+import java.lang.Thread;
+
+public class Main {
+
+    // msecだけ停止する関数
+    public static void sleep(int msec){
+        try{
+            Thread.sleep(msec);
+        }
+        catch(InterruptedException e){}
+    }
+
+    public static void main(String[] args){
+
+        var thread1 = new Thread( ()-&gt;{
+            for(var i = 0; i &lt; 10; ++i ){
+                sleep(100);
+                System.out.println("thread1");
+            }
+        });
+
+        var thread2 = new Thread( ()-&gt;{
+            for(var i = 0; i &lt; 2; ++i ){
+                sleep(500);
+                System.out.println("thread2");
+            }
+        });
+
+        // 各スレッドを実行
+        thread1.start();
+        thread2.start();
+
+        // 各スレッドが停止するまで待つ
+        try{
+            thread1.join();
+            thread2.join();
+        }
+        catch(InterruptedException e){}
+    }
+}
+</pre>
+</div>
+
+<p>
+結果は次のようになります。
+<br>
+2つのスレッドが並行して動いていることがわかります。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"> <b>ソース1の実行結果</b>
+<pre class="wrap">
+thread1
+thread1
+thread1
+thread1
+thread2
+thread1
+thread1
+thread1
+thread1
+thread1
+thread2
+thread1
+</pre>
+</div>
+
+
+
+<br>
+<script>PreNext(5,5)</script>
+</body>
+</html>

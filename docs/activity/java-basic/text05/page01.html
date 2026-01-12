@@ -39,6 +39,7 @@ Java の「<b>関数型インターフェース</b>」とは抽象メソッド�
 </p>
 <p>
 例えば、Runnable インターフェースの変数 runnable と、引数が Integer 型、戻り値が String 型である Function インターフェースの変数 function はソース 1 のようにして定義します。
+<br>
 なお Runnable インターフェースを使いたい時は java.lang.Runnable を、Funtion　インターフェースを使いたい時は  java.util.function.Function をインポートします。
 </p>
 
@@ -86,6 +87,10 @@ public class Main{
 
         runnable = Main::myrunnable;
         function = Main::myfunction;
+
+        // (注意) 型推論に失敗するので下のようにvarを使って初期化することはできない
+        // var runnable = Main::myrunnable;
+        // var function = Main::myfunction;
     }
 }
 </pre>
@@ -203,6 +208,6 @@ piyo
 
 
 <br>
-<script>PreNext(1,4)</script>
+<script>PreNext(1,5)</script>
 </body>
 </html>

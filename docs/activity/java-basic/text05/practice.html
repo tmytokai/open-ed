@@ -126,7 +126,7 @@ hoge=790
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-3 (個人):</b> リスト + forEach + ラムダ式を使ってみましょう。
+<input type="checkbox"><b>演習 5-3 (個人):</b> リストに対して forEach を使ってみましょう。
 </p>
 
 <div class="info">
@@ -135,7 +135,7 @@ import java.util.ArrayList;
 
 public class Main{
 
-    // (注) Javaのラムダ式はローカル変数の値を書き換えられないので static int で定義しています
+    // (注) Javaのラムダ式はローカル変数にアクセスできないので static int で定義しています
     static private int goukei;
 
     public static void main(String[] args) {
@@ -181,7 +181,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-4 (個人):</b> マップ + forEach + ラムダ式を使ってみましょう。
+<input type="checkbox"><b>演習 5-4 (個人):</b> マップに対して forEach を使ってみましょう。
 </p>
 
 <div class="info">
@@ -198,8 +198,7 @@ public class Main{
         map.put( "旭川", 56 );
         map.put( "釧路", 34 );
 
-        // key がキー、value が値です
-        // value が34であるkeyを全て表示してください
+        // 値が34である都市を全て表示してください
         map.forEach( (key,value) -&gt; {
             if( ? ){
               System.out.println( ? );
@@ -232,12 +231,79 @@ public class Main{
 </div>
 
 <br>
+<p>
+<input type="checkbox"><b>演習 5-5 (個人):</b> <a href="../text04/page05.html">こちら</a>のソース1で与えた入れ子構造のマップに対して forEach を使ってみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var sincho = new HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt;();
+
+        sincho.put("1組", new HashMap&lt;String, Integer&gt;() );
+        sincho.get("1組").put( "安倍", 162 );
+        sincho.get("1組").put( "田中", 132 );
+
+        sincho.put("2組", new HashMap&lt;String, Integer&gt;() );
+        sincho.get("2組").put( "鈴木", 151 );
+        sincho.get("2組").put( "本田", 172 );
+
+        // 下の結果の様に"組,名前,身長"の順に表示する
+        sincho.forEach( (key1,value1) -&gt; {
+            ?.forEach( (key2,value2) -&gt; {
+                System.out.println( ? );
+            });
+        });
+    }
+}
+
+
+結果:
+
+※ <a href="../text04/page02.html">こちら</a>で説明したようにHashMapの要素はputした順には保存されないことに注意する
+
+2組,鈴木,151
+2組,本田,172
+1組,田中,132
+1組,安倍,162
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+<br>
+<br>
+<p>
+<b>以下準備中</b>
+</p>
+
+<br>
 <h2><a href="./page04.html">4. StreamAPI</a></h2>
 
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-5 (個人):</b> StreamAPIを使って「値が30以上かつ40以下の都市名」を表示してみましょう。
+<input type="checkbox"><b>演習 5-? (個人):</b> StreamAPIを使って「値が30以上かつ40以下の都市名」を表示してみましょう。
 </p>
 
 <div class="info">
@@ -270,9 +336,9 @@ public class Main{
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」を新規作成し、その中に移動します 
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_?」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_5」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_?」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
 <span class="olradio"><input type="radio" name="p5"></span> 上のコードをコピーして、解答します。
 <br>
@@ -286,6 +352,50 @@ public class Main{
 
 
 <br>
-<script>PreNext(5,4)</script>
+<h2><a href="./page05.html">5. スレッド</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 5-? (個人):</b> <a href="./page05.html">ソース1</a>を修正して、以下の様な仕様のプログラムを作成しましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+仕様:
+
+・スレッドを3つ(thread1、thread2、thread3)作る
+・thread1の処理内容: 3秒待ってから hoge と1回だけ表示する
+・thread2の処理内容: 1秒待ってから fuga と1回だけ表示する
+・thread3の処理内容: 2秒待ってから piyo と1回だけ表示する
+
+結果:
+
+fuga
+piyo
+hoge
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_5_?」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_5_?」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> <a href="./page05.html">ソース1</a>をコピーし、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+
+<br>
+<script>PreNext(6,5)</script>
 </body>
 </html>
