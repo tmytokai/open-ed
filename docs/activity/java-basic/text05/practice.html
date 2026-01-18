@@ -247,6 +247,8 @@ public class Main{
         sincho.put("1組", new HashMap&lt;String, Integer&gt;() );
         sincho.get("1組").put( "安倍", 162 );
         sincho.get("1組").put( "田中", 132 );
+        sincho.get("1組").put( "佐藤", 148 );
+        sincho.get("1組").put( "山田", 179 );
 
         sincho.put("2組", new HashMap&lt;String, Integer&gt;() );
         sincho.get("2組").put( "鈴木", 151 );
@@ -269,6 +271,8 @@ public class Main{
 2組,鈴木,151
 2組,本田,172
 1組,田中,132
+1組,山田,179
+1組,佐藤,148
 1組,安倍,162
 
 </pre>
@@ -290,20 +294,50 @@ public class Main{
 </p>
 </div>
 
-
-<br>
 <br>
 <p>
-<b>以下準備中</b>
+<input type="checkbox"><b>演習 5-6 (個人):</b> 演習5-5で考えた入れ子構造のマップに対し、クラスが"1組"で、名前に"田"が含まれる人の身長を表示してください
 </p>
+
+<p>
+<pre class="wrap">
+(ヒント) String型変数 str に "文字列" が含まれているか判定する方法
+
+if( str.contains("文字列") ){
+　〜
+}
+</pre>
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+1組,田中,132
+1組,山田,179
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> 「JAVABSC_5_5」をフォルダごとコピーし、フォルダ名を「JAVABSC_5_6」とします。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> Main.java を開いて解答します。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 <br>
 <h2><a href="./page04.html">4. StreamAPI</a></h2>
 
-
 <br>
 <p>
-<input type="checkbox"><b>演習 5-? (個人):</b> StreamAPIを使って「値が30以上かつ40以下の都市名」を表示してみましょう。
+<input type="checkbox"><b>演習 5-7 (個人):</b> StreamAPIを使って「気温が30以上かつ40以下の都市名と温度」を表示してみましょう。
 </p>
 
 <div class="info">
@@ -314,14 +348,15 @@ public class Main{
 
     public static void main(String[] args) {
 
-    	var map = new HashMap&lt; String, Integer &gt;();
-        map.put( "札幌", 12 );
-        map.put( "函館", 34 );
-        map.put( "旭川", 56 );
-        map.put( "釧路", 34 );
+    	var kion = new HashMap&lt; String, Integer &gt;();
+        kion.put( "札幌", 12 );
+        kion.put( "函館", 38 );
+        kion.put( "旭川", 56 );
+        kion.put( "千歳", 32 );
+        kion.put( "釧路", 9 );
 
-        // 値が30以上かつ40以下の都市名を表示して下さい
-        map.entrySet().stream()
+        // 気温が30以上かつ40以下の都市名と温度を"都市名,身長"の順に表示する
+        ?.entrySet().stream()
             .filter( i -&gt; ? &amp;&amp; ? ) // 中間操作
             .forEach( i -&gt; System.out.println( ? ) ); // 終端操作
     }
@@ -329,26 +364,32 @@ public class Main{
 
 結果:
 
-函館
-釧路
+函館,38
+千歳,32
 </pre>
 </div>
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_?」を新規作成し、その中に移動します 
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_5_7」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> フォルダ「JAVABSC_5_?」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<span class="olradio"><input type="radio" name="p7"></span> フォルダ「JAVABSC_5_7」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 上のコードをコピーして、解答します。
+<span class="olradio"><input type="radio" name="p7"></span> 上のコードをコピーして、解答します。
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> コンパイルして実行します。 
+<span class="olradio"><input type="radio" name="p7"></span> コンパイルして実行します。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> チーム内で答え合わせをしてください。 
+<span class="olradio"><input type="radio" name="p7"></span> チーム内で答え合わせをしてください。 
 <br>
-<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p7"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
+
+<br>
+<br>
+<p>
+<b>以下準備中</b>
+</p>
 
 
 <br>

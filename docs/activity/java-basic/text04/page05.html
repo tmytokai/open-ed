@@ -39,6 +39,8 @@ public class Main{
         sincho.put("1組", new HashMap&lt;String, Integer&gt;() );
         sincho.get("1組").put( "安倍", 162 );
         sincho.get("1組").put( "田中", 132 );
+        sincho.get("1組").put( "佐藤", 148 );
+        sincho.get("1組").put( "山田", 179 );
 
         sincho.put("2組", new HashMap&lt;String, Integer&gt;() );
         sincho.get("2組").put( "鈴木", 151 );
@@ -57,7 +59,9 @@ public class Main{
 <div class="info">
 <input type="checkbox"> <b>ソース 1 の実行結果</b>
 <pre class="wrap">
-{2組={鈴木=151, 本田=172}, 1組={田中=132, 安倍=162}}
+※ HashMapの要素はputした順には保存されないことに注意する
+
+{2組={鈴木=151, 本田=172}, 1組={田中=132, 山田=179, 佐藤=148, 安倍=162}}
 </pre>
 </div>
 
