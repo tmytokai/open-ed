@@ -42,26 +42,21 @@ print(f'サンプリング周波数 fs = {fs} Hz' )
 print(f'信号長 N = {N} 点' )
 print(f'再生時間 {N/fs} 秒' )
 
-# 乗算器の乗数 a と b をセット
-# a と b は負数でも可だが、|a| + |b| が 1.0 を超えないようにする
 a = ?
 b = ?
 
-# 遅延素子の遅延時刻 n の計算
-# delay に遅らせる秒数をセット
-delay = ?
-n = int(delay*fs)
-
-# ディジタル線形フィルタ H(z) = a + b・z^{-n}
+# ディジタル線形フィルタ H(z) = b*{1/(1-a・z^{-1})}
 # 出力信号は y[i]
 for i in range(N):
+    # 前段の乗算器
     y[i] = ?
-    if i-n >= 0 : # i-n が負の場合は第2項を足さない
+    # 後段のフィードバック機構
+    if i-1 >= 0 : # i-1 が負の場合は第2項を足さない
         y[i] += ?
 
 # y[i] を wave ファイルとして保存
 print('')
-write_wavedata('DF_1_1_out.wav',fs,y)
+write_wavedata('DF_1_2_out.wav',fs,y)
 
 print('')
 print('フィルタリング前')
