@@ -337,7 +337,7 @@ if( str.contains("文字列") ){
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-7 (個人):</b> StreamAPIを使って「気温が30以上かつ40以下の都市名と温度」を表示してみましょう。
+<input type="checkbox"><b>演習 5-7 (個人):</b> StreamAPIを使って「気温が30以上かつ40以下の都市名と気温」を表示してみましょう。
 </p>
 
 <div class="info">
@@ -355,7 +355,7 @@ public class Main{
         kion.put( "千歳", 32 );
         kion.put( "釧路", 9 );
 
-        // 気温が30以上かつ40以下の都市名と温度を"都市名,身長"の順に表示する
+        // 気温が30以上かつ40以下の都市名と気温を"都市名,気温"の順に表示する
         ?.entrySet().stream()
             .filter( i -&gt; ? &amp;&amp; ? ) // 中間操作
             .forEach( i -&gt; System.out.println( ? ) ); // 終端操作
