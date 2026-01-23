@@ -76,20 +76,44 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習1-2 (個人):</b> 同様に、伝達関数
+<input type="checkbox"><b>演習1-2 (個人):</b> 伝達関数
 </p>
 \begin{align*}
-\textrm{H}(z) = b \cdot \left \{ \frac{1}{1- a \cdot z^{-1}} \right \}
+\textrm{H}(z) = b \cdot \frac{1}{1- a \cdot z^{-1}}
 \end{align*}
 <p>
-を持つフィルタ、つまり乗算器と<a href="./page10.html#ex7">フィードバック機構をもつフィルタ</a>を直列結合したフィルタを作ってみましょう。
+を持つフィルタを作ってみましょう。
 </p>
 <p>
 なお $a = 0.87$、$b=0.14$ とします。
 </p>
+<br>
+<p>
+(ヒント) $\textrm{H}_1(z)$ を乗算器
+</p>
+
+\begin{align*}
+\textrm{H}_1(z) = b
+\end{align*}
+
+<p>
+$\textrm{H}_2(z)$ を<a href="./page10.html#ex7">フィードバック機構をもつフィルタ</a>
+</p>
+
+\begin{align*}
+\textrm{H}_2(z) = \frac{1}{1- a \cdot z^{-1}}
+\end{align*}
+
+<p>
+としたとき、$\textrm{H}(z)$ は $\textrm{H}_1(z)$ と $\textrm{H}_2(z)$ を<a href="./page08.html#seri">直列結合</a>したフィルタであるので、ブロック図は以下のようになる。
+</p>
+<p>
+<img src="./img/practice-fig1.png" alt="">
+</p>
+
 <div class="olradio">
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 音声は「 DF_1_1.wav 」を使用します。
+<span class="olradio"><input type="radio" name="p2"></span> 音声は引き続き「 DF_1_1.wav 」を使用します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Jupyter Notebook を起動します。 
 <br>
