@@ -25,6 +25,12 @@
 ここではJavaでスレッドを利用する方法について学びます。
 </p>
 
+<br>
+<h2>
+(1) スレッド作成
+</h2>
+
+<br>
 <p>
 まず最初にスレッドを作成します。
 <br>
@@ -95,15 +101,15 @@ public class Main {
     public static void main(String[] args){
 
         var thread1 = new Thread( ()-&gt;{
-            for(var i = 0; i &lt; 10; ++i ){
+            for(var i = 0; i &lt; 5; ++i ){
                 sleep(100);
                 System.out.println("thread1");
             }
         });
 
         var thread2 = new Thread( ()-&gt;{
-            for(var i = 0; i &lt; 2; ++i ){
-                sleep(500);
+            for(var i = 0; i &lt; 5; ++i ){
+                sleep(100);
                 System.out.println("thread2");
             }
         });
@@ -134,20 +140,300 @@ public class Main {
 <input type="checkbox"> <b>ソース1の実行結果</b>
 <pre class="wrap">
 thread1
+thread2
+thread2
 thread1
-thread1
+thread2
 thread1
 thread2
 thread1
 thread1
-thread1
-thread1
-thread1
 thread2
-thread1
 </pre>
 </div>
 
+<br>
+<br>
+<h2>
+(2) デッドロック
+</h2>
+
+<br>
+<p>
+「デッドロック」とは、複数のスレッドが同時に同じリソース(ファイルやメモリや周辺機器などの資源)を利用しようとしたときに、互いにリソースの開放待ち状態におちいって膠着状態となってしまう状況を言います。
+<br>
+例えば下のソース2を実行してください(ちょっと長いですが、main関数のところだけ見れば何をやっているのか分かると思います)。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2: デッドロックの例</b>
+<pre class="wrap">
+import java.lang.Thread;
+
+public class Main {
+
+    static int resource1 = 0;
+    static int resource2 = 0;
+
+    // msecだけ停止する関数
+    public static void sleep(int msec){
+        try{
+            Thread.sleep(msec);
+        }
+        catch(InterruptedException e){}
+    }
+
+    // リソース1をロックする関数
+    public static void lock_resource1(){
+        while(resource1 == 1) sleep(10); // リソース1のロック解除待ち
+        resource1 = 1;
+        System.out.println("リソース1 ロック");
+        sleep(10);
+    }
+
+    // リソース1のロックを解除する関数
+    public static void unlock_resource1(){
+        resource1 = 0;
+        System.out.println("リソース1 ロック解除");
+    }
+
+    // リソース2のロックを解除する関数
+    public static void unlock_resource2(){
+        resource2 = 0;
+        System.out.println("リソース2 ロック解除");
+    }
+
+    // リソース2をロックする関数
+    public static void lock_resource2(){
+        while(resource2 == 1) sleep(10); // リソース2のロック解除待ち
+        resource2 = 1;
+        System.out.println("リソース2 ロック");
+        sleep(10);
+    }
+
+    public static void main(String[] args){
+
+        var thread1 = new Thread( ()-&gt;{
+                System.out.println("thread1 開始");
+
+                // リソース1 → リソース2の順にロック
+                lock_resource1();
+                lock_resource2();
+
+                // リソース1と2を開放
+                unlock_resource1();
+                unlock_resource2();
+
+                System.out.println("thread1 終了");
+        });
+
+        var thread2 = new Thread( ()-&gt;{
+                System.out.println("thread2 開始");
+
+                // リソース2 → リソース2の順にロック
+                lock_resource2();
+                lock_resource1();
+
+                // リソース1と2を開放
+                unlock_resource1();
+                unlock_resource2();
+
+                System.out.println("thread2 終了");
+        });
+
+        // 各スレッドを実行
+        thread1.start();
+        thread2.start();
+
+        // 各スレッドが停止するまで待つ
+        try{
+            thread1.join();
+            thread2.join();
+        }
+        catch(InterruptedException e){}
+    }
+}
+</pre>
+</div>
+
+<p>
+結果はデットロックします。
+<br>
+その理由は図1に示す様に、thread1はリソース2、thread2はリソース1の開放の待ち状態になって停止するためです。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース2の実行結果</b>
+<pre class="wrap">
+thread1 開始
+リソース1 ロック
+thread2 開始
+リソース2 ロック
+
+(デッドロックして固まる！)
+</pre>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>図1: ソース2の状況 </b>
+<p>　</p>
+<img src="./img/page05-fig01.png" alt="">
+</div>
+
+
+<br>
+<br>
+<h2>
+(3) 排他処理
+</h2>
+
+<br>
+<p>
+デッドロックを防止するためには「排他処理」をおこなって、あるリソースを同時に複数のスレッドが利用しないようにする必要があります。
+<br>
+排他処理をおこなうことで、特定のリソースを利用するコード部分(「クリティカルセクション」といいます)をひとつのスレッドが実行中は、他のスレッドはそのリソースにアクセスできなくなります。
+</p>
+
+<p>
+Javaで排他処理をおこなう方法はいくつかあるのですが、今回は最もシンプルな synchronized を使った方法を見てみましょう。
+<br>
+例えば以下のコード3を見てください(やはり長いですが、main関数だけ見ればだいたい分かります)。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3: synchronizedによる排他処理の例</b>
+<pre class="wrap">
+import java.lang.Thread;
+
+public class Main {
+
+    // ロック用インスタンス作成
+    private static final Object lock = new Object();
+
+    static int resource1 = 0;
+    static int resource2 = 0;
+
+    // msecだけ停止する関数
+    public static void sleep(int msec){
+        try{
+            Thread.sleep(msec);
+        }
+        catch(InterruptedException e){}
+    }
+
+    // リソース1をロックする関数
+    public static void lock_resource1(){
+        while(resource1 == 1) sleep(10); // リソース1のロック解除待ち
+        resource1 = 1;
+        System.out.println("リソース1 ロック");
+        sleep(10);
+    }
+
+    // リソース1のロックを解除する関数
+    public static void unlock_resource1(){
+        resource1 = 0;
+        System.out.println("リソース1 ロック解除");
+    }
+
+    // リソース2のロックを解除する関数
+    public static void unlock_resource2(){
+        resource2 = 0;
+        System.out.println("リソース2 ロック解除");
+    }
+
+    // リソース2をロックする関数
+    public static void lock_resource2(){
+        while(resource2 == 1) sleep(10); // リソース2のロック解除待ち
+        resource2 = 1;
+        System.out.println("リソース2 ロック");
+        sleep(10);
+    }
+
+    public static void main(String[] args){
+
+        var thread1 = new Thread( ()-&gt;{
+
+                synchronized (lock) {
+
+                    // ここからクリティカルセクション
+
+                    System.out.println("thread1 開始");
+
+                    // リソース1 → リソース2の順にロック
+                    lock_resource1();
+                    lock_resource2();
+
+                    // リソース1と2を開放
+                    unlock_resource1();
+                    unlock_resource2();
+
+                    System.out.println("thread1 終了");
+
+                    // ここまでクリティカルセクション
+                }
+        });
+
+        var thread2 = new Thread( ()-&gt;{
+
+                synchronized (lock) {
+
+                    // ここからクリティカルセクション
+
+                    System.out.println("thread2 開始");
+
+                    // リソース2 → リソース2の順にロック
+                    lock_resource2();
+                    lock_resource1();
+
+                    // リソース1と2を開放
+                    unlock_resource1();
+                    unlock_resource2();
+
+                    System.out.println("thread2 終了");
+
+                    // ここまでクリティカルセクション
+                }
+        });
+
+        // 各スレッドを実行
+        thread1.start();
+        thread2.start();
+
+        // 各スレッドが停止するまで待つ
+        try{
+            thread1.join();
+            thread2.join();
+        }
+        catch(InterruptedException e){}
+    }
+}
+</pre>
+</div>
+
+<p>
+ synchronized (lock) で囲まれた部分が各スレッドのクリティカルセクションとなり、他のスレッドがクリティカルセクションを実行中はクリティカルセクション内に入れなくなります。
+<br>
+よって実行結果は以下の通り、thread1→thread2の順に実行されてデッドロックが回避されます。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3の実行結果</b>
+<pre class="wrap">
+thread1 開始
+リソース1 ロック
+リソース2 ロック
+リソース1 ロック解除
+リソース2 ロック解除
+thread1 終了
+thread2 開始
+リソース2 ロック
+リソース1 ロック
+リソース1 ロック解除
+リソース2 ロック解除
+thread2 終了
+</pre>
+</div>
 
 
 <br>

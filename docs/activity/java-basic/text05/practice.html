@@ -385,11 +385,63 @@ public class Main{
 </p>
 </div>
 
-<br>
+
 <br>
 <p>
-<b>以下準備中</b>
+<input type="checkbox"><b>演習 5-8 (個人):</b> 入れ子構造のマップに対し、StreamAPIを使って「クラスが"1組"で、名前に"田"が含まれる人の組と名前と身長」を表示してみましょう。
 </p>
+
+<div class="info">
+<pre class="wrap">
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args) {
+
+    	var sincho = new HashMap&lt;String, HashMap&lt;String, Integer&gt;&gt;();
+
+        sincho.put("1組", new HashMap&lt;String, Integer&gt;() );
+        sincho.get("1組").put( "安倍", 162 );
+        sincho.get("1組").put( "田中", 132 );
+        sincho.get("1組").put( "佐藤", 148 );
+        sincho.get("1組").put( "山田", 179 );
+
+        sincho.put("2組", new HashMap&lt;String, Integer&gt;() );
+        sincho.get("2組").put( "鈴木", 151 );
+        sincho.get("2組").put( "本田", 172 );
+
+        // クラスが"1組"で、名前に"田"が含まれる人の"組,名前,身長"を表示してください
+        sincho.entrySet().stream()
+              .filter( i -&gt; i.getKey().equals( ? ) ) // 1段目の中間操作
+              .forEach( i -&gt; i.getValue().entrySet().stream() // 1段目の終端操作
+                              .filter( i2 -&gt; i2.getKey().contains( ? ) ) // 2段目の中間操作
+                              .forEach( i2 -&gt; System.out.println( ? +"," + ? + "," + ? ) ) // 2段目の終端操作
+              );
+    }
+}
+
+結果:
+
+1組,田中,132
+1組,山田,179
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> フォルダ「JAVABSC_5_8」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> フォルダ「JAVABSC_5_8」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 上のコードをコピーして、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 
 <br>
@@ -397,7 +449,7 @@ public class Main{
 
 <br>
 <p>
-<input type="checkbox"><b>演習 5-? (個人):</b> <a href="./page05.html">ソース1</a>を修正して、以下の様な仕様のプログラムを作成しましょう。
+<input type="checkbox"><b>演習 5-9 (個人):</b> <a href="./page05.html">ソース1</a>を修正して、以下の様な仕様のプログラムを作成しましょう。
 </p>
 
 <div class="info">
@@ -420,20 +472,58 @@ hoge
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_5_?」を新規作成し、その中に移動します 
+<span class="olradio"><input type="radio" name="p9"></span> フォルダ「JAVABSC_5_9」を新規作成し、その中に移動します 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> フォルダ「JAVABSC_5_?」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<span class="olradio"><input type="radio" name="p9"></span> フォルダ「JAVABSC_5_9」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> <a href="./page05.html">ソース1</a>をコピーし、解答します。
+<span class="olradio"><input type="radio" name="p9"></span> <a href="./page05.html">ソース1</a>をコピーし、解答します。
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> コンパイルして実行します。 
+<span class="olradio"><input type="radio" name="p9"></span> コンパイルして実行します。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> チーム内で答え合わせをしてください。 
+<span class="olradio"><input type="radio" name="p9"></span> チーム内で答え合わせをしてください。 
 <br>
-<span class="olradio"><input type="radio" name="p6"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p9"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
+<br>
+<p>
+<input type="checkbox"><b>演習 5-10 (個人):</b> <a href="./page05.html">ソース1</a>を修正し、排他処理をおこなってthread1→thread2の順に動作するプログラムを作成しましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+thread1
+thread1
+thread1
+thread1
+thread1
+thread2
+thread2
+thread2
+thread2
+thread2
+
+</pre>
+</div>
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p10"></span> フォルダ「JAVABSC_5_10」を新規作成し、その中に移動します 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> フォルダ「JAVABSC_5_10」の中で新規に 1 つソースを作ります。ファイル名を「Main.java」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> <a href="./page05.html">ソース1</a>をコピーし、解答します。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> コンパイルして実行します。 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> チーム内で答え合わせをしてください。 
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
 
 
 <br>
