@@ -230,7 +230,7 @@ public class Main {
         var thread2 = new Thread( ()-&gt;{
                 System.out.println("thread2 開始");
 
-                // リソース2 → リソース2の順にロック
+                // リソース2 → リソース1の順にロック
                 lock_resource2();
                 lock_resource1();
 
