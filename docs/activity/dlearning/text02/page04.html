@@ -421,7 +421,7 @@ No.4 番目の入力信号: 猫の確率 1 %、犬の確率 97 %、鳥の確率 
 </p>
 
 <p>
-entropy = - reduce_sum( log(predict)*label_training )
+entropy = - tf.math.reduce_sum( tf.math.log(predict)*label_training )
 </p>
 
 <p>
@@ -477,11 +477,11 @@ entropy = - reduce_sum( log(predict)*label_training )
 <input type="checkbox"><b>SGD クラスと Adam クラス </b>
 
 <p>
-SGD クラス: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD">tf.keras.optimizers.SGD</a>
+SGD クラス: <a href="https://keras.io/api/optimizers/sgd/">keras.optimizers.SGD</a>
 </p>
 
 <p>
-Adam クラス: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam">tf.keras.optimizers.Adam</a>
+Adam クラス: <a href="https://keras.io/api/optimizers/adam/">keras.optimizers.Adam</a>
 </p>
 
 </div>
@@ -524,19 +524,13 @@ print(f'y={y.numpy()}');
 print('')
 
 
-# Keras 3 の場合はこちら
-opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
-#opt = tf.keras.optimizers.SGD( learning_rate=0.1 ) # SGD を使いたい場合はこちら
+opt = keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
+#opt = keras.optimizers.SGD( learning_rate=0.1 ) # SGD を使いたい場合はこちら
 for i in range(50):  # 学習を50回繰り返す
   with tf.GradientTape() as tape:
     gradient = tape.gradient(loss(),[x,y]) # 勾配計算
     opt.apply(gradient,[x,y])  #学習を1回実施、[x,y]は学習対象の変数
 
-# Keras 2 の場合はこちら
-#opt = tf.keras.optimizers.Adam( learning_rate=0.1 ) # Adam使用、学習率 0.1
-#for i in range(50):  # 学習を50回繰り返す
-#    opt.minimize(lambda: loss(), [x,y])  #学習を1回実施。lambda は損失関数の名前、[x,y]は学習対象の変数
-    
 print('学習結果')
 print(f'損失={loss()}');
 print(f'x={x.numpy()}');
@@ -671,8 +665,7 @@ l_{\rm (B*k+B-1)0}\ ,  & \cdots &,\  l_{\rm (B*k+B-1)(M-1)} \\
 
 <pre class="wrap">
 
-# Keras 3 の場合はこちら
-opt = tf.keras.optimizers.Adam( learning_rate=r )
+opt = keras.optimizers.Adam( learning_rate=r )
 for e in range(E):
     for k in range(int(L/B)):
         print(f'\repoch {e} batch {k}', end='')
@@ -681,15 +674,6 @@ for e in range(E):
         with tf.GradientTape() as tape:
           gradient = tape.gradient(loss(data_training_k,label_training_k),[w_h,b_h,w_o,b_o])
           opt.apply(gradient,[w_h,b_h,w_o,b_o])
-
-# Keras 2 の場合はこちら
-#opt = tf.keras.optimizers.Adam( learning_rate=r )
-#for e in range(E):
-#    for k in range(int(L/B)):
-#        print(f'\repoch {e} batch {k}', end='')
-#        data_training_k = data_training[B*k:B*k+B]
-#        label_training_k = label_training[B*k:B*k+B]
-#        opt.minimize(lambda: loss(data_training_k,label_training_k), [w_h,b_h,w_o,b_o])
 
 ※1 r : 学習率
 ※2 E : エポック数

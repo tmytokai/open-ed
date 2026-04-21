@@ -1,4 +1,5 @@
 import tensorflow as tf
+import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -28,63 +29,72 @@ images = np.array(
         [
             [1, 0, 1],
             [1, 1, 1],
-            [1, 0, 1]
+            [1, 0, 1],
         ],
         # 画像1
         [
             [0, 1, 0],
             [1, 0, 1],
-            [0, 1, 0]
+            [0, 1, 0],
         ],
         # 画像2
         [
             [0, 1, 0],
             [1, 1, 1],
-            [0, 1, 0]
+            [0, 1, 0],
         ],
         # 画像3
         [
             [1, 0, 1],
-            [0, 1, 0],
-            [1, 0, 1]
+            [0, 0, 0],
+            [1, 0, 1],
         ],
+        # 画像4
+        [
+            [1, 0, 1],
+            [1, 1, 0],
+            [1, 0, 1],
+        ],        
         # 未知画像
         [
             [1, 1, 0],
             [1, 1, 1],
-            [1, 0, 1]
-        ]        
+            [1, 0, 1],
+        ],
     ]
 )
    
 # 画像データから学習用入力を作成
-data_training = tf.constant(images[:4].reshape(L,N), dtype=tf.float32)
+data_training = tf.constant(images[:L].reshape(L,N), dtype=tf.float32)
 
 # 学習用ラベル
 label_training = tf.constant(
     [ 
         #画像 0,1 はクラス 0
-        [?,?],
-        [?,?], 
+        [?,?,?],
+        [?,?,?],
 
         #画像 2,3 はクラス1
-        [?,?],
-        [?,?]
+        [?,?,?],
+        [?,?,?],
+
+        #画像 3 はクラス2
+        [?,?,?],
     ]
     , dtype=tf.float32
 )
 
 # 未知画像から未知入力信号を作成
-data = tf.constant(images[4].reshape(1,N), dtype=tf.float32)
+data = tf.constant(images[L].reshape(1,N), dtype=tf.float32)
 
 # 画像表示
-for i in range(4):
+for i in range(L):
     print(f'画像{i}')
     plt.imshow(images[i],cmap='gray')
     plt.show()
     
 print('未知画像')
-plt.imshow(images[4],cmap='gray')
+plt.imshow(images[L],cmap='gray')
 plt.show()
 
 print('学習用入力信号')
@@ -111,7 +121,7 @@ print(f'バッチサイズ={B}')
 # 3層ニューラルネットワーク
 # DL_2_1 からコピー
 ?
-
+    
 # 損失関数
 @tf.function
 def loss(data_training ,label_training):

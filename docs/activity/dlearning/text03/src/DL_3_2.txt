@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 # matplotlib は tensorslow の前でimportすること
-# ※ バージョンによっては後でインスールするとエラー出る
+# ※ バージョンによっては後でインスールするとエラー出る(かも)
 import tensorflow as tf
+import keras
 
 np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
@@ -30,32 +31,38 @@ images = np.array(
         [
             [1, 0, 1],
             [1, 1, 1],
-            [1, 0, 1]
+            [1, 0, 1],
         ],
         # 画像1
         [
             [0, 1, 0],
             [1, 0, 1],
-            [0, 1, 0]
+            [0, 1, 0],
         ],
         # 画像2
         [
             [0, 1, 0],
             [1, 1, 1],
-            [0, 1, 0]
+            [0, 1, 0],
         ],
         # 画像3
         [
             [1, 0, 1],
-            [0, 1, 0],
-            [1, 0, 1]
+            [0, 0, 0],
+            [1, 0, 1],
         ],
+        # 画像4
+        [
+            [1, 0, 1],
+            [1, 1, 0],
+            [1, 0, 1],
+        ],        
         # 未知画像
         [
             [1, 1, 0],
             [1, 1, 1],
-            [1, 0, 1]
-        ]        
+            [1, 0, 1],
+        ],
     ]
 )
    
@@ -66,12 +73,15 @@ data_training = tf.constant(images[:L].reshape(L,N), dtype=tf.float32)
 label_training = tf.constant(
     [ 
         #画像 0,1 はクラス 0
-        [?,?],
-        [?,?], 
+        [?,?,?],
+        [?,?,?],
 
         #画像 2,3 はクラス1
-        [?,?],
-        [?,?]
+        [?,?,?],
+        [?,?,?],
+
+        #画像 3 はクラス2
+        [?,?,?],
     ]
     , dtype=tf.float32
 )
@@ -122,7 +132,6 @@ print(model.predict(data_training))
 print('')
     
 # ディープラーニング実行
-# 学習中の経過を表示したい場合は verbose=1 にする
 # テキストを参考にする
 ?
 

@@ -13,7 +13,9 @@ config.log_device_placement = True
 sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
-from tensorflow.keras.datasets import cifar10
+import keras
+from keras.datasets import cifar10
+
 
 # データセット読み込み
 # (images_training, classno_training) は訓練に用いるデータセットで計 50,000 組
@@ -44,17 +46,17 @@ B = ?
 
 # 学習データセットを演習用のフォーマットに変換
 data_training = images_training # 画像データをそのまま入力する
-label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
+label_training = tf.constant( keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
 
 # 今回は検証データセットは使わない
 
 # テストデータセットを演習用のフォーマットに変換
 data_test = images_test # 画像データをそのまま入力する
-label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
+label_test = tf.constant( keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
 # 注意(2022年11月時点) 画像フォーマットが 「channels_first, (3,32, 32)」と表示された場合、GPUを使って計算しないと
 # 「〜 op currently only supports the NHWC tensor format on the CPU. 」というエラーが出て動かないらしい
-print(f'画像フォーマット: '+tf.keras.backend.image_data_format() + f', {images_test[0].shape}')
+print(f'画像フォーマット: '+keras.backend.image_data_format() + f', {images_test[0].shape}')
 
 print(f'学習率={r}')
 print(f'エポック数={E}')
@@ -62,7 +64,7 @@ print(f'学習データセットサイズ={L}')
 print(f'バッチサイズ={B}')
 
 # CNNの構築
-model = tf.keras.Sequential()
+model = keras.Sequential()
 
 # 入力層: rows = 32、 cols = 32、Cin = 3 ※ 入力画像は R・G・B の 3 チャンネル
 model.add( ? )
@@ -92,5 +94,4 @@ model.add( ? )
 model.add( ? )
 
 # 学習設定以下はMLPの時と全く同じ内容なので、DL_3_3からコピーする
-# ただし model.fit 関数の verbose を 1 にする (動いてるかどうか分からないので)
 ?

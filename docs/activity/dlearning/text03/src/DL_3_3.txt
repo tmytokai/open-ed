@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 # ※ バージョンによっては後でインスールするとエラー出る
 import tensorflow as tf
 from tensorflow.keras.datasets import mnist
+import keras
 
 # データセット(MNIST)読み込み
 # (images_training, classno_training) は学習データセットで計 60,000 組
@@ -19,7 +20,7 @@ images_test = images_test / 255.0  # 0〜1の範囲に正規化
 # パーセプトロンの数
 N = np.prod(images_training.shape[1:]) # 入力層の数は画像サイズから計算
 K = ?  # 隠れ層の数
-M = np.max(classno_training)+1  # 出力層の数はクラス数から計算
+M = int(np.max(classno_training)+1)  # 出力層の数はクラス数から計算
 
 #学習率
 r = ?
@@ -35,15 +36,15 @@ B = ?
 
 # 学習データセットを演習用のフォーマットに変換
 data_training = tf.constant(images_training.reshape(L,N), dtype=tf.float32)
-label_training = tf.constant( tf.keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
+label_training = tf.constant( keras.utils.to_categorical(classno_training, M), dtype=tf.float32)
 
 # 今回は検証データセットは使わない
 
 # テストデータセットを演習用のフォーマットに変換
 data_test = tf.constant(images_test.reshape(images_test.shape[0],N), dtype=tf.float32)
-label_test = tf.constant( tf.keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
+label_test = tf.constant( keras.utils.to_categorical(classno_test, M), dtype=tf.float32)
 
-print(f'画像フォーマット: '+tf.keras.backend.image_data_format() + f', {images_test[0].shape}')
+print(f'画像フォーマット: '+keras.backend.image_data_format() + f', {images_test[0].shape}')
 print(f'N={N}')
 print(f'K={K}')
 print(f'M={M}')
@@ -70,7 +71,6 @@ print(f'学習データセット : 損失={ls:0.2f}, 正解率={acc:0.2f}')
 print('')
     
 # ディープラーニング実行
-# 学習中の経過を表示したい場合は verbose=1 にする
 # テキストを参考にする
 ?
 
@@ -87,7 +87,7 @@ print('')
 # 参考までにテストデータの先頭 10 データに対する予測値を表示
 for i in range( 10 ): 
     print(f'\nテスト画像{i}')
-    if tf.keras.backend.image_data_format() == 'channels_first' and images_test[0].ndim == 3:
+    if keras.backend.image_data_format() == 'channels_first' and images_test[0].ndim == 3:
         plt.imshow(images_test[i].transpose(1,2,0),cmap='gray')
     else:
         plt.imshow(images_test[i],cmap='gray')

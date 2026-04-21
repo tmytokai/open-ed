@@ -30,7 +30,6 @@ Keras では<a href="https://keras.io/api/layers/convolution_layers/convolution2
 
 <pre class="wrap">
 import tensorflow as tf
-
 '''
 # CUDA を有効にしている時に「UnknownError:  Failed to get convolution algorithm.」というエラーが
 # 出て動かない時はコメントアウトを外し、カーネルを再起動してから実行してください
@@ -41,6 +40,7 @@ config.log_device_placement = True
 sess = tf.compat.v1.Session(config=config)
 set_session(sess)
 '''
+import keras
 
 import numpy as np
 
@@ -115,18 +115,20 @@ b_1 = -1
 # 入力画像全体: shape = (データ数, rows, cols, Cin) の 4 階テンソル
 data = tf.constant( [ np.stack( [data_0,data_1], -1) ], dtype=tf.float32 )
 
-# カーネル全体: shape = (kernel_size, kernel_size, Cin * Cout) の 3 階テンソル 
-kernel = np.stack( [kernel_00,kernel_01,kernel_10,kernel_11], -1)
+# カーネル全体: shape = (kernel_size, kernel_size, Cin, Cout) の 3 階テンソル 
+kernel = np.stack( [np.stack( [kernel_00,kernel_10], -1),
+                   np.stack(  [kernel_01,kernel_11], -1)]
+                   ,-1)
 
 # バイアス全体 :  shape = (Cout) のベクトル
 b = [b_0, b_1]
 
 # モデル作成
-model = tf.keras.Sequential()
-model.add( tf.keras.Input(shape=(rows,cols,Cin,)))
-model.add( tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
-                                  kernel_initializer=tf.keras.initializers.Constant(kernel), 
-                                  bias_initializer=tf.keras.initializers.Constant(b) ))
+model = keras.Sequential()
+model.add( keras.Input(shape=(rows,cols,Cin,)))
+model.add( keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
+                                  kernel_initializer=keras.initializers.Constant(kernel), 
+                                  bias_initializer=keras.initializers.Constant(b) ))
 model.summary()
 
 # 畳み込み演算
@@ -142,7 +144,7 @@ for i in range(Cin):
 for i in range(Cin):
     for i2 in range(Cout):
         print(f'kernel_{i}{i2} = ')
-        print(kernel[:,:,Cin*i+i2])
+        print(kernel[:,:,i,i2])
         print('')
 
 for i in range(Cout):
@@ -162,9 +164,9 @@ for i in range(Cout):
 
 <div class="info">
 <pre class="wrap">
-model.add( tf.keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
-                                  kernel_initializer=tf.keras.initializers.Constant(kernel), 
-                                  bias_initializer=tf.keras.initializers.Constant(b) ))
+model.add( keras.layers.Conv2D( Cout, (kernel_size,kernel_size), 
+                                  kernel_initializer=keras.initializers.Constant(kernel), 
+                                  bias_initializer=keras.initializers.Constant(b) ))
 </pre>
 </div>
 
