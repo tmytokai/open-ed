@@ -78,7 +78,7 @@ label_training = tf.constant(
         [?,?,?],
         [?,?,?],
 
-        #画像 3 はクラス2
+        #画像 4 はクラス2
         [?,?,?],
     ]
     , dtype=tf.float32
