@@ -39,6 +39,22 @@
 では実際に Score クラスに何かメソッドを追加してみましょう。
 <br>
 次のソース 1 では例として Score クラスに数学と英語の平均を求める average メソッドを追加しました。
+<br>
+なおメソッド内からフィールドにアクセスするには
+</p>
+
+<p>
+<b>this.フィールド名</b>
+</p>
+
+<p>
+と書きます。(※) 
+</p>
+
+<p>
+※ this. ではなくて self. と書く言語もあります
+<br>
+※ Java の場合は this. は省略可能です
 </p>
 
 <div class="info">
@@ -49,18 +65,14 @@ public class Score {
     public int english;
     
     public double average(){
-    	return ( math + english )/2.0;  // ※
+    	return ( this.math + this.english )/2.0;
     }
 }
-
-※ 正式には「this.math + this.english」と書きますが Java の場合は this. は省略可能です
-※ <b>なお this. を付けないと誤作動するプログラミング言語(JavaScriptなど)もありますので注意して下さい</b>
-※ またthisではなくてselfなど他のキーワードを使う言語もあります。
 </pre>
 </div>
 
 <p>
-さてこの様に定義したメソッドは他のインスタンスから
+クラス内で定義したメソッドは、他のインスタンスから
 </p>
 
 <p>
@@ -68,18 +80,9 @@ public class Score {
 </p>
 
 <p>
-と呼び出す事ができます(※)。
-</p>
-<p>
-※ 同じクラス内で定義されているメソッドを呼び出す時は「this.メソッド名(引数)」と書きますが Java の場合は this. は省略可能です
+で呼び出す事ができます。
 <br>
-※ <b>なお this. を付けないと誤作動するプログラミング言語(JavaScriptなど)もありますので注意して下さい</b>
-<br>
-※ またthisではなくてselfなど他のキーワードを使う言語もあります。
-</p>
-
-<p>
-この様にして他のインスタンスやメインメソッドから別のインスタンスで定義されているメソッドを呼び出し、インスタンスにデータを引き渡したり何かの処理をさせることを「<b>メッセージ・パッシング</b>」と言います。
+他のインスタンスやメインメソッドから別のインスタンスで定義されているメソッドを呼び出し、インスタンスにデータを引き渡したり何かの処理をさせることを「<b>メッセージ・パッシング</b>」と言います。
 </p>
 
 <p>
@@ -139,11 +142,11 @@ public class Score {
     public int english;
     
     public double average(){
-    	return (math + english)/2.0;
+    	return (this.math + this.english)/2.0;
     }
     
     public void set_math( int s ){
-    	math = s;
+    	this.math = s;
     }
 }
 </pre>

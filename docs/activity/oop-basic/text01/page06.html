@@ -46,11 +46,11 @@ public class Score {
     // 以下のメソッド(average, set_math) は変更無し
    
     public double average(){
-    	return (math + english)/2.0;
+    	return (this.math + this.english)/2.0;
     }
     
     public void set_math( int s ){
-    	math = s;
+    	this.math = s;
     }
 }
 </pre>
@@ -132,18 +132,18 @@ public class Score {
     // コンストラクタ(引数有り)
     public Score( int m, int e ){
     	System.out.println("引数有りコンストラクタ実行");
-    	math = m;
-    	english = e;
+    	this.math = m;
+    	this.english = e;
     }
 
     // 以下のメソッド(average, set_math) は変更無し
    
     public double average(){
-    	return (math + english)/2.0;
+    	return (this.math + this.english)/2.0;
     }
     
     public void set_math( int s ){
-    	math = s;
+    	this.math = s;
     }
 }
 </pre>
