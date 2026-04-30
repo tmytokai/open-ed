@@ -40,7 +40,7 @@ public class FRUIT {
 	
 	public void eat()
 	{
-		System.out.println(name+"美味い");
+		System.out.println(this.name+"美味い");
 	}
 }
 </pre>
@@ -50,12 +50,6 @@ public class FRUIT {
 次は APPLE と ORANGE サブクラスを書き換えますが、name フィールドと eat() メソッドはすでにスーパークラスで定義済みなので省略出来ます(ソース 2 と 3)。
 <br>
 ただし名前(name)は異なるのでコンストラクタで別々の名前を name フィールドにセットする必要があります。
-<br>
-なおスーパークラスで定義したフィールドにはドット演算子を使わなくてもサブクラスからそのままアクセス出来ます。
-</p>
-
-<p>
-※ 正式には this.フィールド名 でアクセスします
 </p>
 
 <div class="info">
@@ -65,8 +59,7 @@ public class APPLE extends FRUIT{
 
 	public APPLE()
 	{
-		name = "りんご";
-                // 正式には this.name = "りんご";
+		this.name = "りんご";
 	}
 }
 </pre>
@@ -80,8 +73,7 @@ public class ORANGE extends FRUIT{
 
 	public ORANGE()
 	{
-		name = "みかん";
-                // 正式には this.name = "みかん";
+		this.name = "みかん";
 	}
 }
 </pre>
@@ -143,7 +135,7 @@ public class FRUIT {
 	
 	public void eat()
 	{
-		System.out.println(name+"マズイ");
+		System.out.println(this.name+"マズイ");
 	}
 }
 </pre>
@@ -164,14 +156,8 @@ public class FRUIT {
 
 
 <p>
-なおフィールドと同様、スーパークラスのメソッドはドット演算子を使わなくてもサブクラスから呼び出せます。
-</p>
-
-<p>
-※ 正式には this.メソッド名 で呼び出します
-</p>
-
-<p>
+なおフィールドと同様、スーパークラスのメソッドはサブクラスからも呼び出すことも出来ます。
+<br>
 例えば APPLE クラスを次のように書き換えたとしましょう。
 <br>
 この例では APPLE サブクラスの mogu_mogu() メソッドから FRUIT スーパークラスの eat() メソッドを呼び出しています。
@@ -184,16 +170,14 @@ public class APPLE extends FRUIT{
 
 	public APPLE()
 	{
-		name = "りんご";
-                // 正式には this.name = "りんご";
+		this.name = "りんご";
 	}
 
         public void mogu_mogu()
 	{
-                System.out.println( name+"もぐもぐ");
+                System.out.println( this.name+"もぐもぐ");
 
-		eat();  // FRUIT スーパークラスの eat() メソッドを呼び出す
-                // 正式には this.eat();
+		this.eat();  // FRUIT スーパークラスの eat() メソッドを呼び出す
 	}
 }
 </pre>
@@ -250,12 +234,12 @@ public class FRUIT {
 	
         public FRUIT()
         {
-		System.out.println( name + "大好き");
+		System.out.println( this.name + "大好き");
         }
 
 	public void eat()
 	{
-		System.out.println(name+"マズイ");
+		System.out.println(this.name+"マズイ");
 	}
 }
 </pre>
@@ -278,7 +262,15 @@ public class FRUIT {
 </div>
 
 <p>
-この様に<b>各サブクラスのコンストラクタが実行される前にスーパークラスである FRUIT の コンストラクタが自動的に実行される</b>ため、「〜大好き」と表示される時点では name にはまだ "果物" が入っています。
+この様に
+</p>
+
+<p>
+<b>各サブクラスのコンストラクタが実行される前にスーパークラスである FRUIT の コンストラクタが暗黙的に実行される</b>
+</p>
+
+<p>
+ので、「〜大好き」と表示される時点では name にはまだ "果物" が入っています。
 <br>
 その後各サブクラスのコンストラクタが実行されて name に "りんご" とか "みかん" がセットされ、後に eat メソッドが呼び出される時点ではそれらが表示されます。
 </p>
