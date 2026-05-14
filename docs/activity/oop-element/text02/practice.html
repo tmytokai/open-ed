@@ -51,18 +51,19 @@
 <pre class="wrap">
 仕様:
 
-Score クラスに name、math、english の getter を追加する
-Score クラスに name の setter を追加する
-Taro のコンストラクタで setter を使って name に "タロー" をセットする
-Hanako のコンストラクタで setter を使って name に "ハナコ" をセットする
-getter、setter を使う様に Main クラスの表示部を書き換える
+Score クラスに name、math、english の getter を追加する (名前は get_name, get_math, get_english)
+Score クラスに name の setter を追加する (名前は set_name)
+Taro クラスのコンストラクタで setter を使って name に "たろう" をセットする
+Hanako クラスのコンストラクタで setter を使って name に "はなこ" をセットする
+Hanako クラスの total メソッドで getter を使う様に書き換える
+Main クラスの表示部で getter、setter を使う様に書き換える
 
 結果:
 
 引数なしコンストラクタ実行
 引数なしコンストラクタ実行
-name = タロー math = 91 english = 94 平均 = 92.5 合計 = 185
-name = ハナコ math = 95 english = 3 平均 = 49.0 合計 = 196
+name = たろう math = 91 english = 94 平均 = 92.5 合計 = 185
+name = はなこ math = 95 english = 3 平均 = 49.0 合計 = 196
 
 ※ 乱数を使っているので、実行するたびに結果が変わります
 </pre>
@@ -73,21 +74,21 @@ name = ハナコ math = 95 english = 3 平均 = 49.0 合計 = 196
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Score.java を開きます。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> name の値を取得する getter (メソッド名は public String get_name() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> name の値を取得する getter を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> math の値を取得する getter (メソッド名は public int get_math() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> math の値を取得する getter を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> english の値を取得する getter (メソッド名は public int get_english() ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> english の値を取得する getter を Score クラスに追加します。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Main.java を開き、getter を使う様に表示部を書き換えます。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 一度コンパイルします。Main.java のエラーが無くなったことを確認します。 ※ Taro.javaとHanako.javaのエラーはまだ出ます
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Score.java を開き、name の setter(メソッド名は public void set_name( String a ) ) を Score クラスに追加します。
+<span class="olradio"><input type="radio" name="p2"></span> Score.java を開き、name の setter を Score クラスに追加します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Taro.java を開き、コンストラクタの中で setter を使って Score クラスの name フィールドに "タロー" を代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Taro.java を開き、コンストラクタの中で setter を使って Score クラスの name フィールドに "たろう" を代入して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> Hanako.java を開き、コンストラクタの中で setter を使って Score クラスの name フィールドに "ハナコ" を代入して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> Hanako.java を開き、コンストラクタの中で setter を使って Score クラスの name フィールドに "はなこ" を代入して下さい。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> Hanako.java の total メソッドを getter を使う様に書き換えます。
 <br>

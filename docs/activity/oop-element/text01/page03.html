@@ -45,7 +45,7 @@ public class FRUIT {
     public String name;
 
     public void eat(){
-        System.out.println(name+"美味い");
+        System.out.println(this.name+"美味い");
     }
 }
 </pre>
@@ -59,7 +59,7 @@ public class FRUIT {
 public class APPLE extends FRUIT{
 
     public APPLE(){
-        name = "りんご";
+        this.name = "りんご";
     }
 }
 </pre>
@@ -72,7 +72,7 @@ public class APPLE extends FRUIT{
 public class ORANGE extends FRUIT{
 
     public ORANGE(){
-        name = "みかん";
+        this.name = "みかん";
     }
 }
 </pre>
@@ -136,8 +136,8 @@ public class FRUIT {
 
     public void eat(){
 
-        if( name == "みかん" ) System.out.println(name+"不味い");
-        else System.out.println(name+"美味い");
+        if( this.name == "みかん" ) System.out.println(this.name+"不味い");
+        else System.out.println(this.name+"美味い");
     }
 }
 </pre>
@@ -175,10 +175,11 @@ public class FRUIT {
 public class ORANGE extends FRUIT {
 
     public ORANGE(){
-        name = "みかん";
+        this.name = "みかん";
     }
 
     // FRUIT の eat メソッドをオーバライド
+    @Override //※ アノテーション
     public void eat(){ 
         System.out.println(name+"不味い");
     }
@@ -188,6 +189,18 @@ public class ORANGE extends FRUIT {
 
 <p>
 すると ORANGE サブクラスのインスタンスを eat するとスーパークラスで定義した eat の代わりに上書された eat が呼び出されるようになります。
+<br>
+なお ORANGE の eat() メソッドの前にある
+</p>
+
+<p>
+@Override
+</p>
+
+<p>
+はアノテーションと言って、スーパークラスに同じ名前のメソッドが無いとコンパイル時にエラーが出ます。
+<br>
+無くてもコンパイルは通りますが、バグを防ぐために付けておいたほうが無難です。
 </p>
 
 <p>
@@ -235,7 +248,7 @@ public class Main{
 結果:
 
 りんご美味しい
-みかん美味しい
+みかん不味い
 </pre>
 </div>
 
@@ -254,7 +267,7 @@ public class Main{
 	        list.add(new APPLE()); // ※ FRUIT のリストに APPLE のインスタンスを追加！
 	        list.add(new ORANGE());// ※ FRUIT のリストに ORANGE のインスタンスを追加！
         
-	        list.forEach( i -> i.eat() );
+	        list.forEach( fruit -> fruit.eat() );
 	}
 }
 
@@ -262,7 +275,7 @@ public class Main{
 結果:
 
 りんご美味しい
-みかん美味しい
+みかん不味い
 </pre>
 </div>
 
