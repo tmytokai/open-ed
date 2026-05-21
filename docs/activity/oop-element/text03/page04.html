@@ -148,7 +148,7 @@ hoge
 <p>
 それではソース 3〜5 を見て下さい。
 <br>
-この例では String 型及び Integer 型の data をフィールドとして持つ Hoge クラスと Fuga クラスを作っています。
+この例では String 型及び Integer 型 (int 型)の data をフィールドとして持つ Hoge クラスと Fuga クラスを作っています。
 </p>
 
 <div class="info">
@@ -160,11 +160,12 @@ public class Hoge{
    private String data;
 
    public Hoge(String a){
-       data = a;
+       this.data = a;
    }
 
+   // data フィールドの getter
    public String get_data(){
-       return data;
+       return this.data;
    }
 }
 
@@ -181,11 +182,12 @@ public class Fuga{
    private Integer data;
 
    public Fuga(Integer a){
-       data = a;
+       this.data = a;
    }
 
+   // data フィールドの getter
    public Integer get_data(){
-       return data;
+       return this.data;
    }
 }
 
@@ -230,12 +232,13 @@ public class Piyo&lt;T&gt;{
 
    private T data;
 
-   public Piyo(T _data){
-       data = _data;
+   public Piyo(T a){
+       this.data = a;
    }
 
+   // data フィールドの getter
    public T get_data(){
-       return data;
+       return this.data;
    }
 }
 
@@ -262,6 +265,10 @@ public class Main{
 
         Piyo&lt;String&gt; hoge = new Piyo&lt;String&gt;("hoge");
         Piyo&lt;Integer&gt; fuga = new Piyo&lt;Integer&gt;(123);
+
+        // 見づらいなら var を使っても良い
+        // var hoge = new Piyo&lt;String&gt;("hoge");
+        // var fuga = new Piyo&lt;Integer&gt;(123);
 
         System.out.println(hoge.get_data());
         System.out.println(fuga.get_data());
