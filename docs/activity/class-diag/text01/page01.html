@@ -83,14 +83,15 @@ public class FRUIT{
 
     private String name;
 
-    public String get_name(){ return name; } // name の getter
-    public void set_name( String a ){ name = a; } // name の setter
+    public String get_name(){ return this.name; } // name の getter
+    public void set_name( String a ){ this.name = a; } // name の setter
 
-    public FRUIT(){}  // コンストラクタ
+    // コンストラクタ
+    public FRUIT(){}  
 
     public void show()
     {
-           System.out.println( name + "美味い" );
+           System.out.println( this.name + " 美味い" );
      }
 };
 </pre>

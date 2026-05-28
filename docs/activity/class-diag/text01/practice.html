@@ -82,28 +82,6 @@
 <p>
 <input type="checkbox"><b>演習 1-4 (個人):</b> 「OELM_2_2」に集約を導入してみましょう
 </p>
-<div class="info">
-<pre class="wrap">
-仕様:
-
-MyWorld クラスを新規作成し、Taro型のインスタンスを2つ、Hanako型のインスタンスを3つフィールドとして定義する
-MyWorld クラスのコンストラクタで各インスタンスを作成し、名前を表示する
-
-結果:
-
-MyWorldのコンストラクタ実行
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-引数なしコンストラクタ実行
-name = タロー
-name = タロー
-name = ハナコ
-name = ハナコ
-name = ハナコ
-</pre>
-</div>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p4"></span> フォルダ「OELM_2_2」をフォルダ「CDIAG_1_4」に丸ごとコピーし、その中に移動します。
@@ -126,28 +104,32 @@ public class MyWorld{
 
 		System.out.println("MyWorldのコンストラクタ実行");
 
-		taro0 = new Taro();
-		taro1 = new Taro();
+		this.taro0 = new Taro();
+		this.taro1 = new Taro();
 
-                hanako0 = new Hanako();
-                hanako1 = new Hanako();
-                hanako2 = new Hanako();
+                this.hanako0 = new Hanako();
+                this.hanako1 = new Hanako();
+                this.hanako2 = new Hanako();
 
                 // ※
+		System.out.println("MyWorldのコンストラクタ終了");
+	}
 
-                System.out.println( "name = " + taro0.get_name());
-                System.out.println( "name = " + taro1.get_name());
+	public void show() {
 
-                System.out.println( "name = " + hanako0.get_name());
-                System.out.println( "name = " + hanako1.get_name());
-                System.out.println( "name = " + hanako2.get_name());
+                System.out.println( "taro0 の name = " + this.taro0.get_name());
+                System.out.println( "taro1 の name = " + this.taro1.get_name());
+
+                System.out.println( "hanako0 の name = " + this.hanako0.get_name());
+                System.out.println( "hanako1 の name = " + this.hanako1.get_name());
+                System.out.println( "hanako2 の name = " + this.hanako2.get_name());
 	}
 }
 </pre>
 
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
+<span class="olradio"><input type="radio" name="p4"></span> Main.java を開き、以下のソースコードに置き換えてください。
 </p>
 <div class="info">
 
@@ -156,8 +138,25 @@ public class Main{
 
 	public static void main(String[] args) {
 		MyWorld myworld = new MyWorld();
+                myworld.show(); 
 	}
 }
+
+実行結果:
+
+MyWorldのコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+引数なしコンストラクタ実行
+MyWorldのコンストラクタ終了
+taro0 の name = たろう
+taro1 の name = たろう
+hanako0 の name = はなこ
+hanako1 の name = はなこ
+hanako2 の name = はなこ
+
 </pre>
 
 </div>

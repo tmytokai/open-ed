@@ -49,13 +49,37 @@
 <pre class="wrap">
 public class ORANGE extends FRUIT{
 
-	public ORANGE( int no ) // コンストラクタ
+        // コンストラクタ
+	public ORANGE( int no )
 	{
-		set_name( "みかん No." + no );
+		this.set_name( "みかん No." + no );
 	}
 }
 </pre>
 </div>
+
+<p>
+ちなみにMainクラスの例は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : Main クラスと main メソッド </b>
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args){
+
+		ORANGE orange = new ORANGE(1);
+		orange.show();
+	}
+}
+
+実行結果：
+
+みかん No.1 美味い
+</pre>
+</div>
+
 
 <p>
 この関係を英語で書くと
@@ -66,7 +90,7 @@ public class ORANGE extends FRUIT{
 </p>
 
 <p>
-となりますので(微妙に a の使い方が変な気もしますが)、汎化は別名<b>「is-a 関係」</b>と言います。
+となりますので汎化は別名<b>「is-a 関係」</b>と言います。
 </p>
 
 <p>

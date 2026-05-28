@@ -62,13 +62,25 @@
 </p>
 
 <p>
-例えば、前のページで挙げた<a href="./img/page03-fig2.png">関連の例</a>の場合、
+例えば、前のページで挙げた関連の例
 </p>
+
+<br>
+<p>
+<input type="checkbox"><b>図2: 関連のクラス図の例</b>
+</p>
+<img src="./img/page03-fig2.png" alt="">
+
+<br>
+<p>
+の場合、
+</p>
+
 <p>
 「ORANGE は MyWorld を所有している」または「MyWorld は ORANGE の一部である」
 </p>
 <p>
-という解釈はSFでもなければ変なので普通は
+という解釈は(SFの世界でもなければ)変なので普通は
 </p>
 <p>
 「MyWorld は ORANGE を所有している」または「ORANGE は MyWorld の一部である」
@@ -77,21 +89,23 @@
 と解釈して良いでしょう。
 </p>
 <p>
-従って図2の様に集約を使って明確に MyWorld が ORANGE の所有者であることを示せます。
+従って以下の図3の様に集約を使って明確に MyWorld が ORANGE の所有者であることを示せます。
 <br>
 なお多重度より MyWorld は ORANGE を 4 つ所有しているという事も分かります。
 </p>
 
 <br>
 <p>
-<input type="checkbox"><b>図2: 集約のクラス図の例</b>
+<input type="checkbox"><b>図3: 集約のクラス図の例</b>
 </p>
 <img src="./img/page04-fig2.png" alt="">
 
 <br>
 <p>
 さてこれで MyWorld と ORANGE の主従関係が明らかになりましたので、MyWorld のコードは次のソース1の様に書くことが出来ます。
-<br>
+</p>
+
+<p>
 集約の表現方法は色々ありますが、ソース1の様に所有者側のクラス(MyWorld)のフィールドとして所有される側のクラス(ORANGE)のインスタンスが定義されることが多いです。
 <br>
 MyWorld は ORANGE を 4 つ所有していますので、ORANGE クラスのフィールドを 4 つ定義しています。
@@ -108,32 +122,54 @@ public class MyWorld{
     private ORANGE orange3;
 
     // getter
-    public ORANGE get_orange0(){ return orange0; }
-    public ORANGE get_orange1(){ return orange1; }
-    public ORANGE get_orange2(){ return orange2; }
-    public ORANGE get_orange3(){ return orange3; }
+    public ORANGE get_orange0(){ return this.orange0; }
+    public ORANGE get_orange1(){ return this.orange1; }
+    public ORANGE get_orange2(){ return this.orange2; }
+    public ORANGE get_orange3(){ return this.orange3; }
 
     // コンストラクタ
     public MyWorld() 
     {
-         orange0 = new ORANGE(0);
-         orange1 = new ORANGE(1);
-         orange2 = new ORANGE(2);
-         orange3 = new ORANGE(3);
+         this.orange0 = new ORANGE(0);
+         this.orange1 = new ORANGE(1);
+         this.orange2 = new ORANGE(2);
+         this.orange3 = new ORANGE(3);
     }
 }
 </pre>
 </div>
 
 <p>
-なおフィールドを 4 つ追加したので、図2は次の図3の様に変わります。
+なお private なフィールドを 4 つ追加したので、図3は次の図4の様に変わります。
 </p>
 
 <br>
 <p>
-<input type="checkbox"><b>図3: ソース 1 のクラス図</b>
+<input type="checkbox"><b>図4: ソース 1 のクラス図</b>
 </p>
 <img src="./img/page04-fig3.png" alt="">
+
+<p>
+ちなみにMainクラスの例は次の通りです。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>ソース 2 : Main クラスと main メソッド </b>
+<pre class="wrap">
+public class Main{
+
+	public static void main(String[] args){
+
+		MyWorld myworld = new MyWorld();
+		myworld.get_orange2().show();
+	}
+}
+
+実行結果：
+
+みかん No.2 美味い
+</pre>
+</div>
 
 
 
