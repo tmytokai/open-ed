@@ -1,0 +1,28 @@
+%matplotlib inline
+import cmp
+import math
+import cmath
+########### ここから↑は消さないで下さい
+
+# 以下の z6 と z7 を演習1-7でセットした値に置き換えて下さい
+
+z6 = None
+z7 = None
+
+# z12 と z13 を * 演算子を使って求めて下さい
+# (ヒント) 
+# 絶対値が1の複素数 = e^{jθ} = cmath.rect(1,θ)
+# x 度 = x/180*math.pi ラジアン
+
+z12 = None
+z13 = None
+
+########### ここから↓は消さないで下さい
+cmp.init()
+cmp.plot_c((
+    ('z6',z6),
+    ('z7',z7),
+    ('z12',z12),
+    ('z13',z13),
+))
+cmp.savefig("result.png")
