@@ -30,8 +30,9 @@
 <pre class="wrap">
 仕様:
 
-Taro は客
-Hanako はゲーム屋
+Human は人間
+Taro は客で Human を継承している
+Hanako はゲーム屋で を継承している
 Taro は Hanako に Game を注文する
 Hanako が Souko から Game を取り出す
 Hanako は Taro に Game を渡す
@@ -45,61 +46,7 @@ Taro は Game で遊ぶ
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> フォルダ「CDIAG_3_1」を新規作成し、その中に移動します 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Taro.java を新規作成し、以下のソースコードを貼り付けてください。
 </p>
-<div class="info">
-
-<pre class="wrap">
-public class Taro{
-
-    private Game game;
-
-    public Taro(){
-        Hanako hanako = new Hanako();
-        game = hanako.chumon();
-        game.asobu();
-    }
-}
-</pre>
-
-</div>
-
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> Hanako.java を新規作成し、以下のソースコードを貼り付けてください。
-</p>
-<div class="info">
-
-<pre class="wrap">
-public class Hanako{
-
-    private Souko souko = new Souko();
-
-    public Game chumon(){
-        return souko.toridasu();
-    }
-}
-</pre>
-
-</div>
-
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> Souko.java を新規作成し、以下のソースコードを貼り付けてください。
-</p>
-<div class="info">
-
-<pre class="wrap">
-public class Souko{
-
-    private Game game = new Game();
-
-    public Game toridasu(){
-        return game;
-    }
-}
-</pre>
-
-</div>
 
 <p>
 <span class="olradio"><input type="radio" name="p1"></span> Game.java を新規作成し、以下のソースコードを貼り付けてください。
@@ -118,6 +65,88 @@ public class Game{
 </div>
 
 <p>
+<span class="olradio"><input type="radio" name="p1"></span> Souko.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Souko{
+
+    private Game game;
+
+    // コンストラクタ
+    public Souko(){
+        this.game = new Game();
+    }
+
+    public Game toridasu(){
+        return this.game; // インスタンス game をそのまま返す
+    }
+}
+</pre>
+
+</div>
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Human.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Human {
+    // 中身は空
+}
+</pre>
+
+</div>
+
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Hanako.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Hanako extends Human{
+
+    private Souko souko;
+
+    // コンストラクタ
+    public Hanako(){
+        this.souko = new Souko();
+    }
+
+    public Game chumon(){
+        return this.souko.toridasu();  // souko から受け取った game のインスタンスをそのまま返す
+    }
+}
+</pre>
+
+</div>
+
+
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> Taro.java を新規作成し、以下のソースコードを貼り付けてください。
+</p>
+<div class="info">
+
+<pre class="wrap">
+public class Taro extends Human{
+
+    private Game game;
+
+    // コンストラクタ
+    public Taro(){
+        Hanako hanako = new Hanako();
+        this.game = hanako.chumon();  // hanako はフィールドではないので this. は不要
+        this.game.asobu();
+    }
+}
+</pre>
+
+</div>
+
+<p>
 <span class="olradio"><input type="radio" name="p1"></span> Main.java を新規作成し、以下のソースコードを貼り付けてください。
 </p>
 <div class="info">
@@ -125,9 +154,9 @@ public class Game{
 <pre class="wrap">
 public class Main{
 
-	public static void main(String[] args) {
-		Taro taro = new Taro();
-	}
+    public static void main(String[] args) {
+        Taro taro = new Taro();
+    }
 }
 </pre>
 

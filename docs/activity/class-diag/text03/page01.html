@@ -32,20 +32,28 @@
 <p>
 では簡単な例を示しながらシーケンス図の描き方について説明します。
 <br>
-まず以下の「Taro」クラスと「SmartPhone」クラスが次のように定義されているとします。
+まず以下の「SmartPhone」クラス、「Taro」クラスが次のように定義されているとします。
 </p>
 
 <div class="info">
-<input type="checkbox"><b>ソース 1 : Taro クラス </b>
+<input type="checkbox"><b>ソース 1 : SmartPhone クラス </b>
 <pre class="wrap">
-public class Taro{
+public class SmartPhone{
 
-    private SmartPhone sumaho;
+    private int battery = 80;
 
-    public Taro(){
-        SmartPhone sumaho = new SmartPhone();
-        System.out.println( "残量 = " + sumaho.get_battery() + "％" );
-        sumaho.poweroff();
+    // コンストラクタ
+    public SmartPhone(){
+        System.out.println( "電源ON" );
+    }
+
+    // battery の getter
+    public int get_battery(){
+         return this.battery;
+    }
+
+    public void poweroff(){
+        System.out.println( "電源OFF" );
     }
 }
 </pre>
@@ -54,18 +62,17 @@ public class Taro{
 <br>
 
 <div class="info">
-<input type="checkbox"><b>ソース 2 : SmartPhone クラス </b>
+<input type="checkbox"><b>ソース 2 : Taro クラス </b>
 <pre class="wrap">
-public class SmartPhone{
+public class Taro{
 
-    private int battery = 0;
+    private SmartPhone sumaho;
 
-    public int get_battery(){
-         return battery;
-    }
-
-    public void poweroff(){
-        System.out.println( "電源OFF" );
+    // コンストラクタ
+    public Taro(){
+        sumaho = new SmartPhone();
+        System.out.println( "バッテリー残量 = " + this.sumaho.get_battery() + "％" );
+        this.sumaho.poweroff();
     }
 }
 </pre>
@@ -88,7 +95,7 @@ public class Main{
 </div>
 
 <p>
-すると taro はコンストラクタの中で SmartPhone クラスのインスタンス「sumaho」を作成して get_battery メソッドと poweroff メソッドを呼び出します。
+すると Taro クラスのインスタンス taro はコンストラクタの中で SmartPhone クラスのインスタンス「sumaho」を作成して get_battery メソッドと poweroff メソッドを呼び出します。
 <br>
 実行結果は以下になります。
 </p>
@@ -96,7 +103,8 @@ public class Main{
 <div class="info">
 <input type="checkbox"><b>実行結果</b>
 <pre class="wrap">
-残量 = 0％
+電源ON
+バッテリー残量 = 80％
 電源OFF
 </pre>
 </div>
@@ -108,6 +116,9 @@ public class Main{
 <div class="info">
 <p>
 <input type="checkbox"><b>図1　シーケンス図の例</b>
+</p>
+<p>
+※ this.battery の this. は省略
 </p>
 <img src="./img/page01-fig1.png" alt="">
 </div>
