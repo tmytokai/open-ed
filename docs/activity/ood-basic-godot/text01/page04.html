@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>4. キャラクターの移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Godot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<div class="olradio"> 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 次のコードを追加する
+<br>
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 1: キャラクターを右方向に移動距離 100 で動かす</b>
+<pre class="wrap">
+# export をつけるとTaroのインスペクタで数値を変更できるようになる
+@export var speed = 100 
+
+# onready をつけると開始時に表示領域のサイズを取得する
+@onready var screen_size = get_viewport_rect().size 
+
+# 各フレームごとに繰り返し実行される関数
+func _process(delta):
+	# 移動方向・速度をベクトルで指定する
+	var velocity = Vector2(1,0)*speed 
+	# 位置を更新する
+	# deltaは前フレームからの経過時間
+	# deltaを速さにかけることでFPSの影響を受けずに移動距離を一定にできる(距離=速さx時間)
+	position += velocity*delta
+	# 画面外に出ないようにクランプする
+	position = position.clamp(Vector2.ZERO, screen_size) 
+</pre>
+</div>
+
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Taroが動くのを確認したらゲーム画面を閉じる
+</div>
+
+
+<br>
+<script>PreNext(4,10)</script>
+</body>
+</html>

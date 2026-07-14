@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>5. キーボードによるオブジェクトの移動</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Godot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<div class="olradio"> 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> _process関数を次に置き換える
+<br>
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 1: カーソルキーの上下左右で移動</b>
+<pre class="wrap">
+func _process(delta):
+	# 移動方向・速度をゼロでクリア
+	var velocity = Vector2.ZERO
+	# Input.is_action_pressed 関数でキーを押しているかチェック出来る
+	if Input.is_action_pressed("right"):
+		velocity.x = speed
+	if Input.is_action_pressed("left"):
+		velocity.x = -speed
+	if Input.is_action_pressed("down"):
+		velocity.y = speed
+	if Input.is_action_pressed("up"):
+		velocity.y = -speed
+	position += velocity*delta
+	position = position.clamp(Vector2.ZERO, screen_size)
+</pre>
+</div>
+
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Taroが動くのを確認したらゲーム画面を閉じる
+</div>
+
+
+
+
+<br>
+<script>PreNext(5,10)</script>
+</body>
+</html>

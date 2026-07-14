@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>6. ラベルに文字列を表示</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [1] Godot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+
+<div class="olradio"> 
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 2D画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Labelをクリックして「Text」の内容を適当に変えると表示されている文字が変わることを確認する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Labelの位置を適当に変更する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> フォントサイズを変更する場合は「Theme Overrides → Font Sizes → Font Size」の数値を変更する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> _process関数に以下のコードを追加
+<br>
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 1: "a"を押したら Label にHelloと表示、"s"を押したら消す</b>
+<pre class="wrap">
+	# Input.is_action_just_pressed 関数でキーを押しているか「1度だけ」チェック出来る
+	if Input.is_action_just_pressed("a"):
+		# $"../Label" でLabelノードを参照できる
+		$"../Label".text = "Hello"
+		$"../Label".show()
+	if Input.is_action_just_pressed("s"):
+		$"../Label".hide()
+</pre>
+</div>
+
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> "a"で Label に Helloと表示、"b"で表示が消えるのを確認する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ラベルを増やしたい場合は「Label」を右クリックして「複製」を選ぶ
+</div>
+
+
+
+
+
+
+<br>
+<script>PreNext(6,10)</script>
+</body>
+</html>
