@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 5</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<h3>プロダクトバックログアイテムの選択</h2>
+
+<p>
+プロダクトバックログから今回のスプリントで行うタスクを選択して In Progress に移します。
+<br>
+次はゲームオーバーの処理を作りましょう。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td>  </td> <td>ゲームクリア処理をする</td> </tr>
+<tr> <td> </td> <td class="yellow">ゲームオーバー処理をする</td> <td>  </td> </tr>
+</table>
+
+<br>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次の様に詳細仕様書を作りました。
+<br>
+ゲームオーバーの条件は(1) TARO が敵に触れた時、(2) タイムオーバーの時なので、次の様にしました。
+</p>
+
+<table>
+<tr><th>クラス名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+TARO
+</td><td>
+・敵に触れたら「GAME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+</td>
+</tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・残り時間カウンターをフィールドに追加する (フィールド名は private int timecount = 1000 ) 
+<br>
+・プログラムループ(act メソッド)が呼び出される度に残り時間カウンターの数字を1減らして残り時間を画面に表示する。文字列の表示座標は (50,50) 
+<br>
+・残り時間カウンターが 0 になったら「TIME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+</td>
+</tr>
+
+
+</table>
+
+<br>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+今回は以下のようなスプリントバックログを作りました。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td>TARO が敵に触れた時のゲームオーバー処理を作る</td><td>  </td> <td>  </td></tr>
+<tr> <td>タイムオーバー処理を作る</td><td>  </td> <td>  </td></tr>
+</table>
+
+
+<br>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>TARO が敵に触れた時のゲームオーバー処理を作る</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中を「GAME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>するプログラムに変更して下さい。文字列の座標は(400,200)とします。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>タイムオーバー処理を作る</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスのソースを開き、フィールドに private int timecount = 1000 を追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに public void act メソッドを追加して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスの act メソッドの中で
+</p>
+<p>
+残り時間カウンター(timecount)の数を1減らす
+<br>
+<br>
+→残り時間カウンターの値を画面に<a href="../text01/page06.html">表示する</a>。文字列の表示座標は (50,50) 
+<br>
+<br>
+→残り時間カウンターが 0 になったら「TIME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
+</p>
+<p>
+という処理を追加して下さい。
+</p>
+</div>
+</div>
+
+<br>
+<h3>テスト</h3>
+
+<p>
+コーディングが終わったらテストします。
+<br>
+<br>
+Run ボタンを押して動作確認して下さい。 
+<br>
+上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+</p>
+
+<br>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>当たり判定をする</td> </tr>
+<tr> <td> </td> <td>  </td> <td>ゲームクリア処理をする</td> </tr>
+<tr> <td> </td> <td>  </td> <td>ゲームオーバー処理をする</td> </tr>
+</table>
+
+<br>
+<script>PreNext(8,9)</script>
+</body>
+</html>

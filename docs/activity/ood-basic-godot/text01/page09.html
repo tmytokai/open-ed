@@ -19,9 +19,35 @@
 
 <h2><script>GetTitle()</script></h2>
 
-<p>
-準備中
-</p>
+<div class="olradio"> 
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> _on_area_entered関数を次のコードに変更する
+<br>
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 1: キャラクター削除</b>
+<pre class="wrap">
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		# 自分自身を削除
+		queue_free()
+	if area.is_in_group("Friend"):
+		# 相手を削除
+		area.queue_free()
+</pre>
+</div>
+
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押し、TAROがORANGEに当たると自分が消え、HANAKO当たるとHanakoが消えることを確認する。
+</div>
+
 
 <br>
 <script>PreNext(9,10)</script>

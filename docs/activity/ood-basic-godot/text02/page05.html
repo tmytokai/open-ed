@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 2</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<h3>プロダクトバックログアイテムの選択</h2>
+
+<p>
+まずプロダクトバックログから今回のスプリントで行うタスクを選択して In Progress に移します。
+<br>
+今回は敵である APPLE と ORANGE を表示します。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td class="yellow">APPLE を表示する</td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td class="yellow">ORANGE を表示する</td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+<br>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次の様に詳細仕様書を作りました。
+</p>
+
+<table>
+<tr><th>クラス名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+APPLE
+</td><td>
+・敵クラス1
+<br>
+・Greenfootの「Actor」クラスを継承して作る
+<br>
+・全体仕様書に貼った画像を使う (50x50 ピクセル)
+<br>
+・ゲーム開始時にランダムに 5つ初期配置する (x 座標の範囲 0 〜800、y 座標の範囲は 0〜450)。
+</td>
+</tr>
+
+<tr><td>
+ORANGE
+</td><td>
+・敵クラス2
+<br>
+・Greenfootの「Actor」クラスを継承して作る
+<br>
+・全体仕様書に貼った画像を使う (50x50 ピクセル)
+<br>
+・ゲーム開始時にランダムに 5つ初期配置する (x 座標の範囲 0 〜800、y 座標の範囲は 0〜450)。
+</td>
+</tr>
+
+</table>
+
+<br>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+今回は以下のようなスプリントバックログを作りました。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td>APPLE を初期配置して表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を初期配置して表示する</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+
+<br>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>APPLE を初期配置して表示する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 「Actor」クラスを継承して「APPLE」クラスを作成します。画像もセットして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span>  「MyWorld」クラスのソースを開き、コンストラクタで「APPLE」を<a href="../../java-basic/text01/page08.html">ランダム</a>に 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>ORANGE を初期配置して表示する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「ORANGE」クラスを作成します。画像もセットして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span>  「MyWorld」クラスのソースを開き、「ORANGE」を<a href="../../java-basic/text01/page08.html">ランダム</a>に 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+</p>
+</div>
+</div>
+
+<br>
+<h3>テスト</h3>
+
+<p>
+コーディングが終わったらテストします。
+<br>
+Reset ボタンを押すたびに APPLE と ORANGE の位置が変わることを確認します。
+<br>
+上手く動作しなかった場合はデバッグして下さい。
+</p>
+
+<br>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>APPLE を表示する</td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td> </td> <td> </td> <td>ORANGE を表示する</td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+<br>
+<script>PreNext(5,9)</script>
+</body>
+</html>

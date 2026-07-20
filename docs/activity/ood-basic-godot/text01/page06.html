@@ -49,11 +49,12 @@
 <pre class="wrap">
 	# Input.is_action_just_pressed 関数でキーを押しているか「1度だけ」チェック出来る
 	if Input.is_action_just_pressed("a"):
-		# $"../Label" でLabelノードを参照できる
-		$"../Label".text = "Hello"
-		$"../Label".show()
+		# CanvasLayerを使ってHUDを作る
+		# $"../CanvasLayer/Label" でCanvasLayer内にあるLabelノードを参照できる
+		$"../CanvasLayer/Label".text = "Hello"
+		$"../CanvasLayer/Label".show()
 	if Input.is_action_just_pressed("s"):
-		$"../Label".hide()
+		$"../CanvasLayer/Label".hide()
 </pre>
 </div>
 
@@ -62,7 +63,7 @@
 <span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> "a"で Label に Helloと表示、"b"で表示が消えるのを確認する
+<span class="olradio"><input type="radio" name="p1"></span> "a"で Label に Helloと表示、"s"で表示が消えるのを確認する
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ラベルを増やしたい場合は「Label」を右クリックして「複製」を選ぶ

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>スプリント 1</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+では最初の<a href="../../scrum/text02/page03.html">スプリント</a>を開始しましょう。
+</p>
+
+<h3>プロダクトバックログアイテムの選択</h2>
+
+<p>
+まずプロダクトバックログから今回のスプリントで行うアイテム(タスク)を選択して In Progress に移します。
+<br>
+まずは背景と主人公を表示して動かしたいので、以下の様にプロダクトバックログを更新しました。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td class="yellow">背景を表示する</td> <td>  </td> </tr>
+<tr> <td> </td> <td class="yellow">TARO を表示する</td> <td>  </td> </tr>
+<tr> <td> </td> <td class="yellow">TARO を動かす</td> <td>  </td> </tr>
+<tr> <td> </td> <td class="yellow">HANAKO を表示する</td> <td>  </td> </tr>
+<tr> <td> </td> <td class="yellow">HANAKO を動かす</td> <td>  </td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+<br>
+<h3>詳細設計 (詳細仕様書の作成)</h2>
+
+<p>
+次に詳細仕様書を作成します。
+</p>
+
+<p>
+このスプリントでは背景と主人公を作るので、それらのシーン設計を兼ねて行います。
+<br>
+今回は次の様に詳細仕様書を作りました。
+</p>
+
+<table>
+<tr><th>シーン名</th><th>詳細仕様</th></tr>
+
+<tr><td>
+MyWorld
+</td><td>
+・背景シーン
+<br>
+・「World」シーンを継承して作る
+<br>
+・全体仕様書に貼った画像を使う (800x450 ピクセル)
+<br>
+・ゲーム開始時に TARO と HANAKO の初期配置を行う
+</td>
+</tr>
+
+<tr><td>
+TARO
+</td><td>
+・主人公シーン1
+<br>
+・「Actor」シーンを継承して作る
+<br>
+・全体仕様書に貼った画像を使う (50x57 ピクセル)
+<br>
+・ゲーム開始時の初期座標は(0,0)
+<br>
+・キーボードのカーソルキーで上下左右移動を行う(スピード = 100)
+</td>
+</tr>
+
+<tr><td>
+HANAKO
+</td><td>
+・主人公シーン2
+<br>
+・Actor」シーンを継承して作る
+<br>
+・全体仕様書に貼った画像を使う (50x57 ピクセル)
+<br>
+・ゲーム開始時の初期座標は(800,450)
+<br>
+・キーボードのカーソルキーで上下左右移動を行う(スピード = 100)。ただし上下左右を反転させる。
+</td>
+</tr>
+
+</table>
+
+<br>
+<h3>スプリントバックログの作成</h2>
+
+<p>
+次に詳細仕様書から具体的な作業(タスク)をリストアップしてスプリントバックログを作ります。
+<br>
+今回は以下のようなスプリントバックログを作りました。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td>新規プロジェクトを作成する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>MyWorld を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>TARO と HANAKO を初期配置して表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>TARO をカーソルキーで上下左右に動かす</td> <td>  </td> <td>  </td></tr>
+<tr> <td>HANAKO をカーソルキーで上下左右に動かす</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+
+<br>
+<h3>コーディング</h3>
+
+<p>
+スプリントバックログの内容に沿って、以下の様にコーディングします。
+</p>
+
+<div class="info">
+<input type="checkbox"><b>新規プロジェクトを作成する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> テンプレートのフォルダ名を「GF-2」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「今すぐ編集を始める」のチェックを外して「GF-2」をインポートします。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「名前の変更」を押して名前を「GF-2」に変更します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> プロジェクトを開きます。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>MyWorld を表示する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 「World」シーンを継承して「MyWorld」シーンを作成します。画像(MyWorld.jpg)もセットして下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> メニューから「プロジェクト → ブロジェクト設定 → 一般 → 表示 → ウィンドウ」を選択し、「ビューポートの幅」を800、「ビューポートの高さ」を450にセットしてください。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>TARO と HANAKO を初期配置して表示する</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 「Actor」シーンを継承して「TARO」シーンを作成します。画像(TARO.png)もセットして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「Actor」シーンを継承して「HANAKO」シーンを作成します。画像(HANAKO.png)もセットして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  「MyWorld」シーンのスクリプト(my_world.gd)を開き、_ready()関数で「TARO」を<a href="../text01/page07.html">初期配置</a>して下さい。座標は(0,0)です。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  同様に「HANAKO」を<a href="../text01/page07.html">初期配置</a>して下さい。座標は(800,450)です。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>TARO をカーソルキーで上下左右に動かす</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 「TARO」シーンのスクリプト(taro.gd)を開き、_process関数内に<a href="../text01/page05.html">矢印キーで上下左右に動かす</a>プログラムを記述して下さい。 スピードは100です。
+</p>
+</div>
+</div>
+
+<br>
+<div class="info">
+<input type="checkbox"><b>HANAKO をカーソルキーで上下左右に動かす</b>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 「HANAKO」シーンのスクリプト(hanako.gd)を開き、_process メソッド内に<a href="../text01/page05.html">矢印キーで上下左右に動かす</a>(ただし上下左右は反転)プログラムを記述して下さい。 スピードは100です。
+</p>
+</div>
+</div>
+
+<br>
+<h3>テスト</h3>
+
+<p>
+コーディングが終わったらテストします。
+<br>
+MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押して動作確認して下さい。 
+</p>
+
+<br>
+<h3>スプリントレビュー、レトロスペクティブ、リリース</h3>
+
+<p>
+本来はその後スプリントレビュー、レトロスペクティブ、リリース作業があるのですが、今回は省略して次のスプリントに移ります。
+</p>
+
+<p>
+なお、この時点でのプロダクトバックログの状態は次の通りです。
+</p>
+
+<table>
+<tr><th>ToDo</th><th>In Progress</th><th>Done</th></tr>
+<tr> <td> </td>  <td> </td> <td>背景を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>TARO を動かす</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を表示する</td> </tr>
+<tr> <td> </td> <td> </td> <td>HANAKO を動かす</td> </tr>
+<tr> <td>APPLE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>APPLE を動かす</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ORANGE を表示する</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>当たり判定をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームクリア処理をする</td> <td>  </td> <td>  </td> </tr>
+<tr> <td>ゲームオーバー処理をする</td> <td>  </td> <td>  </td> </tr>
+</table>
+
+
+<br>
+<script>PreNext(4,9)</script>
+</body>
+</html>

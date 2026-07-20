@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>全体設計 (全体仕様書の作成)</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門</a></li>
+<li>学習項目: [2] オブジェクト指向開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<p>
+次は要求仕様書を元に全体設計を行って全体仕様書を作成します。
+<br>
+今回は以下の様な全体仕様書を作成しました。
+</p>
+
+<hr>
+<div>
+<input type="checkbox"><b>タイトル</b>
+
+<p>
+TARO と HANAKO
+</p>
+
+<br>
+<hr>
+<div><input type="checkbox"><b>ジャンル</b></div>
+
+<p>
+2D アクション
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>コンセプト</b>
+
+<p>
+Who（〜が）: HANAKO が
+<br>
+When（〜の時代に）: 現代の
+<br>
+Where（〜において）: 日本で
+<br>
+Why（〜のために）: TARO を守るために
+<br>
+How（〜することで）: 動き回る果物を捕まえて
+<br>
+What（〜をする）: 食べる
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>プラットフォーム</b>
+
+<p>
+動作環境: PC
+<br>
+開発環境: <a href="https://godotengine.org/ja/">Godot</a>
+</p>
+
+<br>
+<hr>
+<input type="checkbox"><b>ターゲット</b>
+
+<p>
+10歳以上のライト層
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>開発担当</b>
+
+<p>
+ディレクター: 自分
+<br>
+企画: 自分
+<br>
+デザイン: 自分
+<br>
+プログラム: 自分
+<br>
+サウンド: 無し
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>世界観</b>
+
+<p>
+現代日本
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>ストーリー</b>
+
+<p>
+果物が TARO を襲い始めた
+<br>
+TARO を守るため HANAKO が動き回る果物を捕まえて食べて退治する
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>概要 (フィーチャー)</b>
+
+<p>
+概要:
+</p>
+<p>
+・タイトルは無し。いきなりゲームを開始する。
+<br>
+・背景は一枚絵。スクロールしない
+<br>
+・ゲーム開始時の TARO の初期位置は画面左上
+<br>
+・ゲーム開始時の HANAKO の初期位置は画面右下
+<br>
+・TARO は上下左右に動かせる
+<br>
+・HANAKO も上下左右に動かせるが TARO と逆方向に同時に動く
+<br>
+　(例えば TARO を上に動かすとき HANAKO は下に動く)
+<br>
+・TARO と HANAKO 間に当たり判定無し (つまりスレ違い可能)
+<br>
+・TARO と HANAKO は画面外に移動できない
+<br>
+・果物は APPLE と ORANGE の 2 種類
+<br>
+・ゲーム開始時に APPLE と ORANGE をランダムな位置に複数個表示する
+<br>
+・APPLE は動きまわる
+<br>
+・ORANGE は静止している
+<br>
+・TARO が果物に触れたらゲームオーバー
+<br>
+・HANAKO が果物に触れたらその果物を消す
+<br>
+・HANAKO がすべての果物を消したらゲームクリア
+<br>
+・時間制限を設ける
+<br>
+・残り時間は画面左下に表示する
+</p>
+
+<p>
+クリア条件: 
+</p>
+<p>
+・HANAKO が全ての果物を食べる(消す)
+</p>
+
+<p>
+ゲームオーバー条件: 
+</p>
+<p>
+・TARO が果物に食べられる(触れる)
+<br>
+・制限時間切れ
+</p>
+
+<p>
+ゲーム画面イメージ:
+</p>
+<img src="./img/screen.png" alt="">
+
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>ステージ</b>
+
+<p>
+ステージ名: 街
+<br>
+見た目・特徴: 夜の街
+<br>
+追加フィーチャー: 無し
+<br>
+備考: 無し
+<br>
+画面イメージ: 
+<br>
+<img src="./img/MyWorld.jpg">
+<br>
+<a href="https://www.irasutoya.com/2018/06/blog-post_148.html">元画像</a> (いらすとや)
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>キャラクター</b>
+
+<p>
+キャラクター名: TARO
+<br>
+役割: 主人公1
+<br>
+見た目・特徴: 少年、果物から逃げ回る
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/TARO.png">
+<br>
+<a href="https://www.irasutoya.com/2014/04/blog-post_15.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: HANAKO
+<br>
+役割: 主人公2
+<br>
+見た目・特徴: 少女、果物を食べる
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/HANAKO.png">
+<br>
+<a href="https://www.irasutoya.com/2014/04/blog-post_16.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: APPLE
+<br>
+役割: 敵
+<br>
+見た目・特徴: りんご、ランダムに動く
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/APPLE.png">
+<br>
+<a href="https://www.irasutoya.com/2014/10/blog-post_766.html">元画像</a> (いらすとや)
+</p>
+
+<br>
+<p>
+キャラクター名: ORANGE
+<br>
+役割: 敵
+<br>
+見た目・特徴: みかん、静止したまま動かない
+<br>
+登場ステージ: 全て
+<br>
+備考: 無し
+<br>
+画像イメージ:
+<br>
+<img src="./img/ORANGE.png">
+<br>
+<a href="https://www.irasutoya.com/2012/11/blog-post_18.html">元画像</a> (いらすとや)
+</p>
+</div>
+
+<br>
+<hr>
+<div>
+<input type="checkbox"><b>操作方法</b>
+
+<br>
+<br>
+<table>
+<tr><th>項目</th><th>操作方法</th></tr>
+<tr><td>TARO と HANAKO の上下左右移動</td><td>キーボードのカーソルキー</td></tr>
+</table>
+
+<br>
+<hr>
+<input type="checkbox"><b>画面遷移</b>
+
+<p>
+画面遷移無し(ゲーム画面のみ)
+</p>
+</div>
+
+<br>
+<script>PreNext(2,9)</script>
+</body>
+</html>
