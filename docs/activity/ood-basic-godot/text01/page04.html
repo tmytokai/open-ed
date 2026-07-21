@@ -27,12 +27,14 @@
 <span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 次のコードを追加する
+<span class="olradio"><input type="radio" name="p1"></span> 次のコードに置き換える
 <br>
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース 1: キャラクターを右方向に移動距離 100 で動かす</b>
 <pre class="wrap">
+extends Actor
+
 # export をつけるとTAROのインスペクタで数値を変更できるようになる
 @export var speed = 100 
 
