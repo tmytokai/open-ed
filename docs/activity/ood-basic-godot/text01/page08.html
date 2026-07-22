@@ -54,12 +54,17 @@
 <span class="olradio"><input type="radio" name="p1"></span> 2D画面を開き、APPLEシーンをひとつインスタンス化して適当な位置に移動する。
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 以下のソースコードを追加する
+<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面に切り替えて taro.gd を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> taro.gd の下の方に以下のソースコードを追加する
 <br>
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース 1: 当たり判定</b>
 <pre class="wrap">
+# 他のキャラクターに消失したときに呼び出される関数
+# 引数 area に衝突したキャラクターが入る
 func _on_area_entered(area: Area2D) -> void:
 	$"../CanvasLayer/Label".text = "ITAI"
 	$"../CanvasLayer/Label".show()

@@ -52,18 +52,25 @@
 <span class="olradio"><input type="radio" name="p1"></span> スクリプト画面に切り替えて my_world.gd を開く
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 以下のソースコードを追加する
+<span class="olradio"><input type="radio" name="p1"></span> 以下のソースコードに置き換える
 <br>
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース 1: 開始時にHANAKOを(200,200)の位置に表示</b>
 <pre class="wrap">
-# インスタンス化するシーンを選択
+extends World
+
+# インスタンス化するシーン(キャラクタ)を変数に代入
+#
+# @onready は _ready 関数が実行される直前に代入してくださいという指示
+#
+# preload関数はゲームの起動時にシーンとか画像とかのリソースを事前ロードする関数
+# (多分@onreadyは必要無いけど一応つけとく)
 @onready var hanako_scene = preload("res://hanako.tscn")
 
 # 開始時に1度だけ実行される関数
 func _ready():
-	# HANAKO シーンをインスタンス化
+	# HANAKO をインスタンス化
 	var hanako = hanako_scene.instantiate()
 	# インスタンス化したHANAKOの座標をセット
 	hanako.position = Vector2(200,200)
