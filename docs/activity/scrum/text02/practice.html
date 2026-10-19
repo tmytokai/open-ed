@@ -38,27 +38,7 @@
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-1 (チーム):</b>  今回の開発で利用する開発環境(Greenfoot)を使うとどの様なゲームを作成できるかチームで調べてみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p1"></span> 利用する開発環境を使って作ったゲームを公式サイトなどから見つけます。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 見つけたゲームの中から、これから開発するゲームに近いジャンルのゲームを見つけます。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> そのゲームを実際にプレイし、この開発環境を使うとどの様なゲームを作れるのかを確認します。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> ソースコードも配布していたら、参考にするためダウンロードしておきます。
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 代表者はそのゲームのへのリンクをプロジェクトフォルダ内に作成して下さい。
-<br>
-リンク名は「参考ゲーム.url」とします。 
-</div>
-
-
-<br>
-<p>
-<input type="checkbox"><b>演習 2-2 (チーム):</b> 開発用のリモートリポジトリを新規作成してメンバーを登録しましょう。
+<input type="checkbox"><b>演習 2-1:</b> 開発用のリモートリポジトリを新規作成してメンバーを登録しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -70,25 +50,8 @@
 <p>
 ※ パブリック・リモートリポジトリなので著作権等に注意して下さい
 </p>
-<p>
 <span class="olradio"><input type="radio" name="p2"></span> 代表者は端末を開いてリモートリポジトリを clone します。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリ内にある .gitignore (もし無ければ作成して下さい。先頭のドットを忘れずに)を開き、<a href="./gitignore.txt">テンプレート</a>の内容をファイルの下部にコピーして上書き保存して下さい。
-<p>
-※ .gitignore は git の管理から外すファイルを指定する設定ファイルです
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore を add/commit して下さい。
-</p>
-<pre class="wrap">
-git add .gitignore
-git status
-git commit -m "gitignore 更新"
-git push
-
-※ git push でIDとパスワードを聞かれたら入力して下さい
-</pre>
-<p>
 <span class="olradio"><input type="radio" name="p2"></span> 再び GitHub に戻り、 <a href="../../git/text03/page01.html">こちら</a>を参考にして代表者は他のチームメンバーにインビテーションを送ってコラボレーターとして登録をします。
 <br>
 <span class="olradio"><input type="radio" name="p2"></span> 各メンバーはリモートリポジトリを clone します。
@@ -101,34 +64,26 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-3 (チーム):</b> Greenfoot で新規シナリオを作成してリモートリポジトリに登録しましょう。
+<input type="checkbox"><b>演習 2-2:</b> Godot で新規プロジェクトを追加してリモートリポジトリに登録しましょう。
 </p>
 <div class="olradio"> 
 <p>
 <span class="olradio"><input type="radio" name="p3"></span> A〜Dさん役を決めます。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> AさんはGreenfootを起動して新規シナリオを作成します。
+<span class="olradio"><input type="radio" name="p3"></span> Aさんはテンプレートを演習 2-1 で作成したローカルリポジトリ上に展開し、フォルダ名を「game(チーム番号)」に変更してください。
 </p>
-<p>
-シナリオの保存先として演習 2-2 で作成したローカルリポジトリを指定してください
-</p>
-<p>
-※ シナリオ名は「game(チーム番号)」としてください (例) 1班なら game1
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p3"></span> Aさんは「World」のサブクラスとして「MyWorld」を作って下さい。キャンパスの大きさ、背景画像等の設定は後で変更出来ますので今の所は任意の設定で構いません。
+<span class="olradio"><input type="radio" name="p4"></span> Aさんは Godot を起動し、追加したプロジェクトを開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> 一度 Run して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> Aさんは<a href="../../ood-basic-godot/text01/page02.html">こちら</a>を参考にして「MyWorld」シーンを作成してください。
 <br>
 <span class="olradio"><input type="radio" name="p3"></span> Aさんは端末を開き、ローカルリポジトリの中に移動します。
 <br>
-<span class="olradio"><input type="radio" name="p3"></span> Aさんは<b>Greenfootを閉じてから</b> ※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
-</p>
+<span class="olradio"><input type="radio" name="p3"></span> Aさんは
 <pre>
 git status
 git add .
 git status
-git commit -m "新規シナリオ作成"
+git commit -m "新規プロジェクト追加"
 git push
 </pre>
 <p>
@@ -155,26 +110,26 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-4 (チーム):</b> リポジトリの同時編集の練習をします。まずは各自で自分のキャラクターを追加してみましょう。
+<input type="checkbox"><b>演習 2-3:</b> リポジトリの同時編集の練習をします。各自で自分のキャラクターを追加してみましょう。
 </p>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 全員 Greenfoot を起動し、演習 2-3 で作成したシナリオを開いて下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 全員 Godot を起動し、演習 2-2 で追加したプロジェクトを開いて下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 全員 Actor のサブクラスとして適当なキャラを作って下さい。名前、画像は適当で構いませんが、打ち合わせて他の人と同じ名前にならないようにして下さい。ソースの中身は空で構いません。
+<span class="olradio"><input type="radio" name="p4"></span> 全員 <a href="../../ood-basic-godot/text01/page03.html">こちら</a> を参考にしてキャラクターを作成してください。名前、画像は適当で構いませんが、打ち合わせて他の人と同じ名前にならないようにして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 一度 Run して下さい。
+<span class="olradio"><input type="radio" name="p4"></span> 実行確認をしてください。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> <b>Greenfootを閉じてから</b> ※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
+<span class="olradio"><input type="radio" name="p4"></span> 全員
 </p>
 <pre>
 git status
 git add .
 git status
-git commit -m "(自分の記号(A〜D))がキャラ追加"
+git commit -m "(自分の記号)がキャラ追加"
 </pre>
 <p>
-の順にコマンドを実行してローカルリポジトリを更新して下さい。
+の順にコマンドを実行してローカルリポジトリを更新して下さい。 (例) Aさんなら git commit -m "Aがキャラ追加"
 <br>
 <span class="olradio"><input type="radio" name="p4"></span> 他のメンバーの更新内容を取り込むために
 </p>
@@ -184,23 +139,10 @@ git pull --no-edit
 <p>
 を実行して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> git pull した際に、もし端末に
+衝突が生じた場合は解決してからもう一度上記コマンドを実行してください。
 </p>
 <p>
-CONFLICT (content): Merge conflict in project.greenfoot
-</p>
-<p>
-と表示された時は Greenfoot の設定ファイル(project.greenfoot)に衝突が生じましたので Greenfoot を再起動して下さい。
-<br>
-すると Greenfoot が自動的に設定ファイルを修復します。
-<br>
-衝突を修正したら (4) に戻ります。
-</p>
-<p>
-※ 時々キャラ画像の指定が外れている場合があります。その場合は右クリック → Setimage から画像を指定し直して下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p4"></span> 衝突しなかったら
+<span class="olradio"><input type="radio" name="p4"></span> 衝突が無くなったら
 </p>
 <pre>
 git push
@@ -220,90 +162,11 @@ git pull --no-edit
 </div>
 
 <br>
-<p>
-<input type="checkbox"><b>演習 2-5 (チーム):</b> 引き続きリポジトリの同時編集の練習をします。今度は１つのキャラクターを同時に編集してみましょう。
-</p>
-<div class="olradio"> 
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> 全員は再びGreenfootを開き、Aさんが作ったキャラに対して同時編集をします。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> A さんは<a href="../../ood-basic/text01/page05.html">↑を押したら上に移動する処理</a>を書いて動作確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> B さんは<a href="../../ood-basic/text01/page05.html">→を押したら右に移動する処理</a>を書いて動作確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> C さんは<a href="../../ood-basic/text01/page05.html">↓を押したら下に移動する処理</a>を書いて動作確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> D さんは<a href="../../ood-basic/text01/page05.html">←を押したら左に移動する処理</a>を書いて動作確認して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> <b>Greenfootを閉じてから</b>
-</p>
-<pre>
-git status
-git add .
-git status
-git commit -m "(自分の記号(A〜D))がキャラ移動処理を追加"
-</pre>
-<p>
-の順にコマンドを実行してローカルリポジトリを更新して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 他のメンバーの更新内容を取り込むために
-</p>
-<p>
-git pull --no-edit
-</p>
-<p>
-を実行して下さい。
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> git pull した際に、もし端末に
-</p>
-<p>
-CONFLICT (content): Merge conflict in (衝突ファイル名)
-</p>
-<p>
-と表示された場合は<a href="../../git/text03/page04.html">衝突</a>が起きました。
-<br>
-設定ファイル(project.greenfoot)は自動で修復されますが、それ以外のファイルは手作業で修正する必要があります。
-<br>
-まず
-</p>
-<p>
-git status
-</p>
-<p>
-を実行し、衝突しているファイル( both modified マークが付いているファイル)を確認します。
-<br>
-次に Greenfoot を起動し、衝突しているファイルを開いて衝突箇所を修正し、Run ボタンを押して動作確認します。
-<br>
-衝突を修正したら (6) に戻ります。 
-</p>
-<p>
-<span class="olradio"><input type="radio" name="p5"></span> 衝突しなかったら
-</p>
-<pre>
-git push
-</pre>
-<p>
-を実行してリモートリポジトリを更新して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 全員の git push が終わったら、最後に全員が
-</p>
-<pre>
-git pull --no-edit
-</pre>
-<p>
-を実行してローカルリポジトリを最新状態に更新して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p5"></span> 提出物はありません。
-</div>
-
-
-<br>
 <h2><a href="./page02.html">2. リリースプランニング</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-6 (チーム):</b> <a href="./page02.html#yteigi">要求定義</a>をします。具体的には要求仕様書を作成しましょう。
+<input type="checkbox"><b>演習 2-4:</b> <a href="./page02.html#yteigi">要求定義</a>をします。具体的には要求仕様書を作成しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -326,7 +189,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-7 (チーム):</b> <a href="./page02.html#zentai">全体設計</a>をします。具体的には全体仕様書を作成しましょう。
+<input type="checkbox"><b>演習 2-5:</b> <a href="./page02.html#zentai">全体設計</a>をします。具体的には全体仕様書を作成しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -348,7 +211,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-8 (チーム):</b> 企画書を作りプレゼンしましょう。
+<input type="checkbox"><b>演習 2-6:</b> 企画書を作りプレゼンしましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -369,7 +232,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-9 (チーム):</b>   <a href="./page02.html#pbl">プロダクトバックログ</a>を作成しましょう。
+<input type="checkbox"><b>演習 2-7:</b>   <a href="./page02.html#pbl">プロダクトバックログ</a>を作成しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -389,11 +252,15 @@ git pull --no-edit
 </div>
 
 <br>
+<h2>以下準備中</h2>
+<br>
+
+<br>
 <h2><a href="./page03.html">3. スプリント</a></h2>
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-10 (チーム):</b>  スプリントが始まったら、まずは<a href="./page03.html#smeeting">スプリントプランニングミーティング</a>を行います。
+<input type="checkbox"><b>演習 2-8:</b>  スプリントが始まったら、まずは<a href="./page03.html#smeeting">スプリントプランニングミーティング</a>を行います。
 <br>
 まずは全体仕様書の見直しを行います。
 </p>
@@ -415,7 +282,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-11 (チーム):</b> 次に今回のスプリントで実施するプロダクトバックログアイテムを選択します。
+<input type="checkbox"><b>演習 2-9:</b> 次に今回のスプリントで実施するプロダクトバックログアイテムを選択します。
 </p>
 <div class="olradio"> 
 <p>
@@ -425,7 +292,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-12(チーム):</b> 次に詳細仕様書を作成しましょう。
+<input type="checkbox"><b>演習 2-10:</b> 次に詳細仕様書を作成しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -445,7 +312,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-13 (チーム):</b>  次はスプリントバックログを作成しましょう。
+<input type="checkbox"><b>演習 2-11:</b>  次はスプリントバックログを作成しましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -463,7 +330,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-14 (チーム):</b> <a href="./page03.html#dmeeting">デイリースクラムミーティング</a>を行いましょう。
+<input type="checkbox"><b>演習 2-12:</b> <a href="./page03.html#dmeeting">デイリースクラムミーティング</a>を行いましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -483,7 +350,7 @@ git pull --no-edit
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-15 (チーム):</b> それでは<a href="./page03.html#devel">開発作業</a>を行いましょう。
+<input type="checkbox"><b>演習 2-13:</b> それでは<a href="./page03.html#devel">開発作業</a>を行いましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -535,7 +402,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-16 (チーム):</b>  開発が終わったら<a href="./page03.html#review">スプリントレビュー</a>を行いましょう。
+<input type="checkbox"><b>演習 2-14:</b>  開発が終わったら<a href="./page03.html#review">スプリントレビュー</a>を行いましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -561,7 +428,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-17 (チーム):</b> レビューを終えたら<a href="./page03.html#retro">レトロスペクティブ</a>(振り返り)を行いましょう。
+<input type="checkbox"><b>演習 2-15:</b> レビューを終えたら<a href="./page03.html#retro">レトロスペクティブ</a>(振り返り)を行いましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -576,7 +443,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-18 (チーム):</b>  <a href="./page03.html#release">リリース</a>作業を行いましょう。
+<input type="checkbox"><b>演習 2-16:</b>  <a href="./page03.html#release">リリース</a>作業を行いましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -590,7 +457,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-19 (チーム):</b>  クロスレビューをおこなってユーザーからフィードバックをもらいましょう。
+<input type="checkbox"><b>演習 2-17:</b>  クロスレビューをおこなってユーザーからフィードバックをもらいましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -600,7 +467,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-20 (チーム):</b> 機会をみてオンラインマニュアルを作りましょう。
+<input type="checkbox"><b>演習 2-18:</b> 機会をみてオンラインマニュアルを作りましょう。
 </p>
 <div class="olradio"> 
 <p>
@@ -616,7 +483,7 @@ git push
 
 <br>
 <p>
-<input type="checkbox"><b>演習 2-21 (チーム):</b> 最後にクロージングをおこないましょう。
+<input type="checkbox"><b>演習 2-19:</b> 最後にクロージングをおこないましょう。
 </p>
 <div class="olradio"> 
 <p>

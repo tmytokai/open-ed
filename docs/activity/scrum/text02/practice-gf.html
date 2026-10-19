@@ -1,0 +1,632 @@
+ <!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>演習</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: スクラムによるソフトウェア開発</a></li>
+<li>学習項目: [2] スクラム開発演習</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<p>
+チームによるゲーム開発を通じてスクラムの演習をします。
+<br>
+今回はファシリテーターがスクラムマスターになります。
+<br>
+ユーザーは自分達が兼任します。
+</p>
+<ul>
+<li>スクラムマスター → ファシリテーター</li>
+<li>ユーザー → 自分達</li>
+<li>開発チーム → 自分達</li>
+</ul>
+
+<br>
+<h2><a href="./page01.html">1. キックオフ</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-1 (チーム):</b>  今回の開発で利用する開発環境(Greenfoot)を使うとどの様なゲームを作成できるかチームで調べてみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p1"></span> 利用する開発環境を使って作ったゲームを公式サイトなどから見つけます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 見つけたゲームの中から、これから開発するゲームに近いジャンルのゲームを見つけます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> そのゲームを実際にプレイし、この開発環境を使うとどの様なゲームを作れるのかを確認します。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> ソースコードも配布していたら、参考にするためダウンロードしておきます。
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 代表者はそのゲームのへのリンクをプロジェクトフォルダ内に作成して下さい。
+<br>
+リンク名は「参考ゲーム.url」とします。 
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-2 (チーム):</b> 開発用のリモートリポジトリを新規作成してメンバーを登録しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> <a href="../../git/text01/practice.html">こちら</a>の演習1-3を参考にして、代表者は GitHub 上に新規でパブリック・リモートリポジトリを作成します。
+</p>
+<p>
+※ リポジトリ名は「team(チーム番号)」としてください (例) 1班なら team1
+</p>
+<p>
+※ パブリック・リモートリポジトリなので著作権等に注意して下さい
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 代表者は端末を開いてリモートリポジトリを clone します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリ内にある .gitignore (もし無ければ作成して下さい。先頭のドットを忘れずに)を開き、<a href="./gitignore.txt">テンプレート</a>の内容をファイルの下部にコピーして上書き保存して下さい。
+<p>
+※ .gitignore は git の管理から外すファイルを指定する設定ファイルです
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はローカルリポジトリの中に移動し、以下のコマンドを実行して .gitignore を add/commit して下さい。
+</p>
+<pre class="wrap">
+git add .gitignore
+git status
+git commit -m "gitignore 更新"
+git push
+
+※ git push でIDとパスワードを聞かれたら入力して下さい
+</pre>
+<p>
+<span class="olradio"><input type="radio" name="p2"></span> 再び GitHub に戻り、 <a href="../../git/text03/page01.html">こちら</a>を参考にして代表者は他のチームメンバーにインビテーションを送ってコラボレーターとして登録をします。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 各メンバーはリモートリポジトリを clone します。
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 代表者はリモートリポジトリへのリンクをプロジェクトフォルダ内に作成して下さい。
+<br>
+リンク名は「リモートリポジトリ.url」とします。
+<br>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-3 (チーム):</b> Greenfoot で新規シナリオを作成してリモートリポジトリに登録しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> A〜Dさん役を決めます。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> AさんはGreenfootを起動して新規シナリオを作成します。
+</p>
+<p>
+シナリオの保存先として演習 2-2 で作成したローカルリポジトリを指定してください
+</p>
+<p>
+※ シナリオ名は「game(チーム番号)」としてください (例) 1班なら game1
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> Aさんは「World」のサブクラスとして「MyWorld」を作って下さい。キャンパスの大きさ、背景画像等の設定は後で変更出来ますので今の所は任意の設定で構いません。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 一度 Run して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Aさんは端末を開き、ローカルリポジトリの中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Aさんは<b>Greenfootを閉じてから</b> ※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
+</p>
+<pre>
+git status
+git add .
+git status
+git commit -m "新規シナリオ作成"
+git push
+</pre>
+<p>
+の順にコマンドを実行してローカルリポジトリとリモートリポジトリを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> B〜Dさんも端末を開き、ローカルリポジトリの中に移動します。
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> B〜Dさんは
+</p>
+<p>
+git pull --no-edit
+</p>
+<p>
+を実行してローカルリポジトリを最新状態に更新して下さい。
+</p>
+<p>
+※ --no-edit オプションを付け忘れると端末の画面が切り替わってコミットのメッセージを求められる場合があります。
+<br>
+その場合は「適当にコメントを入力する → ESC 押す → :wq と入力する → Enter 押す」の手順でコミットメッセージを入力して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p3"></span> 提出物はありません。
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-4 (チーム):</b> リポジトリの同時編集の練習をします。まずは各自で自分のキャラクターを追加してみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 全員 Greenfoot を起動し、演習 2-3 で作成したシナリオを開いて下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 全員 Actor のサブクラスとして適当なキャラを作って下さい。名前、画像は適当で構いませんが、打ち合わせて他の人と同じ名前にならないようにして下さい。ソースの中身は空で構いません。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 一度 Run して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> <b>Greenfootを閉じてから</b> ※ 一度 Greenhoot を閉じないとGreenfoot の設定ファイル(project.greenfoot)が保存されない様です
+</p>
+<pre>
+git status
+git add .
+git status
+git commit -m "(自分の記号(A〜D))がキャラ追加"
+</pre>
+<p>
+の順にコマンドを実行してローカルリポジトリを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 他のメンバーの更新内容を取り込むために
+</p>
+<p>
+git pull --no-edit
+</p>
+<p>
+を実行して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> git pull した際に、もし端末に
+</p>
+<p>
+CONFLICT (content): Merge conflict in project.greenfoot
+</p>
+<p>
+と表示された時は Greenfoot の設定ファイル(project.greenfoot)に衝突が生じましたので Greenfoot を再起動して下さい。
+<br>
+すると Greenfoot が自動的に設定ファイルを修復します。
+<br>
+衝突を修正したら (4) に戻ります。
+</p>
+<p>
+※ 時々キャラ画像の指定が外れている場合があります。その場合は右クリック → Setimage から画像を指定し直して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> 衝突しなかったら
+</p>
+<pre>
+git push
+</pre>
+<p>
+を実行してリモートリポジトリを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 全員の git push が終わったら、最後に全員が
+</p>
+<pre>
+git pull --no-edit
+</pre>
+<p>
+を実行してローカルリポジトリを最新状態に更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 提出物はありません。
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-5 (チーム):</b> 引き続きリポジトリの同時編集の練習をします。今度は１つのキャラクターを同時に編集してみましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 全員は再びGreenfootを開き、Aさんが作ったキャラに対して同時編集をします。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> A さんは<a href="../../ood-basic/text01/page05.html">↑を押したら上に移動する処理</a>を書いて動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> B さんは<a href="../../ood-basic/text01/page05.html">→を押したら右に移動する処理</a>を書いて動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> C さんは<a href="../../ood-basic/text01/page05.html">↓を押したら下に移動する処理</a>を書いて動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> D さんは<a href="../../ood-basic/text01/page05.html">←を押したら左に移動する処理</a>を書いて動作確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> <b>Greenfootを閉じてから</b>
+</p>
+<pre>
+git status
+git add .
+git status
+git commit -m "(自分の記号(A〜D))がキャラ移動処理を追加"
+</pre>
+<p>
+の順にコマンドを実行してローカルリポジトリを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 他のメンバーの更新内容を取り込むために
+</p>
+<p>
+git pull --no-edit
+</p>
+<p>
+を実行して下さい。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> git pull した際に、もし端末に
+</p>
+<p>
+CONFLICT (content): Merge conflict in (衝突ファイル名)
+</p>
+<p>
+と表示された場合は<a href="../../git/text03/page04.html">衝突</a>が起きました。
+<br>
+設定ファイル(project.greenfoot)は自動で修復されますが、それ以外のファイルは手作業で修正する必要があります。
+<br>
+まず
+</p>
+<p>
+git status
+</p>
+<p>
+を実行し、衝突しているファイル( both modified マークが付いているファイル)を確認します。
+<br>
+次に Greenfoot を起動し、衝突しているファイルを開いて衝突箇所を修正し、Run ボタンを押して動作確認します。
+<br>
+衝突を修正したら (6) に戻ります。 
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 衝突しなかったら
+</p>
+<pre>
+git push
+</pre>
+<p>
+を実行してリモートリポジトリを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 全員の git push が終わったら、最後に全員が
+</p>
+<pre>
+git pull --no-edit
+</pre>
+<p>
+を実行してローカルリポジトリを最新状態に更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 提出物はありません。
+</div>
+
+
+<br>
+<h2><a href="./page02.html">2. リリースプランニング</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-6 (チーム):</b> <a href="./page02.html#yteigi">要求定義</a>をします。具体的には要求仕様書を作成しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> </span> 代表者は要求仕様書の<a href="./yokyu.docx">テンプレートファイル</a>(yokyu.docx)をプロジェクトフォルダ内にアップロードして「要求仕様書.docx」に名前を変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> メンバー各自は要求仕様書を開き、班名と氏名を記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p6"></span> 開発チーム(自分達)がユーザー(自分達)に対してヒアリングを行い、どういうゲームをユーザーが作って欲しいと思っているのかを理解して箇条書きやイラスト等にまとめて下さい。なお
+</p>
+<ul>
+<li>フォーマットは任意です。</li>
+<li>大雑把な内容で構いません。</li>
+<li>実際に出来るかどうかはこの時点では考えなくて良いです。</li>
+</ul>
+<p>
+<span class="olradio"><input type="radio" name="p6"></span> ユーザー(自分達)にゲームの名前を決めてもらい、要求仕様書に記述して下さい。
+</p>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-7 (チーム):</b> <a href="./page02.html#zentai">全体設計</a>をします。具体的には全体仕様書を作成しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p7"></span> 代表者は全体仕様書の<a href="./zentai.docx">テンプレートファイル</a>(zentai.docx)をプロジェクトフォルダ内にアップロードして「全体仕様書.docx」に名前を変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> メンバー各自は全体仕様書を開き、班名と氏名を記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p7"></span> 全員で話し合い、要求仕様書を元に全体仕様書を作成して下さい。
+</p>
+<ul>
+<li>要求定義で出てきた荒唐無稽な内容が実現可能か吟味し、無理そうなら除外します。</li>
+<li>ウォーターフォールと違って細かい仕様まで決める必要はありませんが(※)、要求定義の時よりは具体的な内容にして下さい。</li>
+<li>キャラクターやステージ等のイラストは簡易的なもので構いません。</li>
+</ul>
+<p>
+※ プログラムする際に必要となる細かい仕様はスプリントに入ってから決めます。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-8 (チーム):</b> 企画書を作りプレゼンしましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p8"></span> 代表者は企画書の<a href="./kikaku.pptx">テンプレートファイル</a>(kikaku.pptx)をプロジェクトフォルダ内にアップロードして「企画書.pptx」に名前を変更して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 全員で話し合い、全体仕様書を元に企画書を作成して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 発表者と記録係を選びます。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 発表者はプロジェクタに映した企画書をプレゼン参加者に 1 分以内で説明します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 2 分間ディスカッションします。ディスカッション内容は記録係が記録します。
+<br>
+<span class="olradio"><input type="radio" name="p8"></span> 全てのチームのプレゼンが終わったら、ディスカッションで出た質問や意見を全体仕様書に反映させます。
+<br>
+</div>
+
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-9 (チーム):</b>   <a href="./page02.html#pbl">プロダクトバックログ</a>を作成しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> <a href="../../wbs/text02/practice.html">こちら</a>を参考にして、代表者はリモートリポジトリの Projects タブを開き、「プロダクトバックログ」という名前でカンバン(プロジェクト)を新規作成します。
+<br>
+<span class="olradio"><input type="radio" name="p9"></span> 他のメンバーもプロダクトバックログを表示し、 全体仕様書を元にチーム内で話し合いながらバックログアイテムを作成・登録していきます。
+</p>
+<p>
+※1 担当者名は入れなくて良いです。
+<br>
+※2 <b>「オンラインマニュアル作成」をアイテムに含めるのを忘れないで下さい</b>
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p9"></span> 代表者はプロダクトバックログへのリンクをプロジェクトフォルダ内に作成して下さい。
+<br>
+リンク名は「プロダクトバックログ.url」とします。
+</div>
+
+<br>
+<h2><a href="./page03.html">3. スプリント</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-10 (チーム):</b>  スプリントが始まったら、まずは<a href="./page03.html#smeeting">スプリントプランニングミーティング</a>を行います。
+<br>
+まずは全体仕様書の見直しを行います。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p10"></span> 代表者はプロジェクトフォルダ内に「スプリント(スプリント番号)」というフォルダを作成します。(例) スプリント1なら「スプリント1」
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 代表者は最新の全体仕様書をスプリントフォルダ内にコピーします。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 代表者はコピーした全体仕様書の名前を「全体仕様書(スプリント番号).docx」に変更します。(例) スプリント1なら「全体仕様書1.docx」
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 全員がコピーした全体仕様書を開き、話し合って全体仕様書を見直します。
+<br>
+スプリント2以降なら前のスプリントで実施した<a href="./page03.html#retro">レトロスペクティブ</a>やユーザーからのフィードバックも参考にして下さい。
+<br>
+<span class="olradio"><input type="radio" name="p10"></span> 「プロダクトバックログ」のToDo列に含まれるバックログアイテムの修正も合わせて行います。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-11 (チーム):</b> 次に今回のスプリントで実施するプロダクトバックログアイテムを選択します。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p11"></span> みんなで話し合ってこのスプリントで実施するバックログアイテムを選択し、Doing列に移動します。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-12(チーム):</b> 次に詳細仕様書を作成しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p12"></span> 代表者はスプリントフォルダ内に「詳細仕様書(スプリント番号).docx」を作成します。フォーマットは任意です。(例) スプリント1なら「詳細仕様書1.docx」
+<br>
+<span class="olradio"><input type="radio" name="p12"></span> みんなで話し合って今回のスプリントで実装予定の内容を文章や箇条書き、クラス図、表、グラフ、イラスト等で詳しくまとめて下さい。
+</p>
+<ul>
+<li>フォーマットは任意です。</li>
+<li>画像のサイズとかキャラクターの画像や移動スピードなど、かなり細かい数値まで具体的に決めて下さい</li>
+<li>仕様は逐次見直し可能なので、深く考えず素早く仕様を決めて下さい</li>
+<li>クラス図やシーンの遷移図、画面等のイラストがあると今後の開発が楽になります</li>
+<li>イラストは再利用可能な様に手描きではなくてドローツールやイラストレイター等を使って作成して下さい</li>
+<li><b><u>ネットにある素材を使用する場合は必ずライセンスを確認して下さい</u></b>。もしフリー素材を使用する場合は必ずアドレスも貼り付けて下さい</li>
+</ul>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-13 (チーム):</b>  次はスプリントバックログを作成しましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p13"></span> <a href="../../wbs/text02/practice.html">こちら</a>を参考にして、代表者はリモートリポジトリの Projects タブを開き、「スプリントバックログ(スプリント番号)」カンバンを新規作成します。(例) スプリント1なら「スプリントバックログ1」
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> 他のメンバーも作成したカンバンを表示し、 詳細仕様書を元にチーム内で話し合いながらスプリントバックログアイテムを作成・登録していきます。
+<br>
+その際に作業担当者も決めて名前(<b>個人特定されないように要注意</b>)も記入して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> 代表者はプロダクトバックログへのリンクをプロジェクトフォルダ内に作成して下さい。リンク名は「スプリントバックログ(スプリント番号).url」とします。(例) スプリント1なら「スプリントバックログ1.url」
+<br>
+<span class="olradio"><input type="radio" name="p13"></span> スプリントバックログの ToDo の中にある作業の中から、各自が最初に実施する作業を一つ選んで Doing 状態に変えます。 ※ 依存関係に注意
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-14 (チーム):</b> <a href="./page03.html#dmeeting">デイリースクラムミーティング</a>を行いましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p14"></span> 相互に現状報告をしあってください。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> 相互にスコープ確認しあってください。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> 今後のスケジュールを確認しあってください。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> もし詳細仕様の変更が必要なら、全員で話し合って詳細仕様書とスプリントバックログを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> もし全体仕様の変更が必要なら、全員で話し合って全体仕様書とプロダクトバックログを更新して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p14"></span> スプリントバックログを見て相互に本日自分が担当する作業の内容を確認しあってください。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-15 (チーム):</b> それでは<a href="./page03.html#devel">開発作業</a>を行いましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p15"></span> 各自はスプリントバックログで選んだ担当作業を行います。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> 適当なタイミングでローカルリポジトリを更新します。
+</p>
+<pre>
+<b>Greenfootを閉じてから</b>
+
+git status
+git add .
+git status
+git commit -m "(適当なコメント)"
+</pre>
+<p>
+の順にコマンドを実行してローカルリポジトリを更新して下さい。 
+<br>
+
+<span class="olradio"><input type="radio" name="p15"></span> 担当作業が終わったら、他のメンバーの更新内容を取り込むために
+</p>
+<p>
+git pull --no-edit
+</p>
+<p>
+を実行して下さい。
+<br>
+もし衝突が起きたら演習 2-5 の手順で修正してください。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p15"></span> 衝突しなかったら
+</p>
+<pre>
+git push
+</pre>
+<p>
+を実行してリモートリポジトリを更新して下さい。 ※ マナーとして git push するときは他のメンバーに「これから push する」と一声かけましょう。
+</p>
+<p>
+<span class="olradio"><input type="radio" name="p15"></span> 対応するスプリントバックログのアイテムを Doing から Done 状態に変えます。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> 対応するタスクが全て終わったらプロダクトバックログも Done 状態に変えます。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> スプリントバックログの ToDo の中に残っている自分の作業を一つ選び Doing 状態に変えて作業を再開します。
+<br>
+<span class="olradio"><input type="radio" name="p15"></span> もし予定していた自分の作業が全て Done になっていたら他の人の手伝いをして下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-16 (チーム):</b>  開発が終わったら<a href="./page03.html#review">スプリントレビュー</a>を行いましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p16"></span> 以下のチェック項目が全て満たされている事を確認して下さい。
+</p>
+<p>
+<input type="checkbox">スプリントバックログが全て Done 状態になっている(※)
+<br>
+<input type="checkbox">今回のスプリントで実施する予定だったプロダクトバックログが全て Done 状態になっている(※)
+<br>
+<input type="checkbox">リモートリポジトリにあるプロジェクトにはビルドエラーが起きない
+<br>
+<input type="checkbox">リモートリポジトリにあるプロジェクトにはバグが無い
+<br>
+<input type="checkbox">ライセンス違反をしていない
+<br>
+<input type="checkbox">人格権違反や個人情報の漏洩をしていない
+</p>
+<p>
+※ 時間内に Done 状態まで辿りつけなかったタスクは次のスプリントに回して下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-17 (チーム):</b> レビューを終えたら<a href="./page03.html#retro">レトロスペクティブ</a>(振り返り)を行いましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p17"></span> 代表者はスプリントフォルダ内に「レトロスペクティブ(スプリント番号).docx」を作成します。フォーマットは任意です。(例) スプリント1なら「レトロスペクティブ1.docx」
+<br>
+<span class="olradio"><input type="radio" name="p17"></span> 全員で反省点や全体仕様書の見直し(※)などを話し合い、話し合った内容を記述して下さい。
+</p>
+<p>
+※ ちゃんとした見直し作業はユーザーレビューも踏まえて次のスプリントのプランニングミーティングで行いますので、ここでは見直し項目を挙げる程度の簡単な作業で結構です。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-18 (チーム):</b>  <a href="./page03.html#release">リリース</a>作業を行いましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p18"></span> 代表者は Code → Download ZIP で最新リポジトリをzip形式で保存します。
+<br>
+<span class="olradio"><input type="radio" name="p18"></span> zipファイルのファイル名を「(班番号)班-(スプリント番号).zip」に変更します。(例) 1班、スプリント1なら 「1班-1.zip」
+<br>
+<span class="olradio"><input type="radio" name="p18"></span> スプリントフォルダ内にzipファイルをアップして下さい。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-19 (チーム):</b>  クロスレビューをおこなってユーザーからフィードバックをもらいましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p19"></span> 各チームのゲームをプレイし、スクラムマスターが用意したアンケート項目に答えてください。
+</p>
+</div>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-20 (チーム):</b> 機会をみてオンラインマニュアルを作りましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p20"></span> github pages を使ってオンラインマニュアルを作成して下さい。フォーマットは任意です。
+<br>
+<span class="olradio"><input type="radio" name="p20"></span> プロジェクトフォルダにリンクを張って下さい。リンク名は「オンラインマニュアル.url」とします。
+</p>
+</div>
+
+
+<br>
+<h2><a href="./page04.html">4. 保守・運用とクロージング</a></h2>
+
+<br>
+<p>
+<input type="checkbox"><b>演習 2-21 (チーム):</b> 最後にクロージングをおこないましょう。
+</p>
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p21"></span> 代表者はプロジェクトフォルダに「クロージング.docx」を作成します。フォーマットは任意です。
+<br>
+<span class="olradio"><input type="radio" name="p21"></span> 全体を通した振り返りを書いて下さい(1人1行程度、名前も記入)
+</p>
+</div>
+
+<br>
+<script>PreNext(5,4)</script>
+</body>
+</html>
