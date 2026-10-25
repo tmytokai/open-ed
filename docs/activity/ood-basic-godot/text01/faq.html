@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="stylesheet" href="../../../common.css">
+<script src="../../../common.js"></script>
+<title>FAQ</title>
+</head>
+<body>
+
+<nav class="brcr">
+<ol>
+<li><a href="../">アクティビティ: オブジェクト指向開発入門(Godot編)</a></li>
+<li>学習項目: [1] Godot の基本</li>
+<li><script>GetTitle()</script></li>
+</ol>
+</nav>
+
+<h2><script>GetTitle()</script></h2>
+
+<br>
+<h3 id="mergetcsh">
+Q. git pull したらシーンファイル(.tcsh)が衝突した。衝突したファイルをマージしてから実行したら他の人が追加したキャラクターが自分のキャラクターに置き換わっていた。
+</h3>
+
+<p>
+A. シーンファイルの「ext_resource type="PackedScene"」の行のidが同じなのが原因なので、idを変更してからマージする。
+<br>
+例えばCopilotを使ってマージする場合は衝突したシーンファイルを添付したうえで以下の様なプロンプトを実行する。
+<br>
+<br>
+(注) Copilotは拡張子が.tcshのファイルを添付できないので、拡張子を.txtにしてから添付すること
+</p>
+
+<div class="info">
+<pre class="wrap">
+GodotのプロジェクトをGithubを使って複数人で共有しています。
+git pull をしたらシーンファイル(tcsh形式)が衝突しました。
+ところが「ext_resource type="PackedScene"」の行のidが同じためうまくマージが出来ません。
+衝突したファイルを添付するので、idをpathと同じ文字列にしてからマージしてください。
+例は次の通りです。
+
+(マージ前)
+
+<<<<<<< HEAD
+[ext_resource type="PackedScene" uid="uid://xy0tu56uorat" path="res://apple.tscn" id="4_asled"]
+=======
+[ext_resource type="PackedScene" uid="uid://c6jlc7fc23jfq" path="res://taro.tscn" id="4_asled"]
+>>>>>>> efb91510906e2d80c2cabdfd44fd79d9eb8410c6
+
+<<<<<<< HEAD
+[node name="APPLE" parent="." index="2" unique_id=1239789849 instance=ExtResource("4_asled")]
+position = Vector2(99, 238)
+=======
+[node name="TARO" parent="." index="2" unique_id=1239789849 instance=ExtResource("4_asled")]
+position = Vector2(306, 172)
+>>>>>>> efb91510906e2d80c2cabdfd44fd79d9eb8410c6
+
+(マージ後)
+
+[ext_resource type="PackedScene" uid="uid://xy0tu56uorat" path="res://apple.tscn" id="res://apple.tscn"]
+
+[ext_resource type="PackedScene" uid="uid://c6jlc7fc23jfq" path="res://taro.tscn" id="res://taro.tscn"]
+
+[node name="APPLE" parent="." index="2" unique_id=1239789849 instance=ExtResource("res://apple.tscn")]
+position = Vector2(99, 238)
+
+[node name="TARO" parent="." index="2" unique_id=1239789849 instance=ExtResource("res://taro.tscn")]
+position = Vector2(306, 172)
+</pre>
+</div>
+
+
+
+</body>
+</html>
