@@ -57,18 +57,18 @@
 <tr><td>
 TARO
 </td><td>
-・敵に触れたら「GAME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+・敵に触れたらラベルに「GAME OVER」と文字列を表示してゲームを停止する。
 </td>
 </tr>
 
 <tr><td>
 MyWorld
 </td><td>
-・残り時間カウンターをフィールドに追加する (フィールド名は private int timecount = 1000 ) 
+・残り時間カウンターをフィールドに追加する (フィールド名は @export var timecount = 1000 ) 
 <br>
-・プログラムループ(act メソッド)が呼び出される度に残り時間カウンターの数字を1減らして残り時間を画面に表示する。文字列の表示座標は (50,50) 
+・_process関数が呼び出される度に残り時間カウンターの数字を1減らして残り時間をラベルに表示する。
 <br>
-・残り時間カウンターが 0 になったら「TIME OVER」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+・残り時間カウンターが 0 以下になったらラベルに「TIME OVER」と表示してゲームを停止する。
 </td>
 </tr>
 
@@ -101,7 +101,7 @@ MyWorld
 <input type="checkbox"><b>TARO が敵に触れた時のゲームオーバー処理を作る</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中を「GAME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>するプログラムに変更して下さい。文字列の座標は(400,200)とします。
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」シーンのスクリプト(taro.gd)を開き、当たり判定処理の中を「GAME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>するプログラムに変更して下さい。
 </p>
 </div>
 </div>
@@ -111,20 +111,18 @@ MyWorld
 <input type="checkbox"><b>タイムオーバー処理を作る</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスのソースを開き、フィールドに private int timecount = 1000 を追加して下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」シーンのスクリプト(my_world.gd)を開き、フィールドに @export var timecount = 1000 を追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスに public void act メソッドを追加して下さい。
-<br>
-<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」クラスの act メソッドの中で
+<span class="olradio"><input type="radio" name="p2"></span> 「MyWorld」シーンの_process関数の中で
 </p>
 <p>
 残り時間カウンター(timecount)の数を1減らす
 <br>
 <br>
-→残り時間カウンターの値を画面に<a href="../text01/page06.html">表示する</a>。文字列の表示座標は (50,50) 
+→残り時間カウンターの値を画面に<a href="../text01/page06.html">表示する</a>。
 <br>
 <br>
-→残り時間カウンターが 0 になったら「TIME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
+→残り時間カウンターが 0 以下になったら「TIME OVER」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。
 </p>
 <p>
 という処理を追加して下さい。
@@ -138,10 +136,7 @@ MyWorld
 <p>
 コーディングが終わったらテストします。
 <br>
-<br>
-Run ボタンを押して動作確認して下さい。 
-<br>
-上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押して動作確認して下さい。
 </p>
 
 <br>

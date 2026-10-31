@@ -19,60 +19,64 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+次にラベルに文字列を表示してみましょう。
+</p>
+
+<br>
+<h3>ラベルに文字列を表示</h3>
 
 <div class="olradio"> 
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「2D」をクリックして2D画面を開く
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を開く
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「CanvasLayer/Label」をクリックしてLabelのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Labelをクリックして「Text」の内容を適当に変えると表示されている文字が変わることを確認する
+<span class="olradio"><input type="radio" name="p1"></span> 「Text」の内容を適当に変えると表示されている文字が変わることを確認する
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> Labelの位置を適当に変更する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> フォントサイズを変更する場合は「Theme Overrides → Font Sizes → Font Size」の数値を変更する
+<span class="olradio"><input type="radio" name="p1"></span> フォントサイズを変更する場合はインスペクタの「Theme Overrides → Font Sizes → Font Size」の数値を変更する。色は「Colors/Font Color」で変更できる。
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> _process関数に以下のコードを追加
+<span class="olradio"><input type="radio" name="p1"></span> _process関数の移動部の下あたりに次のコードを追加する(先頭のスペースの数が違うとエラーが出るので注意する)
 <br>
 <br>
 <div class="info">
 <input type="checkbox"><b>ソース 1: "a"を押したら Label にHelloと表示、"s"を押したら消す</b>
 <pre class="wrap">
-	# Input.is_action_just_pressed 関数でキーを押しているか「1度だけ」チェック出来る
+	# Input.is_action_just_pressed 関数でキーを押しているか1度だけチェック出来る
+	# is_action_pressed 関数と違ってキーボードから指を離さない限り再びTRUEにならない
 	if Input.is_action_just_pressed("a"):
-		# CanvasLayerを使ってHUDを作る
-		# $"../CanvasLayer/Label" でCanvasLayer内にあるLabelノードを参照できる
-		$"../CanvasLayer/Label".text = "Hello"
-		$"../CanvasLayer/Label".show()
+		# Labelに文字列セット
+		# シーンツリーでTAROからみるとLabelはひとつ上の階層のCanvasLayerの中にあるので
+		# $"../CanvasLayer/Label".text = "Hello" でも可
+		$"/root/MyWorld/CanvasLayer/Label".text = "Hello"
+		# Label表示
+		$"/root/MyWorld/CanvasLayer/Label".show()
 	if Input.is_action_just_pressed("s"):
-		$"../CanvasLayer/Label".hide()
+		# Label非表示
+		$"/root/MyWorld/CanvasLayer/Label".hide()
 </pre>
 </div>
 
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> "a"で Label に Helloと表示、"s"で表示が消えるのを確認する
+<span class="olradio"><input type="radio" name="p1"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、"a"で Label に Helloと表示、"s"で表示が消えるのを確認する
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> ラベルを増やしたい場合は「Label」を右クリックして「複製」を選ぶ
+</p>
 </div>
-
-
-
-
-
 
 <br>
 <script>PreNext(6,10)</script>

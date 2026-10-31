@@ -19,9 +19,14 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+キャラクターをプログラム内で動的に配置する場合は次の様にします。
+</p>
+
+<br>
+<h3>(1) ゲーム開始時にキャラクターを動的配置する場合</h3>
 
 <div class="olradio"> 
-<br>
 <span class="olradio"><input type="radio" name="p1"></span> 新たに「HANAKO」シーンを作成する
 <br>
 <br>
@@ -31,41 +36,47 @@
 <span class="olradio"><input type="radio" name="p1"></span> シーンドックの「Actor」を「HANAKO」に変更する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「HANAKO」を右クリックして「スクリプトを拡張」を選び、HANAKOのスクリプトファイル(hanako.gd)を作成する。
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「HANAKO」を右クリックして「スクリプトを拡張」を選び、そのまま作成ボタンを押してHANAKOのスクリプトファイル(hanako.gd)を作成する。
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Sprite2Dノードをクリックし、ファイルシステムドッグ内の「img/HANAKO.jpg」を「Texure」の「<空>」にドッグする
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「Sprite2D」をクリックしてSprite2Dのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を表示し、画像(50x57)が表示されていることを確認する
+<span class="olradio"><input type="radio" name="p1"></span> インスペクタの「Texure <空>」をクリックし、「読み込む」をクリックして「img/HANAKO.png」を選択する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> CollisionShape2Dノードをクリックし、「Shape」を「CapsuleShape2D」にし、当たり判定の領域を調整する
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「2D」をクリックして2D画面を表示し、画像(50x57)が表示されていることを確認する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してHANAKOシーン(hanako.tscn)を保存する
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「CollisionShape2D」をクリックしてCollisionShape2Dのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> タブでMyWorldシーンに切り替える
+<span class="olradio"><input type="radio" name="p1"></span> インスペクタの「Shape <空>」をクリックし、「CapsuleShape2D」を選択し、2D画面で当たり判定の領域を調整する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面に切り替えて my_world.gd を開く
+<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してHANAKOシーン(hanako.tscn)を一旦保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> メイン画面の上にある「my_world」タブをクリックして MyWorld シーンに切り替える
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 「my_world.gd」を選ぶ
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 以下のソースコードに置き換える
 <br>
 <br>
 <div class="info">
-<input type="checkbox"><b>ソース 1: 開始時にHANAKOを(200,200)の位置に表示</b>
+<input type="checkbox"><b>ソース 1: ゲーム開始時にHANAKOを(200,200)の位置に表示</b>
 <pre class="wrap">
 extends World
 
-# インスタンス化するシーン(キャラクタ)を変数に代入
-#
+# HANAKOシーン(hanako.tscn)を読み込む
 # @onready は _ready 関数が実行される直前に代入してくださいという指示
-#
 # preload関数はゲームの起動時にシーンとか画像とかのリソースを事前ロードする関数
-# (多分@onreadyは必要無いけど一応つけとく)
 @onready var hanako_scene = preload("res://hanako.tscn")
 
 # 開始時に1度だけ実行される関数
@@ -80,7 +91,82 @@ func _ready():
 </div>
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押すとHANAKOが表示されるのを確認する
+<span class="olradio"><input type="radio" name="p1"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行するとHANAKOが表示されるのを確認する
+</div>
+
+<br>
+<br>
+<h3>(2) ゲームの途中でキャラクターを動的配置する場合</h3>
+
+<div class="olradio"> 
+<span class="olradio"><input type="radio" name="p2"></span> 新たに「APPLE」シーンを作成する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> メニューから「シーン → 新しい継承シーン」を選択し、「actor.tscn」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「Actor」を「APPLE」に変更する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「APPLE」を右クリックして「スクリプトを拡張」を選び、そのまま作成ボタンを押してAPPLEのスクリプトファイル(apple.gd)を作成する。
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「Sprite2D」をクリックしてSprite2Dのインスペクタを表示する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> インスペクタの「Texure <空>」をクリックし、「読み込む」をクリックして「img/APPLE.png」を選択する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 上の方にある「2D」をクリックして2D画面を表示し、画像(50x50)が表示されていることを確認する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「CollisionShape2D」をクリックしてCollisionShape2Dのインスペクタを表示する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> インスペクタの「Shape <空>」をクリックし、「CircleShape2D」を選択し、2D画面で当たり判定の領域を調整する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> Ctrl+S を押してAPPLEシーン(apple.tscn)を一旦保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> メイン画面の上にある「my_world」タブをクリックして MyWorld シーンに切り替える
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 「hanako.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 以下のソースコードに置き換える
+<br>
+<br>
+<div class="info">
+<input type="checkbox"><b>ソース 2: ゲーム実行中にHANAKOがAPPLEを表示</b>
+<pre class="wrap">
+extends Actor
+
+# APPLEシーン(apple.tscn)を読み込む
+@onready var apple_scene = preload("res://apple.tscn")
+
+# 各フレームごとに繰り返し実行される関数
+func _process(delta):
+	# d を押したらランダム位置にAPPLEを表示
+	if Input.is_action_just_pressed("d"):
+		# APPLE をインスタンス化
+		var apple = apple_scene.instantiate()
+		# インスタンス化したAPPLEの座標をセット
+		# HANAKOの近くに表示する
+		var x = position.x + randi_range(-50, 50)
+		var y = position.y + randi_range(-50, 50)
+		apple.position = Vector2(x,y)
+		# MyWorldシーンにAPPLEを追加
+		$"/root/MyWorld".add_child(apple)
+</pre>
+</div>
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、dキーを押すたびにHANAKOの近くにAPPLEが表示されるのを確認する
 </div>
 
 

@@ -57,11 +57,11 @@ HANAKO が敵に当たったらその敵を消し、10匹敵を倒したらメ�
 <tr><td>
 HANAKO
 </td><td>
-・倒した敵の数を記憶するカウンターをフィールドに追加する (フィールド名は private int fruits = 0 )
+・倒した敵の数を記憶するカウンターをフィールドに追加する (フィールド名は @export var fruits = 0 )
 <br>
 ・敵に触れたら敵を消してカウンターを1増やす
 <br>
-・カウンターが10になったら「CLEAR」と文字列を表示してゲームを停止する。文字列の表示座標は (400,200)
+・カウンターが10になったらラベルに「CLEAR」と表示してゲームを停止する。
 </td>
 </tr>
 
@@ -95,9 +95,9 @@ HANAKO
 <input type="checkbox"><b>ゲームクリア処理をする</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」クラスのソースを開き、フィールドに private int fruits = 0 を追加して下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」シーンのスクリプト(hanako.gd)を開き、フィールドに @export var fruits = 0 を追加して下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」クラスの当たり判定処理の中を
+<span class="olradio"><input type="radio" name="p1"></span> 「HANAKO」シーンの当たり判定処理の中を
 </p>
 <p>
 カウンター(fruit)の数を1増やす 
@@ -106,13 +106,13 @@ HANAKO
 → 触れた<a href="../text01/page09.html">オブジェクトを消す</a>
 <br>
 <br>
-→カウンターが 10 になったら「CLEAR」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。文字列の座標は(400,200)
+→カウンターが 10 になったらラベルに「CLEAR」と<a href="../text01/page06.html">表示し</a>て<a href="../text01/page10.html">ゲームを停止</a>する。
 </p>
 <p>
 という処理に変更して下さい。
 </p>
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「TARO」クラスのソースを開き、当たり判定処理の中のゲームを停止するコードをコメントアウトして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「TARO」シーンのスクリプト(taro.gd)を開き、、当たり判定処理の中のゲームを停止するコードをコメントアウトして下さい。
 </p>
 <p>
 ※ この作業は詳細仕様書には含まれていませんが、テストをスムーズに実施するため TARO が敵に触れてもゲームが停止しないようにします。
@@ -126,10 +126,7 @@ HANAKO
 <p>
 コーディングが終わったらテストします。
 <br>
-<br>
-Run ボタンを押して動作確認して下さい。 
-<br>
-上手く動作しなかった場合は Reset ボタンを押して動作を止めてデバッグして下さい。
+MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押して動作確認して下さい。
 </p>
 
 <br>

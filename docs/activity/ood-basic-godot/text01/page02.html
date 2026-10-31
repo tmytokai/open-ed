@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>2. プロジェクトの新規作成とメインシーン作成</title>
+<title>2. プロジェクトの登録とメインシーン作成</title>
 </head>
 <body>
 
@@ -19,9 +19,19 @@
 
 <h2><script>GetTitle()</script></h2>
 
+<p>
+まず、以下の手順で演習で使用するプロジェクトのテンプレートを登録してメインシーンを作成してください。
+</p>
+
+<br>
+<h3>プロジェクトの登録とメインシーン作成</h3>
+
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> テンプレートをインポートする
+<span class="olradio"><input type="radio" name="p1"></span> <a href="https://github.com/tmytokai/template_godot/archive/refs/heads/main.zip">プロジェクトのテンプレート</a>をダウンロードして展開する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Godotを起動し、展開したテンプレートをインポートする
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> メニューから「シーン → 新しい継承シーン」を選択し、「world.tscn」を選ぶ
@@ -30,19 +40,26 @@
 <span class="olradio"><input type="radio" name="p1"></span> シーンドックの「World」を「MyWorld」に変更する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「MyWorld」を右クリックして「スクリプトを拡張」を選び、MyWorldのスクリプトファイル(my_world.gd)を作成する。
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「MyWorld」を右クリックして「スクリプトを拡張」を選び、そのまま作成ボタンを押してMyWorldのスクリプトファイル(my_world.gd)を作成する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Sprite2Dノードをクリックし、ファイルシステムパネル内の「img/MyWorld.jpg」を「Texure」の「<空>」にドロップする
+<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「Sprite2D」をクリックしてSprite2Dのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を表示し、背景画像(800x450)が表示されていることを確認する
+<span class="olradio"><input type="radio" name="p1"></span> インスペクタの「Texure <空>」をクリックし、「読み込む」をクリックして「img/MyWorld.jpg」を選択する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> メニューから「プロジェクト → ブロジェクト設定 → 一般 → 表示 → ウィンドウ」を選択し、「ビューポートの幅」を800、「ビューポートの高さ」を450にすると表示領域のサイズが背景画像と同じになる
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「2D」をクリックして2D画面を表示し、背景画像(800x450)が表示されていることを確認する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Ctrl+s を押してMyWorldシーン(my_world.tscn)を保存する
+<span class="olradio"><input type="radio" name="p1"></span> Ctrl+s を押してMyWorldシーン(my_world.tscn)を一旦保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行する。すると背景の下の部分が見切れていることを確認する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> 表示領域を拡大する。メニューから「プロジェクト → ブロジェクト設定」で設定ダイアログを表示し、「一般タブ → 表示 → ウィンドウ」を選択し、「ビューポートの幅」を800、「ビューポートの高さ」を450にすると表示領域のサイズが背景画像と同じになる
+</p>
 </div>
 
 <br>

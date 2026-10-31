@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 <link rel="stylesheet" href="../../../common.css">
 <script src="../../../common.js"></script>
-<title>5. キーボードによるオブジェクトの移動</title>
+<title>5. キーボードによるキャラクターの移動</title>
 </head>
 <body>
 
@@ -20,9 +20,15 @@
 <h2><script>GetTitle()</script></h2>
 
 
-<div class="olradio"> 
+<p>
+次にキャラクターをキーボードを使って動かしてみましょう。
+</p>
+
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面を開く
+<h3>キーボードによるキャラクタの移動</h3>
+
+<div class="olradio"> 
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> 「taro.gd」を選ぶ
@@ -34,33 +40,34 @@
 <div class="info">
 <input type="checkbox"><b>ソース 1: カーソルキーの上下左右で移動</b>
 <pre class="wrap">
+# 各フレームごとに繰り返し実行される関数
 func _process(delta):
 	# 移動方向・速度をゼロでクリア
 	var velocity = Vector2.ZERO
 	# Input.is_action_pressed 関数でキーを押しているかチェック出来る
 	if Input.is_action_pressed("right"):
-		velocity.x = speed
+		velocity.x = 1
 	if Input.is_action_pressed("left"):
-		velocity.x = -speed
+		velocity.x = -1
 	if Input.is_action_pressed("down"):
-		velocity.y = speed
+		velocity.y = 1
 	if Input.is_action_pressed("up"):
-		velocity.y = -speed
+		velocity.y = -1
+	# 方向をnormalized 関数で正規化してからspeedをかけると指定した方向に speed(ピクセル/秒)の速さで動く
+	velocity = velocity.normalized()*speed 
+	# 位置を更新する
+	# deltaは前フレームからの経過時間(秒)
+	# deltaを速さにかけることでFPSの影響を受けずに移動距離を一定にできる(距離=速さx時間)
 	position += velocity*delta
+	# 画面外に出ないようにクランプする
 	position = position.clamp(Vector2.ZERO, screen_size)
 </pre>
 </div>
-
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押す
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> TAROが動くのを確認したらゲーム画面を閉じる
+<span class="olradio"><input type="radio" name="p1"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、キーボードでTAROが動くのを確認したらゲーム画面を閉じる
+</p>
 </div>
-
-
-
 
 <br>
 <script>PreNext(5,10)</script>

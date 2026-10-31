@@ -19,141 +19,172 @@
 
 <h2><script>GetTitle()</script></h2>
 
+次は当たり判定処理をします。
 <br>
-<h3>(1) コリジョンマスクによる衝突のフィルタリング</h3>
+当たり判定処理で、ぶつかったキャラクターごとに処理内容を変えるためにはコリジョンマスクを用いる方法とグローバルグループを用いる方法があります。
+<br>
+通常はこの両方を組み合わせて使用します。
+<br>
+<br>
+<h3>(1) 当たり判定処理</h3>
 
 <div class="olradio"> 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 新たに「APPLE」シーンを作成する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> メニューから「シーン → 新しい継承シーン」を選択し、「actor.tscn」を選ぶ
+<span class="olradio"><input type="radio" name="p1"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「Actor」を「APPLE」に変更する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「APPLE」を右クリックして「スクリプトを拡張」を選び、APPLEのスクリプトファイル(apple.gd)を作成する。
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Sprite2Dノードをクリックし、ファイルシステムドッグ内の「img/APPLE.jpg」を「Texure」の「<空>」にドッグする
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を表示し、画像が表示されていることを確認する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> CollisionShape2Dノードをクリックし、「Shape」を「CircleShape2D」にし、当たり判定の領域を調整する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してAPPLEシーン(apple.tscn)を保存する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> タブでMyWorldシーンに切り替える
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を開き、APPLEシーンをひとつインスタンス化して適当な位置に移動する。
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面に切り替えて taro.gd を開く
+<span class="olradio"><input type="radio" name="p2"></span> 「taro.gd」を選ぶ
 <br>
 <br>
 <span class="olradio"><input type="radio" name="p1"></span> taro.gd の下の方に以下のソースコードを追加する
 <br>
 <br>
 <div class="info">
-<input type="checkbox"><b>ソース 1: 当たり判定</b>
+<input type="checkbox"><b>ソース 1: TAROが他のキャラクターにぶつかったら"ITAI"と表示</b>
 <pre class="wrap">
-# 他のキャラクターに消失したときに呼び出される関数
+# 他のキャラクターに衝突したときに呼び出される関数
 # 引数 area に衝突したキャラクターが入る
 func _on_area_entered(area: Area2D) -> void:
-	$"../CanvasLayer/Label".text = "ITAI"
-	$"../CanvasLayer/Label".show()
+	$"/root/MyWorld/CanvasLayer/Label".text = "ITAI"
+	$"/root/MyWorld/CanvasLayer/Label".show()
 </pre>
 </div>
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押し、TAROがAPPLEに当たるとラベルに「ITAI」と表示されることを確認する。
+<span class="olradio"><input type="radio" name="p2"></span> (もしMyWorldシーンを開いてなければ)メイン画面の上にある「my_world」タブをクリックして MyWorld シーンに切り替える
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> APPLEシーンを開き、APPLEをクリックしてからインスペクタドックの 「CollisionObject2D → Collision → Layer」を 1 から 2 に変更するとAPPLEのコリジョンレイヤーが 1 から 2 に変更される。
+<span class="olradio"><input type="radio" name="p1"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、TAROがHANAKOやAPPLEに当たるとラベルに「ITAI」と表示されることを確認する。
+</div>
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> TAROシーンを開き、TAROをクリックしてからインスペクタドックの 「CollisionObject2D → Collision → Mask」の 2 をオフにする。するとコリジョンレイヤー2に属しているキャラクターと衝突しなくなる。
+<h3>(2) コリジョンマスクによる衝突のフィルタリング</h3>
+<div class="olradio"> 
+<span class="olradio"><input type="radio" name="p2"></span> メイン画面の上にある「apple」タブをクリックして APPLE シーンに切り替える
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いて「現在のシーンを実行」ボタンを押し、TAROがAPPLEに当たってもラベルの表示が変化しない事を確認する。
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「APPLE」をクリックしてAPPLEのインスペクタを表示する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> インスペクタの「CollisionObject2D → Collision → Layer」の値を現在の 1 から 2 に変更するとAPPLEのコリジョンレイヤーが 1 から 2 に変更される。
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してAPPLEシーン(taro.tscn)を一旦保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> メイン画面の上にある「taro」タブをクリックして TARO シーンに切り替える
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> シーンドックの「TARO」をクリックしてTAROのインスペクタを表示する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> インスペクタの 「CollisionObject2D → Collision → Mask」の 2 をオフにすると、TAROはコリジョンレイヤー2に属しているキャラクター(今回はAPPLE)と衝突しなくなる
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してTAROシーン(taro.tscn)を一旦保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> メイン画面の上にある「my_world」タブをクリックして MyWorld シーンに切り替える
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、dキーを押してAPPLEを表示する。
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> TAROがAPPLEに当たってもラベルの表示が変化しない事を確認する。
 </div>
 
 <br>
-<h3>(2) グローバルグループによる衝突時の場合分け</h3>
+<br>
+<h3>(3) グローバルグループによる衝突時の場合分け</h3>
 
 <div class="olradio"> 
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> 新たに「ORANGE」シーンを作成する
-<br>
-<br>
-<span class="olradio"><input type="radio" name="p1"></span> メニューから「シーン → 新しい継承シーン」を選択し、「actor.tscn」を選ぶ
+<span class="olradio"><input type="radio" name="p3"></span> 新たに「ORANGE」シーンを作成する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「Actor」を「ORANGE」に変更する
+<span class="olradio"><input type="radio" name="p3"></span> メニューから「シーン → 新しい継承シーン」を選択し、「actor.tscn」を選ぶ
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> シーンドックの「ORANGE」を右クリックして「スクリプトを拡張」を選び、ORANGEのスクリプトファイル(orange.gd)を作成する。
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「Actor」を「ORANGE」に変更する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Sprite2Dノードをクリックし、ファイルシステムドッグ内の「img/ORANGE.jpg」を「Texure」の「<空>」にドッグする
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「ORANGE」を右クリックして「スクリプトを拡張」を選び、そのまま作成ボタンを押してORANGEのスクリプトファイル(orange.gd)を作成する。
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を表示し、画像が表示されていることを確認する
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「Sprite2D」をクリックしてSprite2Dのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> CollisionShape2Dノードをクリックし、「Shape」を「CircleShape2D」にし、当たり判定の領域を調整する
+<span class="olradio"><input type="radio" name="p3"></span> インスペクタの「Texure <空>」をクリックし、「読み込む」をクリックして「img/ORANGE.png」を選択する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  ORANGE をクリックしてからインスペクタドックの右にあるグループドックを開き、「+」ボタンを押し、名前に Enemy と入れ、グローバルをセットし、作成ボタンを押してEnemyグループを作成する。すると ORANGEが Enemy グローバルグループに登録される。
+<span class="olradio"><input type="radio" name="p3"></span> 上の方にある「2D」をクリックして2D画面を表示し、画像(50x50)が表示されていることを確認する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してORANGEシーン(orange.tscn)を保存する
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「CollisionShape2D」をクリックしてCollisionShape2Dのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> タブでHANAKOシーンに切り替える
+<span class="olradio"><input type="radio" name="p3"></span> インスペクタの「Shape <空>」をクリックし、「CircleShape2D」を選択し、2D画面で当たり判定の領域を調整する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  HANAKO をクリックしてからグループドックを開き、「+」ボタンを押し、名前に Friene と入れ、グローバルをセットし、作成ボタンを押して Friend グループを作成する。すると HANAKOが Friend グローバルグループに登録される。
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「ORANGE」をクリックしてORANGEのインスペクタを表示する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> Ctrl+S を押してFriendシーン(friend.tscn)を保存する
+<span class="olradio"><input type="radio" name="p3"></span> 「インスペクタ」タブの右の方にある「グループ」タブをクリックしてグループドックを開く
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> タブでMyWorldシーンに切り替える
+<span class="olradio"><input type="radio" name="p3"></span> グループドックの「+」ボタンを押し、名前に Enemy と入れ、グローバルをセットしてから作成ボタンを押すとORANGEシーンが Enemy グローバルグループに登録される。
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> 2D画面を開き、ORANGEシーンをひとつインスタンス化して適当な位置に移動する。
+<span class="olradio"><input type="radio" name="p3"></span> Ctrl+S を押してORANGEシーン(orange.tscn)を保存する
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> スクリプト画面に切り替えて taro.gd を開く
+<span class="olradio"><input type="radio" name="p3"></span> メイン画面の上にある「hanako」タブをクリックして HANAKO シーンに切り替える
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> _on_area_entered関数を次のコードに変更する
+<span class="olradio"><input type="radio" name="p3"></span> シーンドックの「HANAKO」をクリックしてHANAKOのインスペクタを表示する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> (もし開いてなかったら)「インスペクタ」タブの右の方にある「グループ」タブをクリックしてグループドックを開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p3"></span>  グループドックの「+」ボタンを押し、名前に Friend と入れ、グローバルをセットしてから作成ボタンを押すと HANAKO シーンが Friend グローバルグループに登録される。
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> Ctrl+S を押してHANAKOシーン(hanako.tscn)を保存する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> メイン画面の上にある「my_world」タブをクリックして MyWorld シーンに切り替える
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p1"></span> シーンパネルの「MyWorld」を右クリックして「子シーンをインスタンス化 → orange.tscn」を選ぶとORANGEが表示されるので、適当な位置に移動する
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p2"></span> 上の方にある「スクリプト」をクリックしてスクリプト画面を開く
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> 「taro.gd」を選ぶ
+<br>
+<br>
+<span class="olradio"><input type="radio" name="p3"></span> _on_area_entered関数を次のコードに置き換える
 <br>
 <br>
 <div class="info">
-<input type="checkbox"><b>ソース 1: 当たり判定</b>
+<input type="checkbox"><b>ソース 2: グローバルグループを用いた当たり判定</b>
 <pre class="wrap">
+# 他のキャラクターに衝突したときに呼び出される関数
+# 引数 area に衝突したキャラクターが入る
 func _on_area_entered(area: Area2D) -> void:
-	# 当たったキャラクターが"Enemy"グローバルグループに属しているか判定
+	# 当たったキャラクターが"Enemy"グローバルグループに属しているか？
 	if area.is_in_group("Enemy"):
-		$"../CanvasLayer/Label".text = "ITAI"
-		$"../CanvasLayer/Label".show()
-	# 当たったキャラクターが"Friend"グローバルグループに属しているか判定
+		$"/root/MyWorld/CanvasLayer/Label".text = "ITAI"
+		$"/root/MyWorld/CanvasLayer/Label".show()
+	# 当たったキャラクターが"Friend"グローバルグループに属しているか？
 	if area.is_in_group("Friend"):
-		$"../CanvasLayer/Label".text = "Konnitiwa"
-		$"../CanvasLayer/Label".show()
+		$"/root/MyWorld/CanvasLayer/Label".text = "Konnitiwa"
+		$"/root/MyWorld/CanvasLayer/Label".show()
 </pre>
 </div>
 <br>
 <br>
-<span class="olradio"><input type="radio" name="p1"></span> MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押し、TAROがORANGEに当たるとラベルに「ITAI」、HANAKOに当たると「Konnitiwa」と表示されることを確認する。
+<span class="olradio"><input type="radio" name="p2"></span> 右上の「現在のシーンを実行(F6)」を押すかF6キーでゲームを実行し、TAROがORANGEに当たるとラベルに「ITAI」、HANAKOに当たると「Konnitiwa」と表示されることを確認する。
 </div>
 
 <br>

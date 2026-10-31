@@ -50,14 +50,14 @@
 </p>
 
 <table>
-<tr><th>クラス名</th><th>詳細仕様</th></tr>
+<tr><th>シーン名</th><th>詳細仕様</th></tr>
 
 <tr><td>
 APPLE
 </td><td>
-・敵クラス1
+・敵シーン1
 <br>
-・Greenfootの「Actor」クラスを継承して作る
+・「Actor」シーンを継承して作る
 <br>
 ・全体仕様書に貼った画像を使う (50x50 ピクセル)
 <br>
@@ -68,9 +68,9 @@ APPLE
 <tr><td>
 ORANGE
 </td><td>
-・敵クラス2
+・敵シーン2
 <br>
-・Greenfootの「Actor」クラスを継承して作る
+・「Actor」シーンを継承して作る
 <br>
 ・全体仕様書に貼った画像を使う (50x50 ピクセル)
 <br>
@@ -106,9 +106,14 @@ ORANGE
 <input type="checkbox"><b>APPLE を初期配置して表示する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p1"></span> 「Actor」クラスを継承して「APPLE」クラスを作成します。画像もセットして下さい。
+<span class="olradio"><input type="radio" name="p1"></span> 「Actor」シーンを継承して「APPLE」シーンを作成します。画像(APPLE.png)もセットして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p1"></span>  「MyWorld」クラスのソースを開き、コンストラクタで「APPLE」を<a href="../../java-basic/text01/page08.html">ランダム</a>に 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+<span class="olradio"><input type="radio" name="p1"></span>  「MyWorld」シーンのスクリプト(my_world.gd)を開き、コンストラクタで「APPLE」をランダムに 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+<br>
+<br>
+(整数の乱数生成例)
+<br>
+x = randi_range(0, 800)
 </p>
 </div>
 </div>
@@ -118,9 +123,14 @@ ORANGE
 <input type="checkbox"><b>ORANGE を初期配置して表示する</b>
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p2"></span> 「Actor」クラスを継承して「ORANGE」クラスを作成します。画像もセットして下さい。
+<span class="olradio"><input type="radio" name="p2"></span> 「Actor」シーンを継承して「ORANGE」シーンを作成します。画像もセットして下さい。
 <br>
-<span class="olradio"><input type="radio" name="p2"></span>  「MyWorld」クラスのソースを開き、「ORANGE」を<a href="../../java-basic/text01/page08.html">ランダム</a>に 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+<span class="olradio"><input type="radio" name="p2"></span>  「MyWorld」シーンのスクリプト(my_world.gd)を開き、「ORANGE」をランダム</a>に 5 つ<a href="../text01/page07.html">初期配置</a>して下さい。x 座標の範囲は 0 〜800、y 座標の範囲は 0〜450 です。
+<br>
+<br>
+(整数の乱数生成例)
+<br>
+x = randi_range(0, 800)
 </p>
 </div>
 </div>
@@ -131,9 +141,7 @@ ORANGE
 <p>
 コーディングが終わったらテストします。
 <br>
-Reset ボタンを押すたびに APPLE と ORANGE の位置が変わることを確認します。
-<br>
-上手く動作しなかった場合はデバッグして下さい。
+MyWorldシーンを開いているのを確認してから「現在のシーンを実行」ボタンを押して動作確認して下さい。
 </p>
 
 <br>
