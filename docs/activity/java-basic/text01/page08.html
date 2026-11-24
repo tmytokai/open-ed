@@ -57,6 +57,37 @@ public class Main{
 
 </div>
 
+<p>
+(補足) ソース3のように Random クラスを使って乱数を生成することも可能です。
+</p>
+
+<div class="info">
+<input type="checkbox"> <b>ソース3: Random クラスを使って乱数を生成</b>
+
+<pre class="wrap">
+import java.util.Random;
+
+public class Main{
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        // 0から1未満までの実数の乱数
+        double a = random.nextDouble();
+        System.out.println( a );
+
+        // AからBまでの整数の乱数
+        int A = 5;
+        int B = 8;
+        int C = A + random.nextInt(B-A+1);
+        System.out.println( C );
+    }
+}
+</pre>
+
+</div>
+
+
+
 <br>
 <script>PreNext(8,9)</script>
 </body>
