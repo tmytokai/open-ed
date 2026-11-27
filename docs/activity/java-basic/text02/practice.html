@@ -110,6 +110,7 @@ var in3 = new FileReader( "piyo.txt" );
 
 ※ 1を入力すると
 
+1
 入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
 </pre>
 </div>
@@ -137,10 +138,8 @@ var in3 = new FileReader( "piyo.txt" );
 </div>
 
 <br>
-<h2><a href="./page03.html">3. finally</a></h2>
-
 <p>
-<input type="checkbox"><b>演習 2-4 (個人):</b> finallyを試してみましょう。
+<input type="checkbox"><b>演習 2-4 (個人):</b> NULLポインター例外を試してみましょう。
 </p>
 
 <div class="info">
@@ -152,18 +151,17 @@ var in3 = new FileReader( "piyo.txt" );
 ※ 0を入力すると
 
 算術例外発生: java.lang.ArithmeticException: / by zero
-OK
 
 ※ 1を入力すると
 
 1
+5
 入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
-OK
 
-※ piyo.txtを追加してから 1を入力すると
+※ 2を入力すると
 
-1
-OK
+0
+NULLポインター例外発生: java.lang.NullPointerException: Cannot invoke "String.length()" because "<local3>" is null
 
 </pre>
 </div>
@@ -171,23 +169,91 @@ OK
 
 <div class="olradio"> 
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> 「JAVABSC_2_3」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_4」とします。 
+<span class="olradio"><input type="radio" name="p4"></span> 演習 2-3 で作った「JAVABSC_2_3」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_4」とします。 
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> Main.java を開き、catch 処理部 の下に以下の finally 処理部を追加します。
+<span class="olradio"><input type="radio" name="p4"></span>  Main.java を開き、1/a の計算結果を画面に表示している行と hoge.txt をオープンしている行の間に以下のコードを追加します。
+</p>
+<div class="info">
+<pre class="wrap">
+        String str = "hello";
+        if(a==2) str = null;
+        System.out.println(str.length());
+</pre>
+</div>
+<p>
+<span class="olradio"><input type="radio" name="p4"></span> ArithmeticException の catch 処理の下に <b>NullPointerException</b> の catch 処理を追加します。なお println の中身は「<b>"NULLポインター例外発生: "+e</b>」として下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> コンパイルと実行をし、0 を入力したら算術例外(0除算)、1 を入力したら入出力例外(piyo.txtが無い)、2を入力したらNULLポインター例外が起きることを確認して下さい。
+<br>
+<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+</p>
+</div>
+
+
+
+
+<br>
+<h2><a href="./page03.html">3. finally</a></h2>
+
+<p>
+<input type="checkbox"><b>演習 2-5 (個人):</b> finallyを試してみましょう。
+</p>
+
+<div class="info">
+<pre class="wrap">
+結果:
+
+(注) 実行環境により表示が若干異なる場合があります
+
+※ 0を入力すると
+
+算術例外発生: java.lang.ArithmeticException: / by zero
+finally処理
+
+※ 1を入力すると
+
+1
+5
+入出力例外発生: java.io.FileNotFoundException: piyo.txt (No such file or directory)
+finally処理
+
+※ 2を入力すると
+
+0
+NULLポインター例外発生: java.lang.NullPointerException: Cannot invoke "String.length()" because "<local3>" is null
+finally処理
+
+※ piyo.txtを追加してから 1を入力すると
+
+1
+5
+finally処理
+
+</pre>
+</div>
+
+
+<div class="olradio"> 
+<p>
+<span class="olradio"><input type="radio" name="p5"></span> 「JAVABSC_2_3」をフォルダごとコピーし、フォルダ名を「JAVABSC_2_4」とします。 
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> Main.java を開き、catch 処理部 の下に以下の finally 処理部を追加します。
 </p>
 <div class="info">
 <p>
-System.out.println( "OK" );
+System.out.println( "finally処理" );
 </p>
 </div>
 <p>
-<span class="olradio"><input type="radio" name="p4"></span> コンパイルと実行をし、0 を入力したら算術例外(0除算)の表示がされた後に OK と表示される事を確認して下さい
+<span class="olradio"><input type="radio" name="p5"></span> コンパイルと実行をし、0 を入力したら算術例外の表示がされた後に OK と表示される事を確認して下さい
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 0 以外を入力したら割り算の結果と入出力例外(piyo.txtが無い)の表示がされた後に OK と表示される事を確認して下さい
+<span class="olradio"><input type="radio" name="p5"></span> 1 を入力したら入出力例外の表示がされた後に OK と表示される事を確認して下さい
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 空の piyo.txt ファイルを追加して実行し、0以外を入力したら割り算の結果と OK が表示される事を確認して下さい
+<span class="olradio"><input type="radio" name="p5"></span> 2 を入力したらのNULLポインター例外の表示がされた後に OK と表示される事を確認して下さい
 <br>
-<span class="olradio"><input type="radio" name="p4"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
+<span class="olradio"><input type="radio" name="p5"></span> 空の piyo.txt ファイルを追加して実行し、1を入力したら例外表示無しで OK が表示される事を確認して下さい
+<br>
+<span class="olradio"><input type="radio" name="p5"></span> 指定場所に「ソースコード」と「実行結果」を記入して下さい。
 </p>
 </div>
 
