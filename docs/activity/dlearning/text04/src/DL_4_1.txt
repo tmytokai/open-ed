@@ -25,6 +25,7 @@ from keras.datasets import cifar10
 
 (images_training, classno_training), (images_test, classno_test) = cifar10.load_data()
 classnames=['airplane  ','automobile','bird      ','cat       ','deer      ','dog       ','frog      ','horse     ','ship      ','truck     ']
+classno_test = classno_test.flatten()
 
 images_training = images_training / 255.0  # 0〜1の範囲に正規化
 images_test = images_test / 255.0  # 0〜1の範囲に正規化
